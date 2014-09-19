@@ -53,15 +53,15 @@ void printUsage( void )
 
 /*
  *
- * å¨„é†’
- * å¿’æ›°è¢„
- *      TRUE(1)     æ³æ©˜å…æˆŠç©´ä»¶ç‰ä»¿å¥¶ä»¶å¨„é†’åˆ†åŒ€å‡¶æ—¥
- *      FALSE(0)    å”±æ©˜å…æˆŠç©´ä»¶ç‰ä»¿å¥¶ä»¶å¨„é†’åˆ†åŒ€å‡¶æ—¥
+ * Â¦ĞÑ
+ * ß¯Ô»°À
+ *      TRUE(1)     ¿ÒéÙØ¦ÎìÑ¨¼şÓñ·ÂÄÌ¼şÂ¦ĞÑ·ÖÔÈĞ×ÈÕ
+ *      FALSE(0)    ³ªéÙØ¦ÎìÑ¨¼şÓñ·ÂÄÌ¼şÂ¦ĞÑ·ÖÔÈĞ×ÈÕ
  */
 BOOL parseCommandLine( int argc , char** argv )
 {
-    int c;                          /* getopt åŒ¹é“¶ä¸¹ */
-    extern char* optarg;            /* getopt åŒ¹é“¶ä¸¹ */
+    int c;                          /* getopt Æ¥Òøµ¤ */
+    extern char* optarg;            /* getopt Æ¥Òøµ¤ */
 
 
     while( ( c = getopt( argc, argv ,OPTIONSTRING )) != -1 ){
@@ -97,9 +97,9 @@ BOOL parseCommandLine( int argc , char** argv )
 
 
 /*
- * å¨„é†’
+ * Â¦ĞÑ
  *
- * æ¼†åŠèµ­çª’æ‰‹ä»„å…ä¸­
+ * Æá¼°ô÷ÖÏÊÖØÆØ¦ÖĞ
  */
 BOOL parseEnvironment( char** env )
 {
@@ -120,11 +120,11 @@ BOOL parseEnvironment( char** env )
 
 #define GOTORETURNFALSEIFFALSE(x) if(!(x))goto RETURNFALSE
 /*
- * èµ“æ¸ç¥­ä¼™â–¡æ°‘ä»¶
- * å¨„é†’
- *      argc    argvåŠé†’
- *      argv    æˆŠç©´ä»¶ç‰ä»¿å¥¶ä»¶å¨„é†’
- * å¿’æ›°è¢„
+ * âÙÓå¼À»ï¡õÃñ¼ş
+ * Â¦ĞÑ
+ *      argc    argv¼°ĞÑ
+ *      argv    ÎìÑ¨¼şÓñ·ÂÄÌ¼şÂ¦ĞÑ
+ * ß¯Ô»°À
  */
 BOOL init(int argc , char** argv , char** env )
 {
@@ -157,7 +157,7 @@ BOOL init(int argc , char** argv , char** env )
         debug( sizeof( aho.workchar ),d);
     }
 
-    print( "é…ç½®æ–‡ä»¶: %s\n" , getConfigfilename() );
+    print( "ÅäÖÃÎÄ¼ş: %s\n" , getConfigfilename() );
 		
     GOTORETURNFALSEIFFALSE(readconfigfile( getConfigfilename() ) );
     
@@ -165,132 +165,132 @@ BOOL init(int argc , char** argv , char** env )
     //ttom start
     {  int iWork = setEncodeKey();
        if( iWork == 0 ){
-       // å·¨ä»¶æˆŠâ–¡ç‰å¹³â–¡æ¯›æ¶©çƒ‚
+       // ¾Ş¼şÎì¡õÓñÆ½¡õÃ«É¬ÀÃ
        printf( "----------------------------------------\n" );
-       printf( "-------------[ç¼–ç ] æ— æ³•è®¾ç½® %s\n", getConfigfilename() );
+       printf( "-------------[±àÂë] ÎŞ·¨ÉèÖÃ %s\n", getConfigfilename() );
        printf( "----------------------------------------\n" );
        exit( 1 );
        }else{
-            // å·¨ä»¶æˆŠâ–¡ç‰å¹³â–¡æ¯›æ¶©çƒ‚
-               printf( "ç¼–ç  = %d\n", iWork );
+            // ¾Ş¼şÎì¡õÓñÆ½¡õÃ«É¬ÀÃ
+               printf( "±àÂë = %d\n", iWork );
        }
     }
-    // AcWBuffæ¯›æ¶©çƒ‚
+    // AcWBuffÃ«É¬ÀÃ
     {   int iWork = setAcWBSize();
         if( iWork == 0 ){
            printf( "----------------------------------------\n" );
-           printf( "-------------[ACç¼“å†²] æ— æ³•è®¾ç½® %s\n", getConfigfilename() );
+           printf( "-------------[AC»º³å] ÎŞ·¨ÉèÖÃ %s\n", getConfigfilename() );
            printf( "----------------------------------------\n" );
            exit( 1 );
            }else{
-                   printf( "ACç¼“å†² = %d\n", iWork );
+                   printf( "AC»º³å = %d\n", iWork );
            }
     }
     //ttom end
 
     if( getDebuglevel() >= 1 ){
 //		print("ServerType: %d\n", getServerType() );
-				print("è°ƒè¯•ç­‰çº§: %d\n", getDebuglevel() );
-				print("è¿è¡Œç­‰çº§: %d\n", getrunlevel() );
-				print("æ¥æ”¶ç¼“å†²: %d\n", getrecvbuffer()*1024);
-				print("å‘é€ç¼“å†²: %d\n", getsendbuffer()*1024);
-				print("æ¥æ”¶ç¼“å†²ä¸‹é™: %d\n", getrecvlowatbuffer());
-        print("å†…å­˜å•å…ƒå¤§å°: %d\n", getMemoryunit() );
-        print("å†…å­˜å•å…ƒæ•°é‡: %d\n", getMemoryunitnum() );
+				print("µ÷ÊÔµÈ¼¶: %d\n", getDebuglevel() );
+				print("ÔËĞĞµÈ¼¶: %d\n", getrunlevel() );
+				print("½ÓÊÕ»º³å: %d\n", getrecvbuffer()*1024);
+				print("·¢ËÍ»º³å: %d\n", getsendbuffer()*1024);
+				print("½ÓÊÕ»º³åÏÂÏŞ: %d\n", getrecvlowatbuffer());
+        print("ÄÚ´æµ¥Ôª´óĞ¡: %d\n", getMemoryunit() );
+        print("ÄÚ´æµ¥ÔªÊıÁ¿: %d\n", getMemoryunitnum() );
 
-        print("è´¦å·æœåŠ¡å™¨åœ°å€: %s\n", getAccountservername() );
-        print("è´¦å·æœåŠ¡å™¨ç«¯å£: %d\n", getAccountserverport() );
-        print("ç™»é™†æœåŠ¡å™¨åç§°: %s\n",
+        print("ÕËºÅ·şÎñÆ÷µØÖ·: %s\n", getAccountservername() );
+        print("ÕËºÅ·şÎñÆ÷¶Ë¿Ú: %d\n", getAccountserverport() );
+        print("µÇÂ½·şÎñÆ÷Ãû³Æ: %s\n",
               getGameservername());
-        print("ç™»é™†æœåŠ¡å™¨å¯†ç : %s\n", getAccountserverpasswd());
+        print("µÇÂ½·şÎñÆ÷ÃÜÂë: %s\n", getAccountserverpasswd());
 
-        print("ç­‰å¾…è¿æ¥ç«¯å£: %d\n", getPortnumber() );
+        print("µÈ´ıÁ¬½Ó¶Ë¿Ú: %d\n", getPortnumber() );
 
-        print("æœåŠ¡ç«¯åºåˆ—å·: %d\n", getServernumber() );
+        print("·şÎñ¶ËĞòÁĞºÅ: %d\n", getServernumber() );
 
-        print("é‡å¤åœ°å€ä½¿ç”¨: %d\n", getReuseaddr() );
+        print("ÖØ¸´µØÖ·Ê¹ÓÃ: %d\n", getReuseaddr() );
 
 
-        print("æœ€å¤§åœ¨çº¿äººæ•°: %d\n", getFdnum() );
-        print("æœ€å¤§åœ¨çº¿å® æ•°: %d\n", getPetcharnum() );
-        print("æœ€å¤§å…¶ä»–æ•°ç›®: %d\n", getOtherscharnum() );
-        print("æœ€å¤§å¯¹è±¡æ•°ç›®: %d\n", getObjnum() );
-        print("æœ€å¤§ç‰©å“æ•°ç›®: %d\n", getItemnum() );
-        print("æœ€å¤§æˆ˜æ–—æ•°ç›®: %d\n", getBattlenum() );
-        print("é¡¶å±‚æ–‡ä»¶ç›®å½•: %s\n", getTopdir());
-        print("åœ°å›¾æ–‡ä»¶ç›®å½•: %s\n", getMapdir());
-        print("åœ°å›¾æ ‡è¯†æ–‡ä»¶: %s\n", getMaptilefile());
-        print("ç‰©å“é…ç½®æ–‡ä»¶: %s\n", getItemfile());
-        print("ä¸å¯æˆ˜æ–—æ–‡ä»¶: %s\n", getInvfile());
-        print("æ˜¾ç¤ºä½ç½®æ–‡ä»¶: %s\n", getAppearfile());
-        print("é‡æ•Œé…ç½®æ–‡ä»¶: %s\n", getEffectfile());
-        print("å¤´è¡”åç§°æ–‡ä»¶: %s\n", getTitleNamefile());
-        print("å¤´è¡”é…ç½®æ–‡ä»¶: %s\n", getTitleConfigfile());
-        print("é‡æ•Œåæ ‡æ–‡ä»¶: %s\n", getEncountfile());
-        print("é‡æ•Œç»„ç¾¤æ–‡ä»¶: %s\n", getGroupfile());
-        print("å® ç‰©åŸºæœ¬æ–‡ä»¶: %s\n", getEnemyBasefile());
-        print("åˆ›å»ºå® ç‰©æ–‡ä»¶: %s\n", getEnemyfile());
-        print("ç²¾çµé­”æ³•æ–‡ä»¶: %s\n", getMagicfile());
+        print("×î´óÔÚÏßÈËÊı: %d\n", getFdnum() );
+        print("×î´óÔÚÏß³èÊı: %d\n", getPetcharnum() );
+        print("×î´óÆäËûÊıÄ¿: %d\n", getOtherscharnum() );
+        print("×î´ó¶ÔÏóÊıÄ¿: %d\n", getObjnum() );
+        print("×î´óÎïÆ·ÊıÄ¿: %d\n", getItemnum() );
+        print("×î´óÕ½¶·ÊıÄ¿: %d\n", getBattlenum() );
+        print("¶¥²ãÎÄ¼şÄ¿Â¼: %s\n", getTopdir());
+        print("µØÍ¼ÎÄ¼şÄ¿Â¼: %s\n", getMapdir());
+        print("µØÍ¼±êÊ¶ÎÄ¼ş: %s\n", getMaptilefile());
+        print("ÎïÆ·ÅäÖÃÎÄ¼ş: %s\n", getItemfile());
+        print("²»¿ÉÕ½¶·ÎÄ¼ş: %s\n", getInvfile());
+        print("ÏÔÊ¾Î»ÖÃÎÄ¼ş: %s\n", getAppearfile());
+        print("ÓöµĞÅäÖÃÎÄ¼ş: %s\n", getEffectfile());
+        print("Í·ÏÎÃû³ÆÎÄ¼ş: %s\n", getTitleNamefile());
+        print("Í·ÏÎÅäÖÃÎÄ¼ş: %s\n", getTitleConfigfile());
+        print("ÓöµĞ×ø±êÎÄ¼ş: %s\n", getEncountfile());
+        print("ÓöµĞ×éÈºÎÄ¼ş: %s\n", getGroupfile());
+        print("³èÎï»ù±¾ÎÄ¼ş: %s\n", getEnemyBasefile());
+        print("´´½¨³èÎïÎÄ¼ş: %s\n", getEnemyfile());
+        print("¾«ÁéÄ§·¨ÎÄ¼ş: %s\n", getMagicfile());
 
 #ifdef _ATTACK_MAGIC
-        print("æ”»å‡»é­”æ³•æ–‡ä»¶: %s\n", getAttMagicfileName() );
+        print("¹¥»÷Ä§·¨ÎÄ¼ş: %s\n", getAttMagicfileName() );
 #endif
 
-        print("å® ç‰©æŠ€èƒ½æ–‡ä»¶: %s\n", getPetskillfile());
-        print("ç‰©å“æˆä»½æ–‡ä»¶: %s\n", getItematomfile());
-        print("çŒœè¿·é—®é¢˜æ–‡ä»¶: %s\n", getQuizfile());
+        print("³èÎï¼¼ÄÜÎÄ¼ş: %s\n", getPetskillfile());
+        print("ÎïÆ·³É·İÎÄ¼ş: %s\n", getItematomfile());
+        print("²ÂÃÔÎÊÌâÎÄ¼ş: %s\n", getQuizfile());
 #ifdef _GMRELOAD
-				print("G M é…ç½®æ–‡ä»¶: %s\n", getGMSetfile());
+				print("G M ÅäÖÃÎÄ¼ş: %s\n", getGMSetfile());
 #endif
-        print("æ—¥å¿—è®°å½•æ–‡ä»¶: %s\n",  getLsgenlogfilename() );
-        print("è¿˜åŸèµ„æ–™ç›®å½•: %s\n", getStoredir());
-        print("NPC é…ç½®ç›®å½•: %s\n", getNpcdir());
-        print("æ—¥å¿—è®°è½½æ–‡ä»¶: %s\n",  getLogdir());
-        print("æ—¥å¿—é…ç½®æ–‡ä»¶: %s\n", getLogconffile() );
-        print("GMçš„æŒ‡å‘½å¯†ç : %s\n", getChatMagicPasswd() );
-        print("ä½¿ç”¨GMçš„æƒé™: %d\n", getChatMagicCDKeyCheck() );
+        print("ÈÕÖ¾¼ÇÂ¼ÎÄ¼ş: %s\n",  getLsgenlogfilename() );
+        print("»¹Ô­×ÊÁÏÄ¿Â¼: %s\n", getStoredir());
+        print("NPC ÅäÖÃÄ¿Â¼: %s\n", getNpcdir());
+        print("ÈÕÖ¾¼ÇÔØÎÄ¼ş: %s\n",  getLogdir());
+        print("ÈÕÖ¾ÅäÖÃÎÄ¼ş: %s\n", getLogconffile() );
+        print("GMµÄÖ¸ÃüÃÜÂë: %s\n", getChatMagicPasswd() );
+        print("Ê¹ÓÃGMµÄÈ¨ÏŞ: %d\n", getChatMagicCDKeyCheck() );
 
-        print("NPC æ¨¡æ¿æ•°ç›®: %d\n", getNpctemplatenum() );
-        print("NPC æœ€å¤§æ•°ç›®: %d\n", getNpccreatenum() );
+        print("NPC Ä£°åÊıÄ¿: %d\n", getNpctemplatenum() );
+        print("NPC ×î´óÊıÄ¿: %d\n", getNpccreatenum() );
 
-        print("èµ°è·¯æ—¶é—´é—´éš”: %d\n", getWalksendinterval());
-        print("æ¸…é™¤æ‰€æœ‰é—´éš”: %d\n", getCAsendinterval_ms());
-        print("æ¸…é™¤ç›®æ ‡é—´éš”: %d\n", getCDsendinterval_ms());
-        print("æ‰§è¡Œä¸€æ¬¡æ—¶é—´: %d\n", getOnelooptime_ms());
-        print("å® ç‰©æ¸…é™¤æ—¶é—´: %d\n", getPetdeletetime());
-        print("é“å…·æ¸…é™¤æ—¶é—´: %d\n", getItemdeletetime());
+        print("×ßÂ·Ê±¼ä¼ä¸ô: %d\n", getWalksendinterval());
+        print("Çå³ıËùÓĞ¼ä¸ô: %d\n", getCAsendinterval_ms());
+        print("Çå³ıÄ¿±ê¼ä¸ô: %d\n", getCDsendinterval_ms());
+        print("Ö´ĞĞÒ»´ÎÊ±¼ä: %d\n", getOnelooptime_ms());
+        print("³èÎïÇå³ıÊ±¼ä: %d\n", getPetdeletetime());
+        print("µÀ¾ßÇå³ıÊ±¼ä: %d\n", getItemdeletetime());
 #ifdef _DEL_DROP_GOLD
-				print("çŸ³å™¨æ¸…é™¤æ—¶é—´: %d\n", getGolddeletetime());
+				print("Ê¯Æ÷Çå³ıÊ±¼ä: %d\n", getGolddeletetime());
 #endif
-        print("æ•°æ®ä¿å­˜é—´éš”: %d\n", getCharSavesendinterval());
+        print("Êı¾İ±£´æ¼ä¸ô: %d\n", getCharSavesendinterval());
 
-        print("åç‰‡æœ€å¤§æ•°ç›®: %d\n", getAddressbookoffmsgnum());
-        print("è¯»å–é¢‘ç‡åè®®: %d\n" ,getProtocolreadfrequency());
+        print("ÃûÆ¬×î´óÊıÄ¿: %d\n", getAddressbookoffmsgnum());
+        print("¶ÁÈ¡ÆµÂÊĞ­Òé: %d\n" ,getProtocolreadfrequency());
 
-        print("è¿æ¥é”™è¯¯ä¸Šé™: %d\n", getAllowerrornum());
+        print("Á¬½Ó´íÎóÉÏÏŞ: %d\n", getAllowerrornum());
 #ifdef _GET_BATTLE_EXP
-				print("æˆ˜æ–—ç»éªŒå€æ•°: %då€\n", getBattleexp() );
+				print("Õ½¶·¾­Ñé±¶Êı: %d±¶\n", getBattleexp() );
 #endif
 #ifdef _NEW_PLAYER_CF
-				print("å‡ºç”Ÿäººç‰©è½¬æ•°: %dè½¬\n", getNewplayertrans());
-				print("å‡ºç”Ÿäººç‰©ç­‰çº§: %dçº§\n", getNewplayerlv());
-				print("å‡ºç”Ÿäººç‰©é‡‘é’±: %d S\n", getNewplayergivegold());
-				print("å‡ºç”Ÿå® ç‰©ç­‰çº§: %dçº§\n", getNewplayerpetlv());
+				print("³öÉúÈËÎï×ªÊı: %d×ª\n", getNewplayertrans());
+				print("³öÉúÈËÎïµÈ¼¶: %d¼¶\n", getNewplayerlv());
+				print("³öÉúÈËÎï½ğÇ®: %d S\n", getNewplayergivegold());
+				print("³öÉú³èÎïµÈ¼¶: %d¼¶\n", getNewplayerpetlv());
 #ifdef _VIP_SERVER
-				print("å‡ºç”Ÿæ‹¥æœ‰ç‚¹æ•°: %dç‚¹\n", getNewplayergivevip());
+				print("³öÉúÓµÓĞµãÊı: %dµã\n", getNewplayergivevip());
 #endif
-				print("å‡ºç”Ÿèƒ½éª‘ç­‰çº§: %d\n", getRidePetLevel());
+				print("³öÉúÄÜÆïµÈ¼¶: %d\n", getRidePetLevel());
 #ifdef _NEW_PLAYER_RIDE
-				print("å‡ºç”Ÿé…å¥—éª‘å® : %s\n", getPlayerRide());
+				print("³öÉúÅäÌ×Æï³è: %s\n", getPlayerRide());
 #endif
-				print("å‡ºç”Ÿæ‹¥æœ‰å® ç‰©: NO1:%d NO2:%d NO3:%d NO4:%d NO5:%d\n",getNewplayergivepet(0),
+				print("³öÉúÓµÓĞ³èÎï: NO1:%d NO2:%d NO3:%d NO4:%d NO5:%d\n",getNewplayergivepet(0),
 																																	getNewplayergivepet(1),
 																																	getNewplayergivepet(2),
 																																	getNewplayergivepet(3),
 																																	getNewplayergivepet(4));
-				print("å‡ºç”Ÿæ‹¥æœ‰ç‰©å“: ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
-							"ã€€ã€€ã€€ã€€ã€€ã€€ã€€ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
-							"ã€€ã€€ã€€ã€€ã€€ã€€ã€€ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
+				print("³öÉúÓµÓĞÎïÆ·: ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
+							"¡¡¡¡¡¡¡¡¡¡¡¡¡¡ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
+							"¡¡¡¡¡¡¡¡¡¡¡¡¡¡ITEM1:%d ITEM2:%d ITEM3:%d ITEM4:%d ITEM5:%d\n"
 																																	,getNewplayergiveitem(0)
 																																	,getNewplayergiveitem(1)
 																																	,getNewplayergiveitem(2)
@@ -308,15 +308,15 @@ BOOL init(int argc , char** argv , char** env )
 																																	,getNewplayergiveitem(14));
 #endif
 #ifdef _UNREG_NEMA
-		print("ç¦æ­¢äººç‰©åç§°: åå­—1:%s åå­—2:%s åå­—3:%s åå­—4:%s åå­—5:%s\n",getUnregname(0),
+		print("½ûÖ¹ÈËÎïÃû³Æ: Ãû×Ö1:%s Ãû×Ö2:%s Ãû×Ö3:%s Ãû×Ö4:%s Ãû×Ö5:%s\n",getUnregname(0),
 																																	getUnregname(1),
 																																	getUnregname(2),
 																																	getUnregname(3),
 																																	getUnregname(4));
 #endif
 #ifdef _UNLAW_WARP_FLOOR
-		print("ç¦æ­¢ä¼ é€åœ°å›¾: åœ°å›¾1:%d åœ°å›¾2:%d åœ°å›¾3:%d åœ°å›¾4:%d åœ°å›¾5:%d\n"
-	          "              åœ°å›¾1:%d åœ°å›¾2:%d åœ°å›¾3:%d åœ°å›¾4:%d åœ°å›¾5:%d\n",getUnlawwarpfloor(0),
+		print("½ûÖ¹´«ËÍµØÍ¼: µØÍ¼1:%d µØÍ¼2:%d µØÍ¼3:%d µØÍ¼4:%d µØÍ¼5:%d\n"
+	          "              µØÍ¼1:%d µØÍ¼2:%d µØÍ¼3:%d µØÍ¼4:%d µØÍ¼5:%d\n",getUnlawwarpfloor(0),
 																																					getUnlawwarpfloor(1),
 																																					getUnlawwarpfloor(2),
 																																					getUnlawwarpfloor(3),
@@ -328,9 +328,9 @@ BOOL init(int argc , char** argv , char** env )
 																																					getUnlawwarpfloor(9));
 #endif
 #ifdef _WATCH_FLOOR
-		print("æ˜¯å¦å…¨å›¾è§‚æˆ˜: %s\n",getWatchFloorCF());
-		if(strcmp(getWatchFloorCF(),"æ˜¯"))
-			print("å…è®¸è§‚æˆ˜åœ°å›¾: åœ°å›¾1:%d åœ°å›¾2:%d åœ°å›¾3:%d åœ°å›¾4:%d åœ°å›¾5:%d\n",getWatchFloor(1),
+		print("ÊÇ·ñÈ«Í¼¹ÛÕ½: %s\n",getWatchFloorCF());
+		if(strcmp(getWatchFloorCF(),"ÊÇ"))
+			print("ÔÊĞí¹ÛÕ½µØÍ¼: µØÍ¼1:%d µØÍ¼2:%d µØÍ¼3:%d µØÍ¼4:%d µØÍ¼5:%d\n",getWatchFloor(1),
 																																		getWatchFloor(2),
 																																		getWatchFloor(3),
 																																		getWatchFloor(4),
@@ -338,9 +338,9 @@ BOOL init(int argc , char** argv , char** env )
 #endif
 
 #ifdef _BATTLE_FLOOR
-		print("æ˜¯å¦å¼ºåˆ¶æˆ˜æ–—: %s\n",getBattleFloorCF());
-		if(strcmp(getBattleFloorCF(),"æ˜¯"))
-			print("å¼ºåˆ¶æˆ˜æ–—åœ°å›¾: åœ°å›¾1:%d åœ°å›¾2:%d åœ°å›¾3:%d åœ°å›¾4:%d åœ°å›¾5:%d\n",getBattleFloor(1),
+		print("ÊÇ·ñÇ¿ÖÆÕ½¶·: %s\n",getBattleFloorCF());
+		if(strcmp(getBattleFloorCF(),"ÊÇ"))
+			print("Ç¿ÖÆÕ½¶·µØÍ¼: µØÍ¼1:%d µØÍ¼2:%d µØÍ¼3:%d µØÍ¼4:%d µØÍ¼5:%d\n",getBattleFloor(1),
 																																		getBattleFloor(2),
 																																		getBattleFloor(3),
 																																		getBattleFloor(4),
@@ -348,14 +348,14 @@ BOOL init(int argc , char** argv , char** env )
 #endif
 
 #ifdef _TRANS_LEVEL_CF
-		print("äººç‰©ç­‰çº§è½¬æ•°: %dçº§\n",getChartrans());
-		print("å® ç‰©ç­‰çº§è½¬æ•°: %dçº§\n",getPettrans());
+		print("ÈËÎïµÈ¼¶×ªÊı: %d¼¶\n",getChartrans());
+		print("³èÎïµÈ¼¶×ªÊı: %d¼¶\n",getPettrans());
 #endif
 
 #ifdef _POINT
-		print("ç¦æ­¢ç‚¹æ•°ä¸Šé™: %s\n",getPoint());
-		if(strcmp(getPoint(),"æ˜¯"))
-			print("æ¯è½¬ç‚¹æ•°ä¸Šé™: 0è½¬:%d 1è½¬:%d 2è½¬:%d 3è½¬:%d 4è½¬:%d 5è½¬:%d 6è½¬:%d\n",getTransPoint(0),
+		print("½ûÖ¹µãÊıÉÏÏŞ: %s\n",getPoint());
+		if(strcmp(getPoint(),"ÊÇ"))
+			print("Ã¿×ªµãÊıÉÏÏŞ: 0×ª:%d 1×ª:%d 2×ª:%d 3×ª:%d 4×ª:%d 5×ª:%d 6×ª:%d\n",getTransPoint(0),
 																																								getTransPoint(1),
 																																								getTransPoint(2),
 																																								getTransPoint(3),
@@ -364,53 +364,53 @@ BOOL init(int argc , char** argv , char** env )
 																																								getTransPoint(6));
 #endif
 #ifdef _PET_UP
-		print("å® ç‰©èƒ½å¦æ¡è·: %s\n",getPetup());
+		print("³èÎïÄÜ·ñ¼ñ»ñ: %s\n",getPetup());
 #endif
 #ifdef _LOOP_ANNOUNCE
-		print("å¾ªç¯å…¬å‘Šè·¯å¾„: %s\n",getLoopAnnouncePath());
-		print("å¾ªç¯æ—¶é—´é—´éš”: %dåˆ†é’Ÿ\n",getLoopAnnounceTime());
+		print("Ñ­»·¹«¸æÂ·¾¶: %s\n",getLoopAnnouncePath());
+		print("Ñ­»·Ê±¼ä¼ä¸ô: %d·ÖÖÓ\n",getLoopAnnounceTime());
 #endif
 #ifdef _SKILLUPPOINT_CF
-		print("æ¯çº§å‡çº§ç‚¹æ•°: %d\n",getSkup());
+		print("Ã¿¼¶Éı¼¶µãÊı: %d\n",getSkup());
 #endif
 
 #ifdef _RIDELEVEL
-		print("éª‘å® ç­‰çº§ç›¸å·®: %dçº§\n",getRideLevel());
+		print("Æï³èµÈ¼¶Ïà²î: %d¼¶\n",getRideLevel());
 #endif
 #ifdef _REVLEVEL
-		print("è¿˜åŸä¸Šé™ç­‰çº§: %sçº§\n",getRevLevel());	
+		print("»¹Ô­ÉÏÏŞµÈ¼¶: %s¼¶\n",getRevLevel());	
 #endif
 #ifdef _TRANS_LEVEL_CF
-		print("ä¸€èˆ¬ç­‰çº§ä¸Šé™: %dçº§\n",getYBLevel());	
-		print("æœ€é«˜ç­‰çº§ä¸Šé™: %dçº§\n",getMaxLevel());	
+		print("Ò»°ãµÈ¼¶ÉÏÏŞ: %d¼¶\n",getYBLevel());	
+		print("×î¸ßµÈ¼¶ÉÏÏŞ: %d¼¶\n",getMaxLevel());	
 #endif
 #ifdef _FIX_CHARLOOPS
-	print("æ¶é­”æ—¶é—´å€æ•°: %då€\n",getCharloops());	
+	print("¶ñÄ§Ê±¼ä±¶Êı: %d±¶\n",getCharloops());	
 #endif
 #ifdef _PLAYER_ANNOUNCE
 	if(getPAnnounce()==-1)
-		print("å–‡å­æ¶ˆè€—ç‚¹æ•°: å…³é—­ä½¿ç”¨\n");
+		print("À®°ÈÏûºÄµãÊı: ¹Ø±ÕÊ¹ÓÃ\n");
 	else
-		print("å–‡å­æ¶ˆè€—ç‚¹æ•°: %dç‚¹\n",getPAnnounce());	
+		print("À®°ÈÏûºÄµãÊı: %dµã\n",getPAnnounce());	
 #endif
 #ifdef _PLAYER_MOVE
 	if(getPMove()==-1)
-		print("é¡ºç§»æ¶ˆè€—ç‚¹æ•°: å…³é—­ä½¿ç”¨\n");	
+		print("Ë³ÒÆÏûºÄµãÊı: ¹Ø±ÕÊ¹ÓÃ\n");	
 	else
-		print("é¡ºç§»æ¶ˆè€—ç‚¹æ•°: %dç‚¹\n",getPMove());	
+		print("Ë³ÒÆÏûºÄµãÊı: %dµã\n",getPMove());	
 #endif
 #ifdef _BATTLE_GOLD
-		print("æˆ˜æ–—è·å¾—é‡‘é’±: %d%\n",getBattleGold());	
+		print("Õ½¶·»ñµÃ½ğÇ®: %d%\n",getBattleGold());	
 #endif
 #ifdef _ANGEL_TIME
-		print("ç²¾çµå¬å”¤æ—¶é—´: (%däºº/åœ¨çº¿äººæ•°)åˆ†\n",getAngelPlayerTime());	
-		print("ç²¾çµå¬å”¤äººæ•°: %däºº\n",getAngelPlayerMun());	
+		print("¾«ÁéÕÙ»½Ê±¼ä: (%dÈË/ÔÚÏßÈËÊı)·Ö\n",getAngelPlayerTime());	
+		print("¾«ÁéÕÙ»½ÈËÊı: %dÈË\n",getAngelPlayerMun());	
 #endif
 #ifdef _RIDEMODE_20
-		print("2.0 éª‘å® æ¨¡å¼: %d\n",getRideMode());	
+		print("2.0 Æï³èÄ£Ê½: %d\n",getRideMode());	
 #endif
 #ifdef _FM_POINT_PK
-		print("åº„å›­äº’æŠ¢æ¨¡å¼: %s\n",getFmPointPK());	
+		print("×¯Ô°»¥ÇÀÄ£Ê½: %s\n",getFmPointPK());	
 #endif
     }
 
@@ -419,204 +419,204 @@ BOOL init(int argc , char** argv , char** env )
 		GameServerName = getGameserverID();
 		if( GameServerName == NULL || strlen( GameServerName) <= 0 )
 			return FALSE;
-		print("\næ¸¸æˆæœåŠ¡å™¨ID: %s\n",  GameServerName );
+		print("\nÓÎÏ··şÎñÆ÷ID: %s\n",  GameServerName );
 	}
-    print("å¼€å§‹åˆå§‹åŒ–\n" );
+    print("¿ªÊ¼³õÊ¼»¯\n" );
     
 //#define DEBUG1( arg... ) if( getDebuglevel()>1 ){##arg}
-    print( "å»ºç«‹å†…å­˜ç©ºé—´..." );
+    print( "½¨Á¢ÄÚ´æ¿Õ¼ä..." );
     GOTORETURNFALSEIFFALSE(configmem( getMemoryunit(),
                                       getMemoryunitnum() ) );
     GOTORETURNFALSEIFFALSE(memInit());
-		print( "å®Œæˆ\n" );
+		print( "Íê³É\n" );
 				
-		print( "å§‹ç»ˆåŒ–è¿æ¥ç©ºé—´..." );
+		print( "Ê¼ÖÕ»¯Á¬½Ó¿Õ¼ä..." );
     if( !initConnect(getFdnum()) )
         goto MEMEND;
-    print( "å®Œæˆ\n" );
+    print( "Íê³É\n" );
     while( 1 ){
-        print( "å°è¯•ç»‘å®šæœ¬åœ°ç«¯å£ %d... " , getPortnumber());
+        print( "³¢ÊÔ°ó¶¨±¾µØ¶Ë¿Ú %d... " , getPortnumber());
         bindedfd = bindlocalhost( getPortnumber() );
         if( bindedfd == -1 )
             sleep( 10 );
         else
             break;
     }
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "å»ºç«‹å¯¹è±¡..." );
+	print( "½¨Á¢¶ÔÏó..." );
     if( !initObjectArray( getObjnum()) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 	
-	print( "å»ºç«‹äººç‰©..." );
+	print( "½¨Á¢ÈËÎï..." );
     if(!CHAR_initCharArray( getFdnum(), getPetcharnum(),getOtherscharnum()) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "å»ºç«‹ç‰©å“...");
+	print( "Íê³É\n" );
+	print( "½¨Á¢ÎïÆ·...");
     if(!ITEM_readItemConfFile( getItemfile()) )
         goto CLOSEBIND;
     if(!ITEM_initExistItemsArray( getItemnum() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "å»ºç«‹æˆ˜æ–—..." );
+	print( "½¨Á¢Õ½¶·..." );
     if(!BATTLE_initBattleArray( getBattlenum() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "å»ºç«‹åŠŸèƒ½æ¨¡å—..." );
+	print( "½¨Á¢¹¦ÄÜÄ£¿é..." );
     if( !initFunctionTable() )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "åˆå§‹åŒ–é‚®ä»¶..." );
+	print( "³õÊ¼»¯ÓÊ¼ş..." );
     if( !PETMAIL_initOffmsgBuffer( getAddressbookoffmsgnum() ))
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–ä¸å¯æˆ˜æ–—æ–‡ä»¶..." );
+	print( "¶ÁÈ¡²»¿ÉÕ½¶·ÎÄ¼ş..." );
     if( !CHAR_initInvinciblePlace( getInvfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–æ˜¾ç¤ºä½ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡ÏÔÊ¾Î»ÖÃÎÄ¼ş..." );
     if( !CHAR_initAppearPosition( getAppearfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–å¤´è¡”åç§°æ–‡ä»¶..." );
+	print( "¶ÁÈ¡Í·ÏÎÃû³ÆÎÄ¼ş..." );
     if( !TITLE_initTitleName( getTitleNamefile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–å¤´è¡”é…ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡Í·ÏÎÅäÖÃÎÄ¼ş..." );
     if( !TITLE_initTitleConfig( getTitleConfigfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–é‡æ•Œåæ ‡æ–‡ä»¶..." );
+	print( "¶ÁÈ¡ÓöµĞ×ø±êÎÄ¼ş..." );
     if( !ENCOUNT_initEncount( getEncountfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–å® ç‰©åŸºæœ¬æ–‡ä»¶..." );
+	print( "¶ÁÈ¡³èÎï»ù±¾ÎÄ¼ş..." );
     if( !ENEMYTEMP_initEnemy( getEnemyBasefile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–åˆ›å»ºå® ç‰©æ–‡ä»¶..." );
+	print( "¶ÁÈ¡´´½¨³èÎïÎÄ¼ş..." );
     if( !ENEMY_initEnemy( getEnemyfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "è¯»å–é‡æ•Œç»„ç¾¤æ–‡ä»¶..." );
+	print( "¶ÁÈ¡ÓöµĞ×éÈºÎÄ¼ş..." );
     if( !GROUP_initGroup( getGroupfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "è¯»å–é­”æ³•æ–‡ä»¶..." );
+	print( "Íê³É\n" );
+	print( "¶ÁÈ¡Ä§·¨ÎÄ¼ş..." );
     if( !MAGIC_initMagic( getMagicfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
 		#ifdef _ATTACK_MAGIC
 
-	print( "è¯»å–é­”æ³•æ”»å‡»æ–‡ä»¶..." );
+	print( "¶ÁÈ¡Ä§·¨¹¥»÷ÎÄ¼ş..." );
 
     if( !ATTMAGIC_initMagic( getAttMagicfileName() ) )
 //		if( !ATTMAGIC_initMagic( getMagicfile() ) )
         goto CLOSEBIND;
 
-	print( "é­”æ³•æ”»å‡»æ–‡ä»¶ -->%s..." , getAttMagicfileName());
-	print( "å®Œæˆ\n" );
+	print( "Ä§·¨¹¥»÷ÎÄ¼ş -->%s..." , getAttMagicfileName());
+	print( "Íê³É\n" );
 
     #endif
  
-	print( "è¯»å–å® ç‰©æŠ€èƒ½æ–‡ä»¶..." );
+	print( "¶ÁÈ¡³èÎï¼¼ÄÜÎÄ¼ş..." );
     if( !PETSKILL_initPetskill( getPetskillfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-    /* å¤±å¥¶  ä¸åŠç¬º    æ¯›  æˆˆ */
-	print( "è¯»å–ç‰©å“æˆä»½æ–‡ä»¶..." );
+    /* Ê§ÄÌ  Ø©¼°¼ã    Ã«  ¸ê */
+	print( "¶ÁÈ¡ÎïÆ·³É·İÎÄ¼ş..." );
     if( !ITEM_initItemAtom( getItematomfile()) )
         goto CLOSEBIND;
-	print("å®Œæˆ\n" );
+	print("Íê³É\n" );
 
-	print( "åˆå§‹åŒ–æ–™ç†åˆæˆç‰©å“..." );
+	print( "³õÊ¼»¯ÁÏÀíºÏ³ÉÎïÆ·..." );
     if( !ITEM_initItemIngCache() )
         goto CLOSEBIND;
-	print("å®Œæˆ\n" );
+	print("Íê³É\n" );
     
-	print( "åˆå§‹æ–™ç†åˆæˆéšæœºè®¾å®š..." );
+	print( "³õÊ¼ÁÏÀíºÏ³ÉËæ»úÉè¶¨..." );
     if( !ITEM_initRandTable() )
         goto CLOSEBIND;
-	print("å®Œæˆ\n" );
+	print("Íê³É\n" );
   
-	print( "è¯»å–é‡æ•Œé…ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡ÓöµĞÅäÖÃÎÄ¼ş..." );
     if( !CHAR_initEffectSetting( getEffectfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "è¯»å–çŒœè¿·é—®é¢˜æ–‡ä»¶..." );
+	print( "Íê³É\n" );
+	print( "¶ÁÈ¡²ÂÃÔÎÊÌâÎÄ¼ş..." );
     if( !QUIZ_initQuiz( getQuizfile() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 #ifdef _GMRELOAD
-	print( "è¯»å–GMé…ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡GMÅäÖÃÎÄ¼ş..." );
 	if ( !LoadGMSet( getGMSetfile() ) )
 		goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 #endif
 
 #ifdef _USER_EXP_CF
-	print( "è¯»å–ç»éªŒé…ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡¾­ÑéÅäÖÃÎÄ¼ş..." );
 	if ( !LoadEXP( getEXPfile() ) )
 		goto CLOSEBIND;
-	print("æœ€é«˜ç­‰çº§: %d...",getMaxLevel());
-	print("ä¸€èˆ¬ç­‰çº§: %d...",getYBLevel());
-	print( "å®Œæˆ\n" );
+	print("×î¸ßµÈ¼¶: %d...",getMaxLevel());
+	print("Ò»°ãµÈ¼¶: %d...",getYBLevel());
+	print( "Íê³É\n" );
 #endif
 
 #ifdef _LOOP_ANNOUNCE
-	print("è¯»å–å¾ªç¯å…¬å‘Šæ–‡ä»¶...");
+	print("¶ÁÈ¡Ñ­»·¹«¸æÎÄ¼ş...");
 	if(!loadLoopAnnounce())
-		print("...å¤±è´¥\n");
+		print("...Ê§°Ü\n");
 	else
-	 print("å®Œæˆ\n");
+	 print("Íê³É\n");
 #endif
 #ifdef _RIDE_CF
-	print( "è¯»å–è‡ªå®šä¹‰éª‘å® æ–‡ä»¶..." );
+	print( "¶ÁÈ¡×Ô¶¨ÒåÆï³èÎÄ¼ş..." );
 	if(!CHAR_Ride_CF_init())
-		print("...å¤±è´¥\n");
-	print("å®Œæˆ\n");
+		print("...Ê§°Ü\n");
+	print("Íê³É\n");
 #endif
 #ifdef _FM_LEADER_RIDE
-	print( "è¯»å–åº„å›­æ—é•¿ä¸“ç”¨éª‘å® æ–‡ä»¶..." );
+	print( "¶ÁÈ¡×¯Ô°×å³¤×¨ÓÃÆï³èÎÄ¼ş..." );
 	if(!CHAR_FmLeaderRide_init())
-		print("...å¤±è´¥\n");
-	print("å®Œæˆ\n");
+		print("...Ê§°Ü\n");
+	print("Íê³É\n");
 #endif
 #ifdef _NEED_ITEM_ENEMY
-	print( "è¯»å–èåˆå® é…ç½®æ–‡ä»¶..." );
+	print( "¶ÁÈ¡ÈÚºÏ³èÅäÖÃÎÄ¼ş..." );
 	if(!need_item_eneny_init())
-		print("...å¤±è´¥\n");
-	print("å®Œæˆ\n");
+		print("...Ê§°Ü\n");
+	print("Íê³É\n");
 #endif
 
-	print( "å»ºç«‹åœ°å›¾..." );
+	print( "½¨Á¢µØÍ¼..." );
     if( !MAP_initReadMap( getMaptilefile() , getMapdir() ))
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "è¯»å–NPCæ–‡ä»¶..." );
+	print( "Íê³É\n" );
+	print( "¶ÁÈ¡NPCÎÄ¼ş..." );
     if( !NPC_readNPCSettingFiles( getNpcdir(), getNpctemplatenum(),
                                   getNpccreatenum() ) )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "åˆå§‹åŒ– NPC æœåŠ¡å™¨... " );
+	print( "Íê³É\n" );
+	print( "³õÊ¼»¯ NPC ·şÎñÆ÷... " );
     if( lssproto_InitServer( lsrpcClientWriteFunc, LSGENWORKINGBUFFER ) < 0 )
         goto CLOSEBIND;
-	print( "å®Œæˆ\n" );
-	print( "å°è¯•è¿æ¥è´¦å·æœåŠ¡å™¨... " );
+	print( "Íê³É\n" );
+	print( "³¢ÊÔÁ¬½ÓÕËºÅ·şÎñÆ÷... " );
     acfd = connectHost( getAccountservername(), getAccountserverport());
     if(acfd == -1)
         goto CLOSEBIND;
@@ -634,20 +634,20 @@ BOOL init(int argc , char** argv , char** env )
 	}
 */
 
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
     initConnectOne( acfd, NULL , 0 );
     if( !CONNECT_acfdInitRB( acfd)) goto CLOSEAC;
     if( !CONNECT_acfdInitWB( acfd)) goto CLOSEAC;
     CONNECT_setCtype( acfd, AC );
 	
-	print( "åˆå§‹åŒ– NPC å®¢æˆ·ç«¯ ... " );
-    /*  rpc(client)åŠèµ“æ¸ç¥­ */
+	print( "³õÊ¼»¯ NPC ¿Í»§¶Ë ... " );
+    /*  rpc(client)¼°âÙÓå¼À */
     if( saacproto_InitClient( lsrpcClientWriteFunc,LSGENWORKINGBUFFER, acfd) < 0 )
         goto CLOSEAC;
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
-	print( "å‘è´¦å·æœåŠ¡å™¨å‘é€ç™»é™†è¯·æ±‚... " );
-    /*  å¤«å¼˜å¥¶ä»¶é‚°è²æ¯›è¯·å…  */
+	print( "ÏòÕËºÅ·şÎñÆ÷·¢ËÍµÇÂ½ÇëÇó... " );
+    /*  ·òºëÄÌ¼şÛ¢·ÆÃ«ÇëÔÊ  */
    	{
 #ifdef _VIP_ALL
     	saacproto_ACServerLogin_send(acfd, getGameservername(), getAccountserverpasswd(), getCheckVip()*2);
@@ -657,7 +657,7 @@ BOOL init(int argc , char** argv , char** env )
 			saacproto_ACServerLogin_send(acfd, getGameservername(), buff);
 #endif
     }
-	print( "å®Œæˆ\n" );
+	print( "Íê³É\n" );
 
     if( isExistFile( getLsgenlogfilename() ) ){
         lssproto_SetServerLogFiles( getLsgenlogfilename(),
@@ -667,9 +667,9 @@ BOOL init(int argc , char** argv , char** env )
     }
 
 
-	print( "åˆå§‹åŒ–å·²å®Œæˆ\n" );
+	print( "³õÊ¼»¯ÒÑÍê³É\n" );
 
-	print( "å¼€å§‹è®°å§‹æ—¥å¿—\n" );
+	print( "¿ªÊ¼¼ÇÊ¼ÈÕÖ¾\n" );
     {
         char    logconffile[512];
         snprintf( logconffile, sizeof( logconffile), "%s/%s" ,
@@ -678,9 +678,9 @@ BOOL init(int argc , char** argv , char** env )
             goto CLOSEAC;
     }
 #ifdef _ITEM_QUITPARTY
-	print( "è¯»å–é˜Ÿä¼è§£æ•£ç‰©å“æ¶ˆå¤±æ–‡ä»¶..." );
+	print( "¶ÁÈ¡¶ÓÎé½âÉ¢ÎïÆ·ÏûÊ§ÎÄ¼ş..." );
     
-	//è¯»å–æ¡£æ¡ˆ
+	//¶ÁÈ¡µµ°¸
     f = fopen( getitemquitparty(), "r" );
 	if( f != NULL ){
 		while( fgets( line, sizeof( line ), f ) ){
@@ -690,26 +690,26 @@ BOOL init(int argc , char** argv , char** env )
 			itemquitparty_num++;
 		}
 		if( fseek( f, 0, SEEK_SET ) == -1 ){
-			print( "ç‰©å“å½•æ‰¾é”™è¯¯\n" );
+			print( "ÎïÆ·Â¼ÕÒ´íÎó\n" );
 			fclose(f);
 			goto CLOSEAC;
 		}
-		//é…è®°å¿†ä½“
+		//Åä¼ÇÒäÌå
 		Disappear_Item = allocateMemory( sizeof(struct tagDisappearItem) * itemquitparty_num );
 		if( Disappear_Item == NULL ){
-			print( "æ— æ³•åˆ†é…å†…å­˜ %d\n", sizeof(struct tagDisappearItem) * itemquitparty_num );
+			print( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n", sizeof(struct tagDisappearItem) * itemquitparty_num );
 			fclose( f );
 			goto CLOSEAC;
 		}
 
 		i = 0;
-		//å°†é“å…·ç¼–å·å­˜å…¥ Disappear_Item.string
+		//½«µÀ¾ß±àºÅ´æÈë Disappear_Item.string
 		while( fgets( line, sizeof( line ), f ) ){
 			if( line[0] == '#' )continue;
 			if( line[0] == '\n' )continue; 
 			chomp( line );
 			sprintf( Disappear_Item[i].string,"%s",line );
-			print("\né“å…·ç¼–å·:%s", Disappear_Item[i].string );
+			print("\nµÀ¾ß±àºÅ:%s", Disappear_Item[i].string );
 			i++;
 		}
 		fclose(f);

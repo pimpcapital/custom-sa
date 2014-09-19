@@ -54,7 +54,7 @@ void CHAR_allpostwalk( int index )
 BOOL CHAR_makeCADefaultString( int objindex,char* buf,int buflen, int act )
 {
 	char	objindexbuf[64];
-    /*  æ°‘å°¼æ°¸å¼    */
+    /*  ÃñÄáÓÀÛÍ    */
     if( CHECKOBJECT(objindex) == FALSE )    return FALSE;
     if( OBJECT_getType(objindex) != OBJTYPE_CHARA ) return FALSE;
     snprintf( buf,buflen,"%s|%d|%d|%d|%d",
@@ -224,8 +224,8 @@ void CHAR_sendWallDamage( int charaindex,int x, int y, int damage )
 
 static struct ParamShow
 {
-    int     paramindex;     /*  ç”±ä»¿ä¸¢â–¡æ­£åŠå¥¶ä»¶çŠ¯æ°¸å¼æ—¦    */
-    char*   offmessage;     /*    åŒ€å‡¶å‡›åŠä¸¢æ°¸æœ¬â–¡æ–¥  ä¾¬      */
+    int     paramindex;     /*  ÓÉ·Â¶ª¡õÕı¼°ÄÌ¼ş·¸ÓÀÛÍµ©    */
+    char*   offmessage;     /*    ÔÈĞ×Áİ¼°¶ªÓÀ±¾¡õ³â  Ù¯      */
 }pShow[]={
     {CHAR_PARALYSIS,    CHAR_RECOVERPARALYSISSTRING},
     {CHAR_SLEEP,      CHAR_RECOVERSILENCESTRING},
@@ -476,7 +476,7 @@ void CHAR_playerTalkedfunc( int charaindex, int talkindex,char* message, int col
     if( fd == -1 )return;
     if( (channel>-1) && (fmindex>0) ){
 		if( channel == 0 ){
-			snprintf( lastbuf,sizeof(lastbuf),"P|[æ—]%s",
+			snprintf( lastbuf,sizeof(lastbuf),"P|[×å]%s",
 				makeEscapeString( CHAR_appendNameAndTitle(talkindex, message, mesgbuf,sizeof(mesgbuf)),
 				escapebuf,sizeof(escapebuf) ));
 		}
@@ -485,7 +485,7 @@ void CHAR_playerTalkedfunc( int charaindex, int talkindex,char* message, int col
 #else
 		else if( channel == FAMILY_MAXCHANNEL && CHAR_getInt( talkindex, CHAR_FMLEADERFLAG ) == 1 ){
 #endif
-			snprintf( lastbuf,sizeof(lastbuf),"P|[æ—é•¿å¹¿æ’­]%s",
+			snprintf( lastbuf,sizeof(lastbuf),"P|[×å³¤¹ã²¥]%s",
 				makeEscapeString(CHAR_appendNameAndTitle(talkindex, message,mesgbuf,sizeof(mesgbuf)),
 				escapebuf,sizeof(escapebuf) ));
 		}else{

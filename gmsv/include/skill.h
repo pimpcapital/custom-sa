@@ -49,8 +49,8 @@ typedef struct tagSkillTable
 
 typedef enum
 {
-    SKILL_LEVEL,		// æŠ€èƒ½ç­‰çº§
-    SKILL_IDENTITY,		// æŠ€èƒ½ç¼–å·
+    SKILL_LEVEL,		// ¼¼ÄÜµÈ¼¶
+    SKILL_IDENTITY,		// ¼¼ÄÜ±àºÅ
     SKILL_DATAINTNUM,
 }SKILL_DATAINT;
 

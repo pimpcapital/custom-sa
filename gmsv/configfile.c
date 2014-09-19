@@ -24,103 +24,108 @@ extern struct MissionInfo missionlist[MAXMISSION];
 extern struct MissionTable missiontable[MAXMISSIONTABLE];
 #endif
 
-/* 涩锟斤拷毛锟斤拷  锟斤拷锟斤拷锟斤拷瞻   */
+/* ɬ��ë��  ������հ   */
 typedef struct tagConfig
 {
-    /*锟斤拷锟斤拷锟截? (锟斤拷  锟斤拷锟斤拷苹锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  */
+    /*�����ة  (��  ����ƻ��������������  */
   char    progname[8];
-  char    configfilename[32]; /* config锟斤拷锟斤拷锟教伙拷   */
-    unsigned int debuglevel;   /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷矛锟斤拷 */
-  unsigned int  usememoryunit;    /*锟斤拷乒锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
-  unsigned int  usememoryunitnum; /*锟斤拷乒锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
-  char    asname[32];         /*失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锛? 锟?/
-  unsigned short  acservport; /*失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锛帮拷獭锟斤拷锟? */
-  char    acpasswd[32];       /*失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锟竭硷拷锟缴碉拷锟斤拷锟斤拷锟斤拷*/
+  char    configfilename[32]; /* config�����̻�   */
+    unsigned int debuglevel;   /* ����������ì�� */
+  unsigned int  usememoryunit;    /*��ƹ�������������� */
+  unsigned int  usememoryunitnum; /*��ƹ���������� */
+  char    asname[32];         /*ʧ��������ӡ��Ｐ  �*/
+  unsigned short  acservport; /*ʧ��������ӡ��Ｐ�̡���  */
+  char    acpasswd[32];       /*ʧ��������ӡ���߼��ɵ�������*/
   char    gsnamefromas[32];   /*
-                                 * 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锞拷锟轿拷锟斤拷锟?                                 * 锟截★拷丞锟接★拷锟斤拷锟斤拷锟狡伙拷锟斤拷  锟?                                 */
+                                 * ʧ��������ӡ��ﾮ��έ����
+                                 * �ء�ة�ӡ������ƻ���  �
+                                 */
                                  
     // Arminius 7.24 manor pk
   char gsid[32];	// game server chinese id
   unsigned short allowmanorpk;	// is this server allow manor pk
-  unsigned short port;        /* 锟接★拷锟斤及锟斤拷锟叫帮拷锟斤拷獭锟斤拷锟?*/
-	int				servernumber;	/* 锟截★拷丞锟接★拷锟斤及  寞 */
-	int				reuseaddr;	/* Address already used... 锟斤拷锟斤拷锟斤拷锟斤拷卅锟斤拷锟捷硷拷锟阶伙拷锟斤拷 */
-  int             do_nodelay;     /* TCP_NODELAY 锟斤拷锟斤拷锟铰撅拷锟斤拷 */
-  int             log_write_time; /* 踏锟斤拷锟斤拷姆锟斤拷毛锟斤拷锟铰撅拷锟斤拷锟?*/
-  int             log_io_time;    /* I/O锟斤拷  锟斤拷锟斤拷锟睫凤拷锟斤拷锟铰撅拷锟斤拷锟?*/
-  int             log_game_time;  /* 锟截★拷丞锟斤拷锟斤拷  锟斤拷  锟斤拷锟斤拷锟斤拷毛锟斤拷锟斤拷锟斤拷 */
-  int             log_netloop_faster; /* netloop_faster 锟斤拷锟斤拷锟?*/
-	int				saacwritenum;	/* 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锟竭硷拷锟斤拷锟斤拷  锟斤拷write锟斤拷锟铰撅拷 */
-	int				saacreadnum;	/* 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锞拷占锟絛ispatch 毛锟较硷拷锟斤拷锟铰撅拷 */
-  unsigned short fdnum;           /*锟斤拷木锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟矫拷锟? 锟斤拷锟铰撅拷 */
-  unsigned int   othercharnum;    /*  锟斤拷锟斤拷职锟斤拷平锟揭仿硷拷锟斤拷  */
-  unsigned int objnum;            /* 锟斤拷皮锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷    锟斤拷*/
-  unsigned int   petcharnum;   	/* 矢锟斤拷锟斤拷锟斤拷锟斤拷    */
-  unsigned int itemnum;           /* 失锟斤拷  丞锟斤拷    锟斤拷*/
-  unsigned int battlenum;         /* 锟斤拷锟斤拷锟斤及    */
-  unsigned int battleexp;         /* 锟斤拷锟斤拷锟斤及    */
-  char    topdir[32];         	/* 锟斤拷锟斤拷锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷  */
-  char    mapdir[32];         	/* 穴锟斤拷锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷  */
-  char    maptilefile[32];    	/* 穴锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    battlemapfile[32];    	/* 锟斤拷锟斤拷锟斤拷穴锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    itemfile[32];       	/* 失锟斤拷  丞涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    invfile[32];        	/*   锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    appearfile[32];     	/* 锟斤拷锟斤拷锟斤拷  涩锟矫帮拷锟斤拷锟教伙拷  */
-	char	titlenamefile[32];		/* 锟斤拷寞锟斤拷锟斤拷锟教伙拷   */
-	char	titleconfigfile[32];	/* 锟斤拷寞涩锟矫帮拷锟斤拷锟教伙拷   */
-	char	encountfile[32];		/* 锟睫硷拷锟斤拷锟斤拷锟斤拷锟缴拷冒锟斤拷锟斤拷袒锟?  */
-	char	enemybasefile[32];		/* 锟斤拷锟斤拷  涩锟矫帮拷锟斤拷锟教伙拷   */
-	char	enemyfile[32];			/* 锟斤拷涩锟矫帮拷锟斤拷锟教伙拷   */
-	char	groupfile[32];			/* 锟斤拷锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷   */
-	char	magicfile[32];			/* 锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷   */
+  unsigned short port;        /* �ӡ��Ｐ���а���̡��� */
+	int				servernumber;	/* �ء�ة�ӡ��Ｐ  į */
+	int				reuseaddr;	/* Address already used... ��������ئ���ݼ��׻��� */
+  int             do_nodelay;     /* TCP_NODELAY �����¾��� */
+  int             log_write_time; /* ̤����ķ��ë���¾���� */
+  int             log_io_time;    /* I/O��  �����޷����¾���� */
+  int             log_game_time;  /* �ء�ة����  ��  ������ë������ */
+  int             log_netloop_faster; /* netloop_faster ����� */
+	int				saacwritenum;	/* ʧ��������ӡ���߼�����  ��write���¾� */
+	int				saacreadnum;	/* ʧ��������ӡ��ﾮ�ռ�dispatch ë�ϼ����¾� */
+  unsigned short fdnum;           /*��ľ���������������ë��  ���¾� */
+  unsigned int   othercharnum;    /*  ����ְ��ƽ�ҷ¼���  */
+  unsigned int objnum;            /* ��Ƥ����������    ��*/
+  unsigned int   petcharnum;   	/* ʸ��������    */
+  unsigned int itemnum;           /* ʧ��  ة��    ��*/
+  unsigned int battlenum;         /* �����Ｐ    */
+  unsigned int battleexp;         /* �����Ｐ    */
+  char    topdir[32];         	/* ������ū��������  */
+  char    mapdir[32];         	/* Ѩ����ū��������  */
+  char    maptilefile[32];    	/* Ѩ����ɬ�ð����̻�  */
+  char    battlemapfile[32];    	/* ������Ѩ����ɬ�ð����̻�  */
+  char    itemfile[32];       	/* ʧ��  ةɬ�ð����̻�  */
+  char    invfile[32];        	/*   ��ɬ�ð����̻�  */
+  char    appearfile[32];     	/* ������  ɬ�ð����̻�  */
+	char	titlenamefile[32];		/* ��į�����̻�   */
+	char	titleconfigfile[32];	/* ��įɬ�ð����̻�   */
+	char	encountfile[32];		/* �޼��������ɬ�ð����̻�   */
+	char	enemybasefile[32];		/* ����  ɬ�ð����̻�   */
+	char	enemyfile[32];			/* ��ɬ�ð����̻�   */
+	char	groupfile[32];			/* ������ɬ�ð����̻�   */
+	char	magicfile[32];			/* ����ɬ�ð����̻�   */
 #ifdef _ATTACK_MAGIC
-  char    attmagicfile[32];       // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+  char    attmagicfile[32];       // ����������
 #endif
 
-	char	petskillfile[32];		/* 矢锟斤拷锟斤拷  锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷   */
-  char    itematomfile[32];       /* 失锟斤拷  丞锟斤拷锟斤拷    锟斤拷锟斤拷锟教伙拷 */
-  char    effectfile[32];     	/* 锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    quizfile[32];     		/* 锟斤拷锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  */
-  char    lsgenlog[32];       /*锟接★拷锟斤及lsgen 失锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟教伙拷  */
-  char    storedir[128];       /*锟斤拷锟斤拷失锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷    */
-  char    npcdir[32];         /*NPC锟斤拷涩锟矫帮拷锟斤拷锟教伙拷毛  锟绞凤拷奴锟斤拷锟斤拷锟斤拷锟斤拷   */
+	char	petskillfile[32];		/* ʸ����  ����ɬ�ð����̻�   */
+  char    itematomfile[32];       /* ʧ��  ة����    �����̻� */
+  char    effectfile[32];     	/* ����ɬ�ð����̻�  */
+  char    quizfile[32];     		/* ������ɬ�ð����̻�  */
+  char    lsgenlog[32];       /*�ӡ��Ｐlsgen ʧ���������������̻�  */
+  char    storedir[128];       /*����ʧ��ū��������    */
+  char    npcdir[32];         /*NPC��ɬ�ð����̻�ë  �ʷ�ū��������   */
   char    logdir[32];         /*
-                               * 锟斤拷敕概拷锟斤拷锟斤拷锟斤拷锟?                               */
-  char    logconfname[32];    /*
-                               * 锟斤拷锟缴拷冒锟斤拷锟斤拷袒锟? 
+                               * ��뷸ū��������
                                */
-  char	chatmagicpasswd[32];	/* 锟斤拷锟斤拷锟斤拷锟斤拷  芊锟缴碉拷锟斤拷锟斤拷锟斤拷 */
+  char    logconfname[32];    /*
+                               * ���ɬ�ð����̻�  
+                               */
+  char	chatmagicpasswd[32];	/* ��������  ܷ�ɵ������� */
 #ifdef _STORECHAR
   char	storechar[32];
 #endif
-	unsigned int 	chatmagiccdkeycheck;	/* 锟斤拷锟斤拷锟斤拷锟斤拷  芊匹CDKEY毛锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰撅拷 */
-  unsigned int    filesearchnum;     /*锟斤拷锟斤拷锟教伙拷毛锟斤拷锟斤拷匹锟斤拷锟铰帮拷锟斤拷锟教伙及锟斤拷*/
-  unsigned int    npctemplatenum;     /*NPC锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟教伙及锟斤拷*/
-  unsigned int    npccreatenum;       /*NPC锟斤拷戏遣锟斤拷锟斤拷锟教伙及锟斤拷*/
-  unsigned int    walksendinterval;   /* 锟斤拷锟绞硷拷毛霜锟斤拷锟斤拷锟斤拷 */
-  unsigned int    CAsendinterval_ms;     /* CA毛霜锟斤拷锟斤拷锟斤拷 (ms)*/
-  unsigned int    CDsendinterval_ms;     /* CD毛霜锟斤拷锟斤拷锟斤拷 (ms)*/
-  unsigned int    Onelooptime_ms;     	/* 1锟斤拷锟斤拷锟藉井锟斤拷锟斤拷锟斤拷锟斤拷 */
-	unsigned int	Petdeletetime;		/* 矢锟斤拷锟斤拷锟斤拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷 */
-	unsigned int	Itemdeletetime;		/* 失锟斤拷  丞锟斤拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷 */
-    /* 锟斤拷锟斤拷碳锟? 锟斤拷平锟揭仿硷拷锟斤拷锟斤拷皮毛锟斤拷锟斤拷锟斤拷锟斤拷 */
+	unsigned int 	chatmagiccdkeycheck;	/* ��������  ܷƥCDKEYë�����������¾� */
+  unsigned int    filesearchnum;     /*�����̻�ë����ƥ���°����̻Ｐ��*/
+  unsigned int    npctemplatenum;     /*NPC��  ���������������̻Ｐ��*/
+  unsigned int    npccreatenum;       /*NPC��Ϸǲ�����̻Ｐ��*/
+  unsigned int    walksendinterval;   /* ���ʼ�ë˪������ */
+  unsigned int    CAsendinterval_ms;     /* CAë˪������ (ms)*/
+  unsigned int    CDsendinterval_ms;     /* CDë˪������ (ms)*/
+  unsigned int    Onelooptime_ms;     	/* 1�����微�������� */
+	unsigned int	Petdeletetime;		/* ʸ��������  �������� */
+	unsigned int	Itemdeletetime;		/* ʧ��  ة����  �������� */
+    /* ����̼�  ��ƽ�ҷ¼�����Ƥë�������� */
   unsigned int    CharSavesendinterval;
   unsigned int    addressbookoffmsgnum;  /*
-                                          * 失锟斤拷锟斤拷锟斤拷皮锟斤拷锟酵憋拷锟斤拷追锟斤拷碳锟?                                          * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷毛
-                                          * 锟较讹拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟铰撅拷
+                                          * ʧ������Ƥ���ͱ���׷��̼�
+                                          * ����������ë
+                                          * �϶��������������¾�
                                           */
   unsigned int    protocolreadfrequency;  /*
-                                           * 锟斤拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟斤拷锟斤拷    
-                                           * 锟斤拷  锟疥井
+                                           * ��������ë������    
+                                           * ��  �꾮
                                            */
   unsigned int    allowerrornum;          /*
-                                           * 锟睫仿★拷毛锟斤拷锟斤拷锟斤拷匹锟斤拷锟绞撅拷
+                                           * �޷¡�ë������ƥ���ʾ�
                                            */
   unsigned int    loghour;          		/*
-                                           * 锟斤拷锟矫拷锟斤拷锟斤拷锟斤拷锟斤拷荻锟? 锟斤拷锟斤拷  
+                                           * ���ë���������ݶ�  ����  
                                            */
   unsigned int    battledebugmsg;    		/*
-                                           * 锟斤拷锟斤拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟诫丢锟斤拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟绞撅拷锟桔拷卅锟斤拷锟斤拷锟截︼拷锟?                                           */
+                                           * ������  ���������붪��������ë���ʾ��ۨ�ئ�����ئ��
+                                           */
   //ttom add this because the second had this                                         
   unsigned int    encodekey;              
   unsigned int    acwbsize;             
@@ -128,7 +133,7 @@ typedef struct tagConfig
   unsigned int    ErrUserDownFlg;
   //ttom end
 #ifdef _GMRELOAD
-	char	gmsetfile[32];				/* GM锟绞号★拷权锟斤拷锟借定锟斤拷 */
+	char	gmsetfile[32];				/* GM�ʺš�Ȩ���趨�� */
 #endif
 #ifdef _ITEM_QUITPARTY
     char itemquitparty[32];
@@ -249,22 +254,23 @@ int point;
 Config config;
 
 /*
- *  锟斤拷锟斤拷锟脚拷锟斤拷锟斤拷锟教伙拷毛  锟斤拷锟捷憋拷锟斤拷锟斤拷瞻  
- *  xxxx=yyyy 锟斤拷锟斤拷锟斤拷卅锟斤拷毛  锟斤拷
+ *  �����ū������̻�ë  ���ݱ�����հ  
+ *  xxxx=yyyy ������ئ��ë  ��
  */
 
 typedef struct tagReadConf
 {
-    char    name[32];       /*xxxx锟斤拷丐锟斤拷锟铰帮拷*/
+    char    name[32];       /*xxxx��ؤ���°�*/
 
-    /*锟捷硷拷2锟斤拷锟斤拷NULL毛  木锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  锟斤拷卅锟斤拷*/
-    char  *charvalue;      /*yyyy毛锟斤拷锟斤拷锟斤拷锟斤拷医  锟斤拷锟斤拷锟捷硷拷医  锟斤拷*/
-    size_t  charsize;       /*charvalue锟斤拷锟斤拷锟斤拷锟斤拷*/
+    /*�ݼ�2����NULLë  ľ����������  ��ئ��*/
+    char  *charvalue;      /*yyyyë��������ҽ  �����ݼ�ҽ  ��*/
+    size_t  charsize;       /*charvalue��������*/
 
     /*
-     *     锟斤拷  锟斤拷锟狡伙拷=锟斤拷  锟斤拷 "ON"锟斤拷锟斤拷锟斤拷锟斤拷 intvalue 锟藉反1毛医  锟斤拷锟斤拷
-     * 锟斤拷木锟斤拷陆锟斤拷 atoi 锟斤拷锟斤拷锟?     */
-    void*    value;       /*yyyy毛  锟斤拷锟斤拷锟斤拷医  锟斤拷锟斤拷锟捷硷拷医  锟斤拷*/
+     *     ��  ���ƻ�=��  �� "ON"�������� intvalue �巴1ëҽ  ����
+     * ��ľ��½�� atoi �����
+     */
+    void*    value;       /*yyyyë  ������ҽ  �����ݼ�ҽ  ��*/
     CTYPE    valuetype;
 }ReadConf;
 
@@ -618,7 +624,7 @@ void LoadPetTalk(void)
 		strcpy( pettalktext[i].DATA, "\0");
 	}
 
-	print("\n装锟截筹拷锟斤拷曰锟斤拷募锟?%s...", fn);
+	print("\nװ�س���Ի��ļ�:%s...", fn);
 	fp = fopen( fn, "r");
     if( fp != NULL ) {
 		while( fgets( line, sizeof( line), fp)) {
@@ -632,7 +638,7 @@ void LoadPetTalk(void)
 		}
 		fclose( fp);
     }else	{
-		print("锟斤拷锟斤拷:锟揭诧拷锟斤拷锟侥硷拷!");
+		print("����:�Ҳ����ļ�!");
 	}
 
 	talkNO=1;
@@ -663,7 +669,7 @@ void LoadPetTalk(void)
 					maxid++;
 					fclose( fp);
 				}else	{
-					print("锟斤拷锟斤拷:[%s] 锟揭诧拷锟斤拷!", fn);
+					print("����:[%s] �Ҳ���!", fn);
 					pettalktext[maxid].ID=-1;
 				}
 			}else	{
@@ -674,7 +680,7 @@ void LoadPetTalk(void)
 		if( maxid >= PETTALK_MAXID )
 			break;
 	}
-	print("锟斤拷锟絀D=%d...", maxid);
+	print("���ID=%d...", maxid);
 	{
 		int haveid=0;
 		for( i=0;i<PETTALK_MAXID;i++)	{
@@ -682,7 +688,7 @@ void LoadPetTalk(void)
 				haveid++;
 			}
 		}
-		print("锟斤拷锟斤拷锟斤拷锟斤拷=%d", haveid);
+		print("��������=%d", haveid);
 	}
 
 }
@@ -701,7 +707,7 @@ void LoadPetTalk(void)
   
   fp = fopen( fn, "r");
     if( fp != NULL ) {
-		print("\n\n 锟斤拷取 pettalk.mem");
+		print("\n\n ��ȡ pettalk.mem");
 		while( fgets( line, sizeof( line), fp)) {
 			if( strlen( pettalktext) != 0 ) {
 				if( pettalktext[strlen( pettalktext) -1] != '|' ) {
@@ -714,7 +720,7 @@ void LoadPetTalk(void)
 		fclose( fp);
 		print("\n %s", pettalktext);
     }else	{
-		print("\n 锟斤拷锟斤拷锟揭碉拷 pettalk.mem");
+		print("\n �����ҵ� pettalk.mem");
 	}
 }
 #endif
@@ -732,7 +738,7 @@ void Load_GambleBankItems( void)
 	int num,ID,type;
 	int i=0;
 	sprintf(filename, "./data/gambleitems.txt" );
-	print("\n锟斤拷锟截赌诧拷锟斤拷品锟侥硷拷 %s ...", filename);
+	print("\n���ضĲ���Ʒ�ļ� %s ...", filename);
 	fp = fopen( filename, "r");
     if( fp != NULL ) {
 		while( fgets( buf1, sizeof( buf1), fp) != NULL )	{
@@ -744,10 +750,10 @@ void Load_GambleBankItems( void)
 			GB_ITEMS[i].type = type;
 			i++;
 		}
-		print("锟斤拷锟絀D: %d ", i);
+		print("���ID: %d ", i);
 		fclose( fp);
     }else	{
-		print("锟斤拷锟斤拷 锟揭诧拷锟斤拷锟侥硷拷 %s", filename);
+		print("���� �Ҳ����ļ� %s", filename);
 	}
 
 }
@@ -766,7 +772,7 @@ void Load_PetSkillCodes( void)
 	int num,ID;
 	int i=0;
 	sprintf(filename, "./data/skillcode.txt" );
-	print("\n锟斤拷锟截筹拷锟斤技锟杰憋拷锟斤拷锟侥硷拷:%s...", filename);
+	print("\n���س��＼�ܱ����ļ�:%s...", filename);
 	fp = fopen( filename, "r");
     if( fp != NULL ) {
 		while( fgets( buf1, sizeof( buf1), fp) != NULL )	{
@@ -782,9 +788,9 @@ void Load_PetSkillCodes( void)
 		}
 		fclose( fp);
     }else	{
-		print("锟津不碉拷锟侥硷拷 %s", filename);
+		print("�򲻵��ļ� %s", filename);
 	}
-	print("锟斤拷锟絓n");
+	print("���\n");
 }
 #endif
 
@@ -796,7 +802,7 @@ BOOL LoadGMSet( char* filename )
 	fp = fopen(filename, "r");
 	if (fp == NULL)
 	{
-		print("锟睫凤拷锟斤拷锟侥硷拷\n");
+		print("�޷����ļ�\n");
 		return FALSE;
 	}
 	for (i = 0; i < GMMAXNUM; i++)
@@ -808,7 +814,7 @@ BOOL LoadGMSet( char* filename )
 		char	line[64], cdkey[64], level[64];
 		if (fgets(line, sizeof(line), fp) == NULL)	break;
 		chop(line);
-		//change 使gmset.txt锟斤拷锟斤拷锟斤拷锟斤拷注锟斤拷*******
+		//change ʹgmset.txt��������ע��*******
 		if( line[0] == '#' )
 			continue;
 		for( i=0; i<strlen(line); i++ ){
@@ -834,10 +840,10 @@ BOOL LoadGMSet( char* filename )
 #endif
 
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟截? 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * �����ة  ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  cahr*
  ------------------------------------------------------------*/
 char* getProgname( void )
@@ -845,10 +851,10 @@ char* getProgname( void )
     return config.progname;
 }
 /*------------------------------------------------------------
- * configfilename 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * configfilename ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getConfigfilename( void )
@@ -856,11 +862,11 @@ char* getConfigfilename( void )
     return config.configfilename;
 }
 /*------------------------------------------------------------
- * configfilename 毛涩锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
- *  newv    char*   蕙锟斤拷锟叫帮拷
- * 忒曰锟斤拷
- *  卅锟斤拷
+ * configfilename ëɬ�����£�
+ * ¦��
+ *  newv    char*   ޥ���а�
+ * ߯Ի��
+ *  ئ��
  ------------------------------------------------------------*/
 void setConfigfilename( char* newv )
 {
@@ -869,10 +875,10 @@ void setConfigfilename( char* newv )
 }
 
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷矛锟斤拷毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ����������ì��ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getDebuglevel( void )
@@ -880,11 +886,11 @@ unsigned int getDebuglevel( void )
     return config.debuglevel;
 }
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷矛锟斤拷毛涩锟斤拷锟斤拷锟斤拷
- * 娄锟斤拷
- *  newv    int     蕙锟斤拷锟叫帮拷
- * 忒曰锟斤拷
- *  unsigned int    锟缴硷拷锟斤拷
+ * ����������ì��ëɬ������
+ * ¦��
+ *  newv    int     ޥ���а�
+ * ߯Ի��
+ *  unsigned int    �ɼ���
  ------------------------------------------------------------*/
 unsigned int setDebuglevel( unsigned int newv )
 {
@@ -894,10 +900,10 @@ unsigned int setDebuglevel( unsigned int newv )
     return old;
 }
 /*------------------------------------------------------------
- * memoryunit 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * memoryunit ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getMemoryunit( void )
@@ -905,10 +911,10 @@ unsigned int getMemoryunit( void )
     return config.usememoryunit;
 }
 /*------------------------------------------------------------
- * memoryunitnum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * memoryunitnum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getMemoryunitnum( void )
@@ -917,10 +923,10 @@ unsigned int getMemoryunitnum( void )
 }
 
 /*------------------------------------------------------------
- * 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锛笆э拷锟斤拷锟斤拷锟矫? 锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ʧ��������ӡ��Ｐʧ������ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char*   getAccountservername( void )
@@ -928,10 +934,10 @@ char*   getAccountservername( void )
     return config.asname;
 }
 /*------------------------------------------------------------
- * 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锛帮拷獭锟斤拷锟矫? 锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ʧ��������ӡ��Ｐ�̡���ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned short
  ------------------------------------------------------------*/
 unsigned short   getAccountserverport( void )
@@ -939,10 +945,10 @@ unsigned short   getAccountserverport( void )
     return config.acservport;
 }
 /*------------------------------------------------------------
- * 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锟竭硷拷锟缴碉拷锟斤拷锟斤拷锟斤拷毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ʧ��������ӡ���߼��ɵ�������ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned short
  ------------------------------------------------------------*/
 char*   getAccountserverpasswd( void )
@@ -950,10 +956,10 @@ char*   getAccountserverpasswd( void )
     return config.acpasswd;
 }
 /*------------------------------------------------------------
- * 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锞拷锟轿拷锟斤拷卤亍锟截╋拷印锟斤拷锟斤拷锟斤拷苹锟斤拷锟? 锟矫? 锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ʧ��������ӡ��ﾮ��έ���±ء�ة�ӡ������ƻ���  �ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned short
  ------------------------------------------------------------*/
 char*   getGameservername( void )
@@ -980,10 +986,10 @@ unsigned short getPortnumber( void )
     return config.port;
 }
 /*------------------------------------------------------------
- * 锟截★拷丞锟接★拷锟斤及  寞   寞毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * �ء�ة�ӡ��Ｐ  į   įë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned short
  ------------------------------------------------------------*/
 int getServernumber( void )
@@ -991,10 +997,10 @@ int getServernumber( void )
     return config.servernumber;
 }
 /*------------------------------------------------------------
- * reuseaddr 锟斤拷锟斤拷毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * reuseaddr ����ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned short
  ------------------------------------------------------------*/
 int getReuseaddr( void )
@@ -1024,10 +1030,10 @@ int getLogNetloopFaster(void)
 }
 
 /*------------------------------------------------------------
- * saacwritenum 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * saacwritenum ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *   int
  ------------------------------------------------------------*/
 int getSaacwritenum( void )
@@ -1035,10 +1041,10 @@ int getSaacwritenum( void )
     return config.saacwritenum;
 }
 /*------------------------------------------------------------
- * saacwritenum 毛涩锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * saacwritenum ëɬ�����£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *   int
  ------------------------------------------------------------*/
 void setSaacwritenum( int num )
@@ -1046,10 +1052,10 @@ void setSaacwritenum( int num )
     config.saacwritenum = num;
 }
 /*------------------------------------------------------------
- * saacreadnum 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * saacreadnum ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *   int
  ------------------------------------------------------------*/
 int getSaacreadnum( void )
@@ -1057,10 +1063,10 @@ int getSaacreadnum( void )
     return config.saacreadnum;
 }
 /*------------------------------------------------------------
- * saacreadnum 毛涩锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * saacreadnum ëɬ�����£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *   int
  ------------------------------------------------------------*/
 void setSaacreadnum( int num )
@@ -1068,10 +1074,10 @@ void setSaacreadnum( int num )
     config.saacreadnum = num;
 }
 /*------------------------------------------------------------
- * fdnum 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * fdnum ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getFdnum( void )
@@ -1079,10 +1085,10 @@ unsigned int getFdnum( void )
     return config.fdnum;
 }
 /*------------------------------------------------------------
- * petcharanum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * petcharanum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getPetcharnum( void )
@@ -1092,10 +1098,10 @@ unsigned int getPetcharnum( void )
 
 
 /*------------------------------------------------------------
- * othercharnum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * othercharnum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getOtherscharnum( void )
@@ -1104,10 +1110,10 @@ unsigned int getOtherscharnum( void )
 }
 
 /*------------------------------------------------------------
- * objnum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * objnum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getObjnum( void )
@@ -1116,10 +1122,10 @@ unsigned int getObjnum( void )
 }
 
 /*------------------------------------------------------------
- * itemnum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * itemnum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getItemnum( void )
@@ -1129,10 +1135,10 @@ unsigned int getItemnum( void )
 
 
 /*------------------------------------------------------------
- * battlenum 毛  锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * battlenum ë  ��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getBattlenum( void )
@@ -1147,10 +1153,10 @@ unsigned int getBattleexp( void )
 }
 #endif
 /*------------------------------------------------------------
- * topdir 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * topdir ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getTopdir( void )
@@ -1158,10 +1164,10 @@ char* getTopdir( void )
     return config.topdir;
 }
 /*------------------------------------------------------------
- * mapdir 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * mapdir ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getMapdir( void )
@@ -1169,10 +1175,10 @@ char* getMapdir( void )
     return config.mapdir;
 }
 /*------------------------------------------------------------
- * maptilefile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * maptilefile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getMaptilefile( void )
@@ -1180,10 +1186,10 @@ char* getMaptilefile( void )
     return config.maptilefile;
 }
 /*------------------------------------------------------------
- * battlemapfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * battlemapfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getBattleMapfile( void )
@@ -1191,10 +1197,10 @@ char* getBattleMapfile( void )
     return config.battlemapfile;
 }
 /*------------------------------------------------------------
- * itemfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * itemfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getItemfile( void )
@@ -1202,10 +1208,10 @@ char* getItemfile( void )
     return config.itemfile;
 }
 /*------------------------------------------------------------
- * invfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * invfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getInvfile( void )
@@ -1213,10 +1219,10 @@ char* getInvfile( void )
     return config.invfile;
 }
 /*------------------------------------------------------------
- * appearfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * appearfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getAppearfile( void )
@@ -1224,10 +1230,10 @@ char* getAppearfile( void )
     return config.appearfile;
 }
 /*------------------------------------------------------------
- * effectfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * effectfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getEffectfile( void )
@@ -1235,10 +1241,10 @@ char* getEffectfile( void )
     return config.effectfile;
 }
 /*------------------------------------------------------------
- * titlenamefile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * titlenamefile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getTitleNamefile( void )
@@ -1246,10 +1252,10 @@ char* getTitleNamefile( void )
     return config.titlenamefile;
 }
 /*------------------------------------------------------------
- * titleconfigfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * titleconfigfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getTitleConfigfile( void )
@@ -1257,10 +1263,10 @@ char* getTitleConfigfile( void )
     return config.titleconfigfile;
 }
 /*------------------------------------------------------------
- * encountfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * encountfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getEncountfile( void )
@@ -1268,10 +1274,10 @@ char* getEncountfile( void )
     return config.encountfile;
 }
 /*------------------------------------------------------------
- * enemyfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * enemyfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getEnemyfile( void )
@@ -1279,10 +1285,10 @@ char* getEnemyfile( void )
     return config.enemyfile;
 }
 /*------------------------------------------------------------
- * enemybasefile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * enemybasefile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getEnemyBasefile( void )
@@ -1290,10 +1296,10 @@ char* getEnemyBasefile( void )
     return config.enemybasefile;
 }
 /*------------------------------------------------------------
- * groupfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * groupfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getGroupfile( void )
@@ -1301,10 +1307,10 @@ char* getGroupfile( void )
     return config.groupfile;
 }
 /*------------------------------------------------------------
- * magicfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * magicfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getMagicfile( void )
@@ -1315,10 +1321,10 @@ char* getMagicfile( void )
 #ifdef _ATTACK_MAGIC
 
 /*------------------------------------------------------------
- * 取锟矫癸拷锟斤拷锟皆碉拷锟斤拷锟斤拷
- * 锟斤拷锟斤拷
+ * ȡ�ù����Ե�����
+ * ����
  * None
- * 锟斤拷锟斤拷值
+ * ����ֵ
  * char*
  ------------------------------------------------------------*/
 char* getAttMagicfileName( void )
@@ -1354,10 +1360,10 @@ char* getQuizfile( void )
 }
 
 /*------------------------------------------------------------
- * lsgenlogfile 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * lsgenlogfile ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getLsgenlogfilename( void )
@@ -1373,10 +1379,10 @@ char* getGMSetfile( void )
 #endif
 
 /*------------------------------------------------------------
- * storedir 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * storedir ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getStoredir( void )
@@ -1393,10 +1399,10 @@ char* getStorechar( void )
 #endif
 
 /*------------------------------------------------------------
- * NPC 锟矫硷拷锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷毛  锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * NPC �ü���ū��������ë  ����������
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getNpcdir( void )
@@ -1404,10 +1410,10 @@ char* getNpcdir( void )
     return config.npcdir;
 }
 /*------------------------------------------------------------
- * 锟斤拷敕概拷锟斤拷锟斤拷锟斤拷锟矫? 锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ��뷸ū��������ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getLogdir( void )
@@ -1416,10 +1422,10 @@ char* getLogdir( void )
 }
 
 /*------------------------------------------------------------
- * 锟斤拷锟缴拷冒锟斤拷锟斤拷袒锟? 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ���ɬ�ð����̻�  ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getLogconffile( void )
@@ -1427,10 +1433,10 @@ char* getLogconffile( void )
     return config.logconfname;
 }
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷锟斤拷  芊锟缴碉拷锟斤拷锟斤拷锟斤拷 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ��������  ܷ�ɵ������� ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 char* getChatMagicPasswd( void )
@@ -1438,10 +1444,10 @@ char* getChatMagicPasswd( void )
     return config.chatmagicpasswd;
 }
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  芊匹锟斤拷CDKEY锟斤拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟铰撅拷锟斤拷毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ����������������  ܷƥ��CDKEY��������ë���¾���ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  char*
  ------------------------------------------------------------*/
 unsigned getChatMagicCDKeyCheck( void )
@@ -1450,10 +1456,10 @@ unsigned getChatMagicCDKeyCheck( void )
 }
 
 /*------------------------------------------------------------
- * filesearchnum毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * filesearchnumë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getFilesearchnum( void )
@@ -1461,10 +1467,10 @@ unsigned int getFilesearchnum( void )
     return config.filesearchnum;
 }
 /*------------------------------------------------------------
- * npctemplatenum毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * npctemplatenumë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getNpctemplatenum( void )
@@ -1472,10 +1478,10 @@ unsigned int getNpctemplatenum( void )
     return config.npctemplatenum;
 }
 /*------------------------------------------------------------
- * npccreatenum毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * npccreatenumë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getNpccreatenum( void )
@@ -1484,10 +1490,10 @@ unsigned int getNpccreatenum( void )
 }
 
 /*------------------------------------------------------------
- * walksendinterval毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * walksendintervalë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getWalksendinterval( void )
@@ -1495,10 +1501,10 @@ unsigned int getWalksendinterval( void )
     return config.walksendinterval;
 }
 /*------------------------------------------------------------
- * walksendinterval毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
- *  unsigned int 	interval	锟斤拷锟斤拷  锟斤拷锟斤拷    
- * 忒曰锟斤拷
+ * walksendintervalë���������£�
+ * ¦��
+ *  unsigned int 	interval	����  ����    
+ * ߯Ի��
  *  void
  ------------------------------------------------------------*/
 void setWalksendinterval( unsigned int interval )
@@ -1506,10 +1512,10 @@ void setWalksendinterval( unsigned int interval )
     config.walksendinterval = interval;
 }
 /*------------------------------------------------------------
- * CAsendinterval毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * CAsendintervalë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getCAsendinterval_ms( void )
@@ -1517,10 +1523,10 @@ unsigned int getCAsendinterval_ms( void )
     return config.CAsendinterval_ms;
 }
 /*------------------------------------------------------------
- * CAsendinterval毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
+ * CAsendintervalë���������£�
+ * ¦��
  *  unsigned int interval
- * 忒曰锟斤拷
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 void setCAsendinterval_ms( unsigned int interval_ms )
@@ -1528,10 +1534,10 @@ void setCAsendinterval_ms( unsigned int interval_ms )
     config.CAsendinterval_ms = interval_ms;
 }
 /*------------------------------------------------------------
- * CDsendinterval毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * CDsendintervalë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getCDsendinterval_ms( void )
@@ -1539,10 +1545,10 @@ unsigned int getCDsendinterval_ms( void )
     return config.CDsendinterval_ms;
 }
 /*------------------------------------------------------------
- * CDsendinterval毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
+ * CDsendintervalë���������£�
+ * ¦��
  *  interval		unsigned int
- * 忒曰锟斤拷
+ * ߯Ի��
  * void
  ------------------------------------------------------------*/
 void setCDsendinterval_ms( unsigned int interval_ms )
@@ -1550,10 +1556,10 @@ void setCDsendinterval_ms( unsigned int interval_ms )
 	config.CDsendinterval_ms = interval_ms;
 }
 /*------------------------------------------------------------
- * Onelooptime毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Onelooptimeë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getOnelooptime_ms( void )
@@ -1561,10 +1567,10 @@ unsigned int getOnelooptime_ms( void )
     return config.Onelooptime_ms;
 }
 /*------------------------------------------------------------
- * Onelooptime毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
+ * Onelooptimeë���������£�
+ * ¦��
  *  interval		unsigned int
- * 忒曰锟斤拷
+ * ߯Ի��
  * void
  ------------------------------------------------------------*/
 void setOnelooptime_ms( unsigned int interval_ms )
@@ -1572,10 +1578,10 @@ void setOnelooptime_ms( unsigned int interval_ms )
 	config.Onelooptime_ms = interval_ms;
 }
 /*------------------------------------------------------------
- * Petdeletetime毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Petdeletetimeë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getPetdeletetime( void )
@@ -1583,10 +1589,10 @@ unsigned int getPetdeletetime( void )
     return config.Petdeletetime;
 }
 /*------------------------------------------------------------
- * Petdeletetime毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
+ * Petdeletetimeë���������£�
+ * ¦��
  *  interval		unsigned int
- * 忒曰锟斤拷
+ * ߯Ի��
  * void
  ------------------------------------------------------------*/
 void setPetdeletetime( unsigned int interval )
@@ -1594,10 +1600,10 @@ void setPetdeletetime( unsigned int interval )
 	config.Petdeletetime = interval;
 }
 /*------------------------------------------------------------
- * Itemdeletetime毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Itemdeletetimeë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getItemdeletetime( void )
@@ -1605,10 +1611,10 @@ unsigned int getItemdeletetime( void )
     return config.Itemdeletetime;
 }
 /*------------------------------------------------------------
- * Itemdeletetime毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
+ * Itemdeletetimeë���������£�
+ * ¦��
  *  interval		unsigned int
- * 忒曰锟斤拷
+ * ߯Ի��
  * void
  ------------------------------------------------------------*/
 void setItemdeletetime( unsigned int interval )
@@ -1617,10 +1623,10 @@ void setItemdeletetime( unsigned int interval )
 }
 
 /*------------------------------------------------------------
- * CharSavesendinterval毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * CharSavesendintervalë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getCharSavesendinterval( void )
@@ -1628,10 +1634,10 @@ unsigned int getCharSavesendinterval( void )
     return config.CharSavesendinterval;
 }
 /*------------------------------------------------------------
- * CharSavesendinterval毛锟斤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * CharSavesendintervalë���������£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 void setCharSavesendinterval( unsigned int interval)
@@ -1640,10 +1646,10 @@ void setCharSavesendinterval( unsigned int interval)
 }
 
 /*------------------------------------------------------------
- * Addressbookoffmsgnum 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Addressbookoffmsgnum ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getAddressbookoffmsgnum( void )
@@ -1651,10 +1657,10 @@ unsigned int getAddressbookoffmsgnum( void )
     return config.addressbookoffmsgnum;
 }
 /*------------------------------------------------------------
- * Protocolreadfrequency 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Protocolreadfrequency ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getProtocolreadfrequency( void )
@@ -1663,10 +1669,10 @@ unsigned int getProtocolreadfrequency( void )
 }
 
 /*------------------------------------------------------------
- * Allowerrornum 毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * Allowerrornum ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getAllowerrornum( void )
@@ -1675,10 +1681,10 @@ unsigned int getAllowerrornum( void )
 }
 
 /*------------------------------------------------------------
- * 锟斤拷锟矫拷锟? 锟斤拷锟斤拷锟捷讹拷毛  锟铰ｏ拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
+ * ���ë��  �����ݶ�ë  �£�
+ * ¦��
+ *  ئ��
+ * ߯Ի��
  *  unsigned int
  ------------------------------------------------------------*/
 unsigned int getLogHour( void )
@@ -1687,22 +1693,22 @@ unsigned int getLogHour( void )
 }
 
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟诫丢锟斤拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟绞撅拷锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
- *  unsigned int 1卅锟斤拷锟斤拷锟斤拷
+ * ������  ���������붪��������ë���ʾ���
+ * ¦��
+ *  ئ��
+ * ߯Ի��
+ *  unsigned int 1ئ������
  ------------------------------------------------------------*/
 unsigned int getBattleDebugMsg( void )
 {
     return config.battledebugmsg;
 }
 /*------------------------------------------------------------
- * 锟斤拷锟斤拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟诫丢锟斤拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟绞撅拷锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
- *  unsigned int 1卅锟斤拷锟斤拷锟斤拷
+ * ������  ���������붪��������ë���ʾ���
+ * ¦��
+ *  ئ��
+ * ߯Ի��
+ *  unsigned int 1ئ������
  ------------------------------------------------------------*/
 void setBattleDebugMsg( unsigned int num )
 {
@@ -1712,88 +1718,88 @@ void setBattleDebugMsg( unsigned int num )
 
 
 /*
- * Config锟斤拷锟斤拷锟斤拷锟缴伙拷锟斤拷锟斤拷毛瑁伙拷锟斤拷锟斤拷锟斤拷
- * 娄锟斤拷
- *  argv0   char*   锟斤拷穴锟斤拷锟斤拷锟斤拷碳锟铰︼拷鸭锟? 锟斤拷
+ * Config�������ɻ�����ë裻�������
+ * ¦��
+ *  argv0   char*   ��Ѩ������̼�¦�Ѽ�  ��
  */
 void  defaultConfig( char* argv0 )
 {
-    char* program;                  /* program  毛锟狡伙拷锟铰硷拷锟斤拷锟斤拷 */
+    char* program;                  /* program  ë�ƻ��¼����� */
 
-    /* 锟斤拷锟斤拷锟缴伙拷锟斤拷锟斤拷毛  木锟斤拷 */
+    /* �����ɻ�����ë  ľ�� */
 
-    /*锟斤拷锟斤拷锟截? */
+    /*�����ة  */
     program = rindex(argv0, '/');
     if (program == NULL)
         program = argv0;
     else
-        program++;   /* "/"锟斤拷锟捷撅拷锟秸憋拷锟斤拷锟斤拷锟叫硷拷匹++锟斤拷锟斤拷*/
+        program++;   /* "/"���ݾ��ձ������м�ƥ++����*/
     strcpysafe( config.progname , sizeof( config.progname ) ,program );
 
-    /*涩锟矫帮拷锟斤拷锟教伙拷  */
+    /*ɬ�ð����̻�  */
     strcpysafe( config.configfilename,
                 sizeof( config.configfilename ),"setup.cf" );
 
 }
 
 /*
- * 涩锟矫帮拷锟斤拷锟教伙拷  毛  锟较凤拷  匹锟斤拷锟斤拷  毛锟芥丹锟斤拷
- * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
- *  卅锟斤拷
+ * ɬ�ð����̻�  ë  �Ϸ�  ƥ����  ë�浤��
+ * ¦��
+ *  ئ��
+ * ߯Ի��
+ *  ئ��
  */
 void lastConfig( void )
 {
     char    entry[256];
-    /*  穴锟斤拷锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷涩锟斤拷    */
+    /*  Ѩ����ū��������ɬ��    */
     snprintf(entry, sizeof(entry), "%s/%s", config.topdir, config.mapdir);
     strcpysafe(config.mapdir, sizeof(config.mapdir), entry);
 
-    /*  穴锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  Ѩ����ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry),"%s/%s",
              config.topdir,config.maptilefile);
     strcpysafe(config.maptilefile, sizeof(config.maptilefile), entry);
 
-    /*  锟斤拷锟斤拷锟斤拷穴锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ������Ѩ����ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry),"%s/%s",
              config.topdir,config.battlemapfile);
     strcpysafe(config.battlemapfile, sizeof(config.battlemapfile), entry);
 
-    /*  失锟斤拷  丞涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ʧ��  ةɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.itemfile);
     strcpysafe(config.itemfile, sizeof(config.itemfile), entry);
 
-    /*    锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*    ��ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.invfile);
     strcpysafe(config.invfile, sizeof(config.invfile), entry);
 
-    /*  锟斤拷锟斤拷锟斤拷  涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ������  ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.appearfile);
     strcpysafe(config.appearfile, sizeof(config.appearfile), entry);
 
-    /*  锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ����ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.effectfile);
     strcpysafe(config.effectfile, sizeof(config.effectfile), entry);
 
-    /*  锟斤拷锟斤拷锟斤拷涩锟矫帮拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ������ɬ�ð����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.quizfile);
     strcpysafe(config.quizfile, sizeof(config.quizfile), entry);
 
-    /*  锟斤拷寞  锟斤拷锟斤拷锟教伙拷  锟斤拷涩锟斤拷    */
+    /*  ��į  �����̻�  ��ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s", config.topdir,config.titlenamefile);
     strcpysafe(config.titlenamefile, sizeof(config.titlenamefile), entry);
 
-    /*  lsgen 失锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟教伙拷      */
+    /*  lsgen ʧ���������������̻�      */
     snprintf(entry,sizeof(entry),"%s/%s", config.topdir,config.lsgenlog);
     strcpysafe(config.lsgenlog, sizeof(config.lsgenlog), entry);
 
-    /*  锟斤拷锟斤拷失锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷涩锟斤拷    */
+    /*  ����ʧ��ū��������ɬ��    */
 /*
     snprintf(entry,sizeof(entry), "%s/%s",config.topdir,config.storedir);
     strcpysafe(config.storedir, sizeof(config.storedir), entry);
 */
-    /*  NPC涩锟斤拷锟斤拷锟斤拷锟斤拷奴锟斤拷锟斤拷锟斤拷锟斤拷涩锟斤拷    */
+    /*  NPCɬ��������ū��������ɬ��    */
     snprintf(entry,sizeof(entry), "%s/%s",config.topdir,config.npcdir);
     strcpysafe(config.npcdir, sizeof(config.npcdir), entry);
 
@@ -1807,13 +1813,13 @@ void lastConfig( void )
 
 
 /*
- * 锟斤拷锟教硷拷锟斤拷锟斤拷锟斤拷锟斤拷卅锟斤拷锟斤拷  毛  锟饺伙拷医  毛锟斤拷锟斤拷锟斤拷锟斤拷
- * 娄锟斤拷
- *  to      void*   锟斤拷毛医  锟斤拷锟铰猴拷锟教硷拷锟斤拷
- *  type    CTYPE   to锟斤拷锟斤拷毛瑁伙拷锟斤拷
- *  value   double  to锟斤拷医  锟斤拷锟铰帮拷
- * 忒曰锟斤拷
- *  卅锟斤拷
+ * ���̼���������ئ����  ë  �Ȼ�ҽ  ë��������
+ * ¦��
+ *  to      void*   ��ëҽ  ���º��̼���
+ *  type    CTYPE   to����ë裻���
+ *  value   double  to��ҽ  ���°�
+ * ߯Ի��
+ *  ئ��
  */
 void substitutePointerFromType( void* to , CTYPE type ,double value)
 {
@@ -1835,23 +1841,23 @@ void substitutePointerFromType( void* to , CTYPE type ,double value)
 
 
 /*------------------------------------------------------------
- * 涩锟矫帮拷锟斤拷锟教伙拷毛  锟斤拷
- * 娄锟斤拷
- *      filename            锟斤拷锟斤拷锟教伙拷  
- * 忒曰锟斤拷
- *      TRUE(1)     锟斤拷  
- *      FALSE(0)    锟斤拷      -> 锟斤拷锟斤拷锟教伙及锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  锟斤拷锟斤拷
+ * ɬ�ð����̻�ë  ��
+ * ¦��
+ *      filename            �����̻�  
+ * ߯Ի��
+ *      TRUE(1)     ��  
+ *      FALSE(0)    ��      -> �����̻Ｐ����������  ����
  ------------------------------------------------------------*/
 BOOL readconfigfile( char* filename )
 {
     FILE* f=NULL;
-    char linebuf[256];                  /* 锟斤拷锟? 锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
-    int linenum=0;                      /* 锟斤拷锟斤拷毛锟斤拷锟斤拷锟斤拷 */
-    char    realopenfilename[256];      /*    锟剿憋拷open 锟斤拷锟铰帮拷锟斤拷锟教伙拷  */
+    char linebuf[256];                  /* ���  ��  ���������� */
+    int linenum=0;                      /* ����ë������ */
+    char    realopenfilename[256];      /*    �˱�open ���°����̻�  */
 
     char    hostname[128];
 
-    /*  石锟斤拷锟斤拷  毛锟狡伙拷锟斤拷    */
+    /*  ʯ����  ë�ƻ���    */
     if( gethostname( hostname, sizeof(hostname) ) != -1 ){
         char*   initdot;
         initdot = index( hostname, '.' );
@@ -1860,25 +1866,25 @@ BOOL readconfigfile( char* filename )
         snprintf( realopenfilename, sizeof(realopenfilename),
                   "%s.%s" , filename, hostname);
 
-        /* 锟斤拷锟斤拷锟教伙及锟斤拷锟斤拷锟斤拷 */
+        /* �����̻Ｐ������ */
         f=fopen( realopenfilename, "r" );
         if( f == NULL )
             print( "Can't open %s.  use %s instead\n", realopenfilename,
                    filename );
     }
     if( f == NULL ){
-        f=fopen( filename , "r" );          /* 锟斤拷锟斤拷锟教伙及锟斤拷锟斤拷锟斤拷 */
+        f=fopen( filename , "r" );          /* �����̻Ｐ������ */
         if( f == NULL ){
             print( "Can't open %s\n", filename );
             return FALSE;
         }
     }
 
-    /* 锟斤拷锟斤拷锟? 锟斤拷  锟斤拷 */
+    /* �����  ��  �� */
     while( fgets( linebuf , sizeof( linebuf ), f ) ){
-        char firstToken[256];       /*1    锟斤拷  侬  */
-        int i;                      /*锟斤拷锟斤拷锟? 锟斤拷*/
-        int ret;                    /*锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷*/
+        char firstToken[256];       /*1    ��  ٯ  */
+        int i;                      /*�����  ��*/
+        int ret;                    /*������������*/
 
         linenum ++;
 
@@ -1889,7 +1895,7 @@ BOOL readconfigfile( char* filename )
 
         chomp( linebuf );                    /* remove tail newline  */
 
-        /* delim "=" 匹  锟斤拷(1)锟斤拷锟斤拷锟斤拷锟酵硷拷毛  锟斤拷*/
+        /* delim "=" ƥ  ��(1)�������ͼ�ë  ��*/
         ret = getStringFromIndexWithDelim( linebuf , "=",  1, firstToken,
                                            sizeof(firstToken) );
         if( ret == FALSE ){
@@ -1898,17 +1904,17 @@ BOOL readconfigfile( char* filename )
             continue;
         }
 
-        /* readconf 锟斤拷锟斤拷锟斤拷锟斤拷匹锟斤拷锟斤拷锟?*/
+        /* readconf ��������ƥ����� */
         for( i = 0 ; i < arraysizeof( readconf ) ; i ++ ){
             if( strcmp( readconf[i].name ,firstToken ) == 0 ){
                 /* match */
-                char secondToken[256];      /*2    锟斤拷  侬  */
-                /* delim "=" 匹2    锟斤拷锟斤拷锟斤拷锟酵硷拷毛  锟斤拷*/
+                char secondToken[256];      /*2    ��  ٯ  */
+                /* delim "=" ƥ2    �������ͼ�ë  ��*/
                 ret = getStringFromIndexWithDelim( linebuf , "=" , 2
                                                    , secondToken ,
                                                    sizeof(secondToken) );
 
-                /* NULL  侬锟斤拷锟斤拷毛譬锟斤拷锟斤拷 */
+                /* NULL  ٯ����ëƩ���� */
                 if( ret == FALSE ){
                     print( "Find error at %s in line %d. Ignore",
                            filename , linenum);
@@ -1916,21 +1922,21 @@ BOOL readconfigfile( char* filename )
                 }
 
 
-                /*NULL锟斤拷锟斤拷锟斤拷锟斤拷医  锟斤拷卅锟斤拷*/
+                /*NULL��������ҽ  ��ئ��*/
                 if( readconf[i].charvalue != NULL )
                     strcpysafe( readconf[i].charvalue
                                 ,readconf[i].charsize, secondToken);
 
-                /*NULL锟斤拷锟斤拷锟斤拷锟斤拷医  锟斤拷卅锟斤拷*/
+                /*NULL��������ҽ  ��ئ��*/
                 if( readconf[i].value != NULL ) {
                     if( strcmp( "ON" ,secondToken ) == 0 ) {
-                        /*ON锟斤拷锟斤拷锟斤拷锟斤拷1毛  木锟斤拷*/
+                        /*ON��������1ë  ľ��*/
                         substitutePointerFromType( readconf[i].value,
                                                    readconf[i].valuetype,
                                                    1.0);
 
                     }else if( strcmp( "OFF" ,secondToken ) == 0 ) {
-                        /*OFF锟斤拷锟斤拷锟斤拷锟斤拷1毛  木锟斤拷*/
+                        /*OFF��������1ë  ľ��*/
                         substitutePointerFromType( readconf[i].value,
                                                    readconf[i].valuetype,
                                                    1.0);
@@ -1950,10 +1956,11 @@ BOOL readconfigfile( char* filename )
 }
 //ttom add this becaus the second had this function 
 /*------------------------------------------------------------
- * 锟睫硷拷锟斤拷锟斤拷锟狡斤拷锟矫拷锟斤拷锟斤拷锟? * 娄锟斤拷
- *  卅锟斤拷
- * 忒曰锟斤拷
- *  unsigned int 平锟斤拷毛忒锟斤拷
+ * �޼������ƽ��ëɬ������
+ * ¦��
+ *  ئ��
+ * ߯Ի��
+ *  unsigned int ƽ��ë߯��
 ------------------------------------------------------------*/
 unsigned int setEncodeKey( void )
 {
@@ -1961,11 +1968,11 @@ unsigned int setEncodeKey( void )
    return JENCODE_KEY;
 }
 /*------------------------------------------------------------
-* 失锟斤拷锟斤拷锟斤拷锟斤拷印锟斤拷锟斤拷锟斤拷踏锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟诫及锟斤拷锟斤拷锟斤拷毛涩锟斤拷锟斤拷锟斤拷
-* 娄锟斤拷
-*  卅锟斤拷
-* 忒曰锟斤拷
-*  unsigned int 平锟斤拷毛忒锟斤拷
+* ʧ��������ӡ������̤��  ���������뼰������ëɬ������
+* ¦��
+*  ئ��
+* ߯Ի��
+*  unsigned int ƽ��ë߯��
 ------------------------------------------------------------*/
 unsigned int setAcWBSize( void )
 {
@@ -2090,7 +2097,7 @@ int getWatchFloor( unsigned int index )
 }
 char* getWatchFloorCF( void )
 {
-	return (config.watchfloor[0]>0)? "锟斤拷":"锟斤拷";
+	return (config.watchfloor[0]>0)? "��":"��";
 }
 #endif
 
@@ -2104,7 +2111,7 @@ int getBattleFloor( unsigned int index )
 }
 char* getBattleFloorCF( void )
 {
-	return (config.battlefloor[0]>0)? "锟斤拷":"锟斤拷";
+	return (config.battlefloor[0]>0)? "��":"��";
 }
 #endif
 
@@ -2153,7 +2160,7 @@ int getMaxLevel( void )
 #ifdef _POINT
 char* getPoint( void )
 {
-		return (config.point>0)? "锟斤拷":"锟斤拷";
+		return (config.point>0)? "��":"��";
 }
 int getTransPoint( int index )
 {
@@ -2164,7 +2171,7 @@ int getTransPoint( int index )
 #ifdef _PET_UP
 char* getPetup( void )
 {
-		return (config.petup>0)? "锟斤拷":"锟斤拷";
+		return (config.petup>0)? "��":"��";
 }
 #endif
 #ifdef _LOOP_ANNOUNCE
@@ -2180,7 +2187,7 @@ int loadLoopAnnounce( void )
 	fp = fopen(config.loopannouncepath, "r");
 	if (fp == NULL)
 	{
-		print("锟睫凤拷锟斤拷锟侥硷拷\n");
+		print("�޷����ļ�\n");
 		return FALSE;
 	}
 	while(1){
@@ -2232,20 +2239,20 @@ int getRideLevel( void )
 #ifdef _REVLEVEL
 char* getRevLevel( void )
 {
-		return (config.revlevel>0)?"锟斤拷":"锟斤拷";
+		return (config.revlevel>0)?"��":"��";
 }
 #endif
 #ifdef _NEW_PLAYER_RIDE
 char* getPlayerRide( void )
 {
 		if(config.npride>2)
-			return "锟斤拷锟斤拷锟酵伙拷锟斤拷锟斤拷";
+			return "�����ͻ�����";
 		else if(config.npride==2)
-			return "锟斤拷锟斤拷锟斤拷锟斤拷";
+			return "��������";
 		else if(config.npride==1)
-			return "锟斤拷锟斤拷锟酵伙拷";
+			return "�����ͻ�";
 		else
-			return "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?;
+			return "�����������";
 }
 #endif
 
@@ -2367,7 +2374,7 @@ int getRideMode( void )
 #ifdef _FM_POINT_PK
 char *getFmPointPK( void )
 {
-		return (config.fmpointpk>0)?"锟斤拷":"锟斤拷";
+		return (config.fmpointpk>0)?"��":"��";
 }
 #endif
 #ifdef _ENEMY_ACTION

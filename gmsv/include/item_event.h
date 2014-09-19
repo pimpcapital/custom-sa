@@ -50,10 +50,10 @@ void ITEM_SexMetamo( int charaindex, int toindex, int haveitemindex);
 #ifdef _ITEM_CRACKER
 void ITEM_Cracker(int charaindex,int toindex,int haveitemindex);
 #endif
-#ifdef _ITEM_ADDEXP	//vincent ç»éªŒæå‡
+#ifdef _ITEM_ADDEXP	//vincent ¾­ÑéÌáÉı
 void ITEM_Addexp(int charaindex,int toindex,int haveitemindex);
 #endif
-#ifdef _ITEM_REFRESH //vincent è§£é™¤å¼‚å¸¸çŠ¶æ€é“å…·
+#ifdef _ITEM_REFRESH //vincent ½â³ıÒì³£×´Ì¬µÀ¾ß
 void ITEM_Refresh(int charaindex,int toindex,int haveitemindex);
 #endif
 //Terry 2001/12/21
@@ -106,7 +106,7 @@ void ITEM_MagicEquitReWear( int charaindex, int itemindex);
 void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex);
 #endif
 
-#ifdef _FEV_ADD_NEW_ITEM			// FEV ADD å¢åŠ å¤æ´»å®ˆç²¾
+#ifdef _FEV_ADD_NEW_ITEM			// FEV ADD Ôö¼Ó¸´»îÊØ¾«
 void ITEM_ResAndDef( int charaindex, int toindex, int haveitemindex );
 #endif
 

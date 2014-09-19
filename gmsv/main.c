@@ -35,7 +35,7 @@ void warplog_proc();
 
 int main( int argc , char** argv, char** env )
 {
-    /*  åˆæ›°ä¸å°¹å†…å‡›æ£‰æ¯›æ¶©çƒ‚ä»„åŒ–äº‘ä»    */
+    /*  ÎçÔ»Ø¤ÒüÄÚÁİÃŞÃ«É¬ÀÃØÆ»¯ÔÆÈÊ    */
     setNewTime();
 /*
     if ( argc > 1 && 0==strcmp(argv[1],"-v"))
@@ -50,7 +50,7 @@ int main( int argc , char** argv, char** env )
 
     LoadAnnounce();	// Arminius 7.12 loginannounce
 
-		/* èµ“æ¸æ¶©çƒ‚ */
+		/* âÙÓåÉ¬ÀÃ */
 		memcpy( &tmOld, localtime( (time_t *)&NowTime.tv_sec), sizeof( tmNow ) );
 
     EXITWITHEXITCODEIFFALSE( init(argc , argv ,env ) , 1);
@@ -72,19 +72,19 @@ int main( int argc , char** argv, char** env )
 
 void mainloop( void )
 {	
-    print("åˆå§‹åŒ–NPC...");
+    print("³õÊ¼»¯NPC...");
     NPC_generateLoop( 1 );
-    print("å®Œæˆ\n");
-    print("åˆå§‹åŒ–signal1...");
+    print("Íê³É\n");
+    print("³õÊ¼»¯signal1...");
     signal(SIGUSR1,sigusr1);
-    print("å®Œæˆ\n");
-    print("åˆå§‹åŒ–signal2...");
+    print("Íê³É\n");
+    print("³õÊ¼»¯signal2...");
     signal(SIGUSR2,sigusr2);
-    print("å®Œæˆ\n");
+    print("Íê³É\n");
 #ifdef _MAP_WARPPOINT
-	print("åˆå§‹åŒ–åœ°å›¾ä¼ é€ç‚¹...");
+	print("³õÊ¼»¯µØÍ¼´«ËÍµã...");
 	MAPPOINT_InitMapWarpPoint();
-	print("å®Œæˆ\n");
+	print("Íê³É\n");
 	if( !MAPPOINT_loadMapWarpPoint() ){
 		return;
 	}
@@ -94,9 +94,9 @@ void mainloop( void )
 	Assess_InitSysEfficacy();
 #endif
 //#ifdef _ALLDOMAN
-//	print("åˆå§‹åŒ–è‹±é›„è¡¨åˆ—...");
+//	print("³õÊ¼»¯Ó¢ĞÛ±íÁĞ...");
 //	InitHeroList();
-//	print("å®Œæˆ\n");
+//	print("Íê³É\n");
 //#endif
 
 	int itime=0;
@@ -123,7 +123,7 @@ Assess_SysEfficacy( 0 );
 		}
 
     setNewTime();
-#ifdef _ASSESS_SYSEFFICACY_SUB //æ˜¾ç¤ºLOOPæ—¶é—´
+#ifdef _ASSESS_SYSEFFICACY_SUB //ÏÔÊ¾LOOPÊ±¼ä
 Assess_SysEfficacy_sub( 0, 1);
 #ifdef _GMSV_DEBUG
 	  DebugMainFunction="netloop_faster";
@@ -201,8 +201,8 @@ static void sendmsg_toall( char *msg )
 }
 static void ShutdownProc( void)
 {
-#define		SYSINFO_SHUTDOWN_MSG		"%d åˆ†é’Ÿåå¼€å§‹è¿›è¡Œç³»ç»Ÿåœæœºç»´æŠ¤, è¯·å¤§å®¶æå‰ä¸‹çº¿ä»¥å…æ•°æ®ä¸¢å¤±ã€‚"
-#define		SYSINFO_SHUTDOWN_MSG_COMP	"æœåŠ¡å™¨å·²å…³é—­ã€‚"
+#define		SYSINFO_SHUTDOWN_MSG		"%d ·ÖÖÓºó¿ªÊ¼½øĞĞÏµÍ³Í£»úÎ¬»¤, Çë´ó¼ÒÌáÇ°ÏÂÏßÒÔÃâÊı¾İ¶ªÊ§¡£"
+#define		SYSINFO_SHUTDOWN_MSG_COMP	"·şÎñÆ÷ÒÑ¹Ø±Õ¡£"
 	int diff,hun;
 
 	diff = NowTime.tv_sec - SERVSTATE_getShutdown();

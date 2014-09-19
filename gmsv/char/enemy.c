@@ -1,4 +1,4 @@
-/* è¡¬æ¶©çƒ‚æ¥®   */
+/* ³ÄÉ¬ÀÃèú   */
 #include "version.h"
 #include <stdio.h>
 #include <string.h>
@@ -18,7 +18,7 @@
 #include "anim_tbl.h"
 #include "log.h"
 
-#ifdef _ADD_ENCOUNT           // WON ADD å¢åŠ æ•Œé­é‡è§¦å‘ä¿®ä»¶
+#ifdef _ADD_ENCOUNT           // WON ADD Ôö¼ÓµĞÔâÓö´¥·¢ĞŞ¼ş
 #include "encount.h"
 #include "npcutil.h"
 #endif
@@ -215,13 +215,13 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
 	int		i,j;
     f = fopen(filename,"r");
     if( f == NULL ){
-        print( "æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
+        print( "ÎÄ¼ş´ò¿ªÊ§°Ü\n");
         return FALSE;
     }
 
     ENEMYTEMP_enemynum=0;
 
-    /*  å¼•å†…  èº²å…å«äº’çª’å«ä¸æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆ    */
+    /*  ÒıÄÚ  ¶ãØ¦µæ»¥ÖÏµæØ¤ÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ    */
     while( fgets( line, sizeof( line ), f ) ){
         linenum ++;
         if( line[0] == '#' )continue;        /* comment */
@@ -239,13 +239,13 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
     ENEMYTEMP_enemy = allocateMemory( sizeof(struct tagENEMYTEMP_Table)
                                    * ENEMYTEMP_enemynum );
     if( ENEMYTEMP_enemy == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" ,
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" ,
                 sizeof(struct tagENEMYTEMP_Table)*ENEMYTEMP_enemynum);
         fclose( f );
         return FALSE;
     }
 
-	/* èµ“æ¸ç¥­ */
+	/* âÙÓå¼À */
     for( i = 0; i < ENEMYTEMP_enemynum; i ++ ) {
     	for( j = 0; j < E_T_DATAINTNUM; j ++ ) {
     		ENEMYTEMP_setInt( i,j,-1);
@@ -277,7 +277,7 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
 	        ret = getStringFromIndexWithDelim( line,",",i+1,token,
 	                                           sizeof(token));
 	        if( ret==FALSE ){
-	            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+	            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
 	            continue;
 	        }
 	        ENEMYTEMP_setChar( enemytemp_readlen, E_T_NAME + i, token);
@@ -288,7 +288,7 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
             ret = getStringFromIndexWithDelim( line,",",i,token,
                                                sizeof(token));
             if( ret==FALSE ){
-                fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+                fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
                 break;
             }
             if( strlen( token) != 0 ) {
@@ -305,7 +305,7 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
 
     ENEMYTEMP_enemynum = enemytemp_readlen;
 
-    print( "æœ‰æ•ˆå® ç‰©åŸºæœ¬çŠ¶æ€æ•°æ˜¯ %d...", ENEMYTEMP_enemynum );
+    print( "ÓĞĞ§³èÎï»ù±¾×´Ì¬ÊıÊÇ %d...", ENEMYTEMP_enemynum );
 
     return TRUE;
 }
@@ -353,7 +353,7 @@ BOOL ENEMY_initEnemy( char* filename )
 	int		i,j;
     f = fopen(filename,"r");
     if( f == NULL ){
-        print( "æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
+        print( "ÎÄ¼ş´ò¿ªÊ§°Ü\n");
         return FALSE;
     }
 
@@ -368,7 +368,7 @@ BOOL ENEMY_initEnemy( char* filename )
     }
 
     if( fseek( f, 0, SEEK_SET ) == -1 ){
-        fprint( "å¯»æ‰¾å¤±è´¥\n" );
+        fprint( "Ñ°ÕÒÊ§°Ü\n" );
         fclose(f);
         return FALSE;
     }
@@ -376,7 +376,7 @@ BOOL ENEMY_initEnemy( char* filename )
     ENEMY_enemy = allocateMemory( sizeof(struct tagENEMY_EnemyTable)
                                    * ENEMY_enemynum );
     if( ENEMY_enemy == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" ,
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" ,
                 sizeof(struct tagENEMY_EnemyTable)*ENEMY_enemynum);
         fclose( f );
         return FALSE;
@@ -411,20 +411,20 @@ BOOL ENEMY_initEnemy( char* filename )
 
         ret = getStringFromIndexWithDelim( line,",",1,token,sizeof(token));
         if( ret==FALSE ){
-            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_NAME, token);
         ret = getStringFromIndexWithDelim( line,",",2,token,sizeof(token));
         if( ret==FALSE ){
-            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_TACTICSOPTION, token);
 #ifdef _BATTLENPC_WARP_PLAYER
 	    ret = getStringFromIndexWithDelim( line, ",", 3, token, sizeof(token));
         if(ret==FALSE){
-            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_ACT_CONDITION, token);
@@ -439,7 +439,7 @@ BOOL ENEMY_initEnemy( char* filename )
         for( i = ENEMY_STARTINTNUM; i < ENEMY_DATAINTNUM+ENEMY_STARTINTNUM; i ++ ) {
             ret = getStringFromIndexWithDelim( line,",",i,token,sizeof(token));
             if( ret==FALSE ){
-                fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+                fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
                 break;
             }
             ENEMY_setInt( enemy_readlen, i - ENEMY_STARTINTNUM, atoi( token));
@@ -451,7 +451,7 @@ BOOL ENEMY_initEnemy( char* filename )
 			}
 		}
 		if( i == ENEMYTEMP_enemynum) {
-            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
 			continue;
 		}
 		ENEMY_enemy[enemy_readlen].enemytemparray = i;
@@ -470,12 +470,12 @@ BOOL ENEMY_initEnemy( char* filename )
     }
     fclose(f);
     ENEMY_enemynum = enemy_readlen;
-    print( "æœ‰æ•ˆå® ç‰©æ•°æ˜¯ %d..", ENEMY_enemynum );
+    print( "ÓĞĞ§³èÎïÊıÊÇ %d..", ENEMY_enemynum );
 
     return TRUE;
 }
 /*------------------------------------------------------------------------
- * ENEMY_enemyåŠæ¶©çƒ‚ç™½å¤®å¥¶ä¼™  å¿ƒ  ä»„
+ * ENEMY_enemy¼°É¬ÀÃ°×ÑëÄÌ»ï  ĞÄ  ØÆ
  *-----------------------------------------------------------------------*/
 BOOL ENEMY_reinitEnemy( void )
 {
@@ -484,7 +484,7 @@ BOOL ENEMY_reinitEnemy( void )
 }
 
 /*------------------------------------------------------------------------
- ENEMY_EnemyåŠéª„ä¾¬æ¯›è¥æœˆ
+ ENEMY_Enemy¼°½¾Ù¯Ã«ôÅÔÂ
  *-----------------------------------------------------------------------*/
 int ENEMY_getEnemyArrayFromIndex( int groupindex, int index)
 {
@@ -493,7 +493,7 @@ int ENEMY_getEnemyArrayFromIndex( int groupindex, int index)
 	return GROUP_group[groupindex].enemyarray[index];
 }
 /*------------------------------------------------------------------------
- * ENEMY_ID äº•æ—¥ENEMY_EnemyåŠéª„ä¾¬æ¯›è¥æœˆ
+ * ENEMY_ID ¾®ÈÕENEMY_Enemy¼°½¾Ù¯Ã«ôÅÔÂ
  *-----------------------------------------------------------------------*/
 int ENEMY_getEnemyArrayFromId( int EnemyId)
 {
@@ -540,7 +540,7 @@ int ENEMY_getEnemyTempNoFromId( int EnemyId)
 }
 
 /*------------------------------------------------------------------------
- * å¼˜ä¼™â–¡çš¿æ¶©çƒ‚ç™½å¤®å¥¶ä¼™æ¯›  æˆˆ
+ * ºë»ï¡õÃóÉ¬ÀÃ°×ÑëÄÌ»ïÃ«  ¸ê
  *-----------------------------------------------------------------------*/
 BOOL GROUP_initGroup( char* filename )
 {
@@ -552,13 +552,13 @@ BOOL GROUP_initGroup( char* filename )
 
     f = fopen(filename,"r");
     if( f == NULL ){
-        print( "æ–‡ä»¶æ‰“å¼€å¤±è´¥\n");
+        print( "ÎÄ¼ş´ò¿ªÊ§°Ü\n");
         return FALSE;
     }
 
     GROUP_groupnum=0;
 
-    /*  å¼•å†…  èº²å…å«äº’çª’å«ä¸æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆ    */
+    /*  ÒıÄÚ  ¶ãØ¦µæ»¥ÖÏµæØ¤ÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ    */
     while( fgets( line, sizeof( line ), f ) ){
         linenum ++;
         if( line[0] == '#' )continue;        /* comment */
@@ -569,7 +569,7 @@ BOOL GROUP_initGroup( char* filename )
     }
 
     if( fseek( f, 0, SEEK_SET ) == -1 ){
-        fprint( "å¯»æ‰¾å¤±è´¥\n" );
+        fprint( "Ñ°ÕÒÊ§°Ü\n" );
         fclose(f);
         return FALSE;
     }
@@ -577,12 +577,12 @@ BOOL GROUP_initGroup( char* filename )
     GROUP_group = allocateMemory( sizeof(struct tagGROUP_Table)
                                    * GROUP_groupnum );
     if( GROUP_group == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" ,
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" ,
                 sizeof(struct tagGROUP_Table)*GROUP_groupnum);
         fclose( f );
         return FALSE;
     }
-	/* èµ“æ¸ç¥­ */
+	/* âÙÓå¼À */
     for( i = 0; i < GROUP_groupnum; i ++ ) {
     	for( j = 0; j < GROUP_DATAINTNUM; j ++ ) {
     		GROUP_setInt( i,j,-1);
@@ -592,7 +592,7 @@ BOOL GROUP_initGroup( char* filename )
 		}
     }
 
-    /*  å¼•å‡¶  å¿ƒ  å…    */
+    /*  ÒıĞ×  ĞÄ  ÔÊ    */
     linenum = 0;
     while( fgets( line, sizeof( line ), f ) ){
         linenum ++;
@@ -600,10 +600,10 @@ BOOL GROUP_initGroup( char* filename )
         if( line[0] == '\n' )continue;       /* none    */
         chomp( line );
 
-        /*  å«æ¯›å¸®æº¥å…æœˆ    */
-        /*  å¼•å†… tab æ¯› " " å  äº”æ™¶å°¹æœˆ    */
+        /*  µæÃ«°ïäßÔÊÔÂ    */
+        /*  ÒıÄÚ tab Ã« " " ±å  Îå¾§ÒüÔÂ    */
         replaceString( line, '\t' , ' ' );
-        /* ç‡®  åŠæ—¦çŸ¢â–¡æ—¦æ¯›æ½¸æœˆï¼»*/
+        /* ÛÆ  ¼°µ©Ê¸¡õµ©Ã«äúÔÂ£Û*/
 {
         char    buf[256];
         for( i = 0; i < strlen( line); i ++) {
@@ -621,7 +621,7 @@ BOOL GROUP_initGroup( char* filename )
         int     ret;
         int		loop;
 
-		/* æ‰‹ä»„æ‰‹ã„¡è˜¸æˆ·åŠä¼™â–¡çš¿å  åŒ€å‡¶å‡›åŠå‡¶æˆ·åèµ“æ¸ç¥­ä»„åŒ–äº‘ä» */
+		/* ÊÖØÆÊÖ¨áÕº»§¼°»ï¡õÃó±å  ÔÈĞ×Áİ¼°Ğ×»§±åâÙÓå¼ÀØÆ»¯ÔÆÈÊ */
     	for( j = 0; j < GROUP_DATAINTNUM; j ++ ) {
     		GROUP_setInt( group_readlen,j,-1);
     	}
@@ -629,22 +629,22 @@ BOOL GROUP_initGroup( char* filename )
 			GROUP_group[group_readlen].enemyarray[j] = -1;
 		}
 
-        /*  å¤«åˆå‹¾æˆ·åŠç„â–¡å¼ä»¶æ¯›è‹‡æœˆ    */
+        /*  ·òÎç¹´»§¼°Ğş¡õÛÍ¼şÃ«Î­ÔÂ    */
         ret = getStringFromIndexWithDelim( line,",",1,token,
                                            sizeof(token));
         if( ret==FALSE ){
-            fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+            fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
             continue;
         }
         GROUP_setChar( group_readlen, GROUP_NAME, token);
 
-        /* 2å‹¾  åŠ¨å«¦åé†’è¢„çŠ¯â–¡æ­£ */
+        /* 2¹´  ¶¯æÏ·´ĞÑ°À·¸¡õÕı */
 #define	GROUP_STARTINTNUM		2
         for( i = GROUP_STARTINTNUM; i < GROUP_DATAINTNUM+GROUP_STARTINTNUM; i ++ ) {
             ret = getStringFromIndexWithDelim( line,",",i,token,
                                                sizeof(token));
             if( ret==FALSE ){
-                fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
+                fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
                 break;
             }
             if( strlen( token) != 0 ) {
@@ -675,13 +675,13 @@ BOOL GROUP_initGroup( char* filename )
 				}
 			}
 			if( enemycnt == 0 ) {
-                fprint("å›¢é˜Ÿè®¾å®šä¸­æ•Œäººå°šæœªè®¾å®š æ–‡ä»¶:%s ç¬¬%dè¡Œ\n",filename,linenum);
+                fprint("ÍÅ¶ÓÉè¶¨ÖĞµĞÈËÉĞÎ´Éè¶¨ ÎÄ¼ş:%s µÚ%dĞĞ\n",filename,linenum);
 				continue;;
 			}
             if( checkRedundancy( &GROUP_group[group_readlen].intdata[ENEMY_ID1],
             			CREATEPROB1 - ENEMY_ID1))
             {
-                fprint("å›¢é˜Ÿè®¾å®šä¸­æ•Œäººé‡å¤è®¾å®š æ–‡ä»¶:%s ç¬¬%dè¡Œ\n",filename,linenum);
+                fprint("ÍÅ¶ÓÉè¶¨ÖĞµĞÈËÖØ¸´Éè¶¨ ÎÄ¼ş:%s µÚ%dĞĞ\n",filename,linenum);
 				continue;;
 			}
 
@@ -695,12 +695,12 @@ BOOL GROUP_initGroup( char* filename )
 
     GROUP_groupnum = group_readlen;
 
-    print( "æœ‰æ•ˆé‡æ•Œç»„ç¾¤æ•°æ˜¯ %d...", GROUP_groupnum );
+    print( "ÓĞĞ§ÓöµĞ×éÈºÊıÊÇ %d...", GROUP_groupnum );
 
 	return TRUE;
 }
 /*------------------------------------------------------------------------
- * å¼˜ä¼™â–¡çš¿åŠæ¶©çƒ‚ç™½å¤®å¥¶ä¼™  å¿ƒ  ä»„
+ * ºë»ï¡õÃó¼°É¬ÀÃ°×ÑëÄÌ»ï  ĞÄ  ØÆ
  *-----------------------------------------------------------------------*/
 BOOL GROUP_reinitGroup( void )
 {
@@ -708,7 +708,7 @@ BOOL GROUP_reinitGroup( void )
 	return( GROUP_initGroup( getGroupfile()));
 }
 /*------------------------------------------------------------------------
- * GROUP_ID äº•æ—¥GROUP_GroupåŠéª„ä¾¬æ¯›è¥æœˆ
+ * GROUP_ID ¾®ÈÕGROUP_Group¼°½¾Ù¯Ã«ôÅÔÂ
  *-----------------------------------------------------------------------*/
 int GROUP_getGroupArray( int groupid)
 {
@@ -721,7 +721,7 @@ int GROUP_getGroupArray( int groupid)
 	return -1;
 }
 /*------------------------------------------------------------------------
- * æ½¸  çƒ¦è‘£è¢„æ¯›ç»¼å²³å…æœˆï¼»
+ * äú  ·³¶­°ÀÃ«×ÛÔÀÔÊÔÂ£Û
  *-----------------------------------------------------------------------*/
 static int ENEMY_getExp( int array,int tarray, int level, int rank )
 {
@@ -747,7 +747,7 @@ static int ENEMY_getExp( int array,int tarray, int level, int rank )
     p  = ENEMY_enemy[array].intdata;
     tp = ENEMYTEMP_enemy[tarray].intdata;
 
-	// ä»¿ä»¶å¼äº•æ—¥    æ¯›æ½¸  
+	// ·Â¼şÛÍ¾®ÈÕ    Ã«äú  
 	if( rank < 0 || rank > 5 ) rank = 0;
 	ranknum = ranktbl[rank].rank;
 
@@ -756,7 +756,7 @@ static int ENEMY_getExp( int array,int tarray, int level, int rank )
 			  + *( tp + E_T_STONE)    + *( tp + E_T_DRUNK)     + *(tp + E_T_CONFUSION)
 			) / 100.0
 			+ *( tp + E_T_RARE);
-	/* EXPï¼æ¹˜  EXPâ‰ˆï¼  ä»¿ä»¶å¼â‰ˆæ±  â†ä¼ŠçŸ›ä¼™Ã—*/
+	/* EXP£¾Ïæ  EXP¡Ö£­  ·Â¼şÛÍ¡ÖÏ«  ¡ûÒÁÃ¬»ï¡Á*/
 	//return enemybaseexptbl[*(p+ENEMY_LV)] + (ranknum + alpha)*(*(tp+ENEMY_LV));
 	ret = enemybaseexptbl[level] + (ranknum + alpha)*(level+1);
 	return ( ret < 1 ) ? 1 : ret;
@@ -775,7 +775,7 @@ int ENEMY_getRank( int array, int tarray ){
     	int		num;
     	float	rank;
     }ranktbl[] = {
-    	{ 100, 2.5}, //æ€»æˆé•¿ç‡ >= 100 petrank=0
+    	{ 100, 2.5}, //×Ü³É³¤ÂÊ >= 100 petrank=0
     	{ 95, 2.0},
     	{ 90, 1.5},
     	{ 85, 1.0},
@@ -785,14 +785,14 @@ int ENEMY_getRank( int array, int tarray ){
 
     p  = ENEMY_enemy[array].intdata;
     tp = ENEMYTEMP_enemy[tarray].intdata;
-	/* ä»¿ä»¶å¼æ¯›ç…Œé¥å…æœˆ */
-	/* ä»‡åŠ  åŠé…·  åé…·  è¸æ¯›è¾…å“”åŠä»ªï¼» */
+	/* ·Â¼şÛÍÃ«»ÍÒ£ÔÊÔÂ */
+	/* ³ğ¼°  ¼°¿á  ·´¿á  Ì¤Ã«¸¨ßÙ¼°ÒÇ£Û */
 	paramsum  = *( tp + E_T_BASEVITAL) +
 		   		*( tp + E_T_BASESTR) +
 		   		*( tp + E_T_BASETGH) +
 		   		*( tp + E_T_BASEDEX);
 
-	ranknum = 0;	// çŠ¯ç™½å·§ä¼™ç„åã„Ÿ
+	ranknum = 0;	// ·¸°×ÇÉ»ïĞş·´¨ß
 	for( i = 0; i < arraysizeof( ranktbl); i ++ ) {
 		if(  paramsum >= ranktbl[i].num ) {
 			ranknum = i;
@@ -806,67 +806,67 @@ int ENEMY_getRank( int array, int tarray ){
 
 
 //*********************************************************
-// ä»¿ä»¶æ¯ä¸å…  
+// ·Â¼şÄ¸Ø©Ø¦  
 //*********************************************************
 static int EnemyGymSkill[] = {
-	PETSKILL_GUARDBREAK, 			// ã„¢â€œå¸ƒâ–¡ç‰æ—°ä»„(3)
-	PETSKILL_CONTINUATIONATTACK1, 	// ã„ ã„Ÿâ€œ  ç²®  çŒ¾(10)
-	PETSKILL_CONTINUATIONATTACK2, 	// ã„ ã„ â€œ  ç²®  çŒ¾(11)
-	PETSKILL_CONTINUATIONATTACK3, 	// ã„ ã„¡â€œ  ç²®  çŒ¾(12)
-	PETSKILL_CHARGE1,				// ã„¢ã„Ÿâ€œæ°‘ä¹“â–¡æ–¥ã„ (30)
-	PETSKILL_CHARGE2,				// ã„¢ã„ â€œæ°‘ä¹“â–¡æ–¥ã„¡(31)
-	PETSKILL_MIGHTY1,				// ã„£ã„Ÿâ€œåŸŸçŒ¾  è¯®(40)
-	PETSKILL_MIGHTY2,				// ã„£ã„ â€œåŸŸçŒ¾  è¯®(41)
-	PETSKILL_POWERBALANCE1,			// ã„¤ã„Ÿâ€œ    åŠè®½ã„ (50)
-	PETSKILL_POWERBALANCE2,			// ã„¤ã„ â€œ    åŠè®½ã„¡(51)
-	PETSKILL_POWERBALANCE3,			// ã„¤ã„¡â€œ    åŠè®½ã„¢(52)
-	PETSKILL_POISON_ATTACK1,		// ã„¥ã„Ÿâ€œ    çŒ¾(60)
-	PETSKILL_POISON_ATTACK2,		// ã„¥ã„ â€œ    çŒ¾(61)
-	PETSKILL_STONE,					// ã„§ã„Ÿâ€œæª—ç¥­  çŒ¾(80)
-	PETSKILL_CONFUSION_ATTACK,		// ã„¨ã„Ÿâ€œæ¸”åˆ­  çŒ¾(90)
-	PETSKILL_DRUNK_ATTACK,			// ã„ ã„Ÿã„Ÿâ€œå¬åŠ  çŒ¾(100)
-	PETSKILL_SLEEP_ATTACK,			// ã„ ã„ ã„Ÿâ€œæˆ½æ›°  çŒ¾(110)
-	PETSKILL_NOGUARD1,				// ã„ ã„¤ã„Ÿâ€œç”¨â–¡å¸ƒâ–¡ç‰ã„ (150)
-	PETSKILL_NOGUARD2,				// ã„ ã„¤ã„ â€œç”¨â–¡å¸ƒâ–¡ç‰ã„¡(151)
-	PETSKILL_NOGUARD3,				// ã„ ã„¤ã„¡â€œç”¨â–¡å¸ƒâ–¡ç‰ã„¢(152)
+	PETSKILL_GUARDBREAK, 			// ¨â¡°²¼¡õÓñêºØÆ(3)
+	PETSKILL_CONTINUATIONATTACK1, 	// ¨à¨ß¡°  Á¸  »«(10)
+	PETSKILL_CONTINUATIONATTACK2, 	// ¨à¨à¡°  Á¸  »«(11)
+	PETSKILL_CONTINUATIONATTACK3, 	// ¨à¨á¡°  Á¸  »«(12)
+	PETSKILL_CHARGE1,				// ¨â¨ß¡°ÃñÅÒ¡õ³â¨à(30)
+	PETSKILL_CHARGE2,				// ¨â¨à¡°ÃñÅÒ¡õ³â¨á(31)
+	PETSKILL_MIGHTY1,				// ¨ã¨ß¡°Óò»«  Ú½(40)
+	PETSKILL_MIGHTY2,				// ¨ã¨à¡°Óò»«  Ú½(41)
+	PETSKILL_POWERBALANCE1,			// ¨ä¨ß¡°    ¼°·í¨à(50)
+	PETSKILL_POWERBALANCE2,			// ¨ä¨à¡°    ¼°·í¨á(51)
+	PETSKILL_POWERBALANCE3,			// ¨ä¨á¡°    ¼°·í¨â(52)
+	PETSKILL_POISON_ATTACK1,		// ¨å¨ß¡°    »«(60)
+	PETSKILL_POISON_ATTACK2,		// ¨å¨à¡°    »«(61)
+	PETSKILL_STONE,					// ¨ç¨ß¡°éŞ¼À  »«(80)
+	PETSKILL_CONFUSION_ATTACK,		// ¨è¨ß¡°ÓæØÙ  »«(90)
+	PETSKILL_DRUNK_ATTACK,			// ¨à¨ß¨ß¡°Ìı°ì  »«(100)
+	PETSKILL_SLEEP_ATTACK,			// ¨à¨à¨ß¡°ìæÔ»  »«(110)
+	PETSKILL_NOGUARD1,				// ¨à¨ä¨ß¡°ÓÃ¡õ²¼¡õÓñ¨à(150)
+	PETSKILL_NOGUARD2,				// ¨à¨ä¨à¡°ÓÃ¡õ²¼¡õÓñ¨á(151)
+	PETSKILL_NOGUARD3,				// ¨à¨ä¨á¡°ÓÃ¡õ²¼¡õÓñ¨â(152)
 #ifdef _PSKILL_FALLGROUND
-	PETSKILL_FALLGROUND,			//è½é©¬æœ¯
+	PETSKILL_FALLGROUND,			//ÂäÂíÊõ
 #endif
 #ifdef _SKILL_DAMAGETOHP
-	PETSKILL_DAMAGETOHP,		//å—œè¡€æŠ€
+	PETSKILL_DAMAGETOHP,		//ÊÈÑª¼¼
 #endif
 #ifdef _Skill_MPDAMAGE
-	PETSKILL_MPDAMAGE,		//MPä¼¤å®³
+	PETSKILL_MPDAMAGE,		//MPÉËº¦
 #endif
 
 #ifdef _SKILL_WILDVIOLENT_ATT
-    PETSKILL_WILDVIOLENTATTACK,   //(540)ç‹‚æš´æ”»å‡»  vincent add 2002/05/16
+    PETSKILL_WILDVIOLENTATTACK,   //(540)¿ñ±©¹¥»÷  vincent add 2002/05/16
 #endif
 #ifdef _SKILL_SPEEDY_ATT
-    PETSKILL_SPEEDYATTACK,        //(541)ç–¾é€Ÿæ”»å‡»  vincent add 2002/05/16
+    PETSKILL_SPEEDYATTACK,        //(541)¼²ËÙ¹¥»÷  vincent add 2002/05/16
 #endif
 #ifdef _SKILL_GUARDBREAK2
-    PETSKILL_GUARDBREAK2,         //(542)ç ´é™¤é˜²å¾¡2 vincent add 2002/05/20
+    PETSKILL_GUARDBREAK2,         //(542)ÆÆ³ı·ÀÓù2 vincent add 2002/05/20
 #endif
 #ifdef _SKILL_SACRIFICE
-    PETSKILL_SACRIFICE,           //(543)æ•‘æ´      vincent add 2002/05/30
+    PETSKILL_SACRIFICE,           //(543)¾ÈÔ®      vincent add 2002/05/30
 #endif
 #ifdef _SKILL_WEAKEN  
-    PETSKILL_WEAKEN,              //(544)æ•‘æ´      vincent add 2002/07/11
+    PETSKILL_WEAKEN,              //(544)¾ÈÔ®      vincent add 2002/07/11
 #endif
 #ifdef _SKILL_DEEPPOISON  
-    PETSKILL_DEEPPOISON,          //(545)æ•‘æ´      vincent add 2002/07/16
+    PETSKILL_DEEPPOISON,          //(545)¾ÈÔ®      vincent add 2002/07/16
 #endif
 #ifdef _SKILL_BARRIER  
-    PETSKILL_BARRIER,             //(546)é­”éšœ      vincent add 2002/07/16
+    PETSKILL_BARRIER,             //(546)Ä§ÕÏ      vincent add 2002/07/16
 #endif
 
 #ifdef _SKILL_ROAR 
-    PETSKILL_ROAR,                //(548)å¤§å¼      vincent add 2002/07/11
+    PETSKILL_ROAR,                //(548)´óºğ      vincent add 2002/07/11
 #endif
 
 #ifdef _SKILL_REFRESH
-    PETSKILL_REFRESH,           //(550)æ•‘æ´      vincent add 2002/08/08
+    PETSKILL_REFRESH,           //(550)¾ÈÔ®      vincent add 2002/08/08
 #endif
 #ifdef _VARY_WOLF
 	PETSKILL_VARY,
@@ -902,29 +902,29 @@ static int gymbody[] = {
 
 
 /*------------------------------------------------------------------------
- * ENEMYï½›åä»¿ä»¶æ¯ä¸å…    æ¯›èŠ¨å°¹æœˆ
+ * ENEMY£û±å·Â¼şÄ¸Ø©Ø¦    Ã«Ü¸ÒüÔÂ
  *-----------------------------------------------------------------------*/
 int ENEMY_RandomChange( int enemyindex, int tempno )
 {
 	int work, work2, iRet = 0;
 
-	// ä»¿ä»¶æ¯ä¸å¹³ä¹“ä»¿äº•å‡ä¸¹äº•æ°‘å°¼æ°¸å¼
+	// ·Â¼şÄ¸Ø©Æ½ÅÒ·Â¾®Éıµ¤¾®ÃñÄáÓÀÛÍ
 	if( ( 564 <= tempno && tempno <= 580 )
 	||  ( 739 <= tempno && tempno <= 750 )
 	||  ( 895 <= tempno && tempno <= 906 )
 	){
 		//********************************************
-		// çš¿ä¼Šå¥¶ä¹©â–¡åŠæ¶Œ
+		// ÃóÒÁÄÌØÀ¡õ¼°Ó¿
 		//********************************************
 		iRet = 1;
 	}else
-	// ä»¿ä»¶æ¯ä¸å¹³ä¹“ä»¿äº•å‡ä¸¹äº•æ°‘å°¼æ°¸å¼
+	// ·Â¼şÄ¸Ø©Æ½ÅÒ·Â¾®Éıµ¤¾®ÃñÄáÓÀÛÍ
 	if( ( 655 <= tempno && tempno <= 720 )
 	||  ( 859 <= tempno && tempno <= 894 )
 	||  ( 907 <= tempno && tempno <= 940 )
 	){
 		//********************************************
-		// çŸ¢æ°¸ç„åŠæ¶Œ
+		// Ê¸ÓÀĞş¼°Ó¿
 		//********************************************
 		iRet = 2;
 	}else{
@@ -935,15 +935,15 @@ int ENEMY_RandomChange( int enemyindex, int tempno )
 	if( iRet == 1 ){
 		//********************************************
 		//
-		// çš¿ä¼Šå¥¶ä¹©â–¡åŠæ¶Œä»„å‡¶è¡¬å…åŠåŒ¹ï½ç®ªå²­æ‰‹ä»¿ä»¶æ¯ä¸
+		// ÃóÒÁÄÌØÀ¡õ¼°Ó¿ØÆĞ×³ÄØ¦¼°Æ¥£ıóìÁëÊÖ·Â¼şÄ¸Ø©
 		//
 		//********************************************
-		// é“£æ‰‹ä»¿ä»¶æ¯ä¸
+		// Ï³ÊÖ·Â¼şÄ¸Ø©
 		CHAR_setInt( enemyindex, CHAR_BASEBASEIMAGENUMBER,
 			gymbody[RAND( 0, arraysizeof( gymbody ) - 1)] );
 		CHAR_setInt( enemyindex, CHAR_BASEIMAGENUMBER,
 			CHAR_getInt( enemyindex, CHAR_BASEBASEIMAGENUMBER ) );
-		// ç®ªå²­åèµç™«
+		// óìÁë·´ØÍñ²
 		work = ( RAND( 0, 20 ) - 10 ) * 10;
 		work2 = 100 - ABS( work );
 		CHAR_setInt( enemyindex, CHAR_EARTHAT, work );
@@ -954,28 +954,28 @@ int ENEMY_RandomChange( int enemyindex, int tempno )
 		CHAR_setInt( enemyindex, CHAR_WATERAT, work2 );
 		CHAR_setInt( enemyindex, CHAR_WINDAT,  -work2 );
 
-		// ä»¿ä»¶æ¯ä¸å…  æ¹›æ¯›  å‡¶å…­æœˆ
+		// ·Â¼şÄ¸Ø©Ø¦  Õ¿Ã«  Ğ×ÁùÔÂ
 		if( DoujyouRandomWeponSet( enemyindex ) ){
-			//   æºƒ  æ¹›åŠæ¡¦å®åéªšæ©˜  çŒ¾æ¯›å‹¾ä»ƒæœˆ
+			//   À£  Õ¿¼°èëÄş·´É§éÙ  »«Ã«¹´ØêÔÂ
 			CHAR_setPetSkill( enemyindex, 0, PETSKILL_NORMALATTACK );
 			CHAR_setPetSkill( enemyindex, 1, PETSKILL_NORMALATTACK );
 		}else{
-			//   æºƒ  æ¹›å…ƒæ‰å…ä¸­åŠåŒ¹  å‹¾ä»ƒæœˆ
-			//   æ¯›å°¥ä»ƒæœˆ
+			//   À£  Õ¿ÔªÔúØ¦ÖĞ¼°Æ¥  ¹´ØêÔÂ
+			//   Ã«ŞÍØêÔÂ
 			CHAR_setPetSkill( enemyindex, 0,
 				EnemyGymSkill[RAND( 0, arraysizeof( EnemyGymSkill ) - 1 )] );
-			//   æ¯›å°¥ä»ƒæœˆ
+			//   Ã«ŞÍØêÔÂ
 			CHAR_setPetSkill( enemyindex, 1,
 				EnemyGymSkill[RAND( 0, arraysizeof( EnemyGymSkill ) - 1 )] );
 		}
 
 	}else
 	if( iRet == 2 ){
-		//   æºƒ  æ¹›å…ƒæ‰å…ä¸­åŠåŒ¹  å‹¾ä»ƒæœˆ
-		//   æ¯›å°¥ä»ƒæœˆ
+		//   À£  Õ¿ÔªÔúØ¦ÖĞ¼°Æ¥  ¹´ØêÔÂ
+		//   Ã«ŞÍØêÔÂ
 		CHAR_setPetSkill( enemyindex, 0,
 			EnemyGymSkill[RAND( 0, arraysizeof( EnemyGymSkill ) - 1 )] );
-		//   æ¯›å°¥ä»ƒæœˆ
+		//   Ã«ŞÍØêÔÂ
 		CHAR_setPetSkill( enemyindex, 1,
 			EnemyGymSkill[RAND( 0, arraysizeof( EnemyGymSkill ) - 1 )] );
 	}
@@ -986,7 +986,7 @@ int ENEMY_RandomChange( int enemyindex, int tempno )
 
 
 /*------------------------------------------------------------------------
- * ENEMY_enemyäº•æ—¥å¹³ä¹“ä»¿å¼æ­£â–¡æ¯›ç»¼å²³å…æœˆï¼»
+ * ENEMY_enemy¾®ÈÕÆ½ÅÒ·ÂÛÍÕı¡õÃ«×ÛÔÀÔÊÔÂ£Û
  *-----------------------------------------------------------------------*/
 int ENEMY_createEnemy( int array, int baselevel )
 {
@@ -1005,50 +1005,50 @@ int ENEMY_createEnemy( int array, int baselevel )
     tarray = ENEMYTEMP_getEnemyTempArray( array);
 	if( !ENEMYTEMP_CHECKINDEX( tarray)) return -1;
 //    tp = ENEMYTEMP_enemy[tarray].intdata;
-	// çŠ¯â–¡æ­£æˆŠç–‹â–¡
+	// ·¸¡õÕıÎìñâ¡õ
 	for( i = 0; i < E_T_DATAINTNUM; i ++ ){
 	    tp[i] = ENEMYTEMP_enemy[tarray].intdata[i];
 	}
 
-    //     èµ“æ¸ç¥­
+    //     âÙÓå¼À
     memset( &CharNew, 0, sizeof( Char ) );
 
     if( !CHAR_getDefaultChar( &CharNew,31010 ) )return -1;
 
-    /*    é£“  å¯    */
+    /*    ì«  Ä¯    */
     CharNew.data[CHAR_BASEBASEIMAGENUMBER]
         = CharNew.data[CHAR_BASEIMAGENUMBER] = *(tp+E_T_IMGNUMBER);
-    /*  è¡¬åŒ¹ä¸æœˆåˆæ¶©çƒ‚å…æœˆ   */
+    /*  ³ÄÆ¥Ø¤ÔÂÎçÉ¬ÀÃÔÊÔÂ   */
     CharNew.data[CHAR_WHICHTYPE] = CHAR_TYPEENEMY;
-    /*     æ¯›å£…å… */
+    /*     Ã«ÛÕÔÊ */
     CharNew.data[CHAR_DUELPOINT] = 0;
 
-	/* ä¼ŠçŸ›ä¼™æ¯›ç‘çƒ‚å…æœˆï¼» */
+	/* ÒÁÃ¬»ïÃ«è£ÀÃÔÊÔÂ£Û */
 	if( baselevel > 0 ){
-		level = baselevel;	// ä¼ŠçŸ›ä¼™è£”çƒ‚
+		level = baselevel;	// ÒÁÃ¬»ïÒáÀÃ
 	}else{
 		level = RAND( (*(p + ENEMY_LV_MIN)), (*(p+ ENEMY_LV_MAX)));
 	}
 #define		E_PAR( a)		(*(p + (a)))
 #define		ET_PAR( a)		(*(tp + (a)))
-/* ç”±ä»¿ä¸¢â–¡æ­£éš™é†’äº•æ—¥  ç«¯åŠæ¹˜  ç”±ä»¿ä¸¢â–¡æ­£å°ºåŠç…Œé¥æŒš */
+/* ÓÉ·Â¶ª¡õÕıÏ¶ĞÑ¾®ÈÕ  ¶Ë¼°Ïæ  ÓÉ·Â¶ª¡õÕı³ß¼°»ÍÒ£Ö¿ */
 #if 1
 #define		PARAM_CAL( l) 	( ( level -1)*ET_PAR( E_T_LVUPPOINT)+ ET_PAR(E_T_INITNUM)) * ET_PAR( (l))
 #else
 #define		PARAM_CAL( l) 	( (E_PAR(ENEMY_LV) -1)*ET_PAR( E_T_LVUPPOINT)+ ET_PAR(E_T_INITNUM)) * ET_PAR( (l))
 #endif
-	/* ç‡®å†…æ¹˜  å–ƒæ›°è•Šæ›°ç¦¾å¥¶ä»¶ç„åï¼‹ã„¡æ¯›ä»¿ä»¶æ¯ä¸åŒ¹å«ä¸¹ */
+	/* ÛÆÄÚÏæ  à«Ô»ÈïÔ»ºÌÄÌ¼şĞş±å£«¨áÃ«·Â¼şÄ¸Ø©Æ¥µæµ¤ */
 	tp[E_T_BASEVITAL] += RAND( 0, 4 ) - 2;
 	tp[E_T_BASESTR] += RAND( 0, 4 ) - 2;
 	tp[E_T_BASETGH] += RAND( 0, 4 ) - 2;
 	tp[E_T_BASEDEX] += RAND( 0, 4 ) - 2;
-	/* ä»‡åŠå‡›é³”åŒ¹å–ƒæ›°è•Šæ›°ç¦¾å¥¶ä»¶ç„æ¯›å¿¡ç»£ä»„åŒ–äº‘ä» */
+	/* ³ğ¼°Áİ÷§Æ¥à«Ô»ÈïÔ»ºÌÄÌ¼şĞşÃ«âçĞåØÆ»¯ÔÆÈÊ */
     CharNew.data[CHAR_ALLOCPOINT]
     = ( tp[E_T_BASEVITAL] << 24 )
     + ( tp[E_T_BASESTR] << 16 )
     + ( tp[E_T_BASETGH] << 8 )
     + ( tp[E_T_BASEDEX] << 0 );
-	/* å…¬åŠ  ï½ä»¿ä»¶æ¯ä¸åŒ¹ç¦¾å¥¶ä»¶ç„æ¯›ã„ å‹¿å‹¾ç¬›é¥ï¼»ä»‡æœ¨æ¯›ã„ ã„Ÿèšæ¥æ›°å¿’å…ï¼»*/
+	/* ¹«¼°  £ı·Â¼şÄ¸Ø©Æ¥ºÌÄÌ¼şĞşÃ«¨àÎğ¹´µÑÒ££Û³ğÄ¾Ã«¨à¨ß¼ÔÀãÔ»ß¯ÔÊ£Û*/
 	for( i = 0; i < 10; i ++ ){
 		int work = RAND( 0, 3 );
 		if( work == 0 )tp[E_T_BASEVITAL]++;
@@ -1057,7 +1057,7 @@ int ENEMY_createEnemy( int array, int baselevel )
 		if( work == 3 )tp[E_T_BASEDEX]++;
 	}
 
-    /* ç”±ä»¿ä¸¢â–¡æ­£æœ¬æ°¸ç„ */
+    /* ÓÉ·Â¶ª¡õÕı±¾ÓÀĞş */
     CharNew.data[CHAR_VITAL]    = PARAM_CAL(E_T_BASEVITAL);
     CharNew.data[CHAR_STR]      = PARAM_CAL(E_T_BASESTR);
     CharNew.data[CHAR_TOUGH]    = PARAM_CAL(E_T_BASETGH);
@@ -1126,12 +1126,12 @@ int ENEMY_createEnemy( int array, int baselevel )
 		style = (*(p + ENEMY_STYLE));
 		switch( style ){
 		case 1:		wepon = 0;break;	//   
-		case 2:		wepon = 100;break;  // è½ºå¾‡
-		case 3:		wepon = 200;break;	// é”®
-		case 4:		wepon = 400;break;	// è°
-		case 5:		wepon = 500;break;	// çš®â–¡ä¸¢ä»¿ä»¶
-		case 6:		wepon = 700;break;  // é«‘ä»†æª—
-		case 7:		wepon = 600;break;	// é«‘ä»†  
+		case 2:		wepon = 100;break;  // é÷áß
+		case 3:		wepon = 200;break;	// ¼ü
+		case 4:		wepon = 400;break;	// İÔ
+		case 5:		wepon = 500;break;	// Æ¤¡õ¶ª·Â¼ş
+		case 6:		wepon = 700;break;  // ÷ÇÆÍéŞ
+		case 7:		wepon = 600;break;	// ÷ÇÆÍ  
 		default:break;
 		}
 		if( wepon >= 0 ){
@@ -1167,7 +1167,7 @@ int ENEMY_createEnemy( int array, int baselevel )
 		}
 	}
 #endif
-#ifdef _PETSKILL_BECOMEFOX //å°†åªšæƒ‘æœ¯ä¸­æ‹›æ—¶é—´æ¸…é™¤ä¸º-1
+#ifdef _PETSKILL_BECOMEFOX //½«ÃÄ»óÊõÖĞÕĞÊ±¼äÇå³ıÎª-1
      CHAR_setWorkInt( newindex, CHAR_WORKFOXROUND, -1 ); 
 #endif
     return newindex;
@@ -1232,35 +1232,35 @@ static RANDOMENEMY RandomEnemyTbl[] = {
 
 
 /*------------------------------------------------------------
- * è¡¬    æ¶©çƒ‚åŠæ‘¹    å¯äº’  æºƒå…è¢„å…æ—¥ä»¿ä»¶æ¯ä¸åæ¶©çƒ‚å…æœˆ
+ * ³Ä    É¬ÀÃ¼°Ä¡    Ä¯»¥  À£Ø¦°ÀØ¦ÈÕ·Â¼şÄ¸Ø©±åÉ¬ÀÃÔÊÔÂ
  ------------------------------------------------------------*/
 int ENEMY_RandomEnemyArray( int e_array, int *pNew )
 {
 	int i = 0, randwork, work;
 //	RANDOMENEMY *pRandomEnemy;
 	*pNew = -1;
-	// ä»‡åŠ  åŒºåä»¿ä»¶æ¯ä¸
+	// ³ğ¼°  Çø·´·Â¼şÄ¸Ø©
 	if(
 		( RANDOMENEMY_TOP <= e_array && e_array <= RANDOMENEMY_END )
 	||	( 964 <= e_array && e_array <= 969 )
 	){
-		// å‡åŠæ¯ç«‹â–¡äº•è­¬å±¯æœˆ
+		// Éı¼°Ä¸Á¢¡õ¾®Æ©ÍÍÔÂ
 		for( i = 0; i < arraysizeof( RandomEnemyTbl ); i ++ ){
 			if( RandomEnemyTbl[i].num == e_array ){
 				break;
 			}
 		}
-		//   åŒºæ¯›è¯‘å°¹åŒ–ä¸­å‡¶æ—¥å·¨ä»¿â–¡åŒ¹  ä»ƒæœˆ
+		//   ÇøÃ«ÒëÒü»¯ÖĞĞ×ÈÕ¾Ş·Â¡õÆ¥  ØêÔÂ
 		if( i >= arraysizeof( RandomEnemyTbl ) ) return 0;
 
-		// ä»¿ä»¶æ¯ä¸æ¶©çƒ‚
+		// ·Â¼şÄ¸Ø©É¬ÀÃ
 		randwork = RAND( 0, RandomEnemyTbl[i].arraysize - 1 );
-		//     äº•æ—¥è•™ä»„ä¸­  å¯æ¯›æ½¸  
+		//     ¾®ÈÕŞ¥ØÆÖĞ  Ä¯Ã«äú  
 		work = RandomEnemyTbl[i].pTbl[randwork];
 		*pNew = ENEMY_getEnemyArrayFromId( work );
 		return 1;
 	}else{
-		// çª’ä»ªæ‰‹å…ä¸­
+		// ÖÏÒÇÊÖØ¦ÖĞ
 		return 0;
 	}
 }
@@ -1359,7 +1359,7 @@ int *ENEMY_getEnemy( int charaindex, int x, int y)
 		int newarray, enemywork;
 		e_array = ENEMY_getEnemyArrayFromIndex( g_array, i - ENEMY_ID1 );
 
-#ifdef _ADD_ENCOUNT           // WON ADD å¢åŠ æ•Œé­é‡è§¦å‘ä¿®ä»¶
+#ifdef _ADD_ENCOUNT           // WON ADD Ôö¼ÓµĞÔâÓö´¥·¢ĞŞ¼ş
 		{	
 		int char_event_now = -1, char_event_end = -1;
 		if(ENCOUNT_table[array].event_now != -1){
@@ -1511,7 +1511,7 @@ int ENEMY_createPetFromEnemyIndex( int charaindex, int array)
 		if( work == 2 )tp[E_T_BASETGH]++;
 		if( work == 3 )tp[E_T_BASEDEX]++;
 	}
-    /* ç”±ä»¿ä¸¢â–¡æ­£æœ¬æ°¸ç„ */
+    /* ÓÉ·Â¶ª¡õÕı±¾ÓÀĞş */
     CharNew.data[CHAR_VITAL]    = PARAM_CAL(E_T_BASEVITAL);
     CharNew.data[CHAR_STR]      = PARAM_CAL(E_T_BASESTR);
     CharNew.data[CHAR_TOUGH]    = PARAM_CAL(E_T_BASETGH);
@@ -1745,7 +1745,7 @@ int GetNewPet( int toindex , int petindex, int array, int *work)
     CHAR_setInt( petindex, CHAR_DEX , ( PARAM_CAL(E_T_BASEDEX) * work[3] ));
 	CHAR_setMaxExp( petindex, 0);
 	CHAR_setInt( petindex, CHAR_LV, level);
-	//å® ç‰©æŠ€èƒ½è®¾ä¸ºä¸ƒæŠ€
+	//³èÎï¼¼ÄÜÉèÎªÆß¼¼
 	CHAR_setInt( petindex, CHAR_SLOT, 7);
 /*
 	for( i=0; i<CHAR_MAXPETSKILLHAVE; i++)	{

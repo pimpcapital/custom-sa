@@ -13,7 +13,7 @@
 
 /*
  *
- * å…¬ä¸¹åŒ¹å…ä¸­æ‰‹åŠåè¸äº”ä»‡å¿ƒåŠå‡¶å¤ªåfopen(..,"w")å…æœˆ
+ * ¹«µ¤Æ¥Ø¦ÖĞÊÖ¼°·´Ì¤Îå³ğĞÄ¼°Ğ×Ì«±åfopen(..,"w")ÔÊÔÂ
  * by ringo
  */
 
@@ -22,7 +22,7 @@ struct tagLogconf{
     char*   entry;
     char    filename[256];
     FILE*   f;
-    BOOL    append;             /* append å…æœˆäº•ï½è¸äº”ä»‡å¿ƒåŠå‡¶å¤ªåSEEK_SETå…æœˆäº• */
+    BOOL    append;             /* append ÔÊÔÂ¾®£ıÌ¤Îå³ğĞÄ¼°Ğ×Ì«±åSEEK_SETÔÊÔÂ¾® */
 }LogConf[LOG_TYPE_NUM]={
     { "TALK: ", "talklog" ,"", NULL , TRUE},
     { "PROC: ", "proc" , "" , NULL , FALSE},
@@ -49,10 +49,10 @@ struct tagLogconf{
 #endif
 	{ "LOGIN: ", "loginlog", "", NULL, TRUE},
 	{ "", "pettranslog", "", NULL, TRUE},
-//Syu å¢åŠ åº„å›­æˆ˜èƒœè´ŸLog
+//Syu Ôö¼Ó×¯Ô°Õ½Ê¤¸ºLog
 	{ "FMPKRESULT: ", "fmpkresultlog" ,"", NULL , TRUE},
 
-// Syu ADD æ–°å¢å®¶æ—ä¸ªäººé“¶è¡Œå­˜å–Log (ä¸å«å®¶æ—é“¶è¡Œ)
+// Syu ADD ĞÂÔö¼Ò×å¸öÈËÒøĞĞ´æÈ¡Log (²»º¬¼Ò×åÒøĞĞ)
 	{ "BANKSTONELOG: ", "bankstonelog" ,"", NULL , TRUE},
 
 	{ "ACMESSAGE: ", "acmessagelog" ,"", NULL , TRUE},
@@ -63,8 +63,8 @@ tagWarplog warplog[MAXMAPNUM];
 tagWarpCount warpCount[MAXMAPLINK];
 
 /*------------------------------------------------------------
- * å¨„é†’
- * å¿’æ›°è¢„
+ * Â¦ĞÑ
+ * ß¯Ô»°À
  ------------------------------------------------------------*/
 static BOOL readLogConfFile( char* filename )
 {
@@ -188,7 +188,7 @@ BOOL initLog( char* filename )
     return TRUE;
 }
 
-//Syu å¢åŠ åº„å›­æˆ˜èƒœè´ŸLog
+//Syu Ôö¼Ó×¯Ô°Õ½Ê¤¸ºLog
 void Logfmpk(
 			 char *winner, int winnerindex, int num1,
 			 char *loser, int loserindex, int num2,
@@ -201,7 +201,7 @@ void Logfmpk(
 			char buf[256];
 			memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
 			sprintf( buf, " (%d:%d)", tm1.tm_hour, tm1.tm_min);
-			printl( LOG_FMPKRESULT, "\nFMPK: [%s]åœ°ç‚¹:%s %s(%d) çº¦æˆ˜è¦æ±‚ %s(%d) time:%s",
+			printl( LOG_FMPKRESULT, "\nFMPK: [%s]µØµã:%s %s(%d) Ô¼Õ½ÒªÇó %s(%d) time:%s",
 				buf1, buf2,
 				winner, winnerindex, loser, loserindex, buf);
 		}
@@ -224,11 +224,11 @@ void LogAcMess(	int fd, char *type, char *mess )
 
 
 void LogItem(
-	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
-        char *CharID, /* å¹³ä¹“ä»¿å¼æ­£ID */	
-	int ItemNo, 	/* å¤±å¥¶  ä¸  å¯ */
-	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
-	int floor,		/* ç”„   */
+	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+        char *CharID, /* Æ½ÅÒ·ÂÛÍÕıID */	
+	int ItemNo, 	/* Ê§ÄÌ  Ø©  Ä¯ */
+	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
+	int floor,		/* Õç   */
 	int x,
 	int y,
 	char *uniquecode, // shan 2001/12/14
@@ -254,7 +254,7 @@ void LogPkContend( char *teamname1, char *teamname2,
 	memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
 
 	if( flg == 0 ) {
- 		printl( LOG_PKCONTEND, "[%32s èƒœ %32s],(%5d,%4d,%4d)(%d:%d)" ,
+ 		printl( LOG_PKCONTEND, "[%32s Ê¤ %32s],(%5d,%4d,%4d)(%d:%d)" ,
 			teamname1, teamname2, 
 			floor, x, y, tm1.tm_hour, tm1.tm_min);
 	}else{
@@ -282,16 +282,16 @@ void LogPetTrans(
 }                                                                                        
 /*------------------------------------------------------------
  *
- * çŸ¢æ°¸ç„å¤«å¼˜æ¯›æ½¸æœˆ
+ * Ê¸ÓÀĞş·òºëÃ«äúÔÂ
  *
 -------------------------------------------------------------*/
 void LogPet(
-	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
+	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
 	char *CharID,
 	char *PetName,
 	int  PetLv,
-	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
-	int floor,		/* ç”„   */
+	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
+	int floor,		/* Õç   */
 	int x,
 	int y,
 	char *uniquecode  // shan 2001/12/14	
@@ -310,12 +310,12 @@ void LogPet(
 }
 
 void LogBankStone(
-        char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
-        char *CharId, /* äº¤â–¡æ‰’â–¡ID */
+        char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+        char *CharId, /* ½»¡õ°Ç¡õID */
 		int	meindex,
-        int Gold,               /* å—¯å–Š */
-        char *Key,              /* å¹³â–¡ä¼â–¡ç‰ */
-        int floor,              /* ç”„   */
+        int Gold,               /* àÅº° */
+        char *Key,              /* Æ½¡õ·¥¡õÓñ */
+        int floor,              /* Õç   */
         int x,
         int y,
 		int my_gold,
@@ -359,27 +359,27 @@ void LogPetPointChange(
 
 /*------------------------------------------------------------
  *
- * é³–æˆå¤«å¼˜æ¯›æ½¸æœˆ
+ * ±îÏ··òºëÃ«äúÔÂ
  *
 -------------------------------------------------------------*/
 void LogTensei(
-	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
+	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
 	char *CharID,
-	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
-	int level,		//ä¼ŠçŸ›ä¼™
-	int transNum,	//é³–æˆèšé†’
-	int quest,		//å¼å·¨æ—¦ç„é†’
-	int home,		//è¯·è¤¥å“—
-	int item,		//  ç¬›å¤±å¥¶  ä¸  äº•æ›°é†’
-	int pet,		//  ç¬›çŸ¢æ°¸ç„  äº•æ›°é†’
-	int vital,		//  ç¥­èŸ†Vital
-	int b_vital,	//  ç¥­  vital
-	int str,		//  ç¥­èŸ†str
-	int b_str,		//  ç¥­  str
-	int tgh,		//  ç¥­èŸ†      
-	int b_tgh,		//  ç¥­        
-	int dex,		//  ç¥­èŸ†      
-	int b_dex		//  ç¥­        
+	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
+	int level,		//ÒÁÃ¬»ï
+	int transNum,	//±îÏ·¼ÔĞÑ
+	int quest,		//ÛÍ¾Şµ©ĞşĞÑ
+	int home,		//ÇëÈì»©
+	int item,		//  µÑÊ§ÄÌ  Ø©  ¾®Ô»ĞÑ
+	int pet,		//  µÑÊ¸ÓÀĞş  ¾®Ô»ĞÑ
+	int vital,		//  ¼Àó¡Vital
+	int b_vital,	//  ¼À  vital
+	int str,		//  ¼Àó¡str
+	int b_str,		//  ¼À  str
+	int tgh,		//  ¼Àó¡      
+	int b_tgh,		//  ¼À        
+	int dex,		//  ¼Àó¡      
+	int b_dex		//  ¼À        
 ){
 	struct  tm tm1;
 	memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
@@ -407,9 +407,9 @@ void LogTensei(
 
 // LOG_TALK
 void LogTalk(
-	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
+	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
 	char *CharID,
-	int floor,		/* ç”„   */
+	int floor,		/* Õç   */
 	int x,
 	int y,
 	char *message
@@ -427,12 +427,12 @@ void LogTalk(
 
 }
 /*------------------------------------------------------------
- * æ¶©çƒ‚åä»„å‡¶äº’åŒ€åŒ–å…å±¯åŒ–åŠç™½å¤®å¥¶ä¼™æ¯›ç”°æ°¸å¼å¤±æ°¸çš¿
- * ç™½å¤®å¥¶ä¼™åå¼å¤«â–¡æœ¯ä»Šæœ¨åŒ–ä¸­å…ä»ƒæœ¨å£¬å¼å¤«â–¡æœ¯å…æœˆ
- * å¨„é†’  struct tm
- *  å…ä»„
- * å¿’æ›°è¢„
- *  å·¦â–¡çš¿ä»¶ä»„å‡¶ç™½å¤®å¥¶ä¼™åŠé†’
+ * É¬ÀÃ±åØÆĞ×»¥ÔÈ»¯ÔÊÍÍ»¯¼°°×ÑëÄÌ»ïÃ«ÌïÓÀÛÍÊ§ÓÀÃó
+ * °×ÑëÄÌ»ï·´ÛÍ·ò¡õÊõ½ñÄ¾»¯ÖĞØ¦ØêÄ¾ÈÉÛÍ·ò¡õÊõÔÊÔÂ
+ * Â¦ĞÑ  struct tm
+ *  Ø¦ØÆ
+ * ß¯Ô»°À
+ *  ×ó¡õÃó¼şØÆĞ×°×ÑëÄÌ»ï¼°ĞÑ
  ------------------------------------------------------------*/
 void backupAllLogFile( struct tm *ptm )
 {
@@ -440,24 +440,24 @@ void backupAllLogFile( struct tm *ptm )
     char szBuffer[256];
 
     for( i=0 ; i<arraysizeof(LogConf) ; i++ ){
-        /* append åŒ¹å…ä¸­æ‰‹åŠåä»„å…ä¸­ */
+        /* append Æ¥Ø¦ÖĞÊÖ¼°·´ØÆØ¦ÖĞ */
         if( ! LogConf[i].append )continue;
 
 		sprintf( szBuffer, "%s.%4d%02d%02d", LogConf[i].filename,
 			ptm->tm_year+1900, ptm->tm_mon+1, ptm->tm_mday );
 
 		if( LogConf[i].f != NULL ){
-			/* å·¦â–¡çš¿ä»¶ä»Šæœ¨åŒ–ä¸­å‡¶æ—¥å¼å¤«â–¡æœ¯ */
+			/* ×ó¡õÃó¼ş½ñÄ¾»¯ÖĞĞ×ÈÕÛÍ·ò¡õÊõ */
 			fclose( LogConf[i].f );
-			/* ä¼‰ç”Ÿâ–¡ä¸ */
+			/* ØøÉú¡õØ© */
 			rename( LogConf[i].filename, szBuffer );
-			/* ç–¯å¤ªå·¦â–¡çš¿ä»¶ */
+			/* ·èÌ«×ó¡õÃó¼ş */
 	        LogConf[i].f = fopen( LogConf[i].filename , "a" );
 
 		}else{
-			/* ä¼‰ç”Ÿâ–¡ä¸ */
+			/* ØøÉú¡õØ© */
 			rename( LogConf[i].filename, szBuffer );
-			/* ç–¯å¤ªå·¦â–¡çš¿ä»¶ */
+			/* ·èÌ«×ó¡õÃó¼ş */
 	        LogConf[i].f = fopen( LogConf[i].filename , "a" );
 
 		}
@@ -465,10 +465,10 @@ void backupAllLogFile( struct tm *ptm )
 }
 /*------------------------------------------------------------
 *
-* äº‘å—¯æ¯›èƒ¶ä¸¹
+* ÔÆàÅÃ«½ºµ¤
 *
 -------------------------------------------------------------*/
-// Syu ADD æ–°å¢å®¶æ—ä¸ªäººé“¶è¡Œå­˜å–Log (ä¸å«å®¶æ—é“¶è¡Œ)
+// Syu ADD ĞÂÔö¼Ò×å¸öÈËÒøĞĞ´æÈ¡Log (²»º¬¼Ò×åÒøĞĞ)
 void LogFamilyBankStone(
         char *CharName,
         char *CharId, 
@@ -490,12 +490,12 @@ void LogFamilyBankStone(
 
 void LogStone(
 				int TotalGold,
-        char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
-        char *CharId, /* äº¤â–¡æ‰’â–¡ID */
-        int Gold,               /* å—¯å–Š */
+        char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+        char *CharId, /* ½»¡õ°Ç¡õID */
+        int Gold,               /* àÅº° */
 		int MyGold,
-        char *Key,              /* å¹³â–¡ä¼â–¡ç‰ */
-        int floor,              /* ç”„   */
+        char *Key,              /* Æ½¡õ·¥¡õÓñ */
+        int floor,              /* Õç   */
         int x,
         int y
 ){
@@ -543,11 +543,11 @@ void LogFMPOP(char *message)
 
 // Arminius 2001/6/14
 char hackmsg[HACK_TYPE_NUM][4096]=
-	{ "??? ä»€éº½äº‹ä¹Ÿæ²¡æœ‰å‘ç”Ÿ",
-	  "æ— æ³•å–å¾—é€šè®¯åå®šç ",
-	  "æ”¶åˆ°æ— æ³•è¾¨è¯†çš„é€šè®¯åå®šç ",
-	  "æ£€æŸ¥ç é”™è¯¯",
-      "äººç‰©çš„HPä¸ºè´Ÿ",  
+	{ "??? Ê²÷áÊÂÒ²Ã»ÓĞ·¢Éú",
+	  "ÎŞ·¨È¡µÃÍ¨Ñ¶Ğ­¶¨Âë",
+	  "ÊÕµ½ÎŞ·¨±æÊ¶µÄÍ¨Ñ¶Ğ­¶¨Âë",
+	  "¼ì²éÂë´íÎó",
+      "ÈËÎïµÄHPÎª¸º",  
 	};
 
 void logHack(int fd, int errcode)
@@ -597,9 +597,9 @@ void logSpeed(int fd)
 
 // Shan 
 void LogGM(
-        char *CharName,    //è§’è‰²åç§°
-        char *CharID,      //ç©å®¶ID
-        char *Message,     //æŒ‡ä»¤å†…å®¹
+        char *CharName,    //½ÇÉ«Ãû³Æ
+        char *CharID,      //Íæ¼ÒID
+        char *Message,     //Ö¸ÁîÄÚÈİ
         int  floor,
         int  x,
         int  y
@@ -631,17 +631,17 @@ void LogFamily(
 
 #ifdef _GAMBLE_ROULETTE
 void LogGamble(
-        char *CharName, //è§’è‰²åç§°
-        char *CharID,   //ç©å®¶ID
-        char *Key,      //è¯´æ˜
+        char *CharName, //½ÇÉ«Ãû³Æ
+        char *CharID,   //Íæ¼ÒID
+        char *Key,      //ËµÃ÷
         int floor,
         int x,
         int y,
-		int player_stone,	//æ‰€æ‹¥æœ‰é‡‘é’±
-		int Gamble_stone,	//ä¸‹æ³¨æœ¬é‡‘
-		int get_stone,		//è·å¾—
+		int player_stone,	//ËùÓµÓĞ½ğÇ®
+		int Gamble_stone,	//ÏÂ×¢±¾½ğ
+		int get_stone,		//»ñµÃ
 		int Gamble_num,
-		int flg	//flg = 1 ç©å®¶ 2 åº„å®¶
+		int flg	//flg = 1 Íæ¼Ò 2 ×¯¼Ò
 )
 {
   struct  tm tm1;
@@ -659,8 +659,8 @@ void LogGamble(
 #endif
 
 void LogLogin(
-        char *CharID,   //ç©å®¶ID
-        char *CharName, //è§’è‰²åç§°
+        char *CharID,   //Íæ¼ÒID
+        char *CharName, //½ÇÉ«Ãû³Æ
 		int  saveIndex,
 		char *ipadress
 )
@@ -758,7 +758,7 @@ void LogPetFeed(
 	struct tm tm1;
 
 	memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
- 	printl( LOG_PET, "%s\t%s\t%s:%d å–‚è›‹=%s (%d,%d,%d)(%d:%d) %s " , 
+ 	printl( LOG_PET, "%s\t%s\t%s:%d Î¹µ°=%s (%d,%d,%d)(%d:%d) %s " , 
 		CharName, CharID, PetName, PetLv, Key, floor, x, y, tm1.tm_hour, tm1.tm_min, ucode);
 }
 

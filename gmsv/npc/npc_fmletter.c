@@ -19,8 +19,8 @@ char subbuf[128];
 int i, j;
 
 /* 
- * æ¶©çƒ‚ä»Šæœ¨å‡¶å®ƒå¥´ä»¶ç‰å®ƒæ¯›è¯·å…NPC
- * æ£µå“‘  å¹³æ—¦ç„å¤±ç‰çŸ›ä»¶æ°‘ä¹“â–¡ä»æ—¥ä¸­å…æ—¥ç»¼æœ¨æœˆäº•æ‰‹ï¼»
+ * É¬ÀÃ½ñÄ¾Ğ×ËüÅ«¼şÓñËüÃ«ÇëÔÊNPC
+ * ¿ÃÑÆ  Æ½µ©ĞşÊ§ÓñÃ¬¼şÃñÅÒ¡õÈÊÈÕÖĞØ¦ÈÕ×ÛÄ¾ÔÂ¾®ÊÖ£Û
  *
  */
  
@@ -43,7 +43,7 @@ struct	{
 	int		warp;
 	int		battle;
 	int		gotowin;
-}buttonproc[13];		/* ok,cancel, yes,no,prev,next åŠå‡›åŠè´¨   */
+}buttonproc[13];		/* ok,cancel, yes,no,prev,next ¼°Áİ¼°ÖÊ   */
 
 
 
@@ -58,7 +58,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg);
 static int NPC_FmLetter_restoreButtontype( char *data );
 
 /*********************************
-* èµ“æ¸è´¨  
+* âÙÓåÖÊ  
 *********************************/
 BOOL NPC_FmLetterInit( int meindex )
 {
@@ -75,10 +75,10 @@ BOOL NPC_FmLetterInit( int meindex )
 	if( NPC_Util_GetStrFromStrWithDelim( argstr, "conff", buf, sizeof( buf))
 		== NULL )
 	{
-		print( "fmletter:æ²¡æœ‰æŒ‡å®šè®¾å®šçš„æ¡£æ¡ˆ ã€‚\n");
+		print( "fmletter:Ã»ÓĞÖ¸¶¨Éè¶¨µÄµµ°¸ ¡£\n");
 		return FALSE;
 	}
-	/* èµ“æ¸å‡›åæ¶©çƒ‚çŠ¯â–¡æ­£æ¯›æ°‘å°¼æ°¸å¼ä»„åŒ–æ”¯æœˆ */
+	/* âÙÓåÁİ±åÉ¬ÀÃ·¸¡õÕıÃ«ÃñÄáÓÀÛÍØÆ»¯Ö§ÔÂ */
 	if( !NPC_FmLetter_readData( meindex, -1, TRUE) ) {
 		return FALSE;
 	}
@@ -92,7 +92,7 @@ BOOL NPC_FmLetterInit( int meindex )
 
 
 /*********************************
-*   ä»„äº•ä»ƒæ—¥æœ¨å‡¶å‡›åŠè´¨  
+*   ØÆ¾®ØêÈÕÄ¾Ğ×Áİ¼°ÖÊ  
 *********************************/
 void NPC_FmLetterTalked( int meindex , int talkerindex , char *szMes ,int color )
 {
@@ -123,12 +123,12 @@ void NPC_FmLetterTalked( int meindex , int talkerindex , char *szMes ,int color 
 		lssproto_WN_send( getfdFromCharaIndex( talkerindex ), WINDOW_MESSAGETYPE_MESSAGE,
 			WINDOW_BUTTONTYPE_OK,
 			-1, -1,
-			makeEscapeString( "\nåªæœ‰æœ¬åº„å›­çš„æ—é•¿æ‰èƒ½åˆ¶ä½œé‚€è¯·å‡½åŠåŒæ„ä¹¦ï¼", buf, sizeof(buf)));
+			makeEscapeString( "\nÖ»ÓĞ±¾×¯Ô°µÄ×å³¤²ÅÄÜÖÆ×÷ÑûÇëº¯¼°Í¬ÒâÊé£¡", buf, sizeof(buf)));
 
 
 }
 /*********************************
-* è‹‡æ—¥æœ¨å‡¶å‡›åŠè´¨  
+* Î­ÈÕÄ¾Ğ×Áİ¼°ÖÊ  
 *********************************/
 void NPC_FmLetterLooked( int meindex , int lookedindex)
 {
@@ -144,11 +144,11 @@ static void NPC_FmLetter_selectWindow( int meindex, int toindex, int num)
 	int		fd;
 	char	buf[256];
 	
-	/* çš¿ä¼Šå¥¶ä¹©â–¡åè¦†ä»„åŒ–åˆ†ä»ƒ  æ€å…æœˆ */
+	/* ÃóÒÁÄÌØÀ¡õ±å¸²ØÆ»¯·ÖØê  É±ÔÊÔÂ */
 	if( CHAR_getInt( toindex , CHAR_WHICHTYPE ) != CHAR_TYPEPLAYER ) {
 		return;
 	}
-	/* ã„ å¼˜ä¼‰æ°¸ç‰åŠ¨  åŠå¿ƒ */
+	/* ¨àºëØøÓÀÓñ¶¯  ¼°ĞÄ */
 	if( !NPC_Util_charIsInFrontOfChar( toindex, meindex, 1 )) return; 
 
 	if( !NPC_FmLetter_readData( meindex, num, FALSE) ) {
@@ -175,15 +175,15 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 	int		button = -1;
 	char	buf[512];
 
-	/* ã„ å¼˜ä¼‰æ°¸ç‰åŠ¨  åŠå¿ƒ */
+	/* ¨àºëØøÓÀÓñ¶¯  ¼°ĞÄ */
 	if( NPC_Util_CharDistance( talkerindex, meindex ) > 1) return;
 	
-	/* ä»‡åŠå®ƒå¥´ä»¶ç‰å®ƒ  å¯åŠçŠ¯â–¡æ­£æ¯›  å¿ƒ  æˆˆ */	
+	/* ³ğ¼°ËüÅ«¼şÓñËü  Ä¯¼°·¸¡õÕıÃ«  ĞÄ  ¸ê */	
 	if( !NPC_FmLetter_readData( meindex, seqno - 100, FALSE) ) {
 		print( "fmletter:readdata error\n");
 		return;
 	}
-	/* ç“·ä»„å‡¶ç¤ºæ­£ä»¶æ¯›è­¬å±¯æœˆ */
+	/* ´ÉØÆĞ×Ê¾Õı¼şÃ«Æ©ÍÍÔÂ */
 	if( w.windowtype == WINDOW_MESSAGETYPE_SELECT ) {
 		button = atoi( data)+5;
 		if( button > 12 ) {
@@ -207,7 +207,7 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 	
 		fd = getfdFromCharaIndex( talkerindex);
 		
-		/* ç¤ºæ­£ä»¶åæ–¹åŒ€åŒ–è´¨  æ¯›å­”æ›°æ­¹ä»ƒæœˆ */
+		/* Ê¾Õı¼ş±å·½ÔÈ»¯ÖÊ  Ã«¿×Ô»´õØêÔÂ */
 		if( newwin == -1 ) {
 			newwin = buttonproc[button].gotowin;
 		}
@@ -223,19 +223,19 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 			if( itemindex != -1 ){
 				char    msgbuf[128];
 				CHAR_setItemIndex( talkerindex, emptyitemindexinchara, itemindex );
-				/*  WorkçŠ¯â–¡æ­£æ¯›æ¶©çƒ‚    */
+				/*  Work·¸¡õÕıÃ«É¬ÀÃ    */
 				ITEM_setWorkInt(itemindex, ITEM_WORKOBJINDEX,-1);
 				ITEM_setWorkInt(itemindex, ITEM_WORKCHARAINDEX, talkerindex);
 				CHAR_sendItemDataOne( talkerindex, emptyitemindexinchara);
 				LogItem(
-					CHAR_getChar( talkerindex, CHAR_NAME ), /* å¹³ä¹“ä»¿   */
+					CHAR_getChar( talkerindex, CHAR_NAME ), /* Æ½ÅÒ·Â   */
 					CHAR_getChar( talkerindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
+#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
 					itemindex,
 #else
-					ITEM_getInt( itemindex, ITEM_ID ),  /* å¤±å¥¶  ä¸  å¯ */
+					ITEM_getInt( itemindex, ITEM_ID ),  /* Ê§ÄÌ  Ø©  Ä¯ */
 #endif
-					"AddLetter(åˆ¶ä½œé‚€è¯·å‡½)",
+					"AddLetter(ÖÆ×÷ÑûÇëº¯)",
 					CHAR_getInt( talkerindex,CHAR_FLOOR),
 					CHAR_getInt( talkerindex,CHAR_X ),
 					CHAR_getInt( talkerindex,CHAR_Y ),
@@ -243,7 +243,7 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 					ITEM_getChar( itemindex, ITEM_NAME),
 					ITEM_getInt( itemindex, ITEM_ID)
 				);
-				snprintf( msgbuf, sizeof( msgbuf), "åˆ¶ä½œ%sæˆåŠŸã€‚",
+				snprintf( msgbuf, sizeof( msgbuf), "ÖÆ×÷%s³É¹¦¡£",
 					ITEM_getChar( itemindex, ITEM_NAME));
 				CHAR_talkToCli( talkerindex, -1,msgbuf, CHAR_COLORWHITE);
 			}
@@ -259,19 +259,19 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 			if( itemindex != -1 ){
 				char    msgbuf[128];
 				CHAR_setItemIndex( talkerindex, emptyitemindexinchara, itemindex );
-				/*  WorkçŠ¯â–¡æ­£æ¯›æ¶©çƒ‚    */
+				/*  Work·¸¡õÕıÃ«É¬ÀÃ    */
 				ITEM_setWorkInt(itemindex, ITEM_WORKOBJINDEX,-1);
 				ITEM_setWorkInt(itemindex, ITEM_WORKCHARAINDEX, talkerindex);
 				CHAR_sendItemDataOne( talkerindex, emptyitemindexinchara);
 				LogItem(
-					CHAR_getChar( talkerindex, CHAR_NAME ), /* å¹³ä¹“ä»¿   */
+					CHAR_getChar( talkerindex, CHAR_NAME ), /* Æ½ÅÒ·Â   */
 					CHAR_getChar( talkerindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
+#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
 					itemindex,
 #else
-					ITEM_getInt( itemindex, ITEM_ID ),  /* å¤±å¥¶  ä¸  å¯ */
+					ITEM_getInt( itemindex, ITEM_ID ),  /* Ê§ÄÌ  Ø©  Ä¯ */
 #endif
-					"AddLetter(åˆ¶ä½œé‚€è¯·å‡½)",
+					"AddLetter(ÖÆ×÷ÑûÇëº¯)",
 					CHAR_getInt( talkerindex,CHAR_FLOOR),
 					CHAR_getInt( talkerindex,CHAR_X ),
 					CHAR_getInt( talkerindex,CHAR_Y ),
@@ -279,7 +279,7 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 					ITEM_getChar( itemindex, ITEM_NAME),
 					ITEM_getInt( itemindex, ITEM_ID)
 				);
-				snprintf( msgbuf, sizeof( msgbuf), "åˆ¶ä½œ%sæˆåŠŸã€‚",
+				snprintf( msgbuf, sizeof( msgbuf), "ÖÆ×÷%s³É¹¦¡£",
 					ITEM_getChar( itemindex, ITEM_NAME));
 				CHAR_talkToCli( talkerindex, -1,msgbuf, CHAR_COLORWHITE);
 			}
@@ -305,11 +305,11 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
 	}
 }
 /* 
- * æ¶©çƒ‚ç™½å¤®å¥¶ä¼™æ¯›  æ°åŒ¹éš™çƒ‚ä»Šæœ¨å‡¶windownoåŠçŠ¯â–¡æ­£æ¯›æœ¬æ°¸ç„å…æœˆ
+ * É¬ÀÃ°×ÑëÄÌ»ïÃ«  ÊÏÆ¥Ï¶ÀÃ½ñÄ¾Ğ×windowno¼°·¸¡õÕıÃ«±¾ÓÀĞşÔÊÔÂ
  * 
- * å¨„é†’â€œ
- *		meindex		int		ä»‡åŠNPCåŠcharaindex
- *		windowno	int		å®ƒå¥´ä»¶ç‰å®ƒ  å¯
+ * Â¦ĞÑ¡°
+ *		meindex		int		³ğ¼°NPC¼°charaindex
+ *		windowno	int		ËüÅ«¼şÓñËü  Ä¯
  *		
  */
 static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
@@ -334,10 +334,10 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 	char	firstToken[1024];
 	char	secondToken[1024];
 	
-	/* å®ƒå¥´ä»¶ç‰å®ƒåŠæ¶©çƒ‚æ¯›  æ›°  æˆˆåŒç»   */
+	/* ËüÅ«¼şÓñËü¼°É¬ÀÃÃ«  Ô»  ¸êÑáÕ°   */
 	
 	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
-	/* æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  æ½¸   */
+	/* É¬ÀÃ°×ÑëÄÌ»ï  äú   */
 	NPC_Util_GetStrFromStrWithDelim( argstr, "conff", filename, sizeof( filename));
 
 	sprintf( opfile, "%s/", getNpcdir( ) );
@@ -359,7 +359,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 		b_mode = -1;
 		errflg = FALSE;
 
-		/* èµ“æ¸ç¥­ */
+		/* âÙÓå¼À */
 		w.windowno = -1;
 		w.windowtype = -1;
 		w.buttontype = -1;
@@ -388,15 +388,15 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 			
 			linenum ++;
 			
-			/* æˆŠä¸¢ä»¶ç„å  éª° */
+			/* Îì¶ª¼şĞş·´  ÷» */
 			if( line[0] == '#' || line[0] == '\n') continue;
-			/* è¼å«æ½¸æœˆ */
+			/* İ±µæäúÔÂ */
 			chomp( line );
 			
-			/*  å«æ¯›å¸®æº¥å…æœˆ    */
-			/*  å¼•å†… tab æ¯› " " å  äº”æ™¶å°¹æœˆ    */
+			/*  µæÃ«°ïäßÔÊÔÂ    */
+			/*  ÒıÄÚ tab Ã« " " ±å  Îå¾§ÒüÔÂ    */
 			replaceString( line, '\t' , ' ' );
-			/* ç‡®  åŠæ—¦çŸ¢â–¡æ—¦æ¯›æ½¸æœˆï¼»*/
+			/* ÛÆ  ¼°µ©Ê¸¡õµ©Ã«äúÔÂ£Û*/
 			for( i = 0; i < strlen( line); i ++) {
 				if( line[i] != ' ' ) {
 					break;
@@ -405,7 +405,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 			}
 			if( i != 0 ) strcpy( line, buf);
 
-			/* delim "=" åŒ¹  èµ“(1)åŠç„â–¡å¼ä»¶æ¯›  æœˆ*/
+			/* delim "=" Æ¥  âÙ(1)¼°Ğş¡õÛÍ¼şÃ«  ÔÂ*/
 			ret = getStringFromIndexWithDelim( line, "=",  1, firstToken,
 											   sizeof( firstToken ) );
 			if( ret == FALSE ){
@@ -413,7 +413,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 					   filename , linenum);
 				continue;
 			}
-			/* delim "=" åŒ¹2    åŠç„â–¡å¼ä»¶æ¯›  æœˆ*/
+			/* delim "=" Æ¥2    ¼°Ğş¡õÛÍ¼şÃ«  ÔÂ*/
 			ret = getStringFromIndexWithDelim( line, "=", 2, secondToken,
 											   sizeof( secondToken ) );
 			if( ret == FALSE ){
@@ -424,27 +424,27 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 			
 			if( strcasecmp( firstToken, "winno") == 0 ) {
 				if( winno != -1 ) {
-					print( "fmletter:å·²æœ‰winnoå´é‡æ–°å®šä¹‰winno\n");
+					print( "fmletter:ÒÑÓĞwinnoÈ´ÖØĞÂ¶¨Òåwinno\n");
 					print( "filename:[%s] line[%d]\n", filename, linenum);
 					errflg = TRUE;
 					readflg = FALSE;
 					break;
 				}
-				/* å®ƒå¥´ä»¶ç‰å®ƒNoæ¯›å¿¡ç»£ */
+				/* ËüÅ«¼şÓñËüNoÃ«âçĞå */
 				winno = atoi( secondToken);
 				continue;
 			}
 			
-			/* å®ƒå¥´ä»¶ç‰å®ƒNo äº’ç‘å¼•åŒ€åŒ–ä¸­å…ä¸­å‡›åŠå«å  éª°å…æœˆ */
+			/* ËüÅ«¼şÓñËüNo »¥è£ÒıÔÈ»¯ÖĞØ¦ÖĞÁİ¼°µæ·´  ÷»ÔÊÔÂ */
 			if( winno == -1 ) {
-				print( "fmletter:winno å°šæœªå®šä¹‰ï¼Œèµ„æ–™å´å·²è®¾å®šã€‚\n");
+				print( "fmletter:winno ÉĞÎ´¶¨Òå£¬×ÊÁÏÈ´ÒÑÉè¶¨¡£\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				readflg = FALSE;
 				errflg = FALSE;
 				break;
 			}
-			/* å®ƒå¥´ä»¶ç‰å®ƒNo äº’åŸŸè°¯ä»„å‡¶å‡›åæ¤­ç˜€æ¯›  æˆˆï¼»
-			 * å…¬æœ¨åŠ¨é™†å  éª°å…æœˆ */
+			/* ËüÅ«¼şÓñËüNo »¥ÓòÚÛØÆĞ×Áİ·´ÍÖğöÃ«  ¸ê£Û
+			 * ¹«Ä¾¶¯Â½·´  ÷»ÔÊÔÂ */
 			if( (chkflg == FALSE && winno == windowno )||
 				chkflg == TRUE) 
 			{
@@ -472,7 +472,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 								errflg = TRUE;
 							}
 							else {
-								/* å‡åŒ€åˆ‡äº•äº•å‡¶åŒ€åŠåˆ†ä»ƒåŒ¹æ‰‹æ¶©çƒ‚ä»Šæœ¨åŒ–ä¸­æœ¨å£¬     */
+								/* ÉıÔÈÇĞ¾®¾®Ğ×ÔÈµõ·ÖØêÆ¥ÊÖÉ¬ÀÃ½ñÄ¾»¯ÖĞÄ¾ÈÉ     */
 								if( !((buttonproc[b_mode].checkhaveitem != -1 && 
 									   buttonproc[b_mode].checkhaveitemgotowin != -1)
 									 || (buttonproc[b_mode].checkdonthaveitem != -1 && 
@@ -484,7 +484,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 						}
 						
 						if( errflg == TRUE) {
-							print( "fmletter: æ‰¾ä¸åˆ°gotowin\n");
+							print( "fmletter: ÕÒ²»µ½gotowin\n");
 							print( "filename:[%s] line[%d]\n", filename, linenum);
 							readflg = FALSE;
 							errflg = TRUE;
@@ -501,19 +501,19 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 					
 					sprintf( buf, "letter%d", CHAR_getInt( meindex, CHAR_FMINDEX) );
 					
-					/* å®ƒå¥´ä»¶ç‰å®ƒæ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* ËüÅ«¼şÓñËüÕıÄÌÃó¼°É¬ÀÃ */
 					if( strcasecmp( firstToken, "wintype") == 0 ) {
 						w.windowtype = atoi( secondToken);
 					}
-					/* ç¤ºæ­£ä»¶æ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÕıÄÌÃó¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "buttontype") == 0 ) {
 						w.buttontype = NPC_FmLetter_restoreButtontype( secondToken);
 					}
-					/* getitemåŠæ¶©çƒ‚ */
+					/* getitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "takeitem") == 0 ) {
 						w.takeitem = atoi( secondToken);
 					}
-					/* giveitemåŠæ¶©çƒ‚ */
+					/* giveitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "giveitem") == 0 ) {
 						w.giveitem = atoi( secondToken);
 					}
@@ -521,7 +521,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 						w.letter = atoi( secondToken);
 					}
 					
-					/* messageåŠæ¶©çƒ‚ */
+					/* message¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "message") == 0 ) {
 						if( messagepos == 0 ) {
 							strcpy(  w.message, secondToken);
@@ -534,7 +534,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 							messagepos+=strlen(secondToken);
 						}
 					}
-					/* ç¤ºæ­£ä»¶æ¯›ç“·ä»„å‡¶å‡›åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÃ«´ÉØÆĞ×Áİ¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "okpressed") == 0 ) {
 						buttonconfmode = TRUE;
 						b_mode = 0;
@@ -571,7 +571,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 						buttonendflg = FALSE;
 						selectnum ++;
 					}
-					/* æ¶©çƒ‚è”½æ­¹æ›° */
+					/* É¬ÀÃ±Î´õÔ» */
 					else if( strcasecmp( firstToken, "endwin") == 0 ) {
 						endflg = TRUE;
 						if( chkflg == FALSE) {
@@ -580,7 +580,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 						break;
 					}
 					else {
-						//print( "fmletter:è®¾å®šæ˜¯ä¸å¯èƒ½çš„å‚æ•°\n");
+						//print( "fmletter:Éè¶¨ÊÇ²»¿ÉÄÜµÄ²ÎÊı\n");
 						//print( "filename:[%s] line[%d]\n", filename, linenum);
 					}
 				}
@@ -592,26 +592,26 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 			}
 		}
 		if( buttonendflg == FALSE) {
-			print( "fmletter: æ‰¾ä¸åˆ°endbutton\n");
+			print( "fmletter: ÕÒ²»µ½endbutton\n");
 			print( "filename:[%s] line[%d]\n", filename, linenum);
 			errflg = TRUE;
 			break;
 		}
 		if( winno != -1 ) {
 			if( w.windowtype == -1 ) {
-				print( "fmletter: æ‰¾ä¸åˆ°wintype\n");
+				print( "fmletter: ÕÒ²»µ½wintype\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( w.buttontype == -1 ) {
-				print( "fmletter: æ‰¾ä¸åˆ°button\n");
+				print( "fmletter: ÕÒ²»µ½button\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( strlen( w.message) == 0 ) {
-				print( "fmletter: æ‰¾ä¸åˆ°message\n");
+				print( "fmletter: ÕÒ²»µ½message\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
@@ -621,12 +621,12 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 	fclose( fp);
 	
 	if( chkflg == FALSE && w.windowno == -1 ) {
-		print( "fmletter: æ‰¾ä¸åˆ°æ‰€æŒ‡å®šçš„windowno\n");
+		print( "fmletter: ÕÒ²»µ½ËùÖ¸¶¨µÄwindowno\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
 	if( winno != -1 && endflg == FALSE) {
-		print( "fmletter: æ‰¾ä¸åˆ°endwin\n");
+		print( "fmletter: ÕÒ²»µ½endwin\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
@@ -635,7 +635,7 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 	return TRUE;
 }
 /*
- * buttontype=åŒ¹éš™çƒ‚ä»„å‡¶  ä¾¬  æ¯›é†’è¢„å  æ™¶å…æœˆï¼»
+ * buttontype=Æ¥Ï¶ÀÃØÆĞ×  Ù¯  Ã«ĞÑ°À±å  ¾§ÔÊÔÂ£Û
  *
  */
 static int NPC_FmLetter_restoreButtontype( char *data )

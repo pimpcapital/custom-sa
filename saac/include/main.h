@@ -96,17 +96,6 @@ int login_game_server( int ti , char *svname , char *svpas ,
                char *result , int resultlen ,
                char *retdata , int retdatalen );
 #endif
-#ifdef _ANGEL_SUMMON
-typedef enum
-{
-	MISSION_NONE =0,
-	MISSION_WAIT_ANSWER,
-	MISSION_DOING,
-	MISSION_HERO_COMPLETE,
-	MISSION_TIMEOVER,
-}ANGEL_MISSIONFLAG;
-#endif
-
 
 #undef EXT
 #endif

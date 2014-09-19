@@ -18,15 +18,15 @@
 #define BCF_ABSORB		(1 << 11)
 #define BCF_VANISH		(1 << 12)
 #define BCF_CRUSH		(1 << 13)
-#define BCF_FALL		(1 << 14)	//è½é©¬æœ¯
+#define BCF_FALL		(1 << 14)	//ÂäÂíÊõ
 #ifdef _SKILL_TOOTH
-#define BCF_TOOTH		(1 << 15)	//å›“é½¿
+#define BCF_TOOTH		(1 << 15)	//‡Ü³Ý
 #endif
 #ifdef _PSKILL_MODIFY
-#define BCF_ATTDOUBLE	(1 << 16)	//å±žæ€§å¼ºåŒ–
+#define BCF_ATTDOUBLE	(1 << 16)	//ÊôÐÔÇ¿»¯
 #endif
 #ifdef _SKILL_ROAR  
-#define BCF_ROAR		(1 << 17)	//å® æŠ€:å¤§å¼(å…‹å¹´å…½)
+#define BCF_ROAR		(1 << 17)	//³è¼¼:´óºð(¿ËÄêÊÞ)
 #endif 
 
 #ifdef _MAGIC_DEFMAGICATT
@@ -39,7 +39,7 @@
 #define BCF_MODIFY		(1 << 21)
 #endif
 
-#define BCF_B_SKILLACT	(1 << 23)	//å‡»ä¸­å¾Œç§€å›¾
+#define BCF_B_SKILLACT	(1 << 23)	//»÷ÖÐááÐãÍ¼
 
 #ifdef _PETSKILL_ANTINTER
 #define BCF_ANTINTER    (1 << 28)
@@ -74,19 +74,19 @@ extern int	 gBattleStausChange;
 extern int	 gBattleStausTurn;
 
 enum{
-	BATTLE_ST_NONE,		 //  0 "æ­£å¸¸",
-	BATTLE_ST_POISON,	 //  1 "æ¯’",
-	BATTLE_ST_PARALYSIS, //  2 "éº»",
-	BATTLE_ST_SLEEP,	 //  3 "çœ ",
-	BATTLE_ST_STONE,	 //  4 "çŸ³",
-	BATTLE_ST_DRUNK,	 //  5 "é†‰",
-	BATTLE_ST_CONFUSION, //  6 "ä¹±",
-    BATTLE_ST_WEAKEN,    //  7 "è™š"
-	BATTLE_ST_DEEPPOISON,//  8 "å‰§æ¯’"
-	BATTLE_ST_BARRIER,   //  9 "é­”éšœ"
-	BATTLE_ST_NOCAST,    // 10 "æ²‰é»˜"
-#ifdef _PET_SKILL_SARS				// WON ADD æ¯’ç…žè”“å»¶
-	BATTLE_ST_SARS,		 // 11 "ç…ž"
+	BATTLE_ST_NONE,		 //  0 "Õý³£",
+	BATTLE_ST_POISON,	 //  1 "¶¾",
+	BATTLE_ST_PARALYSIS, //  2 "Âé",
+	BATTLE_ST_SLEEP,	 //  3 "Ãß",
+	BATTLE_ST_STONE,	 //  4 "Ê¯",
+	BATTLE_ST_DRUNK,	 //  5 "×í",
+	BATTLE_ST_CONFUSION, //  6 "ÂÒ",
+    BATTLE_ST_WEAKEN,    //  7 "Ðé"
+	BATTLE_ST_DEEPPOISON,//  8 "¾ç¶¾"
+	BATTLE_ST_BARRIER,   //  9 "Ä§ÕÏ"
+	BATTLE_ST_NOCAST,    // 10 "³ÁÄ¬"
+#ifdef _PET_SKILL_SARS				// WON ADD ¶¾É·ÂûÑÓ
+	BATTLE_ST_SARS,		 // 11 "É·"
 #endif
 
 	BATTLE_ST_END
@@ -116,7 +116,7 @@ enum{
 };
 
 #ifdef _PETSKILL_RETRACE
-    //å­˜æ”¾BATTLE_Attackå‡½å¼æ‰§è¡Œå¾Œçš„æ”»å‡»æ¨¡å¼   
+    //´æ·ÅBATTLE_Attackº¯Ê½Ö´ÐÐááµÄ¹¥»÷Ä£Ê½   
 typedef struct tagBattle_Attack_ReturnData_x1
 {
     int Battle_Attack_ReturnData;
@@ -155,7 +155,7 @@ int BATTLE_Magic( int battleindex, int attackNo );
 
 int BATTLE_S_GBreak( int battleindex, int attackNo, int defNo );
 
-#ifdef _SKILL_GUARDBREAK2//ç ´é™¤é˜²å¾¡2 vincent add 2002/05/20
+#ifdef _SKILL_GUARDBREAK2//ÆÆ³ý·ÀÓù2 vincent add 2002/05/20
 int BATTLE_S_GBreak2( int battleindex, int attackNo, int defNo );
 #endif
 
@@ -167,19 +167,19 @@ int BATTLE_S_Sacrifice( int battleindex, int attackNo, int defNo );
 int BATTLE_S_Refresh( int battleindex, int attackNo, int defNo, int marray );
 #endif
 
-#ifdef _SKILL_WEAKEN  //vincentå® æŠ€:è™šå¼±
+#ifdef _SKILL_WEAKEN  //vincent³è¼¼:ÐéÈõ
 int BATTLE_S_Weaken( int battleindex, int attackNo, int defNo, int marray );
 #endif
 
-#ifdef _SKILL_DEEPPOISON  //vincentå® æŠ€:å‰§æ¯’ 
+#ifdef _SKILL_DEEPPOISON  //vincent³è¼¼:¾ç¶¾ 
 int BATTLE_S_Deeppoison( int battleindex, int attackNo, int defNo, int marray );
 #endif
 
-#ifdef _SKILL_BARRIER  //vincentå® æŠ€:é­”éšœ
+#ifdef _SKILL_BARRIER  //vincent³è¼¼:Ä§ÕÏ
 int BATTLE_S_Barrier( int battleindex, int attackNo, int defNo, int marray );
 #endif
 
-#ifdef _SKILL_ROAR //vincentå® æŠ€:å¤§å¼
+#ifdef _SKILL_ROAR //vincent³è¼¼:´óºð
 int BATTLE_S_Roar( int battleindex, int attackNo, int defNo, int marray );
 #endif
 
@@ -191,12 +191,12 @@ int BATTLE_StatusAttackCheck(
 	int attackindex,
 	int defindex,
 	int status,
-	//BATTLE_ST_POISON,	    1 "æ¯’",
-	//BATTLE_ST_PARALYSIS,  2 "éº»",
-	//BATTLE_ST_SLEEP,	    3 "çœ ",
-	//BATTLE_ST_STONE,	    4 "çŸ³",
-	//BATTLE_ST_DRUNK,	    5 "é†‰",
-	//BATTLE_ST_CONFUSION,  6 "ä¹±"
+	//BATTLE_ST_POISON,	    1 "¶¾",
+	//BATTLE_ST_PARALYSIS,  2 "Âé",
+	//BATTLE_ST_SLEEP,	    3 "Ãß",
+	//BATTLE_ST_STONE,	    4 "Ê¯",
+	//BATTLE_ST_DRUNK,	    5 "×í",
+	//BATTLE_ST_CONFUSION,  6 "ÂÒ"
 	int PerOffset,
 	int Range,
 	float Bai,
@@ -239,7 +239,7 @@ float BATTLE_adjustRidePet3A( int charaindex, int petindex, int workindex, int a
 
 int BATTLE_getRidePet( int charaindex );
 
-#ifdef _PSKILL_FALLGROUND	//è½é©¬æœ¯
+#ifdef _PSKILL_FALLGROUND	//ÂäÂíÊõ
 int BATTLE_S_FallGround( int battleindex, int attackNo, int defNo, int skill_type );
 #endif
 
@@ -275,14 +275,14 @@ int BATTLE_E_ENEMYHELP( int battleindex, int attackNo, int defNo, int skill_type
 #endif
 
 #ifdef _USER_CHARLOOPS
-int CHAR_BattleStayLoop( int charaindex);//åŽŸåœ°é‡æ•Œ
+int CHAR_BattleStayLoop( int charaindex);//Ô­µØÓöµÐ
 #endif
 
 #ifdef _PETSKILL_PROPERTY
 int PET_PetskillPropertyEvent( int Myindex, int defindex, int *damage, int *T_Pow, int size);
 #endif
 
-#ifdef _PETSKILL_FIREKILL //ç«çº¿çŒŽæ€ä¸“ç”¨
+#ifdef _PETSKILL_FIREKILL //»ðÏßÁÔÉ±×¨ÓÃ
 int BATTLE_Attack_FIREKILL( int battleindex, int attackNo, int defNo );
 #endif
 #ifdef _NEED_ITEM_ENEMY

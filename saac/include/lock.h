@@ -6,9 +6,6 @@
 typedef struct tagLockNode {
   int use;
   char cdkey[16];
-#ifdef _LOCK_ADD_NAME
-	char name[32];
-#endif
   char server[128];
   int process;
   struct tagLockNode *next,*prev;
@@ -17,11 +14,7 @@ typedef struct tagLockNode {
 extern LockNode **userlock;
 
 void Lock_Init(void);
-#ifdef _LOCK_ADD_NAME
-	int InsertMemLock(int entry, char *cdkey, char *name, char *passwd, char *server, int process, char *deadline);
-#else
-	int InsertMemLock(int entry, char *cdkey, char *passwd, char *server, int process, char *deadline);
-#endif
+int InsertMemLock(int entry, char *cdkey, char *passwd, char *server, int process, char *deadline);
 int DeleteMemLock(int entry, char *cdkey, int *process);
 void DeleteMemLockServer(char *sname);
 int isMemLocked(int entry, char *cdkey);

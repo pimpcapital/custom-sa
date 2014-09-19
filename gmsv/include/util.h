@@ -34,7 +34,7 @@ typedef struct tagPOINT
     int     y;
 }POINT;
 
-/* strtol åŠä»¿æ°¸ç”±â–¡è¿•åžé“¶ä¸¹ */
+/* strtol ¼°·ÂÓÀÓÉ¡õåÃ±åÒøµ¤ */
 typedef enum
 {
     CHAR,SHORT,INT,DOUBLE
@@ -101,20 +101,20 @@ unsigned short CheckCRC( unsigned char *p , int size );
 INLINE double time_diff(struct timeval subtrahend,struct timeval subtractor);
  
 
-/*  ç©´å¼å¤«å…æ›°  */
+/*  Ñ¨ÛÍ·òØ¦Ô»  */
 #define ABS(x)      ((x)>=0 ? (x) : -(x))
 
-/*    è½¾æ¯› 0 - 7 åžæ¿®è¦†åžå…æœˆ   */
+/*    éùÃ« 0 - 7 ±åå§¸²±åÔÊÔÂ   */
 #define VALIDATEDIR(x)  ({(x)%=8;(x)=((x)+8)%8;})
 
-/*  4ç”°å¥¶çŽ„çŠ¯â–¡æ­£æ¯›2ç”°å¥¶çŽ„çŠ¯â–¡æ­£åˆä»„åŒ–é“¶ä¸¹  */
+/*  4ÌïÄÌÐþ·¸¡õÕýÃ«2ÌïÄÌÐþ·¸¡õÕýÎçØÆ»¯Òøµ¤  */
 #define GETLOWVALUE(x)  (  (x)&0x0000ffff)
 #define GETHIGHVALUE(x) ((((x)&0xffff0000)>>16)&0x0000ffff)
 #define SETLOWVALUE(x,y)  ((x)=((x)&0xffff0000)|( (y)     &0x0000ffff))
 #define SETHIGHVALUE(x,y) ((x)=((x)&0x0000ffff)|(((y)<<16)&0xffff0000))
 #define MAKE2VALUE(x,y)  ((((x)<<16)&0xffff0000)|((y)&0x0000ffff))
 
-/*  4ç”°å¥¶çŽ„çŠ¯â–¡æ­£æ¯›1ç”°å¥¶çŽ„*4åˆä»„åŒ–ä¸å‹¾äº•ä¸¹ç©´å¼å¤«    */
+/*  4ÌïÄÌÐþ·¸¡õÕýÃ«1ÌïÄÌÐþ*4ÎçØÆ»¯Ø¤¹´¾®µ¤Ñ¨ÛÍ·ò    */
 #define GETFIRSTVALUE(x)  (  (x)&0x000000ff )
 #define GETSECONDVALUE(x) ((((x)&0x0000ff00)>>8 )&0x000000ff)
 #define GETTHIRDVALUE(x)  ((((x)&0x00ff0000)>>16)&0x000000ff)

@@ -89,10 +89,10 @@ void CHAR_CHAT_DEBUG_setgamblenum( int charaindex, char *message );
 #ifdef _WAEI_KICK
 void CHAR_CHAT_DEBUG_gmkick( int charindex, char* message);
 #endif
-// WON ADD 淇鏃忛暱闂
+// WON ADD 修正族长问题
 void CHAR_CHAT_DEBUG_fixfmleader(int charaindex, char *message);
 
-// WON ADD 褰撴満鎸囦护
+// WON ADD 当机指令
 void CHAR_CHAT_DEBUG_crash(int charaindex, char *message);
 
 #ifdef _PETSKILL_SETDUCK
@@ -102,7 +102,7 @@ void CHAR_CHAT_DEBUG_SetDuck( int charaindex, char *message);
 void CHAR_CHAT_DEBUG_Toxication( int charaindex, char *message);
 #endif
 
-#ifdef _SEND_EFFECT	   	        // WON ADD AC閫佷笅闆�佷笅闆ㄧ瓑鐗规晥
+#ifdef _SEND_EFFECT	   	        // WON ADD AC送下雪、下雨等特效
 void CHAR_CHAT_DEBUG_sendeffect(int charaindex, char *message);
 #endif
 #ifdef _TEST_DROPITEMS

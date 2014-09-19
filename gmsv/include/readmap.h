@@ -16,7 +16,7 @@ typedef struct tagMAP_Map
 {
     int     id;             /*        ID    */
     int     xsiz,ysiz;      /*          */
-    char    string[64];     /*  Ë°®Á§∫    */
+    char    string[64];     /*  ±Ì æ    */
     unsigned short*  tile;           /*          */
     unsigned short*  obj;            /*                  */
     MAP_Objlink** olink;
@@ -30,33 +30,33 @@ typedef struct tagMAP_Map
 typedef enum
 {
     MAP_WALKABLE,           /*
-                             *         Âú∫Âêà
-                             * Êìå? Q            ËßÅ     0
-                             * Êìå? M        ËßÅ   1
-                             * Êìå? M        ËßÅ     2
+                             *         ≥°∫œ
+                             * ìˆ? Q            º˚     0
+                             * ìˆ? M        º˚   1
+                             * ìˆ? M        º˚     2
                              */
-    MAP_HAVEHEIGHT,         /*  È´ò            Èùû0           0   */
-    MAP_DEFENCE,            /*  ÊäÉ        „ÄÅÂÆàÂ§áÂäõ„ÄÅ0 ‰ª•‰∏ã    ÊäÉ        */
+    MAP_HAVEHEIGHT,         /*  ∏ﬂ            ∑«0           0   */
+    MAP_DEFENCE,            /*  í\        °¢ ÿ±∏¡¶°¢0 “‘œ¬    í\        */
 
-    MAP_INTODAMAGE,         /*        ÂÖ•    Êó∂  HP  Ë∂≥  ?  */
-    MAP_OUTOFDAMAGE,        /*          Âá∫  Êó∂  HP  Ë∂≥  ?  */
+    MAP_INTODAMAGE,         /*        »Î     ±  HP  ◊„  ?  */
+    MAP_OUTOFDAMAGE,        /*          ≥ˆ   ±  HP  ◊„  ?  */
 
-    MAP_SETED_BATTLEMAP,    /*             ËÆæÂÆö? */
-	MAP_BATTLEMAP,			/*               Áï™Âí• Ôºë*/
-	MAP_BATTLEMAP2,			/*               Áï™Âí• Ôºí*/
-	MAP_BATTLEMAP3,			/*               Áï™Âí• Ôºì*/
+    MAP_SETED_BATTLEMAP,    /*             …Ë∂®? */
+	MAP_BATTLEMAP,			/*               ∑¨ÜA £±*/
+	MAP_BATTLEMAP2,			/*               ∑¨ÜA £≤*/
+	MAP_BATTLEMAP3,			/*               ∑¨ÜA £≥*/
 
-/* ‰ª•‰∏ã  Ôº¨Ôº≥Ôºí  ‰Ωø        Ôº≥Ôº°    ‰Ωø      (? X      ? @) */
+/* “‘œ¬  £Ã£”£≤   π        £”£¡     π      (? X      ? @) */
 
-    MAP_INTODARKNESS,       /*  ÂÖ•    Êó∂  Êöó      */
-    MAP_INTOCONFUSION,      /*  ÂÖ•    Êó∂  Ê∑∑?    */
+    MAP_INTODARKNESS,       /*  »Î     ±  ∞µ      */
+    MAP_INTOCONFUSION,      /*  »Î     ±  ªÏ?    */
 
-    MAP_OUTOFPOISON,         /*  ÂÖ•    Êó∂  ÊØí    */
-    MAP_OUTOFPARALYSIS,      /*  ÂÖ•    Êó∂            */
-    MAP_OUTOFSILENCE,        /*  ÂÖ•    Êó∂  Ê≤à?  */
-    MAP_OUTOFSTONE,          /*  ÂÖ•    Êó∂  Áü≥    */
-    MAP_OUTOFDARKNESS,       /*  ÂÖ•    Êó∂  Êöó      */
-    MAP_OUTOFCONFUSION,      /*  ÂÖ•    Êó∂  Ê∑∑?    */
+    MAP_OUTOFPOISON,         /*  »Î     ±  ∂æ    */
+    MAP_OUTOFPARALYSIS,      /*  »Î     ±            */
+    MAP_OUTOFSILENCE,        /*  »Î     ±  …Ú?  */
+    MAP_OUTOFSTONE,          /*  »Î     ±   Ø    */
+    MAP_OUTOFDARKNESS,       /*  »Î     ±  ∞µ      */
+    MAP_OUTOFCONFUSION,      /*  »Î     ±  ªÏ?    */
 
     MAP_DATAINT_NUM,
 }MAP_DATAINT;
@@ -72,7 +72,7 @@ typedef struct tagMAP_ImageData
 
 typedef enum
 {
-    MAP_KINDWALKABLE,           /*  Êìå? F   1   ÂÖ•     */
+    MAP_KINDWALKABLE,           /*  ìˆ? F   1   »Î     */
 
     MAP_KINDNUM,
 }MAP_kind;

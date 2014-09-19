@@ -9,7 +9,7 @@
 // CoolFish: Family 2001/5/9
 #include "acfamily.h"
 #include "version.h"
-#ifdef _SEND_EFFECT				  // WON ADD 送下雪、下雨等特效 
+#ifdef _SEND_EFFECT				  // WON ADD ����ѩ���������Ч 
 #include "recv.h"
 #endif
 
@@ -30,9 +30,7 @@
 #include <sys/wait.h>
 #include <getopt.h>
 #include <stdio.h>
-#ifndef __APPLE__
 #include <malloc.h>
-#endif
 #include <strings.h>
 #include <string.h>
 #include <unistd.h>
@@ -76,18 +74,18 @@ int mbuse ;
 int cpuuse;
 
 
-int mainsockfd;             /* accept 及  域娄醒卞中木月 */
-struct sockaddr_in localaddr;       /* bind 允月失玉伊旦 */
+int mainsockfd;             /* accept ��  ��¦�ѱ���ľ�� */
+struct sockaddr_in localaddr;       /* bind ����ʧ������ */
     
 
-struct connection *con;        /* 戊生弁扑亦件     */
+struct connection *con;        /* �����������     */
 
-static int mb_finder=0;              /* mb及坞五毛腹绸允月凶户及
-                               腹绸玄永皿及匏  筏盛迕 */
+static int mb_finder=0;              /* mb������ë���������׻���
+                               ������������  ��ʢ�� */
 // WON FIX
 //char tmpbuf[65536];
 char tmpbuf[1024*32];
-//char tmpbuf[65536*3];         /* read迕 */
+//char tmpbuf[65536*3];         /* read�� */
 
 struct timeval select_timeout;
 
@@ -108,23 +106,23 @@ int tcpstruct_connect( char *addr , int port );
 void set_nodelay( int sock );
 
 
-#define OK     0        /* 岳   */
-#define TCPSTRUCT_ENOMEM -1       /* malloc 撩   */
-#define TCPSTRUCT_ESOCK -2        /* socket 撩   */
-#define TCPSTRUCT_EBIND -3        /* bind 撩   */
-#define TCPSTRUCT_ELISTEN -4      /* listen 撩   */
-#define TCPSTRUCT_EBUG -6         /* 田弘匹丐月 */
-#define TCPSTRUCT_EINVCIND -7     /* con尺及index互云井仄中方 */
-#define TCPSTRUCT_EREADFIN -8     /* read 允月犯□正互卅仁化 closed by remote */
-#define TCPSTRUCT_EHOST -9        /* gethostbyname 撩   */
-#define TCPSTRUCT_ECONNECT -10    /* connect 撩   */
-#define TCPSTRUCT_ECFULL -11      /* con 互中匀天中 */
-#define TCPSTRUCT_ETOOLONG -12    /* 垫互卅互允亢 */
-#define TCPSTRUCT_EMBFULL -13     /* mb 互中匀天中  */
-#define TCPSTRUCT_ECLOSEAGAIN -14 /* close 互2荚今木凶 */
+#define OK     0        /* ��   */
+#define TCPSTRUCT_ENOMEM -1       /* malloc ��   */
+#define TCPSTRUCT_ESOCK -2        /* socket ��   */
+#define TCPSTRUCT_EBIND -3        /* bind ��   */
+#define TCPSTRUCT_ELISTEN -4      /* listen ��   */
+#define TCPSTRUCT_EBUG -6         /* ���ƥؤ�� */
+#define TCPSTRUCT_EINVCIND -7     /* con�߼�index���ƾ����з� */
+#define TCPSTRUCT_EREADFIN -8     /* read ���·�����ئ�ʻ� closed by remote */
+#define TCPSTRUCT_EHOST -9        /* gethostbyname ��   */
+#define TCPSTRUCT_ECONNECT -10    /* connect ��   */
+#define TCPSTRUCT_ECFULL -11      /* con ���������� */
+#define TCPSTRUCT_ETOOLONG -12    /* �滥ئ���ʿ� */
+#define TCPSTRUCT_EMBFULL -13     /* mb ����������  */
+#define TCPSTRUCT_ECLOSEAGAIN -14 /* close ��2�Խ�ľ�� */
 
 
-int port;               /* 必□丞扔□田□互涛粮仄化仁月禾□玄 */
+int port;               /* �ء�ة�ӡ�����������ƻ����º̡��� */
 int Total_Charlist;
 int Expired_mail;
 int Del_Family_or_Member;
@@ -140,28 +138,19 @@ char *chartime()
     buf[strlen(buf)-1]=0;
     return(buf);
 }
-#ifdef _ANGEL_SUMMON
-extern struct MissionTable missiontable[MAXMISSIONTABLE];
-static int initMissionTable( void );
-int saveMissionTable( void );
-void checkMissionTimelimit( void);
-#endif
 
 static int initRankTable( void );
 
 /*
-  sigaction白弁
+  sigaction����
  */
 void sighandle( int a )
 {
-  if (a==SIGUSR1) log("sigusr1信号!\n");
-  log("得到一个信号! 异常中断......\n" );
+  if (a==SIGUSR1) log("sigusr1�ź�!\n");
+  log("�õ�һ���ź�! �쳣�ж�......\n" );
   writeFamily(familydir);
   writeFMPoint(fmpointdir);
   writeFMSMemo(fmsmemodir);
-#ifdef _ANGEL_SUMMON
-	saveMissionTable();
-#endif
   exit(1);
 }
 
@@ -198,14 +187,14 @@ void sigusr1(int a)
       sprintf(key, "echo \"%s\" > ./sigusr1.result", buf);
       system(key);
     break;
-#ifdef _SEND_EFFECT		   // WON ADD 送下雪、下雨等特效
+#ifdef _SEND_EFFECT		   // WON ADD ����ѩ���������Ч
 	case 'E':	
-		log("\nAC 向 GS 发送下雪特效!!\n");
+		log("\nAC �� GS ������ѩ��Ч!!\n");
 	    SendEffect(&key[1]);
 	break;
 #endif
 
-	case 'L':  // Robin 列出所有Server连线
+	case 'L':  // Robin �г�����Server����
 		log("\nList All Server Conncet!!!!!\n");
 		for( i =0; i <MAXCONNECTION; i++)
 			if( gs[i].use)
@@ -243,21 +232,13 @@ int login_game_server( int ti , char *svname , char *svpas ,
 #else
 		if( strcmp( svpas , svpass ) == 0 ){
 #endif
-        log( "服务器密码正确 %s\n" , svname );
+        log( "������������ȷ %s\n" , svname );
     } else {
-        log( "服务器密码错误 %s\n" , svname );
-        snprintf( result , resultlen , "失败" );
-        snprintf( retdata , retdatalen , "密码错误" );
+        log( "������������� %s\n" , svname );
+        snprintf( result , resultlen , "ʧ��" );
+        snprintf( retdata , retdatalen , "�������" );
         return 0;
     }
-#ifdef _VIP
-    if(checkvip==0 || checkvip!=55575556 * 2)
-    {
-    	snprintf( result , resultlen , "failed" );
-      snprintf( retdata , retdatalen , "duplicate login vip" );
-      //return 0;
-    }
-#endif
     {
         int i;
         for(i=0;i<MAXCONNECTION;i++){
@@ -309,59 +290,59 @@ static int readConfig( char *path )
 
         if( strcmp( command , "port" ) == 0 ){
             port = atoi( param );
-        		log( "端口:%d\n",port );
+        		log( "�˿�:%d\n",port );
         } else if( strcmp( command , "logdir" ) == 0 ){
             snprintf( logdir , sizeof( logdir) , param );
-            log( "日志目录:%s\n",logdir );
+            log( "��־Ŀ¼:%s\n",logdir );
         } else if( strcmp( command , "chardir" ) == 0 ){
             snprintf( chardir , sizeof( chardir) , param );
-            log( "档案目录:%s\n",chardir );
+            log( "����Ŀ¼:%s\n",chardir );
 #ifdef _SLEEP_CHAR
 						snprintf( sleepchardir , sizeof( sleepchardir), "%s_sleep", chardir);
-						log( "睡眠目录:%s\n",sleepchardir );
+						log( "˯��Ŀ¼:%s\n",sleepchardir );
 #endif
         } else if( strcmp( command , "pass" ) == 0 ){
         		snprintf( svpass , sizeof( svpass ) , param);
-            log( "密码:%s\n",param );
+            log( "����:%s\n",param );
         } else if( strcmp( command , "dbdir" ) == 0 ){
             snprintf( dbdir , sizeof( dbdir) , param );    
-            log( "数据目录:%s\n",dbdir );        
+            log( "���Ŀ¼:%s\n",dbdir );        
         } else if( strcmp( command, "rotate_interval" ) == 0 ){
             log_rotate_interval = atoi( param );
-            log( "日志循环间隔:%d\n",log_rotate_interval ); 
+            log( "��־ѭ�����:%d\n",log_rotate_interval ); 
         } else if( strcmp( command, "maildir" ) == 0 ){
             snprintf( maildir, sizeof( maildir ), param );
-            log( "邮件目录:%s\n",maildir );
+            log( "�ʼ�Ŀ¼:%s\n",maildir );
 #ifdef	_FAMILY
         // CoolFish: Family 2001/5/9
         } else if( strcmp( command, "familydir" ) == 0 ){
             snprintf( familydir, sizeof( familydir ), param );
-            log( "家族目录:%s\n",familydir );
+            log( "����Ŀ¼:%s\n",familydir );
         } else if( strcmp( command, "fmpointdir" ) == 0 ){
             snprintf( fmpointdir, sizeof( fmpointdir ), param );
-            log( "庄园表列:%s\n",fmpointdir );
+            log( "ׯ԰����:%s\n",fmpointdir );
         } else if( strcmp( command, "fmsmemodir" ) == 0 ){
             snprintf( fmsmemodir, sizeof( fmsmemodir ), param );
-            log( "家族备份:%s\n",fmsmemodir );
+            log( "���屸��:%s\n",fmsmemodir );
 #endif
 			  } else if( strcmp( command , "Total_Charlist" ) == 0 ){
         	Total_Charlist = atoi( param );
-        	log( "更新人物点数间隔:%d秒\n",Total_Charlist );
+        	log( "�������������:%d��\n",Total_Charlist );
         } else if( strcmp( command , "Expired_mail" ) == 0 ){
         	Expired_mail = atoi( param );
-        	log( "更新过期邮件间隔:%d秒\n",Expired_mail );
+        	log( "���¹����ʼ����:%d��\n",Expired_mail );
         } else if( strcmp( command , "Del_Family_or_Member" ) == 0 ){
         	Del_Family_or_Member = atoi( param );
-        	log( "删除家族成员间隔:%d秒\n",Del_Family_or_Member );
+        	log( "ɾ������Ա���:%d��\n",Del_Family_or_Member );
         } else if( strcmp( command , "Write_Family" ) == 0 ){
         	Write_Family = atoi( param );
-        	log( "更新家族信息间隔:%d秒\n",Write_Family );
+        	log( "���¼�����Ϣ���:%d��\n",Write_Family );
 				} else if( strcmp( command , "SameIpMun" ) == 0 ){
         	sameipmun = atoi( param );
         	if(sameipmun>0){
-        		log( "同IP允许同时登陆:%d次\n",sameipmun );
+        		log( "ͬIP����ͬʱ��½:%d��\n",sameipmun );
         	}else{
-        		log( "同IP允许同时登陆:无限制\n" );
+        		log( "ͬIP����ͬʱ��½:������\n" );
         	}
 				}
     }
@@ -387,10 +368,10 @@ static void parseOpts( int argc, char **argv )
         switch( c ){
         case 'h':
             fprintf( stderr ,
-                     "使用方法: saac [-h] [-w port] [-w port] ... \n"
-                     "-h : 显示saac的帮助\n"
-                     "-w port : 添加一个工作站进程端口\n"
-                     "Copyright 2006 龙zoro工作室 "
+                     "ʹ�÷���: saac [-h] [-w port] [-w port] ... \n"
+                     "-h : ��ʾsaac�İ���\n"
+                     "-w port : ���һ������վ��̶˿�\n"
+                     "Copyright 2006 ��zoro������ "
                      "( Longzoro System Supply )\n");
             exit(0);
             break;
@@ -414,7 +395,7 @@ static void parseOpts( int argc, char **argv )
         		nice(atoi( optarg ));
         		break;
         default:
-            log( "不能读懂选项 %c\n" , c );
+            log( "���ܶ���ѡ�� %c\n" , c );
             exit(0);
         }
     }
@@ -444,47 +425,47 @@ int main( int argc , char **argv )
 		UNlockM_Init();
     
     if(readConfig( "acserv.cf" )<0){
-        log( "无法在当前目录里读取 acserv.cf .\n" );
+        log( "�޷��ڵ�ǰĿ¼���ȡ acserv.cf .\n" );
         exit(1);
     }
 
 #ifdef _SASQL
     sasql_init();
 #endif	
-    log( "读取数据目录\n" );
+    log( "��ȡ���Ŀ¼\n" );
     dbRead( dbdir );
 #ifdef	_FAMILY
-    log("读取 家族庄园\n");
+    log("��ȡ ����ׯ԰\n");
     readFMSMemo(fmsmemodir);
-    log("读取 家族留言\n");
+    log("��ȡ ��������\n");
     readFMPoint(fmpointdir);
-    log("读取 家族目录\n");
+    log("��ȡ ����Ŀ¼\n");
     readFamily(familydir);
 #endif
-    log( "准备 档案目录\n" );
+    log( "׼�� ����Ŀ¼\n" );
     prepareDirectories( chardir );
-    log( "准备 日志目录\n" );
+    log( "׼�� ��־Ŀ¼\n" );
     prepareDirectories( logdir );
-    log( "准备 邮件目录\n" );
+    log( "׼�� �ʼ�Ŀ¼\n" );
     prepareDirectories( maildir );
 
 #ifdef _SLEEP_CHAR
     prepareDirectories( sleepchardir );
-    log( "准备 睡眠档案目录\n" );
+    log( "׼�� ˯�ߵ���Ŀ¼\n" );
 #endif
 
-    /* 凶引匀化月丢□伙毛  心仇戈 */
+    /* �����Ȼ��¶�����ë  �ĳ�� */
     if( readMail(maildir) < 0 ){
-        log( "不能初始化邮件\n" );
+        log( "���ܳ�ʼ���ʼ�\n" );
         exit(1);
 		}
 
-    /* TCPSTRUCT 毛赓渝祭 */
+    /* TCPSTRUCT ë����� */
     {
         int tcpr;
         if( ( tcpr = tcpstruct_init( NULL , port , 0 ,
 						CHARDATASIZE * 16 * MAXCONNECTION , 1 /* DEBUG */ ) ) < 0 ){
-            log( "不能开启TCP: %d\n", tcpr );
+            log( "���ܿ���TCP: %d\n", tcpr );
             return 1;
         }
     }
@@ -510,7 +491,7 @@ int main( int argc , char **argv )
 
     }
 
-#ifdef _AC_SEND_FM_PK		 // WON ADD 庄园对战列表储存在AC
+#ifdef _AC_SEND_FM_PK		 // WON ADD ׯ԰��ս�б?����AC
 	load_fm_pk_list();
 #endif
 
@@ -518,21 +499,17 @@ int main( int argc , char **argv )
 	FMPK_LoadList();
 #endif
 #ifdef _ALLDOMAN
-	LOAD_herolist();  // Syu ADD 排行榜NPC
-#endif
-
-#ifdef _ANGEL_SUMMON
-	initMissionTable();
+	LOAD_herolist();  // Syu ADD ���а�NPC
 #endif
 
 #ifdef _VIP
-		log( "\n服务端版本: <%s 会员版>\n" , SERVER_VERSION );
+		log( "\n����˰汾: <%s ��Ա��>\n" , SERVER_VERSION );
 #else
-		log( "\n服务端版本: <%s 普通版>\n" , SERVER_VERSION );
+		log( "\n����˰汾: <%s ��ͨ��>\n" , SERVER_VERSION );
 #endif
-		log( "\n服务端编译完成时间:%s %s by 龙zoro工作室\n" , __DATE__ , __TIME__ );
+		log( "\n����˱������ʱ��:%s %s by ��zoro������\n" , __DATE__ , __TIME__ );
 		
-    log( "\n开始工作...\n" );
+    log( "\n��ʼ����...\n" );
 
     signal(SIGUSR1,sigusr1);	// Arminius 7.20 memory lock
 	int itime=0;
@@ -556,9 +533,6 @@ int main( int argc , char **argv )
 			//andy add 2002/06/20
 			UNlockM_UnlockPlayer();
 
-#ifdef _ANGEL_SUMMON
-			checkMissionTimelimit();
-#endif
             // Nuke *1 1012
             if( counter1 > Total_Charlist ){
             		counter1=0;
@@ -570,7 +544,7 @@ int main( int argc , char **argv )
                     dbFlush(dbdir);
                     gettimeofday( &et,NULL);
                     log( "Flushed db(%fsec)\n", time_diff(et,st) );
-                    log( "档案表列总数:%d NG:%d\n",
+                    log( "������������:%d NG:%d\n",
                          total_ok_charlist, total_ng_charlist );
                 }
             }
@@ -582,7 +556,7 @@ int main( int argc , char **argv )
                 gettimeofday( &st,NULL);
                 expireMail();
                 gettimeofday( &et,NULL);
-                log( "过期邮件(%fsec)\n", time_diff(et,st) );
+                log( "�����ʼ�(%fsec)\n", time_diff(et,st) );
             }
 #ifdef	_FAMILY
             //if ((counter % 300) == 0) // 300( -> 60)
@@ -595,13 +569,13 @@ int main( int argc , char **argv )
          	writeFMPoint(fmpointdir);
          	writeFMSMemo(fmsmemodir);
          	gettimeofday(&et, NULL);
-         	log("记录家族(%fsec)\n", time_diff(et, st));
+         	log("��¼����(%fsec)\n", time_diff(et, st));
       }
 #endif
         }
     newti = tcpstruct_accept1();
     if( newti >= 0 ){
-			log( "同意: %d\n" , newti );
+			log( "ͬ��: %d\n" , newti );
 			gs[newti].use = 1;
     }
 
@@ -618,13 +592,13 @@ int main( int argc , char **argv )
                     if( saacproto_ServerDispatchMessage( i , buf, debugfun)<0){
                         // Nuke start
                         tcpstruct_close(i);// avoid the shutdown the gmsv ttom
-                        log( "GMSV(%s) 消息:%s\n", gs[i].name, debugfun);
+                        log( "GMSV(%s) ��Ϣ:%s\n", gs[i].name, debugfun);
                     }
                 } else if( l == TCPSTRUCT_ETOOLONG ){
-                    log( "很长:%d 服务器名::%s\n", i , gs[i].name );
+                    log( "�ܳ�:%d ��������::%s\n", i , gs[i].name );
                     logout_game_server( i );
                 } else if( l < 0 ){
-                    log( "关闭:%d 服务器名:%s\n", i , gs[i].name );
+                    log( "�ر�:%d ��������:%s\n", i , gs[i].name );
                     logout_game_server(i);
                 } else if( l == 0 ){
                     ;
@@ -643,9 +617,9 @@ int main( int argc , char **argv )
             tv_loop_store = now;
         }
 
-        /* 伐□市□及正奶丞失它玄毛譬屯月［
-           正奶丞失它玄仄凶日夫弘毛分仄化伐□市□毛诮仄化仄引丹［
-           匹必□丞扔□田□卞  蔽读卞反骚襞允月           */
+        /* �����С�������ةʧ����ëƩ���£�
+           ����ةʧ���������շ��ë���ƻ������С�ëڽ�ƻ������
+           ƥ�ء�ة�ӡ������  �ζ��巴ɧ������           */
     }
     return 0;       
 }
@@ -660,11 +634,11 @@ time_diff(struct timeval subtrahend,
 
 
 /*
-  夫弘及夫□  □玄市它件玄毛  月［
-  云卅元凛渝及手及反允屯化及夫弘白央奶伙互云卅元卞卅月方丹卞允月［
+  ��뼰���  �����������ë  �£�
+  ��ئԪ���弰�ּ������ͻ����������̻ﻥ��ئԪ��ئ�·��������£�
 
-  仇及酷  反醒侬及瑕互云云仁卅月互｝    匹奶件正□田伙毛  凳仄化手
-    暹屺分［
+  �𼰿�  ����ٯ��覻�������ئ�»���    ƥ�̼�������ë  ���ƻ���
+    ��ᨷ֣�
   
  */
 int get_rotate_count(void )
@@ -752,104 +726,107 @@ int tcpstruct_accept1( void )
 
 int tcpstruct_accept( int *tis , int ticount )
 {
-    int i;
-    int sret;
-    int accepted = 0;
-    struct timeval t;
-    fd_set rfds, wfds , efds;  
-    FD_ZERO( & rfds );
-    FD_ZERO( & wfds );
-    FD_ZERO( & efds );    
-
-    for(i=0;i<MAXCONNECTION;i++){
-        if( con[i].use &&
-            con[i].fd >= 0 && con[i].closed_by_remote ==0 ){
-            FD_SET( con[i].fd , & rfds );
-            FD_SET( con[i].fd , & wfds );
-            FD_SET( con[i].fd , & efds );
-        }
-    }
+  int i;
+  int sret = 0;
+  int accepted = 0;
+  struct timeval t;
+  fd_set rfds, wfds , efds;  
+  FD_ZERO( & rfds );
+  FD_ZERO( & wfds );
+  FD_ZERO( & efds );    
+  
+  for(i=0;i<MAXCONNECTION;i++){
+   if( con[i].use &&
+      con[i].fd >= 0 && con[i].closed_by_remote ==0 ){
+      FD_SET( con[i].fd , & rfds );
+      FD_SET( con[i].fd , & wfds );
+      FD_SET( con[i].fd , & efds );
     
-    t = select_timeout;
-    sret = select( 1024, & rfds , (fd_set*)NULL, & efds , &t);
-	if( sret > 0 ) {
-		for(i=0;i< MAXCONNECTION;i++){
-			if( ( con[i].fd >= 0 ) && FD_ISSET( con[i].fd , &rfds ) ){
-				int fr = getFreeMem( );
-				int rr , readsize ;
-				if( fr <= 0 ) continue;
-				if( fr > sizeof(tmpbuf ) ){
-					readsize = sizeof( tmpbuf);
-				} else {
-					readsize = fr;
-				}
-				rr = read( con[i].fd , tmpbuf , readsize );
-				if( rr <= 0 ){
-					con[i].closed_by_remote = 1;
-				} else {
-					appendReadBuffer( i , tmpbuf , rr );
+          
+	    t = select_timeout;
+	    sret = select( con[i].fd+1, & rfds , (fd_set*)NULL, (fd_set*)NULL , &t);
+			if( sret > 0 ) {
+				if( ( con[i].fd >= 0 ) && FD_ISSET( con[i].fd , &rfds ) ){
+					int fr = getFreeMem( );
+					int rr , readsize ;
+					if( fr <= 0 ) continue;
+					if( fr > sizeof(tmpbuf ) ){
+						readsize = sizeof( tmpbuf);
+					} else {
+						readsize = fr;
+					}
+					rr = read( con[i].fd , tmpbuf , readsize );
+					if( rr <= 0 ){
+						con[i].closed_by_remote = 1;
+					} else {
+						appendReadBuffer( i , tmpbuf , rr );
+#ifdef _DEBUG
+						printf("��ȡ����:%s\n",tmpbuf);
+#endif
+					}
 				}
 			}
-		}
-    }    
-    /* write */
-    t = select_timeout;    
-    sret = select( 1024, (fd_set*)NULL, &wfds, & efds , &t);
-	if( sret > 0 ) {
-		for(i=0;i<MAXCONNECTION;i++){
-			if( ( con[i].fd >= 0 ) && FD_ISSET( con[i].fd , &wfds )){
-				char send_buf[4096];
-				int l , rr;
-				memset( send_buf, 0, sizeof( send_buf));
-				l = consumeMemBufList( con[i].mbtop_wi ,send_buf, sizeof(send_buf),0 , 1 );
-				rr = write( con[i].fd , send_buf , l );
-				if( rr < 0 ){
-					con[i].closed_by_remote = 1;
-				} else {
-					consumeMemBufList( con[i].mbtop_wi , send_buf, l, 1 , 0 );
+	
+	    t = select_timeout;    
+	    sret = select( con[i].fd+1, (fd_set*)NULL, &wfds, (fd_set*)NULL , &t);
+			if( sret > 0 ) {
+				if( ( con[i].fd >= 0 ) && FD_ISSET( con[i].fd , &wfds )){
+					char send_buf[4096];
+					memset( send_buf, 0, sizeof( send_buf));
+					int l = consumeMemBufList( con[i].mbtop_wi ,send_buf, sizeof(send_buf),0 , 1 );
+					if(l>0){
+						int rr = write( con[i].fd , send_buf , l );
+						if( rr < 0 ){
+							con[i].closed_by_remote = 1;
+						} else {
+#ifdef _DEBUG
+							printf("��������:%s\n",send_buf);
+#endif
+							consumeMemBufList( con[i].mbtop_wi , send_buf, l, 1 , 0 );
+						}
+					}
 				}
 			}
 		}
 	}
 
-    for( i=0; i<ticount; i++){
-        int asret;
-        struct timeval t;
-        t.tv_sec =0;
-        t.tv_usec =0;
-        FD_ZERO( & rfds );
-        FD_ZERO( & wfds );
-        FD_ZERO( & efds );
-
-        FD_SET( mainsockfd , & rfds );
-        FD_SET( mainsockfd , & wfds );
-        FD_SET( mainsockfd , & efds );
-        asret = select( 1024, &rfds , &wfds , &efds, &t );
+  for( i=0; i<ticount; i++){
+    int asret;
+    struct timeval t;
+    t.tv_sec =0;
+    t.tv_usec =0;
+    FD_ZERO( & rfds );
+    FD_ZERO( & wfds );
+	  FD_ZERO( & efds );
+	  FD_SET( mainsockfd , & rfds );
+    FD_SET( mainsockfd , & wfds );
+    FD_SET( mainsockfd , & efds );
+    asret = select( mainsockfd+1, &rfds , &wfds , (fd_set*)NULL, &t );
 		// Nuke 20040610: add asret>0 to avoid signal interrupt in select
-        if( (asret>0) && FD_ISSET( mainsockfd , & rfds )){
-            struct sockaddr_in c;
-            int len , newsockfd;
-            int newcon;
-            bzero( &c , sizeof( c ));
-            len = sizeof( c );
-            fprintf( stderr, "i can accept " );
-            newcon = findregBlankCon( );
-            if( newcon < 0 ) continue;
-            newsockfd = accept( mainsockfd, (struct sockaddr*)&c , &len );
-        log( "同意: %d\n" , newsockfd );
-            if( newsockfd < 0 ){
-                unregMemBuf( newcon );
-                continue;
-            }
-            set_nodelay( newsockfd );
-            con[newcon].fd = newsockfd;
-            memcpy( &con[newcon].remoteaddr , &c ,sizeof(c));
-            tis[accepted] = newcon;
-            accepted ++;
+    if( (asret>0) && FD_ISSET( mainsockfd , & rfds )){
+      struct sockaddr_in c;
+      int len , newsockfd;
+      int newcon;
+      bzero( &c , sizeof( c ));
+      len = sizeof( c );
+      fprintf( stderr, "i can accept " );
+      newcon = findregBlankCon( );
+      if( newcon < 0 ) continue;
+        newsockfd = accept( mainsockfd, (struct sockaddr*)&c , &len );
+        log( "ͬ��: %d\n" , newsockfd );
+        if( newsockfd < 0 ){
+          unregMemBuf( newcon );
+          continue;
         }
-    }
+        set_nodelay( newsockfd );
+        con[newcon].fd = newsockfd;
+        memcpy( &con[newcon].remoteaddr , &c ,sizeof(c));
+        tis[accepted] = newcon;
+        accepted ++;
+     }
+   }
 
-    return accepted;
+   return accepted;
 }
 
 int tcpstruct_close( int ti )
@@ -863,7 +840,7 @@ int tcpstruct_close( int ti )
     con[ti].use = 0;
     con[ti].fd = -1;
 
-    /* 伉旦玄毛凶升匀化蝈  毛弁伉失允月 */
+    /* ����ë�����Ȼ���  ë����ʧ���� */
     consumeMemBufList( con[ti].mbtop_ri , NULL,
                    mbsize * sizeof( mb[0].buf ), 1, 0 );
     consumeMemBufList( con[ti].mbtop_wi , NULL,
@@ -876,7 +853,7 @@ int tcpstruct_close( int ti )
 }
 
 /*
-    心仇戈手及互手丹卅仁化｝仄井手 remoteclose 分匀凶日 -1 毛井尹允
+    �ĳ���ּ����ֵ�ئ�ʻ����ƾ��� remoteclose �������� -1 ë������
   
  */
 int tcpstruct_read( int ti , char *buf , int len )
@@ -892,11 +869,11 @@ int tcpstruct_read( int ti , char *buf , int len )
 }
 
 /*
-  1垫毛方心仇戈［
-  int kend : 1卅日垫  及 \n 毛诮允
-  int kend_r : 1卅日垫  及 \r 手诮允(丐木壬)
+  1��ë���ĳ���
+  int kend : 1ئ�յ�  �� \n ëڽ��
+  int kend_r : 1ئ�յ�  �� \r ��ڽ��(ؤľ��)
 
-    心仇戈手及互手丹卅仁化｝井勾 remote closed 分匀凶日-1毛井尹允
+    �ĳ���ּ����ֵ�ئ�ʻ��� remote closed ��������-1ë������
   // Nuke
 	Read 1 line
 	if kend==1 then delete \n at the tail
@@ -976,7 +953,7 @@ int tcpstruct_connect( char *addr , int port )
     set_nodelay( s );
     newti = findregBlankCon( );
     if( newti < 0 ){
-        fprintf( stderr , "连接失败: newti:%d\n", newti );
+        fprintf( stderr , "����ʧ��: newti:%d\n", newti );
         return TCPSTRUCT_ECFULL;
     }
     con[newti].fd = s;
@@ -1071,7 +1048,7 @@ static int consumeMemBufList( int top , char *out , int len ,
         if( consumeflag ){
             mb[top].len -= cpsize;
             if( mb[top].len > 0 ){
-                /* 勾井中反凶仄化卅中及匹memmove */
+                /* �����з����ƻ�ئ�м�ƥmemmove */
                 memmove( mb[top].buf , mb[top].buf + cpsize ,
                          sizeof( mb[top].buf ) - cpsize );
             }
@@ -1083,7 +1060,7 @@ static int consumeMemBufList( int top , char *out , int len ,
     }
 
     if( consumeflag ){
-        /* 卅互今互0卞卅匀化月卅日荸  ［匹手  赓及支勾反荸  仄卅中冗 */
+        /* ئ����0��ئ�Ȼ���ئ��ݩ  ��ƥ��  �ټ�֧����ݩ  ��ئ���� */
         top = mb[top_store].next;
         for(;;){
             if( top == -1 )break;
@@ -1123,10 +1100,10 @@ static int getLineReadBuffer( int index , char *buf, int len )
         top = mb[top].next;
     }
     if( ti > len ){
-        /* 1垫互卅互允亢月［    卅巨仿□毛井尹六 */
+        /* 1�滥ئ���ʿ��£�    ئ�޷¡�ë������ */
         return TCPSTRUCT_ETOOLONG;
     }
-    /* 垫互敦岳仄化卅中 */
+    /* �滥�����ƻ�ئ�� */
     if( breakflag == 0 ){
         return 0;
     }
@@ -1137,16 +1114,16 @@ static int getLineReadBuffer( int index , char *buf, int len )
 
 
 /*
-    心仇户月    赢今毛忒允
+    �ĳ���    Ӯ��ë߯��
   int index : con index
 
   return:
-    反巨仿□
-  0动晓及桦宁反 read 仄化手方中赢今［
+    ���޷¡�
+  0������������ read �ƻ��ַ���Ӯ���
 
 
-  mbsize 井日mbuse 毛娄中化扔奶术毛井仃月分仃［
-  仇引井中芴曰及坌反  骰允月［公氏卅称井中袄卞仇分歹日卅仁化手第［
+  mbsize ����mbuse ë¦�л�������ë�����·����
+  ��������Ի���з�  �����£۹���ئ�ƾ��а����ִ���ئ�ʻ��ֵڣ�
   
  */   
 static int getFreeMem( void )
@@ -1156,13 +1133,13 @@ static int getFreeMem( void )
 
 /*
   
-  membuf 及坞五毛茧仄分允［
+  membuf ������ë���Ʒ��ʣ�
 
-  return : 心勾井匀凶日 >=0 匹 index.
-  心勾井日卅井匀凶日  
+  return : �Ĺ��������� >=0 ƥ index.
+  �Ĺ�����ئ��������  
 
-  腹绸及午五卞反 mb_finder 毛勾井丹［
-  仇木匹腹绸仄化｝    卞reg允月［
+  ��������巴 mb_finder ë��������
+  ��ľƥ�����ƻ���    ��reg���£�
  */
 
 static int findregBlankMemBuf( void  )
@@ -1184,7 +1161,7 @@ static int findregBlankMemBuf( void  )
 }
 
 /*
-  mb 毛荸  允月
+  mb ëݩ  ����
   
  */
 static int unregMemBuf(  int index )
@@ -1247,13 +1224,13 @@ void checkGSUCheck( char *id )
     if(!id[0])	return;
 	memset( gname, 0,  sizeof( gname) );
 	if( LockNode_getGname( (getHash(id) & 0xff), id, gname) <= 0 ){
-		log("无法从游戏中找到账号:%x/%s !!\n", getHash( id), id);
+		log("�޷�����Ϸ���ҵ��˺�:%x/%s !!\n", getHash( id), id);
 		return;
 	}
 	log("\n");
     for(i=0; i < MAXCONNECTION; i++ ){
         if( gs[i].name[0] && strcmp( gs[i].name , gname )==0){
-          log("发送解锁检查[%s] 到 %d.%x/%s 服务器:%d !!\n", id, i, getHash( id), gname, gs[i].fd);
+          log("���ͽ�����[%s] �� %d.%x/%s ������:%d !!\n", id, i, getHash( id), gname, gs[i].fd);
 					saacproto_ACUCheck_send( gs[i].fd , id );
 					return;
         }
@@ -1262,12 +1239,12 @@ void checkGSUCheck( char *id )
 
 	int ret = -1;
 		if( !isLocked( id) ) {
-			log( "删除内存信息: 用户:%x/%s 没有锁定!!\n", getHash(id), id);
+			log( "ɾ���ڴ���Ϣ: �û�:%x/%s û����!!\n", getHash(id), id);
 		}
 		if( DeleteMemLock( getHash(id) & 0xff, id, &ret) ) {
 
 		} else {
-			log( "不能解锁 %x:%s !\n", getHash(id), id);
+			log( "���ܽ��� %x:%s !\n", getHash(id), id);
 		}
 }
 
@@ -1277,17 +1254,17 @@ void set_nodelay( int sock )
     int result = setsockopt( sock, IPPROTO_TCP, TCP_NODELAY,
                              (char*)&flag, sizeof(int));
     if( result < 0 ){
-        log( "不能设置延迟.\n" );
+        log( "���������ӳ�.\n" );
     } else {
-        log( "设置延迟: fd:%d\n", sock );
+        log( "�����ӳ�: fd:%d\n", sock );
     }
 }
 
 
 /*
-  允屯化及必□丞扔□田□卞  霜［
+  ���ͻ����ء�ة�ӡ������  ˪��
 
-  int flag : 1分匀凶日霜耨葭卞反云仁日卅中
+  int flag : 1��������˪����巴������ئ��
   
  */
 void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag )
@@ -1301,207 +1278,5 @@ void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag )
             c++;
         }
     }
-/*
-#if 1
-    {
-        char fn[1000];
-        FILE *fp;
-        snprintf( fn, sizeof(fn), "%s/broadcast.log" , logdir );
-        fp = fopen( fn,"a" );
-        if(fp){
-            fprintf( fp, "From %s(%d) Id:[%s] Char:[%s] Mesg:[%s]\n",
-                     gs[fd].name, fd, p1,p2,p3 );
-            fclose(fp);
-        }
-    }
-#endif
-*/
 }
-
-#ifdef _ANGEL_SUMMON
-
-#define MISSIONFILE "db/missiontable.txt"
-
-static int initMissionTable( void )
-{
-	FILE *fp;
-	char onedata[1024];
-	char buf[1024];
-	int index =0;
-
-	memset( missiontable, 0, sizeof(missiontable));
-	fp = fopen( MISSIONFILE, "r");
-	if( !fp ) {
-		log("\n加载精灵召唤错误!!!! \n");
-		//return false;
-	}
-	log("\n加载精灵召唤...");
-	while(1) {
-		//
-		if( fgets( onedata, sizeof(onedata), fp) == NULL)
-			break;
-		if( onedata[0] == '\0' || onedata[0] == '#' )
-			continue;
-		//easyGetTokenFromBuf( onedata, ",", 1, buf, sizeof( buf));
-		//index = atoi( buf);
-		easyGetTokenFromBuf( onedata, ",", 1, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		strcpy( missiontable[index].angelinfo, buf);
-		easyGetTokenFromBuf( onedata, ",", 2, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		strcpy( missiontable[index].heroinfo, buf);
-		easyGetTokenFromBuf( onedata, ",", 3, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		missiontable[index].mission = atoi( buf);
-		easyGetTokenFromBuf( onedata, ",", 4, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		missiontable[index].flag = atoi( buf);
-		easyGetTokenFromBuf( onedata, ",", 5, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		missiontable[index].time = atoi( buf);
-		easyGetTokenFromBuf( onedata, ",", 6, buf, sizeof( buf));
-		if( buf[0] == '\0' ) continue;
-		missiontable[index].limittime = atoi( buf);
-
-		log("%d=%s,%s,%d,%d,%d,%d \n", index,
-			missiontable[index].angelinfo,
-			missiontable[index].heroinfo,
-			missiontable[index].mission,
-			missiontable[index].flag,
-			missiontable[index].time,
-			missiontable[index].limittime );
-
-		index++;
-		if( index >= MAXMISSIONTABLE) break;
-	}
-	fclose( fp);
-	log("..成功! \n");
-	//return true;
-}
-
-
-int saveMissionTable( void )
-{
-	FILE *fp;
-	char onedata[1024];
-	char buf[1024];
-	int index =0;
-
-	fp = fopen( MISSIONFILE, "w");
-	if( !fp ) {
-		log("\n打开精灵召唤错误!!!! \n");
-		//return false;
-	}
-	log("\n保存精灵召唤...");
-	for( index =0; index < MAXMISSIONTABLE; index++) {
-
-		if( missiontable[index].angelinfo[0] == '\0' )
-			continue;
-		sprintf( onedata, "%s,%s,%d,%d,%d,%d\n",
-			missiontable[index].angelinfo,
-			missiontable[index].heroinfo,
-			missiontable[index].mission,
-			missiontable[index].flag,
-			missiontable[index].time,
-			missiontable[index].limittime );
-		fputs( onedata, fp);
-	}
-	fclose( fp);
-	log("..成功! \n");
-	//return true;
-}
-
-void delMissionTableOnedata( int index)
-{
-	int gi;
-
-	log("\n删除精灵召唤:%d:%s:%s \n", index, missiontable[index].angelinfo, missiontable[index].heroinfo);
-
-	if( index <0 || index >=MAXMISSIONTABLE) return;
-	strcpy( missiontable[index].angelinfo, "");
-	strcpy( missiontable[index].heroinfo, "");
-	missiontable[index].mission = 0;
-	missiontable[index].flag = MISSION_NONE;
-	missiontable[index].time = 0;
-	missiontable[index].limittime = 0;
-	
-	for( gi=0; gi<MAXCONNECTION; gi++) {
-		if (gs[gi].use && gs[gi].name[0]) {
-			saacproto_ACMissionTable_send( gi, index, 3, "", "");
-		}
-	}
-}
-
-#define ANSWERTIME 1 // 等待回答时间(小时)
-//#define DOINGTIME 3*24 // 任务时间(小时)
-#define BOUNDSTIME 1*24 // 保留时间(小时)
-
-void checkMissionTimelimit( void)
-{
-	int index;
-	static time_t lastcheck =0;
-
-	if( sys_time < lastcheck + 5*60 )
-		return;
-
-	log("\n检查精灵召唤时间限制:%d \n", sys_time);
-	for( index =0; index < MAXMISSIONTABLE; index++) {
-		if( missiontable[index].flag == MISSION_NONE) {
-			continue;
-		}
-		// 等待使者回应1小时
-		else if( missiontable[index].flag == MISSION_WAIT_ANSWER
-				&& sys_time > missiontable[index].time + ANSWERTIME*60*60 ) {
-			
-			delMissionTableOnedata( index);// 删
-		}
-		// 等待领奖完成 limittime小时
-		else if( ( missiontable[index].flag == MISSION_DOING || missiontable[index].flag == MISSION_HERO_COMPLETE )
-				&& ( sys_time > (missiontable[index].time + missiontable[index].limittime*60*60))		 ) {
-
-			char buf[1024];
-			int gi;
-			// 改TIMEOVER
-			log("精灵召唤及领奖时间过:%d ", index);
-			missiontable[index].flag = MISSION_TIMEOVER;
-			missiontable[index].time = time(NULL);
-			missiontable[index].limittime = BOUNDSTIME;
-			
-			sprintf( buf, "%d|%s|%s|%d|%d|%d|%d ", index,
-				missiontable[index].angelinfo,
-				missiontable[index].heroinfo,
-				missiontable[index].mission,
-				missiontable[index].flag,
-				missiontable[index].time,
-				missiontable[index].limittime );
-			for( gi=0; gi<MAXCONNECTION; gi++) {
-				if (gs[gi].use && gs[gi].name[0]) {
-					saacproto_ACMissionTable_send( gi, 1, 1, buf, "");
-				}
-			}
-			
-			continue;
-		}
-		//else if( missiontable[index].flag == MISSION_HERO_COMPLETE
-		//		&& sys_time > missiontable[index].time + BOUNDSTIME*60*60 ) {
-		//	log(" 领奖时间过:%d ", index);
-		//	delMissionTableOnedata( index);// 删
-		//}
-
-		// 资料保留时间(BOUNDSTIME小时)
-		else if( missiontable[index].flag == MISSION_TIMEOVER
-				&& sys_time > missiontable[index].time + BOUNDSTIME*60*60 ) {
-			log(" 保留时间过:%d ", index);
-			delMissionTableOnedata( index);// 删
-		}
-
-	}
-	saveMissionTable();
-
-	lastcheck = sys_time;
-}
-
-#endif
-
-
 

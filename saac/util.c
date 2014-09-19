@@ -178,16 +178,16 @@ char*   makeStringFromEscaped( char* src )
         if( src[i] == '\\' ){
             int j;
 
-            /*  æˆšåŠ  ä¾¬åå«ä»  */
+            /*  Æİ¼°  Ù¯±åµæÈÊ  */
             i++;
             for( j = 0; j<sizeof(escapeChar)/sizeof(escapeChar[0]); j++){
                 if( escapeChar[j].escapedchar == src[i] ){
-                    /*  æˆšäº’å·¨æ—¦å¼—â–¡çš¿å¹³ä¹“ä»¿åˆ†  */
+                    /*  Æİ»¥¾Şµ©¸¥¡õÃóÆ½ÅÒ·Â·Ö  */
                     src[searchindex++] = escapeChar[j].escapechar;
                     break;
                 }
             }
-            /*  å·¨ä»¿â–¡æ”¯ä»ƒå‡å…¬åŠå¼•å¼•æˆŠç–‹â–¡ä»„åŒ–äº‘ä»  */
+            /*  ¾Ş·Â¡õÖ§ØêÉı¹«¼°ÒıÒıÎìñâ¡õØÆ»¯ÔÆÈÊ  */
             if(escapeChar[j].escapedchar != src[i])
             	src[searchindex++] = src[i];
         }else{
@@ -232,7 +232,7 @@ char *   makeEscapeString( char* src , char* dest, int sizeofdest)
 				dest[destindex+1] = escapechar;
 				destindex+=2;
 				dirty=TRUE;
-				continue;       /*  æˆšåŠ  ä¾¬åè¤¡æˆˆ  */
+				continue;       /*  Æİ¼°  Ù¯±åñ×¸ê  */
 			}else{
 				dest[destindex] = '\0';
 				return dest;
@@ -258,14 +258,14 @@ char *   makeEscapeString1( char* src , char* dest, int sizeofdest)
         int     j;
         char    escapechar='\0';
         if( destindex + 1 >= sizeofdest )
-            /*  '\0'åŒäº’ç®«æ›°å…ä¸­åŠåŒ¹ä»‡ä»‡åŒ¹è”½æ›°   */
+            /*  '\0'ÛĞ»¥óïÔ»Ø¦ÖĞ¼°Æ¥³ğ³ğÆ¥±ÎÔ»   */
             break;
 
-	/*	// èˆå‰©åŠã„ ç”°å¥¶ç„  äº•å‡ä¸¹äº•æ¯›æ°‘å°¼æ°¸å¼
+	/*	// òåÊ£¼°¨àÌïÄÌĞş  ¾®Éıµ¤¾®Ã«ÃñÄáÓÀÛÍ
 		if( IS_2BYTEWORD( src[i] ) ){
-			// èˆå‰©åˆ†ï¼»å…¬åŠæ¡¦å®åã„ ç”°å¥¶ç„èŠ´åŒåè¤¡å¼•å…­æœˆï¼»
-			// å‡¶åˆ†ä»„ã„ ç”°å¥¶ç„ä»„äº•å…ä¸­æ¡¦å®åå…¬ä¸¹ä»„å…ä¸­
-			// å…¬åŠå¼•å¼•ã„¡ç”°å¥¶ç„é³–éœœ
+			// òåÊ£·Ö£Û¹«¼°èëÄş·´¨àÌïÄÌĞşÜÌÛĞ±åñ×ÒıÁùÔÂ£Û
+			// Ğ×·ÖØÆ¨àÌïÄÌĞşØÆ¾®Ø¦ÖĞèëÄş·´¹«µ¤ØÆØ¦ÖĞ
+			// ¹«¼°ÒıÒı¨áÌïÄÌĞş±îËª
 	        if( destindex + 2 >= sizeofdest )break;
 
             dest[destindex] = src[i];
@@ -283,17 +283,17 @@ char *   makeEscapeString1( char* src , char* dest, int sizeofdest)
             }
 
         if( dirty == TRUE ){
-            /*  å·¨æ—¦å¼—â–¡çš¿å…æœˆ  ä¾¬åˆ†    */
+            /*  ¾Şµ©¸¥¡õÃóÔÊÔÂ  Ù¯·Ö    */
             if( destindex + 2 < sizeofdest ){
-                /*  +2 åˆä¸­ä¸¹åŠåï½ '\\' åˆ 'n'åŠä»ªåˆ†   */
-                /*  é…¸æ›°  ä¾¬åèœ—åŒåˆ†    */
+                /*  +2 ÎçÖĞµ¤¼°·´£ı '\\' Îç 'n'¼°ÒÇ·Ö   */
+                /*  ËáÔ»  Ù¯·´ÎÏÛĞ·Ö    */
                 dest[destindex] = '\\';
                 dest[destindex+1] = escapechar;
                 destindex+=2;
                 dirty=TRUE;
-                continue;       /*  æˆšåŠ  ä¾¬åè¤¡æˆˆ  */
+                continue;       /*  Æİ¼°  Ù¯±åñ×¸ê  */
             }else{
-                /*  é…¸æ›°ç”°æ°¸ç™½å¤®äº’å°•ç®«ä»„åŒ–ä¸­æœˆ  */
+                /*  ËáÔ»ÌïÓÀ°×Ñë»¥æØóïØÆ»¯ÖĞÔÂ  */
                 dest[destindex] = '\0';
                 return dest;
             }
@@ -312,7 +312,7 @@ char *   makeEscapeString1( char* src , char* dest, int sizeofdest)
 
 
 
-/* èµä¸­strcatsafeï¼»ç”°æ°¸ç™½å¤®äº’ä¸å­”æœ¨æœˆæ¡¦å®åçª’æ‰‹ä»„å…ä¸­ï¼» */
+/* ÔŞÖĞstrcatsafe£ÛÌïÓÀ°×Ñë»¥Ø¤¿×Ä¾ÔÂèëÄş·´ÖÏÊÖØÆØ¦ÖĞ£Û */
 int
 strcatsafe( char *dest, int destlen , char *append )
 {
@@ -420,7 +420,7 @@ char* strncpy2( char* dest, const char* src, size_t n )
         int i;
         for( i=0; i<n ; i++ ){
             if( *(s+i) == 0 ){
-                /*  æˆŠç–‹â–¡ä»„äº‘æ­¹åŒ€å‡¶æ—¥ NULL   ä¾¬æ¯›  æœ¨æœˆ   */
+                /*  Îìñâ¡õØÆÔÆ´õÔÈĞ×ÈÕ NULL   Ù¯Ã«  Ä¾ÔÂ   */
                 *(d+i) = '\0';
                 return dest;
             }
@@ -443,22 +443,22 @@ void strncpysafe( char* dest , const size_t n ,
                   const char* src ,const int length )
 {
     /*
-     * src äº•æ—¥ dest å length æˆŠç–‹â–¡å…æœˆ
-     * strcpy, strncpy åŒ¹å dest æ–¹æ›° æˆŠç–‹â–¡å…æœˆæ±¹äº’
-     *   äº”ä¸­å‡›åè£Ÿå°‘åˆ,ä¸¢ä¹’ä¼‰é™†å¤±å¼æœ¬æ—¦äº’ç²Ÿæœˆ.
-     * ä»‡åŠæ¥®é†’åŒ¹åï½strlen( src ) åˆ length åŠå‡ä»Šä¸­å¹»ä¸¹
-     * (  ç«¯åæˆŠç–‹â–¡å…æœˆæ±¹) åˆ dest åŠæ‰”å¥¶æœ¯æ¯›  å±¯åŒ–ï½
-     * strcpysafe åˆ  å…ƒä»ªæ¯›å…æœˆï¼»
+     * src ¾®ÈÕ dest ±å length Îìñâ¡õÔÊÔÂ
+     * strcpy, strncpy Æ¥·´ dest ·½Ô» Îìñâ¡õÔÊÔÂĞÚ»¥
+     *   ÎåÖĞÁİ±åôÄÉÙÎç,¶ªÆ¹ØøÂ½Ê§ÛÍ±¾µ©»¥ËÚÔÂ.
+     * ³ğ¼°èúĞÑÆ¥·´£ıstrlen( src ) Îç length ¼°Äı½ñÖĞ»Ãµ¤
+     * (  ¶Ë±åÎìñâ¡õÔÊÔÂĞÚ) Îç dest ¼°ÈÓÄÌÊõÃ«  ÍÍ»¯£ı
+     * strcpysafe Îç  ÔªÒÇÃ«ÔÊÔÂ£Û
      */
 
     int Short;
     Short = min( strlen( src ) , length );
 
-    /* NULL  ä¾¬ æ¯›å“”  ä»„å‡¶  èƒœ */
+    /* NULL  Ù¯ Ã«ßÙ  ØÆĞ×  Ê¤ */
     if( n < Short + 1 ){
         /*
-         * ç”°æ°¸ç™½å¤®äº’ç®«æ›°å…ä¸­åŠåŒ¹ n - 1(NULL  ä¾¬)
-         * åŒ¹ strncpy æ¯›è£Ÿå°‘
+         * ÌïÓÀ°×Ñë»¥óïÔ»Ø¦ÖĞ¼°Æ¥ n - 1(NULL  Ù¯)
+         * Æ¥ strncpy Ã«ôÄÉÙ
          */
         strncpy2( dest , src , n-1 );
         dest[n-1]='\0';
@@ -467,9 +467,9 @@ void strncpysafe( char* dest , const size_t n ,
         return;
     }else{
         /*
-         * ç”°æ°¸ç™½å¤®åèœ—åŒåä¸æœˆåŠåŒ¹ Short åŒ¹strncpyæ¯›è£Ÿå°‘
-         * å…äº‘ src åå Short åŠèµ¢ä»Š  å NULL äº’å…ä¸­åŠåŒ¹ï½
-         * dest åå é¦¨ç¬›ä»„åŒ–äº‘ä»ï¼»
+         * ÌïÓÀ°×Ñë·´ÎÏÛĞ±åØ¤ÔÂ¼°Æ¥ Short Æ¥strncpyÃ«ôÄÉÙ
+         * Ø¦ÔÆ src ±å·´ Short ¼°Ó®½ñ  ±å NULL »¥Ø¦ÖĞ¼°Æ¥£ı
+         * dest ±å·´ Ü°µÑØÆ»¯ÔÆÈÊ£Û
          */
 
         strncpy2( dest , src , Short );
@@ -481,16 +481,16 @@ void strncpysafe( char* dest , const size_t n ,
 void strcpysafe( char* dest ,size_t n ,const char* src )
 {
     /*
-     * src äº•æ—¥ dest å°ºæˆŠç–‹â–¡å…æœˆ.
-     * strcpy, strncpy åŒ¹å dest æ–¹æ›° æˆŠç–‹â–¡å…æœˆæ±¹äº’
-     *   äº”ä¸­å‡›åè£Ÿå°‘åˆ,ä¸¢ä¹’ä¼‰é™†å¤±å¼æœ¬æ—¦äº’ç²Ÿæœˆ.
-     * ä»‡æœ¨æ¯›  ä»€å•ƒå, strncpy äº’ä¸æœˆäº’ strlen( src ) äº’ n æ–¹æ›°
-     *   äº”ä¸­å‡›åå, dest åŠ    äº’ NULL   ä¾¬åˆåå…æ—¥å…ä¸­.
+     * src ¾®ÈÕ dest ³ßÎìñâ¡õÔÊÔÂ.
+     * strcpy, strncpy Æ¥·´ dest ·½Ô» Îìñâ¡õÔÊÔÂĞÚ»¥
+     *   ÎåÖĞÁİ±åôÄÉÙÎç,¶ªÆ¹ØøÂ½Ê§ÛÍ±¾µ©»¥ËÚÔÂ.
+     * ³ğÄ¾Ã«  Ê²¿Ğ±å, strncpy »¥Ø¤ÔÂ»¥ strlen( src ) »¥ n ·½Ô»
+     *   ÎåÖĞÁİ±å·´, dest ¼°    »¥ NULL   Ù¯Îç·´Ø¦ÈÕØ¦ÖĞ.
      *
-     * ä»„å‡¶äº’åŒ€åŒ– dest åŠ  äº”ä»Šæ–¹æ›° src åŠå¹»ä¸¹äº’èµ¢ä¸­å‡›åå
-     * n-1 åŒ¹ strncpy æ¯›å…æœˆ. å‡ä»Šä¸­å‡›åå…¬åŠå¼•å¼•æˆŠç–‹â–¡å…æœˆ
+     * ØÆĞ×»¥ÔÈ»¯ dest ¼°  Îå½ñ·½Ô» src ¼°»Ãµ¤»¥Ó®ÖĞÁİ±å·´
+     * n-1 Æ¥ strncpy Ã«ÔÊÔÂ. Äı½ñÖĞÁİ·´¹«¼°ÒıÒıÎìñâ¡õÔÊÔÂ
      *
-     * n äº’  åŠå‡›åäº‘äº•ä»„ä»å…æœˆåŠåŒ¹  åŠå‡›å çª’æ‰‹ä»„å…ä¸­ï¼»
+     * n »¥  ¼°Áİ·´ÔÆ¾®ØÆÈÊØ¦ÔÂ¼°Æ¥  ¼°Áİ·´ ÖÏÊÖØÆØ¦ÖĞ£Û
      *
      */
     // Nuke +1 (08/25): Danger if src=0
@@ -498,15 +498,15 @@ void strcpysafe( char* dest ,size_t n ,const char* src )
         *dest = '\0';
         return;
     }
-    if( n <= 0 )        /* çª’æ‰‹ä»„å…ä¸­   */
+    if( n <= 0 )        /* ÖÏÊÖØÆØ¦ÖĞ   */
         return;
 
-    /*  ä»‡åŠå‡›é³”åŒ¹ï½ n >= 1 åŠ¨æ™“äº’ç‘çƒ‚  */
-    /*  NULL  ä¾¬æ¯›å“”  ä»„åŒ–  èƒœå…æœˆ  */
+    /*  ³ğ¼°Áİ÷§Æ¥£ı n >= 1 ¶¯Ïş»¥è£ÀÃ  */
+    /*  NULL  Ù¯Ã«ßÙ  ØÆ»¯  Ê¤ÔÊÔÂ  */
     else if( n < strlen( src ) + 1 ){
         /*
-         * ç”°æ°¸ç™½å¤®äº’ç®«æ›°å…ä¸­åŠåŒ¹ n - 1(NULL  ä¾¬)
-         * åŒ¹ strncpy æ¯›è£Ÿå°‘
+         * ÌïÓÀ°×Ñë»¥óïÔ»Ø¦ÖĞ¼°Æ¥ n - 1(NULL  Ù¯)
+         * Æ¥ strncpy Ã«ôÄÉÙ
          */
         strncpy2( dest , src , n-1 );
         dest[n-1]='\0';
@@ -520,67 +520,67 @@ char * ScanOneByte( char *src, char delim )
 	// Nuke
 	if (!src) return NULL;
 
-        //   ä¾¬  äº’å…ä»å…æœˆå¼•åŒ¹è…¹ç»¸
+        //   Ù¯  »¥Ø¦ÈÊØ¦ÔÂÒıÆ¥¸¹³ñ
         for( ;src[0] != '\0'; src ++ ){
           if( IS_2BYTEWORD( src[0] ) ){
-              // èˆå‰©åˆ†ï¼»å…¬åŠæ¡¦å®åã„ ç”°å¥¶ç„èŠ´åŒåè¤¡å¼•å…­æœˆï¼»
-              // å‡¶åˆ†ä»„ã„ ç”°å¥¶ç„ä»„äº•å…ä¸­æ¡¦å®åå…¬ä¸¹ä»„å…ä¸­
+              // òåÊ£·Ö£Û¹«¼°èëÄş·´¨àÌïÄÌĞşÜÌÛĞ±åñ×ÒıÁùÔÂ£Û
+              // Ğ×·ÖØÆ¨àÌïÄÌĞşØÆ¾®Ø¦ÖĞèëÄş·´¹«µ¤ØÆØ¦ÖĞ
               if( src[1] != 0 ){
                   src ++;
               }
               continue;
           }
-          //   å‰©åˆ†åŒ€å‡¶ï¼»ä»‡ä»‡åŒ¹è¦†æ“‚åŠ  ä¾¬åˆ  èƒœ
+          //   Ê£·ÖÔÈĞ×£Û³ğ³ğÆ¥¸²ÀŞ¼°  Ù¯Îç  Ê¤
           if( src[0] == delim ){
               return src;
           }
         }
-        // ä¼™â–¡çš¿  ä»ƒå‡¶æ—¥è‹‡å‹¾äº•æ—¥å…äº•åŒ€å‡¶ï¼»
+        // »ï¡õÃó  ØêĞ×ÈÕÎ­¹´¾®ÈÕØ¦¾®ÔÈĞ×£Û
         return NULL;
 }
 
 int easyGetTokenFromBuf( char* src ,char* delim ,int count, char* output , int len )
 {//ttom this function all change,copy from the second
-    int i;          /* ä¼™â–¡çš¿  é†’ */
-    int length =0;  /* æ½¸æ›°è¯·ä»„å‡¶  ä¾¬  åŠèµ¢ä»Š */
-    int addlen=0;   /* ç®«ä»Šæœ¨æœˆèµ¢ä»Š */
-    int oneByteMode = 0; /* ã„ ç”°å¥¶ç„ä¹’â–¡ç‰äº•ï¼‚ */
+    int i;          /* »ï¡õÃó  ĞÑ */
+    int length =0;  /* äúÔ»ÇëØÆĞ×  Ù¯  ¼°Ó®½ñ */
+    int addlen=0;   /* óï½ñÄ¾ÔÂÓ®½ñ */
+    int oneByteMode = 0; /* ¨àÌïÄÌĞşÆ¹¡õÓñ¾®£¢ */
 
-    if( strlen( delim ) == 1 ){ // è…¹ç»¸äº’ã„ ç”°å¥¶ç„å…æ—¥ã„ ç”°å¥¶ç„ä¹’â–¡ç‰åå…æœˆ
-        oneByteMode = 1;// å…¬åŠç«¯ã„¡ç”°å¥¶ç„  ä¾¬åæ°‘å°¼æ°¸å¼ä»„å…ä¸­
+    if( strlen( delim ) == 1 ){ // ¸¹³ñ»¥¨àÌïÄÌĞşØ¦ÈÕ¨àÌïÄÌĞşÆ¹¡õÓñ±åÔÊÔÂ
+        oneByteMode = 1;// ¹«¼°¶Ë¨áÌïÄÌĞş  Ù¯·´ÃñÄáÓÀÛÍØÆØ¦ÖĞ
     }
     for( i =  0 ; i < count ; i ++ ){
          char* last;
-         src += addlen;/* å¿ƒå‹¾äº•åŒ€å‡¶èµ¢ä»Šæ¯›ç®«å… */
+         src += addlen;/* ĞÄ¹´¾®ÔÈĞ×Ó®½ñÃ«óïÔÊ */
       
          if( oneByteMode ){
-             // ã„ ç”°å¥¶ç„ä¹’â–¡ç‰åˆ†åŒ€å‡¶æ—¥ä»‡åˆ‡æ—¥åŒ¹è…¹ç»¸
+             // ¨àÌïÄÌĞşÆ¹¡õÓñ·ÖÔÈĞ×ÈÕ³ğÇĞÈÕÆ¥¸¹³ñ
              last = ScanOneByte( src, delim[0] );
          }else{
-                 last  = strstr( src , delim );  /* è‹‡å°¥ä»ƒæœˆ */
+                 last  = strstr( src , delim );  /* Î­ŞÍØêÔÂ */
          }
          if( last == NULL ){
             /*
-             * å¿ƒå‹¾äº•æ—¥å…äº•åŒ€å‡¶åŠåŒ¹å…å±¯åŒ–æˆŠç–‹â–¡ä»„åŒ– returnï¼»
+             * ĞÄ¹´¾®ÈÕØ¦¾®ÔÈĞ×¼°Æ¥ÔÊÍÍ»¯Îìñâ¡õØÆ»¯ return£Û
             */
             strcpysafe( output , len, src );
 
             if( i == count - 1 )
-                /*åˆ‡æ–¤ä¸¹å‡å¿ƒå‹¾äº•åŒ€å‡¶*/
+                /*ÇĞ½ïµ¤ÉıĞÄ¹´¾®ÔÈĞ×*/
                 return 1;
                                                                                                            
-                /*å¿ƒå‹¾äº•æ—¥å…äº•åŒ€å‡¶*/
+                /*ĞÄ¹´¾®ÈÕØ¦¾®ÔÈĞ×*/
              return 0;
           }
           
           /*
-           * å¿ƒå‹¾äº•åŒ€å‡¶èµ­åˆ  èµ“åŠåŒ  åŠçŠ’æ¯›è²æˆ·æœˆ
-           * å‹¾å¼•æ›°å—‰æ¿ æ—¥æœ¨åŒ–ä¸­æœˆ  ä¾¬  åŠèµ¢ä»Š
+           * ĞÄ¹´¾®ÔÈĞ×ô÷Îç  âÙ¼°ŞË  ¼°êûÃ«·Æ»§ÔÂ
+           * ¹´ÒıÔ»à¼å©ÈÕÄ¾»¯ÖĞÔÂ  Ù¯  ¼°Ó®½ñ
           */
           length = last - src;
                                            
           /*
-           * æˆšåŠä¼™â–¡çš¿åŠå•ƒåå¿ƒå‹¾äº•åŒ€å‡¶èµ¢ä»Šåˆ delim åŠèµ¢ä»Šæ¯›ç®«ä»„åŒ–äº‘ä»
+           * Æİ¼°»ï¡õÃó¼°¿Ğ±åĞÄ¹´¾®ÔÈĞ×Ó®½ñÎç delim ¼°Ó®½ñÃ«óïØÆ»¯ÔÆÈÊ
           */
           addlen= length + strlen( delim );
        }

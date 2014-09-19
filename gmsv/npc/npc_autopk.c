@@ -146,7 +146,7 @@ void NPC_AutoPkWindowTalked( int meindex, int talkerindex, int seqno,
 			char buf1[128];
 			char buf2[255];
 			int i;
-			CHAR_DischargePartyNoMsg( talkerindex);//è§£æ•£å›¢é˜Ÿ
+			CHAR_DischargePartyNoMsg( talkerindex);//½âÉ¢ÍÅ¶Ó
 			CHAR_warpToSpecificPoint( talkerindex, 20000, 27, 15 );
 #ifdef _GMRELOAD
 			for (i = 0; i < GMMAXNUM; i++){
@@ -159,8 +159,8 @@ void NPC_AutoPkWindowTalked( int meindex, int talkerindex, int seqno,
 #endif
 			{
 				CHAR_setInt(talkerindex,CHAR_AUTOPK,0);
-				sprintf(buf1,"ç©å®¶%så‚åŠ æ¯”èµ›ï¼",CHAR_getChar( talkerindex, CHAR_NAME));
-				sprintf(buf2,"ç©å®¶%så‚åŠ æ¯”èµ›,ä½ è¿˜æ²¡å‚åŠ å—ï¼Ÿæœ¬æ¬¡å¥–å“ä¸°å¯Œï¼Œä½ è¿˜ç­‰ä»€ä¹ˆï¼Ÿå¿«æ¥å§ï¼",CHAR_getChar( talkerindex, CHAR_NAME));
+				sprintf(buf1,"Íæ¼Ò%s²Î¼Ó±ÈÈü£¡",CHAR_getChar( talkerindex, CHAR_NAME));
+				sprintf(buf2,"Íæ¼Ò%s²Î¼Ó±ÈÈü,Äã»¹Ã»²Î¼ÓÂğ£¿±¾´Î½±Æ··á¸»£¬Äã»¹µÈÊ²Ã´£¿¿ìÀ´°É£¡",CHAR_getChar( talkerindex, CHAR_NAME));
 				AutoPk_PKSystemTalk(buf1,buf2);
 			}
 		}
@@ -254,12 +254,12 @@ static void NPC_AutoPk_selectWindow( int meindex, int toindex, int num,int selec
 
 	switch( num)	{
 	case WINDOW_START:
-		sprintf(token, "3\n              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›ç®¡ç†å‘˜â˜…\n\n"
-											"æœ‰ä»€ä¹ˆéœ€è¦æˆ‘ä¸ºä½ æœåŠ¡å‘¢ï¼Ÿ\n"
-											"                ã€Šæˆ‘è¦å‚åŠ æ¯”èµ›ã€‹\n"
-											"                ã€ŠæŸ¥çœ‹å‚èµ›åå•ã€‹\n"
-											"                ã€Šé¢†å–è·å¥–å¥–å“ã€‹\n"
-											"                ã€ŠæŸ¥çœ‹æ¯”èµ›å†å²ã€‹\n");
+		sprintf(token, "3\n              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü¹ÜÀíÔ±¡ï\n\n"
+											"ÓĞÊ²Ã´ĞèÒªÎÒÎªÄã·şÎñÄØ£¿\n"
+											"                ¡¶ÎÒÒª²Î¼Ó±ÈÈü¡·\n"
+											"                ¡¶²é¿´²ÎÈüÃûµ¥¡·\n"
+											"                ¡¶ÁìÈ¡»ñ½±½±Æ·¡·\n"
+											"                ¡¶²é¿´±ÈÈüÀúÊ·¡·\n");
 		CHAR_setWorkInt( toindex, CHAR_WORKSHOPRELEVANT, WINDOW_START);
 		windowtype = WINDOW_MESSAGETYPE_SELECT;
 		buttontype = WINDOW_BUTTONTYPE_CANCEL;
@@ -269,78 +269,78 @@ static void NPC_AutoPk_selectWindow( int meindex, int toindex, int num,int selec
 		windowtype = WINDOW_MESSAGETYPE_MESSAGE;
 		if(select==1){
 			if(autopktime>2){
-				sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›ç®¡ç†å‘˜â˜…\n\n"
-				               "å½“å‰ç¦»æ¯”èµ›å¼€å§‹æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼Œä½ æ˜¯å¦è¦å‚åŠ å½“å‰æ¯”èµ›å—ï¼Ÿï¼Ÿï¼Ÿ",autopktime);
+				sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü¹ÜÀíÔ±¡ï\n\n"
+				               "µ±Ç°Àë±ÈÈü¿ªÊ¼Ê±¼ä»¹Ê£%d·ÖÖÓ£¬ÄãÊÇ·ñÒª²Î¼Óµ±Ç°±ÈÈüÂğ£¿£¿£¿",autopktime);
 				buttontype = WINDOW_BUTTONTYPE_YESNO;
 				windowno = NPC_AUTOPK_JOINPK;
 			}else if(autopktime>0){
-				sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›ç®¡ç†å‘˜â˜…\n\n"
-				               "PKæ¯”èµ›å°†åœ¨%dåˆ†é’Ÿåå¼€å§‹!\nç°åœ¨å·²æ— æ³•è¿›å…¥æ¯”èµ›åœºåœ°ï¼",autopktime);
+				sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü¹ÜÀíÔ±¡ï\n\n"
+				               "PK±ÈÈü½«ÔÚ%d·ÖÖÓºó¿ªÊ¼!\nÏÖÔÚÒÑÎŞ·¨½øÈë±ÈÈü³¡µØ£¡",autopktime);
 				buttontype = WINDOW_BUTTONTYPE_CANCEL;
 			}else{
-				sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›ç®¡ç†å‘˜â˜…\n\n"
-				               "ç›®å‰è¿˜æœªä¸¾è¡ŒPKæ¯”èµ›!\nè¯·å…³æ³¨PKæ¯”èµ›æœ€æ–°æ¶ˆæ¯ï¼");
+				sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü¹ÜÀíÔ±¡ï\n\n"
+				               "Ä¿Ç°»¹Î´¾ÙĞĞPK±ÈÈü!\nÇë¹Ø×¢PK±ÈÈü×îĞÂÏûÏ¢£¡");
 				buttontype = WINDOW_BUTTONTYPE_CANCEL;
 			}
 		}else if(select==2){
-			sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›å‚èµ›åå•â˜…\n");
-			strcat(token, "è½¬ç”Ÿ  ç­‰çº§    ç©    å®¶\n");
+			sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü²ÎÈüÃûµ¥¡ï\n");
+			strcat(token, "×ªÉú  µÈ¼¶    Íæ    ¼Ò\n");
 			AutoPk_PKNum(token);
 			buttontype = WINDOW_BUTTONTYPE_CANCEL;
 			windowno = NPC_AUTOPK_PKLIST;
 		}else if(select==3){
 			char buff[64];
-			sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›å¥–å“é¢†å–â˜…\n");
-			strcat(token, "â€œè·èƒœâ€â€œå¥–ã€€ã€€ã€€ã€€ã€€ã€€ã€€å“â€\n");
+			sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈü½±Æ·ÁìÈ¡¡ï\n");
+			strcat(token, "¡°»ñÊ¤¡±¡°½±¡¡¡¡¡¡¡¡¡¡¡¡¡¡Æ·¡±\n");
 			if(strlen(award[0].awardpet)>0)
-				sprintf(buff, "ã€€å† å†›ã€€å® ç‰©ï¼š%s\n", award[0].awardpet);
+				sprintf(buff, "¡¡¹Ú¾ü¡¡³èÎï£º%s\n", award[0].awardpet);
 			else
-				sprintf(buff, "ã€€å† å†›ã€€å® ç‰©ï¼šæ— \n");
+				sprintf(buff, "¡¡¹Ú¾ü¡¡³èÎï£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[0].awarditem)>0)
-				sprintf(buff, "ã€€å† å†›ã€€ç‰©å“ï¼š%s\n", award[0].awarditem);
+				sprintf(buff, "¡¡¹Ú¾ü¡¡ÎïÆ·£º%s\n", award[0].awarditem);
 			else
-				sprintf(buff, "ã€€å† å†›ã€€ç‰©å“ï¼šæ— \n");
+				sprintf(buff, "¡¡¹Ú¾ü¡¡ÎïÆ·£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[1].awardpet)>0)
-				sprintf(buff, "ã€€äºšå†›ã€€å® ç‰©ï¼š%s\n", award[1].awardpet);
+				sprintf(buff, "¡¡ÑÇ¾ü¡¡³èÎï£º%s\n", award[1].awardpet);
 			else
-				sprintf(buff, "ã€€äºšå†›ã€€å® ç‰©ï¼šæ— \n");
+				sprintf(buff, "¡¡ÑÇ¾ü¡¡³èÎï£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[1].awarditem)>0)
-				sprintf(buff, "ã€€äºšå†›ã€€ç‰©å“ï¼š%s\n", award[1].awarditem);
+				sprintf(buff, "¡¡ÑÇ¾ü¡¡ÎïÆ·£º%s\n", award[1].awarditem);
 			else
-				sprintf(buff, "ã€€äºšå†›ã€€ç‰©å“ï¼šæ— \n");
+				sprintf(buff, "¡¡ÑÇ¾ü¡¡ÎïÆ·£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[2].awardpet)>0)
-				sprintf(buff, "ã€€å­£å†›ã€€å® ç‰©ï¼š%s\n", award[2].awardpet);
+				sprintf(buff, "¡¡¼¾¾ü¡¡³èÎï£º%s\n", award[2].awardpet);
 			else
-				sprintf(buff, "ã€€å­£å†›ã€€å® ç‰©ï¼šæ— \n");
+				sprintf(buff, "¡¡¼¾¾ü¡¡³èÎï£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[2].awarditem)>0)
-				sprintf(buff, "ã€€å­£å†›ã€€ç‰©å“ï¼š%s\n", award[2].awarditem);
+				sprintf(buff, "¡¡¼¾¾ü¡¡ÎïÆ·£º%s\n", award[2].awarditem);
 			else
-				sprintf(buff, "ã€€å­£å†›ã€€ç‰©å“ï¼šæ— \n");
+				sprintf(buff, "¡¡¼¾¾ü¡¡ÎïÆ·£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[3].awardpet)>0)
-				sprintf(buff, "ã€€ä¼˜èƒœã€€å® ç‰©ï¼š%s\n", award[3].awardpet);
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡³èÎï£º%s\n", award[3].awardpet);
 			else
-				sprintf(buff, "ã€€ä¼˜èƒœã€€å® ç‰©ï¼šæ— \n");
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡³èÎï£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[3].awarditem)>0)
-				sprintf(buff, "ã€€ä¼˜èƒœã€€ç‰©å“ï¼š%s\n", award[3].awarditem);
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡ÎïÆ·£º%s\n", award[3].awarditem);
 			else
-				sprintf(buff, "ã€€ä¼˜èƒœã€€ç‰©å“ï¼šæ— \n");
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡ÎïÆ·£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[4].awardpet)>0)
-				sprintf(buff, "ã€€ä¼˜èƒœã€€å® ç‰©ï¼š%s\n", award[4].awardpet);
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡³èÎï£º%s\n", award[4].awardpet);
 			else
-				sprintf(buff, "ã€€ä¼˜èƒœã€€å® ç‰©ï¼šæ— \n");
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡³èÎï£ºÎŞ\n");
 			strcat(token, buff);
 			if(strlen(award[4].awarditem)>0)
-				sprintf(buff, "ã€€ä¼˜èƒœã€€ç‰©å“ï¼š%s\n", award[4].awarditem);
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡ÎïÆ·£º%s\n", award[4].awarditem);
 			else
-				sprintf(buff, "ã€€ä¼˜èƒœã€€ç‰©å“ï¼šæ— \n");
+				sprintf(buff, "¡¡ÓÅÊ¤¡¡ÎïÆ·£ºÎŞ\n");
 			strcat(token, buff);
 			if(baward && (!strcmp(ship[0].cdkey, CHAR_getChar( toindex, CHAR_CDKEY))
 								&& !strcmp(ship[0].name, CHAR_getChar( toindex, CHAR_NAME))
@@ -408,7 +408,7 @@ BOOL AutoPk_GetHistoryStr( char *token, int page )
 	fp = fopen("./data/autopk/autopkhistory.txt", "r");
 	if (fp == NULL)
 	{
-		print("æŸ¥çœ‹æ¯”èµ›å†å²æ–‡ä»¶æ‰“å¼€é”™è¯¯\n");
+		print("²é¿´±ÈÈüÀúÊ·ÎÄ¼ş´ò¿ª´íÎó\n");
 		return FALSE;
 	}
 	typedef struct taghistory
@@ -428,31 +428,31 @@ BOOL AutoPk_GetHistoryStr( char *token, int page )
 	getStringFromIndexWithDelim(line,"|", 2, history[0].winnum, sizeof(history[0].winnum));
 	getStringFromIndexWithDelim(line,"|", 3, history[0].name, sizeof(history[0].name));
 	if(strlen(history[0].name)==0)
-		strcpy(history[0].name,"æ— ");
+		strcpy(history[0].name,"ÎŞ");
 	getStringFromIndexWithDelim(line,"|", 4, history[1].winnum, sizeof(history[1].winnum));
 	getStringFromIndexWithDelim(line,"|", 5, history[1].name, sizeof(history[1].name));
 	if(strlen(history[1].name)==0)
-		strcpy(history[1].name,"æ— ");
+		strcpy(history[1].name,"ÎŞ");
 	getStringFromIndexWithDelim(line,"|", 6, history[2].winnum, sizeof(history[2].winnum));
 	getStringFromIndexWithDelim(line,"|", 7, history[2].name, sizeof(history[2].name));
 	if(strlen(history[2].name)==0)
-		strcpy(history[2].name,"æ— ");
+		strcpy(history[2].name,"ÎŞ");
 	getStringFromIndexWithDelim(line,"|", 8, history[3].winnum, sizeof(history[3].winnum));
 	getStringFromIndexWithDelim(line,"|", 9, history[3].name, sizeof(history[3].name));
 	if(strlen(history[3].name)==0)
-		strcpy(history[3].name,"æ— ");
+		strcpy(history[3].name,"ÎŞ");
 	getStringFromIndexWithDelim(line,"|", 10, history[4].winnum, sizeof(history[4].winnum));
 	getStringFromIndexWithDelim(line,"|", 11, history[4].name, sizeof(history[4].name));
 	if(strlen(history[4].name)==0)
-		strcpy(history[4].name,"æ— ");
-	sprintf(token, "              â˜…ä¹±èˆæ ¼æ–—ï¼°ï¼«èµ›å†å²â˜…\n"
-	               "             ç¬¬ %s å±Šä¹±èˆæ ¼æ–—è·å¥–åå•\n",hstime);
-	strcat(token, "â€œåæ¬¡â€â€œæ€äººâ€â€œç©    å®¶â€\n");
-	sprintf(buf,  "ã€€å† å†›%7d     %s\n"
-								"ã€€äºšå†›%7d     %s\n"
-								"ã€€å­£å†›%7d     %s\n"
-								"ã€€ä¼˜èƒœ%7d     %s\n"
-								"ã€€ä¼˜èƒœ%7d     %s\n"
+		strcpy(history[4].name,"ÎŞ");
+	sprintf(token, "              ¡ïÂÒÎè¸ñ¶·£Ğ£ËÈüÀúÊ·¡ï\n"
+	               "             µÚ %s ½ìÂÒÎè¸ñ¶·»ñ½±Ãûµ¥\n",hstime);
+	strcat(token, "¡°Ãû´Î¡±¡°É±ÈË¡±¡°Íæ    ¼Ò¡±\n");
+	sprintf(buf,  "¡¡¹Ú¾ü%7d     %s\n"
+								"¡¡ÑÇ¾ü%7d     %s\n"
+								"¡¡¼¾¾ü%7d     %s\n"
+								"¡¡ÓÅÊ¤%7d     %s\n"
+								"¡¡ÓÅÊ¤%7d     %s\n"
 								,atoi(history[0].winnum),history[0].name
 								,atoi(history[1].winnum),history[1].name
 								,atoi(history[2].winnum),history[2].name
@@ -516,7 +516,7 @@ void AutoPk_PKNum( char *token )
 			strcat(token,buf);
 		}
 	}
-	sprintf(buf, "å½“å‰å‚åŠ PKæ¯”èµ›äººæ•°ä¸º:%däºº",num);
+	sprintf(buf, "µ±Ç°²Î¼ÓPK±ÈÈüÈËÊıÎª:%dÈË",num);
 	strcat(token,buf);
 }
 
@@ -539,15 +539,15 @@ void AutoPk_PKSystemInfo()
 	if(autopktime>0){
 		char buf1[64];
 		char buf2[128];
-		sprintf(buf1, "è·ç¦»æˆªæ­¢å‚åŠ PKæ¯”èµ›æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼",autopktime);
+		sprintf(buf1, "¾àÀë½ØÖ¹²Î¼ÓPK±ÈÈüÊ±¼ä»¹Ê£%d·ÖÖÓ£¡",autopktime);
 		if(awardpetid!=-1 && awarditemid==-1)
-			sprintf(buf2,"è·ç¦»æˆªæ­¢å‚åŠ PKæ¯”èµ›æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼Œæœ¬æ¬¡æ¯”èµ›å¥–å“ä¸º:ç¼–å·:%d,å® ç‰©:%s",autopktime-2,awardpetid,awardpet);
+			sprintf(buf2,"¾àÀë½ØÖ¹²Î¼ÓPK±ÈÈüÊ±¼ä»¹Ê£%d·ÖÖÓ£¬±¾´Î±ÈÈü½±Æ·Îª:±àºÅ:%d,³èÎï:%s",autopktime-2,awardpetid,awardpet);
 		else if(awardpetid==-1 && awarditemid!=-1)
-			sprintf(buf2,"è·ç¦»æˆªæ­¢å‚åŠ PKæ¯”èµ›æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼Œæœ¬æ¬¡æ¯”èµ›å¥–å“ä¸º:ç¼–å·:%d,ç‰©å“:%s",autopktime-2,awarditemid,awarditem);
+			sprintf(buf2,"¾àÀë½ØÖ¹²Î¼ÓPK±ÈÈüÊ±¼ä»¹Ê£%d·ÖÖÓ£¬±¾´Î±ÈÈü½±Æ·Îª:±àºÅ:%d,ÎïÆ·:%s",autopktime-2,awarditemid,awarditem);
 		else if(awardpetid!=-1 && awarditemid!=-1)
-			sprintf(buf2,"è·ç¦»æˆªæ­¢å‚åŠ PKæ¯”èµ›æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼Œæœ¬æ¬¡æ¯”èµ›å¥–å“ä¸º:ç¼–å·:%d,å® ç‰©:%så’Œç¼–å·:%d,ç‰©å“:%s",autopktime-2,awardpetid,awardpet,awarditemid,awarditem);
+			sprintf(buf2,"¾àÀë½ØÖ¹²Î¼ÓPK±ÈÈüÊ±¼ä»¹Ê£%d·ÖÖÓ£¬±¾´Î±ÈÈü½±Æ·Îª:±àºÅ:%d,³èÎï:%sºÍ±àºÅ:%d,ÎïÆ·:%s",autopktime-2,awardpetid,awardpet,awarditemid,awarditem);
 		else
-			sprintf(buf2, "è·ç¦»æ­£å¼PKæ¯”èµ›æ—¶é—´è¿˜å‰©%dåˆ†é’Ÿï¼",autopktime);
+			sprintf(buf2, "¾àÀëÕıÊ½PK±ÈÈüÊ±¼ä»¹Ê£%d·ÖÖÓ£¡",autopktime);
 		AutoPk_PKSystemTalk(buf1, buf2);
 	}else if(autopktime==0){
 		int i,charaindex,num=0;
@@ -561,14 +561,14 @@ void AutoPk_PKSystemInfo()
 				}
 		}
 		if(num>1){
-			AutoPk_PKSystemTalk("æ¯”èµ›æ­£å¼å¼€å§‹å’¯ï¼","æ¯”èµ›æ­£å¼å¼€å§‹å’¯ï¼");
+			AutoPk_PKSystemTalk("±ÈÈüÕıÊ½¿ªÊ¼¿©£¡","±ÈÈüÕıÊ½¿ªÊ¼¿©£¡");
 		}else{
 			if(CHAR_CHECKINDEX(charaindex)){
 				int fl = 0, x = 0, y = 0;
 				CHAR_getElderPosition(CHAR_getInt(charaindex, CHAR_LASTTALKELDER), &fl, &x, &y);
 				CHAR_warpToSpecificPoint(charaindex, fl, x, y);
 			}
-			AutoPk_PKSystemTalk("ç”±äºå‚åŠ æ¯”èµ›äººæ•°è¿‡å°‘ï¼Œæ‰€ä»¥å–æ¶ˆæ¯”èµ›ï¼","ç”±äºå‚åŠ æ¯”èµ›äººæ•°è¿‡å°‘ï¼Œæ‰€ä»¥å–æ¶ˆæ¯”èµ›ï¼");
+			AutoPk_PKSystemTalk("ÓÉÓÚ²Î¼Ó±ÈÈüÈËÊı¹ıÉÙ£¬ËùÒÔÈ¡Ïû±ÈÈü£¡","ÓÉÓÚ²Î¼Ó±ÈÈüÈËÊı¹ıÉÙ£¬ËùÒÔÈ¡Ïû±ÈÈü£¡");
 		}
 	}
 }
@@ -614,7 +614,7 @@ void AutoPk_ChampionShipSet( char *cdkey, char *name, int winnum, int win )
 	if(win==0){
 		char token[64];
 		if(winnum>ship[0].winnum){
-			sprintf( token, "%sæ’åç¬¬ä¸€ï¼Œæ€äººæ€»æ•°%däººï¼", name, winnum);
+			sprintf( token, "%sÅÅÃûµÚÒ»£¬É±ÈË×ÜÊı%dÈË£¡", name, winnum);
 			AutoPk_PKSystemTalk(token,token);
 			if(strstr(ship[0].cdkey,cdkey) && strstr(ship[0].name,name)){
 				ship[0].winnum=winnum;
@@ -637,7 +637,7 @@ void AutoPk_ChampionShipSet( char *cdkey, char *name, int winnum, int win )
 				strcpy(ship[0].name, name);
 			}
 		}else if(winnum>ship[1].winnum){
-			sprintf( token, "%sæ’åç¬¬äºŒï¼Œæ€äººæ€»æ•°%däººï¼", name, winnum);
+			sprintf( token, "%sÅÅÃûµÚ¶ş£¬É±ÈË×ÜÊı%dÈË£¡", name, winnum);
 			AutoPk_PKSystemTalk(token,token);
 			if(strstr(ship[1].cdkey,cdkey) && strstr(ship[1].name,name)){
 				ship[1].winnum=winnum;
@@ -650,7 +650,7 @@ void AutoPk_ChampionShipSet( char *cdkey, char *name, int winnum, int win )
 				strcpy(ship[1].name, name);
 			}
 		}else if(winnum>ship[2].winnum){
-			sprintf( token, "%sæ’åç¬¬ä¸‰ï¼Œæ€äººæ€»æ•°%däººï¼", name, winnum);
+			sprintf( token, "%sÅÅÃûµÚÈı£¬É±ÈË×ÜÊı%dÈË£¡", name, winnum);
 			AutoPk_PKSystemTalk(token,token);
 			ship[2].winnum=winnum;
 			strcpy(ship[2].cdkey, cdkey);
@@ -671,18 +671,18 @@ void AutoPk_GetChampionShip( void )
 {
 	char token[64];
 	if(strlen(ship[0].cdkey)>0){
-		sprintf( token, "æ­å–œ%sè·å¾—æœ¬æ¬¡PKæ¯”èµ›å† å†›ï¼Œæ€äººæ€»æ•°%däººï¼", ship[0].name, ship[0].winnum);
+		sprintf( token, "¹§Ï²%s»ñµÃ±¾´ÎPK±ÈÈü¹Ú¾ü£¬É±ÈË×ÜÊı%dÈË£¡", ship[0].name, ship[0].winnum);
 		AutoPk_PKSystemTalk(token,token);
 	}
 	if(strlen(ship[1].cdkey)>0){
-		sprintf( token, "æ­å–œ%sè·å¾—æœ¬æ¬¡PKæ¯”èµ›äºšå†›ï¼Œæ€äººæ€»æ•°%däººï¼", ship[1].name, ship[1].winnum);
+		sprintf( token, "¹§Ï²%s»ñµÃ±¾´ÎPK±ÈÈüÑÇ¾ü£¬É±ÈË×ÜÊı%dÈË£¡", ship[1].name, ship[1].winnum);
 		AutoPk_PKSystemTalk(token,token);
 	}
 	if(strlen(ship[2].cdkey)>0){
-		sprintf( token, "æ­å–œ%sè·å¾—æœ¬æ¬¡PKæ¯”èµ›å­£å†›ï¼Œæ€äººæ€»æ•°%däººï¼", ship[2].name, ship[2].winnum);
+		sprintf( token, "¹§Ï²%s»ñµÃ±¾´ÎPK±ÈÈü¼¾¾ü£¬É±ÈË×ÜÊı%dÈË£¡", ship[2].name, ship[2].winnum);
 		AutoPk_PKSystemTalk(token,token);
 	}
-	sprintf( token, "æ­å–œ%så’Œ%sè·å¾—æœ¬æ¬¡PKæ¯”èµ›ä¼˜èƒœå¥–ï¼", ship[3].name,ship[4].name);
+	sprintf( token, "¹§Ï²%sºÍ%s»ñµÃ±¾´ÎPK±ÈÈüÓÅÊ¤½±£¡", ship[3].name,ship[4].name);
 	AutoPk_PKSystemTalk(token,token);
 	
 	AutoPk_SetHistoryStr();
@@ -697,7 +697,7 @@ BOOL AutoPk_AddItem( int charindex, int index )
 	int spaceNum=5,i,itemindex=-1;
   itemindex = CHAR_findEmptyItemBox( charindex );
 	if( itemindex < 0 )	{
-		CHAR_talkToCli( charindex, -1, "ç‰©å“æ ç©ºé—´ä¸è¶³ï¼ï¼",  CHAR_COLORYELLOW);
+		CHAR_talkToCli( charindex, -1, "ÎïÆ·À¸¿Õ¼ä²»×ã£¡£¡",  CHAR_COLORYELLOW);
 		return FALSE;
 	}
 
@@ -710,7 +710,7 @@ BOOL AutoPk_AddItem( int charindex, int index )
 		print ("\n ret error!!");
 		return FALSE;
 	}
-	sprintf( msgbuf,"æ‹¿åˆ°%s",ITEM_getChar( itemindex, ITEM_NAME));
+	sprintf( msgbuf,"ÄÃµ½%s",ITEM_getChar( itemindex, ITEM_NAME));
 	CHAR_talkToCli( charindex, -1, msgbuf, CHAR_COLORYELLOW );
 	CHAR_sendItemDataOne( charindex, ret);
 	return TRUE;
@@ -731,7 +731,7 @@ BOOL AutoPk_AddPet( int charindex, int index)
 	}
 
   if( i == CHAR_MAXPETHAVE )      {
-		snprintf( msgbuf,sizeof( msgbuf), "å® ç‰©å·²æ»¡ï¼ï¼");
+		snprintf( msgbuf,sizeof( msgbuf), "³èÎïÒÑÂú£¡£¡");
 		CHAR_talkToCli( charindex, -1, msgbuf,  CHAR_COLORYELLOW);
 		return FALSE;
 	}
@@ -755,7 +755,7 @@ BOOL AutoPk_AddPet( int charindex, int index)
 	petindex2 = CHAR_getCharPet(charindex, i);
 	if( !CHAR_CHECKINDEX( petindex2) )
 		return FALSE;
-	snprintf( msgbuf,sizeof( msgbuf), "æ‹¿åˆ°%sã€‚", CHAR_getChar(petindex2,CHAR_NAME));
+	snprintf( msgbuf,sizeof( msgbuf), "ÄÃµ½%s¡£", CHAR_getChar(petindex2,CHAR_NAME));
 	CHAR_talkToCli( charindex, -1, msgbuf,  CHAR_COLORYELLOW);
 	CHAR_setInt(petindex2,CHAR_VARIABLEAI,10000);
 	for(j = 0; j < CHAR_MAXPETHAVE; j++){
@@ -780,7 +780,7 @@ void NPC_AUTOPKHealerTalked( int meindex )
 	{
 
 		NPC_HealerAllHeal( meindex);
-		CHAR_talkToCli( meindex, -1,"æ­å–œä½ è·èƒœï¼Œä½“åŠ›å·²å…¨éƒ¨å›å¤ã€‚",CHAR_COLORBLUE);
+		CHAR_talkToCli( meindex, -1,"¹§Ï²Äã»ñÊ¤£¬ÌåÁ¦ÒÑÈ«²¿»Ø¸´¡£",CHAR_COLORBLUE);
 	}else{
 		int i = 0;
 		int otherindex;
@@ -791,7 +791,7 @@ void NPC_AUTOPKHealerTalked( int meindex )
 			if(otherindex != -1){
 
 				NPC_HealerAllHeal( otherindex);
-				CHAR_talkToCli( otherindex, -1,"æ­å–œä½ è·èƒœï¼Œä½“åŠ›å·²å…¨éƒ¨å›å¤ã€‚",CHAR_COLORBLUE);
+				CHAR_talkToCli( otherindex, -1,"¹§Ï²Äã»ñÊ¤£¬ÌåÁ¦ÒÑÈ«²¿»Ø¸´¡£",CHAR_COLORBLUE);
 			}
 		}
 	}
@@ -806,7 +806,7 @@ BOOL AutoPk_GetAwardStr( void )
 	fp = fopen("./data/autopk/autopkaward.txt", "r");
 	if (fp == NULL)
 	{
-		print("æŸ¥çœ‹æ¯”èµ›å¥–å“æ–‡ä»¶æ‰“å¼€é”™è¯¯\n");
+		print("²é¿´±ÈÈü½±Æ·ÎÄ¼ş´ò¿ª´íÎó\n");
 		return FALSE;
 	}
 	for(i=0;i<5;i++){

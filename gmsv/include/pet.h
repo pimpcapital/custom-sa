@@ -2,13 +2,13 @@
 #define __PET_H__
 
 /*
- * çŸ¢æ°¸ç„æ¥®  åŠæ¶©çƒ‚åŒ¹å…ï¼»
+ * Ê¸ÓÀĞşèú  ¼°É¬ÀÃÆ¥ÔÊ£Û
  */
 #include "version.h"
 #include "common.h"
 
-#define PETFEEDTIME	60*60	// å® ç‰©è›‹å–‚å…»æ—¶é—´(ç§’)
-//#define PETFEEDTIME	5	// å® ç‰©è›‹å–‚å…»æ—¶é—´(ç§’)
+#define PETFEEDTIME	60*60	// ³èÎïµ°Î¹ÑøÊ±¼ä(Ãë)
+//#define PETFEEDTIME	5	// ³èÎïµ°Î¹ÑøÊ±¼ä(Ãë)
 
 int PET_DEBUG_initPetOne( int charaindex);
 int PET_dropPet( int charaindex, int havepetindex);

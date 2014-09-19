@@ -20,25 +20,25 @@
 #include "npc_bus.h"
 #include "char_talk.h"
 
-#define TRADE_WAIT		"è¯·ç¨å€™ï¼Œè¿ç»œ%sä¸­Â·Â·Â·"
-#define TRADE_NONE		"å‰æ–¹ä»€éº½äººä¹Ÿæ²¡æœ‰ï¼"
-#define	TRADE_OVERPLAYER	"å‰æ–¹ä¸åªä¸€ä½ç©å®¶å–”ï¼"
-#define	TRADE_NOWILL		"çœŸæ˜¯æŠ±æ­‰ï¼Œå¯¹æ–¹ä¸æ„¿æ„è·Ÿä½ äº¤æ˜“ï¼"
-#define	TRADE_TRADING		"%sæ­£åœ¨ä¸å…¶ä»–äººäº¤æ˜“Â·Â·Â·"
-#define	TRADE_VANISHITEM	"ä¸¢åœ¨åœ°ä¸Šä¼šæ¶ˆå¤±çš„ç‰©å“æ— æ³•äº¤æ˜“ï¼"
-#define TRADE_PETFULL		"%så® ç‰©æ å·²æ»¡ï¼Œäº¤æ˜“å–æ¶ˆï¼"
-#define	TRADE_ITEMFULL		"%sç‰©å“æ å·²æ»¡ï¼Œè¯·æ•´ç†å¾Œå†äº¤æ˜“ï½"
-#define TRADE_CANCEL		"%så°†äº¤æ˜“å–æ¶ˆäº†ï¼"
-#define TRADE_POOR		"%sé’±ä¸å¤Ÿï¼Œæ— æ³•äº¤æ˜“ï¼"
-#define	TRADE_RICH		"%sé‡‘é’±äº¤æ˜“è¯·å‹¿è¶…è¿‡ä¸€ç™¾ä¸‡ï¼"
-#define TRADE_TOORICH		"%sé‡‘é’±å°†ä¼šè¶…è¿‡ä¸€ç™¾ä¸‡ï¼"
-#define TRADE_POORLV		"%sç­‰çº§ä¸å¤Ÿï¼Œæ— æ³•ç…§é¡¾äº¤æ˜“å¾Œçš„å® ç‰©ï¼"
-#define	TRADE_LOCK		"äº¤æ˜“é”å®šÂ·Â·Â·"
-#define	TRADE_SUCCESS		"äº¤æ˜“ï¼¯ï¼«ï¼"
-#define	TRADE_FAILED		"äº¤æ˜“å¤±è´¥ï¼"
-#define TRADE_FMPET		"å®¶æ—å®ˆæŠ¤å…½æ— æ³•äº¤æ˜“ï¼"
+#define TRADE_WAIT		"ÇëÉÔºò£¬Á¬Âç%sÖĞ¡¤¡¤¡¤"
+#define TRADE_NONE		"Ç°·½Ê²÷áÈËÒ²Ã»ÓĞ£¡"
+#define	TRADE_OVERPLAYER	"Ç°·½²»Ö»Ò»Î»Íæ¼Òà¸£¡"
+#define	TRADE_NOWILL		"ÕæÊÇ±§Ç¸£¬¶Ô·½²»Ô¸Òâ¸úÄã½»Ò×£¡"
+#define	TRADE_TRADING		"%sÕıÔÚÓëÆäËûÈË½»Ò×¡¤¡¤¡¤"
+#define	TRADE_VANISHITEM	"¶ªÔÚµØÉÏ»áÏûÊ§µÄÎïÆ·ÎŞ·¨½»Ò×£¡"
+#define TRADE_PETFULL		"%s³èÎïÀ¸ÒÑÂú£¬½»Ò×È¡Ïû£¡"
+#define	TRADE_ITEMFULL		"%sÎïÆ·À¸ÒÑÂú£¬ÇëÕûÀíááÔÙ½»Ò×¡«"
+#define TRADE_CANCEL		"%s½«½»Ò×È¡ÏûÁË£¡"
+#define TRADE_POOR		"%sÇ®²»¹»£¬ÎŞ·¨½»Ò×£¡"
+#define	TRADE_RICH		"%s½ğÇ®½»Ò×ÇëÎğ³¬¹ıÒ»°ÙÍò£¡"
+#define TRADE_TOORICH		"%s½ğÇ®½«»á³¬¹ıÒ»°ÙÍò£¡"
+#define TRADE_POORLV		"%sµÈ¼¶²»¹»£¬ÎŞ·¨ÕÕ¹Ë½»Ò×ááµÄ³èÎï£¡"
+#define	TRADE_LOCK		"½»Ò×Ëø¶¨¡¤¡¤¡¤"
+#define	TRADE_SUCCESS		"½»Ò×£Ï£Ë£¡"
+#define	TRADE_FAILED		"½»Ò×Ê§°Ü£¡"
+#define TRADE_FMPET		"¼Ò×åÊØ»¤ÊŞÎŞ·¨½»Ò×£¡"
 
-#define TRADE_RDCANCEL	"äº¤æ˜“å–æ¶ˆï¼"
+#define TRADE_RDCANCEL	"½»Ò×È¡Ïû£¡"
 
 enum{
 	TRADE_ITEM=0,
@@ -77,7 +77,7 @@ BOOL TRADE_HandlePet( int meindex, int showindex, char *message, char *outmess);
 void CHAR_Trade(int fd, int index, char* message)
 {
    char		firstToken[64];
-   // shan ä»¥ä¸‹æ³¨æ‰æ˜¯ä¸å¿…è¦çš„åŠ¨ä½œ  2002/03/05
+   // shan ÒÔÏÂ×¢µôÊÇ²»±ØÒªµÄ¶¯×÷  2002/03/05
    //char		messageeraseescape[512];
    char*	messagebody;
    {   		
@@ -85,13 +85,13 @@ void CHAR_Trade(int fd, int index, char* message)
 	    if (!CHAR_CHECKINDEX(index))	return;
 	   	CHAR_getMessageBody( message, firstToken, sizeof(firstToken), &messagebody);
 			switch( tolower( firstToken[0]) ){
-			  case 'd':	// å¯»æ‰¾å‰æ–¹ç©å®¶
+			  case 'd':	// Ñ°ÕÒÇ°·½Íæ¼Ò
 					TRADE_Search(fd, index, message);
 			   	break;  
-				case 't':	// æ˜¾ç¤ºäº¤æ˜“çš„ç‰©å“ã€é‡‘é’±ã€å® ç‰©
+				case 't':	// ÏÔÊ¾½»Ò×µÄÎïÆ·¡¢½ğÇ®¡¢³èÎï
 			   	TRADE_ShowItem(fd, index, message);
 			   	break;
-			  case 'w':	// å…³é—­äº¤æ˜“
+			  case 'w':	// ¹Ø±Õ½»Ò×
 					TRADE_Close(fd, index, message);
 			   	break;
 			  default:
@@ -111,12 +111,12 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
 
    if (!CHAR_CHECKINDEX(meindex))	return FALSE;
 
-   // è‹¥ç©å®¶çŠ¶æ€ä¸ºäº¤æ˜“ä¸­æˆ–äº¤æ˜“é”å®šä¸­åˆ™ä¸äºˆå¤„ç†
+   // ÈôÍæ¼Ò×´Ì¬Îª½»Ò×ÖĞ»ò½»Ò×Ëø¶¨ÖĞÔò²»Óè´¦Àí
    if (CHAR_getWorkInt(meindex, CHAR_WORKTRADEMODE) == CHAR_TRADE_TRADING
    	|| CHAR_getWorkInt(meindex, CHAR_WORKTRADEMODE) == CHAR_TRADE_LOCK)
    		return FALSE;
 
-   // è‹¥ç©å®¶çŠ¶æ€ä¸ºç»„é˜Ÿæˆ–æˆ˜æ–—ä¸­åˆ™ä¸äºˆå¤„ç†
+   // ÈôÍæ¼Ò×´Ì¬Îª×é¶Ó»òÕ½¶·ÖĞÔò²»Óè´¦Àí
    if ((CHAR_getWorkInt(meindex, CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE)
    	|| (CHAR_getWorkInt(meindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE))
    		return FALSE;
@@ -124,7 +124,7 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
 
    if (getStringFromIndexWithDelim(message, "|", 2, token,
 	sizeof(token)) == FALSE)	return FALSE;
-   // è®¾å®šçŠ¶æ€äº¤æ˜“è¯·æ±‚ä¸­
+   // Éè¶¨×´Ì¬½»Ò×ÇëÇóÖĞ
 //   CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_SENDING);
    
 	for (i = 0; i < CONNECT_WINDOWBUFSIZE; i++)
@@ -136,7 +136,7 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
 
 	found_count = CHAR_getSameCoordinateObjects( objbuf, arraysizeof(objbuf),
 							CHAR_getInt(meindex, CHAR_FLOOR),front_x, front_y);
-	// å‰æ–¹æ²¡æœ‰ç©å®¶æˆ–å¯¹æ–¹å…³é—­äº¤æ˜“é€‰é¡¹
+	// Ç°·½Ã»ÓĞÍæ¼Ò»ò¶Ô·½¹Ø±Õ½»Ò×Ñ¡Ïî
 	if (found_count == 0){
 		CHAR_talkToCli(meindex, -1, TRADE_NONE, CHAR_COLORYELLOW);
 		CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
@@ -171,7 +171,7 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
 	}
 
 	if (cnt == 0){
-		// å‰æ–¹æ²¡æœ‰ç©å®¶æˆ–å¯¹æ–¹å…³é—­äº¤æ˜“é€‰é¡¹
+		// Ç°·½Ã»ÓĞÍæ¼Ò»ò¶Ô·½¹Ø±Õ½»Ò×Ñ¡Ïî
 		if (found){
 			CHAR_talkToCli(meindex, -1, TRADE_NOWILL, CHAR_COLORYELLOW);
 		}else
@@ -181,7 +181,7 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
 		CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
 		return FALSE;
 	}
-	// å‰æ–¹æœ‰ä¸€ä½ç©å®¶
+	// Ç°·½ÓĞÒ»Î»Íæ¼Ò
 	if (cnt == 1){
 		int toindex;
 		toindex = CONNECT_getCharaindex(tofd);
@@ -203,7 +203,7 @@ BOOL TRADE_Search(int fd, int meindex, char* message)
         CHAR_sendTradeEffect(meindex, 1);
         CHAR_sendTradeEffect(toindex, 1);
         return TRUE;
-   }else if (cnt > 1){	// å‰æ–¹ä¸åªä¸€ä½ç©å®¶
+   }else if (cnt > 1){	// Ç°·½²»Ö»Ò»Î»Íæ¼Ò
 		CHAR_talkToCli(meindex, -1, TRADE_OVERPLAYER, CHAR_COLORYELLOW);
 //		sprintf(msgbuf, "C|%d|%s|0", tofd, tocharaname);
 		CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
@@ -292,7 +292,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
    toindex = CONNECT_getCharaindex(tofd);
 
    if (!CHAR_CHECKINDEX(toindex))       return;
-   // è‹¥ç©å®¶çŠ¶æ€ä¸ºç»„é˜Ÿæˆ–æˆ˜æ–—ä¸­åˆ™ä¸äºˆå¤„ç†
+   // ÈôÍæ¼Ò×´Ì¬Îª×é¶Ó»òÕ½¶·ÖĞÔò²»Óè´¦Àí
    if ((CHAR_getWorkInt(meindex, CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE)
    	|| (CHAR_getWorkInt(meindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE))
    		return;
@@ -330,7 +330,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 				print(" TRADE_Close_Err4:%d,%d,%s,%s ", meindex, showindex, message, buf1);
 				TRADE_Close(fd, meindex, message);
 				return;
-			}else{// å°†æ¬²äº¤æ˜“ä¹‹é‡‘é’±ä¼ ç»™å¯¹æ–¹
+			}else{// ½«Óû½»Ò×Ö®½ğÇ®´«¸ø¶Ô·½
 				snprintf(msg, sizeof(msg), "T|%d|%s|G|%d|%s", fd, mycharaname, showindex, buf1);
 				lssproto_TD_send( tofd, -1, msg);
 			}
@@ -353,14 +353,14 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
    	case 'k':
    	{
 	    if((CONNECT_get_confirm(fd)==TRUE) &&
-						(CONNECT_get_confirm(tofd)==TRUE) ){//å½“åŒæ–¹éƒ½æŒ‰ä¸‹ lock
+						(CONNECT_get_confirm(tofd)==TRUE) ){//µ±Ë«·½¶¼°´ÏÂ lock
 				if( CHAR_getWorkInt(meindex, CHAR_WORKTRADEMODE) == CHAR_TRADE_LOCK ){
 					//andy_log
-					print("ANDY err é˜²æ­¢ç¬¬äºŒæ¬¡è¿›å…¥!!\n");
-					return;//é˜²æ­¢ç¬¬äºŒæ¬¡è¿›å…¥
+					print("ANDY err ·ÀÖ¹µÚ¶ş´Î½øÈë!!\n");
+					return;//·ÀÖ¹µÚ¶ş´Î½øÈë
 				}
 				CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_LOCK);
-				//æ£€æŸ¥å¯¹æ–¹æ˜¯å¦æŒ‰ä¸‹ ok
+				//¼ì²é¶Ô·½ÊÇ·ñ°´ÏÂ ok
 //				if( CHAR_getWorkInt( toindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_LOCK )return;
 			
 				snprintf(msg, sizeof(msg), "T|%d|%s|A", fd, mycharaname);
@@ -491,7 +491,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
    CONNECT_getTradeTmp(fd, itembuf, sizeof(itembuf));
    CONNECT_getTradeTmp(tofd, toitembuf, sizeof(toitembuf));
 
-   // æ¯”å¯¹åŒæ–¹ä¹‹æœ€å¾Œäº¤æ˜“åå®š
+   // ±È¶ÔË«·½Ö®×îáá½»Ò×Ğ­¶¨
    if (getStringFromIndexWithDelim(itembuf, "|", 5, token, sizeof(token)) == TRUE)
 	   	strcpy(a, token);
    if (getStringFromIndexWithDelim(itembuf, "|", 6, token, sizeof(token)) == TRUE)
@@ -542,7 +542,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
    if (getStringFromIndexWithDelim(toitembuf, "|", 16, token, sizeof(token)) == TRUE)
 		toitemindex6 = atoi(token);
 
-   // shan hjj add æ´—é“å…·
+   // shan hjj add Ï´µÀ¾ß
    if (itemindex1==itemindex2){
         if (itemindex1!=-1){
             return -1;
@@ -560,7 +560,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
    	&& (itemindex3 == toitemindex6) && (itemindex4 == toitemindex1)
    	&& (itemindex5 == toitemindex2) && (itemindex6 == toitemindex3))
    {
-   	// æ£€éªŒåŒæ–¹ç‰©å“æ æ˜¯å¦æœ‰ç©ºä½
+   	// ¼ìÑéË«·½ÎïÆ·À¸ÊÇ·ñÓĞ¿ÕÎ»
 	if ((strcmp(a, "I") == 0) && (itemindex1 != -1)){
 		swapitem1--;
 		swapitem2++;
@@ -583,7 +583,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
 	if (!CHAR_CHECKINDEX(toindex))       return -1;
 	if (swapitem2 > CHAR_findTotalEmptyItem(toindex))
 		return	-3;
-	// æ£€æŸ¥åŒæ–¹é‡‘é’±
+	// ¼ì²éË«·½½ğÇ®
 	if ((strcmp(a, "G") == 0) && (itemindex1 != -1))	gold1 += itemindex1;
 	if ((strcmp(b, "G") == 0) && (itemindex2 != -1))	gold1 += itemindex2;
 	if ((strcmp(d, "G") == 0) && (itemindex4 != -1))	gold2 += itemindex4;
@@ -594,7 +594,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
 	if (gold2 > CHAR_getInt(toindex, CHAR_GOLD))	return	-7;
 	if ((gold2 + CHAR_getInt(meindex, CHAR_GOLD) - gold1) > CHAR_getMaxHaveGold( meindex) )	return	-8;
 	if ((gold1 + CHAR_getInt(toindex, CHAR_GOLD) - gold2) > CHAR_getMaxHaveGold( toindex))	return	-9;
-	// æ£€æŸ¥åŒæ–¹å® ç‰©	
+	// ¼ì²éË«·½³èÎï	
 	if ((strcmp(c, "P") == 0) && (itemindex3 != -1))
 	{
 		pet1--;	pet2++;
@@ -662,7 +662,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
 	TRADE_ChangeItem(meindex, toindex, c, f, pet3, pet6,
 		itemindex3, itemindex6);
 
-	// å†™å…¥ trade.log
+	// Ğ´Èë trade.log
 	{
 		char petname1[256], petname2[256];
 		int pet1lv, pet2lv;
@@ -717,10 +717,10 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    int gold1 = 0, gold2 = 0, eptitem = -1;
    if (CHAR_CHECKINDEX(meindex) == FALSE)	return FALSE;
    if (CHAR_CHECKINDEX(toindex) == FALSE)	return FALSE;
-   // é“å…· <-> é“å…·
+   // µÀ¾ß <-> µÀ¾ß
    if ((strcmp(a, "I") == 0) && (strcmp(b, "I") == 0))
    {
-   	// æ—  <-> é“å…·
+   	// ÎŞ <-> µÀ¾ß
    	if ((itemindex1 == -1) && (itemindex2 > 0))
    	{
    	   if (ITEM_CHECKINDEX(item2) == FALSE)	return FALSE;
@@ -731,7 +731,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	   ITEM_setWorkInt(item2, ITEM_WORKOBJINDEX, -1);
    	   CHAR_setItemIndex(toindex, itemindex2, -1);
    	}
-   	// é“å…· <-> æ— 
+   	// µÀ¾ß <-> ÎŞ
    	else if ((itemindex1 > 0) && (itemindex2 == -1))
    	{
    	   if (ITEM_CHECKINDEX(item1) == FALSE)	return FALSE;
@@ -742,7 +742,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	   ITEM_setWorkInt(item1, ITEM_WORKOBJINDEX, -1);
    	   CHAR_setItemIndex(meindex, itemindex1, -1);
    	}
-   	// é“å…· <-> é“å…·
+   	// µÀ¾ß <-> µÀ¾ß
    	else if (itemindex1 > 0 && itemindex2 > 0)
    	{
    	   if (ITEM_CHECKINDEX(item1) == FALSE)	return FALSE;
@@ -755,7 +755,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	   CHAR_setItemIndex(meindex, itemindex1, item2);
    	}
    }
-   // é“å…· <-> é‡‘é’±
+   // µÀ¾ß <-> ½ğÇ®
    else if ((strcmp(a, "I") == 0) && (strcmp(b, "G") == 0))
    {
    	if (itemindex1 > 0)
@@ -776,7 +776,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	gold2 -= itemindex2;
    	CHAR_setInt(toindex, CHAR_GOLD, gold2);
    }
-   // é‡‘é’± <-> é“å…·
+   // ½ğÇ® <-> µÀ¾ß
    else if ((strcmp(a, "G") == 0) && (strcmp(b, "I") == 0))
    {
    	if (itemindex2 > 0)
@@ -797,7 +797,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	gold2 += itemindex1;
    	CHAR_setInt(toindex, CHAR_GOLD, gold2);
    }
-   // é‡‘é’± <-> é‡‘é’±
+   // ½ğÇ® <-> ½ğÇ®
    else if ((strcmp(a, "G") == 0) && (strcmp(b, "G") == 0))
    {
    	if (itemindex1 < 0)	itemindex1 = 0;
@@ -809,7 +809,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    	gold2 = gold2 + itemindex2 - itemindex1;
    	CHAR_setInt(meindex, CHAR_GOLD, gold2);
    }
-   // å® ç‰© <-> å® ç‰©
+   // ³èÎï <-> ³èÎï
    else if ((strcmp(a, "P") == 0) && (strcmp(b, "P") == 0))
    {
 	char category[8];
@@ -902,7 +902,7 @@ BOOL TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess)
 
 		strcpy( itemname, ITEM_getChar(itemindex, ITEM_SECRETNAME));//ITEM_NAME
 		crushe	= ITEM_getItemDamageCrusheED( itemindex);
-		sprintf( token, "ä¸ä¼šæŸå");
+		sprintf( token, "²»»áËğ»µ");
 		if( crushe >= 0 ) snprintf( token, sizeof(token), "%d%%", crushe );
 		sprintf( outmess, "%d|%s|%s|%d|%s",
 	   					ITEM_getInt( itemindex, ITEM_BASEIMAGENUMBER),

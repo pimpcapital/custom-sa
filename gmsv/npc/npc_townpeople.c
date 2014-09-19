@@ -11,7 +11,7 @@
 
 
 /*
- *  å¼•åˆ‡åŠå¤«åˆå¤ªåˆ  by nakamura
+ *  ÒıÇĞ¼°·òÎçÌ«Îç  by nakamura
  *
  *
  */
@@ -30,7 +30,7 @@ void NPC_TownPeopleTalked( int index, int talker, char *msg, int color )
         NPC_Util_GetArgStr( index, arg, sizeof( arg));
 
         tokennum = 1;
-        /* æˆŠä»¶ç©´åŒ¹å—‰æ¿ æ—¥æœ¨å‡¶ç„â–¡å¼ä»¶äº’çª’ä»‡ä¸æœˆäº•é†’å°¹æœˆ */
+        /* Îì¼şÑ¨Æ¥à¼å©ÈÕÄ¾Ğ×Ğş¡õÛÍ¼ş»¥ÖÏ³ğØ¤ÔÂ¾®ĞÑÒüÔÂ */
         for( i=0;arg[i]!='\0';i++ ){
             if( arg[i] == ',' ) tokennum++;
         }

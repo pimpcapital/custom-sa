@@ -14,7 +14,7 @@
 #include "handletime.h"
 #include "npc_eventaction.h"
 
-//ç‰¹åœ°ä»å¤©å ‚é«˜è–ªæŒ–è§’æ¥çš„"ä¼ é€å¸ˆ"
+//ÌØµØ´ÓÌìÌÃ¸ßĞ½ÍÚ½ÇÀ´µÄ"´«ËÍÊ¦"
 #ifdef _VIP_SHOP
 enum {
 	WINDOW_START=1,
@@ -223,7 +223,7 @@ BOOL VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token,int
 	int talkNo=index*7+1;
 	if( npcarg == NULL ) return FALSE;
 	
-	sprintf( token, "ä½ å½“å‰çš„ä¼šå‘˜ç‚¹æ•°æ˜¯:%d        %d/%dé¡µ\n",CHAR_getInt( toindex , CHAR_AMPOINT), index+1, page);
+	sprintf( token, "Äãµ±Ç°µÄ»áÔ±µãÊıÊÇ:%d        %d/%dÒ³\n",CHAR_getInt( toindex , CHAR_AMPOINT), index+1, page);
 	while( getStringFromIndexWithDelim( npcarg,"}",talkNo, buf1, sizeof( buf1)) != FALSE )	{
 		talkNo++;
 		memset( buf2, 0, sizeof( buf2));
@@ -233,7 +233,7 @@ BOOL VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token,int
 
 		sprintf( buf3, "    %s", buf2);
 		if(strlen(buf3)<10)
-			strcat( buf3, "ã€€ã€€ã€€\n");
+			strcat( buf3, "¡¡¡¡¡¡\n");
 		else
 			strcat( buf3, "\n");
 		strcat( token, buf3);
