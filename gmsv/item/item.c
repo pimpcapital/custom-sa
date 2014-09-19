@@ -191,7 +191,7 @@ static ITEM_intDataSetting ITEM_setintdata[ITEM_DATAINTNUM]={
 	{"arr",  0},					/*ITEM_MODIFYARRANGE*/
 	{"seqce",  0},					//ITEM_MODIFYSEQUENCE,
 	{"iapi", 0},					//ITEM_ATTACHPILE
-	{"hirt", 0},					//ITEM_HITRIGHT		//¶îÍâÃüÖĞ
+	{"hirt", 0},					//ITEM_HITRIGHT		//é¢å¤–å‘½ä¸­
 #endif
 
 #ifdef _ITEMSET6_TXT
@@ -453,7 +453,7 @@ BOOL ITEM_initExistItemsArray( int num )
 		memset( &ITEM_item[i], 0 , sizeof( ITEM_exists ));
 		ITEM_item[i].use = FALSE;
 	}
-	print("µÚ¶ş´Î·ÖÅä %4.2f MB ¿Õ¼ä...", sizeof( ITEM_exists ) * num /1024.0/1024.0);
+	print("ç¬¬äºŒæ¬¡åˆ†é… %4.2f MB ç©ºé—´...", sizeof( ITEM_exists ) * num /1024.0/1024.0);
 	return TRUE;
 }
 
@@ -515,7 +515,7 @@ int _ITEM_initExistItemsOne( char *file, int line, ITEM_Item* itm )
 			return Sindex;
 		}
 	}
-	fprint( "ÎïÆ·ÒÑÂú\n" );
+	fprint( "ç‰©å“å·²æ»¡\n" );
 	return -1;
 }
 
@@ -663,7 +663,7 @@ void* ITEM_getFunctionPointer( int itemindex, int functype )
 {
 	if( !ITEM_CHECKINDEX(itemindex) )return NULL;
 	if( functype < ITEM_FIRSTFUNCTION  || functype >= ITEM_LASTFUNCTION ){
-		print( "ÀàĞÍ´íÎó:%d\n", functype);
+		print( "ç±»å‹é”™è¯¯:%d\n", functype);
 		return NULL;
 	}
 	return ITEM_item[itemindex].itm.
@@ -1014,7 +1014,7 @@ BOOL ITEM_readItemConfFile( char* filename )
 
 	f = fopen(filename,"r");
 	if( f == NULL ){
-		print( "²»ÄÜ´ò¿ªÎÄ¼ş\n");
+		print( "ä¸èƒ½æ‰“å¼€æ–‡ä»¶\n");
 		return FALSE;
 	}
 #ifdef _ITEMSET2_ITEM
@@ -1036,7 +1036,7 @@ BOOL ITEM_readItemConfFile( char* filename )
 
 		ret = getStringFromIndexWithDelim( line, ",", ITEM_ID_TOKEN_INDEX, token, sizeof(token));
 		if( ret == FALSE ){
-			fprint("ÎÄ¼şÖÈĞò´íÎó:%s µÚ:%dĞĞ\n",filename,linenum);
+			fprint("æ–‡ä»¶ç§©åºé”™è¯¯:%s ç¬¬:%dè¡Œ\n",filename,linenum);
 			continue;
 		}
 		itemid = atoi( token);
@@ -1047,17 +1047,17 @@ BOOL ITEM_readItemConfFile( char* filename )
 	}
 
 	if( maxid <=0 ) {
-		print( "×î´óID´íÎó\n");
+		print( "æœ€å¤§IDé”™è¯¯\n");
 		fclose(f);
 		return FALSE;
 	}
 	
 	if( fseek( f, 0, SEEK_SET ) == -1 ){
-		fprint( "ËÑË÷´íÎó\n" );
+		fprint( "æœç´¢é”™è¯¯\n" );
 		fclose(f);
 		return FALSE;
 	}
-	print( "ÎïÆ·×î´óID %d...", maxid);
+	print( "ç‰©å“æœ€å¤§ID %d...", maxid);
 	ITEM_tblen = itemnum + 1;
 	ITEM_idxlen = maxid + 1;
 	if( ITEM_tbl != NULL )
@@ -1068,17 +1068,17 @@ BOOL ITEM_readItemConfFile( char* filename )
 	ITEM_idx = allocateMemory( sizeof(ITEM_index) * ITEM_idxlen );
 
 	if( ITEM_tbl == NULL ){
-		fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" , sizeof(ITEM_table)*ITEM_tblen );
+		fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" , sizeof(ITEM_table)*ITEM_tblen );
 		fclose( f );
 		return FALSE;
 	}
 	if( ITEM_idx == NULL ){
-		fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" , sizeof(ITEM_index)*ITEM_idxlen );
+		fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" , sizeof(ITEM_index)*ITEM_idxlen );
 		fclose( f );
 		return FALSE;
 	}
-	print("ITEM_tbl·ÖÅä %4.2f MB ¿Õ¼ä...", sizeof(ITEM_table) * ITEM_tblen /1024.0/1024.0);
-	print("ITEM_idx·ÖÅä %4.2f MB ¿Õ¼ä...", sizeof(ITEM_index) * ITEM_idxlen /1024.0/1024.0);
+	print("ITEM_tblåˆ†é… %4.2f MB ç©ºé—´...", sizeof(ITEM_table) * ITEM_tblen /1024.0/1024.0);
+	print("ITEM_idxåˆ†é… %4.2f MB ç©ºé—´...", sizeof(ITEM_index) * ITEM_idxlen /1024.0/1024.0);
 	
 	for( i = 0 ; i < ITEM_idxlen ; i ++ ) {
 		ITEM_idx[i].use = FALSE;
@@ -1398,7 +1398,7 @@ void ITEM_equipEffect( int index )
 		{ ITEM_MODIFYDEFENCE,	CHAR_WORKDEFENCEPOWER,	-100,	0,	EQUIP_FIX_MAX,	0},
 		{ ITEM_MODIFYQUICK,		CHAR_WORKQUICK,			-100,	0,	EQUIP_FIX_MAX,	0},
 		{ ITEM_MODIFYHP,		CHAR_WORKMAXHP,			0,	0,	EQUIP_FIX_MAX,	0},
-		{ ITEM_MODIFYMP,        CHAR_WORKMAXMP,			0,	0,	1000,	0}, // MP ·´100ÒıÆ¥
+		{ ITEM_MODIFYMP,        CHAR_WORKMAXMP,			0,	0,	1000,	0}, // MP å100å¼•åŒ¹
 
 		{ ITEM_MODIFYLUCK,       CHAR_WORKFIXLUCK,	0,	1,	5,	0},
 		{ ITEM_MODIFYCHARM,      CHAR_WORKFIXCHARM,	0,	0,	100,	0},
@@ -1525,7 +1525,7 @@ void Other_DefcharWorkInt( int index)
 #endif//_SUIT_ITEM
 #ifdef _PETSKILL_SETDUCK
 	//profession fix
-	//Ê¹ÓÃ»Ø±ÜÕĞÊ½Ê±,»á½«·ÀÖµ¼õÈ¥30%È»ááÉè¶¨³É»Ø±ÜÖµ,Ææ¹ÖµÄÉè¶¨,Ò²Ôì³ÉÔ­±¾Éè¶¨µÄ»Ø±ÜÖµ¸úÃ»ÉèÒ»Ñù,Òò´ËÎÒ(Change)ÏÈ°ÑÕû¶ÎÄÃµô
+	//ä½¿ç”¨å›é¿æ‹›å¼æ—¶,ä¼šå°†é˜²å€¼å‡å»30%ç„¶å¾Œè®¾å®šæˆå›é¿å€¼,å¥‡æ€ªçš„è®¾å®š,ä¹Ÿé€ æˆåŸæœ¬è®¾å®šçš„å›é¿å€¼è·Ÿæ²¡è®¾ä¸€æ ·,å› æ­¤æˆ‘(Change)å…ˆæŠŠæ•´æ®µæ‹¿æ‰
 	/*if( CHAR_getWorkInt( index, CHAR_MYSKILLDUCK) > 0 ){
 		int mtgh = CHAR_getWorkInt( index, CHAR_WORKFIXTOUGH);
 		mtgh -= (mtgh*30)/100;
@@ -1583,7 +1583,7 @@ void Other_DefcharWorkInt( int index)
             CHAR_setWorkInt( index, CHAR_WORKWEAKEN, CHAR_getWorkInt( index, CHAR_WORKWEAKEN)-1);
 	}
 #endif
-#ifdef _MAGIC_BARRIER// vincent  ¾«Áé:Ä§ÕÏ
+#ifdef _MAGIC_BARRIER// vincent  ç²¾çµ:é­”éšœ
 	if( CHAR_getWorkInt( index, CHAR_WORKBARRIER) > 0){
             CHAR_setWorkInt( index, CHAR_WORKBARRIER, CHAR_getWorkInt( index, CHAR_WORKBARRIER) - 1);
 	}
@@ -1685,13 +1685,13 @@ int ITEM_isTargetValid( int charaindex, int itemindex, int toindex)
 	Myside = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLESIDE );
 	if ((toindex >= 0x0) && (toindex <= 0x13)) return 0;
 
-	if (toindex == 0x14) {//20 ÓÒÏÂÈ« 0
+	if (toindex == 0x14) {//20 å³ä¸‹å…¨ 0
 		if (itemtarget == ITEM_TARGET_ALLMYSIDE){
 			if( Myside == 0 )return 0;
 		}else if(itemtarget == ITEM_TARGET_ALLOTHERSIDE ){
 			if( Myside == 1 )return 0;
 		}
-	}else if (toindex == 0x15) {//21 ×óÉÏÈ« 1
+	}else if (toindex == 0x15) {//21 å·¦ä¸Šå…¨ 1
 		if (itemtarget == ITEM_TARGET_ALLMYSIDE){
 			if( Myside == 1 )return 0;
 		}else if( itemtarget == ITEM_TARGET_ALLOTHERSIDE ){
@@ -1719,7 +1719,7 @@ BOOL CHAR_CheckInItemForWares( int charaindex, int flg)
 			if( flg == 0 ){
 				return FALSE;
 			}
-			sprintf(token,"½»³ö%s",ITEM_getChar( itemindex, ITEM_NAME));
+			sprintf(token,"äº¤å‡º%s",ITEM_getChar( itemindex, ITEM_NAME));
 			CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 
 			CHAR_setItemIndex( charaindex, i ,-1);

@@ -13,16 +13,16 @@
 #define DUELPOINT_RATE	(0.1)
 
 enum{
-	BATTLE_MODE_NONE = 0,	// ÎÞÕ½¶·×´Ì¬
-	BATTLE_MODE_INIT,		// Õ½¶·³õÊ¼»¯
-	BATTLE_MODE_BATTLE,		// Õ½¶·ÖÐ
-	BATTLE_MODE_FINISH,		// Õ½¶·½áÊø
-	BATTLE_MODE_STOP,		// Õ½¶·½áÊø(Î´Ê¹ÓÃ)
-	BATTLE_MODE_WATCHBC,	// ¹ÛÕ½³õÊ¼»¯
-	BATTLE_MODE_WATCHPRE,	// ¹ÛÕ½(Ã»×÷ÓÃ)
-	BATTLE_MODE_WATCHWAIT,	// ¹ÛÕ½(Ã»×÷ÓÃ)
-	BATTLE_MODE_WATCHMOVIE, // ¹ÛÕ½(Ã»×÷ÓÃ)
-	BATTLE_MODE_WATCHAFTER, // ¹ÛÕ½(Ã»×÷ÓÃ)
+	BATTLE_MODE_NONE = 0,	// æ— æˆ˜æ–—çŠ¶æ€
+	BATTLE_MODE_INIT,		// æˆ˜æ–—åˆå§‹åŒ–
+	BATTLE_MODE_BATTLE,		// æˆ˜æ–—ä¸­
+	BATTLE_MODE_FINISH,		// æˆ˜æ–—ç»“æŸ
+	BATTLE_MODE_STOP,		// æˆ˜æ–—ç»“æŸ(æœªä½¿ç”¨)
+	BATTLE_MODE_WATCHBC,	// è§‚æˆ˜åˆå§‹åŒ–
+	BATTLE_MODE_WATCHPRE,	// è§‚æˆ˜(æ²¡ä½œç”¨)
+	BATTLE_MODE_WATCHWAIT,	// è§‚æˆ˜(æ²¡ä½œç”¨)
+	BATTLE_MODE_WATCHMOVIE, // è§‚æˆ˜(æ²¡ä½œç”¨)
+	BATTLE_MODE_WATCHAFTER, // è§‚æˆ˜(æ²¡ä½œç”¨)
 	BATTLE_MODE_END
 };
 
@@ -40,15 +40,15 @@ enum{
 
 
 enum{
-	BATTLE_CHARMODE_NONE = 0,		// ÎÞÕ½¶·×´Ì¬
-	BATTLE_CHARMODE_INIT,			// Õ½¶·³õÊ¼»¯
-	BATTLE_CHARMODE_C_WAIT,			// µÈ´ýÕ½¶·Ö¸Áî
-	BATTLE_CHARMODE_C_OK,			// ÒÑÊäÈëÕ½¶·Ö¸Áî
-	BATTLE_CHARMODE_BATTLE,			// Î´Ê¹ÓÃ
-	BATTLE_CHARMODE_RESCUE,			// ÓÉhelp×´Ì¬½øÈëµÄ
-	BATTLE_CHARMODE_FINAL,			// Õ½¶·½áÊø
-	BATTLE_CHARMODE_WATCHINIT,		// ¹ÛÕ½³õÊ¼»¯
-	BATTLE_CHARMODE_COMMAND,		// Î´Ê¹ÓÃ
+	BATTLE_CHARMODE_NONE = 0,		// æ— æˆ˜æ–—çŠ¶æ€
+	BATTLE_CHARMODE_INIT,			// æˆ˜æ–—åˆå§‹åŒ–
+	BATTLE_CHARMODE_C_WAIT,			// ç­‰å¾…æˆ˜æ–—æŒ‡ä»¤
+	BATTLE_CHARMODE_C_OK,			// å·²è¾“å…¥æˆ˜æ–—æŒ‡ä»¤
+	BATTLE_CHARMODE_BATTLE,			// æœªä½¿ç”¨
+	BATTLE_CHARMODE_RESCUE,			// ç”±helpçŠ¶æ€è¿›å…¥çš„
+	BATTLE_CHARMODE_FINAL,			// æˆ˜æ–—ç»“æŸ
+	BATTLE_CHARMODE_WATCHINIT,		// è§‚æˆ˜åˆå§‹åŒ–
+	BATTLE_CHARMODE_COMMAND,		// æœªä½¿ç”¨
 	BATTLE_CHARMODE_END
 };
 
@@ -110,14 +110,14 @@ typedef enum{
 	BATTLE_COM_S_CHARGE_OK,
 	BATTLE_COM_JYUJYUTU = 2000,
 
-	BATTLE_COM_COMPELESCAPE, //Ç¿ÖÆÀë¿ª
+	BATTLE_COM_COMPELESCAPE, //å¼ºåˆ¶ç¦»å¼€
 
 #ifdef _ATTACK_MAGIC
-  BATTLE_COM_S_ATTACK_MAGIC,		// ³èÎïÄ§·¨
+  BATTLE_COM_S_ATTACK_MAGIC,		// å® ç‰©é­”æ³•
 #endif
 
 #ifdef _PSKILL_FALLGROUND
-	BATTLE_COM_S_FALLRIDE,			//ÂäÂíÊõ
+	BATTLE_COM_S_FALLRIDE,			//è½é©¬æœ¯
 #endif
 #ifdef _PETSKILL_TIMID
 	BATTLE_COM_S_TIMID,
@@ -137,48 +137,48 @@ typedef enum{
 #ifdef _BATTLE_LIGHTTAKE
 	BATTLE_COM_S_LIGHTTAKE,
 #endif
-#ifdef _BATTLE_ATTCRAZED		// ANDY ·è¿ñ±©×ß
+#ifdef _BATTLE_ATTCRAZED		// ANDY ç–¯ç‹‚æš´èµ°
 	BATTLE_COM_S_ATTCRAZED,
 #endif
 #ifdef _BATTLESTEAL_FIX
 	BATTLE_COM_S_STEALMONEY,
 #endif
 #ifdef _PRO_BATTLEENEMYSKILL
-	BATTLE_COM_S_ENEMYRELIFE,		//NPC ENEMY ¸´»î¼¼ÄÜ
-	BATTLE_COM_S_ENEMYREHP,			//NPC ENEMY ²¹Ñª¼¼ÄÜ
-	BATTLE_COM_S_ENEMYHELP,			//NPC ENEMY ÕÐÈË
+	BATTLE_COM_S_ENEMYRELIFE,		//NPC ENEMY å¤æ´»æŠ€èƒ½
+	BATTLE_COM_S_ENEMYREHP,			//NPC ENEMY è¡¥è¡€æŠ€èƒ½
+	BATTLE_COM_S_ENEMYHELP,			//NPC ENEMY æ‹›äºº
 #endif
 #ifdef _SKILL_DAMAGETOHP
-	BATTLE_COM_S_DAMAGETOHP,		//ÊÈÑª¼¼
+	BATTLE_COM_S_DAMAGETOHP,		//å—œè¡€æŠ€
 #endif
 #ifdef _Skill_MPDAMAGE
-	BATTLE_COM_S_MPDAMAGE,			//MPÉËº¦
+	BATTLE_COM_S_MPDAMAGE,			//MPä¼¤å®³
 #endif
 #ifdef _SKILL_WILDVIOLENT_ATT
-    BATTLE_COM_S_WILDVIOLENTATTACK, //¿ñ±©¹¥»÷  vincent add 2002/05/16
+    BATTLE_COM_S_WILDVIOLENTATTACK, //ç‹‚æš´æ”»å‡»  vincent add 2002/05/16
 #endif
 
 #ifdef _SKILL_SPEEDY_ATT
-    BATTLE_COM_S_SPEEDYATTACK,		//¼²ËÙ¹¥»÷  vincent add 2002/05/20
+    BATTLE_COM_S_SPEEDYATTACK,		//ç–¾é€Ÿæ”»å‡»  vincent add 2002/05/20
 #endif
 #ifdef _SKILL_GUARDBREAK2
-    BATTLE_COM_S_GBREAK2,			//ÆÆ³ý·ÀÓù2 vincent add 2002/05/20
+    BATTLE_COM_S_GBREAK2,			//ç ´é™¤é˜²å¾¡2 vincent add 2002/05/20
 #endif
 #ifdef _SKILL_SACRIFICE
-    BATTLE_COM_S_SACRIFICE,			//¾ÈÔ®		vincent add 2002/05/30
+    BATTLE_COM_S_SACRIFICE,			//æ•‘æ´		vincent add 2002/05/30
 #endif
 #ifdef _SKILL_WEAKEN  
-	    BATTLE_COM_S_WEAKEN,		//ÐéÈõ		vincent add 2002/07/11
+	    BATTLE_COM_S_WEAKEN,		//è™šå¼±		vincent add 2002/07/11
 #endif
 #ifdef _SKILL_DEEPPOISON  
-	    BATTLE_COM_S_DEEPPOISON,	//¾ç¶¾		vincent add 2002/07/16
+	    BATTLE_COM_S_DEEPPOISON,	//å‰§æ¯’		vincent add 2002/07/16
 #endif
 #ifdef _SKILL_BARRIER  
-	    BATTLE_COM_S_BARRIER,		//Ä§ÕÏ		vincent add 2002/07/16
+	    BATTLE_COM_S_BARRIER,		//é­”éšœ		vincent add 2002/07/16
 #endif
 
 #ifdef _SKILL_ROAR 
-    BATTLE_COM_S_ROAR,			    //´óºð		vincent add 2002/07/11
+    BATTLE_COM_S_ROAR,			    //å¤§å¼		vincent add 2002/07/11
 #endif
 #ifdef _BATTLENPC_WARP_PLAYER
 	BATTLE_COM_WARP,                // npc warp player
@@ -207,10 +207,10 @@ typedef enum{
 #ifdef _MAGICPET_SKILL
 	BATTLE_COM_S_SETMAGICPET,
 #endif
-#ifdef _PET_SKILL_SARS				// WON ADD ¶¾É·ÂûÑÓ
+#ifdef _PET_SKILL_SARS				// WON ADD æ¯’ç…žè”“å»¶
 	BATTLE_COM_S_SARS,
 #endif
-#ifdef _SONIC_ATTACK				// WON ADD Òô²¨¹¥»÷
+#ifdef _SONIC_ATTACK				// WON ADD éŸ³æ³¢æ”»å‡»
 	BATTLE_COM_S_SONIC,
 	BATTLE_COM_S_SONIC2,
 #endif
@@ -231,7 +231,7 @@ typedef enum{
     BATTLE_COM_S_FIREKILL,
 #endif
 #ifdef _PETSKILL_DAMAGETOHP
-	BATTLE_COM_S_DAMAGETOHP2, //°µÔÂ¿ñÀÇ(ÊÈÑª¼¼µÄ±äÌå) 
+	BATTLE_COM_S_DAMAGETOHP2, //æš—æœˆç‹‚ç‹¼(å—œè¡€æŠ€çš„å˜ä½“) 
 #endif
 #ifdef _PETSKILL_BECOMEFOX
     BATTLE_COM_S_BECOMEFOX,
@@ -243,7 +243,7 @@ typedef enum{
     BATTLE_COM_S_SHOWMERCY,
 #endif
 #ifdef _PETSKILL_BATTLE_MODEL
-		BATTLE_COM_S_BATTLE_MODEL,		// ³èÎï¼¼ÄÜÕ½¶·Ä£×é
+		BATTLE_COM_S_BATTLE_MODEL,		// å® ç‰©æŠ€èƒ½æˆ˜æ–—æ¨¡ç»„
 #endif
 
 	BATTLE_COM_END
@@ -272,20 +272,20 @@ enum{
 #define BC_FLG_HIDE			(1<<9)
 #define BC_FLG_REVERSE		(1<<10)
 #ifdef _MAGIC_WEAKEN
-#define BC_FLG_WEAKEN		(1<<11) // ÐéÈõ
+#define BC_FLG_WEAKEN		(1<<11) // è™šå¼±
 #endif
 #ifdef _MAGIC_DEEPPOISON
-#define BC_FLG_DEEPPOISON	(1<<12) // ¾ç¶¾
+#define BC_FLG_DEEPPOISON	(1<<12) // å‰§æ¯’
 #endif
 #ifdef _MAGIC_BARRIER
-#define BC_FLG_BARRIER		(1<<13) // Ä§ÕÏ
+#define BC_FLG_BARRIER		(1<<13) // é­”éšœ
 #endif
 #ifdef _MAGIC_NOCAST
-#define BC_FLG_NOCAST		(1<<14) // ³ÁÄ¬
+#define BC_FLG_NOCAST		(1<<14) // æ²‰é»˜
 #endif
 
-#ifdef _PET_SKILL_SARS			// WON ADD ¶¾É·ÂûÑÓ
-#define BC_FLG_SARS			(1<<15) // ¶¾É·
+#ifdef _PET_SKILL_SARS			// WON ADD æ¯’ç…žè”“å»¶
+#define BC_FLG_SARS			(1<<15) // æ¯’ç…ž
 #endif
 
 #define BP_FLG_JOIN					(1<<0)
@@ -338,15 +338,15 @@ typedef struct
 
 typedef struct _Battle
 {
-	BOOL	use;	/* ÒøÔÈ»¯ÖÐÔÂ¾®Éýµ¤¾® */
-	int		battleindex; /* ÌïÐþ»ï  Ä¯ */
-	int		mode;	/* òØ»þ¼°¾ô  Æ¹¡õÓñ */
-	int		type;	/* ¾ô  ÕýÄÌÃó (0:É§éÙ)(1:DUEL)(2:Ê¾µ©¾ô) */
-	int		dpbattle;	/* DPÌïÐþ»ï¾®£¢ */
-	int		norisk;	/* ÉØÊÏÆ¥ÊÖØøµ©ÛÍ¼°  ÖÐÌïÐþ»ï¾®£¢ */
-	int		turn;	/* Õý¡õ¼þÐÑ */
-	int		timer;	/* Ëü¾ÞÄÌÐþî¿±åÒøµ¤ÕýÄÌÑ¨ */
-	int		leaderindex; /* ¾Þ¼þÊÐËü¼þÐþÃ«ËÚ³ðØÆÐ×Æ½ÅÒ·Â¼°ÄÌ¼þ·¸ÓÀÛÍµ© */
+	BOOL	use;	/* é“¶åŒ€åŒ–ä¸­æœˆäº•å‡ä¸¹äº• */
+	int		battleindex; /* ç”°çŽ„ä¼™  å¯ž */
+	int		mode;	/* èœ‡ç®•åŠçˆµ  ä¹’â–¡çŽ‰ */
+	int		type;	/* çˆµ  æ­£å¥¶çš¿ (0:éªšæ©˜)(1:DUEL)(2:ç¤ºæ—¦çˆµ) */
+	int		dpbattle;	/* DPç”°çŽ„ä¼™äº•ï¼‚ */
+	int		norisk;	/* éŸ¶æ°åŒ¹æ‰‹ä¼‰æ—¦å¼åŠ  ä¸­ç”°çŽ„ä¼™äº•ï¼‚ */
+	int		turn;	/* æ­£â–¡ä»¶é†’ */
+	int		timer;	/* å®ƒå·¨å¥¶çŽ„ç¾åžé“¶ä¸¹æ­£å¥¶ç©´ */
+	int		leaderindex; /* å·¨ä»¶å¸‚å®ƒä»¶çŽ„æ¯›ç²Ÿä»‡ä»„å‡¶å¹³ä¹“ä»¿åŠå¥¶ä»¶çŠ¯æ°¸å¼æ—¦ */
 #ifdef _AUTO_PK
 	char  leadercdkey[CDKEYLEN];
 	char  leadername[CHARNAMELEN];
@@ -354,12 +354,12 @@ typedef struct _Battle
 	char  rivalcdkey[CDKEYLEN];
 	char  rivalname[CHARNAMELEN];
 #endif
-	int		winside; /*   ØÇØÆÐ×ÈÓÄÌÓñ */
-	int		field_att;	/* °×Å«¡õ»ïÓñ¼°óìÁë */
-	int		att_count;	/* °×Å«¡õ»ïÓñ¼°óìÁë  ¼À  ¼°ÕýÄÌÑ¨ */
-	int		att_pow;	/* °×Å«¡õ»ïÓñ¼°óìÁë  ¼À  ¼°ÓÉ·¥¡õ */
+	int		winside; /*   åŽä»„å‡¶æ‰”å¥¶çŽ‰ */
+	int		field_att;	/* ç™½å¥´â–¡ä¼™çŽ‰åŠç®ªå²­ */
+	int		att_count;	/* ç™½å¥´â–¡ä¼™çŽ‰åŠç®ªå²­  ç¥­  åŠæ­£å¥¶ç©´ */
+	int		att_pow;	/* ç™½å¥´â–¡ä¼™çŽ‰åŠç®ªå²­  ç¥­  åŠç”±ä¼â–¡ */
 	int		field_no;
-	int		flg;		/* ±¸ÅË°×·Âºë */
+	int		flg;		/* å¤‡æ½˜ç™½ä»¿å¼˜ */
 	BATTLE_SIDE		Side[2];
 #ifdef _BATTLE_TIMESPEED
 	unsigned int CreateTime;
@@ -368,25 +368,25 @@ typedef struct _Battle
 	int flgTime;
 	
 #endif
-	int		iEntryBack[BATTLE_ENTRY_MAX*2];		// ó¡Õý¡õ¼þè¶  ½ñÄ¾»¯ÖÐÐ×¶ª¼þÌï¡õ
-	int		iEntryBack2[BATTLE_ENTRY_MAX*2];		// ó¡Õý¡õ¼þè¶  ½ñÄ¾»¯ÖÐÐ×¶ª¼þÌï¡õ
-	int		createindex;	/* ³ð¼°¾ô  Ã«×ÛÔ»ÇëØÆÐ×Æ½ÅÒ·ÂÄÌ¼þ·¸ÓÀÛÍµ©(NPCØ¦Éý) */
+	int		iEntryBack[BATTLE_ENTRY_MAX*2];		// èŸ†æ­£â–¡ä»¶ç“’  ä»Šæœ¨åŒ–ä¸­å‡¶ä¸¢ä»¶ç”°â–¡
+	int		iEntryBack2[BATTLE_ENTRY_MAX*2];		// èŸ†æ­£â–¡ä»¶ç“’  ä»Šæœ¨åŒ–ä¸­å‡¶ä¸¢ä»¶ç”°â–¡
+	int		createindex;	/* ä»‡åŠçˆµ  æ¯›ç»¼æ›°è¯·ä»„å‡¶å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦(NPCå…å‡) */
 	int    (*WinFunc)( int battleindex, int charaindex );
-	struct _Battle *pNext;		// ÆÝ¼°Æå¾ôºë»ï¡õÃó
-	struct _Battle *pBefore;	// ó¡¼°Æå¾ôºë»ï¡õÃó
+	struct _Battle *pNext;		// æˆšåŠæ£‹çˆµå¼˜ä¼™â–¡çš¿
+	struct _Battle *pBefore;	// èŸ†åŠæ£‹çˆµå¼˜ä¼™â–¡çš¿
 }BATTLE;
 
-#define BATTLE_FLG_FREEDP ( 1 << 0 )	//   ÆÍ»¯ÊÖ    Ó¼ÈÕØ¦ÖÐ
-#define BATTLE_FLG_CHARALOST   ( 1 << 1 )	// Æ½ÅÒ·Â»¥ÉØÊÏ·ÖÔ»  ØêÐ×Ô»ØÆ»¯ÖÐÔÂ
+#define BATTLE_FLG_FREEDP ( 1 << 0 )	//   ä»†åŒ–æ‰‹    è›¹æ—¥å…ä¸­
+#define BATTLE_FLG_CHARALOST   ( 1 << 1 )	// å¹³ä¹“ä»¿äº’éŸ¶æ°åˆ†æ›°  ä»ƒå‡¶æ›°ä»„åŒ–ä¸­æœˆ
 
 
 
-enum{	// Ïþ¼°field_att ±å  Ä¾ÔÂ°À
-	BATTLE_ATTR_NONE = 0,	//   óìÁë
-	BATTLE_ATTR_EARTH,		// »©
+enum{	// æ™“åŠfield_att åž  æœ¨æœˆè¢„
+	BATTLE_ATTR_NONE = 0,	//   ç®ªå²­
+	BATTLE_ATTR_EARTH,		// å“—
 	BATTLE_ATTR_WATER,		//   
-	BATTLE_ATTR_FIRE,		// ÉÜ
-	BATTLE_ATTR_WIND,		// ë®
+	BATTLE_ATTR_FIRE,		// ç»
+	BATTLE_ATTR_WIND,		// æ°˜
 	BATTLE_ATTR_END
 };
 
@@ -394,36 +394,36 @@ enum{	// Ïþ¼°field_att ±å  Ä¾ÔÂ°À
 //krynn 2001/12/28
 enum
 {
-	BATTLE_SIDE_RIGHT,		// Õ½¶·ÖÐÓÒ²à	right side of battle
-	BATTLE_SIDE_LEFT,		// Õ½¶·ÖÐ×ó²à	left side of battle
-	BATTLE_SIDE_WATCH,		// ¹ÛÕ½			watch battle player
+	BATTLE_SIDE_RIGHT,		// æˆ˜æ–—ä¸­å³ä¾§	right side of battle
+	BATTLE_SIDE_LEFT,		// æˆ˜æ–—ä¸­å·¦ä¾§	left side of battle
+	BATTLE_SIDE_WATCH,		// è§‚æˆ˜			watch battle player
 };
 //krynn end
 
-#define TARGET_SIDE_0	20	// ã¯´¡  ÈÓÄÌÓñ¨ß  Ï¶ÀÃ
-#define TARGET_SIDE_1	21	// ¶û´¡  ÈÓÄÌÓñ¨à  Ï¶ÀÃ
-#define TARGET_ALL	22	// òå  Ï¶ÀÃ
+#define TARGET_SIDE_0	20	// æƒ˜ç¡€  æ‰”å¥¶çŽ‰ã„Ÿ  éš™çƒ‚
+#define TARGET_SIDE_1	21	// å°”ç¡€  æ‰”å¥¶çŽ‰ã„   éš™çƒ‚
+#define TARGET_ALL	22	// èˆ  éš™çƒ‚
 
 #ifdef _ATTACK_MAGIC
 
-#define TARGET_SIDE_0_B_ROW     26      // ÓÒÏÂááÒ»ÁÐ
-#define TARGET_SIDE_0_F_ROW     25      // ÓÒÏÂÇ°Ò»ÁÐ
-#define TARGET_SIDE_1_F_ROW     24      // ×óÉÏÇ°Ò»ÁÐ
-#define TARGET_SIDE_1_B_ROW     23      // ×óÉÏááÒ»ÁÐ
+#define TARGET_SIDE_0_B_ROW     26      // å³ä¸‹å¾Œä¸€åˆ—
+#define TARGET_SIDE_0_F_ROW     25      // å³ä¸‹å‰ä¸€åˆ—
+#define TARGET_SIDE_1_F_ROW     24      // å·¦ä¸Šå‰ä¸€åˆ—
+#define TARGET_SIDE_1_B_ROW     23      // å·¦ä¸Šå¾Œä¸€åˆ—
 
 // won add
 #define	TARGER_THROUGH			27
 
 #endif
 
-extern int	gItemCrushRate;		//   Ã§  ·¸°×ÇÉ»ïÐþ
-extern BATTLE *BattleArray; 	/* ¾ô  Õýµ©ÛÍ     */
-extern int BATTLE_battlenum;	/*     ¼°ÐÑ */
-extern char szAllBattleString[BATTLE_STRING_MAX];	/* ¾ô  ±åÒøµ¤ÎìÑ¨¼þÓñ  Ù¯   */
-extern char *pszBattleTop, *pszBattleLast;	/* ¾ô  ±åÒøµ¤  Ù¯  ¼°ÞË   */
-extern char szBadStatusString[];	// µ©  ¡õÕýµ©³ªéÙåÃ  Ù¯  
-extern int gWeponType;	// òØ»þ¼°  Õ¿¼°ÅË  
-extern float gDamageDiv;	// Ä¸¶ª¡õ³âÛÐà«
+extern int	gItemCrushRate;		//   èŽ½  çŠ¯ç™½å·§ä¼™çŽ„
+extern BATTLE *BattleArray; 	/* çˆµ  æ­£æ—¦å¼     */
+extern int BATTLE_battlenum;	/*     åŠé†’ */
+extern char szAllBattleString[BATTLE_STRING_MAX];	/* çˆµ  åžé“¶ä¸¹æˆŠç©´ä»¶çŽ‰  ä¾¬   */
+extern char *pszBattleTop, *pszBattleLast;	/* çˆµ  åžé“¶ä¸¹  ä¾¬  åŠåŒ   */
+extern char szBadStatusString[];	// æ—¦  â–¡æ­£æ—¦å”±æ©˜è¿•  ä¾¬  
+extern int gWeponType;	// èœ‡ç®•åŠ  æ¹›åŠæ½˜  
+extern float gDamageDiv;	// æ¯ä¸¢â–¡æ–¥åŒå–ƒ
 
 #define BATTLE_CHECKINDEX( a ) ( ((a)>=BATTLE_battlenum || (a)<0 )?(FALSE):(TRUE) )
 #define BATTLE_CHECKSIDE( a ) ( ((a)>=2 || (a)<0)?(FALSE):( TRUE) )
@@ -438,23 +438,23 @@ extern float gDamageDiv;	// Ä¸¶ª¡õ³âÛÐà«
 
 #define BATTLE_MAP_MAX 219
 
-#define CH_FIX_PLAYERLEVELUP	(+2)	// ÃóÒÁÄÌØÀ¡õ¼°ÒÁÃ¬»ï»¥Ê§ÓÀÃó
-#define CH_FIX_PLAYERDEAD		(-2)	// ÃóÒÁÄÌØÀ¡õ»¥É§éÙÉØ
-#define CH_FIX_PLAYEULTIMATE	(-4)	// ÃóÒÁÄÌØÀ¡õ»¥Ê§»ï  Å«¶ªÓÀÐþÉØ
-#define CH_FIX_PETESCAPE		(-1)	// Ê¸ÓÀÐþ»¥  ÆÍÐ×
+#define CH_FIX_PLAYERLEVELUP	(+2)	// çš¿ä¼Šå¥¶ä¹©â–¡åŠä¼ŠçŸ›ä¼™äº’å¤±æ°¸çš¿
+#define CH_FIX_PLAYERDEAD		(-2)	// çš¿ä¼Šå¥¶ä¹©â–¡äº’éªšæ©˜éŸ¶
+#define CH_FIX_PLAYEULTIMATE	(-4)	// çš¿ä¼Šå¥¶ä¹©â–¡äº’å¤±ä¼™  å¥´ä¸¢æ°¸çŽ„éŸ¶
+#define CH_FIX_PETESCAPE		(-1)	// çŸ¢æ°¸çŽ„äº’  ä»†å‡¶
 
-#define AI_FIX_PETLEVELUP		(+5*100)	// Ê¸ÓÀÐþ»¥ÒÁÃ¬»ïÊ§ÓÀÃó
-#define AI_FIX_PETWIN			(+1)		// Ê¸ÓÀÐþ»¥³ÄÃ«åÎØÆÐ×
-#define AI_FIX_PETGOLDWIN		(+2*10)	// Ê¸ÓÀÐþ»¥ÒÁÃ¬»ï¼°æÎÖÐ³ÄÃ«åÎØÆÐ×
-#define AI_FIX_PETRECOVERY		(+10)		// ¾ô    ±å¼ÔãâØÆ»¯ÊÖÈÕÔÈÐ×
-#define AI_FIX_PETRESSURECT		(+3*100)	// ¾ô    ±åãâÍÙØÆ»¯ÊÖÈÕÔÈÐ×
-//#define AI_FIX_PETRECOVERY	(+50)		// ¾ô    ±å¼ÔãâØÆ»¯ÊÖÈÕÔÈÐ×
+#define AI_FIX_PETLEVELUP		(+5*100)	// çŸ¢æ°¸çŽ„äº’ä¼ŠçŸ›ä¼™å¤±æ°¸çš¿
+#define AI_FIX_PETWIN			(+1)		// çŸ¢æ°¸çŽ„äº’è¡¬æ¯›é€¦ä»„å‡¶
+#define AI_FIX_PETGOLDWIN		(+2*10)	// çŸ¢æ°¸çŽ„äº’ä¼ŠçŸ›ä¼™åŠå«–ä¸­è¡¬æ¯›é€¦ä»„å‡¶
+#define AI_FIX_PETRECOVERY		(+10)		// çˆµ    åžèšæ±Šä»„åŒ–æ‰‹æ—¥åŒ€å‡¶
+#define AI_FIX_PETRESSURECT		(+3*100)	// çˆµ    åžæ±Šå”¾ä»„åŒ–æ‰‹æ—¥åŒ€å‡¶
+//#define AI_FIX_PETRECOVERY	(+50)		// çˆµ    åžèšæ±Šä»„åŒ–æ‰‹æ—¥åŒ€å‡¶
 
-#define AI_FIX_SEKKAN 			(-2*100)	// ·ßÛÐ¼°Ê¸ÓÀÐþÃ«  »«
-#define AI_FIX_PLAYERULTIMATE	(-10*100)	// ·ßÛÐ¼°Ç±ÚÐ»¥Ê§»ï  Å«¶ªÓÀÐþÉØ
-#define AI_FIX_PETULTIMATE		(-10*100)	// Ê¸ÓÀÐþ»¥Ê§»ï  Å«¶ªÓÀÐþÉØ
-#define AI_FIX_PLAYERDEAD		(-1*100)	// ·ßÛÐ¼°Ç±ÚÐ»¥¿¢å§
-#define AI_FIX_PETDEAD			(-5*100)	// Ê¸ÓÀÐþ»¥¿¢å§
+#define AI_FIX_SEKKAN 			(-2*100)	// æ„¤åŒåŠçŸ¢æ°¸çŽ„æ¯›  çŒ¾
+#define AI_FIX_PLAYERULTIMATE	(-10*100)	// æ„¤åŒåŠæ½œè°›äº’å¤±ä¼™  å¥´ä¸¢æ°¸çŽ„éŸ¶
+#define AI_FIX_PETULTIMATE		(-10*100)	// çŸ¢æ°¸çŽ„äº’å¤±ä¼™  å¥´ä¸¢æ°¸çŽ„éŸ¶
+#define AI_FIX_PLAYERDEAD		(-1*100)	// æ„¤åŒåŠæ½œè°›äº’ç«£æ¿®
+#define AI_FIX_PETDEAD			(-5*100)	// çŸ¢æ°¸çŽ„äº’ç«£æ¿®
 
 
 #ifdef _Item_ReLifeAct
@@ -493,8 +493,8 @@ int BATTLE_RescueEntry( int charaindex, int toindex);
 int BATTLE_PetDefaultExit( int charaindex, int battleindex);
 
 int	BATTLE_PetDefaultEntry(
-	int charaindex,	// Ê¸ÓÀÐþÃ«  ÔÈ»¯ÖÐÔÂÃóÒÁÄÌØÀ¡õ¼°          
-	int battleindex,// ÌïÐþ»ïÄÌ¼þ·¸ÓÀÛÍµ©
+	int charaindex,	// çŸ¢æ°¸çŽ„æ¯›  åŒ€åŒ–ä¸­æœˆçš¿ä¼Šå¥¶ä¹©â–¡åŠ          
+	int battleindex,// ç”°çŽ„ä¼™å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
 	int side
 );
 

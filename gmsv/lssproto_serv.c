@@ -82,7 +82,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		DME(); return -1;
 	}
 #ifdef _DEBUG_RET	
-	printf("\nøÕªß∂ÀΩ”ø⁄=%d\n",func);
+	printf("\nÂÆ¢Êà∑Á´ØÊé•Âè£=%d\n",func);
 #endif
 	if (func==LSSPROTO_W_RECV) {
 		int checksum=0, checksumrecv;
@@ -100,7 +100,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_W_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
+		printf("[Êé•Êî∂]LSSPROTO_W_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
 #endif
 		lssproto_W_recv(fd, x, y, direction);
 		util_DiscardMessage();
@@ -123,7 +123,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_W2_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
+		printf("[Êé•Êî∂]LSSPROTO_W2_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
 #endif
 		lssproto_W2_recv(fd, x, y, direction);
 		util_DiscardMessage();
@@ -150,7 +150,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_EV_RECV-event:%d,seqno:%d,x:%d,y:%d,dir:%d\n", event, seqno, x, y, dir);
+		printf("[Êé•Êî∂]LSSPROTO_EV_RECV-event:%d,seqno:%d,x:%d,y:%d,dir:%d\n", event, seqno, x, y, dir);
 #endif
 		lssproto_EV_recv(fd, event, seqno, x, y, dir);
 		util_DiscardMessage();
@@ -171,7 +171,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DU_RECV-x:%d,y:%d\n", x, y);
+		printf("[Êé•Êî∂]LSSPROTO_DU_RECV-x:%d,y:%d\n", x, y);
 #endif
 		lssproto_DU_recv(fd, x, y);
 		util_DiscardMessage();
@@ -190,7 +190,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_EO_RECV-dummy:%d\n", dummy);
+		printf("[Êé•Êî∂]LSSPROTO_EO_RECV-dummy:%d\n", dummy);
 #endif
 		lssproto_EO_recv(fd, dummy);
 		util_DiscardMessage();
@@ -209,7 +209,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_BU_RECV-dummy:%d\n", dummy);
+		printf("[Êé•Êî∂]LSSPROTO_BU_RECV-dummy:%d\n", dummy);
 #endif
 		lssproto_BU_recv(fd, dummy);
 		util_DiscardMessage();
@@ -230,7 +230,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_JB_RECV-x:%d,y:%d\n", x, y);
+		printf("[Êé•Êî∂]LSSPROTO_JB_RECV-x:%d,y:%d\n", x, y);
 #endif
 		lssproto_JB_recv(fd, x, y);
 		util_DiscardMessage();
@@ -251,7 +251,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_LB_RECV-x:%d,y:%d\n", x, y);
+		printf("[Êé•Êî∂]LSSPROTO_LB_RECV-x:%d,y:%d\n", x, y);
 #endif
 		lssproto_LB_recv(fd, x, y);
 		util_DiscardMessage();
@@ -270,7 +270,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}		
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_B_RECV-command:%d\n", command);
+		printf("[Êé•Êî∂]LSSPROTO_B_RECV-command:%d\n", command);
 #endif
 		lssproto_B_recv(fd, command);
 		util_DiscardMessage();
@@ -291,7 +291,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_SKD_RECV-dir:%d,index:%d\n", dir, index);
+		printf("[Êé•Êî∂]LSSPROTO_SKD_RECV-dir:%d,index:%d\n", dir, index);
 #endif
 		lssproto_SKD_recv(fd, dir, index);
 		util_DiscardMessage();
@@ -316,7 +316,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_ID_RECV-x:%d,y:%d,haveitemindex:%d,toindex:%d\n", x, y, haveitemindex, toindex);
+		printf("[Êé•Êî∂]LSSPROTO_ID_RECV-x:%d,y:%d,haveitemindex:%d,toindex:%d\n", x, y, haveitemindex, toindex);
 #endif
 		lssproto_ID_recv(fd, x, y, haveitemindex, toindex);
 		util_DiscardMessage();
@@ -339,7 +339,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PI_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
+		printf("[Êé•Êî∂]LSSPROTO_PI_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
 #endif
 		lssproto_PI_recv(fd, x, y, dir);
 		util_DiscardMessage();
@@ -362,7 +362,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DI_RECV-x:%d,y:%d,itemindex:%d\n", x, y, itemindex);
+		printf("[Êé•Êî∂]LSSPROTO_DI_RECV-x:%d,y:%d,itemindex:%d\n", x, y, itemindex);
 #endif
 		lssproto_DI_recv(fd, x, y, itemindex);
 		util_DiscardMessage();
@@ -385,7 +385,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DG_RECV-x:%d,y:%d,amount:%d\n", x, y, amount);
+		printf("[Êé•Êî∂]LSSPROTO_DG_RECV-x:%d,y:%d,amount:%d\n", x, y, amount);
 #endif
 		lssproto_DG_recv(fd, x, y, amount);
 		util_DiscardMessage();
@@ -408,7 +408,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DP_RECV-x:%d,y:%d,petindex:%d\n", x, y, petindex);
+		printf("[Êé•Êî∂]LSSPROTO_DP_RECV-x:%d,y:%d,petindex:%d\n", x, y, petindex);
 #endif
 		lssproto_DP_recv(fd, x, y, petindex);
 		util_DiscardMessage();
@@ -429,7 +429,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_MI_RECV-fromindex:%d,toindex:%d\n", fromindex, toindex);
+		printf("[Êé•Êî∂]LSSPROTO_MI_RECV-fromindex:%d,toindex:%d\n", fromindex, toindex);
 #endif
 		lssproto_MI_recv(fd, fromindex, toindex);
 		util_DiscardMessage();
@@ -452,7 +452,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_MSG_RECV-index:%d,message:%s,color:%d\n", index, message, color);
+		printf("[Êé•Êî∂]LSSPROTO_MSG_RECV-index:%d,message:%s,color:%d\n", index, message, color);
 #endif
 		lssproto_MSG_recv(fd, index, message, color);
 		util_DiscardMessage();
@@ -479,7 +479,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PMSG_RECV-index:%d,petindex:%d,itemindex:%d,message:%s,color:%d\n", index, petindex, itemindex, message, color);
+		printf("[Êé•Êî∂]LSSPROTO_PMSG_RECV-index:%d,petindex:%d,itemindex:%d,message:%s,color:%d\n", index, petindex, itemindex, message, color);
 #endif
 		lssproto_PMSG_recv(fd, index, petindex, itemindex, message, color);
 		util_DiscardMessage();
@@ -495,7 +495,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_AB_RECV\n");
+		printf("[Êé•Êî∂]LSSPROTO_AB_RECV\n");
 #endif
 		lssproto_AB_recv(fd);
 		util_DiscardMessage();
@@ -514,7 +514,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DAB_RECV-index:%d\n", index);
+		printf("[Êé•Êî∂]LSSPROTO_DAB_RECV-index:%d\n", index);
 #endif
 		lssproto_DAB_recv(fd, index);
 		util_DiscardMessage();
@@ -535,7 +535,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_AAB_RECV-x:%d,y:%d\n", x, y);
+		printf("[Êé•Êî∂]LSSPROTO_AAB_RECV-x:%d,y:%d\n", x, y);
 #endif
 		lssproto_AAB_recv(fd, x, y);
 		util_DiscardMessage();
@@ -554,7 +554,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_L_RECV-dir:%d\n", dir);
+		printf("[Êé•Êî∂]LSSPROTO_L_RECV-dir:%d\n", dir);
 #endif
 		lssproto_L_recv(fd, dir);
 		util_DiscardMessage();
@@ -581,7 +581,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_TK_RECV-x:%d,y:%d,message:%s,color:%d,area:%d\n", x, y, message, color, area);
+		printf("[Êé•Êî∂]LSSPROTO_TK_RECV-x:%d,y:%d,message:%s,color:%d,area:%d\n", x, y, message, color, area);
 #endif
 		lssproto_TK_recv(fd, x, y, message, color, area);
 		util_DiscardMessage();
@@ -608,7 +608,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_M_RECV-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d\n", fl, x1, y1, x2, y2);
+		printf("[Êé•Êî∂]LSSPROTO_M_RECV-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d\n", fl, x1, y1, x2, y2);
 #endif
 		lssproto_M_recv(fd, fl, x1, y1, x2, y2);
 		util_DiscardMessage();
@@ -627,7 +627,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_C_RECV-index:%d\n", index);
+		printf("[Êé•Êî∂]LSSPROTO_C_RECV-index:%d\n", index);
 #endif
 		lssproto_C_recv(fd, index);
 		util_DiscardMessage();
@@ -646,7 +646,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_S_RECV-category:%s\n", category);
+		printf("[Êé•Êî∂]LSSPROTO_S_RECV-category:%s\n", category);
 #endif
 		lssproto_S_recv(fd, category);
 		util_DiscardMessage();
@@ -665,7 +665,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_FS_RECV-flg:%d\n", flg);
+		printf("[Êé•Êî∂]LSSPROTO_FS_RECV-flg:%d\n", flg);
 #endif
 		lssproto_FS_recv(fd, flg);
 		util_DiscardMessage();
@@ -684,7 +684,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_HL_RECV-flg:%d\n", flg);
+		printf("[Êé•Êî∂]LSSPROTO_HL_RECV-flg:%d\n", flg);
 #endif
 		lssproto_HL_recv(fd, flg);
 		util_DiscardMessage();
@@ -707,7 +707,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PR_RECV-x:%d,y:%d,request:%d\n", x, y, request);
+		printf("[Êé•Êî∂]LSSPROTO_PR_RECV-x:%d,y:%d,request:%d\n", x, y, request);
 #endif
 		lssproto_PR_recv(fd, x, y, request);
 		util_DiscardMessage();
@@ -725,7 +725,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_KS_RECV-petarray:%d\n", petarray);
+		printf("[Êé•Êî∂]LSSPROTO_KS_RECV-petarray:%d\n", petarray);
 #endif
 		lssproto_KS_recv(fd, petarray);
 		util_DiscardMessage();
@@ -744,7 +744,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_SPET_RECV-standbypet:%d\n", standbypet);
+		printf("[Êé•Êî∂]LSSPROTO_SPET_RECV-standbypet:%d\n", standbypet);
 #endif
 		lssproto_SPET_recv(fd, standbypet);
 		util_DiscardMessage();
@@ -768,7 +768,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_AC_RECV-x:%d,y:%d,actionno:%d\n", x, y, actionno);
+		printf("[Êé•Êî∂]LSSPROTO_AC_RECV-x:%d,y:%d,actionno:%d\n", x, y, actionno);
 #endif
 		lssproto_AC_recv(fd, x, y, actionno);
 		util_DiscardMessage();
@@ -793,7 +793,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_MU_RECV-x:%d,y:%d,array:%d,toindex:%d\n", x, y, array, toindex);
+		printf("[Êé•Êî∂]LSSPROTO_MU_RECV-x:%d,y:%d,array:%d,toindex:%d\n", x, y, array, toindex);
 #endif
 		lssproto_MU_recv(fd, x, y, array, toindex);
 		util_DiscardMessage();
@@ -819,7 +819,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PS_RECV-havepetindex:%d,havepetskill:%d,toindex:%d,data:%s\n", havepetindex, havepetskill, toindex, data);
+		printf("[Êé•Êî∂]LSSPROTO_PS_RECV-havepetindex:%d,havepetskill:%d,toindex:%d,data:%s\n", havepetindex, havepetskill, toindex, data);
 #endif
 		lssproto_PS_recv(fd, havepetindex, havepetskill, toindex, data);
 		
@@ -839,7 +839,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_ST_RECV-titleindex:%d\n", titleindex);
+		printf("[Êé•Êî∂]LSSPROTO_ST_RECV-titleindex:%d\n", titleindex);
 #endif
 		lssproto_ST_recv(fd, titleindex);
 		util_DiscardMessage();
@@ -858,7 +858,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_DT_RECV-titleindex:%d\n", titleindex);
+		printf("[Êé•Êî∂]LSSPROTO_DT_RECV-titleindex:%d\n", titleindex);
 #endif
 		lssproto_DT_recv(fd, titleindex);
 		util_DiscardMessage();
@@ -877,7 +877,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_FT_RECV-data:%s\n", data);
+		printf("[Êé•Êî∂]LSSPROTO_FT_RECV-data:%s\n", data);
 #endif
 		lssproto_FT_recv(fd, data);
 		util_DiscardMessage();
@@ -896,7 +896,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_SKUP_RECV-skillid:%d\n", skillid);
+		printf("[Êé•Êî∂]LSSPROTO_SKUP_RECV-skillid:%d\n", skillid);
 #endif
 		lssproto_SKUP_recv(fd, skillid);
 		util_DiscardMessage();
@@ -917,7 +917,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_KN_RECV-havepetindex:%d,data:%s\n", havepetindex, data);
+		printf("[Êé•Êî∂]LSSPROTO_KN_RECV-havepetindex:%d,data:%s\n", havepetindex, data);
 #endif
 		lssproto_KN_recv(fd, havepetindex, data);
 		util_DiscardMessage();
@@ -947,7 +947,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_WN_RECV-x:%d,y:%d,seqno:%d,objindex:%d,select:%d,data:%s\n", x, y, seqno, objindex, select, data);
+		printf("[Êé•Êî∂]LSSPROTO_WN_RECV-x:%d,y:%d,seqno:%d,objindex:%d,select:%d,data:%s\n", x, y, seqno, objindex, select, data);
 #endif
 		lssproto_WN_recv(fd, x, y, seqno, objindex, select, data);
 		util_DiscardMessage();
@@ -970,7 +970,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_SP_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
+		printf("[Êé•Êî∂]LSSPROTO_SP_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
 #endif
 		lssproto_SP_recv(fd, x, y, dir);
 		util_DiscardMessage();
@@ -995,7 +995,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CLIENTLOGIN_RECV-cdkey:%s,passwd:%s\n", cdkey, passwd);
+		printf("[Êé•Êî∂]LSSPROTO_CLIENTLOGIN_RECV-cdkey:%s,passwd:%s\n", cdkey, passwd);
 #endif
 		lssproto_ClientLogin_recv(fd, cdkey, passwd);
 		util_DiscardMessage();
@@ -1038,7 +1038,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CREATENEWCHAR_RECV-dataplacenum:%d,charname:%s,imgno:%d,faceimgno:%d,vital:%d,str:%d,"
+		printf("[Êé•Êî∂]LSSPROTO_CREATENEWCHAR_RECV-dataplacenum:%d,charname:%s,imgno:%d,faceimgno:%d,vital:%d,str:%d,"
 						"tgh:%d,dex:%d,earth:%d,water:%d,fire:%d,wind:%d,hometown:%d\n",
 						dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
 #endif
@@ -1059,7 +1059,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CHARDELETE_RECV-charname:%s\n", charname);
+		printf("[Êé•Êî∂]LSSPROTO_CHARDELETE_RECV-charname:%s\n", charname);
 #endif
 		lssproto_CharDelete_recv(fd, charname);
 		util_DiscardMessage();
@@ -1078,7 +1078,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CHARLOGIN_RECV-charname:%s\n", charname);
+		printf("[Êé•Êî∂]LSSPROTO_CHARLOGIN_RECV-charname:%s\n", charname);
 #endif
 		lssproto_CharLogin_recv(fd, charname);
 		util_DiscardMessage();
@@ -1094,7 +1094,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CHARLIST_RECV\n");
+		printf("[Êé•Êî∂]LSSPROTO_CHARLIST_RECV\n");
 #endif
 		lssproto_CharList_recv( fd);
 
@@ -1112,7 +1112,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CHARLOGOUT_RECV-Flg:%d\n", Flg);
+		printf("[Êé•Êî∂]LSSPROTO_CHARLOGOUT_RECV-Flg:%d\n", Flg);
 #endif
 		lssproto_CharLogout_recv(fd, Flg);
 		util_DiscardMessage();
@@ -1131,7 +1131,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PROCGET_RECV\n");
+		printf("[Êé•Êî∂]LSSPROTO_PROCGET_RECV\n");
 #endif
 		lssproto_ProcGet_recv(fd);
 		util_DiscardMessage();
@@ -1147,7 +1147,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PLAYERNUMGET_RECV\n");
+		printf("[Êé•Êî∂]LSSPROTO_PLAYERNUMGET_RECV\n");
 #endif
 		lssproto_PlayerNumGet_recv(fd);
 		util_DiscardMessage();
@@ -1166,7 +1166,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_ECHO_RECV-fd:%d,test:%s\n", fd, test);
+		printf("[Êé•Êî∂]LSSPROTO_ECHO_RECV-fd:%d,test:%s\n", fd, test);
 #endif
 		lssproto_Echo_recv(fd, test);
 		util_DiscardMessage();
@@ -1187,7 +1187,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_SHUTDOWN_RECV-passwd:%s,min:%d\n", passwd,min);
+		printf("[Êé•Êî∂]LSSPROTO_SHUTDOWN_RECV-passwd:%s,min:%d\n", passwd,min);
 #endif
 		lssproto_Shutdown_recv(fd, passwd, min);
 		util_DiscardMessage();
@@ -1206,7 +1206,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_TD_RECV-message:%s\n", message);
+		printf("[Êé•Êî∂]LSSPROTO_TD_RECV-message:%s\n", message);
 #endif
 		lssproto_TD_recv(fd, message);
 		util_DiscardMessage();
@@ -1225,7 +1225,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_FM_RECV-message:%s\n", message);
+		printf("[Êé•Êî∂]LSSPROTO_FM_RECV-message:%s\n", message);
 #endif
 		lssproto_FM_recv(fd, message);
 		util_DiscardMessage();
@@ -1246,7 +1246,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}	
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_PETST_RECV-nPet:%d,sPet:%d\n", nPet, sPet);
+		printf("[Êé•Êî∂]LSSPROTO_PETST_RECV-nPet:%d,sPet:%d\n", nPet, sPet);
 #endif
 		lssproto_PETST_recv(fd, nPet, sPet);		
 		util_DiscardMessage();
@@ -1258,7 +1258,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 	    char buffer[2];
 	    buffer[0] = '\0';
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_CS_RECV\n");
+		printf("[Êé•Êî∂]LSSPROTO_CS_RECV\n");
 #endif
 		lssproto_CS_recv( fd );
 		util_DiscardMessage();
@@ -1282,7 +1282,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			DME(); return -1;
 		}		
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_MA_RECV-x:%d,y:%d,nMind:%d\n", x, y, nMind);
+		printf("[Êé•Êî∂]LSSPROTO_MA_RECV-x:%d,y:%d,nMind:%d\n", x, y, nMind);
 #endif
 		lssproto_MA_recv(fd, x, y, nMind);
 		util_DiscardMessage();
@@ -1290,7 +1290,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 	}
 #endif
 
-#ifdef _OUTOFBATTLESKILL			// (≤ªø…ø™) Syu ADD ∑«’Ω∂∑ ±ººƒ‹Protocol
+#ifdef _OUTOFBATTLESKILL			// (‰∏çÂèØÂºÄ) Syu ADD ÈùûÊàòÊñóÊó∂ÊäÄËÉΩProtocol
 		if(func==LSSPROTO_BATTLESKILL_RECV){
 				int checksum = 0, checksumrecv;
 				int iNum;
@@ -1303,7 +1303,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 					DME(); return -1;
 				}		
 #ifdef _DEBUG_RET_CLI
-		printf("[Ω” ’]LSSPROTO_BATTLESKILL_RECV-iNum:%d\n", iNum);
+		printf("[Êé•Êî∂]LSSPROTO_BATTLESKILL_RECV-iNum:%d\n", iNum);
 #endif
 				lssproto_BATTLESKILL_recv(fd, iNum);
 				util_DiscardMessage();
@@ -1311,7 +1311,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		}
 #endif
 
-	printf("\nŒﬁ∑®’“µΩøÕªß∂ÀΩ”ø⁄=%d\n",func);
+	printf("\nÊó†Ê≥ïÊâæÂà∞ÂÆ¢Êà∑Á´ØÊé•Âè£=%d\n",func);
 
 	util_DiscardMessage();
 	logHack(fd,HACK_NOTDISPATCHED);
@@ -1324,7 +1324,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 void lssproto_XYD_send(int fd,int x,int y,int dir)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_XYD_SEND-x:%d,y:%d,dir:%d\n",x,y,dir);
+	printf("[ÂèëÈÄÅ]LSSPROTO_XYD_SEND-x:%d,y:%d,dir:%d\n",x,y,dir);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1344,7 +1344,7 @@ void lssproto_XYD_send(int fd,int x,int y,int dir)
 void lssproto_EV_send(int fd,int seqno,int result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_EV_SEND-seqno:%d,result:%d\n",seqno,result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_EV_SEND-seqno:%d,result:%d\n",seqno,result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1363,7 +1363,7 @@ void lssproto_EV_send(int fd,int seqno,int result)
 void lssproto_EN_send(int fd,int result,int field)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_EN_SEND-result:%d,field:%d\n",result,field);
+	printf("[ÂèëÈÄÅ]LSSPROTO_EN_SEND-result:%d,field:%d\n",result,field);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1385,7 +1385,7 @@ void lssproto_EN_send(int fd,int result,int field)
 void lssproto_RS_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_RS_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_RS_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1404,7 +1404,7 @@ void lssproto_RS_send(int fd,char* data)
 void lssproto_RD_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_RD_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_RD_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1422,7 +1422,7 @@ void lssproto_RD_send(int fd,char* data)
 void lssproto_B_send(int fd,char* command)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_B_SEND-command:%s\n",command);
+	printf("[ÂèëÈÄÅ]LSSPROTO_B_SEND-command:%s\n",command);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1440,7 +1440,7 @@ void lssproto_B_send(int fd,char* command)
 void lssproto_I_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_I_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_I_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1458,7 +1458,7 @@ void lssproto_I_send(int fd,char* data)
 void lssproto_SI_send(int fd,int fromindex,int toindex)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_SI_SEND-fromindex:%d,toindex:%d\n",fromindex,toindex);
+	printf("[ÂèëÈÄÅ]LSSPROTO_SI_SEND-fromindex:%d,toindex:%d\n",fromindex,toindex);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1476,7 +1476,7 @@ void lssproto_SI_send(int fd,int fromindex,int toindex)
 void lssproto_MSG_send(int fd,int aindex,char* text,int color)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]lssproto_MSG_send-aindex:%d,text:%s,color:%d\n",aindex,text,color);
+	printf("[ÂèëÈÄÅ]lssproto_MSG_send-aindex:%d,text:%s,color:%d\n",aindex,text,color);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1497,7 +1497,7 @@ void lssproto_MSG_send(int fd,int aindex,char* text,int color)
 void lssproto_PME_send(int fd,int objindex,int graphicsno,int x,int y,int dir,int flg,int no,char* cdata)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PME_SEND-objindex:%d,graphicsno:%d,x:%d,y:%d,dir:%d,flg:%d,no:%d,cdata:%s\n",objindex,graphicsno,x,y,dir,flg,no,cdata);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PME_SEND-objindex:%d,graphicsno:%d,x:%d,y:%d,dir:%d,flg:%d,no:%d,cdata:%s\n",objindex,graphicsno,x,y,dir,flg,no,cdata);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1523,7 +1523,7 @@ void lssproto_PME_send(int fd,int objindex,int graphicsno,int x,int y,int dir,in
 void lssproto_AB_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_AB_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_AB_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1542,7 +1542,7 @@ void lssproto_AB_send(int fd,char* data)
 void lssproto_ABI_send(int fd,int num,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_ABI_SEND-num:%d,data:%s\n",num,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_ABI_SEND-num:%d,data:%s\n",num,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1561,7 +1561,7 @@ void lssproto_ABI_send(int fd,int num,char* data)
 void lssproto_TK_send(int fd,int index,char* message,int color)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_TK_SEND-index:%d,message:%s,color:%d\n",index,message,color);
+	printf("[ÂèëÈÄÅ]LSSPROTO_TK_SEND-index:%d,message:%s,color:%d\n",index,message,color);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1581,7 +1581,7 @@ void lssproto_TK_send(int fd,int index,char* message,int color)
 void lssproto_MC_send(int fd,int fl,int x1,int y1,int x2,int y2,int tilesum,int objsum,int eventsum,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_MC_SEND-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d,tilesum:%d,objsum:%d,eventsum:%d,data:%s\n",fl,x1,y1,x2,y2,tilesum,objsum,eventsum,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_MC_SEND-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d,tilesum:%d,objsum:%d,eventsum:%d,data:%s\n",fl,x1,y1,x2,y2,tilesum,objsum,eventsum,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1608,7 +1608,7 @@ void lssproto_MC_send(int fd,int fl,int x1,int y1,int x2,int y2,int tilesum,int 
 void lssproto_M_send(int fd,int fl,int x1,int y1,int x2,int y2,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_M_SEND-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d,data:%s\n",fl,x1,y1,x2,y2,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_M_SEND-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d,data:%s\n",fl,x1,y1,x2,y2,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1631,7 +1631,7 @@ void lssproto_M_send(int fd,int fl,int x1,int y1,int x2,int y2,char* data)
 void lssproto_C_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_C_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_C_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1649,7 +1649,7 @@ void lssproto_C_send(int fd,char* data)
 void lssproto_CA_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CA_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CA_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1667,7 +1667,7 @@ void lssproto_CA_send(int fd,char* data)
 void lssproto_CD_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CD_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CD_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1685,7 +1685,7 @@ void lssproto_CD_send(int fd,char* data)
 void lssproto_R_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_R_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_R_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1703,7 +1703,7 @@ void lssproto_R_send(int fd,char* data)
 void lssproto_S_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_S_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_S_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1721,7 +1721,7 @@ void lssproto_S_send(int fd,char* data)
 void lssproto_D_send(int fd,int category,int dx,int dy,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_D_SEND-category:%d,dx:%d,dy:%d,data:%s\n",category,dx,dy,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_D_SEND-category:%d,dx:%d,dy:%d,data:%s\n",category,dx,dy,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1742,7 +1742,7 @@ void lssproto_D_send(int fd,int category,int dx,int dy,char* data)
 void lssproto_FS_send(int fd,int flg)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_FS_SEND-flg:%d\n",flg);
+	printf("[ÂèëÈÄÅ]LSSPROTO_FS_SEND-flg:%d\n",flg);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1760,7 +1760,7 @@ void lssproto_FS_send(int fd,int flg)
 void lssproto_HL_send(int fd,int flg)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_HL_SEND-flg:%d\n",flg);
+	printf("[ÂèëÈÄÅ]LSSPROTO_HL_SEND-flg:%d\n",flg);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1778,7 +1778,7 @@ void lssproto_HL_send(int fd,int flg)
 void lssproto_PR_send(int fd,int request,int result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PR_SEND-request:%d,result:%d\n",request,result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PR_SEND-request:%d,result:%d\n",request,result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1798,7 +1798,7 @@ void lssproto_PR_send(int fd,int request,int result)
 void lssproto_PETS_send(int fd,int petarray,int result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PETST_SEND-petarray:%d,result:%d\n",petarray,result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PETST_SEND-petarray:%d,result:%d\n",petarray,result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1818,7 +1818,7 @@ void lssproto_PETS_send(int fd,int petarray,int result)
 void lssproto_KS_send(int fd,int petarray,int result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_KS_SEND-petarray:%d,result:%d\n",petarray,result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_KS_SEND-petarray:%d,result:%d\n",petarray,result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1837,7 +1837,7 @@ void lssproto_KS_send(int fd,int petarray,int result)
 void lssproto_SPET_send(int fd, int standbypet, int result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_SPET_SEND-standbypet:%d,result:%d\n",standbypet,result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_SPET_SEND-standbypet:%d,result:%d\n",standbypet,result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1856,7 +1856,7 @@ void lssproto_SPET_send(int fd, int standbypet, int result)
 void lssproto_PS_send(int fd,int result,int havepetindex,int havepetskill,int toindex)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PS_SEND-result:%d,havepetindex:%d,havepetskill:%d,toindex:%d\n",result,havepetindex,havepetskill,toindex);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PS_SEND-result:%d,havepetindex:%d,havepetskill:%d,toindex:%d\n",result,havepetindex,havepetskill,toindex);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1877,7 +1877,7 @@ void lssproto_PS_send(int fd,int result,int havepetindex,int havepetskill,int to
 void lssproto_SKUP_send(int fd,int point)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_SKUP_SEND-point:%d\n",point);
+	printf("[ÂèëÈÄÅ]LSSPROTO_SKUP_SEND-point:%d\n",point);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1894,7 +1894,7 @@ void lssproto_SKUP_send(int fd,int point)
 void lssproto_WN_send(int fd,int windowtype,int buttontype,int seqno,int objindex,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_WN_SEND-windowtype:%d,buttontype:%d,seqno:%d,objindex:%s\n",windowtype,buttontype,seqno,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_WN_SEND-windowtype:%d,buttontype:%d,seqno:%d,objindex:%s\n",windowtype,buttontype,seqno,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1917,7 +1917,7 @@ void lssproto_WN_send(int fd,int windowtype,int buttontype,int seqno,int objinde
 void lssproto_EF_send(int fd,int effect,int level,char* option)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_EF_SEND-effect:%d,level:%d,char:%s\n",effect,level,option);
+	printf("[ÂèëÈÄÅ]LSSPROTO_EF_SEND-effect:%d,level:%d,char:%s\n",effect,level,option);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1936,7 +1936,7 @@ void lssproto_EF_send(int fd,int effect,int level,char* option)
 void lssproto_SE_send(int fd,int x,int y,int senumber,int sw)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_SE_SEND-x:%d,y:%d,senumber:%d,sw:%d\n",x,y,senumber,sw);
+	printf("[ÂèëÈÄÅ]LSSPROTO_SE_SEND-x:%d,y:%d,senumber:%d,sw:%d\n",x,y,senumber,sw);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1957,7 +1957,7 @@ void lssproto_SE_send(int fd,int x,int y,int senumber,int sw)
 void lssproto_ClientLogin_send(int fd,char* result)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CLIENTLOGIN_SEND-result:%s\n",result);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CLIENTLOGIN_SEND-result:%s\n",result);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1976,7 +1976,7 @@ void lssproto_ClientLogin_send(int fd,char* result)
 void lssproto_CreateNewChar_send(int fd,char* result,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CREATENEWCHAR_SEND-result:%s,data:%s\n",result,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CREATENEWCHAR_SEND-result:%s,data:%s\n",result,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -1995,7 +1995,7 @@ void lssproto_CreateNewChar_send(int fd,char* result,char* data)
 void lssproto_CharDelete_send(int fd,char* result,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CHARDELETE_SEND-result:%s,data:%s\n",result,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CHARDELETE_SEND-result:%s,data:%s\n",result,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2014,7 +2014,7 @@ void lssproto_CharDelete_send(int fd,char* result,char* data)
 void lssproto_CharLogin_send(int fd,char* result,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CHARLOGIN_SEND-result:%s,data:%s\n",result,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CHARLOGIN_SEND-result:%s,data:%s\n",result,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2033,7 +2033,7 @@ void lssproto_CharLogin_send(int fd,char* result,char* data)
 void lssproto_CharList_send(int fd,char* result,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CHARLIST_SEND-result:%s,data:%s\n",result,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CHARLIST_SEND-result:%s,data:%s\n",result,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2052,7 +2052,7 @@ void lssproto_CharList_send(int fd,char* result,char* data)
 void lssproto_CharLogout_send(int fd,char* result,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_CHARLOGOUT_SEND-result:%s,data:%s\n",result,data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_CHARLOGOUT_SEND-result:%s,data:%s\n",result,data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2071,7 +2071,7 @@ void lssproto_CharLogout_send(int fd,char* result,char* data)
 void lssproto_ProcGet_send(int fd,char* data)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PROCGET_SEND-data:%s\n",data);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PROCGET_SEND-data:%s\n",data);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2090,7 +2090,7 @@ void lssproto_ProcGet_send(int fd,char* data)
 void lssproto_PlayerNumGet_send(int fd,int logincount,int player)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_PLAYERNUMGET_SEND-logincount:%d,player:%d\n",logincount,player);
+	printf("[ÂèëÈÄÅ]LSSPROTO_PLAYERNUMGET_SEND-logincount:%d,player:%d\n",logincount,player);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2109,7 +2109,7 @@ void lssproto_PlayerNumGet_send(int fd,int logincount,int player)
 void lssproto_Echo_send(int fd,char* test)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_ECHO_SEND-test:%s\n",test);
+	printf("[ÂèëÈÄÅ]LSSPROTO_ECHO_SEND-test:%s\n",test);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2129,7 +2129,7 @@ void lssproto_Echo_send(int fd,char* test)
 void lssproto_TD_send(int fd, int index, char* message)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_TD_SEND-message:%s\n",message);
+	printf("[ÂèëÈÄÅ]LSSPROTO_TD_SEND-message:%s\n",message);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2147,7 +2147,7 @@ void lssproto_TD_send(int fd, int index, char* message)
 void lssproto_NU_send(int fd, int nu)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_NU_SEND-nu:%d\n",nu);
+	printf("[ÂèëÈÄÅ]LSSPROTO_NU_SEND-nu:%d\n",nu);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2166,7 +2166,7 @@ void lssproto_NU_send(int fd, int nu)
 void lssproto_FM_send(int fd, char* message)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_FM_SEND-message:%s\n",message);
+	printf("[ÂèëÈÄÅ]LSSPROTO_FM_SEND-message:%s\n",message);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2185,7 +2185,7 @@ void lssproto_FM_send(int fd, char* message)
 void lssproto_WO_send(int fd,int effect)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_WO_SEND-effect:%d\n",effect);
+	printf("[ÂèëÈÄÅ]LSSPROTO_WO_SEND-effect:%d\n",effect);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2203,7 +2203,7 @@ void lssproto_WO_send(int fd,int effect)
 void lssproto_IC_send(int fd, int x, int y)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]lssproto_IC_send-x:%d,y:%d\n",x,y);
+	printf("[ÂèëÈÄÅ]lssproto_IC_send-x:%d,y:%d\n",x,y);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;
@@ -2219,11 +2219,11 @@ void lssproto_IC_send(int fd, int x, int y)
 	util_SendMesg(fd, LSSPROTO_IC_SEND, buffer);
 }
 #endif
-#ifdef _MAGIC_NOCAST             // æ´¡È:≥¡ƒ¨
+#ifdef _MAGIC_NOCAST             // Á≤æÁÅµ:Ê≤âÈªò
 void lssproto_NC_send(int fd,int flg)
 {
 #ifdef _DEBUG_SEND_CLI
-	printf("[∑¢ÀÕ]LSSPROTO_NC_SEND-flg:%d\n",flg);
+	printf("[ÂèëÈÄÅ]LSSPROTO_NC_SEND-flg:%d\n",flg);
 #endif
 	char buffer[1024 * 64];
 	int checksum=0;

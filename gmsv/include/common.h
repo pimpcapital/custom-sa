@@ -21,7 +21,7 @@
 #define TAB '\t'
 #define SPACE ' '
 
-/*票及 define 方曰兜蝈卞允月    */
+/*绁ㄥ強 define 鏂规洶鍏滆潏鍗炲厑鏈?   */
 /*#define min( x,y ) ((x)>(y)?(y):(x))
   #define max( x,y ) ((x)>(y)?(x):(y))*/
 #define min( x,y ) ({typeof(x) __x=(x),__y=(y);(__x < __y) ? __x : __y; })

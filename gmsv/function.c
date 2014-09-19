@@ -105,7 +105,7 @@
 #include "npc_itemchange.h"
 #endif
 
-#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅĞĞ°ñNPC
+#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æ’è¡Œæ¦œNPC
 #include "npc_alldoman.h"
 #endif
 //#define DEBUG
@@ -184,13 +184,13 @@ correspondStringAndFunctionTable[]=
 #ifdef _ITEM_FIRECRACKER	//Terry add 2001/12/21
 		{ {"ITEM_firecracker"}, ITEM_firecracker, 0 },
 #endif
-#ifdef _ITEM_CRACKER	//vincent À­ÅÚ
+#ifdef _ITEM_CRACKER	//vincent æ‹‰ç‚®
 		{ {"ITEM_Cracker"}, ITEM_Cracker, 0 },
 #endif
-#ifdef _ITEM_ADDEXP	//vincent ¾­ÑéÌáÉı
+#ifdef _ITEM_ADDEXP	//vincent ç»éªŒæå‡
 		{ {"ITEM_Addexp"}, ITEM_Addexp, 0 },
 #endif
-#ifdef _ITEM_REFRESH //vincent ½â³ıÒì³£×´Ì¬µÀ¾ß
+#ifdef _ITEM_REFRESH //vincent è§£é™¤å¼‚å¸¸çŠ¶æ€é“å…·
 		{ {"ITEM_Refresh"}, ITEM_Refresh, 0 },
 #endif
 
@@ -235,7 +235,7 @@ correspondStringAndFunctionTable[]=
 #ifdef _Item_DeathAct
   	{ {"ITEM_useDeathcounter"}, ITEM_UseDeathCounter, 0 },
 #endif
-#ifdef _FEV_ADD_NEW_ITEM			// FEV ADD Ôö¼Ó¸´»îÊØ¾«
+#ifdef _FEV_ADD_NEW_ITEM			// FEV ADD å¢åŠ å¤æ´»å®ˆç²¾
   	{ {"ITEM_ResAndDef"} ,   ITEM_ResAndDef,        0 },
 #endif
 
@@ -329,18 +329,18 @@ correspondStringAndFunctionTable[]=
 	  { {"NPCEnemyLoop"},				NPC_NPCEnemyLoop,		0 },
     { {"NPCEnemyWindowTalked"}, 	NPC_NPCEnemyWindowTalked, 0 },
 
-    /* Ê§ÛÍÆËÒà¼şé¬ */
+    /* å¤±å¼æ‰‘äº¦ä»¶æ¥ */
     { {"ActionInit"} ,				NPC_ActionInit ,		0 },
     { {"ActionTalked"} ,			NPC_ActionTalked ,		0 },
     { {"ActionWatch"} ,				NPC_ActionWatch ,		0 },
 
-    /* ËüÅ«¼şÓñËüé¬ */
+    /* å®ƒå¥´ä»¶ç‰å®ƒæ¥ */
     { {"WindowmanInit"} , 			NPC_WindowmanInit ,		0 },
     { {"WindowmanTalked"} , 		NPC_WindowmanTalked ,	0 },
     { {"WindowmanLooked"}, 			NPC_WindowmanLooked,	0 },
     { {"WindowmanWindowTalked"}, 	NPC_WindowmanWindowTalked, 0 },
 
-    /* ËüÅ«¼şÓñËü¼×¡õ·Â¡õ */
+    /* å®ƒå¥´ä»¶ç‰å®ƒç”²â–¡ä»¿â–¡ */
     { {"WindowHealerInit"} , 		NPC_WindowHealerInit ,	0 },
     { {"WindowHealerTalked"} , 		NPC_WindowHealerTalked,	0 },
     { {"WindowHealerLooked"} , 		NPC_WindowHealerLooked,	0 },
@@ -373,7 +373,7 @@ correspondStringAndFunctionTable[]=
     { {"SignBoardLooked"} ,			NPC_SignBoardLooked,	0 },
     { {"SignBoardWindowTalked"},	NPC_SignBoardWindowTalked, 0 },
 
-    /*·¥¡õÃóÑ¨¼ş */
+    /*ä¼â–¡çš¿ç©´ä»¶ */
     { {"WarpManInit"},				NPC_WarpManInit,		0 },
     { {"WarpManTalked"},			NPC_WarpManTalked,		0 },
   	{ {"WarpManWatch"},				NPC_WarpManWatch,		0 },
@@ -385,32 +385,32 @@ correspondStringAndFunctionTable[]=
     { {"ExChangeManTalked"},			NPC_ExChangeManTalked,		0 },
     { {"ExChangeManWindowTalked"},		NPC_ExChangeManWindowTalked,0 },
 
-    /*ÕıÄÌØ©Ñ¨¼ş */
+    /*æ­£å¥¶ä¸ç©´ä»¶ */
     { {"TimeManInit"},				NPC_TimeManInit,		0 },
     { {"TimeManTalked"},			NPC_TimeManTalked,		0 },
     { {"TimeManWatch"} ,			NPC_TimeManWatch ,		0 },
 
-    /* Ê¾·¸Å«·Â¼ş±Ø¡õ³â */
+    /* ç¤ºçŠ¯å¥´ä»¿ä»¶å¿…â–¡æ–¥ */
     { {"BodyLanInit"},				NPC_BodyLanInit,		0 },
     { {"BodyLanTalked"},			NPC_BodyLanTalked,		0 },
     { {"BodyLanWatch"} ,			NPC_BodyLanWatch ,		0 },
     { {"BodyLanWindowTalked"} ,		NPC_BodyLanWindowTalked,0 },
 
-    /* Ñ¨ÄÌÛÍ */
+    /* ç©´å¥¶å¼ */
     { {"MicInit"},				NPC_MicInit,		0 },
     { {"MicTalked"},			NPC_MicTalked,		0 },
 
-    /* ·ÂÓÀÆ½¡õÑ¨¼ş */
+    /* ä»¿æ°¸å¹³â–¡ç©´ä»¶ */
     { {"LuckyManInit"} , 		NPC_LuckyManInit ,	0 },
     { {"LuckyManTalked"} , 		NPC_LuckyManTalked,	0 },
     { {"LuckyManWindowTalked"}, NPC_LuckyManWindowTalked, 0 },
 
-    /* é¬ */
+    /* æ¥ */
     { {"BusInit"} ,				NPC_BusInit ,		0 },
     { {"BusTalked"} ,			NPC_BusTalked ,		0 },
     { {"BusLoop"} ,				NPC_BusLoop ,		0 },
 
-    /* ¼ÓÃÀº½¿Õ */      // Arminius 7.7 Airplane
+    /* åŠ ç¾èˆªç©º */      // Arminius 7.7 Airplane
     { {"AirInit"} ,     NPC_AirInit ,           0 },
     { {"AirTalked"} ,   NPC_AirTalked ,         0 },
     { {"AirLoop"} ,     NPC_AirLoop ,           0 },
@@ -429,17 +429,17 @@ correspondStringAndFunctionTable[]=
     { {"QuizWindowTalked"}, NPC_QuizWindowTalked, 0 },
 	
 
-    /* ÇĞÖ®ÔÈÈÊÒıÊÏ */
+    /* åˆ‡ä¹‹åŒ€ä»å¼•æ° */
     { {"CheckManInit"} , 		NPC_CheckManInit ,	0 },
     { {"CheckManTalked"} , 		NPC_CheckManTalked,	0 },
     { {"CheckManWindowTalked"}, NPC_CheckManWindowTalked, 0 },
 
-    /* ÔªÔúÊÏØêÊÏé¬ */
+    /* å…ƒæ‰æ°ä»ƒæ°æ¥ */
     { {"JankenInit"} , 		NPC_JankenInit ,	0 },
     { {"JankenTalked"} , 		NPC_JankenTalked,	0 },
     { {"JankenWindowTalked"}, NPC_JankenWindowTalked, 0 },
 
-    /* ±îÏ·ÚĞ */
+    /* é³–æˆè°› */
     { {"TransmigrationInit"} , 		NPC_TransmigrationInit ,	0 },
     { {"TransmigrationTalked"} , 		NPC_TransmigrationTalked,	0 },
     { {"TransmigrationWindowTalked"}, NPC_TransmigrationWindowTalked, 0 },
@@ -497,7 +497,7 @@ correspondStringAndFunctionTable[]=
     { {"FmLetterWindowTalked"}, NPC_FmLetterWindowTalked, 0 },
 
 
-#ifdef _GAMBLE_BANK	//ÒøĞĞ
+#ifdef _GAMBLE_BANK	//é“¶è¡Œ
   	{ {"GambleBankInit"},			NPC_GambleBankInit, 0},
   	{ {"GambleBankLoop"},			NPC_GambleBankLoop,0},
     { {"GambleBankTalked"},			NPC_GambleBankTalked,0},
@@ -508,7 +508,7 @@ correspondStringAndFunctionTable[]=
 #ifdef _PET_LIMITLEVEL
 	{ {"ITEM_useOtherEditBase"}, ITEM_useOtherEditBase, 0},
 #endif
-#ifdef _GAMBLE_ROULETTE //¶Ä³¡ÂÖÅÌ
+#ifdef _GAMBLE_ROULETTE //èµŒåœºè½®ç›˜
 	{ {"GambleRouletteInit"},			NPC_Gamble_RouletteInit, 0},
 	{ {"GambleRouletteLoop"},			NPC_Gamble_RouletteLoop, 0},
     { {"GambleRouletteTalked"},		NPC_Gamble_RouletteTalked, 0},
@@ -554,7 +554,7 @@ correspondStringAndFunctionTable[]=
     { {"FreePetSkillWindowTalked"},	NPC_FreePetSkillShopWindowTalked, 0 },
 #endif
 
-#ifdef _PETRACE // ³èÎï¾ºËÙ
+#ifdef _PETRACE // å® ç‰©ç«é€Ÿ
 	{ {"PetRaceMasterInit"},			NPC_PetRaceMasterInit, 0},
 	{ {"PetRaceMasterLoop"},			NPC_PetRaceMasterLoop, 0},
     { {"PetRaceMasterTalked"},		NPC_PetRaceMasterTalked, 0},
@@ -572,7 +572,7 @@ correspondStringAndFunctionTable[]=
     { {"NewNpcManWindowTalked"},	NPC_NewNpcManWindowTalked, 0},
 #endif
 
-#ifdef _ALLDOMAN   // (²»¿É¿ª) Syu ADD ÅÅĞĞ°ñNPC
+#ifdef _ALLDOMAN   // (ä¸å¯å¼€) Syu ADD æ’è¡Œæ¦œNPC
     { {"AlldomanInit"} ,                        NPC_AlldomanInit,        0 },
     { {"AlldomanTalked"} ,                      NPC_AlldomanTalked ,     0 },
     { {"AlldomanWindowTalked"},                 NPC_AlldomanWindowTalked , 0},
@@ -581,17 +581,17 @@ correspondStringAndFunctionTable[]=
 #ifdef _TIME_TICKET
   	{ {"ITEM_timeticket"}, ITEM_timeticket, 0},
 #endif
-#ifdef _ITEM_SETLOVER	// ½á»éÎïÆ·
+#ifdef _ITEM_SETLOVER	// ç»“å©šç‰©å“
     { {"ITEM_SetLoverUser"}, ITEM_SetLoverUser, 0 },
     { {"ITEM_LoverWarp"}, ITEM_LoverWarp, 0 },
     { {"ITEM_LoverUnmarry"}, ITEM_LoverUnmarry, 0 },
 #endif
 
-#ifdef _GM_ITEM	// GMÃüÁîÎïÆ·
+#ifdef _GM_ITEM	// GMå‘½ä»¤ç‰©å“
 		{ {"ITEM_GMFUNCTION"}, ITEM_GMFUNCTION, 0 },
 #endif
 
-#ifdef _VIP_SERVER	// »áÔ±·şÎñ
+#ifdef _VIP_SERVER	// ä¼šå‘˜æœåŠ¡
 		{ {"ITEM_AddMemberPoint"}, ITEM_AddMemberPoint, 0 },
 #endif
 #ifdef _VIP_RIDE

@@ -26,7 +26,7 @@ void TalkAction(int charaindex, char *message);
 static BOOL player_useChatMagic( int charaindex, char* data, BOOL isDebug);
 #endif
 /*------------------------------------------------------------
- * ÃñÅÒÓÀĞşèú  ¼°Ä©¡õµ©
+ * æ°‘ä¹“æ°¸ç„æ¥®  åŠæœ«â–¡æ—¦
  ------------------------------------------------------------*/
 #define DEBUGCDKEYNUM 100
 struct tagDebugCDKey {
@@ -35,7 +35,7 @@ struct tagDebugCDKey {
 };
 static struct tagDebugCDKey DebugCDKey[DEBUGCDKEYNUM];
 
-/*====================ÃñÅÒÓÀĞş  Ü·====================*/
+/*====================æ°‘ä¹“æ°¸ç„  èŠŠ====================*/
 typedef void (*CHATMAGICFUNC)(int,char*);
 typedef struct tagCHAR_ChatMagicTable
 {
@@ -48,107 +48,107 @@ typedef struct tagCHAR_ChatMagicTable
 }CHAR_ChatMagicTable;
 
 static CHAR_ChatMagicTable CHAR_cmtbl[]={
-	//¹¤³ÌÊ¦×¨ÓÃ
+	//å·¥ç¨‹å¸ˆä¸“ç”¨
 	{ "programming_engineer",	CHAR_CHAT_DEBUG_engineer,	TRUE,	0,	3, ""},
-	{ "petlevelup",	CHAR_CHAT_DEBUG_petlevelup,	TRUE,	0,	2, "³èÎïÀ¸ºÅ µÈ¼¶ (ÕËºÅ)"},
-	{ "petexpup",	CHAR_CHAT_DEBUG_petexpup,	TRUE,	0,	2, "³èÎïÀ¸ºÅ ¾­Ñé (ÕËºÅ)"},
-	{ "help",			CHAR_CHAT_DEBUG_help,				TRUE,	0,	1, "Ö¸Áî/all"},
+	{ "petlevelup",	CHAR_CHAT_DEBUG_petlevelup,	TRUE,	0,	2, "å® ç‰©æ å· ç­‰çº§ (è´¦å·)"},
+	{ "petexpup",	CHAR_CHAT_DEBUG_petexpup,	TRUE,	0,	2, "å® ç‰©æ å· ç»éªŒ (è´¦å·)"},
+	{ "help",			CHAR_CHAT_DEBUG_help,				TRUE,	0,	1, "æŒ‡ä»¤/all"},
 #ifdef _EQUIT_NEGLECTGUARD
 	{ "setneguard",		CHAR_CHAT_DEBUG_setneguard,			TRUE,	0,	3, "waei"},
 #endif
-	//ÈËÎïÊôĞÔ
-	{ "info",			CHAR_CHAT_DEBUG_info,			TRUE,	0,	1, "ÊıÖµ"},
-	{ "level",			CHAR_CHAT_DEBUG_level,			TRUE,	0,	1, "ÊıÖµ (ÕËºÅ)"},
-	{ "settrans",		CHAR_CHAT_DEBUG_setTrans,		TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "exp",			CHAR_CHAT_DEBUG_exp,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "hp",				CHAR_CHAT_DEBUG_hp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "mp",				CHAR_CHAT_DEBUG_mp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "setmp",			CHAR_CHAT_DEBUG_setmp,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "str",			CHAR_CHAT_DEBUG_str,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "dex",			CHAR_CHAT_DEBUG_dex,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "tgh",			CHAR_CHAT_DEBUG_tgh,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "vital",			CHAR_CHAT_DEBUG_vital,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "luck",			CHAR_CHAT_DEBUG_luck,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "superman",		CHAR_CHAT_DEBUG_superman,		TRUE,	0,	2, "(ÕËºÅ)"},
-	{ "dp",				CHAR_CHAT_DEBUG_dp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
+	//äººç‰©å±æ€§
+	{ "info",			CHAR_CHAT_DEBUG_info,			TRUE,	0,	1, "æ•°å€¼"},
+	{ "level",			CHAR_CHAT_DEBUG_level,			TRUE,	0,	1, "æ•°å€¼ (è´¦å·)"},
+	{ "settrans",		CHAR_CHAT_DEBUG_setTrans,		TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "exp",			CHAR_CHAT_DEBUG_exp,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "hp",				CHAR_CHAT_DEBUG_hp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "mp",				CHAR_CHAT_DEBUG_mp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "setmp",			CHAR_CHAT_DEBUG_setmp,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "str",			CHAR_CHAT_DEBUG_str,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "dex",			CHAR_CHAT_DEBUG_dex,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "tgh",			CHAR_CHAT_DEBUG_tgh,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "vital",			CHAR_CHAT_DEBUG_vital,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "luck",			CHAR_CHAT_DEBUG_luck,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "superman",		CHAR_CHAT_DEBUG_superman,		TRUE,	0,	2, "(è´¦å·)"},
+	{ "dp",				CHAR_CHAT_DEBUG_dp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
 #ifdef _EQUIT_SEQUENCE
-	{ "sequence",		CHAR_CHAT_DEBUG_sequence,		TRUE,	0,	3, "ÊıÖµ"},
+	{ "sequence",		CHAR_CHAT_DEBUG_sequence,		TRUE,	0,	3, "æ•°å€¼"},
 #endif
 
-	//ÏµÍ³
-	{ "announce",		CHAR_CHAT_DEBUG_announce,		TRUE,	0,	1, "ÄÚÈİ"},
-	{ "loginannounce",	CHAR_CHAT_DEBUG_loginannounce,	TRUE,	0,	1, "ÄÚÈİ"},
+	//ç³»ç»Ÿ
+	{ "announce",		CHAR_CHAT_DEBUG_announce,		TRUE,	0,	1, "å†…å®¹"},
+	{ "loginannounce",	CHAR_CHAT_DEBUG_loginannounce,	TRUE,	0,	1, "å†…å®¹"},
 	{ "sysinfo",		CHAR_CHAT_DEBUG_sysinfo,		TRUE,	0,	1, ""},
-	{ "effect",			CHAR_CHAT_DEBUG_effect,			TRUE,	0,	1, "alloff/µØÍ¼ºÅ ÌØĞ§"},
+	{ "effect",			CHAR_CHAT_DEBUG_effect,			TRUE,	0,	1, "alloff/åœ°å›¾å· ç‰¹æ•ˆ"},
 	{ "reset",			CHAR_CHAT_DEBUG_reset,			TRUE,	0,	2, "enemy/encount/magic/warppoint/petskill/pettalk/npc/all"},
-	{ "clean_floor",	CHAR_CHAT_DEBUG_cleanfloor,		TRUE,	0,	3, "µØÍ¼ºÅ"},
+	{ "clean_floor",	CHAR_CHAT_DEBUG_cleanfloor,		TRUE,	0,	3, "åœ°å›¾å·"},
 	{ "printcount",		CHAR_CHAT_printcount,			TRUE,	0,	1, ""},
-	{ "enemyrestart",	CHAR_CHAT_DEBUG_enemyrestart,	TRUE,	0,	3, "ÎŞ"},
-	{ "cleanfreepet",	CHAR_CHAT_DEBUG_cleanfreepet,	TRUE,	0,	3, "ÎŞ"},
+	{ "enemyrestart",	CHAR_CHAT_DEBUG_enemyrestart,	TRUE,	0,	3, "æ— "},
+	{ "cleanfreepet",	CHAR_CHAT_DEBUG_cleanfreepet,	TRUE,	0,	3, "æ— "},
 	
 #ifdef _GMRELOAD
 	{ "gmreload",		CHAR_CHAT_DEBUG_gmreload,		TRUE,	0,	3, "all/cdkey level"},
 #endif
 
-	{ "waeikickall",	CHAR_CHAT_DEBUG_waeikickall,	TRUE,	0,	3, "ÎŞ"},
-	//¹¤¾ß	³õ¼¶GM
+	{ "waeikickall",	CHAR_CHAT_DEBUG_waeikickall,	TRUE,	0,	3, "æ— "},
+	//å·¥å…·	åˆçº§GM
 	{ "debug",			CHAR_CHAT_DEBUG_debug,			TRUE,	0,	1, "on/off"},
-	{ "metamo",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "±äÉíÍ¼ºÅ (ÕËºÅ)"},
-	{ "checklock",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "ÕÊºÅ"},
-	{ "shutup",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "ÕÊºÅ ON/OFF"},
+	{ "metamo",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "å˜èº«å›¾å· (è´¦å·)"},
+	{ "checklock",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "å¸å·"},
+	{ "shutup",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "å¸å· ON/OFF"},
 #ifdef _WAEI_KICK
-	{ "gmkick",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "ÕÊºÅ LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
+	{ "gmkick",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "å¸å· LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
 #endif
-  { "battlein",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "ÎŞ"},
-  { "battleout",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "ÎŞ"},
-	{ "battlewatch",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "ÎŞ"},
-	{ "getuser",		CHAR_CHAT_DEBUG_getuser,		TRUE,	0,	1, "ÈËÎïÃû µØÍ¼ºÅ (npc)"},
-	{ "warp",			CHAR_CHAT_DEBUG_warp,			TRUE,	0,	1, "µØÍ¼ºÅ x y"},
-	{ "waeikick",		CHAR_CHAT_DEBUG_waeikick,		TRUE,	0,	1, "ÕÊºÅ"},
-  { "jail",			CHAR_CHAT_DEBUG_jail,			TRUE,	0,	1, "ÕÊºÅ"},
-	{ "send",			CHAR_CHAT_DEBUG_send,			TRUE,	0,	1, "floor x y ÕÊºÅ"},
+  { "battlein",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "æ— "},
+  { "battleout",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "æ— "},
+	{ "battlewatch",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "æ— "},
+	{ "getuser",		CHAR_CHAT_DEBUG_getuser,		TRUE,	0,	1, "äººç‰©å åœ°å›¾å· (npc)"},
+	{ "warp",			CHAR_CHAT_DEBUG_warp,			TRUE,	0,	1, "åœ°å›¾å· x y"},
+	{ "waeikick",		CHAR_CHAT_DEBUG_waeikick,		TRUE,	0,	1, "å¸å·"},
+  { "jail",			CHAR_CHAT_DEBUG_jail,			TRUE,	0,	1, "å¸å·"},
+	{ "send",			CHAR_CHAT_DEBUG_send,			TRUE,	0,	1, "floor x y å¸å·"},
 #ifdef _SendTo
-	{ "sendto",			CHAR_CHAT_DEBUG_Sendto,			TRUE,	0,	1, "ÕÊºÅ"},
+	{ "sendto",			CHAR_CHAT_DEBUG_Sendto,			TRUE,	0,	1, "å¸å·"},
 #endif
 	{ "noenemy",		CHAR_CHAT_DEBUG_noenemy,		TRUE,	0,	1, "on/off"},
-	{ "watchevent",		CHAR_CHAT_DEBUG_watchevent,		TRUE,	0,	1, "ÎŞ"},
-#ifdef _SEND_EFFECT	   	        // WON ADD ACËÍÏÂÑ©¡¢ÏÂÓêµÈÌØĞ§
+	{ "watchevent",		CHAR_CHAT_DEBUG_watchevent,		TRUE,	0,	1, "æ— "},
+#ifdef _SEND_EFFECT	   	        // WON ADD ACé€ä¸‹é›ªã€ä¸‹é›¨ç­‰ç‰¹æ•ˆ
 	{ "sendeffect",		CHAR_CHAT_DEBUG_sendeffect,		TRUE,	0,	1, ""},
 #endif
-	{ "silent",			CHAR_CHAT_DEBUG_silent,			TRUE,	0,	2, "ÕÊºÅ ·ÖÖÓ"},//½ûÑÔ
-	{ "unlock",			CHAR_CHAT_DEBUG_unlock,			TRUE,	0,	2, "ÕÊºÅ"},
-	{ "eventclean",		CHAR_CHAT_DEBUG_eventclean,		TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
-	{ "eventsetend",	CHAR_CHAT_DEBUG_eventsetend,	TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
-	{ "eventsetnow",	CHAR_CHAT_DEBUG_eventsetnow,	TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
+	{ "silent",			CHAR_CHAT_DEBUG_silent,			TRUE,	0,	2, "å¸å· åˆ†é’Ÿ"},//ç¦è¨€
+	{ "unlock",			CHAR_CHAT_DEBUG_unlock,			TRUE,	0,	2, "å¸å·"},
+	{ "eventclean",		CHAR_CHAT_DEBUG_eventclean,		TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
+	{ "eventsetend",	CHAR_CHAT_DEBUG_eventsetend,	TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
+	{ "eventsetnow",	CHAR_CHAT_DEBUG_eventsetnow,	TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
 
 	{ "playerspread",	CHAR_CHAT_DEBUG_playerspread,	TRUE,	0,	3, "waei"},
-	{ "shutupall",		CHAR_CHAT_DEBUG_shutupall,		TRUE,	0,	3, "ÎŞ"},
-	{ "unlockserver",	CHAR_CHAT_DEBUG_unlockserver,	TRUE,	0,	3, "ÎŞ"},
-  { "shutdown",		CHAR_CHAT_DEBUG_shutdown,		TRUE,	0,	3, "(·ÖÖÓ)"},
+	{ "shutupall",		CHAR_CHAT_DEBUG_shutupall,		TRUE,	0,	3, "æ— "},
+	{ "unlockserver",	CHAR_CHAT_DEBUG_unlockserver,	TRUE,	0,	3, "æ— "},
+  { "shutdown",		CHAR_CHAT_DEBUG_shutdown,		TRUE,	0,	3, "(åˆ†é’Ÿ)"},
 
-	//ÖÆ³É
-	{ "delitem",		CHAR_CHAT_DEBUG_delitem,		TRUE,	0,	1, "all/Î»ÖÃ"},
-	{ "delpet",			CHAR_CHAT_DEBUG_deletepet,		TRUE,	0,	1, "all/Î»ÖÃ"},
-	{ "additem",		CHAR_CHAT_DEBUG_additem,		TRUE,	0,	2, "µÀ¾ßID ((ÊıÁ¿) (ÕËºÅ))"},
-	{ "petmake",		CHAR_CHAT_DEBUG_petmake,		TRUE,	0,	2, "³èÎïID ((µÈ¼¶) (ÕËºÅ))"},
-	{ "gold",			CHAR_CHAT_DEBUG_gold,			TRUE,	0,	2, "ÊıÁ¿ (ÕËºÅ)"},
+	//åˆ¶æˆ
+	{ "delitem",		CHAR_CHAT_DEBUG_delitem,		TRUE,	0,	1, "all/ä½ç½®"},
+	{ "delpet",			CHAR_CHAT_DEBUG_deletepet,		TRUE,	0,	1, "all/ä½ç½®"},
+	{ "additem",		CHAR_CHAT_DEBUG_additem,		TRUE,	0,	2, "é“å…·ID ((æ•°é‡) (è´¦å·))"},
+	{ "petmake",		CHAR_CHAT_DEBUG_petmake,		TRUE,	0,	2, "å® ç‰©ID ((ç­‰çº§) (è´¦å·))"},
+	{ "gold",			CHAR_CHAT_DEBUG_gold,			TRUE,	0,	2, "æ•°é‡ (è´¦å·)"},
 
-	//¼Ò×å¹¤¾ß
-	{ "manorpk",		CHAR_CHAT_DEBUG_manorpk,		TRUE,	0,	2, "allpeace/peace ×¯Ô°±àºÅ"},
-	{ "fixfmleader",	CHAR_CHAT_DEBUG_fixfmleader,	TRUE,	0,	2, "ÕÊºÅ 1"},
+	//å®¶æ—å·¥å…·
+	{ "manorpk",		CHAR_CHAT_DEBUG_manorpk,		TRUE,	0,	2, "allpeace/peace åº„å›­ç¼–å·"},
+	{ "fixfmleader",	CHAR_CHAT_DEBUG_fixfmleader,	TRUE,	0,	2, "å¸å· 1"},
 	{ "fixfmpk",		CHAR_CHAT_DEBUG_fixfmpk,		TRUE,	0,	3, ""},
 	{ "fixfmdata",		CHAR_CHAT_DEBUG_fixfmdata,		TRUE,	0,	2, ""},
 
 #ifdef _TEST_DROPITEMS
-	{ "dropmypet",		CHAR_CHAT_DEBUG_dropmypet,		TRUE,	0,	3, "³èÎï±àºÅ"},
-	{ "dropmyitem",		CHAR_CHAT_DEBUG_dropmyitem,		TRUE,	0,	2, "µÀ¾ß±àºÅ/(0/1)"},
+	{ "dropmypet",		CHAR_CHAT_DEBUG_dropmypet,		TRUE,	0,	3, "å® ç‰©ç¼–å·"},
+	{ "dropmyitem",		CHAR_CHAT_DEBUG_dropmyitem,		TRUE,	0,	2, "é“å…·ç¼–å·/(0/1)"},
 #endif
 	{ "checktime",		CHAR_CHAT_DEBUG_checktime,		TRUE,	0,	3, ""},
 
 #ifdef _GAMBLE_BANK
-	{ "setgamblenum",	CHAR_CHAT_DEBUG_setgamblenum,	TRUE,	0,	3, "ÊıÖµ"},
+	{ "setgamblenum",	CHAR_CHAT_DEBUG_setgamblenum,	TRUE,	0,	3, "æ•°å€¼"},
 #endif
-    // WON ADD µ±»úÖ¸Áî
+    // WON ADD å½“æœºæŒ‡ä»¤
 	{ "crash",			CHAR_CHAT_DEBUG_crash,			TRUE,	0,	3, ""},
 #ifdef _PETSKILL_SETDUCK
 	{ "setDuck",		CHAR_CHAT_DEBUG_SetDuck,		TRUE,	0,	3, ""},
@@ -157,8 +157,8 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 #ifdef _TYPE_TOXICATION
 	{ "setTox",			CHAR_CHAT_DEBUG_Toxication,		TRUE,	0,	3, ""},
 #endif
-	{ "showMem",		CHAR_CHAT_DEBUG_showMem,		TRUE,	0,	2, "ÎŞ"},
-	{ "samecode",		CHAR_CHAT_DEBUG_samecode,		TRUE,	0,	3, "pet/item/set ±àÂë"},
+	{ "showMem",		CHAR_CHAT_DEBUG_showMem,		TRUE,	0,	2, "æ— "},
+	{ "samecode",		CHAR_CHAT_DEBUG_samecode,		TRUE,	0,	3, "pet/item/set ç¼–ç "},
 	{ "itemreload",	CHAR_CHAT_DEBUG_itemreload,	TRUE,   0,  2, ""},
 
 	{ "skywalker",	CHAR_CHAT_DEBUG_skywalker,	TRUE,   0,  1, ""},
@@ -167,40 +167,40 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 #endif
 
 #ifdef _DEF_GETYOU	  
-	{ "getyou",		    CHAR_CHAT_DEBUG_getyou,			TRUE,   0,  1, "¸ñÊı 1~3"},
+	{ "getyou",		    CHAR_CHAT_DEBUG_getyou,			TRUE,   0,  1, "æ ¼æ•° 1~3"},
 #endif 
 #ifdef _DEF_NEWSEND
-	{ "newsend",        CHAR_CHAT_DEBUG_newsend,        TRUE,   0,  1, "floor x y ÕÊºÅ ÎŞ/ÒªËµµÄ»°"},   
+	{ "newsend",        CHAR_CHAT_DEBUG_newsend,        TRUE,   0,  1, "floor x y å¸å· æ— /è¦è¯´çš„è¯"},   
 #endif
 #ifdef _DEF_SUPERSEND
-	{ "supersend",      CHAR_CHAT_DEBUG_supersend,      TRUE,   0,  3, "floor x y ¸ñÊı ÎŞ/ÒªËµµÄ»°"},   
+	{ "supersend",      CHAR_CHAT_DEBUG_supersend,      TRUE,   0,  3, "floor x y æ ¼æ•° æ— /è¦è¯´çš„è¯"},   
 #endif
 
 #ifdef _CREATE_MM_1_2
-	{ "MM",		CHAR_CHAT_DEBUG_MM,      TRUE,   0,  3, "MM 1/2 (ÕËºÅ)"},
+	{ "MM",		CHAR_CHAT_DEBUG_MM,      TRUE,   0,  3, "MM 1/2 (è´¦å·)"},
 #endif
 #ifdef _GM_ITEM
-	{ "gmfunction",		CHAR_CHAT_DEBUG_GMFUNCTION,      TRUE,   0,  3, "ÃüÁî ´ÎÊı (ÕËºÅ)"},
+	{ "gmfunction",		CHAR_CHAT_DEBUG_GMFUNCTION,      TRUE,   0,  3, "å‘½ä»¤ æ¬¡æ•° (è´¦å·)"},
 #endif
 
 #ifdef _GM_RIDE
-	{ "setride",		CHAR_CHAT_DEBUG_SETRIDE,      TRUE,   0,  3, "Æï³èºÅ (ÕËºÅ)"},
-	{ "mvride",		CHAR_CHAT_DEBUG_MVRIDE,      TRUE,   0,  3, "Æï³èºÅ (ÕËºÅ)"},
+	{ "setride",		CHAR_CHAT_DEBUG_SETRIDE,      TRUE,   0,  3, "éª‘å® å· (è´¦å·)"},
+	{ "mvride",		CHAR_CHAT_DEBUG_MVRIDE,      TRUE,   0,  3, "éª‘å® å· (è´¦å·)"},
 #endif
 
 #ifdef _LOCK_IP
-	{ "addlock",		CHAR_CHAT_DEBUG_ADD_LOCK,      TRUE,   0,  3, "flag ÕËºÅ/IP IP"},
-	{ "dellock",		CHAR_CHAT_DEBUG_DEL_LOCK,      TRUE,   0,  3, "flag ÕËºÅ/IP IP"},
-	{ "showip",		CHAR_CHAT_DEBUG_SHOWIP,      TRUE,   0,  3, "ÕËºÅ"},
+	{ "addlock",		CHAR_CHAT_DEBUG_ADD_LOCK,      TRUE,   0,  3, "flag è´¦å·/IP IP"},
+	{ "dellock",		CHAR_CHAT_DEBUG_DEL_LOCK,      TRUE,   0,  3, "flag è´¦å·/IP IP"},
+	{ "showip",		CHAR_CHAT_DEBUG_SHOWIP,      TRUE,   0,  3, "è´¦å·"},
 #endif	
-	{ "setfame",		CHAR_CHAT_DEBUG_SET_FAME,      TRUE,   0,  3, "ÕËºÅ ÉùÍûÖµ"},
+	{ "setfame",		CHAR_CHAT_DEBUG_SET_FAME,      TRUE,   0,  3, "è´¦å· å£°æœ›å€¼"},
 	
 #ifdef _AUTO_PK
-	{ "pktime",		CHAR_CHAT_DEBUG_SET_AUTOPK,      TRUE,   0,  3, "·ÖÖÓ"},
+	{ "pktime",		CHAR_CHAT_DEBUG_SET_AUTOPK,      TRUE,   0,  3, "åˆ†é’Ÿ"},
 #endif
 
 #ifdef _PLAYER_NUM
-	{ "playernum",		CHAR_CHAT_DEBUG_SET_PLAYERNUM,      TRUE,   0,  3, "ÈËÊı"},
+	{ "playernum",		CHAR_CHAT_DEBUG_SET_PLAYERNUM,      TRUE,   0,  3, "äººæ•°"},
 #endif
 
 #ifdef _RELOAD_CF
@@ -208,13 +208,13 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 #endif
 
 #ifdef _TRANS
-	{ "trans",		CHAR_CHAT_DEBUG_Trans,      TRUE,   0,  3, "(ÕËºÅ)"},
+	{ "trans",		CHAR_CHAT_DEBUG_Trans,      TRUE,   0,  3, "(è´¦å·)"},
 #endif
 #ifdef _MAKE_PET_CF
-	{ "petmakecf",		CHAR_CHAT_DEBUG_petmakecf,      TRUE,   0,  3, "³èÎï±àºÅ ×ªÎï/µÈ¼¶/³É³¤"},
+	{ "petmakecf",		CHAR_CHAT_DEBUG_petmakecf,      TRUE,   0,  3, "å® ç‰©ç¼–å· è½¬ç‰©/ç­‰çº§/æˆé•¿"},
 #endif
 #ifdef _MAKE_PET_ABILITY
-	{ "petmakeabi",		CHAR_CHAT_DEBUG_petmakeabi,      TRUE,   0,  3, "³èÎï±àºÅ ×ªÎï/µÈ¼¶/³É³¤"},
+	{ "petmakeabi",		CHAR_CHAT_DEBUG_petmakeabi,      TRUE,   0,  3, "å® ç‰©ç¼–å· è½¬ç‰©/ç­‰çº§/æˆé•¿"},
 #endif
 #ifdef _MAKE_MAP
 	{ "delmap",		CHAR_CHAT_DelMap,      TRUE,   0,  3, ""},
@@ -222,177 +222,177 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 	{ "map",		CHAR_CHAT_Map,      TRUE,   0,  3, ""},
 	{ "tile",		CHAR_CHAT_Fixtile,      TRUE,   0,  3, ""},
 	{ "obj",		CHAR_CHAT_Fixobj,      TRUE,   0,  3, ""},
-	{ "É¾³ıµØÍ¼",		CHAR_CHAT_GetMap,      TRUE,   0,  3, ""},
-	{ "»ñÈ¡µØÍ¼",		CHAR_CHAT_GetMap,      TRUE,   0,  3, ""},
-	{ "Í¼Æ¬¶ÔÏñ",		CHAR_CHAT_Map,      TRUE,   0,  3, ""},
-	{ "Í¼Æ¬",		CHAR_CHAT_Fixtile,      TRUE,   0,  3, ""},
-	{ "¶ÔÏó",		CHAR_CHAT_Fixobj,      TRUE,   0,  3, ""},
+	{ "åˆ é™¤åœ°å›¾",		CHAR_CHAT_GetMap,      TRUE,   0,  3, ""},
+	{ "è·å–åœ°å›¾",		CHAR_CHAT_GetMap,      TRUE,   0,  3, ""},
+	{ "å›¾ç‰‡å¯¹åƒ",		CHAR_CHAT_Map,      TRUE,   0,  3, ""},
+	{ "å›¾ç‰‡",		CHAR_CHAT_Fixtile,      TRUE,   0,  3, ""},
+	{ "å¯¹è±¡",		CHAR_CHAT_Fixobj,      TRUE,   0,  3, ""},
 //	{ "fukuwa",		CHAR_CHAT_Fukuwa,      TRUE,   0,  3, ""},
 #endif
 /////////////////////////////////////////////////////////////////////////
-	//¹¤³ÌÊ¦×¨ÓÃ
+	//å·¥ç¨‹å¸ˆä¸“ç”¨
 //	{ "programming_engineer",	CHAR_CHAT_DEBUG_engineer,	TRUE,	0,	3, ""},
-	{ "³èÎïµÈ¼¶",	CHAR_CHAT_DEBUG_petlevelup,	TRUE,	0,	2, "³èÎïÀ¸ºÅ µÈ¼¶ (ÕËºÅ)"},
-	{ "³èÎï¾­Ñé",	CHAR_CHAT_DEBUG_petexpup,	TRUE,	0,	2, "³èÎïÀ¸ºÅ ¾­Ñé (ÕËºÅ)"},
-	{ "°ïÖú",			CHAR_CHAT_DEBUG_help,				TRUE,	0,	1, "Ö¸Áî/all"},
+	{ "å® ç‰©ç­‰çº§",	CHAR_CHAT_DEBUG_petlevelup,	TRUE,	0,	2, "å® ç‰©æ å· ç­‰çº§ (è´¦å·)"},
+	{ "å® ç‰©ç»éªŒ",	CHAR_CHAT_DEBUG_petexpup,	TRUE,	0,	2, "å® ç‰©æ å· ç»éªŒ (è´¦å·)"},
+	{ "å¸®åŠ©",			CHAR_CHAT_DEBUG_help,				TRUE,	0,	1, "æŒ‡ä»¤/all"},
 #ifdef _EQUIT_NEGLECTGUARD
 //	{ "setneguard",		CHAR_CHAT_DEBUG_setneguard,			TRUE,	0,	3, "waei"},
 #endif
-	//ÈËÎïÊôĞÔ
-	{ "ÈËÎïĞÅÏ¢",			CHAR_CHAT_DEBUG_info,			TRUE,	0,	1, "ÊıÖµ"},
-	{ "µÈ¼¶",			CHAR_CHAT_DEBUG_level,			TRUE,	0,	1, "ÊıÖµ (ÕËºÅ)"},
-	{ "×ªÉú",		CHAR_CHAT_DEBUG_setTrans,		TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "¾­Ñé",			CHAR_CHAT_DEBUG_exp,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "Ñª",				CHAR_CHAT_DEBUG_hp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "Ä§·¨",				CHAR_CHAT_DEBUG_mp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "ÉèÖÃÄ§·¨",			CHAR_CHAT_DEBUG_setmp,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "ÍóÁ¦",			CHAR_CHAT_DEBUG_str,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "Ãô½İ",			CHAR_CHAT_DEBUG_dex,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "ÄÍÁ¦",			CHAR_CHAT_DEBUG_tgh,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "ÌåÁ¦",			CHAR_CHAT_DEBUG_vital,			TRUE,	0,	2, "ÊıÖµ*100 (ÕËºÅ)"},
-	{ "ÔËÆø",			CHAR_CHAT_DEBUG_luck,			TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
-	{ "³¬ÈË",		CHAR_CHAT_DEBUG_superman,		TRUE,	0,	2, "(ÕËºÅ)"},
-	{ "dp",				CHAR_CHAT_DEBUG_dp,				TRUE,	0,	2, "ÊıÖµ (ÕËºÅ)"},
+	//äººç‰©å±æ€§
+	{ "äººç‰©ä¿¡æ¯",			CHAR_CHAT_DEBUG_info,			TRUE,	0,	1, "æ•°å€¼"},
+	{ "ç­‰çº§",			CHAR_CHAT_DEBUG_level,			TRUE,	0,	1, "æ•°å€¼ (è´¦å·)"},
+	{ "è½¬ç”Ÿ",		CHAR_CHAT_DEBUG_setTrans,		TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "ç»éªŒ",			CHAR_CHAT_DEBUG_exp,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "è¡€",				CHAR_CHAT_DEBUG_hp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "é­”æ³•",				CHAR_CHAT_DEBUG_mp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "è®¾ç½®é­”æ³•",			CHAR_CHAT_DEBUG_setmp,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "è…•åŠ›",			CHAR_CHAT_DEBUG_str,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "æ•æ·",			CHAR_CHAT_DEBUG_dex,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "è€åŠ›",			CHAR_CHAT_DEBUG_tgh,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "ä½“åŠ›",			CHAR_CHAT_DEBUG_vital,			TRUE,	0,	2, "æ•°å€¼*100 (è´¦å·)"},
+	{ "è¿æ°”",			CHAR_CHAT_DEBUG_luck,			TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
+	{ "è¶…äºº",		CHAR_CHAT_DEBUG_superman,		TRUE,	0,	2, "(è´¦å·)"},
+	{ "dp",				CHAR_CHAT_DEBUG_dp,				TRUE,	0,	2, "æ•°å€¼ (è´¦å·)"},
 
 #ifdef _EQUIT_SEQUENCE
-	{ "Ë³Ğò",		CHAR_CHAT_DEBUG_sequence,		TRUE,	0,	3, "ÊıÖµ"},
+	{ "é¡ºåº",		CHAR_CHAT_DEBUG_sequence,		TRUE,	0,	3, "æ•°å€¼"},
 #endif
 
-	//ÏµÍ³
-	{ "¹«¸æ",		CHAR_CHAT_DEBUG_announce,		TRUE,	0,	1, "ÄÚÈİ"},
-	{ "µÇÂ½¹«¸æ",	CHAR_CHAT_DEBUG_loginannounce,	TRUE,	0,	1, "ÄÚÈİ"},
-	{ "ÏµÍ³ĞÅÏ¢",		CHAR_CHAT_DEBUG_sysinfo,		TRUE,	0,	1, ""},
-	{ "µØÍ¼ÌØĞ§",			CHAR_CHAT_DEBUG_effect,			TRUE,	0,	1, "alloff/µØÍ¼ºÅ ÌØĞ§"},
-	{ "ÖØ¶Á",			CHAR_CHAT_DEBUG_reset,			TRUE,	0,	2, "enemy/encount/magic/warppoint/petskill/pettalk/npc/all"},
-	{ "Çå³ıµØÍ¼ÎïÆ·",	CHAR_CHAT_DEBUG_cleanfloor,		TRUE,	0,	3, "µØÍ¼ºÅ"},
-	{ "Í³¼Æ",		CHAR_CHAT_printcount,			TRUE,	0,	1, ""},
-	{ "ÖØ¶Á³èÎï×ÊÁÏ",	CHAR_CHAT_DEBUG_enemyrestart,	TRUE,	0,	3, "ÎŞ"},
-	{ "Çå³ıµØÉÏ³èÎï",	CHAR_CHAT_DEBUG_cleanfreepet,	TRUE,	0,	3, "ÎŞ"},
+	//ç³»ç»Ÿ
+	{ "å…¬å‘Š",		CHAR_CHAT_DEBUG_announce,		TRUE,	0,	1, "å†…å®¹"},
+	{ "ç™»é™†å…¬å‘Š",	CHAR_CHAT_DEBUG_loginannounce,	TRUE,	0,	1, "å†…å®¹"},
+	{ "ç³»ç»Ÿä¿¡æ¯",		CHAR_CHAT_DEBUG_sysinfo,		TRUE,	0,	1, ""},
+	{ "åœ°å›¾ç‰¹æ•ˆ",			CHAR_CHAT_DEBUG_effect,			TRUE,	0,	1, "alloff/åœ°å›¾å· ç‰¹æ•ˆ"},
+	{ "é‡è¯»",			CHAR_CHAT_DEBUG_reset,			TRUE,	0,	2, "enemy/encount/magic/warppoint/petskill/pettalk/npc/all"},
+	{ "æ¸…é™¤åœ°å›¾ç‰©å“",	CHAR_CHAT_DEBUG_cleanfloor,		TRUE,	0,	3, "åœ°å›¾å·"},
+	{ "ç»Ÿè®¡",		CHAR_CHAT_printcount,			TRUE,	0,	1, ""},
+	{ "é‡è¯»å® ç‰©èµ„æ–™",	CHAR_CHAT_DEBUG_enemyrestart,	TRUE,	0,	3, "æ— "},
+	{ "æ¸…é™¤åœ°ä¸Šå® ç‰©",	CHAR_CHAT_DEBUG_cleanfreepet,	TRUE,	0,	3, "æ— "},
 	
 #ifdef _GMRELOAD
-	{ "¶ÁÈ¡GMÉèÖÃ",		CHAR_CHAT_DEBUG_gmreload,		TRUE,	0,	3, "all/cdkey level"},
+	{ "è¯»å–GMè®¾ç½®",		CHAR_CHAT_DEBUG_gmreload,		TRUE,	0,	3, "all/cdkey level"},
 #endif
 
-	{ "Ìß³ıËùÓĞÍæ¼Ò",	CHAR_CHAT_DEBUG_waeikickall,	TRUE,	0,	3, "ÎŞ"},
+	{ "è¸¢é™¤æ‰€æœ‰ç©å®¶",	CHAR_CHAT_DEBUG_waeikickall,	TRUE,	0,	3, "æ— "},
 //	{ "checktrade",		CHAR_CHAT_DEBUG_checktrade,		TRUE,	0,	3, "waei"},
-	//¹¤¾ß	³õ¼¶GM
-	{ "µ÷ÊÔ",			CHAR_CHAT_DEBUG_debug,			TRUE,	0,	1, "ÃÜÂë µ÷ÊÔ on/off"},
-	{ "ÔìĞÍ",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "±äÉíÍ¼ºÅ (ÕËºÅ)"},
-	{ "Ëø¶¨ÕÊºÅ",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "ÕÊºÅ"},
-	{ "·â×ì",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "ÕÊºÅ ON/OFF"},
+	//å·¥å…·	åˆçº§GM
+	{ "è°ƒè¯•",			CHAR_CHAT_DEBUG_debug,			TRUE,	0,	1, "å¯†ç  è°ƒè¯• on/off"},
+	{ "é€ å‹",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "å˜èº«å›¾å· (è´¦å·)"},
+	{ "é”å®šå¸å·",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "å¸å·"},
+	{ "å°å˜´",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "å¸å· ON/OFF"},
 #ifdef _WAEI_KICK
-	{ "gmÌßÈË",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "ÕÊºÅ LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
+	{ "gmè¸¢äºº",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "å¸å· LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
 #endif
-  { "¼ÓÈëÕ½¶·",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "ÎŞ"},
-  { "½áÊøÕ½¶·",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "ÎŞ"},
-	{ "¹ÛÕ½",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "ÎŞ"},
-	{ "ÏÔÊ¾ĞÅÏ¢",		CHAR_CHAT_DEBUG_getuser,		TRUE,	0,	1, "ÈËÎïÃû µØÍ¼ºÅ (npc)"},
-	{ "´«ËÍ×Ô¼º",			CHAR_CHAT_DEBUG_warp,			TRUE,	0,	1, "µØÍ¼ºÅ x y"},
-	{ "Ìß³ıÍæ¼Ò",		CHAR_CHAT_DEBUG_waeikick,		TRUE,	0,	1, "ÕÊºÅ"},
-  { "¹ØÈë¼àÓü",			CHAR_CHAT_DEBUG_jail,			TRUE,	0,	1, "ÕÊºÅ"},
-	{ "´«ËÍ",			CHAR_CHAT_DEBUG_send,			TRUE,	0,	1, "µØÍ¼±àºÅ x y ÕÊºÅ"},
+  { "åŠ å…¥æˆ˜æ–—",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "æ— "},
+  { "ç»“æŸæˆ˜æ–—",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "æ— "},
+	{ "è§‚æˆ˜",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "æ— "},
+	{ "æ˜¾ç¤ºä¿¡æ¯",		CHAR_CHAT_DEBUG_getuser,		TRUE,	0,	1, "äººç‰©å åœ°å›¾å· (npc)"},
+	{ "ä¼ é€è‡ªå·±",			CHAR_CHAT_DEBUG_warp,			TRUE,	0,	1, "åœ°å›¾å· x y"},
+	{ "è¸¢é™¤ç©å®¶",		CHAR_CHAT_DEBUG_waeikick,		TRUE,	0,	1, "å¸å·"},
+  { "å…³å…¥ç›‘ç‹±",			CHAR_CHAT_DEBUG_jail,			TRUE,	0,	1, "å¸å·"},
+	{ "ä¼ é€",			CHAR_CHAT_DEBUG_send,			TRUE,	0,	1, "åœ°å›¾ç¼–å· x y å¸å·"},
 #ifdef _SendTo
-	{ "´«ËÍµ½Íæ¼Ò",			CHAR_CHAT_DEBUG_Sendto,			TRUE,	0,	1, "ÕÊºÅ"},
+	{ "ä¼ é€åˆ°ç©å®¶",			CHAR_CHAT_DEBUG_Sendto,			TRUE,	0,	1, "å¸å·"},
 #endif
-	{ "²»ÓöµĞ",		CHAR_CHAT_DEBUG_noenemy,		TRUE,	0,	1, "on/off"},
-	{ "ÏÔÊ¾Íê³ÉÈÎÎñ",		CHAR_CHAT_DEBUG_watchevent,		TRUE,	0,	1, "ÎŞ"},
-#ifdef _SEND_EFFECT	   	        // WON ADD ACËÍÏÂÑ©¡¢ÏÂÓêµÈÌØĞ§
-	{ "ÌØĞ§",		CHAR_CHAT_DEBUG_sendeffect,		TRUE,	0,	1, ""},
+	{ "ä¸é‡æ•Œ",		CHAR_CHAT_DEBUG_noenemy,		TRUE,	0,	1, "on/off"},
+	{ "æ˜¾ç¤ºå®Œæˆä»»åŠ¡",		CHAR_CHAT_DEBUG_watchevent,		TRUE,	0,	1, "æ— "},
+#ifdef _SEND_EFFECT	   	        // WON ADD ACé€ä¸‹é›ªã€ä¸‹é›¨ç­‰ç‰¹æ•ˆ
+	{ "ç‰¹æ•ˆ",		CHAR_CHAT_DEBUG_sendeffect,		TRUE,	0,	1, ""},
 #endif
-	{ "½ûÑÔ",			CHAR_CHAT_DEBUG_silent,			TRUE,	0,	2, "ÕÊºÅ ·ÖÖÓ"},//½ûÑÔ
-	{ "½âËø",			CHAR_CHAT_DEBUG_unlock,			TRUE,	0,	2, "ÕÊºÅ"},
-	{ "Çå³ıÆì±ê",		CHAR_CHAT_DEBUG_eventclean,		TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
-	{ "Ôö¼ÓÆì±ê",	CHAR_CHAT_DEBUG_eventsetend,	TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
-	{ "ÖØĞÂÈÎÎñ",	CHAR_CHAT_DEBUG_eventsetnow,	TRUE,	0,	2, "all/Æì±ê ÕÊºÅ ÈËÎïÃû"},
+	{ "ç¦è¨€",			CHAR_CHAT_DEBUG_silent,			TRUE,	0,	2, "å¸å· åˆ†é’Ÿ"},//ç¦è¨€
+	{ "è§£é”",			CHAR_CHAT_DEBUG_unlock,			TRUE,	0,	2, "å¸å·"},
+	{ "æ¸…é™¤æ——æ ‡",		CHAR_CHAT_DEBUG_eventclean,		TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
+	{ "å¢åŠ æ——æ ‡",	CHAR_CHAT_DEBUG_eventsetend,	TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
+	{ "é‡æ–°ä»»åŠ¡",	CHAR_CHAT_DEBUG_eventsetnow,	TRUE,	0,	2, "all/æ——æ ‡ å¸å· äººç‰©å"},
 
-	{ "ÈËÎïµØÇøÏÔÊ¾",	CHAR_CHAT_DEBUG_playerspread,	TRUE,	0,	3, "waei"},
-//	{ "shutupall",		CHAR_CHAT_DEBUG_shutupall,		TRUE,	0,	3, "ÎŞ"},
-	{ "½â³ı·şÎñÆ÷",	CHAR_CHAT_DEBUG_unlockserver,	TRUE,	0,	3, "ÎŞ"},
-  { "¹Ø·ş",		CHAR_CHAT_DEBUG_shutdown,		TRUE,	0,	3, "·ÖÖÓ"},
+	{ "äººç‰©åœ°åŒºæ˜¾ç¤º",	CHAR_CHAT_DEBUG_playerspread,	TRUE,	0,	3, "waei"},
+//	{ "shutupall",		CHAR_CHAT_DEBUG_shutupall,		TRUE,	0,	3, "æ— "},
+	{ "è§£é™¤æœåŠ¡å™¨",	CHAR_CHAT_DEBUG_unlockserver,	TRUE,	0,	3, "æ— "},
+  { "å…³æœ",		CHAR_CHAT_DEBUG_shutdown,		TRUE,	0,	3, "åˆ†é’Ÿ"},
 
-	//ÖÆ³É
-	{ "É¾³ıÎïÆ·",		CHAR_CHAT_DEBUG_delitem,		TRUE,	0,	1, "all/Î»ÖÃ"},
-	{ "É¾³ı³èÎï",			CHAR_CHAT_DEBUG_deletepet,		TRUE,	0,	1, "all/Î»ÖÃ"},
-	{ "ÖÆ×÷ÎïÆ·",		CHAR_CHAT_DEBUG_additem,		TRUE,	0,	2, "µÀ¾ßID ((ÊıÁ¿) (ÕËºÅ))"},
-	{ "ÖÆ×÷³èÎï",		CHAR_CHAT_DEBUG_petmake,		TRUE,	0,	2, "³èÎïID ((µÈ¼¶) (ÕËºÅ))"},
-	{ "½ğÇ®",			CHAR_CHAT_DEBUG_gold,			TRUE,	0,	2, "ÊıÁ¿ (ÕËºÅ)"},
+	//åˆ¶æˆ
+	{ "åˆ é™¤ç‰©å“",		CHAR_CHAT_DEBUG_delitem,		TRUE,	0,	1, "all/ä½ç½®"},
+	{ "åˆ é™¤å® ç‰©",			CHAR_CHAT_DEBUG_deletepet,		TRUE,	0,	1, "all/ä½ç½®"},
+	{ "åˆ¶ä½œç‰©å“",		CHAR_CHAT_DEBUG_additem,		TRUE,	0,	2, "é“å…·ID ((æ•°é‡) (è´¦å·))"},
+	{ "åˆ¶ä½œå® ç‰©",		CHAR_CHAT_DEBUG_petmake,		TRUE,	0,	2, "å® ç‰©ID ((ç­‰çº§) (è´¦å·))"},
+	{ "é‡‘é’±",			CHAR_CHAT_DEBUG_gold,			TRUE,	0,	2, "æ•°é‡ (è´¦å·)"},
 
-	//¼Ò×å¹¤¾ß
-//	{ "manorpk",		CHAR_CHAT_DEBUG_manorpk,		TRUE,	0,	2, "allpeace/peace ×¯Ô°±àºÅ"},
-	{ "ĞŞ¸Ä×å³¤",	CHAR_CHAT_DEBUG_fixfmleader,	TRUE,	0,	2, "ÕÊºÅ 1"},
-	{ "ĞŞ¸´¼Ò×åPK",		CHAR_CHAT_DEBUG_fixfmpk,		TRUE,	0,	3, ""},
-	{ "ĞŞ¸´¼Ò×åÊı¾İ",		CHAR_CHAT_DEBUG_fixfmdata,		TRUE,	0,	2, ""},
+	//å®¶æ—å·¥å…·
+//	{ "manorpk",		CHAR_CHAT_DEBUG_manorpk,		TRUE,	0,	2, "allpeace/peace åº„å›­ç¼–å·"},
+	{ "ä¿®æ”¹æ—é•¿",	CHAR_CHAT_DEBUG_fixfmleader,	TRUE,	0,	2, "å¸å· 1"},
+	{ "ä¿®å¤å®¶æ—PK",		CHAR_CHAT_DEBUG_fixfmpk,		TRUE,	0,	3, ""},
+	{ "ä¿®å¤å®¶æ—æ•°æ®",		CHAR_CHAT_DEBUG_fixfmdata,		TRUE,	0,	2, ""},
 
 #ifdef _TEST_DROPITEMS
-	{ "ÂúµØ³èÎï",		CHAR_CHAT_DEBUG_dropmypet,		TRUE,	0,	3, "³èÎï±àºÅ"},
-	{ "ÂúµØÎïÆ·",		CHAR_CHAT_DEBUG_dropmyitem,		TRUE,	0,	3, "µÀ¾ß±àºÅ/(0/1)"},
+	{ "æ»¡åœ°å® ç‰©",		CHAR_CHAT_DEBUG_dropmypet,		TRUE,	0,	3, "å® ç‰©ç¼–å·"},
+	{ "æ»¡åœ°ç‰©å“",		CHAR_CHAT_DEBUG_dropmyitem,		TRUE,	0,	3, "é“å…·ç¼–å·/(0/1)"},
 #endif
-	{ "ÏÔÊ¾Ê±¼ä",		CHAR_CHAT_DEBUG_checktime,		TRUE,	0,	3, ""},
+	{ "æ˜¾ç¤ºæ—¶é—´",		CHAR_CHAT_DEBUG_checktime,		TRUE,	0,	3, ""},
 
 #ifdef _GAMBLE_BANK
-	{ "»ı·Ö",	CHAR_CHAT_DEBUG_setgamblenum,	TRUE,	0,	3, "ÊıÖµ"},
+	{ "ç§¯åˆ†",	CHAR_CHAT_DEBUG_setgamblenum,	TRUE,	0,	3, "æ•°å€¼"},
 #endif
-    // WON ADD µ±»úÖ¸Áî
-	{ "µ±»ú",			CHAR_CHAT_DEBUG_crash,			TRUE,	0,	3, ""},
+    // WON ADD å½“æœºæŒ‡ä»¤
+	{ "å½“æœº",			CHAR_CHAT_DEBUG_crash,			TRUE,	0,	3, ""},
 #ifdef _PETSKILL_SETDUCK
 //	{ "setDuck",		CHAR_CHAT_DEBUG_SetDuck,		TRUE,	0,	3, ""},
 #endif
 
 #ifdef _TYPE_TOXICATION
-	{ "ÖĞ¶¾",			CHAR_CHAT_DEBUG_Toxication,		TRUE,	0,	3, ""},
+	{ "ä¸­æ¯’",			CHAR_CHAT_DEBUG_Toxication,		TRUE,	0,	3, ""},
 #endif
-	{ "ÏÔÊ¾ÄÚ´æ",		CHAR_CHAT_DEBUG_showMem,		TRUE,	0,	2, "ÎŞ"},
-	{ "±àÂë",		CHAR_CHAT_DEBUG_samecode,		TRUE,	0,	3, "pet/item/set ±àÂë"},
+	{ "æ˜¾ç¤ºå†…å­˜",		CHAR_CHAT_DEBUG_showMem,		TRUE,	0,	2, "æ— "},
+	{ "ç¼–ç ",		CHAR_CHAT_DEBUG_samecode,		TRUE,	0,	3, "pet/item/set ç¼–ç "},
 
-	{ "¶ÁÈ¡ÎïÆ·",	CHAR_CHAT_DEBUG_itemreload,	TRUE,   0,  2, ""},
+	{ "è¯»å–ç‰©å“",	CHAR_CHAT_DEBUG_itemreload,	TRUE,   0,  2, ""},
 
-	{ "ÌìĞĞÕß",	CHAR_CHAT_DEBUG_skywalker,	TRUE,   0,  1, ""},
+	{ "å¤©è¡Œè€…",	CHAR_CHAT_DEBUG_skywalker,	TRUE,   0,  1, ""},
 #ifdef _ITEM_ADDEXP
-	{ "¶ÁÈ¡¾­ÑéÎïÆ·",	CHAR_CHAT_DEBUG_itemaddexp,	TRUE,   0,  1, ""},
+	{ "è¯»å–ç»éªŒç‰©å“",	CHAR_CHAT_DEBUG_itemaddexp,	TRUE,   0,  1, ""},
 #endif
 #ifdef _DEF_GETYOU	  
-	{ "»ñÈ¡ÕËºÅ",		    CHAR_CHAT_DEBUG_getyou,			TRUE,   0,  1, "¸ñÊı 1~3"},
+	{ "è·å–è´¦å·",		    CHAR_CHAT_DEBUG_getyou,			TRUE,   0,  1, "æ ¼æ•° 1~3"},
 #endif 
 #ifdef _DEF_NEWSEND
-	{ "´«ËÍÍæ¼Ò",        CHAR_CHAT_DEBUG_newsend,        TRUE,   0,  1, "µØÍ¼±àºÅ x y ÕÊºÅ ÎŞ/ÒªËµµÄ»°"},   
+	{ "ä¼ é€ç©å®¶",        CHAR_CHAT_DEBUG_newsend,        TRUE,   0,  1, "åœ°å›¾ç¼–å· x y å¸å· æ— /è¦è¯´çš„è¯"},   
 #endif
 #ifdef _DEF_SUPERSEND
-	{ "ÈºÌå´«ËÍ",      CHAR_CHAT_DEBUG_supersend,      TRUE,   0,  3, "µØÍ¼±àºÅ x y ¸ñÊı ÎŞ/ÒªËµµÄ»°"},   
+	{ "ç¾¤ä½“ä¼ é€",      CHAR_CHAT_DEBUG_supersend,      TRUE,   0,  3, "åœ°å›¾ç¼–å· x y æ ¼æ•° æ— /è¦è¯´çš„è¯"},   
 #endif
 
 #ifdef _GM_ITEM
-	{ "È¨ÏŞ",		CHAR_CHAT_DEBUG_GMFUNCTION,      TRUE,   0,  3, "ÃüÁî ´ÎÊı (ÕËºÅ)"},
+	{ "æƒé™",		CHAR_CHAT_DEBUG_GMFUNCTION,      TRUE,   0,  3, "å‘½ä»¤ æ¬¡æ•° (è´¦å·)"},
 #endif
 
 #ifdef _GM_RIDE
-	{ "ÉèÖÃÆï³Ë",		CHAR_CHAT_DEBUG_SETRIDE,      TRUE,   0,  3, "Æï³èºÅ (ÕËºÅ)"},
-	{ "ÒÆ³ıÆï³Ë",		CHAR_CHAT_DEBUG_MVRIDE,      TRUE,   0,  3, "Æï³èºÅ (ÕËºÅ)"},
+	{ "è®¾ç½®éª‘ä¹˜",		CHAR_CHAT_DEBUG_SETRIDE,      TRUE,   0,  3, "éª‘å® å· (è´¦å·)"},
+	{ "ç§»é™¤éª‘ä¹˜",		CHAR_CHAT_DEBUG_MVRIDE,      TRUE,   0,  3, "éª‘å® å· (è´¦å·)"},
 #endif
 
 #ifdef _LOCK_IP
-	{ "Ëø¶¨",		CHAR_CHAT_DEBUG_ADD_LOCK,      TRUE,   0,  3, "flag ÕËºÅ/IP IP"},
-	{ "½â³ıËø¶¨",		CHAR_CHAT_DEBUG_DEL_LOCK,      TRUE,   0,  3, "flag ÕËºÅ/IP IP"},
-	{ "ÏÔÊ¾Íæ¼ÒIP",		CHAR_CHAT_DEBUG_SHOWIP,      TRUE,   0,  3, "ÕËºÅ"},
+	{ "é”å®š",		CHAR_CHAT_DEBUG_ADD_LOCK,      TRUE,   0,  3, "flag è´¦å·/IP IP"},
+	{ "è§£é™¤é”å®š",		CHAR_CHAT_DEBUG_DEL_LOCK,      TRUE,   0,  3, "flag è´¦å·/IP IP"},
+	{ "æ˜¾ç¤ºç©å®¶IP",		CHAR_CHAT_DEBUG_SHOWIP,      TRUE,   0,  3, "è´¦å·"},
 #endif
-	{ "ÉùÍû",		CHAR_CHAT_DEBUG_SET_FAME,      TRUE,   0,  3, "ÕËºÅ ÉùÍûÖµ"},
+	{ "å£°æœ›",		CHAR_CHAT_DEBUG_SET_FAME,      TRUE,   0,  3, "è´¦å· å£°æœ›å€¼"},
 #ifdef _AUTO_PK
-	{ "pkÊ±¼ä",		CHAR_CHAT_DEBUG_SET_AUTOPK,      TRUE,   0,  3, "·ÖÖÓ"},
+	{ "pkæ—¶é—´",		CHAR_CHAT_DEBUG_SET_AUTOPK,      TRUE,   0,  3, "åˆ†é’Ÿ"},
 #endif
 
 #ifdef _PLAYER_NUM
-	{ "Íæ¼ÒÊı",		CHAR_CHAT_DEBUG_SET_PLAYERNUM,      TRUE,   0,  3, "ÈËÊı"},
+	{ "ç©å®¶æ•°",		CHAR_CHAT_DEBUG_SET_PLAYERNUM,      TRUE,   0,  3, "äººæ•°"},
 #endif
 #ifdef _RELOAD_CF
-	{ "¶ÁÈ¡ÉèÖÃ",		CHAR_CHAT_DEBUG_SET_RELOADCF,      TRUE,   0,  3, ""},
+	{ "è¯»å–è®¾ç½®",		CHAR_CHAT_DEBUG_SET_RELOADCF,      TRUE,   0,  3, ""},
 #endif
 #ifdef _TRANS
-	{ "¸ß¼¶×ªÉú",		CHAR_CHAT_DEBUG_Trans,      TRUE,   0,  3, "(ÕËºÅ)"},
+	{ "é«˜çº§è½¬ç”Ÿ",		CHAR_CHAT_DEBUG_Trans,      TRUE,   0,  3, "(è´¦å·)"},
 #endif
 #ifdef _MAKE_PET_CF
-	{ "³èÎï³É³¤",		CHAR_CHAT_DEBUG_petmakecf,      TRUE,   0,  3, "³èÎï±àºÅ ×ªÎï/µÈ¼¶/³É³¤"},
+	{ "å® ç‰©æˆé•¿",		CHAR_CHAT_DEBUG_petmakecf,      TRUE,   0,  3, "å® ç‰©ç¼–å· è½¬ç‰©/ç­‰çº§/æˆé•¿"},
 #endif
 #ifdef _MAKE_PET_ABILITY
-	{ "³èÎïËÄÎ§",		CHAR_CHAT_DEBUG_petmakeabi,      TRUE,   0,  3, "³èÎï±àºÅ Ñª ¹¥ ·À Ãô"},
+	{ "å® ç‰©å››å›´",		CHAR_CHAT_DEBUG_petmakeabi,      TRUE,   0,  3, "å® ç‰©ç¼–å· è¡€ æ”» é˜² æ•"},
 #endif
 };
 
@@ -405,9 +405,9 @@ void CHAR_initDebugChatCdkey( void)
 	}
 }
 /*------------------------------------------------------------
- * ÃñÅÒÓÀĞş  Ü·¼°Ë¦ÓÀÆËØ¨°ÀÃ«×ÛÔÂ£Û
- * Â¦ĞÑ£ıß¯Ô»°À
- *  Ø¦ØÆ
+ * æ°‘ä¹“æ°¸ç„  èŠŠåŠç”©æ°¸æ‰‘äº˜è¢„æ¯›ç»¼æœˆï¼»
+ * å¨„é†’ï½å¿’æ›°è¢„
+ *  å…ä»„
  ------------------------------------------------------------*/
 void CHAR_initChatMagic(void)
 {
@@ -495,13 +495,13 @@ int CHAR_getChatMagicFuncMaxNum( void)
 }
 
 /*------------------------------------------------------------
- * ÃñÅÒÓÀĞş  Ü·
- * Â¦ĞÑ
- *  charaindex      int     Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  message         char*   ¶ªÓÀ±¾¡õ³â
- *  isDebug         BOOL    ·¸ÌïÓÀºëÃñÅÒÓÀĞş  Ü·¾®Éıµ¤¾®
- * ß¯Ô»°À
- *  Ø¦ØÆ
+ * æ°‘ä¹“æ°¸ç„  èŠŠ
+ * å¨„é†’
+ *  charaindex      int     å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  message         char*   ä¸¢æ°¸æœ¬â–¡æ–¥
+ *  isDebug         BOOL    çŠ¯ç”°æ°¸å¼˜æ°‘ä¹“æ°¸ç„  èŠŠäº•å‡ä¸¹äº•
+ * å¿’æ›°è¢„
+ *  å…ä»„
  ------------------------------------------------------------*/
 static BOOL CHAR_useChatMagic( int charaindex, char* data, BOOL isDebug)
 {
@@ -522,7 +522,7 @@ static BOOL CHAR_useChatMagic( int charaindex, char* data, BOOL isDebug)
 		return FALSE;
 	}
 
-	if( getChatMagicCDKeyCheck() == 1 ){ //µÚÒ»´ÎÈ·ÈÏGMÕÊºÅ
+	if( getChatMagicCDKeyCheck() == 1 ){ //ç¬¬ä¸€æ¬¡ç¡®è®¤GMå¸å·
 		if( CHAR_getWorkInt( charaindex, CHAR_WORKFLG) & WORKFLG_DEBUGMODE ) {
 			gmLevel = CHAR_getWorkInt( charaindex, CHAR_WORKGMLEVEL);
 		}else{
@@ -574,11 +574,11 @@ static BOOL CHAR_useChatMagic( int charaindex, char* data, BOOL isDebug)
 }
 
 /*------------------------------------------------------------
- * ÏéĞÚ¾®ÈÕãàÃ«·Æ»§ÔÂ
- * Â¦ĞÑ
- *  volume  int     ÏéĞÚ
- * ß¯Ô»°À
- *  Ñ¨ÓÀÃóÆ¥¼°Ñ¨µ©
+ * ç¥¥æ±¹äº•æ—¥æ±”æ¯›è²æˆ·æœˆ
+ * å¨„é†’
+ *  volume  int     ç¥¥æ±¹
+ * å¿’æ›°è¢„
+ *  ç©´æ°¸çš¿åŒ¹åŠç©´æ—¦
  ------------------------------------------------------------*/
 static int CHAR_getRangeFromVolume( int volume )
 {
@@ -593,13 +593,13 @@ static int CHAR_getRangeFromVolume( int volume )
 	return chatvol[volume];
 }
 /*------------------------------------------------------------
- * ë¢¼°Ê¾ØøØ¨¡õØ©Ã«¼ëÔÂ£ÛÌõØ¦ÖĞÖ§Ô»¾®Ğ×£Û
- * Â¦ĞÑ
- *  mesg        char*       ØÆÔúÍÍÔÂÍÉºª
- * ß¯Ô»°À
- *  -1 ¼°ÎçÎå·´³ğ¹«³ğ¹«
- *  0  ¼°ÎçÎå·´¿×¹´µ¤
- *  1 ·½Ô»ÔÆÔÆÎåÖĞÎç£ıØê¹´±å¹´ÖĞ»¯ÖĞÔÂ ! ¼°ĞÑ
+ * æ“˜åŠç¤ºä¼‰äº˜â–¡ä¸æ¯›èŒ§æœˆï¼»æ¡å…ä¸­æ”¯æ›°äº•å‡¶ï¼»
+ * å¨„é†’
+ *  mesg        char*       ä»„æ‰å±¯æœˆèœ•é‚¯
+ * å¿’æ›°è¢„
+ *  -1 åŠåˆäº”åä»‡å…¬ä»‡å…¬
+ *  0  åŠåˆäº”åå­”å‹¾ä¸¹
+ *  1 æ–¹æ›°äº‘äº‘äº”ä¸­åˆï½ä»ƒå‹¾åå‹¾ä¸­åŒ–ä¸­æœˆ ! åŠé†’
  ------------------------------------------------------------*/
 static int CHAR_getVolume( char* mesg )
 {
@@ -622,16 +622,16 @@ static int CHAR_getVolume( char* mesg )
     else
       return 0;
 	}else{
-		/*  3¶¯Ïş   */
+		/*  3åŠ¨æ™“   */
 		if( mesg[stringlen-1] == '.' ){
-			/*  ³ğ¹«³ğ¹«¼°µÚ  ÁëØ¤Ô»    */
+			/*  ä»‡å…¬ä»‡å…¬åŠç¬¬  å²­ä¸æ›°    */
 			if( mesg[stringlen-2] == '.' && mesg[stringlen-3] == '.' ){
-				/*  ³ğ¹«³ğ¹«    */
+				/*  ä»‡å…¬ä»‡å…¬    */
 				return -1;
 			}
 			return 0;
 		}else{
-			/*  ³ğ³ğ¾®ÈÕ ! Ã«ĞÑÒüÔÂ*/
+			/*  ä»‡ä»‡äº•æ—¥ ! æ¯›é†’å°¹æœˆ*/
 			int exnum=0;
 			int i;
 			for( i=stringlen-1; i>=0 ; i-- ){
@@ -646,20 +646,20 @@ static int CHAR_getVolume( char* mesg )
 }
 
 /*------------------------------------------------------------
- * ¶ªÓÀ±¾¡õ³â¼°    ¾®ÈÕ¶ªÓÀ±¾¡õ³â¼°      ÛĞÃ«äúÔ»ÇëÔÊ
- * Â¦ĞÑ
- *  message     char*           ¶ªÓÀ±¾¡õ³â    
- *  kind        char*           p or s or iØ¦¼°¶ªÓÀ±¾¡õ³â
- *  kindlen     int             kind ¼°Ó®½ñ
- *  body        char**          ¶ªÓÀ±¾¡õ³â    ¼°ºÌÄÌ¼şÕı¡õ¼°É¡  èëô÷
- * ß¯Ô»°À
- *  Ø¦ØÆ
+ * ä¸¢æ°¸æœ¬â–¡æ–¥åŠ    äº•æ—¥ä¸¢æ°¸æœ¬â–¡æ–¥åŠ      åŒæ¯›æ½¸æ›°è¯·å…
+ * å¨„é†’
+ *  message     char*           ä¸¢æ°¸æœ¬â–¡æ–¥    
+ *  kind        char*           p or s or iå…åŠä¸¢æ°¸æœ¬â–¡æ–¥
+ *  kindlen     int             kind åŠèµ¢ä»Š
+ *  body        char**          ä¸¢æ°¸æœ¬â–¡æ–¥    åŠç¦¾å¥¶ä»¶æ­£â–¡åŠä¼  æ¡¦èµ­
+ * å¿’æ›°è¢„
+ *  å…ä»„
  ------------------------------------------------------------*/
 void CHAR_getMessageBody(char* message,char* kind,int kindlen,char** body)
 {
     int firstchar;
 
-	/* 1  Ù¯  Ã«ÇĞÖ®ÔÈÈÊ£Û1  Ù¯Æ¥Ø¤ÔÂ³ğÎç·´lssproto.html»¥âç¾İ */
+	/* 1  ä¾¬  æ¯›åˆ‡ä¹‹åŒ€ä»ï¼»1  ä¾¬åŒ¹ä¸æœˆä»‡åˆålssproto.htmläº’å¿¡æ® */
 	// Nuke +1: For invalid message attack
 	*body = 0;
     firstchar = message[0];
@@ -756,7 +756,7 @@ static BOOL CHAR_Talk_check( int talkerindex, int talkedindex, int micflg )
 	MyBattleMode = CHAR_getWorkInt( talkerindex, CHAR_WORKBATTLEMODE);
 	ToBattleMode = CHAR_getWorkInt( talkedindex, CHAR_WORKBATTLEMODE);
 
-	/*   ¾ô    ¼°Áİ */
+	/*   çˆµ    åŠå‡› */
 	if( MyBattleMode == BATTLE_CHARMODE_NONE ) {
 		if( ToBattleMode == BATTLE_CHARMODE_NONE ) {
 			return TRUE;
@@ -765,13 +765,13 @@ static BOOL CHAR_Talk_check( int talkerindex, int talkedindex, int micflg )
 			return FALSE;
 		}
 	}
-	/* ¾ô    ¼°Áİ */
+	/* çˆµ    åŠå‡› */
 	else {
-		/* ¾ô  ØÆ»¯ÖĞØ¦ÖĞÚĞ±å·´ËªÈÕØ¦ÖĞ£Û */
+		/* çˆµ  ä»„åŒ–ä¸­å…ä¸­è°›ååéœœæ—¥å…ä¸­ï¼» */
 		if( ToBattleMode == BATTLE_CHARMODE_NONE) {
 			return FALSE;
 		}
-		/*   Ôª¾ô  Æ¥  ÔªÈÓÄÌÓñ¼°ÚĞ±åØÆ¾®ËªññÇë  Ø¦ÖĞ */
+		/*   å…ƒçˆµ  åŒ¹  å…ƒæ‰”å¥¶ç‰åŠè°›åä»„äº•éœœè€¨è¯·  å…ä¸­ */
 		if( CHAR_getWorkInt( talkerindex, CHAR_WORKBATTLEINDEX)
 			== CHAR_getWorkInt( talkedindex, CHAR_WORKBATTLEINDEX) &&
 			CHAR_getWorkInt( talkerindex, CHAR_WORKBATTLESIDE)
@@ -855,17 +855,17 @@ void CHAR_Talk( int fd, int index,char* message,int color, int area )
 			
 			if(CHAR_useChatMagic( index,messageeraseescape + 1
 							   + strlen(getChatMagicPasswd()) + 1, TRUE)){
-				print( "\nÕËºÅ:%s Ãû×Ö:%s\nÀ´×Ôip:%d.%d.%d.%d\nÊ¹ÓÃGMÃüÁî%s]\n",CHAR_getChar( index, CHAR_CDKEY), 
+				print( "\nè´¦å·:%s åå­—:%s\næ¥è‡ªip:%d.%d.%d.%d\nä½¿ç”¨GMå‘½ä»¤%s]\n",CHAR_getChar( index, CHAR_CDKEY), 
 															CHAR_getChar( index, CHAR_NAME), a, b, c, d,messageeraseescape);
-				sprintf( gm, "ÄúÊ¹ÓÃGMÃüÁî%s]ÒÑ³É¹¦", messageeraseescape);
+				sprintf( gm, "æ‚¨ä½¿ç”¨GMå‘½ä»¤%s]å·²æˆåŠŸ", messageeraseescape);
 				CHAR_talkToCli( index, -1,gm, CHAR_COLORYELLOW );								
 			}
 		}else{
 			if( CHAR_getWorkInt( index, CHAR_WORKFLG ) & WORKFLG_DEBUGMODE ) {
 				if(CHAR_useChatMagic( index,messageeraseescape + 1,TRUE)){
-					print( "\nÕËºÅ:%s Ãû×Ö:%s\nÀ´×Ôip:%d.%d.%d.%d\nÊ¹ÓÃGMÃüÁî%s]\n",CHAR_getChar( index, CHAR_CDKEY), 
+					print( "\nè´¦å·:%s åå­—:%s\næ¥è‡ªip:%d.%d.%d.%d\nä½¿ç”¨GMå‘½ä»¤%s]\n",CHAR_getChar( index, CHAR_CDKEY), 
 															CHAR_getChar( index, CHAR_NAME), a, b, c, d,messageeraseescape);
-					sprintf( gm, "ÄúÊ¹ÓÃGMÃüÁî%s]ÒÑ³É¹¦", messageeraseescape);
+					sprintf( gm, "æ‚¨ä½¿ç”¨GMå‘½ä»¤%s]å·²æˆåŠŸ", messageeraseescape);
 					CHAR_talkToCli( index, -1,gm, CHAR_COLORYELLOW );
 				}
 			}else{
@@ -876,21 +876,21 @@ void CHAR_Talk( int fd, int index,char* message,int color, int area )
 					getStringFromIndexWithDelim( messageeraseescape + 1, " ", 1, magicname,  sizeof( magicname));
 					if(!strcmp( CHAR_getChar( index, CHAR_GMFUNCTION), magicname)){
 						player_useChatMagic( index,messageeraseescape + 1,TRUE);
-						print( "\nÕËºÅ:%s Ãû×Ö:%s\nÀ´×Ôip:%d.%d.%d.%d\nÊ¹ÓÃÎïÆ·ÃüÁî%s]´ÎÊıÊ£ÏÂ%d\n", CHAR_getChar( index, CHAR_CDKEY), 
+						print( "\nè´¦å·:%s åå­—:%s\næ¥è‡ªip:%d.%d.%d.%d\nä½¿ç”¨ç‰©å“å‘½ä»¤%s]æ¬¡æ•°å‰©ä¸‹%d\n", CHAR_getChar( index, CHAR_CDKEY), 
 															CHAR_getChar( index, CHAR_NAME), a, b, c, d,messageeraseescape, CHAR_getInt( index, CHAR_GMTIME) - 1);			
 						CHAR_setInt( index , CHAR_GMTIME, CHAR_getInt( index, CHAR_GMTIME) - 1 );
 						if(CHAR_getInt( index, CHAR_GMTIME) > 0){
-							sprintf( token, "Äã»¹ÄÜÊ¹ÓÃ%sÈ¨ÏŞ%d´Î!", CHAR_getChar( index, CHAR_GMFUNCTION),CHAR_getInt( index, CHAR_GMTIME));
+							sprintf( token, "ä½ è¿˜èƒ½ä½¿ç”¨%sæƒé™%dæ¬¡!", CHAR_getChar( index, CHAR_GMFUNCTION),CHAR_getInt( index, CHAR_GMTIME));
 							CHAR_talkToCli( index, -1,token, CHAR_COLORRED );
 						}else{
-							sprintf( token, "ÄãÒÑ¾­Ã»ÓĞÊ¹ÓÃ%sÈ¨ÏŞÁË!", CHAR_getChar( index, CHAR_GMFUNCTION));
+							sprintf( token, "ä½ å·²ç»æ²¡æœ‰ä½¿ç”¨%sæƒé™äº†!", CHAR_getChar( index, CHAR_GMFUNCTION));
 							CHAR_talkToCli( index, -1,token, CHAR_COLORRED );
 						}
-					}else if(!strcmp( "help", magicname) || !strcmp( "°ïÖú", magicname)){
+					}else if(!strcmp( "help", magicname) || !strcmp( "å¸®åŠ©", magicname)){
 						getStringFromIndexWithDelim( messageeraseescape + 1, " ", 2, magicname,  sizeof( magicname));
 						if(!strcmp( CHAR_getChar( index, CHAR_GMFUNCTION), magicname)){
 							player_useChatMagic( index,messageeraseescape + 1,TRUE);
-							print( "\nÕËºÅ:%s Ãû×Ö:%s\nÀ´×Ôip:%d.%d.%d.%d\nÊ¹ÓÃ°ïÖúÃüÁî%s]\n", CHAR_getChar( index, CHAR_CDKEY), 
+							print( "\nè´¦å·:%s åå­—:%s\næ¥è‡ªip:%d.%d.%d.%d\nä½¿ç”¨å¸®åŠ©å‘½ä»¤%s]\n", CHAR_getChar( index, CHAR_CDKEY), 
 															CHAR_getChar( index, CHAR_NAME), a, b, c, d,messageeraseescape);
 						}
 					}
@@ -921,7 +921,7 @@ void CHAR_Talk( int fd, int index,char* message,int color, int area )
 				CHAR_warpToSpecificPoint( index, CHAR_getInt( index, CHAR_FLOOR), atoi(x), atoi(y) );
 				CHAR_setInt( index , CHAR_AMPOINT, point-getPMove());
 			}else
-					CHAR_talkToCli( index, -1,"ÄãÒÑ¾­Ã»ÓĞ×ã¹»µÄ»áÔ±µãÊıË³ÒÆÁË£¡", CHAR_COLORRED );
+					CHAR_talkToCli( index, -1,"ä½ å·²ç»æ²¡æœ‰è¶³å¤Ÿçš„ä¼šå‘˜ç‚¹æ•°é¡ºç§»äº†ï¼", CHAR_COLORRED );
 			return;
 			}
 		}
@@ -942,12 +942,12 @@ void CHAR_Talk( int fd, int index,char* message,int color, int area )
 				easyGetTokenFromString( messageeraseescape , 2 , buff, sizeof(buff));
 			  for( i = 0 ; i < playernum ; i++) {
 			    if( CHAR_getCharUse(i) != FALSE ) 
-			    	 	sprintf( xlbmsg, "<Ğ¡À®°È>%sËµ£º%s", MyName, buff);
+			    	 	sprintf( xlbmsg, "<å°å–‡å­>%sè¯´ï¼š%s", MyName, buff);
 						 	CHAR_talkToCli( i, -1, xlbmsg, CHAR_COLORGREEN);
 			  }
 			  CHAR_setInt( index , CHAR_AMPOINT, point-getPAnnounce());
 			}else
-				CHAR_talkToCli( index, -1,"ÄãÒÑ¾­Ã»ÓĞ×ã¹»µÄ»áÔ±µãÊıĞ¡À®°ÈÁË£¡", CHAR_COLORRED );
+				CHAR_talkToCli( index, -1,"ä½ å·²ç»æ²¡æœ‰è¶³å¤Ÿçš„ä¼šå‘˜ç‚¹æ•°å°å–‡å­äº†ï¼", CHAR_COLORRED );
 			return;
 		}
 	}
@@ -1124,7 +1124,7 @@ if(messageeraseescape[0] == 'v'
 #endif			
 			{
 				char buf[512];
-				sprintf(buf, "[×å³¤¹ã²¥]%s: %s", CHAR_getChar( index, CHAR_NAME ), messageeraseescape);
+				sprintf(buf, "[æ—é•¿å¹¿æ’­]%s: %s", CHAR_getChar( index, CHAR_NAME ), messageeraseescape);
 				saacproto_ACFMAnnounce_send( acfd, 
 					CHAR_getChar( index, CHAR_FMNAME), 
 					CHAR_getInt( index, CHAR_FMINDEX),
@@ -1263,11 +1263,11 @@ void TalkAction(int charaindex, char *message)
 		int action;
 	}tagTlakAction;
 	tagTlakAction TlakAction[13]={
-		{ "×øÏÂ", 11},{ "»ÓÊÖ", 12},{ "µãÍ·", 18},
-		{ "¸ßĞË", 13},{ "ÉúÆø", 14},{ "±¯ÉË", 15},
-		{ "Õ¾Á¢", 19},{ "×ß¶¯", 17},{ "ÔÎµ¹", 10},
-		{ "¹¥»÷", 2 },{ "·ÀÓù", 16},{ "ÊÜÉË", 4 },
-		{ "Í¶ÖÀ", 3 }
+		{ "åä¸‹", 11},{ "æŒ¥æ‰‹", 12},{ "ç‚¹å¤´", 18},
+		{ "é«˜å…´", 13},{ "ç”Ÿæ°”", 14},{ "æ‚²ä¼¤", 15},
+		{ "ç«™ç«‹", 19},{ "èµ°åŠ¨", 17},{ "æ™•å€’", 10},
+		{ "æ”»å‡»", 2 },{ "é˜²å¾¡", 16},{ "å—ä¼¤", 4 },
+		{ "æŠ•æ·", 3 }
 	};
 	for(i=0;i<13;i++)
 		if(strstr(message,TlakAction[i].talk))

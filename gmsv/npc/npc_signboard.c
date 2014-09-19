@@ -18,7 +18,7 @@ BOOL NPC_SignBoardInit( int meindex )
 {
 
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
-	/*--ÕýÄÌÃóÉ¬ÀÃ--*/
+	/*--æ­£å¥¶çš¿æ¶©çƒ‚--*/
    	CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEMSG );
 
 	if(NPC_Util_GetArgStr( meindex, npcarg, sizeof(npcarg))==NULL){
@@ -77,7 +77,7 @@ static void NPC_SignBoard_Window( int meindex, int toindex, int num,int select)
   	      q[0]='\0';
  	      p[0]='\0';
 	      a=atoi(p+9);
-#ifdef _FAMILY_MANORNUM_CHANGE	// CoolFish ÓÃÀ´ÐÞ¸Ä×°Ô°ÊýÁ¿
+#ifdef _FAMILY_MANORNUM_CHANGE	// CoolFish ç”¨æ¥ä¿®æ”¹è£…å›­æ•°é‡
 	      if ((a>=1) && (a<=MANORNUM)) {		  
 #else
 	      if ((a>=1) && (a<=4)) {
@@ -88,7 +88,7 @@ static void NPC_SignBoard_Window( int meindex, int toindex, int num,int select)
   	          sprintf(tmp,"%s%s%s",npcarg,token,q+1);
 	          strcpy(npcarg, tmp);
 	        } else {
-	          sprintf(tmp,"%sÃ»ÓÐÈÎºÎ¼Ò×å%s",npcarg,q+1);
+	          sprintf(tmp,"%sæ²¡æœ‰ä»»ä½•å®¶æ—%s",npcarg,q+1);
 	          strcpy(npcarg, tmp);
 	        }
 	      }
@@ -96,9 +96,9 @@ static void NPC_SignBoard_Window( int meindex, int toindex, int num,int select)
 	  }
 	}
 
-	sprintf(token, "¡¡¡¡¡¡¡¡¡¡¡¡£¼¡¡¿´°å¡¡£¾\n%s",npcarg);
+	sprintf(token, "ã€€ã€€ã€€ã€€ã€€ã€€ï¼œã€€çœ‹æ¿ã€€ï¼ž\n%s",npcarg);
 	
-	/*--Ëªññ--*/
+	/*--éœœè€¨--*/
 	lssproto_WN_send( fd,WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK,
 					CHAR_WINDOWTYPE_WINDOWPETSHOP_START,

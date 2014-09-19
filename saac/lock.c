@@ -19,7 +19,7 @@ void Lock_Init(void)
 		memset( userlock[i]->cdkey, 0, sizeof( userlock[i]->cdkey) );
 		memset( userlock[i]->server, 0, sizeof( userlock[i]->server) );
 	}
-	log("´æÖüÆ÷³õÊ¼»¯");
+	log("å­˜è´®å™¨åˆå§‹åŒ–");
 }
 
 LockNode *Creat_newNodes( void)
@@ -41,7 +41,7 @@ int InsertMemLock(int entry, char *cdkey, char *passwd, char *server, int proces
 {
 	int j;
 	LockNode *ln = userlock[entry];
-	log("½øÈëÓÎÏ·:Ä¿Â¼:%x ÕËºÅ:%s ·şÎñÆ÷:%s\n", entry, cdkey, server);
+	log("è¿›å…¥æ¸¸æˆ:ç›®å½•:%x è´¦å·:%s æœåŠ¡å™¨:%s\n", entry, cdkey, server);
   
 	while( (ln!=NULL) && (ln->use!=0)) ln=ln->next;
 
@@ -73,7 +73,7 @@ int DeleteMemLock(int entry, char *cdkey, int *process)
 {
 	LockNode *ln = userlock[entry];
 
-	log("É¾³ıÄÚ´æĞÅÏ¢ Î»ÖÃ=%x ÕËºÅ=%s ..", entry, cdkey);
+	log("åˆ é™¤å†…å­˜ä¿¡æ¯ ä½ç½®=%x è´¦å·=%s ..", entry, cdkey);
 
 	while (ln!=NULL) {
 		if( ln->use != 0) {
@@ -86,10 +86,10 @@ int DeleteMemLock(int entry, char *cdkey, int *process)
 		memset( ln->cdkey, 0, sizeof( ln->cdkey) );
 		memset( ln->server, 0, sizeof( ln->server) );
 		*process = ln->process;
-		log("É¾³ı³É¹¦\n");
+		log("åˆ é™¤æˆåŠŸ\n");
 		return 1;
 	}
-	log("É¾³ıÊ§°Ü!!\n");
+	log("åˆ é™¤å¤±è´¥!!\n");
 	return 0;
 }
 
@@ -116,8 +116,8 @@ int isMemLocked(int entry, char *cdkey)
 	while (ln!=NULL) {
 		if (ln->use != 0) {
 			if (strcmp(ln->cdkey, cdkey)==0) {
-				if( !strcmp(ln->server, "ĞÇÏµÒÆÃñ"))
-					log(" ĞÇÏµÒÆÃñÖĞ ");
+				if( !strcmp(ln->server, "æ˜Ÿç³»ç§»æ°‘"))
+					log(" æ˜Ÿç³»ç§»æ°‘ä¸­ ");
 				break;
 			}
 		}
@@ -133,13 +133,13 @@ int GetMemLockState(int entry, char *cdkey, char *result)
 	while (ln!=NULL) {
 		if (ln->use != 0) {
 			if (strcmp(ln->cdkey, cdkey)==0) {
-				sprintf(result, "%s ÊÇÔÚ %s ±»ËøµÄ.",cdkey, ln->server);
+				sprintf(result, "%s æ˜¯åœ¨ %s è¢«é”çš„.",cdkey, ln->server);
 				return 1;
 			}
 		}
 		ln=ln->next;
 	}
-	sprintf(result, "%s Ã»ÓĞ±»Ëø.", cdkey);
+	sprintf(result, "%s æ²¡æœ‰è¢«é”.", cdkey);
 	return 0;
 }
 

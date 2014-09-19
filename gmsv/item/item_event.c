@@ -42,7 +42,7 @@ int ITEM_TimeDelCheck( int itemindex )
 		if( CHAR_CHECKINDEX( icnt ) ) {
 			for( jcnt = 0; jcnt < CHAR_MAXITEMHAVE; jcnt ++ ) {
 				if( CHAR_getItemIndex( icnt, jcnt ) == itemindex ) {
-					print( "µÀ¾ßĞ§Á¦Ê±¼äÒÑµ½£¬½øĞĞÆæ¹ÖµÀ¾ß´¦Àí(%s)(%s)\n",
+					print( "é“å…·æ•ˆåŠ›æ—¶é—´å·²åˆ°ï¼Œè¿›è¡Œå¥‡æ€ªé“å…·å¤„ç†(%s)(%s)\n",
 						CHAR_getUseName(icnt),ITEM_getAppropriateName(itemindex) );
 					return FALSE;
 				}
@@ -66,20 +66,20 @@ int ITEM_eventDrop( int itemindex, int charaindex, int itemcharaindex )
 	}
 
     if( ITEM_getInt( itemindex, ITEM_VANISHATDROP) != 1 )return 0;
-	snprintf( szBuffer, sizeof( szBuffer), "%s ÏûÃğÁË¡£",
+	snprintf( szBuffer, sizeof( szBuffer), "%s æ¶ˆç­äº†ã€‚",
 		ITEM_getAppropriateName(itemindex) );
 	CHAR_talkToCli( charaindex, -1, szBuffer, CHAR_COLORWHITE );
 
 	{
 		LogItem(
-			CHAR_getChar( charaindex, CHAR_NAME ), /* Æ½ÅÒ·Â   */
+			CHAR_getChar( charaindex, CHAR_NAME ), /* å¹³ä¹“ä»¿   */
 			CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 			itemindex,
 #else
-       		ITEM_getInt( itemindex, ITEM_ID ),  /* Ê§ÄÌ  Ø©  Ä¯ */
+       		ITEM_getInt( itemindex, ITEM_ID ),  /* å¤±å¥¶  ä¸  å¯ */
 #endif
-			"Drop&Delete(¶ª³öááÏûÊ§)",
+			"Drop&Delete(ä¸¢å‡ºå¾Œæ¶ˆå¤±)",
 			CHAR_getInt( charaindex,CHAR_FLOOR),
 			CHAR_getInt( charaindex,CHAR_X ),
  	      	CHAR_getInt( charaindex,CHAR_Y ),
@@ -97,15 +97,15 @@ int ITEM_eventDrop( int itemindex, int charaindex, int itemcharaindex )
 #define UNDEF (-1)
 
 typedef struct {
-    char* cmd;        /* Ä¡    Ù¯   */
-    char*   onmessage;    /*  ¶ªÓÀ±¾¡õ³â  Ù¯      */
-    char*   offmessage;    /*  ¶ªÓÀ±¾¡õ³â  Ù¯      */
-    int   element;    /* ¸²ÀŞ±åØ¦ÔÂÛ¢áÙ */
-    int   maxElement; /* elementÆ¥Ï¶ÀÃ½ñÄ¾Ğ×Û¢áÙ¼°    °ÀÃ«ÊÖ¹´Û¢áÙ */
+    char* cmd;        /* æ‘¹    ä¾¬   */
+    char*   onmessage;    /*  ä¸¢æ°¸æœ¬â–¡æ–¥  ä¾¬      */
+    char*   offmessage;    /*  ä¸¢æ°¸æœ¬â–¡æ–¥  ä¾¬      */
+    int   element;    /* è¦†æ“‚åå…æœˆé‚°è±³ */
+    int   maxElement; /* elementåŒ¹éš™çƒ‚ä»Šæœ¨å‡¶é‚°è±³åŠ    è¢„æ¯›æ‰‹å‹¾é‚°è±³ */
 } ITEM_EFFECTPARAM;
 static ITEM_EFFECTPARAM ITEM_restorableParam[] = {
-    {"hp", "HP»Ø¸´ÁË¡£", "HP½µµÍÁË¡£",CHAR_HP, CHAR_WORKMAXHP},
-    {"mp", "MP»Ø¸´ÁË¡£", "MP½µµÍÁË¡£",CHAR_MP, CHAR_WORKMAXMP},
+    {"hp", "HPå›å¤äº†ã€‚", "HPé™ä½äº†ã€‚",CHAR_HP, CHAR_WORKMAXHP},
+    {"mp", "MPå›å¤äº†ã€‚", "MPé™ä½äº†ã€‚",CHAR_MP, CHAR_WORKMAXMP},
 };
 static ITEM_EFFECTPARAM ITEM_statusParam[] = {
     {"po", CHAR_POISONSTRING, CHAR_RECOVERPOISONSTRING,
@@ -192,7 +192,7 @@ BOOL ITEM_MedicineInit(ITEM_Item* itm)
             *q++ = *p++;
         }
         *q = '\0';
-        value = strtol(arg, & q, 10); /* strtol()·´OK? */
+        value = strtol(arg, & q, 10); /* strtol()åOK? */
         if(ITEM_isValidEffect(cmd, value)){
             effectCount++;
         }else{
@@ -235,7 +235,7 @@ static BOOL ITEM_medicineRaiseEffect(int charaindex, char* cmd,int value)
                 amount = 30;
                 if(curv + amount < 0) amount = -curv;
                 CHAR_setInt(charaindex, ITEM_restorableParam[i].element, min((curv+amount), maxv));
-                snprintf( ansmsg, sizeof(ansmsg), "%s»Ø¸´ÁË¡£",
+                snprintf( ansmsg, sizeof(ansmsg), "%så›å¤äº†ã€‚",
                           ITEM_restorableParam[i].onmessage );
                 CHAR_talkToCli( charaindex, -1, ansmsg, CHAR_COLORWHITE);
                 return TRUE;
@@ -243,7 +243,7 @@ static BOOL ITEM_medicineRaiseEffect(int charaindex, char* cmd,int value)
                 int maxv;
                 maxv =CHAR_getWorkInt(charaindex, ITEM_restorableParam[i].maxElement);
                 CHAR_setInt(charaindex, ITEM_restorableParam[i].element, maxv);
-                snprintf( ansmsg, sizeof(ansmsg), "%sÒÑÍêÈ«»Ø¸´¡£", ITEM_restorableParam[i].onmessage );
+                snprintf( ansmsg, sizeof(ansmsg), "%så·²å®Œå…¨å›å¤ã€‚", ITEM_restorableParam[i].onmessage );
                 CHAR_talkToCli( charaindex, -1, ansmsg, CHAR_COLORWHITE );
                 return TRUE;
             }else
@@ -277,7 +277,7 @@ static BOOL ITEM_medicineRaiseEffect(int charaindex, char* cmd,int value)
         }
     }
 #undef ITEM_STATUSCHANGEVALUE
-    strcpysafe( ansmsg, sizeof(ansmsg),"Ê²÷áÒ²Ã»·¢Éú¡£");
+    strcpysafe( ansmsg, sizeof(ansmsg),"ä»€éº½ä¹Ÿæ²¡å‘ç”Ÿã€‚");
     CHAR_talkToCli( charaindex, -1, ansmsg, CHAR_COLORWHITE );
     return FALSE;
 }
@@ -294,7 +294,7 @@ void ITEM_MedicineUsed(int charaindex, int to_charaindex, int itemindex)
     itemid = CHAR_getItemIndex(charaindex, itemindex);
     if(!ITEM_CHECKINDEX(itemid)) return;
     effectarg = ITEM_getChar(itemid, ITEM_ARGUMENT);
-    snprintf( ansmsg, sizeof(ansmsg), "×¥µ½ÁË%s ¡£", ITEM_getChar(itemid, ITEM_NAME) );
+    snprintf( ansmsg, sizeof(ansmsg), "æŠ“åˆ°äº†%s ã€‚", ITEM_getChar(itemid, ITEM_NAME) );
     CHAR_talkToCli( charaindex, -1, ansmsg, CHAR_COLORWHITE );
     for( p=effectarg ; *p != '\0'; ){
         int i;
@@ -331,7 +331,7 @@ void ITEM_SandClockDetach( int charaindex , int itemid )
     for( i=0 ; i<CHAR_MAXITEMHAVE ; i++ ){
         if( CHAR_getItemIndex(charaindex,i ) == itemid ){
 			CHAR_DelItem( charaindex, i);
-            CHAR_talkToCli( charaindex, -1, "Ò»Ğ¶ÏÂÉ³Â©£¬¾¹ºöÈ»»µÁË£¡", CHAR_COLORWHITE );
+            CHAR_talkToCli( charaindex, -1, "ä¸€å¸ä¸‹æ²™æ¼ï¼Œç«Ÿå¿½ç„¶åäº†ï¼", CHAR_COLORWHITE );
             print( "deleted sand clock!\n" );
             break;
         }
@@ -438,7 +438,7 @@ void ITEM_DeleteByWatched(
     	if( CHAR_getInt( moveindex , CHAR_WHICHTYPE ) == CHAR_TYPEPLAYER ){
     		snprintf( szBuffer, sizeof( szBuffer ), "%s",
     							ITEM_getAppropriateName(itemindex) );
-            CHAR_talkToCli( moveindex	, -1, "%s ÏûÃğÁË¡£", CHAR_COLORWHITE );
+            CHAR_talkToCli( moveindex	, -1, "%s æ¶ˆç­äº†ã€‚", CHAR_COLORWHITE );
     	}
     }
 
@@ -471,7 +471,7 @@ void ITEM_DeleteTimeWatched(
 			LogItem(
 					"NULL",
 					"NULL",
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 					itemindex,
 #else
 		       		ITEM_getInt( itemindex, ITEM_ID ),
@@ -512,7 +512,7 @@ void ITEM_useEffectTohelos( int charaindex, int to_charaindex, int haveitemindex
 			LogItem(
 				CHAR_getChar( charaindex, CHAR_NAME ),
 				CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 				itemindex,
 #else
        			ITEM_getInt( itemindex, ITEM_ID ),
@@ -538,7 +538,7 @@ void ITEM_useEffectTohelos( int charaindex, int to_charaindex, int haveitemindex
 			LogItem(
 				CHAR_getChar( charaindex, CHAR_NAME ),
 				CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 				itemindex,
 #else
        			ITEM_getInt( itemindex, ITEM_ID ),
@@ -564,12 +564,12 @@ void ITEM_useEffectTohelos( int charaindex, int to_charaindex, int haveitemindex
 	CHAR_setWorkInt( sendcharaindex, CHAR_WORK_TOHELOS_COUNT, limitcount);
 
     snprintf( msgbuf, sizeof(msgbuf),
-              "×¥µ½ÁË%s ¡£", ITEM_getChar(itemindex, ITEM_NAME) );
+              "æŠ“åˆ°äº†%s ã€‚", ITEM_getChar(itemindex, ITEM_NAME) );
     CHAR_talkToCli( charaindex, -1, msgbuf, CHAR_COLORWHITE );
 
     if( sendcharaindex != charaindex ) {
 	    snprintf( msgbuf, sizeof(msgbuf),
-	              "%s ×¥µ½ÁË %s¡£ ",
+	              "%s æŠ“åˆ°äº† %sã€‚ ",
 	              CHAR_getChar( charaindex, CHAR_NAME),
 	              ITEM_getChar( itemindex, ITEM_NAME) );
 	    CHAR_talkToCli( sendcharaindex, -1, msgbuf, CHAR_COLORWHITE );
@@ -579,7 +579,7 @@ void ITEM_useEffectTohelos( int charaindex, int to_charaindex, int haveitemindex
 		LogItem(
 			CHAR_getChar( charaindex, CHAR_NAME ), 
 			CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 			itemindex,
 #else
        		ITEM_getInt( itemindex, ITEM_ID ),
@@ -624,47 +624,47 @@ void ITEM_useMic_Field( int charaindex, int to_charaindex, int haveitemindex )
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKFLG ) & WORKFLG_MICMODE ){
 		CHAR_setWorkInt( charaindex, CHAR_WORKFLG,
 			CHAR_getWorkInt( charaindex, CHAR_WORKFLG ) & ~WORKFLG_MICMODE );
-		CHAR_talkToCli( charaindex, -1, "½«Âó¿Ë·çÉè¶¨ÎªOFF¡£", CHAR_COLORWHITE);
+		CHAR_talkToCli( charaindex, -1, "å°†éº¦å…‹é£è®¾å®šä¸ºOFFã€‚", CHAR_COLORWHITE);
 	}else{
 		CHAR_setWorkInt( charaindex, CHAR_WORKFLG,
 			CHAR_getWorkInt( charaindex, CHAR_WORKFLG ) | WORKFLG_MICMODE );
-		CHAR_talkToCli( charaindex, -1, "½«Âó¿Ë·çÉè¶¨ÎªON¡£", CHAR_COLORWHITE);
+		CHAR_talkToCli( charaindex, -1, "å°†éº¦å…‹é£è®¾å®šä¸ºONã€‚", CHAR_COLORWHITE);
 	}
 }
 #if 1
 char *aszHealStringByOwn[] = {
-	"%sµÄÄÍ¾ÃÁ¦»Ø¸´%d",
-	"%sµÄÆøÁ¦»Ø¸´%d",
-	"%sµÄ÷ÈÁ¦ÉÏÉı%d",
-	"%sµÄÖÒ³Ï¶ÈÉÏÉı%d",
+	"%sçš„è€ä¹…åŠ›å›å¤%d",
+	"%sçš„æ°”åŠ›å›å¤%d",
+	"%sçš„é­…åŠ›ä¸Šå‡%d",
+	"%sçš„å¿ è¯šåº¦ä¸Šå‡%d",
 	""
 };
 
 char *aszDownStringByOwn[] = {
-	"%sµÄÄÍ¾ÃÁ¦¼õµÍ%d",
-	"%sµÄÆøÁ¦¼õµÍ%d",
-	"%sµÄ÷ÈÁ¦ÏÂ½µ%d",
-	"%sµÄÖÒ³Ï¶ÈÏÂ½µ%d",
+	"%sçš„è€ä¹…åŠ›å‡ä½%d",
+	"%sçš„æ°”åŠ›å‡ä½%d",
+	"%sçš„é­…åŠ›ä¸‹é™%d",
+	"%sçš„å¿ è¯šåº¦ä¸‹é™%d",
 	""
 };
 
 char *aszHealStringByOther[] = {
-	"½åÓÉ%s%sµÄÄÍ¾ÃÁ¦»Ø¸´%d",
-	"½åÓÉ%s%sµÄÆøÁ¦»Ø¸´%d",
-	"½åÓÉ%s%sµÄ÷ÈÁ¦ÉÏÉı%d",
-	"½åÓÉ%s%sµÄÖÒ³Ï¶ÈÉÏÉı%d",
+	"è—‰ç”±%s%sçš„è€ä¹…åŠ›å›å¤%d",
+	"è—‰ç”±%s%sçš„æ°”åŠ›å›å¤%d",
+	"è—‰ç”±%s%sçš„é­…åŠ›ä¸Šå‡%d",
+	"è—‰ç”±%s%sçš„å¿ è¯šåº¦ä¸Šå‡%d",
 	""
 };
 
 char *aszDownStringByOther[] = {
-	"½åÓÉ%s%sµÄÄÍ¾ÃÁ¦¼õµÍ%d",
-	"½åÓÉ%s%sµÄÆøÁ¦¼õµÍ%d",
-	"½åÓÉ%s%sµÄ÷ÈÁ¦¼õµÍ%d",
-	"½åÓÉ%s%sµÄÖÒ³Ï¶È¼õµÍ%d",
+	"è—‰ç”±%s%sçš„è€ä¹…åŠ›å‡ä½%d",
+	"è—‰ç”±%s%sçš„æ°”åŠ›å‡ä½%d",
+	"è—‰ç”±%s%sçš„é­…åŠ›å‡ä½%d",
+	"è—‰ç”±%s%sçš„å¿ è¯šåº¦å‡ä½%d",
 	""
 };
 
-char *aszKeyString[] = {"Ìå", "Æø", "÷È", "ÖÒ", ""};
+char *aszKeyString[] = {"ä½“", "æ°”", "é­…", "å¿ ", ""};
 int  aHealInt[] = { CHAR_HP, CHAR_MP, CHAR_CHARM, CHAR_VARIABLEAI, -1 };
 int  aHealMaxWork[] = { CHAR_WORKMAXHP, CHAR_WORKMAXMP, -1, -1,  -1 };
 
@@ -687,13 +687,13 @@ void ITEM_useRecovery_Field(
 	if( arg == "\0" ) return;
 
 #ifdef _ITEM_UNBECOMEPIG
-    if( (p = strstr( arg, "½âÖí" )) != NULL ){
+    if( (p = strstr( arg, "è§£çŒª" )) != NULL ){
         if( CHAR_getInt( toindex, CHAR_BECOMEPIG ) > -1 ){
 		    CHAR_setInt( toindex, CHAR_BECOMEPIG, -1 );
 			CHAR_complianceParameter( toindex );
 		    CHAR_sendCToArroundCharacter( CHAR_getWorkInt( toindex , CHAR_WORKOBJINDEX ));
 		    CHAR_send_P_StatusString( toindex , CHAR_P_STRING_BASEBASEIMAGENUMBER);
-		    CHAR_talkToCli( toindex,-1,"ÎÚÁ¦»¯Ê§Ğ§ÁË¡£",CHAR_COLORWHITE);
+		    CHAR_talkToCli( toindex,-1,"ä¹ŒåŠ›åŒ–å¤±æ•ˆäº†ã€‚",CHAR_COLORWHITE);
        		CHAR_DelItemMess( charaindex, haveitemindex, 0);
 		}
 		return;
@@ -706,32 +706,32 @@ void ITEM_useRecovery_Field(
 			sprintf( msgbuf, "%s", p+7 );
             pidx = atoi( strtok( msgbuf, " " ) );
 			if( pidx != CHAR_getInt( toindex, CHAR_PETID) || CHAR_getInt(toindex, CHAR_LIMITLEVEL) == 0 ){
-			    CHAR_talkToCli( charaindex,-1,"ÎŞ·¨Ê¹ÓÃ",CHAR_COLORWHITE);
+			    CHAR_talkToCli( charaindex,-1,"æ— æ³•ä½¿ç”¨",CHAR_COLORWHITE);
 				return;
 			}
 			lv = CHAR_getInt( toindex, CHAR_LV );
 			if( lv < 10 || lv >= 140 ){
-			    CHAR_talkToCli( charaindex,-1,"Ä¿Ç°µÈ¼¶ÎŞ·¨Ê¹ÓÃ",CHAR_COLORWHITE);
+			    CHAR_talkToCli( charaindex,-1,"ç›®å‰ç­‰çº§æ— æ³•ä½¿ç”¨",CHAR_COLORWHITE);
 				return;
 			}
-			if( (p = strstr( arg, "µØ" )) != NULL )
+			if( (p = strstr( arg, "åœ°" )) != NULL )
 					lvup=2;
-		    if( (p = strstr( arg, "Ë®" )) != NULL )
+		    if( (p = strstr( arg, "æ°´" )) != NULL )
 					lvup=3;
-            if( (p = strstr( arg, "»ğ" )) != NULL )
+            if( (p = strstr( arg, "ç«" )) != NULL )
 					lvup=0;
-			if( (p = strstr( arg, "·ç" )) != NULL )
+			if( (p = strstr( arg, "é£" )) != NULL )
 					lvup=1;		    
 			if( lv%4 != lvup || CHAR_getInt(toindex, CHAR_LIMITLEVEL)-lv >= 1 ){//
-			    CHAR_talkToCli( charaindex,-1,"ÆÆ³ı·âÓ¡Ê§°Ü",CHAR_COLORWHITE);
+			    CHAR_talkToCli( charaindex,-1,"ç ´é™¤å°å°å¤±è´¥",CHAR_COLORWHITE);
 			    CHAR_DelItemMess( charaindex, haveitemindex, 0);
 				return;
 			}
 			CHAR_setInt(toindex, CHAR_LIMITLEVEL, CHAR_getInt(toindex, CHAR_LIMITLEVEL)+1);	
-			CHAR_talkToCli( charaindex,-1,"·âÓ¡Ä§Öä¼õÈõ£¬×î¸ßµÈ¼¶ÌáÉı",CHAR_COLORWHITE);    
+			CHAR_talkToCli( charaindex,-1,"å°å°é­”å’’å‡å¼±ï¼Œæœ€é«˜ç­‰çº§æå‡",CHAR_COLORWHITE);    
 			if( CHAR_getInt(toindex, CHAR_LIMITLEVEL) == 140 ){
 				CHAR_setInt(toindex, CHAR_LIMITLEVEL, 0);
-			    CHAR_talkToCli( charaindex,-1,"·âÓ¡Ä§Öä½â³ıÁË",CHAR_COLORWHITE);    	
+			    CHAR_talkToCli( charaindex,-1,"å°å°é­”å’’è§£é™¤äº†",CHAR_COLORWHITE);    	
 			}
 			CHAR_DelItemMess( charaindex, haveitemindex, 0);
 			CHAR_complianceParameter( toindex );
@@ -745,16 +745,16 @@ void ITEM_useRecovery_Field(
 			sprintf( msgbuf, "%s", p+7 );
 			pidx = atoi( strtok( msgbuf, " " ) );
 			if( pidx != CHAR_getInt( toindex, CHAR_PETID) || CHAR_getInt(toindex, CHAR_LIMITLEVEL) == 0 ){
-			    CHAR_talkToCli( charaindex,-1,"ÎŞ·¨Ê¹ÓÃ",CHAR_COLORWHITE);
+			    CHAR_talkToCli( charaindex,-1,"æ— æ³•ä½¿ç”¨",CHAR_COLORWHITE);
 				return;
 			}
 			lv = CHAR_getInt( toindex, CHAR_LV );
 			if( lv < 125 || lv > 140 ){
-			    CHAR_talkToCli( charaindex,-1,"Ä¿Ç°µÈ¼¶ÎŞ·¨Ê¹ÓÃ",CHAR_COLORWHITE);
+			    CHAR_talkToCli( charaindex,-1,"ç›®å‰ç­‰çº§æ— æ³•ä½¿ç”¨",CHAR_COLORWHITE);
 				return;
 			}
 			CHAR_setInt(toindex, CHAR_LIMITLEVEL, 0);
-			CHAR_talkToCli( charaindex,-1,"·âÓ¡Ä§Öä½â³ıÁË",CHAR_COLORWHITE);    	
+			CHAR_talkToCli( charaindex,-1,"å°å°é­”å’’è§£é™¤äº†",CHAR_COLORWHITE);    	
 			CHAR_DelItemMess( charaindex, haveitemindex, 0);
 			CHAR_complianceParameter( toindex );
 		    CHAR_sendCToArroundCharacter( CHAR_getWorkInt( toindex , CHAR_WORKOBJINDEX ));
@@ -764,10 +764,10 @@ void ITEM_useRecovery_Field(
 #endif
 #ifdef _ITEM_PROPERTY
     if( (p = strstr( arg, "PROPERTY" ) ) != NULL ){
-		//print("µØË®»ğ·ç:%s", arg );
+		//print("åœ°æ°´ç«é£:%s", arg );
 		if (CHAR_getInt(toindex, CHAR_WHICHTYPE)!=CHAR_TYPEPLAYER)
             return;
-		if( (p = strstr( arg, "+" ) ) != NULL ){//Ğı×ªÊôĞÔ Õı×ª
+		if( (p = strstr( arg, "+" ) ) != NULL ){//æ—‹è½¬å±æ€§ æ­£è½¬
 	        if( CHAR_getInt( toindex, CHAR_EARTHAT ) == 100 )
                 CHAR_setInt( toindex, CHAR_EARTHAT, CHAR_getInt( toindex, CHAR_EARTHAT )-10 ),
 			    CHAR_setInt( toindex, CHAR_WATERAT, CHAR_getInt( toindex, CHAR_WATERAT )+10 );
@@ -793,7 +793,7 @@ void ITEM_useRecovery_Field(
                 CHAR_setInt( toindex, CHAR_WINDAT, CHAR_getInt( toindex, CHAR_WINDAT )-10 ),
 			    CHAR_setInt( toindex, CHAR_EARTHAT, CHAR_getInt( toindex, CHAR_EARTHAT )+10 );
 		}
-        if( (p = strstr( arg, "-" ) ) != NULL ){//Ğı×ªÊôĞÔ ·´×ª
+        if( (p = strstr( arg, "-" ) ) != NULL ){//æ—‹è½¬å±æ€§ åè½¬
 			if( CHAR_getInt( toindex, CHAR_EARTHAT ) == 100 )
                 CHAR_setInt( toindex, CHAR_EARTHAT, CHAR_getInt( toindex, CHAR_EARTHAT )-10 ),
 			    CHAR_setInt( toindex, CHAR_WINDAT, CHAR_getInt( toindex, CHAR_WINDAT )+10 );
@@ -834,22 +834,22 @@ void ITEM_useRecovery_Field(
 #ifdef _ITEM_ADDPETEXP
 	if( (p = strstr( arg, "GETEXP" )) != NULL ){
 		if (CHAR_getInt(toindex, CHAR_WHICHTYPE)==CHAR_TYPEPET){
-			getStringFromIndexWithDelim( arg, "|", 2, msgbuf,sizeof( msgbuf));//³èÎï±àºÅ
+			getStringFromIndexWithDelim( arg, "|", 2, msgbuf,sizeof( msgbuf));//å® ç‰©ç¼–å·
 			if( atoi(msgbuf) == CHAR_getInt( toindex, CHAR_PETID) ){
-				getStringFromIndexWithDelim( arg, "|", 3, msgbuf,sizeof( msgbuf));//µÈ¼¶ÉÏÏŞ(µÈ¼¶³¬¹ı²Å¿ÉÓÃ)
+				getStringFromIndexWithDelim( arg, "|", 3, msgbuf,sizeof( msgbuf));//ç­‰çº§ä¸Šé™(ç­‰çº§è¶…è¿‡æ‰å¯ç”¨)
 				if( CHAR_getInt( toindex, CHAR_LV ) >= atoi(msgbuf) ){
-					getStringFromIndexWithDelim( arg, "|", 4, msgbuf,sizeof( msgbuf));//¾­ÑéÖµÔö¼Ó
+					getStringFromIndexWithDelim( arg, "|", 4, msgbuf,sizeof( msgbuf));//ç»éªŒå€¼å¢åŠ 
 					if( CHAR_getInt( toindex, CHAR_LV) < CHAR_MAXUPLEVEL ){
 						int UpLevel = 0;
-						CHAR_setWorkInt( toindex, CHAR_WORKGETEXP, atoi(msgbuf) );//»Ø´æCHAR_WORKGETEXP
+						CHAR_setWorkInt( toindex, CHAR_WORKGETEXP, atoi(msgbuf) );//å›å­˜CHAR_WORKGETEXP
 						CHAR_AddMaxExp( toindex, CHAR_getWorkInt( toindex, CHAR_WORKGETEXP ) );
-						sprintf( msgbuf,"ÕâÊ¯Í·ÀïÃæ²»ÖªµÀÓĞÊ²÷áÑùµÄ¿ó£¬ÈÃÎÒ¿´¿´¡£(Ôö¼Ó¾­Ñé%d)", CHAR_getWorkInt( toindex, CHAR_WORKGETEXP ) );
+						sprintf( msgbuf,"è¿™çŸ³å¤´é‡Œé¢ä¸çŸ¥é“æœ‰ä»€éº½æ ·çš„çŸ¿ï¼Œè®©æˆ‘çœ‹çœ‹ã€‚(å¢åŠ ç»éªŒ%d)", CHAR_getWorkInt( toindex, CHAR_WORKGETEXP ) );
 						CHAR_talkToCli( charaindex,-1,msgbuf,CHAR_COLORWHITE);  
 						UpLevel = CHAR_LevelUpCheck( toindex , charaindex);
 						if( UpLevel > 0 ){
 							if( getBattleDebugMsg( ) != 0 ){
 								snprintf( msgbuf, sizeof(msgbuf),
-											"(%s) Éı¼¶ÖÁ %d",
+											"(%s) å‡çº§è‡³ %d",
 											CHAR_getUseName( toindex ),
 											CHAR_getInt( toindex, CHAR_LV ) );
 							BATTLE_talkToCli( charaindex, msgbuf, CHAR_COLORYELLOW );
@@ -862,7 +862,7 @@ void ITEM_useRecovery_Field(
 						CHAR_complianceParameter( toindex );
 					}
 					else{
-						CHAR_talkToCli( charaindex,-1,"²»ÄÜÊ¹ÓÃ",CHAR_COLORWHITE);  
+						CHAR_talkToCli( charaindex,-1,"ä¸èƒ½ä½¿ç”¨",CHAR_COLORWHITE);  
 					}
 					/*CHAR_send_P_StatusString(  charindex, CHAR_P_STRING_DUELPOINT|
 					CHAR_P_STRING_TRANSMIGRATION| CHAR_P_STRING_RIDEPET|
@@ -871,7 +871,7 @@ void ITEM_useRecovery_Field(
 				*/
 				}
 				else
-					CHAR_talkToCli( charaindex,-1,"ÕâÊ¯Í·....(ÎŞ·¨ÅĞ±ğ£¬ÎŞ·¨Ôö¼Ó¾­Ñé)",CHAR_COLORWHITE);  
+					CHAR_talkToCli( charaindex,-1,"è¿™çŸ³å¤´....(æ— æ³•åˆ¤åˆ«ï¼Œæ— æ³•å¢åŠ ç»éªŒ)",CHAR_COLORWHITE);  
 			}
 			CHAR_DelItemMess( charaindex, haveitemindex, 0);
 			CHAR_complianceParameter( toindex );
@@ -879,7 +879,7 @@ void ITEM_useRecovery_Field(
 			return;
 		}
 		else{
-			CHAR_talkToCli( charaindex,-1,"²»ÄÜÊ¹ÓÃ",CHAR_COLORWHITE);  
+			CHAR_talkToCli( charaindex,-1,"ä¸èƒ½ä½¿ç”¨",CHAR_COLORWHITE);  
 		}
 	}
 #endif
@@ -887,7 +887,7 @@ void ITEM_useRecovery_Field(
 		power[j] = 0;
 		recovery[j] = 0;
 	}
-	if( (p = strstr( arg, "È«" )) != NULL ){
+	if( (p = strstr( arg, "å…¨" )) != NULL ){
 		HealFlg = ( 1 << BD_KIND_HP );
 		if( CHAR_getInt( toindex, CHAR_WHICHTYPE) == CHAR_TYPEPET ){
 		}else{
@@ -1035,7 +1035,7 @@ void ITEM_useRecovery_Field(
 		LogItem(
 			CHAR_getChar( charaindex, CHAR_NAME ),
 			CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 			itemindex,
 #else
        		ITEM_getInt( itemindex, ITEM_ID ),
@@ -1110,8 +1110,8 @@ void ITEM_useOtherEditBase( int charaindex, int toindex, int haveitemindex)
 	int num=-1,type;
 	int LevelUpPoint,petrank;
 	char buf1[256];
-	char buf2[][32]={"ÍóÁ¦³É³¤ÂÊ","ÄÍ¾ÃÁ¦³É³¤ÂÊ","ËÙ¶È³É³¤ÂÊ","ÌåÁ¦³É³¤ÂÊ","ÄÜÁ¦"};
-	char buf3[][32]={"´ó·ùÌá¸ß","ÂÔÎªÌá¸ß","ÂÔÎª¼õÉÙ"};
+	char buf2[][32]={"è…•åŠ›æˆé•¿ç‡","è€ä¹…åŠ›æˆé•¿ç‡","é€Ÿåº¦æˆé•¿ç‡","ä½“åŠ›æˆé•¿ç‡","èƒ½åŠ›"};
+	char buf3[][32]={"å¤§å¹…æé«˜","ç•¥ä¸ºæé«˜","ç•¥ä¸ºå‡å°‘"};
 	if( !CHAR_CHECKINDEX( charaindex ) )  return;
 	if( !CHAR_CHECKINDEX( toindex ) )  return; 
 #define RAND(x,y)   ((x-1)+1+ (int)( (double)(y-(x-1))*rand()/(RAND_MAX+1.0)) )
@@ -1126,7 +1126,7 @@ void ITEM_useOtherEditBase( int charaindex, int toindex, int haveitemindex)
 			int maxnums=50;
 
 			if( CHAR_getInt( toindex,CHAR_LV ) < 74 )	{
-				sprintf(buf1,"¸øÎÒµÄÂğ£¿ºÃÃÀÀöµÄÏîÁ´à¸£¡¡´ÄÜÁ¦ÆğÁË±ä»¯¡µ");
+				sprintf(buf1,"ç»™æˆ‘çš„å—ï¼Ÿå¥½ç¾ä¸½çš„é¡¹é“¾å–”ï¼ã€ˆèƒ½åŠ›èµ·äº†å˜åŒ–ã€‰");
 				CHAR_talkToCli( charaindex, toindex, buf1, CHAR_COLORWHITE);
 				num = ITEM_MODIFYATTACK;
 				LevelUpPoint = CHAR_getInt( toindex, CHAR_ALLOCPOINT );
@@ -1140,19 +1140,19 @@ void ITEM_useOtherEditBase( int charaindex, int toindex, int haveitemindex)
 					work[i] += type;
 					strcpy( buf1,"\0");
 					if( work[i] > maxnums )	{
-						sprintf(buf1,"%s ÒÑ¾­´ïµ½×î¸ßÁË¡£", buf2[i]);
+						sprintf(buf1,"%s å·²ç»è¾¾åˆ°æœ€é«˜äº†ã€‚", buf2[i]);
 						work[i] = maxnums;
 					}else if( work[i] < 0 )	{
-						sprintf(buf1,"%s ÒÑ¾­ÎªÁãÁË¡£", buf2[i]);
+						sprintf(buf1,"%s å·²ç»ä¸ºé›¶äº†ã€‚", buf2[i]);
 						work[i] = 0;
 					}else	{
 						if( type > 0 )	{
 							if( type > 2 )
-								sprintf(buf1,"%s %s %s", buf2[i], buf3[0], "¡£");
+								sprintf(buf1,"%s %s %s", buf2[i], buf3[0], "ã€‚");
 							else
-								sprintf(buf1,"%s %s %s", buf2[i], buf3[1], "¡£");
+								sprintf(buf1,"%s %s %s", buf2[i], buf3[1], "ã€‚");
 						}else if( type < 0 ){
-							sprintf(buf1,"%s %s %s", buf2[i], buf3[2], "¡£");	
+							sprintf(buf1,"%s %s %s", buf2[i], buf3[2], "ã€‚");	
 						}
 					}
 					if( strcmp( buf1, "\0"))	{
@@ -1177,7 +1177,7 @@ void ITEM_useOtherEditBase( int charaindex, int toindex, int haveitemindex)
 			}
 				
 		}else	{
-			sprintf(buf1,"£¿£¿£¿");
+			sprintf(buf1,"ï¼Ÿï¼Ÿï¼Ÿ");
 		}
 		CHAR_DelItem( charaindex, haveitemindex);
 		return;
@@ -1187,7 +1187,7 @@ void ITEM_useOtherEditBase( int charaindex, int toindex, int haveitemindex)
 void ITEM_useStatusChange( int charaindex, int toindex, int haveitemindex)
 {
 	int battlemode;
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //£ûÁÃ  
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //ï½›æ’©  
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 	}else
@@ -1201,7 +1201,7 @@ void ITEM_useStatusChange( int charaindex, int toindex, int haveitemindex)
 void ITEM_useStatusRecovery( int charaindex, int toindex, int haveitemindex)
 {
 	int battlemode;
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //£ûÁÃ  
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //ï½›æ’©  
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 	}else
@@ -1279,7 +1279,7 @@ void ITEM_useMic( int charaindex, int toindex, int haveitemindex)
 void ITEM_useCaptureUp( int charaindex, int toindex, int haveitemindex)
 {
 	int battlemode;
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //£ûÁÃ  
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return ; //ï½›æ’©  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 	if( battlemode == BATTLE_CHARMODE_INIT ){
@@ -1331,7 +1331,7 @@ void ITEM_usePetSkillCanned_WindowResult( int charaindex, int seqno, int select,
 
 #ifdef _CFREE_petskill
 	if( NPC_CHECKFREEPETSKILL( charaindex, petindex, SkillID) == FALSE ){
-		CHAR_talkToCli( charaindex, -1, "¸Ã³èÎïÎŞ·¨Ñ§Ï°´ËÏî¼¼ÄÜ£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "è¯¥å® ç‰©æ— æ³•å­¦ä¹ æ­¤é¡¹æŠ€èƒ½ï¼", CHAR_COLORYELLOW);
 		return;
 	}
 #endif
@@ -1342,7 +1342,7 @@ void ITEM_usePetSkillCanned_WindowResult( int charaindex, int seqno, int select,
 	CHAR_sendStatusString( charaindex, "P");
 	{
 		int skillarray = PETSKILL_getPetskillArray( SkillID);
-		sprintf( buf1, "³èÎï%sÑ§Ï°%s£¬µÀ¾ß %sÏûÊ§ÁË¡£",
+		sprintf( buf1, "å® ç‰©%så­¦ä¹ %sï¼Œé“å…· %sæ¶ˆå¤±äº†ã€‚",
 			CHAR_getUseName( petindex), PETSKILL_getChar( skillarray, PETSKILL_NAME),
 			ITEM_getChar( itemindex, ITEM_NAME) );
 	}
@@ -1374,7 +1374,7 @@ static void ITEM_useRenameItem_PrintWindow( int charaindex, int page)
 	if( fd == - 1 ) return;
 	
 	snprintf( message, sizeof( message),
-				"2\n   Òª±ä¸üÄÇ¸öÏîÄ¿µÄÃû³ÆÄØ\n"
+				"2\n   è¦å˜æ›´é‚£ä¸ªé¡¹ç›®çš„åç§°å‘¢\n"
 				"                               Page:%d\n", page +1);
 	
 	for( i = page *5; i < page *5 +5; i ++ ) {
@@ -1450,15 +1450,15 @@ void ITEM_useRenameItem( int charaindex, int toindex, int haveitemindex)
 	char buf[256];
 	int itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
 	if( !ITEM_CHECKINDEX( itemindex) ) return;
-	sprintf( buf, "%s¹¦ÄÜÒÑ±»È¡Ïû¡£", ITEM_getChar( itemindex, ITEM_NAME));
-	CHAR_talkToCli( charaindex, -1, "¹¦ÄÜÒÑ±»È¡Ïû¡£", CHAR_COLORRED );
+	sprintf( buf, "%såŠŸèƒ½å·²è¢«å–æ¶ˆã€‚", ITEM_getChar( itemindex, ITEM_NAME));
+	CHAR_talkToCli( charaindex, -1, "åŠŸèƒ½å·²è¢«å–æ¶ˆã€‚", CHAR_COLORRED );
 
 	{
 		LogItem(
 			CHAR_getChar( charaindex, CHAR_NAME ),
 			CHAR_getChar( charaindex, CHAR_CDKEY ),
 			itemindex,
-			"Ä§Êõ±ÊDEL",
+			"é­”æœ¯ç¬”DEL",
 			CHAR_getInt( charaindex, CHAR_FLOOR),
 			CHAR_getInt( charaindex, CHAR_X ),
  	      	CHAR_getInt( charaindex, CHAR_Y ),
@@ -1504,9 +1504,9 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 			itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
 
 			snprintf( message, sizeof( message),
-							"%s Ãû×ÖÒª¸ü¸Ä\n"
-							"ÇëÊäÈëĞÕÃû\n"
-							"È«ĞÎ13¸ö×Ö, °ëĞÎ26¸ö×Ö",
+							"%s åå­—è¦æ›´æ”¹\n"
+							"è¯·è¾“å…¥å§“å\n"
+							"å…¨å½¢13ä¸ªå­—, åŠå½¢26ä¸ªå­—",
 							ITEM_getChar( itemindex, ITEM_NAME));
 			
 			
@@ -1526,29 +1526,29 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 			char	*p;
 			if( strlen( data) > 26 || strlen( data) < 1) {
 				if( strlen( data) > 26 ) {
-					strcpy( message, "³¬¹ıÎÄ×ÖÏŞÖÆ");
+					strcpy( message, "è¶…è¿‡æ–‡å­—é™åˆ¶");
 				}else {
-					strcpy( message, "ÇëÊäÈëÒ»¸öÎÄ×ÖÒÔÉÏ");
+					strcpy( message, "è¯·è¾“å…¥ä¸€ä¸ªæ–‡å­—ä»¥ä¸Š");
 				}
 				break;
 			}
 
-            // WON ADD ĞŞÕıÄ§Êõ±Ê¸ÄÃûÎÊÌâ
+            // WON ADD ä¿®æ­£é­”æœ¯ç¬”æ”¹åé—®é¢˜
 			flg = TRUE;
 
 			for( p = data; *p ; p ++) {
 				if( *p == ' '){
-					strcpy( message, "²»¿É¿Õ°×");
+					strcpy( message, "ä¸å¯ç©ºç™½");
 					flg = FALSE;
 					break;
 				}
-				if( strncmp( p, "¡¡",2) == 0 ) {
-					strcpy( message, "²»¿É¿Õ°×");
+				if( strncmp( p, "ã€€",2) == 0 ) {
+					strcpy( message, "ä¸å¯ç©ºç™½");
 					flg = FALSE;
 					break;
 				}
 				if( *p == '|'){
-					strcpy( message, "²»¿ÉÓĞÌØÊâ·ûºÅ");
+					strcpy( message, "ä¸å¯æœ‰ç‰¹æ®Šç¬¦å·");
 					flg = FALSE;
 					break;
 				}
@@ -1582,7 +1582,7 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 			ITEM_setChar( itemindex, ITEM_CDKEY, 
 						CHAR_getChar( charaindex, CHAR_CDKEY));
 			CHAR_sendItemDataOne( charaindex, haveitemindex);
-			snprintf( msgbuf, sizeof(msgbuf),"°Ñ %s ÃüÃû³É %s ", 
+			snprintf( msgbuf, sizeof(msgbuf),"æŠŠ %s å‘½åæˆ %s ", 
 					ITEM_getChar( itemindex, ITEM_NAME), data);
 		    CHAR_talkToCli( charaindex, -1, msgbuf, CHAR_COLORYELLOW);
 			renameitemhaveindex = CHAR_getWorkInt( charaindex, CHAR_WORKRENAMEITEMINDEX);
@@ -1595,7 +1595,7 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 			if( remain != 0 ) {
 				remain --;
 				if( remain <= 0 ) {
-					snprintf( msgbuf, sizeof(msgbuf),"%s ÏûÊ§ÁË", 
+					snprintf( msgbuf, sizeof(msgbuf),"%s æ¶ˆå¤±äº†", 
 							ITEM_getChar( renameitemindex, ITEM_NAME));
 				    CHAR_talkToCli( charaindex, -1, msgbuf, CHAR_COLORYELLOW);
 				    CHAR_setItemIndex( charaindex, renameitemhaveindex, -1);
@@ -1612,49 +1612,49 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 }
 
 //-------------------------------------------------------------------------
-//	½ñÖĞ³ğÇ·Ã«  òØÔÊÔÂèúĞÑ£Û
-//	  ÎçØÆĞ×Áİ±å£İ·Â¼şÄ¸Ø©±å¨à  ¨åÃ«¼»Ì«£İ  ó¡Îç  ì«  Ä¯Ã«  µÊÔÊÔÂ£Û
+//	ä»Šä¸­ä»‡æ¬ æ¯›  èœ‡å…æœˆæ¥®é†’ï¼»
+//	  åˆä»„å‡¶å‡›åï¼½ä»¿ä»¶æ¯ä¸åã„   ã„¥æ¯›è“Ÿå¤ªï¼½  èŸ†åˆ  é£“  å¯æ¯›  å‡³å…æœˆï¼»
 //-------------------------------------------------------------------------
 void ITEM_dropDice( int charaindex, int itemindex)
 {
-	char *dicename[] = { "Ò»", "¶ş",  "Èı", "ËÄ", "Îå", "Áù"};
+	char *dicename[] = { "ä¸€", "äºŒ",  "ä¸‰", "å››", "äº”", "å…­"};
 	int  diceimagenumber[] = { 24298,24299,24300,24301,24302,24303};
 	int r = RAND( 0,5);
 	
-	//   ì«  Ä¯Ã«½÷  
+	//   é£“  å¯æ¯›è°¨  
 	ITEM_setInt( itemindex, ITEM_VAR1, ITEM_getInt( itemindex, ITEM_BASEIMAGENUMBER));
-	//   ì«  Ä¯µÊŞ¥
+	//   é£“  å¯å‡³è•™
 	ITEM_setInt( itemindex, ITEM_BASEIMAGENUMBER, diceimagenumber[r]);
-	//   ó¡µÊŞ¥
+	//   èŸ†å‡³è•™
 	ITEM_setChar( itemindex, ITEM_SECRETNAME, dicename[r]);
 	
-	// ·¸¡õÕı¼°ÛÍ·ÂÄÌÊ§¼şĞş³ß¼°Ëªññ·´ÏşŞËèúĞÑÆ¥µæµ¤¼°Æ¥£İ³ğ³ğÆ¥·´Ö§ÈÕØ¦ÖĞ£Û
+	// çŠ¯â–¡æ­£åŠå¼ä»¿å¥¶å¤±ä»¶ç„å°ºåŠéœœè€¨åæ™“åŒæ¥®é†’åŒ¹å«ä¸¹åŠåŒ¹ï¼½ä»‡ä»‡åŒ¹åæ”¯æ—¥å…ä¸­ï¼»
 }
 //-------------------------------------------------------------------------
-//	½ñÖĞ³ğÇ·Ã«  òØÔÊÔÂèúĞÑ£Û
-//  ½ºÔÈĞ×Áİ±å£İ  ó¡Îç  ì«  Ä¯Ã«İç±å  ÔÊ£Û
+//	ä»Šä¸­ä»‡æ¬ æ¯›  èœ‡å…æœˆæ¥®é†’ï¼»
+//  èƒ¶åŒ€å‡¶å‡›åï¼½  èŸ†åˆ  é£“  å¯æ¯›è‘­å  å…ï¼»
 //-------------------------------------------------------------------------
 void ITEM_pickupDice( int charaindex, int itemindex)
 {
-	//   ì«  Ä¯Ã«İç±å  ÔÊ£Û
+	//   é£“  å¯æ¯›è‘­å  å…ï¼»
 	ITEM_setInt( itemindex,  ITEM_BASEIMAGENUMBER, ITEM_getInt( itemindex, ITEM_VAR1));
-	//   ó¡ÊÖİç±å  ÔÊ
+	//   èŸ†æ‰‹è‘­å  å…
 	ITEM_setChar( itemindex, ITEM_SECRETNAME, ITEM_getChar( itemindex, ITEM_NAME));
 }
 enum {
-	ITEM_LOTTERY_1ST,		// 1î¿
+	ITEM_LOTTERY_1ST,		// 1ç¾
 	ITEM_LOTTERY_2ND,
 	ITEM_LOTTERY_3RD,
 	ITEM_LOTTERY_4TH,
-	ITEM_LOTTERY_5TH,		// 5î¿
-	ITEM_LOTTERY_6TH,		// 6î¿
-	ITEM_LOTTERY_NONE,		// Â½Ä¾
+	ITEM_LOTTERY_5TH,		// 5ç¾
+	ITEM_LOTTERY_6TH,		// 6ç¾
+	ITEM_LOTTERY_NONE,		// é™†æœ¨
 	ITEM_LOTTERY_NUM,
 };
 //-------------------------------------------------------------------------
-//	µ©ñâ¡õÓñÈÊÔª»¥×ÛÈÕÄ¾ÔÂÁİ¼°èúĞÑ£Û
-//  ³ğ³ğÆ¥ÖÏî¿²Ù±åØ¦ÔÂ¾®Ã«è£»§ÔÂ£Û
-//  ¸î  ·´¶¯Æ±¼°É§Ô»£Û
+//	æ—¦ç–‹â–¡ç‰ä»å…ƒäº’ç»¼æ—¥æœ¨æœˆå‡›åŠæ¥®é†’ï¼»
+//  ä»‡ä»‡åŒ¹çª’ç¾æ“åå…æœˆäº•æ¯›ç‘æˆ·æœˆï¼»
+//  å‰²  ååŠ¨ç¥¨åŠéªšæ›°ï¼»
 
 #define PRE_6		(10000)
 #define PRE_5		(1300 + PRE_6)
@@ -1687,15 +1687,15 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 {
 	int r = RAND( 0, 49999);
 	int hit = ITEM_LOTTERY_NONE;		// 
-	char result[7];		// Çë  
+	char result[7];		// è¯·  
 	int countnum[6];
 	int count;
 	int i;
 	int len;
-	// Óò¼Ô×ÛÔÈ»¯ÔÂ¼°Æ¥£Û·èËÚ  ØÆĞ×ÁİÎç¾®±å×ÛÔ»Ø¦ÔÆ½ñÄ¾Ø¦ÖĞ·½µ¤±å£Û
+	// åŸŸèšç»¼åŒ€åŒ–æœˆåŠåŒ¹ï¼»ç–¯ç²Ÿ  ä»„å‡¶å‡›åˆäº•åç»¼æ›°å…äº‘ä»Šæœ¨å…ä¸­æ–¹ä¸¹åï¼»
 	if( itm->data[ITEM_VAR3] == 1 ) return TRUE;
 
-	// ²ù¼»ÔÊÔÂ£Û
+	// é“²è“Ÿå…æœˆï¼»
 	if( r < PRE_6 ) hit = ITEM_LOTTERY_6TH;
 	else if( r < PRE_5 ) hit = ITEM_LOTTERY_5TH;
 	else if( r < PRE_4 ) hit = ITEM_LOTTERY_4TH;
@@ -1704,10 +1704,10 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 	else if( r < PRE_1 ) hit = ITEM_LOTTERY_1ST;
 	else hit = ITEM_LOTTERY_NONE;
 	
-	// Çë  Ã«è£ÀÃÔÊÔÂ£Û
+	// è¯·  æ¯›ç‘çƒ‚å…æœˆï¼»
 	count = 0;
 	if( hit != ITEM_LOTTERY_NONE ) {
-		// ñ²Ô»Ã«±¾ÓÀĞş
+		// ç™«æ›°æ¯›æœ¬æ°¸ç„
 		result[0] = result[1] = result[2] = hit+1;
 		count = 3;
 		countnum[hit] = 3;
@@ -1715,8 +1715,8 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 	while( count < 6 ) {
 		int r = RAND( ITEM_LOTTERY_1ST, ITEM_LOTTERY_6TH);
 		if( countnum[r] >= 2 ) continue;
-		// 2/3ÈÊÈÕÖĞ¼°¸î  Æ¥£İÖ°¼°Â½Ä¾µö  Ã«Øø¡õÃñ½ñÁù»¯Ö§ÔÂ£Û
-		// ÉıÎåÉıÎå£Û
+		// 2/3ä»æ—¥ä¸­åŠå‰²  åŒ¹ï¼½èŒåŠé™†æœ¨é’“  æ¯›ä¼‰â–¡æ°‘ä»Šå…­åŒ–æ”¯æœˆï¼»
+		// å‡äº”å‡äº”ï¼»
 		if(      ( hit != ITEM_LOTTERY_NONE && count == 3 )
 		     ||  ( hit == ITEM_LOTTERY_NONE && count == 0 ) )
 		{
@@ -1731,13 +1731,13 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 		result[count] = r+1;
 		count++;
 	}
-	// Çë  Ã«ÆËÅÒÓÀ°×»ïÔÊÔÂ£Û
-	// ñ²Ô»¼°Áİ·´2/3¼°¸î  Æ¥£İñ²Ô»ĞÑÙ¯Ã«Óò    Ç·±åÒáÀÃÔÊÔÂ£Û
-	// ÓñÆ½ÓñÆ½¶ã°íÃ«»Ñµ¤¿Ğ£Û
+	// è¯·  æ¯›æ‰‘ä¹“æ°¸ç™½ä¼™å…æœˆï¼»
+	// ç™«æ›°åŠå‡›å2/3åŠå‰²  åŒ¹ï¼½ç™«æ›°é†’ä¾¬æ¯›åŸŸ    æ¬ åè£”çƒ‚å…æœˆï¼»
+	// ç‰å¹³ç‰å¹³èº²ç»Šæ¯›è°ä¸¹å•ƒï¼»
 	len = sizeof( result)-2;
 	if( hit != ITEM_LOTTERY_NONE ) {
 		if( RAND( 0,2) ) {
-			// ñ²Ô»ĞÑÙ¯Ã«Óò    Ç·±å£Û
+			// ç™«æ›°é†’ä¾¬æ¯›åŸŸ    æ¬ åï¼»
 			char s = result[0];
 			result[0] = result[5];
 			result[5] = s;
@@ -1752,10 +1752,10 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 		result[x] = result[y];
 		result[y] = s;
 	}
-	//   ¼°Ğ×»§£İ  Ù¯  ½¡ÖĞ±åØÆ»¯ÔÆÈÊ£Û
+	//   åŠå‡¶æˆ·ï¼½  ä¾¬  å¥ä¸­åä»„åŒ–äº‘ä»ï¼»
 	result[sizeof(result)-1] = '\0';
 	itm->data[ITEM_VAR1] = hit;
-	// »§ÈÊÔÈĞ×ÊĞËü¼şĞş
+	// æˆ·ä»åŒ€å‡¶å¸‚å®ƒä»¶ç„
 	itm->data[ITEM_VAR2] = 0;
 	itm->data[ITEM_VAR3] = 1;
 	memcpy( itm->string[ITEM_ARGUMENT].string, result, sizeof( result));
@@ -1763,8 +1763,8 @@ BOOL ITEM_initLottery(ITEM_Item* itm)
 	return TRUE;
 }
 //-------------------------------------------------------------------------
-//	µ©ñâ¡õÓñÈÊÔªÃ«ÒøÔÈĞ×Áİ¼°èúĞÑ£Û
-//  ¨å¼ÔÒøµ¤Îç£İÖÏî¿²Ù¾®¼°Ê§ÄÌ  Ø©±å  ¼ÀÔÊÔÂ£Û
+//	æ—¦ç–‹â–¡ç‰ä»å…ƒæ¯›é“¶åŒ€å‡¶å‡›åŠæ¥®é†’ï¼»
+//  ã„¥èšé“¶ä¸¹åˆï¼½çª’ç¾æ“äº•åŠå¤±å¥¶  ä¸å  ç¥­å…æœˆï¼»
 //-------------------------------------------------------------------------
 void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 {
@@ -1773,7 +1773,7 @@ void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 	int count = ITEM_getInt( itemindex, ITEM_VAR2);
 	int hit = ITEM_getInt( itemindex, ITEM_VAR1);
 	char buff[1024];
-	char num[6][3] = { {"µü"},{"ÆÈ"},{"åÆ"},{"åÊ"},{"½¼"}, {"ÀÉ"}};
+	char num[6][3] = { {"è¿­"},{"è¿«"},{"è¿¤"},{"è¿¨"},{"éƒŠ"}, {"éƒ"}};
 	char numbuff[128];
 	char *n;
 	int result;
@@ -1782,7 +1782,7 @@ void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 	if( count == 0 ) {
 		ITEM_setChar( itemindex, ITEM_EFFECTSTRING, "");
 	}
-	// ¨å¼Ô  ¼°ÒøåÃ·´£İÂ½Ä¾ØÆ¾®Ø¤Ô»  Ø¦ÖĞ¼°Æ¥£İ³ğ³ğÆ¥Ê§ÄÌ  Ø©Ã«ÛÕÔÊ
+	// ã„¥èš  åŠé“¶è¿•åï¼½é™†æœ¨ä»„äº•ä¸æ›°  å…ä¸­åŠåŒ¹ï¼½ä»‡ä»‡åŒ¹å¤±å¥¶  ä¸æ¯›å£…å…
 	else if( count == 6 ) {
         CHAR_setItemIndex( charaindex , haveitemindex, -1 );
 		CHAR_sendItemDataOne( charaindex, haveitemindex);
@@ -1792,7 +1792,7 @@ void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 	n = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	// for debug
 	result = (int)n[count]-1;
-	// Øø¡õÃñ¾®Æ©ÍÍÔÂ
+	// ä¼‰â–¡æ°‘äº•è­¬å±¯æœˆ
 	flg = FALSE;
 	for( i = 0; i < count+1 && flg == FALSE; i ++ ) {
 		for( j = i+1; j < count+1 && flg == FALSE; j ++ ) {
@@ -1804,59 +1804,59 @@ void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 		}
 	}
 	memcpy( numbuff, ITEM_getChar( itemindex, ITEM_EFFECTSTRING), (count)*2);
-	// ¶ã°í  Ù¯  ±å£İÇë  Ã«ÇëÔÊ£Û
+	// èº²ç»Š  ä¾¬  åï¼½è¯·  æ¯›è¯·å…ï¼»
 	snprintf( buff, sizeof( buff), "%s%s", numbuff, num[result]);
 	count ++;
 	ITEM_setInt( itemindex, ITEM_VAR2, count);
-	// ¨å¼Ô  Æ¥ñ²Ô»Ø¦ÈÕñ²Ô»Ê§ÄÌ  Ø©±å  µÊ£İÂ½Ä¾Ø¦ÈÕÂ½Ä¾Îç  Ô÷£İ
-	// Æİ¼ÔÄ¸Æ¤»ïÛÍØøÓÀÛÍÆ¥ÛÕÔÊ£Û
+	// ã„¥èš  åŒ¹ç™«æ›°å…æ—¥ç™«æ›°å¤±å¥¶  ä¸å  å‡³ï¼½é™†æœ¨å…æ—¥é™†æœ¨åˆ  æ†ï¼½
+	// æˆšèšæ¯çš®ä¼™å¼ä¼‰æ°¸å¼åŒ¹å£…å…ï¼»
 	if( count >= 6 ) {
-		// ñ²Ô»
+		// ç™«æ›°
 		if( hit != ITEM_LOTTERY_NONE ) {
       		int newitemindex;
       		char strbuff[1024];
             char msgbuff[1024];
-            // ÛÕØÆ»¯
+            // å£…ä»„åŒ–
             CHAR_setItemIndex( charaindex , haveitemindex, -1 );
             ITEM_endExistItemsOne( itemindex );
-			// 2729 - 2734 ·´  ÈÊÔª¼°1  6î¿
+			// 2729 - 2734 å  ä»å…ƒåŠ1  6ç¾
 			newitemindex = ITEM_makeItemAndRegist( 2729 + hit);
             CHAR_setItemIndex( charaindex , haveitemindex, newitemindex );
-			// Çë  ÊÖÎìñâ¡õ
+			// è¯·  æ‰‹æˆŠç–‹â–¡
 			snprintf( strbuff, sizeof( strbuff), "%s                %s", buff, 
 						ITEM_getChar( newitemindex, ITEM_EFFECTSTRING));
 			ITEM_setChar( newitemindex, ITEM_EFFECTSTRING, strbuff);
 			CHAR_sendItemDataOne( charaindex, haveitemindex);
-            snprintf( msgbuff, sizeof( msgbuff), "ÖĞÁËµÚ%d½±", hit+1 );
+            snprintf( msgbuff, sizeof( msgbuff), "ä¸­äº†ç¬¬%då¥–", hit+1 );
             CHAR_talkToCli( charaindex, -1,
                             msgbuff,
                             CHAR_COLORYELLOW );
 		}
-		// Â½Ä¾
+		// é™†æœ¨
 		else {
 //            CHAR_setItemIndex( charaindex , haveitemindex, -1 );
-			// Çë  ÊÖÎìñâ¡õ
+			// è¯·  æ‰‹æˆŠç–‹â–¡
       		char strbuff[1024];
-			snprintf( strbuff, sizeof( strbuff), "%s                       Ã»ÖĞ,ÏÂ´ÎÔÙÀ´", buff);
+			snprintf( strbuff, sizeof( strbuff), "%s                       æ²¡ä¸­,ä¸‹æ¬¡å†æ¥", buff);
 			ITEM_setChar( itemindex, ITEM_EFFECTSTRING, strbuff);
 			CHAR_sendItemDataOne( charaindex, haveitemindex);
 //            ITEM_endExistItemsOne( itemindex );
 //            CHAR_talkToCli( charaindex, -1,
-//                            "·´ÄÚÄ¾¡å",
+//                            "åå†…æœ¨â€³",
 //                            CHAR_COLORWHITE );
 		}
 	}
-	// ¹«µ¤ÔªÔú  ÖĞÁİ·´£İ·¸¡õÕıÃ«ËªÔ»Ø¦ÔÆÔÊ·ÖØê£Û
+	// å…¬ä¸¹å…ƒæ‰  ä¸­å‡›åï¼½çŠ¯â–¡æ­£æ¯›éœœæ›°å…äº‘å…åˆ†ä»ƒï¼»
 	else {
 		char strbuff[1024];
 		if( flg) {
-			// µ©Ê¸¡õµ©»ÍÒ£
-			// Ê§ÄÌ  Ø©¼°      ¼°Îì¶ª¼şĞş·´£İ¨àµæ¨á¨ç  Ù¯Æ¥£İ
-			// µ©Ê¸¡õµ©Ã«ÒøÔÈ»¯İ±µæØÆ»¯ÖĞÔÂ£Û
+			// æ—¦çŸ¢â–¡æ—¦ç…Œé¥
+			// å¤±å¥¶  ä¸åŠ      åŠæˆŠä¸¢ä»¶ç„åï¼½ã„ å«ã„¡ã„§  ä¾¬åŒ¹ï¼½
+			// æ—¦çŸ¢â–¡æ—¦æ¯›é“¶åŒ€åŒ–è¼å«ä»„åŒ–ä¸­æœˆï¼»
 			int spc = 16 + ( 6-count)*2;
 			char space[17];
 			space[spc] = '\0';
-			snprintf( strbuff, sizeof( strbuff), "%s%s¿ìÖĞÁË", buff, space);
+			snprintf( strbuff, sizeof( strbuff), "%s%så¿«ä¸­äº†", buff, space);
 		}
 		else {
 			strcpy( strbuff, buff);
@@ -1892,24 +1892,24 @@ BOOL ITEM_WarpForAny(int charaindex, int haveitemindex, int ff, int fx, int fy,i
 		return FALSE;
 	if( CHAR_getInt( charaindex, CHAR_FLOOR) == 117 
 		){
-		CHAR_talkToCli(charaindex, -1, "´Ë´¦ÎŞ·¨Ê¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "æ­¤å¤„æ— æ³•ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return FALSE;
 	}
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKPARTYMODE ) == CHAR_PARTY_LEADER ){
 		int i;
-		if( flg == 0 )	{//µ¥Ìå
-			CHAR_talkToCli(charaindex, -1, "Ö»ÄÜµ¥ÈËÊ¹ÓÃ¡£", CHAR_COLORYELLOW);
+		if( flg == 0 )	{//å•ä½“
+			CHAR_talkToCli(charaindex, -1, "åªèƒ½å•äººä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 			return FALSE;
 		}
 		for( i = 0; i < CHAR_PARTYMAX; i ++ ){
 			int subindex = CHAR_getWorkInt( charaindex, CHAR_WORKPARTYINDEX1+i );
 			if( CHAR_CHECKINDEX( subindex ) == FALSE ) continue;
-			CHAR_talkToCli( subindex, -1, "È«ÌåË²¼ä·ÉĞĞ£®£®£®", CHAR_COLORWHITE);
+			CHAR_talkToCli( subindex, -1, "å…¨ä½“ç¬é—´é£è¡Œï¼ï¼ï¼", CHAR_COLORWHITE);
 			ITEM_WarpDelErrorItem( subindex );
 			CHAR_warpToSpecificPoint( subindex, ff, fx, fy );
 		}
 	}else if( CHAR_getWorkInt( charaindex, CHAR_WORKPARTYMODE ) == CHAR_PARTY_CLIENT ){
-		CHAR_talkToCli(charaindex, -1, "¶ÓÔ±ÎŞ·¨Ê¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "é˜Ÿå‘˜æ— æ³•ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return FALSE;
 	}else if( CHAR_getWorkInt( charaindex, CHAR_WORKPARTYMODE ) == CHAR_PARTY_NONE ){
 		ITEM_WarpDelErrorItem( charaindex );
@@ -1929,7 +1929,7 @@ void ITEM_useWarp( int charaindex, int toindex, int haveitemindex )
 
 #ifdef _ITEM_CHECKWARES
 	if( CHAR_CheckInItemForWares( charaindex, 0) == FALSE ){
-		CHAR_talkToCli(charaindex, -1, "Ğ¯´ø»õÎïÎŞ·¨Ê¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "æºå¸¦è´§ç‰©æ— æ³•ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
 #endif
@@ -1955,9 +1955,9 @@ void ITEM_useWarpForNum( int charaindex, int toindex, int haveitemindex )
 		701, 702, 703, 704, 705,
 		707, 708 };
 		char MapString[12][256]={
-			"ÈøÒÁÄÇË¹","¼ÓÂ³¿¨","¼ªÂ³µº","É³Ä·µº","ÒÁµéÔ°Çø",
-			"ÒÁµé´óÂ½Î÷·½","Äá¿ËË¹³ÇÇø","ÒÁµé´óÂ½ÄÏ·½","ÑÇÒÁÅ·³ÇÇø","ÒÁµé´óÂ½¶«·½",
-			"ÒÁµé´óÂ½±±·½","Ëş¶úËş³ÇÇø"};
+			"è¨ä¼Šé‚£æ–¯","åŠ é²å¡","å‰é²å²›","æ²™å§†å²›","ä¼Šç”¸å›­åŒº",
+			"ä¼Šç”¸å¤§é™†è¥¿æ–¹","å°¼å…‹æ–¯åŸåŒº","ä¼Šç”¸å¤§é™†å—æ–¹","äºšä¼Šæ¬§åŸåŒº","ä¼Šç”¸å¤§é™†ä¸œæ–¹",
+			"ä¼Šç”¸å¤§é™†åŒ—æ–¹","å¡”è€³å¡”åŸåŒº"};
 	
 	itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
 	if( !ITEM_CHECKINDEX( itemindex) ) return;
@@ -1978,7 +1978,7 @@ void ITEM_useWarpForNum( int charaindex, int toindex, int haveitemindex )
 	}
 #ifdef _ITEM_CHECKWARES
 	if( CHAR_CheckInItemForWares( charaindex, 0) == FALSE ){
-		CHAR_talkToCli(charaindex, -1, "Ğ¯´ø»õÎïÎŞ·¨Ê¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "æºå¸¦è´§ç‰©æ— æ³•ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
 #endif
@@ -1989,13 +1989,13 @@ void ITEM_useWarpForNum( int charaindex, int toindex, int haveitemindex )
 		char buf[256];
 		// WON ADD
 		if( i >= 12 ){
-			CHAR_talkToCli(charaindex, -1, "´Ë´¦ÎŞ·¨Ê¹ÓÃ¡£", CHAR_COLORYELLOW);
+			CHAR_talkToCli(charaindex, -1, "æ­¤å¤„æ— æ³•ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 			return;
 		}
 		sprintf( buf, "%d %d %d %d", flg, Mf, Mx, My);
 		ITEM_setChar(itemindex, ITEM_ARGUMENT, buf);
 		ITEM_setInt( itemindex, ITEM_DAMAGEBREAK, usenum);
-		sprintf( buf, "·ÉĞĞ¼ÍÂ¼µã(%s,%d,%d)", MapString[i], Mx, My);
+		sprintf( buf, "é£è¡Œçºªå½•ç‚¹(%s,%d,%d)", MapString[i], Mx, My);
 		ITEM_setChar( itemindex, ITEM_EFFECTSTRING, buf);
 		CHAR_talkToCli(charaindex, -1, buf, CHAR_COLORYELLOW);
 		CHAR_sendItemDataOne( charaindex, haveitemindex);
@@ -2015,14 +2015,14 @@ void ITEM_petFollow( int charaindex, int toindex, int haveitemindex )
 	//print(" PetFollow_toindex:%d ", toindex);
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKPETFOLLOW ) != -1 ){
 		if( CHAR_CHECKINDEX( CHAR_getWorkInt( charaindex, CHAR_WORKPETFOLLOW ) ) ){
-			CHAR_talkToCli( charaindex, -1, "ÇëÏÈÊÕ»Ø·Å³öµÄ³èÎï£¡", CHAR_COLORWHITE );
+			CHAR_talkToCli( charaindex, -1, "è¯·å…ˆæ”¶å›æ”¾å‡ºçš„å® ç‰©ï¼", CHAR_COLORWHITE );
 			return;
 		}
 		CHAR_setWorkInt( charaindex, CHAR_WORKPETFOLLOW, -1);
 	}
 #ifdef _FIX_METAMORIDE
 	if( CHAR_CHECKJOINENEMY( charaindex) == TRUE ){
-		CHAR_talkToCli( charaindex, -1, "´î³ËÖĞÎŞ·¨Ê¹ÓÃ£¡", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "æ­ä¹˜ä¸­æ— æ³•ä½¿ç”¨ï¼", CHAR_COLORWHITE );
 		return;
 	}
 #endif
@@ -2036,12 +2036,12 @@ void ITEM_petFollow( int charaindex, int toindex, int haveitemindex )
 	if( sscanf( arg, "%d", &followLv) != 1 )
 		return;
 	if( CHAR_getInt( toindex, CHAR_LV ) > followLv ){
-		CHAR_talkToCli( charaindex, -1, "µÀ¾ßµÄµÈ¼¶²»×ã£¡", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "é“å…·çš„ç­‰çº§ä¸è¶³ï¼", CHAR_COLORWHITE );
 		return;
 	}
 	if( CHAR_getWorkInt( toindex, CHAR_WORKFIXAI ) < 80 )
 	{
-		//CHAR_talkToCli( charaindex, -1, "³èÎïµÄÖÒ³Ï¶È²»×ã£¡", CHAR_COLORWHITE );
+		//CHAR_talkToCli( charaindex, -1, "å® ç‰©çš„å¿ è¯šåº¦ä¸è¶³ï¼", CHAR_COLORWHITE );
 		//return;
 	}	
 	
@@ -2058,7 +2058,7 @@ void ITEM_petFollow( int charaindex, int toindex, int haveitemindex )
 	
 	
 	if( !PET_dropPetFollow( charaindex, haveindex, -1, -1, -1 ) ) {
-		CHAR_talkToCli( charaindex, -1, "³èÎï¸úËæÊ§°Ü£¡", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "å® ç‰©è·Ÿéšå¤±è´¥ï¼", CHAR_COLORWHITE );
 		return;
 	}
 
@@ -2073,7 +2073,7 @@ void ITEM_useSkup( int charaindex, int toindex, int haveitemindex)
 	CHAR_setInt(charaindex,CHAR_SKILLUPPOINT,
 	CHAR_getInt(charaindex,CHAR_SKILLUPPOINT)+1);
 	CHAR_Skillupsend(charaindex);
-	CHAR_talkToCli(charaindex, -1, "Äã¸ĞÊÜµ½×Ô¼ºµÄÄÜÁ¦±»ÌáÉıÁË¡£", CHAR_COLORWHITE);
+	CHAR_talkToCli(charaindex, -1, "ä½ æ„Ÿå—åˆ°è‡ªå·±çš„èƒ½åŠ›è¢«æå‡äº†ã€‚", CHAR_COLORWHITE);
 
 	CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -2087,7 +2087,7 @@ void ITEM_useNoenemy( int charaindex, int toindex, int haveitemindex)
 	if(!ITEM_CHECKINDEX(itemindex)) return;	
 	fd=CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 	setNoenemy(fd);
-	CHAR_talkToCli(charaindex, -1, "Äã¸ĞÊÜµ½ÖÜ±ßµÄÉ±ÆøÏûÊ§ÁË¡£", CHAR_COLORWHITE);
+	CHAR_talkToCli(charaindex, -1, "ä½ æ„Ÿå—åˆ°å‘¨è¾¹çš„æ€æ°”æ¶ˆå¤±äº†ã€‚", CHAR_COLORWHITE);
 	CHAR_DelItem( charaindex, haveitemindex);
 
 }
@@ -2112,30 +2112,30 @@ void ITEM_equipNoenemy( int charaindex, int itemindex )
   fd=CHAR_getWorkInt( charaindex, CHAR_WORKFD);
   if (evadelevel>=200) {
     setEqNoenemy(fd, 200);
-    CHAR_talkToCli(charaindex, -1, "Ò»µÀÆæÒìµÄ¹âÃ¢Òş²ØÁËÄãµÄĞĞ×Ù¡£", CHAR_COLORWHITE);
+    CHAR_talkToCli(charaindex, -1, "ä¸€é“å¥‡å¼‚çš„å…‰èŠ’éšè—äº†ä½ çš„è¡Œè¸ªã€‚", CHAR_COLORWHITE);
     return;
   } else if (evadelevel>=120) {
     setEqNoenemy(fd, 120);
 
 	if ( (fl==100)||(fl==200)||(fl==300)||(fl==400)||(fl==500) ){
-	  CHAR_talkToCli(charaindex, -1, "Ò»µÀÆæÒìµÄ¹âÃ¢Òş²ØÁËÄãµÄĞĞ×Ù¡£", CHAR_COLORWHITE);
+	  CHAR_talkToCli(charaindex, -1, "ä¸€é“å¥‡å¼‚çš„å…‰èŠ’éšè—äº†ä½ çš„è¡Œè¸ªã€‚", CHAR_COLORWHITE);
       return;
     }
   } else if (evadelevel>=80) {
     setEqNoenemy(fd, 80);
 	if ( (fl==100)||(fl==200)||(fl==300)||(fl==400) ){
 	
-      CHAR_talkToCli(charaindex, -1, "Ò»µÀÆæÒìµÄ¹âÃ¢Òş²ØÁËÄãµÄĞĞ×Ù¡£", CHAR_COLORWHITE);
+      CHAR_talkToCli(charaindex, -1, "ä¸€é“å¥‡å¼‚çš„å…‰èŠ’éšè—äº†ä½ çš„è¡Œè¸ªã€‚", CHAR_COLORWHITE);
       return;
     }
   } else if (evadelevel>=40) {
     setEqNoenemy(fd, 40);
     if ( (fl==100)||(fl==200) ) {
-      CHAR_talkToCli(charaindex, -1, "Ò»µÀÆæÒìµÄ¹âÃ¢Òş²ØÁËÄãµÄĞĞ×Ù¡£", CHAR_COLORWHITE);
+      CHAR_talkToCli(charaindex, -1, "ä¸€é“å¥‡å¼‚çš„å…‰èŠ’éšè—äº†ä½ çš„è¡Œè¸ªã€‚", CHAR_COLORWHITE);
       return;
     }
   }
-  CHAR_talkToCli(charaindex, -1, "Ê²÷áÊÂÒ²Ã»ÓĞ·¢Éú¡£", CHAR_COLORWHITE);
+  CHAR_talkToCli(charaindex, -1, "ä»€éº½äº‹ä¹Ÿæ²¡æœ‰å‘ç”Ÿã€‚", CHAR_COLORWHITE);
 }
 
 #ifdef _Item_MoonAct
@@ -2154,8 +2154,8 @@ void ITEM_randEnemyEquipOne( int charaindex, int toindex, int haveitemindex)
 	if( (RandNum=atoi( buf)) > 0 ){
 		int fd = CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 		setEqRandenemy(fd, RandNum);
-		CHAR_talkToCli(charaindex, -1, "ÓöµĞÂÊ½µµÍÁË¡£", CHAR_COLORWHITE);
-		sprintf( buf, "µÀ¾ß %sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+		CHAR_talkToCli(charaindex, -1, "é‡æ•Œç‡é™ä½äº†ã€‚", CHAR_COLORWHITE);
+		sprintf( buf, "é“å…· %sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 		CHAR_talkToCli( charaindex, -1, buf, CHAR_COLORYELLOW);
 		CHAR_DelItem( charaindex, haveitemindex);
 		return;
@@ -2180,7 +2180,7 @@ void ITEM_randEnemyEquip( int charaindex, int itemindex)
   fd=CHAR_getWorkInt( charaindex, CHAR_WORKFD);
   if (RandNum > 0 ) {
     setEqRandenemy(fd, RandNum);
-    CHAR_talkToCli(charaindex, -1, "ÓöµĞÂÊ½µµÍÁË¡£", CHAR_COLORWHITE);
+    CHAR_talkToCli(charaindex, -1, "é‡æ•Œç‡é™ä½äº†ã€‚", CHAR_COLORWHITE);
     return;
   }
 
@@ -2197,7 +2197,7 @@ void ITEM_RerandEnemyEquip( int charaindex, int itemindex)
 
   if (RandNum > 0 ) {
     clearEqRandenemy( fd);
-    CHAR_talkToCli(charaindex, -1, "ÓöµĞÂÊ»Ø¸´¡£", CHAR_COLORWHITE);
+    CHAR_talkToCli(charaindex, -1, "é‡æ•Œç‡å›å¤ã€‚", CHAR_COLORWHITE);
     return;
   }
 }
@@ -2227,7 +2227,7 @@ void ITEM_ChikulaStone( int charaindex, int toindex, int haveitemindex)
 	}else{
 	}
 
-	CHAR_talkToCli(charaindex, -1, "½ÓÊÜÆæ¿ËÀ­µÄ×£¸£¡£", CHAR_COLORWHITE);
+	CHAR_talkToCli(charaindex, -1, "æ¥å—å¥‡å…‹æ‹‰çš„ç¥ç¦ã€‚", CHAR_COLORWHITE);
 	CHAR_setItemIndex(charaindex, haveitemindex ,-1);
 	CHAR_sendItemDataOne( charaindex, haveitemindex);
 	ITEM_endExistItemsOne(itemindex);
@@ -2248,7 +2248,7 @@ void ITEM_PutOrnaments( int charaindex, int itemindex)
 	ITEM_setInt( itemindex, ITEM_BASEIMAGENUMBER, bbnums);
 	ITEM_setWorkInt( itemindex, ITEM_CANPICKUP, 1);
 	
-	sprintf( itemname,"%s%s%s",CHAR_getChar( charaindex, CHAR_NAME), "µÄ", ITEM_getChar( itemindex, ITEM_SECRETNAME));
+	sprintf( itemname,"%s%s%s",CHAR_getChar( charaindex, CHAR_NAME), "çš„", ITEM_getChar( itemindex, ITEM_SECRETNAME));
 	ITEM_setChar( itemindex, ITEM_SECRETNAME, itemname);
 }
 #endif
@@ -2273,22 +2273,22 @@ void ITEM_CheckSuitEquip( int charaindex)
 		{"HP", CHAR_WORKROUNDHP},
 		{"MP", CHAR_WORKROUNDMP}
 #ifdef _SUIT_ADDENDUM
-	   ,{"RESIST",CHAR_WORKRESIST},   //Òì³£¿¹ĞÔÂÊ
-		{"COUNTER",CHAR_WORKCOUNTER}, //·´»÷ÂÊ
-		{"M_POW",CHAR_WORKMPOWER}      //¼ÓÇ¿·¨Ê¦µÄÄ§·¨
+	   ,{"RESIST",CHAR_WORKRESIST},   //å¼‚å¸¸æŠ—æ€§ç‡
+		{"COUNTER",CHAR_WORKCOUNTER}, //åå‡»ç‡
+		{"M_POW",CHAR_WORKMPOWER}      //åŠ å¼ºæ³•å¸ˆçš„é­”æ³•
 #endif
 #ifdef _SUIT_TWFWENDUM
-	   ,{"EARTH",CHAR_WORK_EA},   //µØ
-	   {"WRITER",CHAR_WORK_WR},   //Ë®
-	   {"FIRE",CHAR_WORK_FI},   //»ğ
-	   {"WIND",CHAR_WORK_WI}     //·ç
+	   ,{"EARTH",CHAR_WORK_EA},   //åœ°
+	   {"WRITER",CHAR_WORK_WR},   //æ°´
+	   {"FIRE",CHAR_WORK_FI},   //ç«
+	   {"WIND",CHAR_WORK_WI}     //é£
 #endif
 #ifdef _SUIT_ADDPART3
-	   ,{"WDUCKPOWER",CHAR_WORKDUCKPOWER},//Ì××°»Ø±Ü
-	   {"RENOCASE",CHAR_WORKRENOCAST}, //³ÁÄ¬¿¹ĞÔÂÊ
-	   {"SUITSTRP",CHAR_WORKSUITSTR_P},//¹¥ÌáÉı µ¥Î»Îª%
-	   {"SUITTGH_P",CHAR_WORKSUITTGH_P},//·ÀÌáÉı µ¥Î»Îª%
-	   {"SUITDEXP",CHAR_WORKSUITDEX_P}//ÃôÌáÉı µ¥Î»Îª%
+	   ,{"WDUCKPOWER",CHAR_WORKDUCKPOWER},//å¥—è£…å›é¿
+	   {"RENOCASE",CHAR_WORKRENOCAST}, //æ²‰é»˜æŠ—æ€§ç‡
+	   {"SUITSTRP",CHAR_WORKSUITSTR_P},//æ”»æå‡ å•ä½ä¸º%
+	   {"SUITTGH_P",CHAR_WORKSUITTGH_P},//é˜²æå‡ å•ä½ä¸º%
+	   {"SUITDEXP",CHAR_WORKSUITDEX_P}//æ•æå‡ å•ä½ä¸º%
 #endif
 	};
 	maxitem = sizeof(ListSuit)/sizeof(ListSuit[0]);
@@ -2351,25 +2351,25 @@ void ITEM_remNoenemy( int charaindex, int itemindex )
 
   clearEqNoenemy(CHAR_getWorkInt(charaindex, CHAR_WORKFD));
   if (el>=200) {
-    CHAR_talkToCli(charaindex, -1, "»·ÈÆ×ÅÄãµÄ¹âÃ¢ÏûÊ§ÁË¡£", CHAR_COLORWHITE);
+    CHAR_talkToCli(charaindex, -1, "ç¯ç»•ç€ä½ çš„å…‰èŠ’æ¶ˆå¤±äº†ã€‚", CHAR_COLORWHITE);
     return;
   } else if (el>=120) {
     if ( (fl==100)||(fl==200)||(fl==300)||(fl==400)||(fl==500) ) {
-      CHAR_talkToCli(charaindex, -1, "»·ÈÆ×ÅÄãµÄ¹âÃ¢ÏûÊ§ÁË¡£", CHAR_COLORWHITE);
+      CHAR_talkToCli(charaindex, -1, "ç¯ç»•ç€ä½ çš„å…‰èŠ’æ¶ˆå¤±äº†ã€‚", CHAR_COLORWHITE);
       return;
     }
   } else if (el>=80) {
     if ( (fl==100)||(fl==200)||(fl==300)||(fl==400) ) {
-      CHAR_talkToCli(charaindex, -1, "»·ÈÆ×ÅÄãµÄ¹âÃ¢ÏûÊ§ÁË¡£", CHAR_COLORWHITE);
+      CHAR_talkToCli(charaindex, -1, "ç¯ç»•ç€ä½ çš„å…‰èŠ’æ¶ˆå¤±äº†ã€‚", CHAR_COLORWHITE);
       return;
     }
   } else if (el>=40) {
     if ( (fl==100)||(fl==200) ) {
-      CHAR_talkToCli(charaindex, -1, "»·ÈÆ×ÅÄãµÄ¹âÃ¢ÏûÊ§ÁË¡£", CHAR_COLORWHITE);
+      CHAR_talkToCli(charaindex, -1, "ç¯ç»•ç€ä½ çš„å…‰èŠ’æ¶ˆå¤±äº†ã€‚", CHAR_COLORWHITE);
       return;
     }
   }
-  CHAR_talkToCli(charaindex, -1, "Ê²÷áÊÂÒ²Ã»ÓĞ·¢Éú¡£", CHAR_COLORWHITE);
+  CHAR_talkToCli(charaindex, -1, "ä»€éº½äº‹ä¹Ÿæ²¡æœ‰å‘ç”Ÿã€‚", CHAR_COLORWHITE);
 }
 
 extern void setStayEncount(int fd);
@@ -2387,12 +2387,12 @@ void ITEM_useEncounter( int charaindex, int toindex, int haveitemindex)
 		ch  = CHAR_getCharPointer( charaindex);
 		if( ch == NULL ) return;
 		strcpysafe( ch->charfunctable[CHAR_LOOPFUNCTEMP1].string,
-			sizeof( ch->charfunctable[CHAR_LOOPFUNCTEMP1]), "CHAR_BattleStayLoop");//Õ½¶·
+			sizeof( ch->charfunctable[CHAR_LOOPFUNCTEMP1]), "CHAR_BattleStayLoop");//æˆ˜æ–—
 		CHAR_setInt( charaindex, CHAR_LOOPINTERVAL, 2500);
 		CHAR_constructFunctable( charaindex);
 	}
 #endif
-	CHAR_talkToCli(charaindex, -1, "Äã¸ĞÊÜµ½ÖÜ±ßÍ»È»³äÂúÁËÉ±Æø£¡", CHAR_COLORYELLOW);
+	CHAR_talkToCli(charaindex, -1, "ä½ æ„Ÿå—åˆ°å‘¨è¾¹çªç„¶å……æ»¡äº†æ€æ°”ï¼", CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
 
 }
@@ -2424,44 +2424,44 @@ void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex)
 		}
 		i++;
 	}
-	if(okfloor != 0){   // Ææ¹ÖµÄÊ¯Í·
+	if(okfloor != 0){   // å¥‡æ€ªçš„çŸ³å¤´
 		itemmaxuse = ITEM_getInt( itemindex, ITEM_DAMAGEBREAK);	
 		if( itemmaxuse != -1 )	{
 			itemmaxuse--;
 			ITEM_setInt( itemindex, ITEM_DAMAGEBREAK, itemmaxuse);
 			if( itemmaxuse < 1 )	{
-				sprintf( buf1, "%sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+				sprintf( buf1, "%sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 				CHAR_talkToCli(charaindex, -1, buf1, CHAR_COLORYELLOW);
 				CHAR_DelItem( charaindex, haveitemindex);
 				if(Useflag==FALSE) {
-					CHAR_talkToCli(charaindex, -1, "Ã»ÓĞ·¢ÉúÈÎºÎÊÂÇé£¡", CHAR_COLORYELLOW);
+					CHAR_talkToCli(charaindex, -1, "æ²¡æœ‰å‘ç”Ÿä»»ä½•äº‹æƒ…ï¼", CHAR_COLORYELLOW);
 					return;
 				}
 			}else{
-				sprintf( buf1, "Ô­µØÓöµĞ£¬¿ÉÊ¹ÓÃ´ÎÊıÊ£Óà%d´Î¡£", itemmaxuse);
+				sprintf( buf1, "åŸåœ°é‡æ•Œï¼Œå¯ä½¿ç”¨æ¬¡æ•°å‰©ä½™%dæ¬¡ã€‚", itemmaxuse);
 				ITEM_setChar( itemindex, ITEM_EFFECTSTRING, buf1);
 				CHAR_sendItemDataOne( charaindex, haveitemindex);
 				if(Useflag==FALSE) {
-					CHAR_talkToCli(charaindex, -1, "Ã»ÓĞ·¢ÉúÈÎºÎÊÂÇé£¡", CHAR_COLORYELLOW);
+					CHAR_talkToCli(charaindex, -1, "æ²¡æœ‰å‘ç”Ÿä»»ä½•äº‹æƒ…ï¼", CHAR_COLORYELLOW);
 					return;
 				}
 			}
 			fd = CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 			setStayEncount(fd);
-			CHAR_talkToCli(charaindex, -1, "ÄãÉí±ßÁıÕÖÒõ°µÆøÏ¢£¡", CHAR_COLORYELLOW);
+			CHAR_talkToCli(charaindex, -1, "ä½ èº«è¾¹ç¬¼ç½©é˜´æš—æ°”æ¯ï¼", CHAR_COLORYELLOW);
 		}else{
-			sprintf( buf1, "%sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+			sprintf( buf1, "%sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 			CHAR_talkToCli(charaindex, -1, buf1, CHAR_COLORYELLOW);
 			CHAR_DelItem( charaindex, haveitemindex);
 			if(Useflag==FALSE) {
-				CHAR_talkToCli(charaindex, -1, "Ã»ÓĞ·¢ÉúÈÎºÎÊÂÇé£¡", CHAR_COLORYELLOW);
+				CHAR_talkToCli(charaindex, -1, "æ²¡æœ‰å‘ç”Ÿä»»ä½•äº‹æƒ…ï¼", CHAR_COLORYELLOW);
 				return;
 			}
 			fd = CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 			setStayEncount(fd);
-			CHAR_talkToCli(charaindex, -1, "ÄãÉí±ßÁıÕÖÒõ°µÆøÏ¢£¡", CHAR_COLORYELLOW);		
+			CHAR_talkToCli(charaindex, -1, "ä½ èº«è¾¹ç¬¼ç½©é˜´æš—æ°”æ¯ï¼", CHAR_COLORYELLOW);		
 		}
-	}else{		//¶ñÄ§±¦Ê¯
+	}else{		//æ¶é­”å®çŸ³
 #endif
 #ifdef _ITEM_MAXUSERNUM
 	itemmaxuse = ITEM_getInt( itemindex, ITEM_DAMAGEBREAK);
@@ -2469,17 +2469,17 @@ void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex)
 		itemmaxuse--;
 		ITEM_setInt( itemindex, ITEM_DAMAGEBREAK, itemmaxuse);
 		if( itemmaxuse < 1 )	{
-			sprintf( buf1, "µÀ¾ß %sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+			sprintf( buf1, "é“å…· %sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 			CHAR_talkToCli(charaindex, -1, buf1, CHAR_COLORYELLOW);
 			CHAR_DelItem( charaindex, haveitemindex);
 		}else{
-			sprintf( buf1, "Ô­µØÓöµĞ£¬¿ÉÊ¹ÓÃ´ÎÊıÊ£Óà%d´Î¡£", itemmaxuse);
+			sprintf( buf1, "åŸåœ°é‡æ•Œï¼Œå¯ä½¿ç”¨æ¬¡æ•°å‰©ä½™%dæ¬¡ã€‚", itemmaxuse);
 			ITEM_setChar( itemindex, ITEM_EFFECTSTRING, buf1);
 			CHAR_sendItemDataOne( charaindex, haveitemindex);
 		}
 		fd = CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 		setStayEncount(fd);
-		CHAR_talkToCli(charaindex, -1, "Äã¸ĞÊÜµ½ÖÜ±ßÍ»È»³äÂúÁËÉ±Æø£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "ä½ æ„Ÿå—åˆ°å‘¨è¾¹çªç„¶å……æ»¡äº†æ€æ°”ï¼", CHAR_COLORYELLOW);
 	}else{
 		CHAR_DelItem( charaindex, haveitemindex);
 		return;
@@ -2487,7 +2487,7 @@ void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex)
 #else
 	fd = CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 	setStayEncount(fd);
-	sprintf( buf1, "µÀ¾ß %sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+	sprintf( buf1, "é“å…· %sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 	CHAR_talkToCli(charaindex, -1, buf1, CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
 #endif
@@ -2500,7 +2500,7 @@ void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex)
 		ch  = CHAR_getCharPointer( charaindex);
 		if( ch == NULL ) return;
 		strcpysafe( ch->charfunctable[CHAR_LOOPFUNCTEMP1].string,
-			sizeof( ch->charfunctable[CHAR_LOOPFUNCTEMP1]), "CHAR_BattleStayLoop");//Õ½¶·
+			sizeof( ch->charfunctable[CHAR_LOOPFUNCTEMP1]), "CHAR_BattleStayLoop");//æˆ˜æ–—
 		CHAR_setInt( charaindex, CHAR_LOOPINTERVAL, 2500);
 		CHAR_constructFunctable( charaindex);
 	}
@@ -2523,19 +2523,19 @@ void ITEM_useMaxRedSocks( int charaindex, int toindex, int haveitemindex)
 
 	itemarg = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	if( itemarg == "\0" ) {
-		CHAR_talkToCli(charaindex, -1, "µÀ¾ßÎŞĞ§!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "é“å…·æ— æ•ˆ!", CHAR_COLORYELLOW);
 		return;
 	}
 	itemtimes = atoi( itemarg);
-	if( nowtimes >= itemtimes && nowtimes <= itemtimes+(60*60*24) ){ //ÏŞÖÆÊ±¼äÄÚ¿É»»ÀñÎï
+	if( nowtimes >= itemtimes && nowtimes <= itemtimes+(60*60*24) ){ //é™åˆ¶æ—¶é—´å†…å¯æ¢ç¤¼ç‰©
 		int si=0, ret;
 		char token[256];
-		//É¾³ı
+		//åˆ é™¤
 		CHAR_setItemIndex(charaindex, haveitemindex ,-1);
 		CHAR_sendItemDataOne( charaindex, haveitemindex);
 		ITEM_endExistItemsOne(itemindex);
 		itemindex = -1;
-		//ĞÂÔö
+		//æ–°å¢
 		si = rand()%100;
 		if( si > 70 ){
 			si = rand()%3+10;
@@ -2546,16 +2546,16 @@ void ITEM_useMaxRedSocks( int charaindex, int toindex, int haveitemindex)
 		}
 		itemindex = ITEM_makeItemAndRegist( present[ si]);
 		if( !ITEM_CHECKINDEX( itemindex)){
-			CHAR_talkToCli(charaindex, -1, "ÀñÎïÎŞĞ§!", CHAR_COLORYELLOW);
+			CHAR_talkToCli(charaindex, -1, "ç¤¼ç‰©æ— æ•ˆ!", CHAR_COLORYELLOW);
 			return;
 		}
 		ret = CHAR_addItemSpecificItemIndex( charaindex, itemindex);
 		if( ret < 0 || ret >= CHAR_MAXITEMHAVE ) {
 			ITEM_endExistItemsOne( itemindex);
-			CHAR_talkToCli(charaindex, -1, "ÀñÎïÖÃ·ÅÀ¸Î»´íÎó!", CHAR_COLORYELLOW);
+			CHAR_talkToCli(charaindex, -1, "ç¤¼ç‰©ç½®æ”¾æ ä½é”™è¯¯!", CHAR_COLORYELLOW);
 			return;
 		}
-		sprintf( token,"ÄÃµ½%s",ITEM_getChar( itemindex, ITEM_NAME));
+		sprintf( token,"æ‹¿åˆ°%s",ITEM_getChar( itemindex, ITEM_NAME));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 		CHAR_sendItemDataOne( charaindex, ret);
 	}else{
@@ -2571,11 +2571,11 @@ void ITEM_useMaxRedSocks( int charaindex, int toindex, int haveitemindex)
 			minute = defTimes/60;
 			defTimes = defTimes-( minute*60);
 			second = defTimes;
-			sprintf( token,"%s»¹²î%dÌì%dĞ¡Ê±%d·Ö%dÃë²Å¿ÉÊ¹ÓÃ!",
+			sprintf( token,"%sè¿˜å·®%då¤©%då°æ—¶%dåˆ†%dç§’æ‰å¯ä½¿ç”¨!",
 				ITEM_getChar( itemindex, ITEM_NAME), days, hours, minute, second);
 			CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 		}else if( nowtimes > itemtimes+(60*60*24) ){
-			sprintf( token,"%sÊ¹ÓÃÆÚÏŞÒÑ¹ı!", ITEM_getChar( itemindex, ITEM_NAME));
+			sprintf( token,"%sä½¿ç”¨æœŸé™å·²è¿‡!", ITEM_getChar( itemindex, ITEM_NAME));
 			CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 		}
 	}
@@ -2598,11 +2598,11 @@ void ITEM_useMaxRedSocksNew( int charaindex, int toindex, int haveitemindex)
 
 	itemarg = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	if( itemarg == "\0" ){
-		CHAR_talkToCli(charaindex, -1, "ÕâÊÇ¸ö°ÅÀÖÊ¥µ®Íà!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "è¿™æ˜¯ä¸ªèŠ­ä¹åœ£è¯è¢œ!", CHAR_COLORYELLOW);
 		return;
 	}
 
-	//µÀ¾ßÊıÁ¿
+	//é“å…·æ•°é‡
 	if( getStringFromIndexWithDelim( itemarg, "|", 1, itemnumstr, sizeof( itemnumstr)) == FALSE )
 		return;
     itemnum = atoi(itemnumstr);
@@ -2613,26 +2613,26 @@ void ITEM_useMaxRedSocksNew( int charaindex, int toindex, int haveitemindex)
 		    present[i] = atoi(itemnumstr);
 	}
 	
-	//É¾³ı
+	//åˆ é™¤
 	CHAR_setItemIndex(charaindex, haveitemindex ,-1);
 	CHAR_sendItemDataOne( charaindex, haveitemindex);
 	ITEM_endExistItemsOne(itemindex);
 	itemindex = -1;
-	//ĞÂÔö
+	//æ–°å¢
 	si = rand()%itemnum;
 
 	itemindex = ITEM_makeItemAndRegist( present[ si]);
 	if( !ITEM_CHECKINDEX( itemindex)){
-		CHAR_talkToCli(charaindex, -1, "ÀñÎïÎŞĞ§!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "ç¤¼ç‰©æ— æ•ˆ!", CHAR_COLORYELLOW);
 		return;
 	}
 	ret = CHAR_addItemSpecificItemIndex( charaindex, itemindex);
 	if( ret < 0 || ret >= CHAR_MAXITEMHAVE ) {
 		ITEM_endExistItemsOne( itemindex);
-		CHAR_talkToCli(charaindex, -1, "ÀñÎïÖÃ·ÅÀ¸Î»´íÎó!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "ç¤¼ç‰©ç½®æ”¾æ ä½é”™è¯¯!", CHAR_COLORYELLOW);
 		return;
 	}
-	sprintf( token,"ÄÃµ½%s",ITEM_getChar( itemindex, ITEM_NAME));
+	sprintf( token,"æ‹¿åˆ°%s",ITEM_getChar( itemindex, ITEM_NAME));
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 	CHAR_sendItemDataOne( charaindex, ret);
 
@@ -2656,7 +2656,7 @@ void ITEM_useSkillCanned( int charaindex, int toindex, int itemNo)
 			}
 		}
 		if( petNo == -1 ){
-			sprintf( buf1, "%s²»ÔÚÈËÎïÉíÉÏ¡£", CHAR_getChar( toindex, CHAR_NAME) );
+			sprintf( buf1, "%sä¸åœ¨äººç‰©èº«ä¸Šã€‚", CHAR_getChar( toindex, CHAR_NAME) );
 			CHAR_talkToCli( charaindex, -1, buf1, CHAR_COLORYELLOW);
 			return;
 		}
@@ -2664,7 +2664,7 @@ void ITEM_useSkillCanned( int charaindex, int toindex, int itemNo)
 		CHAR_setWorkInt( charaindex, CHAR_WORKRENAMEITEMNUM, petNo);
 		CHAR_setWorkInt( charaindex, CHAR_WORKRENAMEITEMINDEX, itemNo);
 	}else{
-		sprintf( buf1, "µÀ¾ß %s½öÏŞ³èÎïÊ¹ÓÃ¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+		sprintf( buf1, "é“å…· %sä»…é™å® ç‰©ä½¿ç”¨ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 		CHAR_talkToCli( charaindex, -1, buf1, CHAR_COLORYELLOW);
 		return;
 	}
@@ -2683,23 +2683,23 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 	//print(" PetMetamo_toindex:%d ", toindex);
 
 	if( CHAR_getInt( charaindex, CHAR_RIDEPET ) != -1 ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬Æï³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œéª‘ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #ifdef _FIX_METAMORIDE
 	if( CHAR_CHECKJOINENEMY( charaindex) == TRUE ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #else
 	if( CHAR_getInt( charaindex, CHAR_BASEIMAGENUMBER) == 100259 ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #endif
 #ifdef _PETSKILL_BECOMEPIG
-    if( CHAR_getInt( charaindex, CHAR_BECOMEPIG) > -1 ){//±ä³ÉÎÚÁ¦ÁË
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬ÎÚÁ¦»¯ÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+    if( CHAR_getInt( charaindex, CHAR_BECOMEPIG) > -1 ){//å˜æˆä¹ŒåŠ›äº†
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œä¹ŒåŠ›åŒ–ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 	    return;
 	}
 #endif
@@ -2712,7 +2712,7 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 			int armtype = BATTLE_GetWepon( charaindex);
 			if( armtype == ITEM_BOW || armtype == ITEM_BOUNDTHROW ||
 				armtype == ITEM_BREAKTHROW || armtype == ITEM_BOOMERANG)	{
-				CHAR_talkToCli( charaindex, -1, "Ê¹ÓÃÔ¶¾àÀëÎäÆ÷ÎŞ·¨±äÉí£¡", CHAR_COLORYELLOW );
+				CHAR_talkToCli( charaindex, -1, "ä½¿ç”¨è¿œè·ç¦»æ­¦å™¨æ— æ³•å˜èº«ï¼", CHAR_COLORYELLOW );
 				return;
 			}
 		}
@@ -2720,11 +2720,11 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 #endif
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
-	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
+	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return;
 	}
-	// ¾ô    ·ÖÔÈĞ×ÈÕ
+	// çˆµ    åˆ†åŒ€å‡¶æ—¥
 	if( IsBATTLING( charaindex ) == TRUE ){
 		toindex = BATTLE_No2Index(CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEINDEX ), toindex );
 
@@ -2740,7 +2740,7 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 		}
 	}
 	if( haveindex == -1 && charaindex != toindex ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬Ö»ÄÜ±ä³É×Ô¼ºµÄ³èÎï£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œåªèƒ½å˜æˆè‡ªå·±çš„å® ç‰©ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 
@@ -2755,11 +2755,11 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 
 	if( toindex != charaindex ){
 		CHAR_setWorkInt( charaindex, CHAR_WORKITEMMETAMO, NowTime.tv_sec +metamoTime);
-		sprintf( msg, "±äÉí³É%s£¡", CHAR_getChar( toindex, CHAR_NAME) );
+		sprintf( msg, "å˜èº«æˆ%sï¼", CHAR_getChar( toindex, CHAR_NAME) );
 	}
 	else {
 		CHAR_setWorkInt( charaindex, CHAR_WORKITEMMETAMO, 0);
-		sprintf( msg, "±ä»Ø×Ô¼º£¡");
+		sprintf( msg, "å˜å›è‡ªå·±ï¼");
 	}
 	CHAR_talkToCli( charaindex, -1, msg, CHAR_COLORYELLOW );
 
@@ -2776,42 +2776,42 @@ void ITEM_metamo( int charaindex, int toindex, int haveitemindex )
 void ITEM_Cracker(int charaindex,int toindex,int haveitemindex)
 {
 	int battlemode;
-	// ¼ì²éÍæ¼ÒÊÇ·ñÓĞĞ§
-	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //Ê§°Ü
+	// æ£€æŸ¥ç©å®¶æ˜¯å¦æœ‰æ•ˆ
+	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //å¤±è´¥
 	battlemode = CHAR_getWorkInt(charaindex,CHAR_WORKBATTLEMODE);
-	// Õ½¶·ÖĞÊ¹ÓÃÎŞĞ§
+	// æˆ˜æ–—ä¸­ä½¿ç”¨æ— æ•ˆ
 	if(!battlemode) ITEM_useCracker_Effect(charaindex,toindex,haveitemindex);
-	else CHAR_talkToCli(charaindex,-1,"Ê²÷áÒ²Ã»·¢Éú¡£",CHAR_COLORWHITE);
+	else CHAR_talkToCli(charaindex,-1,"ä»€éº½ä¹Ÿæ²¡å‘ç”Ÿã€‚",CHAR_COLORWHITE);
 }
 #endif
 
-#ifdef _ITEM_ADDEXP	//vincent ¾­ÑéÌáÉı
+#ifdef _ITEM_ADDEXP	//vincent ç»éªŒæå‡
 void ITEM_Addexp(int charaindex,int toindex,int haveitemindex)
 {
-	// ¼ì²éÍæ¼ÒÊÇ·ñÓĞĞ§
-	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //Ê§°Ü
+	// æ£€æŸ¥ç©å®¶æ˜¯å¦æœ‰æ•ˆ
+	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //å¤±è´¥
 #if 1
 	ITEM_useAddexp_Effect(charaindex,toindex,haveitemindex);
 #else
 	if( !CHAR_getWorkInt(charaindex,CHAR_WORKITEM_ADDEXP)){
 		ITEM_useAddexp_Effect(charaindex,toindex,haveitemindex);
 	}else{
-		CHAR_talkToCli(charaindex,-1,"ÏÈÇ°Ê¹ÓÃÖ®Ò©Ğ§ÒÀÈ»´æÔÚ",CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex,-1,"å…ˆå‰ä½¿ç”¨ä¹‹è¯æ•ˆä¾ç„¶å­˜åœ¨",CHAR_COLORYELLOW);
 	}
 #endif
 }
 #endif
 
-#ifdef _ITEM_REFRESH //vincent ½â³ıÒì³£×´Ì¬µÀ¾ß
+#ifdef _ITEM_REFRESH //vincent è§£é™¤å¼‚å¸¸çŠ¶æ€é“å…·
 void ITEM_Refresh(int charaindex,int toindex,int haveitemindex)
 {
 	int battlemode,itemindex;
 print("\nvincent--ITEM_Refresh");
-		// ¼ì²éÍæ¼ÒÊÇ·ñÓĞĞ§
+		// æ£€æŸ¥ç©å®¶æ˜¯å¦æœ‰æ•ˆ
 	if(CHAR_CHECKINDEX(charaindex) == FALSE) 
 	{
 print("\nvincent--(charaindex) == FALSE");
-		return; //Ê§°Ü
+		return; //å¤±è´¥
 	}
 	itemindex = CHAR_getItemIndex(charaindex,haveitemindex);
 
@@ -2822,12 +2822,12 @@ print("\nvincent--enter ITEM_useAddexp_Effect");
 print("\nvincent-->charaindex:%d,toindex:%d",charaindex,toindex);
 		ITEM_useRefresh_Effect(charaindex,toindex,haveitemindex);
 	}
-	else CHAR_talkToCli(charaindex,-1,"Ê²÷áÒ²Ã»·¢Éú¡£",CHAR_COLORWHITE);
+	else CHAR_talkToCli(charaindex,-1,"ä»€éº½ä¹Ÿæ²¡å‘ç”Ÿã€‚",CHAR_COLORWHITE);
 
-    /* Æ½ÅÒ·ÂÛÍÕı¡õ¼°ô÷    Øøµ©Ğş¾®ÈÕÛÕ»× */
+    /* å¹³ä¹“ä»¿å¼æ­£â–¡åŠèµ­    ä¼‰æ—¦ç„äº•æ—¥å£…è›” */
     CHAR_setItemIndex(charaindex, haveitemindex ,-1);
-	CHAR_sendItemDataOne( charaindex, haveitemindex);/* Ê§ÄÌ  Ø©µÊŞ¥ */
-	/* ÛÕÔÊ */
+	CHAR_sendItemDataOne( charaindex, haveitemindex);/* å¤±å¥¶  ä¸å‡³è•™ */
+	/* å£…å… */
 	ITEM_endExistItemsOne( itemindex );
 }
 #endif
@@ -2837,19 +2837,19 @@ void ITEM_firecracker(int charaindex,int toindex,int haveitemindex)
 {
 	int battlemode;
 
-	// ¼ì²éÍæ¼ÒÊÇ·ñÓĞĞ§
-	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //Ê§°Ü
+	// æ£€æŸ¥ç©å®¶æ˜¯å¦æœ‰æ•ˆ
+	if(CHAR_CHECKINDEX(charaindex) == FALSE) return; //å¤±è´¥
 
 	battlemode = CHAR_getWorkInt(charaindex,CHAR_WORKBATTLEMODE);
 	
-	if( battlemode // ¼ì²éÊÇ·ñÔÚÕ½¶·ÖĞ
+	if( battlemode // æ£€æŸ¥æ˜¯å¦åœ¨æˆ˜æ–—ä¸­
 #ifdef _PETSKILL_BECOMEPIG
 	    && CHAR_getInt( charaindex, CHAR_BECOMEPIG) == -1 
 #endif
 		) 
 		ITEM_useFirecracker_Battle(charaindex,toindex,haveitemindex);
 	else 
-		CHAR_talkToCli(charaindex,-1,"Ê²÷áÒ²Ã»·¢Éú¡£",CHAR_COLORWHITE);
+		CHAR_talkToCli(charaindex,-1,"ä»€éº½ä¹Ÿæ²¡å‘ç”Ÿã€‚",CHAR_COLORWHITE);
 }
 #endif
 //Terry end
@@ -2988,9 +2988,9 @@ void recoverbi(int index)
 	
 	eBi = CHAR_getNewImagenumberFromEquip( eBbi, eNum);	
 
-	if(CHAR_getInt( index, CHAR_RIDEPET)!=-1)	     //Æï³è			
+	if(CHAR_getInt( index, CHAR_RIDEPET)!=-1)	     //éª‘å® 			
 		CHAR_complianceParameter(index);
-	else                                             //·ÇÆï³è		
+	else                                             //ééª‘å® 		
 		if((eBi!=-1)&&(eBi!=bi))
 			CHAR_setInt( index, CHAR_BASEIMAGENUMBER, eBi);
 }
@@ -3009,11 +3009,11 @@ void ITEM_TimeLimit( int charaindex)
 		int itemindex = CHAR_getItemIndex( charaindex , i );
 		if( !ITEM_CHECKINDEX( itemindex ) ) continue;
 		lTime = ITEM_getWorkInt( itemindex, ITEM_WORKTIMELIMIT);
-		if( ITEM_getInt( itemindex, ITEM_ID) == 20173 //È¼ÉÕ»ğ°Ñ
+		if( ITEM_getInt( itemindex, ITEM_ID) == 20173 //ç‡ƒçƒ§ç«æŠŠ
 			|| ITEM_getInt( itemindex, ITEM_ID) == 20704 ){
 			if( lTime > 0 && NowTime.tv_sec > lTime ){
 				iid = ITEM_getInt( itemindex, ITEM_ID) + 1;
-				snprintf( buff, sizeof( buff), "%sµÄĞ§¹ûÒÑÏûÊ§..", ITEM_getChar( itemindex, ITEM_NAME));
+				snprintf( buff, sizeof( buff), "%sçš„æ•ˆæœå·²æ¶ˆå¤±..", ITEM_getChar( itemindex, ITEM_NAME));
 				CHAR_talkToCli( charaindex, -1, buff, CHAR_COLORGREEN);
 				CHAR_DelItemMess( charaindex, i, 0);
 				itemindex = ITEM_makeItemAndRegist( iid);
@@ -3062,7 +3062,7 @@ void ITEM_Constitution( int charaindex, int toindex, int haveitemindex)
 				//if( points < (FixPoint*100) ) break;
 				if( points < (FixPoint*100) || AllPoint-(FixPoint*100) <= 0 ) 
 				{
-					CHAR_talkToCli( charaindex, -1, "ÎïÆ·ÎŞĞ§¡£", CHAR_COLORYELLOW);
+					CHAR_talkToCli( charaindex, -1, "ç‰©å“æ— æ•ˆã€‚", CHAR_COLORYELLOW);
 					return;
 				}
 				CHAR_setInt( charaindex, CHAR_VITAL+index, (points-(FixPoint*100)));
@@ -3083,9 +3083,9 @@ void ITEM_Constitution( int charaindex, int toindex, int haveitemindex)
 
 	CHAR_Skillupsend( charaindex);
 	if( FIXs == TRUE )	{
-		sprintf( buf, "%s", "ÄãµÄÉíÌå¸Ğµ½±ä»¯¡£");
+		sprintf( buf, "%s", "ä½ çš„èº«ä½“æ„Ÿåˆ°å˜åŒ–ã€‚");
 	}else	{
-		sprintf( buf, "%s", "ÎïÆ·ÎŞĞ§¡£");
+		sprintf( buf, "%s", "ç‰©å“æ— æ•ˆã€‚");
 	}
 	CHAR_talkToCli( charaindex, -1, buf, CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
@@ -3097,7 +3097,7 @@ void ITEM_useLearnRideCode( int charaindex, int toindex, int haveitemindex)
 {//CHAR_LOWRIDEPETS
 	
 	if(getRideMode()==2){
-		CHAR_talkToCli( charaindex, -1, "·şÎñ¶ËÎª2.0·ÇÆïÖ¤Ä£Ê½£¬ËùÒÔÄãÎŞ·¨Ê¹ÓÃ¸ÃÎïÆ·", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "æœåŠ¡ç«¯ä¸º2.0ééª‘è¯æ¨¡å¼ï¼Œæ‰€ä»¥ä½ æ— æ³•ä½¿ç”¨è¯¥ç‰©å“", CHAR_COLORYELLOW);
 		return;
 	}
 	int itemindex, i;
@@ -3152,7 +3152,7 @@ void ITEM_useLearnRideCode( int charaindex, int toindex, int haveitemindex)
 			if(CHAR_getInt( charaindex, CHAR_TRANSMIGRATION) < ridetrans){
 				char token[256];
 				if( getStringFromIndexWithDelim(itemarg,"|", 2, buf1, sizeof(buf1)) != FALSE ){
-					sprintf( token, "±ØĞë%d×ªÈËÒÔÉÏ²ÅÄÜÑ§Ï°Æï%s¡£",ridetrans,buf1);
+					sprintf( token, "å¿…é¡»%dè½¬äººä»¥ä¸Šæ‰èƒ½å­¦ä¹ éª‘%sã€‚",ridetrans,buf1);
 					CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 					return;
 				}
@@ -3175,7 +3175,7 @@ void ITEM_useLearnRideCode( int charaindex, int toindex, int haveitemindex)
 			if( getStringFromIndexWithDelim(itemarg,"|", 2, buf1, sizeof(buf1)) != FALSE ){
 				char token[256];
 
-				sprintf( token, "Ñ§Ï°ÁËĞÂµÄÆï³è (%s)¡£", buf1);
+				sprintf( token, "å­¦ä¹ äº†æ–°çš„éª‘å®  (%s)ã€‚", buf1);
 				CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 				CHAR_DelItem( charaindex, haveitemindex);
 				CHAR_sendStatusString( charaindex, "x");
@@ -3219,7 +3219,7 @@ void ITEM_ThrowItemBox( int charaindex, int toindex, int haveitemindex)
 
 			LogItem(
 				CHAR_getChar( charaindex, CHAR_NAME ), CHAR_getChar( charaindex, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
+#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
 				itemindex,
 #else
 				ITEM_getInt( itemindex, ITEM_ID),
@@ -3269,7 +3269,7 @@ void ITEM_ThrowItemBox( int charaindex, int toindex, int haveitemindex)
 			ITEM_endExistItemsOne( Iindex);
 			return;
 		}
-		sprintf( token,"ÄÃµ½%s", ITEM_getChar( Iindex, ITEM_NAME));
+		sprintf( token,"æ‹¿åˆ°%s", ITEM_getChar( Iindex, ITEM_NAME));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 		CHAR_sendItemDataOne( charaindex, ret);
 	}
@@ -3285,7 +3285,7 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 	if( !CHAR_CHECKINDEX( charaindex ) )  return;
 	if( !CHAR_CHECKINDEX( toindex ) )  return;
 	if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER){
-		CHAR_talkToCli( charaindex, -1, "ÎïÆ·½öÏŞÈËÎïÊ¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "ç‰©å“ä»…é™äººç‰©ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
 	itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -3295,9 +3295,9 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 		return;
 	}
 	if( !strcmp( ITEM_getChar( itemindex, ITEM_FORUSERNAME), "") ||
-		!strcmp( ITEM_getChar( itemindex, ITEM_FORUSERCDKEY), "") ){//Ñ°ÕÒÉè¶¨¶ÔÏó
+		!strcmp( ITEM_getChar( itemindex, ITEM_FORUSERCDKEY), "") ){//å¯»æ‰¾è®¾å®šå¯¹è±¡
 		if( charaindex == toindex ){
-			CHAR_talkToCli( charaindex, -1, "²»ÄÜÑ¡Ôñ×Ô¼ºÊ¹ÓÃ¡£", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "ä¸èƒ½é€‰æ‹©è‡ªå·±ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 			return;
 		}
 		ITEM_setChar( itemindex, ITEM_FORUSERNAME, CHAR_getChar( toindex, CHAR_NAME) );
@@ -3308,7 +3308,7 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 			sprintf( token, "%s(%s)",
 				ITEM_getChar( itemindex, ITEM_SECRETNAME), CHAR_getChar( toindex, CHAR_NAME));
 			ITEM_setChar( itemindex, ITEM_SECRETNAME, token);
-			sprintf( token, "´«ËÍ¶ÔÏóÉè¶¨Îª%s¡£", CHAR_getChar( toindex, CHAR_NAME));
+			sprintf( token, "ä¼ é€å¯¹è±¡è®¾å®šä¸º%sã€‚", CHAR_getChar( toindex, CHAR_NAME));
 			CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 		}
 		CHAR_sendItemDataOne( charaindex, haveitemindex);
@@ -3321,7 +3321,7 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 		//CHAR_getInt( charaindex, CHAR_FLOOR) == 7032 || CHAR_getInt( charaindex, CHAR_FLOOR) == 8032 ||
 		//CHAR_getInt( charaindex, CHAR_FLOOR) == 9032 ){ 
 		if( checkUnlawWarpFloor( CHAR_getInt( charaindex, CHAR_FLOOR) ) ) {
-			CHAR_talkToCli( charaindex, -1, "ÄãµÄËùÔÚÎ»ÖÃÎŞ·¨´«ËÍ¡£", CHAR_COLORYELLOW );
+			CHAR_talkToCli( charaindex, -1, "ä½ çš„æ‰€åœ¨ä½ç½®æ— æ³•ä¼ é€ã€‚", CHAR_COLORYELLOW );
 			return;
 		}
 
@@ -3340,16 +3340,16 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 			//	floor == 1042 || floor == 2032 || floor == 3032 || floor == 4032 ||
 			//	floor == 5032 || floor == 6032 ||floor == 7032 || floor == 8032 || floor == 9032 ){ 
 				if( checkUnlawWarpFloor( floor) ) {
-					CHAR_talkToCli( charaindex, -1, "¶ÔÏóËùÔÚµØ·½ÎŞ·¨´«ËÍ¡£", CHAR_COLORYELLOW );
+					CHAR_talkToCli( charaindex, -1, "å¯¹è±¡æ‰€åœ¨åœ°æ–¹æ— æ³•ä¼ é€ã€‚", CHAR_COLORYELLOW );
 					return;
 				}
 
 				CHAR_warpToSpecificPoint( charaindex, floor, x, y );
-				sprintf( token, "%s½åÓÉ½äÖ¸´«ËÍµ½ÄãÉí±ßÀ´¡£", CHAR_getChar( charaindex, CHAR_NAME));
+				sprintf( token, "%sè—‰ç”±æˆ’æŒ‡ä¼ é€åˆ°ä½ èº«è¾¹æ¥ã€‚", CHAR_getChar( charaindex, CHAR_NAME));
 				CHAR_talkToCli( i, -1, token, CHAR_COLORYELLOW );
-				sprintf( token, "½åÓÉ½äÖ¸´«ËÍµ½%sÉí±ß¡£", CHAR_getChar( i, CHAR_NAME));
+				sprintf( token, "è—‰ç”±æˆ’æŒ‡ä¼ é€åˆ°%sèº«è¾¹ã€‚", CHAR_getChar( i, CHAR_NAME));
 				CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
-				CHAR_DischargePartyNoMsg( charaindex);//½âÉ¢ÍÅ¶Ó
+				CHAR_DischargePartyNoMsg( charaindex);//è§£æ•£å›¢é˜Ÿ
 #ifdef _ITEM_MAXUSERNUM
 				itemmaxuse = ITEM_getInt( itemindex, ITEM_DAMAGEBREAK);
 #endif
@@ -3359,18 +3359,18 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 					ITEM_setInt( itemindex, ITEM_DAMAGEBREAK, itemmaxuse);
 #endif
 					if( itemmaxuse < 1 )	{
-						sprintf( buf1, "µÀ¾ß %sÏûÊ§ÁË¡£", ITEM_getChar( itemindex, ITEM_NAME) );
+						sprintf( buf1, "é“å…· %sæ¶ˆå¤±äº†ã€‚", ITEM_getChar( itemindex, ITEM_NAME) );
 						CHAR_talkToCli(charaindex, -1, buf1, CHAR_COLORYELLOW);
 						CHAR_DelItem( charaindex, haveitemindex);
 						return;
 					}else{
-						sprintf( buf1, "´«ËÍÖÁÄ¿±ê¶ÔÏóËùÔÚÎ»ÖÃ£¬¿ÉÊ¹ÓÃ´ÎÊıÊ£âÅ%d´Î¡£", itemmaxuse);
+						sprintf( buf1, "ä¼ é€è‡³ç›®æ ‡å¯¹è±¡æ‰€åœ¨ä½ç½®ï¼Œå¯ä½¿ç”¨æ¬¡æ•°å‰©é¦€%dæ¬¡ã€‚", itemmaxuse);
 						ITEM_setChar( itemindex, ITEM_EFFECTSTRING, buf1);
 					}
 				}else{
 					itemmaxuse = 10;
 					ITEM_setInt( itemindex, ITEM_DAMAGEBREAK, itemmaxuse);
-					sprintf( buf1, "´«ËÍÖÁÄ¿±ê¶ÔÏóËùÔÚÎ»ÖÃ£¬¿ÉÊ¹ÓÃ´ÎÊıÊ£Óà%d´Î¡£", itemmaxuse);
+					sprintf( buf1, "ä¼ é€è‡³ç›®æ ‡å¯¹è±¡æ‰€åœ¨ä½ç½®ï¼Œå¯ä½¿ç”¨æ¬¡æ•°å‰©ä½™%dæ¬¡ã€‚", itemmaxuse);
 					ITEM_setChar( itemindex, ITEM_EFFECTSTRING, buf1);
 				}
 
@@ -3380,7 +3380,7 @@ void ITEM_LoverSelectUser( int charaindex, int toindex, int haveitemindex)
 				return;
 			}
 		}
-		CHAR_talkToCli( charaindex, -1, "¶ÔÏó²»ÔÚ´ËËÅ·şÆ÷»ò²»ÔÚÏßÉÏ¡£", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "å¯¹è±¡ä¸åœ¨æ­¤ä¼ºæœå™¨æˆ–ä¸åœ¨çº¿ä¸Šã€‚", CHAR_COLORYELLOW );
 	}
 }
 #endif
@@ -3396,12 +3396,12 @@ void ITEM_MapEffect(int charaindex,int toindex,int haveitemindex)
 	itemindex = CHAR_getItemIndex(charaindex,haveitemindex);
 	if(!ITEM_CHECKINDEX(itemindex)) return;
 	
-	// ÕÒ³öÍæ¼ÒËùÔÚµÄµØÍ¼±àºÅ
+	// æ‰¾å‡ºç©å®¶æ‰€åœ¨çš„åœ°å›¾ç¼–å·
 	floor = CHAR_getInt(charaindex,CHAR_FLOOR);
-	// ÕÒ³öµÀ¾ßÒª·ÅµÄÌØĞ§µÄ±àºÅ
+	// æ‰¾å‡ºé“å…·è¦æ”¾çš„ç‰¹æ•ˆçš„ç¼–å·
 	pActionNumber = ITEM_getChar(itemindex,ITEM_ARGUMENT);
 	sprintf(szMsg,"%d 8 %s",floor,pActionNumber);
-	// Ö´ĞĞ
+	// æ‰§è¡Œ
 	CHAR_CHAT_DEBUG_effect(charaindex,szMsg);
 	CHAR_DelItemMess(charaindex,haveitemindex,0);
 }
@@ -3419,13 +3419,13 @@ void ITEM_changePetOwner( int charaindex, int toindex, int haveitemindex)
 	if( !ITEM_CHECKINDEX(itemindex) ) return;
 	
 	if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPET ) {
-		CHAR_talkToCli( charaindex, -1, "ÕâÖ»ÄÜÓÃÔÚ³èÎïÉíÉÏà¸¡£", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "è¿™åªèƒ½ç”¨åœ¨å® ç‰©èº«ä¸Šå–”ã€‚", CHAR_COLORYELLOW );
 		return;
 	}
 
 	if( !strcmp( CHAR_getChar( toindex, CHAR_NPCARGUMENT), "") || 
 		!strcmp( CHAR_getChar( toindex, CHAR_NPCARGUMENT), CHAR_getChar( charaindex, CHAR_CDKEY))) {
-		CHAR_talkToCli( charaindex, -1, "ÕâÖ»³èÎï±¾À´¾ÍÊÇÄãµÄ£¬²¢²»ĞèÒªÊ¹ÓÃÕâ¸öÑ½¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "è¿™åªå® ç‰©æœ¬æ¥å°±æ˜¯ä½ çš„ï¼Œå¹¶ä¸éœ€è¦ä½¿ç”¨è¿™ä¸ªå‘€ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
 
@@ -3435,7 +3435,7 @@ void ITEM_changePetOwner( int charaindex, int toindex, int haveitemindex)
 		if( CHAR_getCharPet( charaindex, i) == toindex )
 			CHAR_send_K_StatusString( charaindex, i,CHAR_K_STRING_NAME|CHAR_K_STRING_CHANGENAMEFLG);
 
-	CHAR_talkToCli( charaindex, -1, "ÏÖÔÚÄã¿ÉÒÔ°ïÕâÖ»³èÎï¸ÄÃû×ÖÁË¡£", CHAR_COLORYELLOW );
+	CHAR_talkToCli( charaindex, -1, "ç°åœ¨ä½ å¯ä»¥å¸®è¿™åªå® ç‰©æ”¹åå­—äº†ã€‚", CHAR_COLORYELLOW );
 
 	CHAR_DelItemMess( charaindex, haveitemindex, 0);
 }
@@ -3464,7 +3464,7 @@ void GOLD_DeleteTimeCheckLoop( void)
 				"NULL",
 				amount,
 				0,
-				"Del(É¾³ı¹ıÊ±½ğÇ®)",
+				"Del(åˆ é™¤è¿‡æ—¶é‡‘é’±)",
 				OBJECT_getFloor( objindex ),
 				OBJECT_getX( objindex ),
 				OBJECT_getY( objindex )
@@ -3493,7 +3493,7 @@ void GOLD_DeleteTimeCheckOne( int objindex)
 			"NULL",
 			amount,
 			0,
-			"Del(É¾³ı¹ıÊ±½ğÇ®)",
+			"Del(åˆ é™¤è¿‡æ—¶é‡‘é’±)",
 			OBJECT_getFloor( objindex ),
 			OBJECT_getX( objindex ),
 			OBJECT_getY( objindex )
@@ -3526,7 +3526,7 @@ void ITEM_timeticketEx( int charaindex, int toindex, int haveitemindex, int flag
 
 	if( check_TimeTicketMap( CHAR_getInt( charaindex, CHAR_FLOOR)) == FALSE 
 		&& flag == 0 ) {
-		CHAR_talkToCli( charaindex, -1, "Õâ¸öµØµã²»¿ÉÊ¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "è¿™ä¸ªåœ°ç‚¹ä¸å¯ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
 	
@@ -3535,19 +3535,19 @@ void ITEM_timeticketEx( int charaindex, int toindex, int haveitemindex, int flag
 
 	tickettime = CHAR_getWorkInt( charaindex, CHAR_WORKTICKETTIME);
 	if( tickettime > nowtime+20 ) {
-		CHAR_talkToCli( charaindex, -1, "Ê±¼ä±ØĞëÊ£ÏÂ£²£°ÃëÒÔÄÚ²Å¿ÉÊ¹ÓÃ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "æ—¶é—´å¿…é¡»å‰©ä¸‹ï¼’ï¼ç§’ä»¥å†…æ‰å¯ä½¿ç”¨ã€‚", CHAR_COLORYELLOW);
 		return;
 	}
-	// µÚÒ»´ÎÊ¹ÓÃµÄ»°
+	// ç¬¬ä¸€æ¬¡ä½¿ç”¨çš„è¯
 	if( tickettime == 0 ) {
 		tickettime = nowtime;
 		CHAR_setWorkInt( charaindex, CHAR_WORKTICKETTIMESTART, nowtime);
 	}
-	// Õ½¶·ÖĞÇÒ³¬¹ıÊ±ÏŞÊ±Ê¹ÓÃ
+	// æˆ˜æ–—ä¸­ä¸”è¶…è¿‡æ—¶é™æ—¶ä½¿ç”¨
 	//if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE 
 	//		&& tickettime < nowtime ) {
 		//tickettime = nowtime;
-	//	sprintf(msg, "Ê±¼ä²»×ã%dÃë¡£", nowtime - tickettime );
+	//	sprintf(msg, "æ—¶é—´ä¸è¶³%dç§’ã€‚", nowtime - tickettime );
 	//	CHAR_talkToCli( charaindex, -1, msg, CHAR_COLORYELLOW);
 	//}
 
@@ -3556,9 +3556,9 @@ void ITEM_timeticketEx( int charaindex, int toindex, int haveitemindex, int flag
 	CHAR_setWorkInt( charaindex, CHAR_WORKTICKETTIME, tickettime );
 	lefttime = tickettime - nowtime;
 	if( lefttime > 0 )
-		sprintf(msg, "Ê±¼äÔö¼Ó%dÃë£¬»¹Ê£ÏÂ%d·Ö%dÃë¡£", addtime, lefttime/60, lefttime%60 );
+		sprintf(msg, "æ—¶é—´å¢åŠ %dç§’ï¼Œè¿˜å‰©ä¸‹%dåˆ†%dç§’ã€‚", addtime, lefttime/60, lefttime%60 );
 	else
-		sprintf(msg, "Ê±¼äÔö¼Ó%dÃë£¬»¹²»×ã%d·Ö%dÃë¡£", addtime, (-lefttime)/60, (-lefttime)%60 );
+		sprintf(msg, "æ—¶é—´å¢åŠ %dç§’ï¼Œè¿˜ä¸è¶³%dåˆ†%dç§’ã€‚", addtime, (-lefttime)/60, (-lefttime)%60 );
 	CHAR_talkToCli( charaindex, -1, msg, CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -3573,29 +3573,29 @@ void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex)
 
    if( !strcmp( CHAR_getChar( charaindex, CHAR_LOVE), "YES"))
         {
-            CHAR_talkToCli( charaindex, -1, "ÖØ»éÊÇÎ¥·¨µÄ£¡ÄúÒÑ¾­½á»éÁËÅ¶~", CHAR_COLORYELLOW);
+            CHAR_talkToCli( charaindex, -1, "é‡å©šæ˜¯è¿æ³•çš„ï¼æ‚¨å·²ç»ç»“å©šäº†å“¦~", CHAR_COLORYELLOW);
             return;
         }
    if( !CHAR_CHECKINDEX( charaindex ) ) return;
    if( !CHAR_CHECKINDEX( toindex ) ) return;
    if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER)
    {
-   		 CHAR_talkToCli( charaindex, -1, "Ö»ÄÜºÍÍæ¼Ò½á»éÅ¶", CHAR_COLORYELLOW);
+   		 CHAR_talkToCli( charaindex, -1, "åªèƒ½å’Œç©å®¶ç»“å©šå“¦", CHAR_COLORYELLOW);
        return;
    }
    if( CHAR_getInt(charaindex,CHAR_TRANSMIGRATION)<3 ||CHAR_getInt(toindex,CHAR_TRANSMIGRATION)<3)
    {
-   	   CHAR_talkToCli( charaindex, -1, "Èç¹ûÏë½á»éµÄ»°£¬Ë«·½±ØĞë3×ªÒÔÉÏÅ¶~", CHAR_COLORYELLOW);
+   	   CHAR_talkToCli( charaindex, -1, "å¦‚æœæƒ³ç»“å©šçš„è¯ï¼ŒåŒæ–¹å¿…é¡»3è½¬ä»¥ä¸Šå“¦~", CHAR_COLORYELLOW);
        return;
    }
    if( charaindex == toindex )
    {
-       CHAR_talkToCli( charaindex, -1, "ÄÑµÀÄúÏëºÍ×Ô¼º½á»éÂğ£¿", CHAR_COLORYELLOW);
+       CHAR_talkToCli( charaindex, -1, "éš¾é“æ‚¨æƒ³å’Œè‡ªå·±ç»“å©šå—ï¼Ÿ", CHAR_COLORYELLOW);
        return;
    }
    if ( IsMale(charaindex)==IsMale(toindex))
    {
-       CHAR_talkToCli( charaindex, -1, "Í¬ĞÔÔõÃ´½á»éÄØ£¿", CHAR_COLORYELLOW);
+       CHAR_talkToCli( charaindex, -1, "åŒæ€§æ€ä¹ˆç»“å©šå‘¢ï¼Ÿ", CHAR_COLORYELLOW);
        return;    
    }
    if( !ITEM_CHECKINDEX(itemindex) ) return;
@@ -3603,7 +3603,7 @@ void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex)
 			itemindex = ITEM_makeItemAndRegist( id );
 
    if( strcmp( CHAR_getChar( charaindex, CHAR_LOVE), "YES") &&
-   			strcmp( CHAR_getChar( toindex, CHAR_LOVE), "YES"))//µÚ¶ş´ÎÅĞ¶ÏË«·½ÊÇ·ñÒÑ¾­½á»é
+   			strcmp( CHAR_getChar( toindex, CHAR_LOVE), "YES"))//ç¬¬äºŒæ¬¡åˆ¤æ–­åŒæ–¹æ˜¯å¦å·²ç»ç»“å©š
    {
 	    if( itemindex != -1 ){
 					 CHAR_setChar( charaindex, CHAR_LOVERID, CHAR_getChar( toindex, CHAR_CDKEY) );
@@ -3611,9 +3611,9 @@ void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex)
 	    	 if (strcmp(CHAR_getChar( toindex, CHAR_LOVERID), CHAR_getChar( charaindex, CHAR_CDKEY))==0 &&
          			strcmp(CHAR_getChar( toindex, CHAR_LOVERNAME), CHAR_getChar( charaindex, CHAR_NAME))==0){
          		int i;
-            sprintf( token, "ÒÑ¾­´ğÓ¦ÁË%sµÄÇó»é", CHAR_getChar( toindex, CHAR_NAME));
+            sprintf( token, "å·²ç»ç­”åº”äº†%sçš„æ±‚å©š", CHAR_getChar( toindex, CHAR_NAME));
 		        CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
-		        sprintf( token, "%sÒÑ¾­ÏìÓ¦ÁËÄãµÄÇó»é", CHAR_getChar( charaindex, CHAR_NAME));
+		        sprintf( token, "%så·²ç»å“åº”äº†ä½ çš„æ±‚å©š", CHAR_getChar( charaindex, CHAR_NAME));
 		        CHAR_talkToCli( toindex, -1, token, CHAR_COLORYELLOW);
             CHAR_setChar( toindex, CHAR_LOVE,"YES");
 		        CHAR_setChar( charaindex, CHAR_LOVE,"YES");
@@ -3627,7 +3627,7 @@ void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex)
          		for(i=0;i<playernum;i++)
             {    
 		           if(CHAR_CHECKINDEX(i) == FALSE) continue;
-		           sprintf( token, "¹§Ï²%sºÍ%sĞÂ»éÖ®Ï²£¬¹§×£ËûÃÇ°ÙÄêºÃºÏ.°×Í·µ½ÀÏ.", 
+		           sprintf( token, "æ­å–œ%så’Œ%sæ–°å©šä¹‹å–œï¼Œæ­ç¥ä»–ä»¬ç™¾å¹´å¥½åˆ.ç™½å¤´åˆ°è€.", 
 														           CHAR_getChar( charaindex, CHAR_NAME),
 														           CHAR_getChar( toindex, CHAR_NAME));
 														           CHAR_talkToCli( i, -1, token, CHAR_COLORRED);
@@ -3637,28 +3637,28 @@ void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex)
 					 	int emptyitemindexinchara = CHAR_findEmptyItemBox( toindex );
 								
 						if( emptyitemindexinchara < 0 ){
-								sprintf( token, "%sÎïÆ·À¸ÒÑÂú¡£Çó»éÊ§°Ü" , CHAR_getChar( toindex, CHAR_NAME));
+								sprintf( token, "%sç‰©å“æ å·²æ»¡ã€‚æ±‚å©šå¤±è´¥" , CHAR_getChar( toindex, CHAR_NAME));
 								CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
-								sprintf( token, "%sÏòÄú·¢ÆğÇó»é£¬µ«ÄúµÄÎïÆ·À¸ÒÑÂú¡£" , CHAR_getChar( charaindex, CHAR_NAME));
+								sprintf( token, "%så‘æ‚¨å‘èµ·æ±‚å©šï¼Œä½†æ‚¨çš„ç‰©å“æ å·²æ»¡ã€‚" , CHAR_getChar( charaindex, CHAR_NAME));
 								CHAR_talkToCli( toindex, -1, token, CHAR_COLORYELLOW);}
 						else{
 						 		CHAR_setItemIndex( toindex, emptyitemindexinchara, itemindex);
-						   	sprintf( token, "%sÏò%sÇó»éµÄ½äÖ¸!Í¬ÒâÇó»éÇëÊ¹ÓÃ!", CHAR_getChar( charaindex, CHAR_NAME) 
+						   	sprintf( token, "%så‘%sæ±‚å©šçš„æˆ’æŒ‡!åŒæ„æ±‚å©šè¯·ä½¿ç”¨!", CHAR_getChar( charaindex, CHAR_NAME) 
 																																							,CHAR_getChar( toindex, CHAR_NAME));
 						    ITEM_setChar( itemindex, ITEM_EFFECTSTRING, token);
 						   	CHAR_sendItemDataOne( toindex, emptyitemindexinchara);
 						   	ITEM_endExistItemsOne(itemindex);
 					  }
 				
-						sprintf( token, "%sÏòÄúÇó»é£¬»ñµÃ¶Ô·½µÄ%s", CHAR_getChar( charaindex, CHAR_NAME),ITEM_getChar( itemindex, ITEM_NAME));
+						sprintf( token, "%så‘æ‚¨æ±‚å©šï¼Œè·å¾—å¯¹æ–¹çš„%s", CHAR_getChar( charaindex, CHAR_NAME),ITEM_getChar( itemindex, ITEM_NAME));
 						CHAR_talkToCli( toindex, -1, token, CHAR_COLORYELLOW);
-						sprintf( token, "ÒÑ¾­Ïò%s·¢ÆğÇó»é", CHAR_getChar( toindex, CHAR_NAME));
+						sprintf( token, "å·²ç»å‘%så‘èµ·æ±‚å©š", CHAR_getChar( toindex, CHAR_NAME));
 						CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 						CHAR_DelItem( charaindex, haveitemindex);
 				}
-				CHAR_talkToCli( charaindex, -1, "ÇëÄÍĞÄµÈ´ı¶Ô·½»ØÓ¦£¡", CHAR_COLORYELLOW );    
+				CHAR_talkToCli( charaindex, -1, "è¯·è€å¿ƒç­‰å¾…å¯¹æ–¹å›åº”ï¼", CHAR_COLORYELLOW );    
 			}else{
-					sprintf( token, "Çó»éÊ§°Ü£¬½äÖ¸ÎŞ·¨´´½¨!" );
+					sprintf( token, "æ±‚å©šå¤±è´¥ï¼Œæˆ’æŒ‡æ— æ³•åˆ›å»º!" );
 					CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 					return;
 			}
@@ -3669,7 +3669,7 @@ void ITEM_LoverWarp( int charaindex, int toindex, int haveitemindex)
 {
   int itemindex, i;
   int playernum = CHAR_getPlayerMaxNum();
-  //¼ì²éÊÇ·ñ½á»é
+  //æ£€æŸ¥æ˜¯å¦ç»“å©š
   if( !strcmp( CHAR_getChar( charaindex, CHAR_LOVE), "YES"))
   {   
     for(i=0;i<playernum;i++)
@@ -3681,10 +3681,10 @@ void ITEM_LoverWarp( int charaindex, int toindex, int haveitemindex)
         {
           break;
         }
-    }//´ÓindexÖĞ¶Ô±ÈLOVERNAME
+    }//ä»indexä¸­å¯¹æ¯”LOVERNAME
         if (i>=playernum)
           {
-            CHAR_talkToCli( charaindex, -1, "ºÜ±§Ç¸£¬ÄúµÄ°®ÈË²»ÔÚÏßÅ¶~", CHAR_COLORYELLOW );   
+            CHAR_talkToCli( charaindex, -1, "å¾ˆæŠ±æ­‰ï¼Œæ‚¨çš„çˆ±äººä¸åœ¨çº¿å“¦~", CHAR_COLORYELLOW );   
             return;
           }
 
@@ -3695,17 +3695,17 @@ void ITEM_LoverWarp( int charaindex, int toindex, int haveitemindex)
   if( !ITEM_CHECKINDEX(itemindex) ) return;
   
     if( checkUnlawWarpFloor( CHAR_getInt( charaindex, CHAR_FLOOR) ) ) {
-        CHAR_talkToCli( charaindex, -1, "ºÜ±§Ç¸£¬ÄúµÄ°®ÈËÔÚÉñÃØÒ£Ô¶µØ·½£¬ÎŞ·¨´«ËÍ¡£", CHAR_COLORYELLOW );
+        CHAR_talkToCli( charaindex, -1, "å¾ˆæŠ±æ­‰ï¼Œæ‚¨çš„çˆ±äººåœ¨ç¥ç§˜é¥è¿œåœ°æ–¹ï¼Œæ— æ³•ä¼ é€ã€‚", CHAR_COLORYELLOW );
         return;
-    }//UNWARPµØÍ¼½ûÖ¹Ê¹ÓÃ
+    }//UNWARPåœ°å›¾ç¦æ­¢ä½¿ç”¨
     if( checkUnlawWarpFloor( CHAR_getInt( i, CHAR_FLOOR) ) ) {
-        CHAR_talkToCli( charaindex, -1, "ºÜ±§Ç¸£¬ÄúµÄ°®ÈËÔÚÉñÃØÒ£Ô¶µØ·½£¬ÎŞ·¨´«ËÍ¡£", CHAR_COLORYELLOW );
+        CHAR_talkToCli( charaindex, -1, "å¾ˆæŠ±æ­‰ï¼Œæ‚¨çš„çˆ±äººåœ¨ç¥ç§˜é¥è¿œåœ°æ–¹ï¼Œæ— æ³•ä¼ é€ã€‚", CHAR_COLORYELLOW );
         return;
-    }//UNWARPµØÍ¼½ûÖ¹Ê¹ÓÃ
+    }//UNWARPåœ°å›¾ç¦æ­¢ä½¿ç”¨
         if(strcmp(CHAR_getChar(i,CHAR_LOVERID),CHAR_getChar(charaindex,CHAR_CDKEY)) == 0 &&
             strcmp(CHAR_getChar(i,CHAR_LOVERNAME),CHAR_getChar(charaindex,CHAR_NAME)) == 0)
           {
-          CHAR_DischargePartyNoMsg( charaindex);//½âÉ¢ÍÅ¶Ó
+          CHAR_DischargePartyNoMsg( charaindex);//è§£æ•£å›¢é˜Ÿ
           int floor, x, y;
           char token[256];
           floor = CHAR_getInt( i, CHAR_FLOOR);
@@ -3713,15 +3713,15 @@ void ITEM_LoverWarp( int charaindex, int toindex, int haveitemindex)
           y = CHAR_getInt( i, CHAR_Y);
 
           CHAR_warpToSpecificPoint( charaindex, floor, x, y );
-          sprintf( token, "%s:Ç×°®µÄ£¬ÎÒÀ´ÁË£¡", CHAR_getChar( charaindex, CHAR_NAME));
+          sprintf( token, "%s:äº²çˆ±çš„ï¼Œæˆ‘æ¥äº†ï¼", CHAR_getChar( charaindex, CHAR_NAME));
           CHAR_talkToCli( i, -1, token, CHAR_COLORYELLOW );
-          sprintf( token, "ÒÑ´«ËÍµ½°®ÈË%sÉí±ß£¡", CHAR_getChar( i, CHAR_NAME));
+          sprintf( token, "å·²ä¼ é€åˆ°çˆ±äºº%sèº«è¾¹ï¼", CHAR_getChar( i, CHAR_NAME));
           CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
-          print("\nÍæ¼Ò%s ´«ËÍµ½Íæ¼Ò%sÉí±ß", CHAR_getChar( charaindex, CHAR_NAME),CHAR_getChar(i, CHAR_NAME));
+          print("\nç©å®¶%s ä¼ é€åˆ°ç©å®¶%sèº«è¾¹", CHAR_getChar( charaindex, CHAR_NAME),CHAR_getChar(i, CHAR_NAME));
           return;
         }
     }else
-    CHAR_talkToCli( charaindex, -1, "ÄúÃ»ÓĞ½á»éÅ¶~", CHAR_COLORYELLOW );
+    CHAR_talkToCli( charaindex, -1, "æ‚¨æ²¡æœ‰ç»“å©šå“¦~", CHAR_COLORYELLOW );
 }
 
 void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
@@ -3730,7 +3730,7 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
   int  i;
   char token[256];
   int playernum = CHAR_getPlayerMaxNum();
-  //¼ì²éÊÇ·ñ½á»é
+  //æ£€æŸ¥æ˜¯å¦ç»“å©š
   if( !strcmp( CHAR_getChar( charaindex, CHAR_LOVE), "YES"))
   {   
     for(i=0;i<playernum;i++)
@@ -3742,10 +3742,10 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
         {
           break;
         }
-    }//´ÓindexÖĞ¶Ô±ÈLOVERNAME
+    }//ä»indexä¸­å¯¹æ¯”LOVERNAME
         if (i>=playernum)
           {
-            CHAR_talkToCli( charaindex, -1, "ºÜ±§Ç¸£¬ÄúµÄ°®ÈË²»ÔÚÏßÅ¶~", CHAR_COLORYELLOW );   
+            CHAR_talkToCli( charaindex, -1, "å¾ˆæŠ±æ­‰ï¼Œæ‚¨çš„çˆ±äººä¸åœ¨çº¿å“¦~", CHAR_COLORYELLOW );   
             return;
           }
 
@@ -3753,7 +3753,7 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
   if( !CHAR_CHECKINDEX( i ) ) return;
   if( !ITEM_CHECKINDEX(itemindex) ) return;
   	
-  	 if(strcmp(ITEM_getChar( itemindex, ITEM_SECRETNAME), "Í¬ÒâÀë»é½äÖ¸")){
+  	 if(strcmp(ITEM_getChar( itemindex, ITEM_SECRETNAME), "åŒæ„ç¦»å©šæˆ’æŒ‡")){
 				int id = ITEM_getInt( itemindex, ITEM_ID);
 				itemindex = ITEM_makeItemAndRegist( id );
 	
@@ -3762,21 +3762,21 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
 		   			int emptyitemindexinchara = CHAR_findEmptyItemBox( toindex );
 					
 						if( emptyitemindexinchara < 0 ){
-								sprintf( token, "%sÎïÆ·À¸ÒÑÂú¡£Àë»éÊ§°Ü" , CHAR_getChar( i, CHAR_NAME));
+								sprintf( token, "%sç‰©å“æ å·²æ»¡ã€‚ç¦»å©šå¤±è´¥" , CHAR_getChar( i, CHAR_NAME));
 								CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
-								sprintf( token, "%sÏòÄú·¢ÆğÀë»é£¬µ«ÄúµÄÎïÆ·À¸ÒÑÂú¡£" , CHAR_getChar( charaindex, CHAR_NAME));
+								sprintf( token, "%så‘æ‚¨å‘èµ·ç¦»å©šï¼Œä½†æ‚¨çš„ç‰©å“æ å·²æ»¡ã€‚" , CHAR_getChar( charaindex, CHAR_NAME));
 								CHAR_talkToCli( i, -1, token, CHAR_COLORYELLOW);}
 					 	else{
 					 		CHAR_setItemIndex( i, emptyitemindexinchara, itemindex);
-				      ITEM_setChar( itemindex, ITEM_NAME, "Í¬ÒâÀë»é½äÖ¸");
-				      ITEM_setChar( itemindex, ITEM_SECRETNAME, "Í¬ÒâÀë»é½äÖ¸");
-			      	sprintf( token, "%sÏòÄãÉêÇëÀë»é£¬Èç¹ûÍ¬ÒâÇëÊ¹ÓÃ¸Ã½äÖ¸!", CHAR_getChar( charaindex, CHAR_NAME));
+				      ITEM_setChar( itemindex, ITEM_NAME, "åŒæ„ç¦»å©šæˆ’æŒ‡");
+				      ITEM_setChar( itemindex, ITEM_SECRETNAME, "åŒæ„ç¦»å©šæˆ’æŒ‡");
+			      	sprintf( token, "%så‘ä½ ç”³è¯·ç¦»å©šï¼Œå¦‚æœåŒæ„è¯·ä½¿ç”¨è¯¥æˆ’æŒ‡!", CHAR_getChar( charaindex, CHAR_NAME));
 				      ITEM_setChar( itemindex, ITEM_EFFECTSTRING, token);
 			      	CHAR_sendItemDataOne( i, emptyitemindexinchara);
 			      	ITEM_endExistItemsOne(itemindex);
-		       		sprintf( token, " %sÏòÄúÌá³öÀë»é²¢°Ñ %s ¸øÄã£¡", CHAR_getChar( charaindex, CHAR_NAME),ITEM_getChar( itemindex, ITEM_NAME));
+		       		sprintf( token, " %så‘æ‚¨æå‡ºç¦»å©šå¹¶æŠŠ %s ç»™ä½ ï¼", CHAR_getChar( charaindex, CHAR_NAME),ITEM_getChar( itemindex, ITEM_NAME));
 		       		CHAR_talkToCli( i, -1, token, CHAR_COLORYELLOW);
-		       		sprintf( token, "ÒÑ¾­Ïò%s·¢ÆğÀë»é", CHAR_getChar( i, CHAR_NAME));
+		       		sprintf( token, "å·²ç»å‘%så‘èµ·ç¦»å©š", CHAR_getChar( i, CHAR_NAME));
 		       		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 			      	CHAR_DelItem( charaindex, haveitemindex);
 	          	return;}}
@@ -3787,11 +3787,11 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
 		      CHAR_setChar( charaindex, CHAR_LOVE,"");
 					CHAR_setChar( charaindex, CHAR_LOVERID,"");
 		      CHAR_setChar( charaindex, CHAR_LOVERNAME,"");
-	       	CHAR_talkToCli( i, -1, "Ë«·½Àë»é³É¹¦£¡", CHAR_COLORYELLOW);
-	      	CHAR_talkToCli( charaindex, -1, "Ë«·½Àë»é³É¹¦£¡", CHAR_COLORYELLOW);}
+	       	CHAR_talkToCli( i, -1, "åŒæ–¹ç¦»å©šæˆåŠŸï¼", CHAR_COLORYELLOW);
+	      	CHAR_talkToCli( charaindex, -1, "åŒæ–¹ç¦»å©šæˆåŠŸï¼", CHAR_COLORYELLOW);}
 	      	CHAR_DelItem( charaindex, haveitemindex);
     }else
-    CHAR_talkToCli( charaindex, -1, "ÄúÃ»ÓĞ½á»éÅ¶~", CHAR_COLORYELLOW );
+    CHAR_talkToCli( charaindex, -1, "æ‚¨æ²¡æœ‰ç»“å©šå“¦~", CHAR_COLORYELLOW );
 }
 
 
@@ -3801,19 +3801,19 @@ void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex)
 void ITEM_ColorMetamo( int charaindex, int toindex, int haveitemindex)
 {
 		int MetamoList[13][7]={
-		/*{  ÔìĞÍ ,   ºì  ,   ÂÌ  ,   »Æ  ,   »Ò  ,   °×  ,   ºÚ  },  //´ËĞĞÎªËµÃ÷ĞĞ*/
-			{ 100000, 100000, 100005, 100010, 100015, 100700, 100705},	//Ğ¡°«×Ó
-			{ 100020, 100025, 100030, 100035, 100020, 100710, 100715},	//ÈüÑÇÈË
-			{ 100040, 100055, 100050, 100045, 100040, 100720, 100725},	//±è×ÓÄĞº¢
-			{ 100060, 100060, 100065, 100070, 100075, 100730, 100735},	//¿á¸ç
-			{ 100080, 100095, 100085, 100090, 100080, 100740, 100745},	//ĞÜÆ¤ÄĞ
-			{ 100100, 100100, 100115, 100110, 100105, 100750, 100755},	//´ó¸ö
-			{ 100120, 100135, 100120, 100125, 100130, 100760, 100765},	//Ğ¡°«ÃÃ
-			{ 100140, 100145, 100140, 100150, 100155, 100770, 100775},	//ĞÜÆ¤ÃÃ
-			{ 100160, 100165, 100170, 100160, 100175, 100780, 100785},	//Ã±×ÓÃÃ
-			{ 100180, 100190, 100195, 100185, 100180, 100790, 100795},	//¶Ì·¢¼ĞÃÃ
-			{ 100200, 100200, 100210, 100210, 100205, 100800, 100805},	//ÊÖÌ×Å®
-			{ 100220, 100230, 100225, 100220, 100235, 100810, 100815},	//À±ÃÃ
+		/*{  é€ å‹ ,   çº¢  ,   ç»¿  ,   é»„  ,   ç°  ,   ç™½  ,   é»‘  },  //æ­¤è¡Œä¸ºè¯´æ˜è¡Œ*/
+			{ 100000, 100000, 100005, 100010, 100015, 100700, 100705},	//å°çŸ®å­
+			{ 100020, 100025, 100030, 100035, 100020, 100710, 100715},	//èµ›äºšäºº
+			{ 100040, 100055, 100050, 100045, 100040, 100720, 100725},	//è¾«å­ç”·å­©
+			{ 100060, 100060, 100065, 100070, 100075, 100730, 100735},	//é…·å“¥
+			{ 100080, 100095, 100085, 100090, 100080, 100740, 100745},	//ç†Šçš®ç”·
+			{ 100100, 100100, 100115, 100110, 100105, 100750, 100755},	//å¤§ä¸ª
+			{ 100120, 100135, 100120, 100125, 100130, 100760, 100765},	//å°çŸ®å¦¹
+			{ 100140, 100145, 100140, 100150, 100155, 100770, 100775},	//ç†Šçš®å¦¹
+			{ 100160, 100165, 100170, 100160, 100175, 100780, 100785},	//å¸½å­å¦¹
+			{ 100180, 100190, 100195, 100185, 100180, 100790, 100795},	//çŸ­å‘å¤¹å¦¹
+			{ 100200, 100200, 100210, 100210, 100205, 100800, 100805},	//æ‰‹å¥—å¥³
+			{ 100220, 100230, 100225, 100220, 100235, 100810, 100815},	//è¾£å¦¹
 			{ 100240,   0   ,   0   ,   0   ,   0   , 100820,   0   },	//
 		};
 		int itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -3827,22 +3827,22 @@ void ITEM_ColorMetamo( int charaindex, int toindex, int haveitemindex)
 				  || (OldMetamoId>=MetamoList[i][5] && OldMetamoId<MetamoList[i+1][5]))
 					break;
 		if(i==12){
-				CHAR_talkToCli( charaindex, -1, "±äÉ«Ê§°Ü£¬ÄãÔìĞÍ²¢²»ÊÇÈËÎïÔìĞÍ", CHAR_COLORYELLOW);
+				CHAR_talkToCli( charaindex, -1, "å˜è‰²å¤±è´¥ï¼Œä½ é€ å‹å¹¶ä¸æ˜¯äººç‰©é€ å‹", CHAR_COLORYELLOW);
 				return;
 		}
-		if( strstr( itemarg, "ºì" ) ){
-				CHAR_talkToCli( charaindex, -1, "±ä³ÉºìÉ«", CHAR_COLORYELLOW);
+		if( strstr( itemarg, "çº¢" ) ){
+				CHAR_talkToCli( charaindex, -1, "å˜æˆçº¢è‰²", CHAR_COLORYELLOW);
 				NewMetamoId=MetamoList[i][1];
-		}else if( strstr( itemarg, "ÂÌ" ) ){
-				CHAR_talkToCli( charaindex, -1, "±ä³ÉÂÌÉ«", CHAR_COLORYELLOW);
+		}else if( strstr( itemarg, "ç»¿" ) ){
+				CHAR_talkToCli( charaindex, -1, "å˜æˆç»¿è‰²", CHAR_COLORYELLOW);
 				NewMetamoId=MetamoList[i][2];
-		}else if( strstr( itemarg, "»Æ" ) ){
-				CHAR_talkToCli( charaindex, -1, "±ä³É»ÆÉ«", CHAR_COLORYELLOW);
+		}else if( strstr( itemarg, "é»„" ) ){
+				CHAR_talkToCli( charaindex, -1, "å˜æˆé»„è‰²", CHAR_COLORYELLOW);
 				NewMetamoId=MetamoList[i][3];
-		}else if( strstr( itemarg, "»Ò" ) ){
-				CHAR_talkToCli( charaindex, -1, "±ä³É»ÒÉ«", CHAR_COLORYELLOW);
+		}else if( strstr( itemarg, "ç°" ) ){
+				CHAR_talkToCli( charaindex, -1, "å˜æˆç°è‰²", CHAR_COLORYELLOW);
 				NewMetamoId=MetamoList[i][4];
-		}else if( strstr( itemarg, "°×" ) ){
+		}else if( strstr( itemarg, "ç™½" ) ){
 #ifdef _FM_METAMO
 				switch( CHAR_getWorkInt( charaindex, CHAR_WORKFMFLOOR) ){
 					case 1041:
@@ -3860,17 +3860,17 @@ void ITEM_ColorMetamo( int charaindex, int toindex, int haveitemindex)
 								&&  CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 0)
 						{
 #endif
-							CHAR_talkToCli( charaindex, -1, "±ä³É°×É«", CHAR_COLORYELLOW);
+							CHAR_talkToCli( charaindex, -1, "å˜æˆç™½è‰²", CHAR_COLORYELLOW);
 							NewMetamoId=MetamoList[i][5];
 #ifdef _FM_METAMO
 							break;
 						}
 					default:
-						CHAR_talkToCli( charaindex, -1, "¸Ã½äÖ¸Ö»ÄÜÓµÓĞ×¯Ô°µÄ¹âÃ÷¼Ò×å³ÉÔ±Ê¹ÓÃ£¡", CHAR_COLORYELLOW);
+						CHAR_talkToCli( charaindex, -1, "è¯¥æˆ’æŒ‡åªèƒ½æ‹¥æœ‰åº„å›­çš„å…‰æ˜å®¶æ—æˆå‘˜ä½¿ç”¨ï¼", CHAR_COLORYELLOW);
 						return;
 				}
 #endif
-		}else if( strstr( itemarg, "ºÚ" ) ){
+		}else if( strstr( itemarg, "é»‘" ) ){
 #ifdef _FM_METAMO
 				switch( CHAR_getWorkInt( charaindex, CHAR_WORKFMFLOOR) ){
 					case 1041:
@@ -3888,24 +3888,24 @@ void ITEM_ColorMetamo( int charaindex, int toindex, int haveitemindex)
 								&&  CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 1)
 						{
 #endif
-							CHAR_talkToCli( charaindex, -1, "±ä³ÉºÚÉ«", CHAR_COLORYELLOW);
+							CHAR_talkToCli( charaindex, -1, "å˜æˆé»‘è‰²", CHAR_COLORYELLOW);
 							NewMetamoId=MetamoList[i][6];
 #ifdef _FM_METAMO
 							break;
 						}
 					default:
-						CHAR_talkToCli( charaindex, -1, "¸Ã½äÖ¸Ö»ÄÜÓµÓĞ×¯Ô°µÄºÚ°µ¼Ò×å³ÉÔ±Ê¹ÓÃ£¡", CHAR_COLORYELLOW);
+						CHAR_talkToCli( charaindex, -1, "è¯¥æˆ’æŒ‡åªèƒ½æ‹¥æœ‰åº„å›­çš„é»‘æš—å®¶æ—æˆå‘˜ä½¿ç”¨ï¼", CHAR_COLORYELLOW);
 						return;
 				}
 #endif
-		}else if( strstr( itemarg, "Ëæ" ) ){
+		}else if( strstr( itemarg, "éš" ) ){
 				srand(time(0));
 				do
 						NewMetamoId=MetamoList[i][rand()%4+1];
 				while(NewMetamoId==OldMetamoId);
-				CHAR_talkToCli( charaindex, -1, "Ëæ»ú±äÉ«³É¹¦", CHAR_COLORYELLOW);
+				CHAR_talkToCli( charaindex, -1, "éšæœºå˜è‰²æˆåŠŸ", CHAR_COLORYELLOW);
 		}else{
-				CHAR_talkToCli( charaindex, -1, "±äÉ«Ê§°Ü", CHAR_COLORYELLOW);
+				CHAR_talkToCli( charaindex, -1, "å˜è‰²å¤±è´¥", CHAR_COLORYELLOW);
 			return;
 		}
 		if(NewMetamoId==0)return;
@@ -3921,19 +3921,19 @@ void ITEM_ColorMetamo( int charaindex, int toindex, int haveitemindex)
 void ITEM_CharaMetamo( int charaindex, int toindex, int haveitemindex)
 {
 		int MetamoList[12][7]={
-		/*{  ÔìĞÍ ,   ºì  ,   ÂÌ  ,   »Æ  ,   »Ò  ,   °×  ,   ºÚ  },  //´ËĞĞÎªËµÃ÷ĞĞ*/
-			{ 100000, 100000, 100005, 100010, 100015, 100700, 100705},	//Ğ¡°«×Ó
-			{ 100020, 100025, 100030, 100035, 100020, 100710, 100715},	//ÈüÑÇÈË
-			{ 100040, 100055, 100050, 100045, 100040, 100720, 100725},	//±è×ÓÄĞº¢
-			{ 100060, 100060, 100065, 100070, 100075, 100730, 100735},	//¿á¸ç
-			{ 100080, 100095, 100085, 100090, 100080, 100740, 100745},	//ĞÜÆ¤ÄĞ
-			{ 100100, 100100, 100115, 100110, 100105, 100750, 100755},	//´ó¸ö
-			{ 100120, 100135, 100120, 100125, 100130, 100760, 100765},	//Ğ¡°«ÃÃ
-			{ 100140, 100145, 100140, 100150, 100155, 100770, 100775},	//ĞÜÆ¤ÃÃ
-			{ 100160, 100165, 100170, 100160, 100175, 100780, 100785},	//Ã±×ÓÃÃ
-			{ 100180, 100190, 100195, 100185, 100180, 100790, 100795},	//¶Ì·¢¼ĞÃÃ
-			{ 100200, 100200, 100210, 100215, 100205, 100800, 100805},	//ÊÖÌ×Å®
-			{ 100220, 100230, 100225, 100220, 100235, 100810, 100815},	//À±ÃÃ
+		/*{  é€ å‹ ,   çº¢  ,   ç»¿  ,   é»„  ,   ç°  ,   ç™½  ,   é»‘  },  //æ­¤è¡Œä¸ºè¯´æ˜è¡Œ*/
+			{ 100000, 100000, 100005, 100010, 100015, 100700, 100705},	//å°çŸ®å­
+			{ 100020, 100025, 100030, 100035, 100020, 100710, 100715},	//èµ›äºšäºº
+			{ 100040, 100055, 100050, 100045, 100040, 100720, 100725},	//è¾«å­ç”·å­©
+			{ 100060, 100060, 100065, 100070, 100075, 100730, 100735},	//é…·å“¥
+			{ 100080, 100095, 100085, 100090, 100080, 100740, 100745},	//ç†Šçš®ç”·
+			{ 100100, 100100, 100115, 100110, 100105, 100750, 100755},	//å¤§ä¸ª
+			{ 100120, 100135, 100120, 100125, 100130, 100760, 100765},	//å°çŸ®å¦¹
+			{ 100140, 100145, 100140, 100150, 100155, 100770, 100775},	//ç†Šçš®å¦¹
+			{ 100160, 100165, 100170, 100160, 100175, 100780, 100785},	//å¸½å­å¦¹
+			{ 100180, 100190, 100195, 100185, 100180, 100790, 100795},	//çŸ­å‘å¤¹å¦¹
+			{ 100200, 100200, 100210, 100215, 100205, 100800, 100805},	//æ‰‹å¥—å¥³
+			{ 100220, 100230, 100225, 100220, 100235, 100810, 100815},	//è¾£å¦¹
 		};
 		int OldMetamoId=0, NewMetamoId=0;
 		int itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -3944,115 +3944,115 @@ void ITEM_CharaMetamo( int charaindex, int toindex, int haveitemindex)
 		OldMetamoId=CHAR_getInt( charaindex, CHAR_BASEBASEIMAGENUMBER);
 		if((OldMetamoId >= 100000 && OldMetamoId < 100240 )
 				|| (OldMetamoId >= 100700 && OldMetamoId < 100820)){
-			if( strstr( itemarg, "¶¹¶¡àî" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶¹àî", CHAR_COLORYELLOW);
+			if( strstr( itemarg, "è±†ä¸å›" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè±†å›", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[0][rand()%4+1];
-			}else if( strstr( itemarg, "ÈüÑÇÈË" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÈüÑÇÈË", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "èµ›äºšäºº" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºèµ›äºšäºº", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[1][rand()%4+1];
-			}else if( strstr( itemarg, "±è×ÓÄĞº¢" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª±è×ÓÄĞº¢", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è¾«å­ç”·å­©" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè¾«å­ç”·å­©", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[2][rand()%4+1];
-			}else if( strstr( itemarg, "¿á¸ç" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¿á¸ç", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "é…·å“¥" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºé…·å“¥", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[3][rand()%4+1];
-			}else if( strstr( itemarg, "ĞÜÆ¤ÄĞ" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªĞÜÆ¤ÄĞ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "ç†Šçš®ç”·" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºç†Šçš®ç”·", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[4][rand()%4+1];
-			}else if( strstr( itemarg, "´óÖ»ÀĞ" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª´óÖ»ÀĞ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "å¤§åªä½¬" ) && OldMetamoId >= 100000 && OldMetamoId < 100120){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºå¤§åªä½¬", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[5][rand()%4+1];
-			}else if( strstr( itemarg, "¶¹¶¡àï" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶¹¶¡àï", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è±†ä¸å›¡" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè±†ä¸å›¡", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[6][rand()%4+1];
-			}else if( strstr( itemarg, "ĞÜÆ¤ÃÃ" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªĞÜÆ¤ÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "ç†Šçš®å¦¹" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºç†Šçš®å¦¹", CHAR_COLORYELLOW);
   				NewMetamoId=MetamoList[7][rand()%4+1];
-			}else if( strstr( itemarg, "Ã±×ÓÃÃ" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÃ±×ÓÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "å¸½å­å¦¹" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºå¸½å­å¦¹", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[8][rand()%4+1];
-			}else if( strstr( itemarg, "¶Ì·¢¼ĞÃÃ" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶Ì·¢¼ĞÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "çŸ­å‘å¤¹å¦¹" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºçŸ­å‘å¤¹å¦¹", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[9][rand()%4+1];
-			}else if( strstr( itemarg, "ÊÖÌ×Å®" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÊÖÌ×Å®", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "æ‰‹å¥—å¥³" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºæ‰‹å¥—å¥³", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[10][rand()%4+1];
-			}else if( strstr( itemarg, "À±ÃÃ" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÀ±ÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è¾£å¦¹" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè¾£å¦¹", CHAR_COLORYELLOW);
 					NewMetamoId=MetamoList[11][rand()%4+1];
-			}else if( strstr( itemarg, "¶¹¶¡àî" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶¹àî", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è±†ä¸å›" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè±†å›", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[0][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[0][6];
-			}else if( strstr( itemarg, "ÈüÑÇÈË" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÈüÑÇÈË", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "èµ›äºšäºº" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºèµ›äºšäºº", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[1][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[1][6];
-			}else if( strstr( itemarg, "±è×ÓÄĞº¢" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª±è×ÓÄĞº¢", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è¾«å­ç”·å­©" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè¾«å­ç”·å­©", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[2][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[2][6];
-			}else if( strstr( itemarg, "¿á¸ç" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¿á¸ç", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "é…·å“¥" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºé…·å“¥", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[3][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[3][6];
-			}else if( strstr( itemarg, "ĞÜÆ¤ÄĞ" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªĞÜÆ¤ÄĞ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "ç†Šçš®ç”·" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºç†Šçš®ç”·", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[4][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[4][6];
-			}else if( strstr( itemarg, "´óÖ»ÀĞ" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª´óÖ»ÀĞ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "å¤§åªä½¬" ) && OldMetamoId >= 100700 && OldMetamoId < 100760){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºå¤§åªä½¬", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[5][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[5][6];	
-			}else if( strstr( itemarg, "¶¹¶¡àï" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶¹¶¡àï", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "è±†ä¸å›¡" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè±†ä¸å›¡", CHAR_COLORYELLOW);
 					if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[6][6];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[6][6];
-			}else if( strstr( itemarg, "ĞÜÆ¤ÃÃ" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªĞÜÆ¤ÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "ç†Šçš®å¦¹" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºç†Šçš®å¦¹", CHAR_COLORYELLOW);
 								if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[7][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[7][6];	
-			}else if( strstr( itemarg, "Ã±×ÓÃÃ" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÃ±×ÓÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "å¸½å­å¦¹" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºå¸½å­å¦¹", CHAR_COLORYELLOW);
 								if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[8][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[8][6];	
-			}else if( strstr( itemarg, "¶Ì·¢¼ĞÃÃ" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎª¶Ì·¢¼ĞÃÃ", CHAR_COLORYELLOW);
+			}else if( strstr( itemarg, "çŸ­å‘å¤¹å¦¹" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºçŸ­å‘å¤¹å¦¹", CHAR_COLORYELLOW);
 								if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[9][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[9][6];	
-		  }else if( strstr( itemarg, "ÊÖÌ×Å®" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÊÖÌ×Å®", CHAR_COLORYELLOW);
+		  }else if( strstr( itemarg, "æ‰‹å¥—å¥³" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºæ‰‹å¥—å¥³", CHAR_COLORYELLOW);
 								if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[10][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[10][6];	
-		  }else if( strstr( itemarg, "À±ÃÃ" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
-					CHAR_talkToCli( charaindex, -1, "¸ü¸ÄÔìĞÍÎªÀ±ÃÃ", CHAR_COLORYELLOW);
+		  }else if( strstr( itemarg, "è¾£å¦¹" ) && OldMetamoId >= 100760 && OldMetamoId < 100820){
+					CHAR_talkToCli( charaindex, -1, "æ›´æ”¹é€ å‹ä¸ºè¾£å¦¹", CHAR_COLORYELLOW);
 								if( ( OldMetamoId - 100700 ) % 10 == 0 )
 						  NewMetamoId=MetamoList[11][5];
 					else if( ( OldMetamoId - 100700 ) % 10 == 5 )
 						  NewMetamoId=MetamoList[11][6];	
-			}else if( strstr( itemarg, "Ëæ»ú" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
+			}else if( strstr( itemarg, "éšæœº" ) && OldMetamoId >= 100120 && OldMetamoId < 100240){
 					do
 							if( OldMetamoId >= 100000 && OldMetamoId < 100120 ){
 									NewMetamoId=MetamoList[rand()%6][rand()%4+1];
@@ -4070,14 +4070,14 @@ void ITEM_CharaMetamo( int charaindex, int toindex, int haveitemindex)
 										  NewMetamoId=MetamoList[rand()%6+6][6];
 							}
 					while(NewMetamoId==OldMetamoId);
-					CHAR_talkToCli( charaindex, -1, "Ëæ»ú¸ü¸ÄÔìĞÍ³É¹¦", CHAR_COLORYELLOW);
+					CHAR_talkToCli( charaindex, -1, "éšæœºæ›´æ”¹é€ å‹æˆåŠŸ", CHAR_COLORYELLOW);
 			}
 		}else{
-			CHAR_talkToCli( charaindex, -1, "Äã²¢²»ÊÇÈËÎïÔìĞÍ!", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "ä½ å¹¶ä¸æ˜¯äººç‰©é€ å‹!", CHAR_COLORYELLOW);
 			return;
 		}
 		if(NewMetamoId==0){
-			CHAR_talkToCli( charaindex, -1, "ÄãµÄĞÔ±ğ²»Í¬£¬ÎŞÃ»¸ü¸Ä´ËÔìĞÍ!", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "ä½ çš„æ€§åˆ«ä¸åŒï¼Œæ— æ²¡æ›´æ”¹æ­¤é€ å‹!", CHAR_COLORYELLOW);
 			return;}
 		CHAR_setInt( charaindex , CHAR_BASEIMAGENUMBER , NewMetamoId );
 		CHAR_setInt( charaindex , CHAR_BASEBASEIMAGENUMBER , NewMetamoId );
@@ -4092,80 +4092,80 @@ void ITEM_SexMetamo( int charaindex, int toindex, int haveitemindex)
 {
 		int OldMetamoId, NewMetamoId;
 		OldMetamoId=CHAR_getInt( charaindex, CHAR_BASEBASEIMAGENUMBER);
-		if(OldMetamoId >=100000 && OldMetamoId <100020){                 //¶¹¶¡àî
+		if(OldMetamoId >=100000 && OldMetamoId <100020){                 //è±†ä¸å›
 				NewMetamoId=OldMetamoId+120;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶¹¶¡àï!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100020 && OldMetamoId <100040){           //ÈüÑÇÈË
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè±†ä¸å›¡!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100020 && OldMetamoId <100040){           //èµ›äºšäºº
 				NewMetamoId=OldMetamoId+160;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶Ì·¢¼ĞÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100040 && OldMetamoId <100060){           //±è×ÓÄĞº¢
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆçŸ­å‘å¤¹å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100040 && OldMetamoId <100060){           //è¾«å­ç”·å­©
 				NewMetamoId=OldMetamoId+120;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÃ±×ÓÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100060 && OldMetamoId <100080){           //¿á¸ç
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆå¸½å­å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100060 && OldMetamoId <100080){           //é…·å“¥
 				NewMetamoId=OldMetamoId+160;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÀ±ÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100080 && OldMetamoId <100100){           //ĞÜÆ¤ÄĞ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè¾£å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100080 && OldMetamoId <100100){           //ç†Šçš®ç”·
 				NewMetamoId=OldMetamoId+60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉĞÜÆ¤ÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100100 && OldMetamoId <100120){           //´óÖ»ÀĞ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆç†Šçš®å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100100 && OldMetamoId <100120){           //å¤§åªä½¬
 				NewMetamoId=OldMetamoId+100;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÊÖÌ×Å®!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100120 && OldMetamoId <100140){           //¶¹¶¡àï
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆæ‰‹å¥—å¥³!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100120 && OldMetamoId <100140){           //è±†ä¸å›¡
 				NewMetamoId=OldMetamoId-120;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶¹¶¡àî!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100140 && OldMetamoId <100160){           //ĞÜÆ¤ÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè±†ä¸å›!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100140 && OldMetamoId <100160){           //ç†Šçš®å¦¹
 				NewMetamoId=OldMetamoId-60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉĞÜÆ¤ÄĞ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100160 && OldMetamoId <100180){           //Ã±×ÓÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆç†Šçš®ç”·!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100160 && OldMetamoId <100180){           //å¸½å­å¦¹
 				NewMetamoId=OldMetamoId-120;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É±è×ÓÄĞº¢!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100180 && OldMetamoId <100200){           //¶Ì·¢¼ĞÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè¾«å­ç”·å­©!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100180 && OldMetamoId <100200){           //çŸ­å‘å¤¹å¦¹
 				NewMetamoId=OldMetamoId-160;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÈüÑÇÈË!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100200 && OldMetamoId <100220){           //ÊÖÌ×Å®
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆèµ›äºšäºº!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100200 && OldMetamoId <100220){           //æ‰‹å¥—å¥³
 				NewMetamoId=OldMetamoId-100;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É´óÖ»ÀĞ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100220 && OldMetamoId <100240){           //À±ÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆå¤§åªä½¬!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100220 && OldMetamoId <100240){           //è¾£å¦¹
 				NewMetamoId=OldMetamoId-160;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¿á¸ç!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId >=100700 && OldMetamoId <100710){          //¶¹¶¡àî
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆé…·å“¥!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId >=100700 && OldMetamoId <100710){          //è±†ä¸å›
 				NewMetamoId=OldMetamoId+60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶¹¶¡àï!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100710 && OldMetamoId <100720){           //ÈüÑÇÈË
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè±†ä¸å›¡!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100710 && OldMetamoId <100720){           //èµ›äºšäºº
 				NewMetamoId=OldMetamoId+80;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶Ì·¢¼ĞÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100720 && OldMetamoId <100730){           //±è×ÓÄĞº¢
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆçŸ­å‘å¤¹å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100720 && OldMetamoId <100730){           //è¾«å­ç”·å­©
 				NewMetamoId=OldMetamoId+60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÃ±×ÓÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100730 && OldMetamoId <100740){           //¿á¸ç
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆå¸½å­å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100730 && OldMetamoId <100740){           //é…·å“¥
 				NewMetamoId=OldMetamoId+80;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÀ±ÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100740 && OldMetamoId <100750){           //ĞÜÆ¤ÄĞ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè¾£å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100740 && OldMetamoId <100750){           //ç†Šçš®ç”·
 				NewMetamoId=OldMetamoId+30;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉĞÜÆ¤ÃÃ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100750 && OldMetamoId <100760){           //´óÖ»ÀĞ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆç†Šçš®å¦¹!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100750 && OldMetamoId <100760){           //å¤§åªä½¬
 				NewMetamoId=OldMetamoId+50;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÊÖÌ×Å®!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100760 && OldMetamoId <100770){           //¶¹¶¡àï
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆæ‰‹å¥—å¥³!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100760 && OldMetamoId <100770){           //è±†ä¸å›¡
 				NewMetamoId=OldMetamoId-60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¶¹¶¡àî!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100770 && OldMetamoId <100780){           //ĞÜÆ¤ÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè±†ä¸å›!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100770 && OldMetamoId <100780){           //ç†Šçš®å¦¹
 				NewMetamoId=OldMetamoId-30;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉĞÜÆ¤ÄĞ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100780 && OldMetamoId <100790){           //Ã±×ÓÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆç†Šçš®ç”·!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100780 && OldMetamoId <100790){           //å¸½å­å¦¹
 				NewMetamoId=OldMetamoId-60;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É±è×ÓÄĞº¢!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100790 && OldMetamoId <100800){           //¶Ì·¢¼ĞÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆè¾«å­ç”·å­©!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100790 && OldMetamoId <100800){           //çŸ­å‘å¤¹å¦¹
 				NewMetamoId=OldMetamoId-80;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³ÉÈüÑÇÈË!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100810 && OldMetamoId <100820){           //ÊÖÌ×Å®
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆèµ›äºšäºº!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100810 && OldMetamoId <100820){           //æ‰‹å¥—å¥³
 				NewMetamoId=OldMetamoId-50;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É´óÖ»ÀĞ!", CHAR_COLORYELLOW);
-		}else if(OldMetamoId>=100820 && OldMetamoId <100830){           //À±ÃÃ
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆå¤§åªä½¬!", CHAR_COLORYELLOW);
+		}else if(OldMetamoId>=100820 && OldMetamoId <100830){           //è¾£å¦¹
 				NewMetamoId=OldMetamoId-80;
-				CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã±äĞÔ³É¿á¸ç!", CHAR_COLORYELLOW);
+				CHAR_talkToCli( charaindex, -1, "æ­å–œä½ å˜æ€§æˆé…·å“¥!", CHAR_COLORYELLOW);
 		}else{
-				CHAR_talkToCli( charaindex, -1, "Äã²¢²»ÊÇÈËÎïÔìĞÍ£¬ÎŞ·¨±äĞÔ!", CHAR_COLORYELLOW);
+				CHAR_talkToCli( charaindex, -1, "ä½ å¹¶ä¸æ˜¯äººç‰©é€ å‹ï¼Œæ— æ³•å˜æ€§!", CHAR_COLORYELLOW);
 				return;}
 		if(NewMetamoId==0)return;
 		CHAR_setInt( charaindex , CHAR_BASEIMAGENUMBER , NewMetamoId );
@@ -4193,9 +4193,9 @@ void ITEM_GMFUNCTION( int charaindex, int toindex, int haveitemindex)
 		getStringFromIndexWithDelim(itemarg,"|", 2, gmtime, sizeof(gmtime));
 		CHAR_setChar( charaindex , CHAR_GMFUNCTION, gmfunction );
 		CHAR_setInt( charaindex , CHAR_GMTIME, atoi(gmtime) );
-		sprintf( token, "»ñµÃÊ¹ÓÃ%sÈ¨ÏŞ%d!", gmfunction, atoi(gmtime));
+		sprintf( token, "è·å¾—ä½¿ç”¨%sæƒé™%d!", gmfunction, atoi(gmtime));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
-		sprintf( token, "Ïà¹ØÊ¹ÓÃÇë²é¿´[help %s]ÎŞĞèGMÃÜÂë!",CHAR_getChar( charaindex, CHAR_GMFUNCTION));
+		sprintf( token, "ç›¸å…³ä½¿ç”¨è¯·æŸ¥çœ‹[help %s]æ— éœ€GMå¯†ç !",CHAR_getChar( charaindex, CHAR_GMFUNCTION));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4212,11 +4212,11 @@ void ITEM_AddMemberPoint( int charaindex, int toindex, int haveitemindex)
 		itemarg=ITEM_getChar(itemindex,ITEM_ARGUMENT);
 		if( itemarg == "\0" ) return;
 		CHAR_setInt( charaindex , CHAR_AMPOINT, point+atoi(itemarg));
-		sprintf( token, "»ñµÃ»áÔ±µãÊı%d,Ä¿Ç°ÄãÓµÓĞ»áÔ±µãÊıÎª%d!", atoi(itemarg),point+atoi(itemarg));
+		sprintf( token, "è·å¾—ä¼šå‘˜ç‚¹æ•°%d,ç›®å‰ä½ æ‹¥æœ‰ä¼šå‘˜ç‚¹æ•°ä¸º%d!", atoi(itemarg),point+atoi(itemarg));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		CHAR_DelItem( charaindex, haveitemindex);
 		CHAR_charSaveFromConnect(fd, FALSE);
-		CHAR_talkToCli( charaindex, -1, "ÄúµÄÊı¾İÒÔ±£´æ", CHAR_COLORRED );
+		CHAR_talkToCli( charaindex, -1, "æ‚¨çš„æ•°æ®ä»¥ä¿å­˜", CHAR_COLORRED );
 }
 #endif
 
@@ -4230,10 +4230,10 @@ void ITEM_VipRide( int charaindex, int toindex, int haveitemindex)
 			CHAR_setInt( charaindex, CHAR_LOWRIDEPETS, LRCode);
 			CHAR_sendStatusString( charaindex, "x");
 			CHAR_setInt( charaindex , CHAR_VIPRIDE, 1);
-			CHAR_talkToCli( charaindex, -1, "¹§Ï²Äã£¬ÄãÒÑ³ÉÎªÕıÊ½»áÔ±ÁË£¡", CHAR_COLORYELLOW );		
+			CHAR_talkToCli( charaindex, -1, "æ­å–œä½ ï¼Œä½ å·²æˆä¸ºæ­£å¼ä¼šå‘˜äº†ï¼", CHAR_COLORYELLOW );		
 			CHAR_DelItem( charaindex, haveitemindex);
 		}else
-			CHAR_talkToCli( charaindex, -1, "ÄãÒÑÊÇ»áÔ±ÁË£¬Ã»±ØÒªÔÙÊ¹ÓÃ£¡", CHAR_COLORRED );
+			CHAR_talkToCli( charaindex, -1, "ä½ å·²æ˜¯ä¼šå‘˜äº†ï¼Œæ²¡å¿…è¦å†ä½¿ç”¨ï¼", CHAR_COLORRED );
 }
 #endif
 
@@ -4247,7 +4247,7 @@ void ITEM_AddFame( int charaindex, int toindex, int haveitemindex)
 		itemarg=ITEM_getChar(itemindex,ITEM_ARGUMENT);
 		if( itemarg == "\0" ) return;
 		CHAR_setInt( charaindex , CHAR_FAME, fame+atoi(itemarg)*100);
-		sprintf( token, "ÉùÍûµãÊıÌáÉı%d,Ä¿Ç°ÄãµÄÉùÍûÊÇ%d!", atoi(itemarg),fame/100+atoi(itemarg));
+		sprintf( token, "å£°æœ›ç‚¹æ•°æå‡%d,ç›®å‰ä½ çš„å£°æœ›æ˜¯%d!", atoi(itemarg),fame/100+atoi(itemarg));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4260,14 +4260,14 @@ void ITEM_Luck( int charaindex, int toindex, int haveitemindex)
 		int i;
 		char *itemarg="\0";
 		char token[64];
-		char luck[][5]={"Ğ×","Ò»°ã","Ğ¡¼ª","ÖĞ¼ª","´ó¼ª"};
+		char luck[][5]={"å‡¶","ä¸€èˆ¬","å°å‰","ä¸­å‰","å¤§å‰"};
 		itemarg=ITEM_getChar(itemindex,ITEM_ARGUMENT);
 		for(i=0;i<5;i++)
 			if(strstr( itemarg, luck[i]))
 				break;
 		if(i==6)i=0;
 		CHAR_setInt( charaindex , CHAR_LUCK, i+1);
-		sprintf( token, "ÄãÏÖÔÚµÄÔËÆøÎª%s", luck[i]);
+		sprintf( token, "ä½ ç°åœ¨çš„è¿æ°”ä¸º%s", luck[i]);
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4283,23 +4283,23 @@ void ITEM_MetamoTime( int charaindex, int toindex, int haveitemindex )
 	//print(" PetMetamo_toindex:%d ", toindex);
 
 	if( CHAR_getInt( charaindex, CHAR_RIDEPET ) != -1 ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬Æï³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œéª‘ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #ifdef _FIX_METAMORIDE
 	if( CHAR_CHECKJOINENEMY( charaindex) == TRUE ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #else
 	if( CHAR_getInt( charaindex, CHAR_BASEIMAGENUMBER) == 100259 ){
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 		return;
 	}
 #endif
 #ifdef _PETSKILL_BECOMEPIG
-    if( CHAR_getInt( charaindex, CHAR_BECOMEPIG) > -1 ){//±ä³ÉÎÚÁ¦ÁË
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬ÎÚÁ¦»¯ÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
+    if( CHAR_getInt( charaindex, CHAR_BECOMEPIG) > -1 ){//å˜æˆä¹ŒåŠ›äº†
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œä¹ŒåŠ›åŒ–ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
 	    return;
 	}
 #endif
@@ -4312,7 +4312,7 @@ void ITEM_MetamoTime( int charaindex, int toindex, int haveitemindex )
 			int armtype = BATTLE_GetWepon( charaindex);
 			if( armtype == ITEM_BOW || armtype == ITEM_BOUNDTHROW ||
 				armtype == ITEM_BREAKTHROW || armtype == ITEM_BOOMERANG)	{
-				CHAR_talkToCli( charaindex, -1, "Ê¹ÓÃÔ¶¾àÀëÎäÆ÷ÎŞ·¨±äÉí£¡", CHAR_COLORYELLOW );
+				CHAR_talkToCli( charaindex, -1, "ä½¿ç”¨è¿œè·ç¦»æ­¦å™¨æ— æ³•å˜èº«ï¼", CHAR_COLORYELLOW );
 				return;
 			}
 		}
@@ -4320,7 +4320,7 @@ void ITEM_MetamoTime( int charaindex, int toindex, int haveitemindex )
 #endif
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
-	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
+	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return;
 	}
@@ -4336,9 +4336,9 @@ void ITEM_MetamoTime( int charaindex, int toindex, int haveitemindex )
 
 	CHAR_setWorkInt( charaindex, CHAR_WORKITEMMETAMO, NowTime.tv_sec + metamoTime);
 	if(metamoTime>60)
-		sprintf( msg, "±äÉí³É%s£¬¿É³ÖĞø%dĞ¡Ê±£¡", buff, metamoTime / 60 );
+		sprintf( msg, "å˜èº«æˆ%sï¼Œå¯æŒç»­%då°æ—¶ï¼", buff, metamoTime / 60 );
 	else
-		sprintf( msg, "±äÉí³É%s£¬¿É³ÖĞø%d·ÖÖÓ£¡", buff, metamoTime );
+		sprintf( msg, "å˜èº«æˆ%sï¼Œå¯æŒç»­%dåˆ†é’Ÿï¼", buff, metamoTime );
 
 	CHAR_talkToCli( charaindex, -1, msg, CHAR_COLORYELLOW );
 
@@ -4366,7 +4366,7 @@ void ITEM_Gold( int charaindex, int toindex, int haveitemindex)
 		CHAR_setInt( charaindex , CHAR_GOLD, gold);
 		CHAR_complianceParameter( charaindex);	
 	  CHAR_send_P_StatusString( charaindex, CHAR_P_STRING_GOLD);
-		sprintf( token, "ÄãµÄÊ¯±ÒÔö¼Ó%dS", atoi(itemarg));
+		sprintf( token, "ä½ çš„çŸ³å¸å¢åŠ %dS", atoi(itemarg));
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4389,7 +4389,7 @@ void ITEM_MysteriousGift( int charaindex, int toindex, int haveitemindex)
 
 	itemarg = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	if( itemarg == "" ){
-		CHAR_talkToCli(charaindex, -1, "ÕâÊÇ¸öÉñÃØÀñÎï!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "è¿™æ˜¯ä¸ªç¥ç§˜ç¤¼ç‰©!", CHAR_COLORYELLOW);
 		return;
 	}
 
@@ -4412,7 +4412,7 @@ void ITEM_MysteriousGift( int charaindex, int toindex, int haveitemindex)
 	}
 
   if( i == CHAR_MAXPETHAVE ){
-		snprintf( token,sizeof( token), "³èÎïÒÑÂú£¡£¡");
+		snprintf( token,sizeof( token), "å® ç‰©å·²æ»¡ï¼ï¼");
 		CHAR_talkToCli( charaindex, -1, token,  CHAR_COLORYELLOW);
 		return;
 	}	
@@ -4430,7 +4430,7 @@ void ITEM_MysteriousGift( int charaindex, int toindex, int haveitemindex)
 	if(!CHAR_CHECKINDEX( ret))
 		return;
 	
-	sprintf( token,"ÄÃµ½%s",ENEMY_getChar( i, ENEMY_NAME));
+	sprintf( token,"æ‹¿åˆ°%s",ENEMY_getChar( i, ENEMY_NAME));
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 	
 	for( i = 0; i < CHAR_MAXPETHAVE; i ++ ){
@@ -4456,22 +4456,22 @@ void ITEM_BattlePK( int charaindex, int toindex, int haveitemindex)
 	if( !CHAR_CHECKINDEX( toindex ) ) return;
 	if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER)
 	{
-	   CHAR_talkToCli( charaindex, -1, "Ö»ÄÜÌôÕ½Íæ¼ÒÅ¶£¡", CHAR_COLORYELLOW);
+	   CHAR_talkToCli( charaindex, -1, "åªèƒ½æŒ‘æˆ˜ç©å®¶å“¦ï¼", CHAR_COLORYELLOW);
 	   return;
 	}
 	if( charaindex == toindex )
 	{
-	   CHAR_talkToCli( charaindex, -1, "ÄÑµÀÓĞ×Ô¼ºÌôÕ½×Ô¼ºµÄÂğ£¿", CHAR_COLORYELLOW);
+	   CHAR_talkToCli( charaindex, -1, "éš¾é“æœ‰è‡ªå·±æŒ‘æˆ˜è‡ªå·±çš„å—ï¼Ÿ", CHAR_COLORYELLOW);
 	   return;
 	}
-	CHAR_DischargePartyNoMsg( charaindex );//½âÉ¢ÍÅ¶Ó
-	CHAR_DischargePartyNoMsg( toindex );//½âÉ¢ÍÅ¶Ó
+	CHAR_DischargePartyNoMsg( charaindex );//è§£æ•£å›¢é˜Ÿ
+	CHAR_DischargePartyNoMsg( toindex );//è§£æ•£å›¢é˜Ÿ
 	BATTLE_CreateVsPlayer(charaindex,toindex);
 	CHAR_setInt( charaindex, CHAR_BATTLEPK,TRUE);
 	CHAR_setInt( toindex, CHAR_BATTLEPK,TRUE);
-	sprintf( token,"³É¹¦Ïò¶Ô·½%sÌôÕ½!",CHAR_getChar( toindex, CHAR_NAME));
+	sprintf( token,"æˆåŠŸå‘å¯¹æ–¹%sæŒ‘æˆ˜!",CHAR_getChar( toindex, CHAR_NAME));
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
-	sprintf( token,"¶Ô·½%sÕıÊ½ÏòÄãÌôÕ½!",CHAR_getChar( charaindex, CHAR_NAME));
+	sprintf( token,"å¯¹æ–¹%sæ­£å¼å‘ä½ æŒ‘æˆ˜!",CHAR_getChar( charaindex, CHAR_NAME));
 	CHAR_talkToCli( toindex, -1, token, CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4493,12 +4493,12 @@ void ITEM_PetLevelItem( int charaindex, int toindex, int haveitemindex)
   if( !CHAR_CHECKINDEX( toindex ) ) return;
   if( CHAR_getInt( toindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER)
   {
-  	CHAR_talkToCli( charaindex, -1, "¸ÃÎïÆ·Ö»ÄÜ¸ø³èÎïÊ¹ÓÃ£¡", CHAR_COLORYELLOW);
+  	CHAR_talkToCli( charaindex, -1, "è¯¥ç‰©å“åªèƒ½ç»™å® ç‰©ä½¿ç”¨ï¼", CHAR_COLORYELLOW);
     return;
   }
 	if( CHAR_getInt( toindex, CHAR_PETID) == 718 || CHAR_getInt( toindex, CHAR_PETID) == 401 )
 	{
-		CHAR_talkToCli( charaindex, -1, "¸ÃÎïÆ·²»ÄÜ¸øMMÊ¹ÓÃ£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "è¯¥ç‰©å“ä¸èƒ½ç»™MMä½¿ç”¨ï¼", CHAR_COLORYELLOW);
 		return;
 	}
 	int itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -4508,10 +4508,10 @@ void ITEM_PetLevelItem( int charaindex, int toindex, int haveitemindex)
 	getStringFromIndexWithDelim( itemarg, "|", 1, low, sizeof(low));
 	getStringFromIndexWithDelim( itemarg, "|", 2, hight, sizeof(hight));
 	if(CHAR_getInt( toindex, CHAR_LV)<atoi(low) && (CHAR_getInt(toindex, CHAR_LIMITLEVEL)>0 && CHAR_getInt(toindex, CHAR_LIMITLEVEL)<atoi(low))){
-		CHAR_talkToCli( charaindex, -1, "Ä¿Ç°ÄãµÄ³èÎïÎŞ·¨Ê¹ÓÃ¸ÃÎïÆ·£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "ç›®å‰ä½ çš„å® ç‰©æ— æ³•ä½¿ç”¨è¯¥ç‰©å“ï¼", CHAR_COLORYELLOW);
 		return;
 	}else	if(CHAR_getInt( toindex, CHAR_LV)>=atoi(hight) && CHAR_getInt(toindex, CHAR_LIMITLEVEL)>=atoi(hight)){
-		CHAR_talkToCli( charaindex, -1, "Ä¿Ç°ÄãµÄ³èÎï²»±ØÔÙÊ¹ÓÃ¸ÃÎïÆ·£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "ç›®å‰ä½ çš„å® ç‰©ä¸å¿…å†ä½¿ç”¨è¯¥ç‰©å“ï¼", CHAR_COLORYELLOW);
 		return;
 	}
 	CHAR_setInt(toindex, CHAR_LIMITLEVEL, atoi(hight));
@@ -4521,7 +4521,7 @@ void ITEM_PetLevelItem( int charaindex, int toindex, int haveitemindex)
 	}
 		
 	char token[256];
-	sprintf(token, "³èÎï%sµÈ¼¶ÒÑÍ»ÆÆ%d¼¶£¡",CHAR_getChar( toindex, CHAR_NAME), atoi(hight));
+	sprintf(token, "å® ç‰©%sç­‰çº§å·²çªç ´%dçº§ï¼",CHAR_getChar( toindex, CHAR_NAME), atoi(hight));
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 	CHAR_DelItem( charaindex, haveitemindex);
 }
@@ -4535,7 +4535,7 @@ void ITEM_efMetamo( int charaindex, int toindex, int haveitemindex)
 
 	char *itemarg = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	if( itemarg == "" ){
-		CHAR_talkToCli(charaindex, -1, "ÕâÊÇ¸öÓÀ¾Ã±äÉí½äÖ¸!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "è¿™æ˜¯ä¸ªæ°¸ä¹…å˜èº«æˆ’æŒ‡!", CHAR_COLORYELLOW);
 		return;
 	}
 	CHAR_setInt( charaindex , CHAR_BASEIMAGENUMBER , atoi(itemarg) );
@@ -4555,12 +4555,12 @@ void PET_BEATITUDE( int charaindex, int toindex, int haveitemindex)
   if( !CHAR_CHECKINDEX( toindex ) ) return;
   if( CHAR_getInt( toindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER)
   {
-  	CHAR_talkToCli( charaindex, -1, "¸ÃÎïÆ·Ö»ÄÜ¸ø³èÎïÊ¹ÓÃ£¡", CHAR_COLORYELLOW);
+  	CHAR_talkToCli( charaindex, -1, "è¯¥ç‰©å“åªèƒ½ç»™å® ç‰©ä½¿ç”¨ï¼", CHAR_COLORYELLOW);
     return;
   }
 	if( CHAR_getInt( toindex, CHAR_PETID) == 718 || CHAR_getInt( toindex, CHAR_PETID) == 401 )
 	{
-		CHAR_talkToCli( charaindex, -1, "¸ÃÎïÆ·²»ÄÜ¸øMMÊ¹ÓÃ£¡", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "è¯¥ç‰©å“ä¸èƒ½ç»™MMä½¿ç”¨ï¼", CHAR_COLORYELLOW);
 		return;
 	}
 	int itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -4571,44 +4571,44 @@ void PET_BEATITUDE( int charaindex, int toindex, int haveitemindex)
 	getStringFromIndexWithDelim( itemarg, "|", 2, mun, sizeof(mun));
 	char token[256];
 	int beat=CHAR_getInt( toindex, CHAR_BEATITUDE);
-	if(strcmp( beatitude, "Ìå")==0){
+	if(strcmp( beatitude, "ä½“")==0){
 		if(CHAR_getInt( toindex, CHAR_BEATITUDE)&BEATITUDE_VITAL){
-			CHAR_talkToCli( charaindex, -1, "ÄúµÄ³èÎï¸ÃÏîÊôĞÔÒÑÌáÉı¹ıÁË£¡", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "æ‚¨çš„å® ç‰©è¯¥é¡¹å±æ€§å·²æå‡è¿‡äº†ï¼", CHAR_COLORYELLOW);
 			return;
 		}else{
-			sprintf(token, "%sÌåÁ¦ÉÏÉı%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
+			sprintf(token, "%sä½“åŠ›ä¸Šå‡%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
 			CHAR_setInt( toindex, CHAR_VITAL,(CHAR_getInt( toindex, CHAR_VITAL)+atoi(mun)));
 			beat|=BEATITUDE_VITAL;
 		}
-	}else if(strcmp( beatitude, "¹¥")==0){
+	}else if(strcmp( beatitude, "æ”»")==0){
 		if(CHAR_getInt( toindex, CHAR_BEATITUDE)&BEATITUDE_STR){
-			CHAR_talkToCli( charaindex, -1, "ÄúµÄ³èÎï¸ÃÏîÊôĞÔÒÑÌáÉı¹ıÁË£¡", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "æ‚¨çš„å® ç‰©è¯¥é¡¹å±æ€§å·²æå‡è¿‡äº†ï¼", CHAR_COLORYELLOW);
 			return;
 		}else{
-			sprintf(token, "%s¹¥»÷Á¦ÉÏÉı%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
+			sprintf(token, "%sæ”»å‡»åŠ›ä¸Šå‡%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
 			CHAR_setInt( toindex, CHAR_STR, (CHAR_getInt( toindex, CHAR_STR)+atoi(mun)));
 			beat|=BEATITUDE_STR;
 		}
-	}else if(strcmp( beatitude, "·À")==0){
+	}else if(strcmp( beatitude, "é˜²")==0){
 		if(CHAR_getInt( toindex, CHAR_BEATITUDE)&BEATITUDE_TOUGH){
-			CHAR_talkToCli( charaindex, -1, "ÄúµÄ³èÎï¸ÃÏîÊôĞÔÒÑÌáÉı¹ıÁË£¡", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "æ‚¨çš„å® ç‰©è¯¥é¡¹å±æ€§å·²æå‡è¿‡äº†ï¼", CHAR_COLORYELLOW);
 			return;
 		}else{
-			sprintf(token, "%s·ÀÓùÁ¦ÉÏÉı%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
+			sprintf(token, "%sé˜²å¾¡åŠ›ä¸Šå‡%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
 			CHAR_setInt( toindex, CHAR_TOUGH, (CHAR_getInt( toindex, CHAR_TOUGH)+atoi(mun)));
 			beat|=BEATITUDE_TOUGH;
 		}
-	}else if(strcmp( beatitude, "Ãô")==0){
+	}else if(strcmp( beatitude, "æ•")==0){
 		if(CHAR_getInt( toindex, CHAR_BEATITUDE)&BEATITUDE_DEX){
-			CHAR_talkToCli( charaindex, -1, "ÄúµÄ³èÎï¸ÃÏîÊôĞÔÒÑÌáÉı¹ıÁË£¡", CHAR_COLORYELLOW);
+			CHAR_talkToCli( charaindex, -1, "æ‚¨çš„å® ç‰©è¯¥é¡¹å±æ€§å·²æå‡è¿‡äº†ï¼", CHAR_COLORYELLOW);
 			return;
 		}else{
-			sprintf(token, "%sÃô½İÁ¦ÉÏÉı%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
+			sprintf(token, "%sæ•æ·åŠ›ä¸Šå‡%d", CHAR_getChar( toindex, CHAR_NAME),atoi(mun));
 			CHAR_setInt( toindex, CHAR_DEX, (CHAR_getInt( toindex, CHAR_DEX)+atoi(mun)));
 			beat|=BEATITUDE_DEX;
 		}
 	}else{
-		sprintf(token, "%sµ±Ç°ÊôĞÔÎªÌå:%d,¹¥:%d,·À:%d,Ãô:%d", CHAR_getChar( toindex, CHAR_NAME),
+		sprintf(token, "%så½“å‰å±æ€§ä¸ºä½“:%d,æ”»:%d,é˜²:%d,æ•:%d", CHAR_getChar( toindex, CHAR_NAME),
 																													CHAR_getInt( toindex, CHAR_VITAL),
 																													CHAR_getInt( toindex, CHAR_STR),
 																													CHAR_getInt( toindex, CHAR_TOUGH),
@@ -4616,7 +4616,7 @@ void PET_BEATITUDE( int charaindex, int toindex, int haveitemindex)
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 		return;
 	}
-	CHAR_talkToCli( charaindex, -1, "Ö÷ÈË£¬Õâ¶«Î÷Ì«°ôÁË£¬ÎÒÒÑ³äÂúÁ¦Á¿ÁË£¡", CHAR_COLORYELLOW);
+	CHAR_talkToCli( charaindex, -1, "ä¸»äººï¼Œè¿™ä¸œè¥¿å¤ªæ£’äº†ï¼Œæˆ‘å·²å……æ»¡åŠ›é‡äº†ï¼", CHAR_COLORYELLOW);
 	CHAR_setInt( toindex, CHAR_BEATITUDE,beat);
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 	int i;
@@ -4655,32 +4655,32 @@ void ITEM_GetMultiItem( int charaindex, int toindex, int haveitemindex)
 
 	itemarg = ITEM_getChar( itemindex, ITEM_ARGUMENT);
 	if( itemarg == "" ){
-		CHAR_talkToCli(charaindex, -1, "ÕâÊÇ¸ö¿ÕºĞ×Ó!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "è¿™æ˜¯ä¸ªç©ºç›’å­!", CHAR_COLORYELLOW);
 		return;
 	}
 
 	if( getStringFromIndexWithDelim( itemarg, "|", 1, buf, sizeof( buf)) == FALSE ){
-		CHAR_talkToCli(charaindex, -1, "²»Ã÷¶«Î÷!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "ä¸æ˜ä¸œè¥¿!", CHAR_COLORYELLOW);
 		return;
 	}
   itemnum = atoi(buf);
 	if( itemnum > 10 ){
 		itemnum = 10;
 	}else if( itemnum < 0 ){
-		CHAR_talkToCli(charaindex, -1, "ÕâÊÇ¸ö¿ÕºĞ×Ó!", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "è¿™æ˜¯ä¸ªç©ºç›’å­!", CHAR_COLORYELLOW);
 		return;
 	}
 	if( (itemnum - 1) <= CHAR_findSurplusItemBox( charaindex )){
 		CHAR_DelItem( charaindex, haveitemindex);
 	}else{
-		sprintf( token, "ºĞ×ÓÀïÓĞ%d¼şÎïÆ·£¬ÄãµÄÎïÆ·À¸Î»²»×ã¡£", itemnum);
+		sprintf( token, "ç›’å­é‡Œæœ‰%dä»¶ç‰©å“ï¼Œä½ çš„ç‰©å“æ ä½ä¸è¶³ã€‚", itemnum);
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW);
 		return;
 	}
 
 	for(i=0;i<itemnum;i++){
 		if( getStringFromIndexWithDelim( itemarg, "|", 2+i, buf, sizeof( buf)) == FALSE ){
-			CHAR_talkToCli(charaindex, -1, "²»Ã÷¶«Î÷!", CHAR_COLORYELLOW);
+			CHAR_talkToCli(charaindex, -1, "ä¸æ˜ä¸œè¥¿!", CHAR_COLORYELLOW);
 			return;
 		}
 		itemid = atoi(buf);
@@ -4695,7 +4695,7 @@ void ITEM_GetMultiItem( int charaindex, int toindex, int haveitemindex)
 		  strcat(itemname,"|");
 		}
 	}
-	sprintf( token,"»ñµÃÎïÆ·:|%s",itemname);
+	sprintf( token,"è·å¾—ç‰©å“:|%s",itemname);
 	CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );
 }
 #endif
@@ -4708,7 +4708,7 @@ void ITEM_NewName( int charaindex, int toindex, int haveitemindex)
 		itemarg=ITEM_getChar(itemindex,ITEM_ARGUMENT);
 		if( itemarg == "\0" ) return;
 		CHAR_setChar( charaindex , CHAR_NEWNAME, itemarg);
-		sprintf( token, "¹§Ï²Äã,ÄãÒÑ»ñµÃ¡¼%s¡½ĞÂ³ÆºÅ!", itemarg);
+		sprintf( token, "æ­å–œä½ ,ä½ å·²è·å¾—ã€–%sã€—æ–°ç§°å·!", itemarg);
 		CHAR_talkToCli( charaindex, -1, token, CHAR_COLORYELLOW );		
 		int i;
 		int playernum = CHAR_getPlayerMaxNum();
@@ -4716,7 +4716,7 @@ void ITEM_NewName( int charaindex, int toindex, int haveitemindex)
 		char *MyName = CHAR_getChar( charaindex,CHAR_NAME );
 		for( i = 0 ; i < playernum ; i++) 
 				{
-        	sprintf( NameMsg, "¹§Ï²Íæ¼Ò¡¸%s¡¹»ñµÃ¡Ú%s¡Û³ÆºÅ!", MyName, itemarg );
+        	sprintf( NameMsg, "æ­å–œç©å®¶ã€Œ%sã€è·å¾—â‰®%sâ‰¯ç§°å·!", MyName, itemarg );
 					CHAR_talkToCli( i, -1, NameMsg, CHAR_COLORBLUE2);
   			}
 		CHAR_DelItem( charaindex, haveitemindex); 

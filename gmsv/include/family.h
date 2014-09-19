@@ -7,39 +7,39 @@
 #include "net.h"
 #include "time.h"
 
-#define FAMILY_MAXNUM			1000	// ¼Ò×åÊıÁ¿
+#define FAMILY_MAXNUM			1000	// å®¶æ—æ•°é‡
 #ifdef _FMVER21
-#define FAMILY_MAXMEMBER		200	// ¼Ò×åÈËÊı
-#define FAMILY_MAXCHANNELMEMBER		50	// ÆµµÀÈËÊı
+#define FAMILY_MAXMEMBER		200	// å®¶æ—äººæ•°
+#define FAMILY_MAXCHANNELMEMBER		50	// é¢‘é“äººæ•°
 #else
-#define FAMILY_MAXMEMBER		50	// ¼Ò×åÈËÊı
-#define FAMILY_MAXCHANNELMEMBER		10	// ÆµµÀÈËÊı
+#define FAMILY_MAXMEMBER		50	// å®¶æ—äººæ•°
+#define FAMILY_MAXCHANNELMEMBER		10	// é¢‘é“äººæ•°
 #endif
-#define FAMILY_MAXCHANNEL 		5	// ¼Ò×åÆµµÀ
+#define FAMILY_MAXCHANNEL 		5	// å®¶æ—é¢‘é“
 
 #define CHAR_MAXNAME			32
 #define CHAR_MAXID			20
-#define MINFMLEVLEFORPOINT      	3       // 3 ÉêÇë×¯Ô°×îµÍµÈ¼¶
-#define FMLEADERLV			30	// ×å³¤µÈ¼¶
+#define MINFMLEVLEFORPOINT      	3       // 3 ç”³è¯·åº„å›­æœ€ä½ç­‰çº§
+#define FMLEADERLV			30	// æ—é•¿ç­‰çº§
 
 #ifdef _FAMILY_MANORNUM_CHANGE
-#define FAMILY_FMPKFLOOR		15	// ¼Ò×å£Ğ£ËÍ¼²ã
+#define FAMILY_FMPKFLOOR		15	// å®¶æ—ï¼°ï¼«å›¾å±‚
 #else
-#define FAMILY_FMPKFLOOR		9	// ¼Ò×å£Ğ£ËÍ¼²ã
-#define FMPOINTNUM			4       // ÓĞ¾İµã¼Ò×åµÄ×î´óÊıÁ¿
+#define FAMILY_FMPKFLOOR		9	// å®¶æ—ï¼°ï¼«å›¾å±‚
+#define FMPOINTNUM			4       // æœ‰æ®ç‚¹å®¶æ—çš„æœ€å¤§æ•°é‡
 #define MANORNUM                	4
-#define FAMILY_MAXHOME			4	// ¼Ò×å¾İµã
+#define FAMILY_MAXHOME			4	// å®¶æ—æ®ç‚¹
 #endif
 
 enum
 {
-    FM_TOP_INTEGRATE = 1,    // DPTOP ×ÛºÏ
-    FM_TOP_ADV,              // DPTOP Ã°ÏÕ
-    FM_TOP_FEED,             // DPTOP ËÇÓı
-    FM_TOP_SYNTHESIZE,       // DPTOP ºÏ³É
-    FM_TOP_DEALFOOD,         // DPTOP ÁÏÀí
-    FM_TOP_PK,               // DPTOP £Ğ£Ë
-    FM_TOP_NUM,              // DPTOP ÊıÁ¿
+    FM_TOP_INTEGRATE = 1,    // DPTOP ç»¼åˆ
+    FM_TOP_ADV,              // DPTOP å†’é™©
+    FM_TOP_FEED,             // DPTOP é¥²è‚²
+    FM_TOP_SYNTHESIZE,       // DPTOP åˆæˆ
+    FM_TOP_DEALFOOD,         // DPTOP æ–™ç†
+    FM_TOP_PK,               // DPTOP ï¼°ï¼«
+    FM_TOP_NUM,              // DPTOP æ•°é‡
 };
 
 enum
@@ -58,9 +58,9 @@ enum
 };
 
 /*
- * ÈÓ¡õÌï    ¼°Ö°¼°èëô÷Îç¼° cdkey charname ¼°Ó®½ñÃ«ÄşÁùÔÂĞ×»§±å
+ * æ‰”â–¡ç”°    åŠèŒåŠæ¡¦èµ­åˆåŠ cdkey charname åŠèµ¢ä»Šæ¯›å®å…­æœˆå‡¶æˆ·å
  * CHEKEYLEN, CHARNAMELEN
- * Ã«Òøµ¤·½µ¤±å  µÊ£Û
+ * æ¯›é“¶ä¸¹æ–¹ä¸¹å  å‡³ï¼»
  */
     
 void CHAR_Family(int fd, int index, char* message);
@@ -76,7 +76,7 @@ void ACShowDpTop(int result,int num, char *data, int kindflag);
 void ACShowPointList(int result, char *data);
 void ACShowFMMemo(int result, int index, int num, int dataindex, char *data);
 
-#ifdef _PERSONAL_FAME   // Arminius: ¼Ò×å¸öÈËÉùÍû
+#ifdef _PERSONAL_FAME   // Arminius: å®¶æ—ä¸ªäººå£°æœ›
 void ACFMCharLogin(int fd, int ret, int index, int floor, int fmdp,
 	int joinflag, int fmsetupflag, int flag, int charindex, int charfame
 	);
@@ -106,7 +106,7 @@ void FAMILY_FixRule( int fd, int meindex, char* message );
 void FAMILY_RidePet( int fd, int meindex, char* message );
 void FAMILY_LeaderFunc( int fd, int meindex, char* message );
 
-#ifdef _ADD_FAMILY_TAX			   // WON ADD Ôö¼Ó×¯Ô°Ë°ÊÕ	
+#ifdef _ADD_FAMILY_TAX			   // WON ADD å¢åŠ åº„å›­ç¨æ”¶	
 void GS_ASK_TAX(void);
 void FAMILY_FIX_TAX( int fd, int index, char* message);
 #endif
@@ -130,47 +130,47 @@ struct FMMEMBER_LIST
 //  int  fmindex;
     int  fmnum; 
     int  fmjoinnum;
-//  BOOL use;                                       // 0->Ã»Ê¹ÓÃ   1->Ê¹ÓÃ
+//  BOOL use;                                       // 0->æ²¡ä½¿ç”¨   1->ä½¿ç”¨
     int  memberindex[FAMILY_MAXMEMBER];             
     char numberlistarray[FAMILY_MAXMEMBER][64];
     char memo[35][220];                             // family dengon
-    int  accept;                                    // ÕÙÄ¼³ÉÔ±Óë·ñ
+    int  accept;                                    // å¬å‹Ÿæˆå‘˜ä¸å¦
     int  memonum;
     int  memoindex;
 };
-// ¼Ò×åÖ®¼äµÄÁôÑÔ°å
+// å®¶æ—ä¹‹é—´çš„ç•™è¨€æ¿
 struct FMS_MEMO
 {
     char memo[140][220];
     int  memonum;
     int  memoindex;
 };
-// ¼Ò×åÇ¿Õß±í
+// å®¶æ—å¼ºè€…è¡¨
 struct FMS_DPTOP
 {
-    int  num;															// ¼ÇÂ¼ÓĞ¶àÉÙ¸ö¼Ò×å(×ÛºÏ)
+    int  num;															// è®°å½•æœ‰å¤šå°‘ä¸ªå®¶æ—(ç»¼åˆ)
     char topmemo[FAMILY_MAXNUM][128];
-    int  fmtopid[FAMILY_MAXNUM];          // ¼Ò×åË÷Òı
+    int  fmtopid[FAMILY_MAXNUM];          // å®¶æ—ç´¢å¼•
 #ifdef _FMVER21    
-    int  fmtopdp[FAMILY_MAXNUM];          // ¼Ò×å×ÛºÏÉùÍû
+    int  fmtopdp[FAMILY_MAXNUM];          // å®¶æ—ç»¼åˆå£°æœ›
 #endif    
-    int  adv_num;                // Ã°ÏÕ
+    int  adv_num;                // å†’é™©
     char adv_topmemo[30][96];    
-    int  feed_num;               // ËÅÓı
+    int  feed_num;               // ä¼ºè‚²
     char feed_topmemo[30][96];        
-    int  syn_num;                // ºÏ³É
+    int  syn_num;                // åˆæˆ
     char syn_topmemo[30][96];        
-    int  food_num;               // ÁÏÀí
+    int  food_num;               // æ–™ç†
     char food_topmemo[30][96];        
-    int  pk_num;                 // £Ğ£Ë
+    int  pk_num;                 // ï¼°ï¼«
     char pk_topmemo[30][96];        
 };
-// ¼Ò×å¾İµã
+// å®¶æ—æ®ç‚¹
 struct FM_POINTLIST
 {
   char pointlistarray[FAMILY_MAXHOME][1024];	// Arminius: 32->1024
 };
-// ¼Ò×åPKÍ¼²ã
+// å®¶æ—PKå›¾å±‚
 struct FM_PKFLOOR
 {
     int fl;

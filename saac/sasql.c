@@ -2,7 +2,7 @@
 
 #include "version.h"
 
-#ifdef _SASQL			//ĞÂÌí¼Ó
+#ifdef _SASQL			//æ–°æ·»åŠ 
 
 #include "main.h"
 #include "sasql.h"
@@ -60,51 +60,51 @@ static int readConfig(char *path)
 		if (strcmp(command, "sql_IP") == 0) {
 			strcmp(config.sql_IP, param);
 			snprintf(config.sql_IP, sizeof(config.sql_IP), param);
-			printf("\nÊı¾İ¿âµØÖ·£º  %s", config.sql_IP);
+			printf("\næ•°æ®åº“åœ°å€ï¼š  %s", config.sql_IP);
 		} else if (strcmp(command, "sql_Port") == 0) {
 			config.sql_Port = atoi(param);
 			snprintf(config.sql_Port1, sizeof(config.sql_Port1),
 				 param);
-			printf("\nÊı¾İ¿â¶Ë¿Ú£º  %d", config.sql_Port);
+			printf("\næ•°æ®åº“ç«¯å£ï¼š  %d", config.sql_Port);
 		} else if (strcmp(command, "sql_ID") == 0) {
 			strcmp(config.sql_ID, param);
 			snprintf(config.sql_ID, sizeof(config.sql_ID), param);
-			printf("\nÊı¾İ¿âÓÃ»§£º  %s", config.sql_ID);
+			printf("\næ•°æ®åº“ç”¨æˆ·ï¼š  %s", config.sql_ID);
 		} else if (strcmp(command, "sql_PS") == 0) {
 			strcmp(config.sql_PS, param);
 			snprintf(config.sql_PS, sizeof(config.sql_PS), param);
-			printf("\nÊı¾İ¿âÃÜÂë£º  %s", config.sql_PS);
+			printf("\næ•°æ®åº“å¯†ç ï¼š  %s", config.sql_PS);
 		} else if (strcmp(command, "sql_DataBase") == 0) {
 			strcmp(config.sql_DataBase, param);
 			snprintf(config.sql_DataBase,
 				 sizeof(config.sql_DataBase), param);
-			printf("\nµÇÂ½Êı¾İ¿âÃû£º%s", config.sql_DataBase);
+			printf("\nç™»é™†æ•°æ®åº“åï¼š%s", config.sql_DataBase);
 		} else if (strcmp(command, "sql_Table") == 0) {
 			strcmp(config.sql_Table, param);
 			snprintf(config.sql_Table, sizeof(config.sql_Table),
 				 param);
-			printf("\nÓÃ»§ĞÅÏ¢±íÃû£º  %s", config.sql_Table);
+			printf("\nç”¨æˆ·ä¿¡æ¯è¡¨åï¼š  %s", config.sql_Table);
 		} else if (strcmp(command, "sql_LOCK") == 0) {
 			strcmp(config.sql_LOCK, param);
 			snprintf(config.sql_LOCK, sizeof(config.sql_LOCK),
 				 param);
-			printf("\nÓÃ»§Ëø¶¨±íÃû£º  %s", config.sql_LOCK);
+			printf("\nç”¨æˆ·é”å®šè¡¨åï¼š  %s", config.sql_LOCK);
 		} else if (strcmp(command, "sql_NAME") == 0) {
 			strcmp(config.sql_NAME, param);
 			snprintf(config.sql_NAME, sizeof(config.sql_NAME),
 				 param);
-			printf("\nÕËºÅ×Ö¶ÎÃû³Æ£º  %s", config.sql_NAME);
+			printf("\nè´¦å·å­—æ®µåç§°ï¼š  %s", config.sql_NAME);
 		} else if (strcmp(command, "sql_PASS") == 0) {
 			strcmp(config.sql_PASS, param);
 			snprintf(config.sql_PASS, sizeof(config.sql_PASS),
 				 param);
-			printf("\nÃÜÂë×Ö¶ÎÃû³Æ£º  %s", config.sql_PASS);
+			printf("\nå¯†ç å­—æ®µåç§°ï¼š  %s", config.sql_PASS);
 		} else if (strcmp(command, "AutoReg") == 0) {
 			AutoReg = atoi(param);
 			if (AutoReg) {
-				printf("\n¿ª·Å×Ô¶¯×¢²á£ºYES");
+				printf("\nå¼€æ”¾è‡ªåŠ¨æ³¨å†Œï¼šYES");
 			} else {
-				printf("\n¿ª·Å×Ô¶¯×¢²á£ºNO");
+				printf("\nå¼€æ”¾è‡ªåŠ¨æ³¨å†Œï¼šNO");
 			}
 			fclose(fp);
 			return 0;
@@ -115,7 +115,7 @@ static int readConfig(char *path)
 BOOL sasql_init(void)
 {
 	if (mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
-		printf("\nmysql_init=fail Êı¾İ¿â³õÊ¼»¯Ê§°Ü£¡");
+		printf("\nmysql_init=fail æ•°æ®åº“åˆå§‹åŒ–å¤±è´¥ï¼");
 		exit(1);
 		return FALSE;
 	}
@@ -123,15 +123,15 @@ BOOL sasql_init(void)
 	       config.sql_IP, config.sql_ID, config.sql_PS, config.sql_DataBase,
 	       config.sql_Port);
 
-	if (!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID,	//ÕÊºÅ
-				config.sql_PS,	//ÃÜÂë
-				config.sql_DataBase,	//Ñ¡ÔñµÄ×ÊÁÏ¿â
+	if (!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID,	//å¸å·
+				config.sql_PS,	//å¯†ç 
+				config.sql_DataBase,	//é€‰æ‹©çš„èµ„æ–™åº“
 				config.sql_Port, NULL, 0)) {
-		printf("\nmysql_real_connect=fail Êı¾İ¿âÁ¬½ÓÊ§°Ü£¡\n");
+		printf("\nmysql_real_connect=fail æ•°æ®åº“è¿æ¥å¤±è´¥ï¼\n");
 		return FALSE;
 	}
 
-	printf("\nmysql_real_connect=ok Êı¾İ¿âÁ¬½Ó³É¹¦£¡\n");
+	printf("\nmysql_real_connect=ok æ•°æ®åº“è¿æ¥æˆåŠŸï¼\n");
 	return TRUE;
 }
 
@@ -157,22 +157,22 @@ int sasql_query(char *nm, char *pas)
 				return 1;
 			} else {
 				printf
-				    ("password=not_correct ÓÃ»§%sÃÜÂë´íÎó£¡\n",
+				    ("password=not_correct ç”¨æˆ·%så¯†ç é”™è¯¯ï¼\n",
 				     nm);
 		        mysql_free_result(mysql_result);
 				return 2;
 			}
 		} 
 		mysql_free_result(mysql_result);
-		printf("user=not_register ÓÃ»§%sÎ´×¢²á£¡\n", nm);
+		printf("user=not_register ç”¨æˆ·%sæœªæ³¨å†Œï¼\n", nm);
 		return 3;
 	} else {
 		printf("\nmysql_error=%s\n", mysql_error(&mysql));
-		printf("\nmysql_query=fail Êı¾İ¿â²éÕÒÊ§°Ü£¡\n");
-		printf("\nreconnect_db=yes ÖØĞÂÁ¬½ÓÊı¾İ¿â...\n");
+		printf("\nmysql_query=fail æ•°æ®åº“æŸ¥æ‰¾å¤±è´¥ï¼\n");
+		printf("\nreconnect_db=yes é‡æ–°è¿æ¥æ•°æ®åº“...\n");
 		sasql_close();
 		sasql_init();
-		printf("finish Íê³É\n");
+		printf("finish å®Œæˆ\n");
 		return 0;
 	}
 }
@@ -188,10 +188,10 @@ BOOL sasql_register(char *id, char *ps)
 		getHash(id) & 0xff);
 	printf("\nregister_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
-		printf("\nnew_user_register=ok ĞÂÓÃ»§×¢²á³É¹¦£¡\n");
+		printf("\nnew_user_register=ok æ–°ç”¨æˆ·æ³¨å†ŒæˆåŠŸï¼\n");
 		return TRUE;
 	}
-	printf("\nnew_user_register=fail ĞÂÓÃ»§×¢²áÊ§°Ü£¡\n");
+	printf("\nnew_user_register=fail æ–°ç”¨æˆ·æ³¨å†Œå¤±è´¥ï¼\n");
 	return FALSE;
 }
 #endif
@@ -225,7 +225,7 @@ BOOL sasql_add_lock(char *idip)
 		config.sql_LOCK, config.sql_NAME, idip);
 	printf("\nadd_lock_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
-		printf("\nÌí¼ÓËø¶¨%s³É¹¦£¡\n", idip);
+		printf("\næ·»åŠ é”å®š%sæˆåŠŸï¼\n", idip);
 		return TRUE;
 	}
 	return FALSE;
@@ -238,7 +238,7 @@ BOOL sasql_del_lock(char *idip)
 		config.sql_LOCK, config.sql_NAME, idip);
 	printf("\ndel_lock_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
-		printf("\n½â³ıËø¶¨%s³É¹¦£¡\n", idip);
+		printf("\nè§£é™¤é”å®š%sæˆåŠŸï¼\n", idip);
 		return TRUE;
 	}
 	return FALSE;

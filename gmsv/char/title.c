@@ -14,7 +14,7 @@
 #include "configfile.h"
 
 
-/*====================±¹Ä¯  ====================*/
+/*====================æƒ«å¯  ====================*/
 static int TITLE_IntCheck( int charaindex,int elem, int *data, int flg);
 static int TITLE_WorkIntCheck( int charaindex,int elem, int *data, int flg);
 static int TITLE_ItemCheck( int charaindex,int elem, int *data, int flg);
@@ -24,28 +24,28 @@ static int TITLE_SexCheck( int charaindex,int elem, int *data, int flg);
 
 typedef enum
 {
-	TITLE_FUNCTYPENONE,     /*  èúĞÑÏ·ÔÀØÆØ¦ÖĞ  */
-	TITLE_FUNCTYPEUSERFUNC, /* definefunction Ã«ÒøÔÈ»¯  ó¡Ã«×ÛÔÂ
-							 * èúĞÑ¼°Â¦ĞÑ·´
-							 *  int     Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
-							 *  buf       ó¡³ß¼°ÌïÓÀ°×Ñë
-							 *  buflen  ¹«¼°ÌïÓÀ°×Ñë¼°Ó®½ñ
+	TITLE_FUNCTYPENONE,     /*  æ¥®é†’æˆå²³ä»„å…ä¸­  */
+	TITLE_FUNCTYPEUSERFUNC, /* definefunction æ¯›é“¶åŒ€åŒ–  èŸ†æ¯›ç»¼æœˆ
+							 * æ¥®é†’åŠå¨„é†’å
+							 *  int     å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+							 *  buf       èŸ†å°ºåŠç”°æ°¸ç™½å¤®
+							 *  buflen  å…¬åŠç”°æ°¸ç™½å¤®åŠèµ¢ä»Š
 							 */
 	TITLE_USEFUNCTYPENUM
 }TITLE_USEFUNCTYPE;
 
 typedef struct tagTITLE_Table
 {
-	int                 index;      /* ÍÜ·¸¡õÕıÎçÑ¯¾§Ã«äúÔÂĞ×»§£Û
-									 * ³ğ¼°  Ä¯Æ¥ÊÖÔÈ»¯addtitleÎç¾®Ö§ÔÂ 
+	int                 index;      /* è›™çŠ¯â–¡æ­£åˆè¯¢æ™¶æ¯›æ½¸æœˆå‡¶æˆ·ï¼»
+									 * ä»‡åŠ  å¯åŒ¹æ‰‹åŒ€åŒ–addtitleåˆäº•æ”¯æœˆ 
 									 */
 	char               name[32];
 	TITLE_USEFUNCTYPE   functype;
 	void                (*definefunction)(int,char* buf,int buflen);
 }TITLE_Table;
 
-/* ÒøÒüÔÂÓÉ·Â¶ª¡õÕı
- * STR,TGH,MAXMP£İATK,DEF
+/* é“¶å°¹æœˆç”±ä»¿ä¸¢â–¡æ­£
+ * STR,TGH,MAXMPï¼½ATK,DEF
  * LEVEL,CLASS,SKILL,ITEM,FIREREG,ICEREG,THUNDERREG
  * KANJILV,TALKCNT,WALKCNT,DEADCNT,LOGINCNT,BASEIMAGENUMBER
  * GOLD
@@ -65,11 +65,11 @@ typedef struct tagTITLE_PARAM
 
 TITLE_PARAM TITLE_param[] = 
 {
-	/**** ³ğ³ğ¾®ÈÕ ****/
+	/**** ä»‡ä»‡äº•æ—¥ ****/
 	{ -1,                     TITLE_ItemCheck,     "ITEM"         },
 	{ -1,                     TITLE_ItemEquipCheck,"EQUIPITEM"    },
 	{ -1,                     NULL,                "EQUIPEVENT"   },
-	/**** ³ğ³ğÒıÆ¥·´  µÊØÆØ¦ÖĞÆ¥ÈÊ·Ö½ñÖĞ£Û ****/
+	/**** ä»‡ä»‡å¼•åŒ¹å  å‡³ä»„å…ä¸­åŒ¹ä»åˆ†ä»Šä¸­ï¼» ****/
 	{ -1,                     TITLE_SkillCheck,    "SKILL"        },
 	{ CHAR_STR,               TITLE_IntCheck,      "STR"           },
 	{ CHAR_TOUGH,             TITLE_IntCheck,      "TGH"           },
@@ -89,13 +89,13 @@ TITLE_PARAM TITLE_param[] =
 #define     TITLE_PARAMSIZE     20
 typedef struct tagTITLE_configTable
 {
-	int     paramindex[20];         /* TITLE_param³ß¼°½¾Ù¯ */
-	int     param[20][TITLE_PARAMSIZE];              /*   óÒ°À */
-	int     compareflg[20];         /* ><=î¿Éıµ¤ÔÊÔÂ¾® */
+	int     paramindex[20];         /* TITLE_paramå°ºåŠéª„ä¾¬ */
+	int     param[20][TITLE_PARAMSIZE];              /*   ç¬ è¢„ */
+	int     compareflg[20];         /* ><=ç¾å‡ä¸¹å…æœˆäº• */
 	int     title;
 	BOOL    equipcheckflg;          /* 
-									 *  Ê§ÄÌ  Ø©à¢  ÄÌÃ¬¼şĞşÆ¥·´³ğ¼°°×·Âºë¼°  ÔÈ»¯ÖĞÔÂ
-									 *  ÊÖ¼°ØÆ¾®¸¹³ñØÆØ¦ÖĞ£Û
+									 *  å¤±å¥¶  ä¸å•–  å¥¶çŸ›ä»¶ç„åŒ¹åä»‡åŠç™½ä»¿å¼˜åŠ  åŒ€åŒ–ä¸­æœˆ
+									 *  æ‰‹åŠä»„äº•è…¹ç»¸ä»„å…ä¸­ï¼»
 									 */
 }TITLE_CONFIGTABLE;
 
@@ -112,7 +112,7 @@ static int                  TITLE_titlenum;
 static int                  TITLE_titlecfgnum;
 
 /*------------------------------------------------------------
- * index  Ä¯¾®ÈÕTITLE_table¼°½¾Ù¯Ã«  ÔÂ
+ * index  å¯äº•æ—¥TITLE_tableåŠéª„ä¾¬æ¯›  æœˆ
  ------------------------------------------------------------*/
 int TITLE_getTitleIndex( int index)
 {
@@ -126,23 +126,23 @@ int TITLE_getTitleIndex( int index)
 	return -1;
 }
 
-/*  ÌïÓÀ°×Ñë¼°ÈÓÄÌÊõ    */
+/*  ç”°æ°¸ç™½å¤®åŠæ‰”å¥¶æœ¯    */
 #define TITLESTRINGBUFSIZ   256
-/*  ÛÍ·ÂÄÌÊ§¼şĞş±åÎ­ÁùÔÂµ©Æ½»ï·¸¡õÕı¼°  Ù¯  ¼°ÌïÓÀ°×Ñë    */
+/*  å¼ä»¿å¥¶å¤±ä»¶ç„åè‹‡å…­æœˆæ—¦å¹³ä¼™çŠ¯â–¡æ­£åŠ  ä¾¬  åŠç”°æ°¸ç™½å¤®    */
 static char    TITLE_statusStringBuffer[TITLESTRINGBUFSIZ];
 /*------------------------------------------------------------
- * ÛÍ·ÂÄÌÊ§¼şĞş±åÎ­ÁùÔÂ±¹Ä¯¼°  Ù¯  Ã«×ÛÔÂ
- * Â¦ĞÑ
- *  title       Title*      µ©Æ½»ï
- *  charaindex  int         ³ğ¼°±¹Ä¯Ã«  ÔÈ»¯ÖĞÔÂÆ½ÅÒ·Â¼°ÄÌ¼ş·¸ÓÀÛÍµ©
- * ß¯Ô»°À
+ * å¼ä»¿å¥¶å¤±ä»¶ç„åè‹‡å…­æœˆæƒ«å¯åŠ  ä¾¬  æ¯›ç»¼æœˆ
+ * å¨„é†’
+ *  title       Title*      æ—¦å¹³ä¼™
+ *  charaindex  int         ä»‡åŠæƒ«å¯æ¯›  åŒ€åŒ–ä¸­æœˆå¹³ä¹“ä»¿åŠå¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ * å¿’æ›°è¢„
  *  char*
  ------------------------------------------------------------*/
 char* TITLE_makeTitleStatusString( int charaindex,int havetitleindex )
 {
 	int     attach;
 	int     index;
-	/*  èúĞÑ  ³ß¼°ÄÌ¼ş·¸ÓÀÛÍµ©¾®ÈÕ·¸¡õÕıÃ«×ÛÔÀÔÊÔÂ  */
+	/*  æ¥®é†’  å°ºåŠå¥¶ä»¶çŠ¯æ°¸å¼æ—¦äº•æ—¥çŠ¯â–¡æ­£æ¯›ç»¼å²³å…æœˆ  */
 	index = CHAR_getCharHaveTitle( charaindex,havetitleindex );
 
 	attach = TITLE_getTitleIndex( index);
@@ -178,10 +178,10 @@ char* TITLE_makeTitleStatusString( int charaindex,int havetitleindex )
 }
 
 /*------------------------------------------------------------
- * Ø¦ÖĞ±¹Ä¯¼°  Ù¯  ·¸¡õÕıÃ«ß¯ÔÊ
- * Â¦ĞÑ
- *  Ø¦ØÆ
- * ß¯Ô»°À
+ * å…ä¸­æƒ«å¯åŠ  ä¾¬  çŠ¯â–¡æ­£æ¯›å¿’å…
+ * å¨„é†’
+ *  å…ä»„
+ * å¿’æ›°è¢„
  *  char*
  ------------------------------------------------------------*/
 char* TITLE_makeSkillFalseString( void )
@@ -192,13 +192,13 @@ char* TITLE_makeSkillFalseString( void )
 
 
 /*------------------------------------------------------------
- * Ï¶ÀÃ½ñÄ¾Ğ×  Ä¯¼°±¹Ä¯Ã«Ü°µÑÔÊÔÂ£ÛºÖ½ñØ¦ÔÈ»¯ÖĞĞ×ÈÕ£ıÜ°µÑØÆØ¦ÖĞ
- * Â¦ĞÑ
- *  charaindex      int     Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  titleindex      int     ±¹Ä¯ÄÌ¼ş·¸ÓÀÛÍµ©
- * ß¯Ô»°À
- *  Ü°µÑØÆĞ×index       
- *  Ü°µÑØÆØ¦¾®ÔÈĞ×      FALSE(0)
+ * éš™çƒ‚ä»Šæœ¨å‡¶  å¯åŠæƒ«å¯æ¯›é¦¨ç¬›å…æœˆï¼»è¤ä»Šå…åŒ€åŒ–ä¸­å‡¶æ—¥ï½é¦¨ç¬›ä»„å…ä¸­
+ * å¨„é†’
+ *  charaindex      int     å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  titleindex      int     æƒ«å¯å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ * å¿’æ›°è¢„
+ *  é¦¨ç¬›ä»„å‡¶index       
+ *  é¦¨ç¬›ä»„å…äº•åŒ€å‡¶      FALSE(0)
  ------------------------------------------------------------*/
 BOOL TITLE_addtitle( int charaindex, int titleindex )
 {
@@ -211,7 +211,7 @@ BOOL TITLE_addtitle( int charaindex, int titleindex )
 
 	for( i=0 ; i < CHAR_TITLEMAXHAVE ; i++ ){
 		if( CHAR_getCharHaveTitle( charaindex,i ) == titleindex )
-			/*  ÔÊÆ¥±å  ÔÈ»¯ÖĞÔÂ¾®ÈÕÖÏÊÖØÆØ¦ÖĞ  */
+			/*  å…åŒ¹å  åŒ€åŒ–ä¸­æœˆäº•æ—¥çª’æ‰‹ä»„å…ä¸­  */
 			return FALSE;
 		if( firstfindempty == -1
 			&& CHAR_getCharHaveTitle(charaindex,i) == -1 ){
@@ -223,14 +223,14 @@ BOOL TITLE_addtitle( int charaindex, int titleindex )
 
 
 /*------------------------------------------------------------
- * Ï¶ÀÃ½ñÄ¾Ğ×  Ä¯¼°±¹Ä¯»¥Ø¤ÔÈĞ×ÈÕ´ÂÂÖÔÊÔÂ£ÛØ¦¾®ÔÈĞ×ÈÕÖÏÊÖØÆØ¦ÖĞ£Û
- *   ĞÑòÛØ¤ÔÈĞ×ÈÕòå  ÛÕÔÊ£Û
- * Â¦ĞÑ
- *  charaindex      int     Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  titleindex      int     ±¹Ä¯ÄÌ¼ş·¸ÓÀÛÍµ©
- * ß¯Ô»°À
- *  ´ÂÂÖØÆĞ×            TRUE(1)
- *  ´ÂÂÖØÆØ¦¾®ÔÈĞ×      FALSE(0)
+ * éš™çƒ‚ä»Šæœ¨å‡¶  å¯åŠæƒ«å¯äº’ä¸åŒ€å‡¶æ—¥ç»°è½®å…æœˆï¼»å…äº•åŒ€å‡¶æ—¥çª’æ‰‹ä»„å…ä¸­ï¼»
+ *   é†’èœŠä¸åŒ€å‡¶æ—¥èˆ  å£…å…ï¼»
+ * å¨„é†’
+ *  charaindex      int     å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  titleindex      int     æƒ«å¯å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ * å¿’æ›°è¢„
+ *  ç»°è½®ä»„å‡¶            TRUE(1)
+ *  ç»°è½®ä»„å…äº•åŒ€å‡¶      FALSE(0)
  ------------------------------------------------------------*/
 BOOL TITLE_deltitle( int charaindex, int titleindex )
 {
@@ -244,11 +244,11 @@ BOOL TITLE_deltitle( int charaindex, int titleindex )
 
 	for( i=0 ; i < CHAR_TITLEMAXHAVE ; i++ )
 		if( CHAR_getCharHaveTitle( charaindex,i ) == titleindex ){
-			/*  ·ßÛĞ»¥ÒøÔÈ»¯ÖĞĞ×Ö§¹´Ø¦ÈÕÈÉ£ı¹«Ä¾ÊÖØ¦ØÆ±åÔÊÔÂ    */
+			/*  æ„¤åŒäº’é“¶åŒ€åŒ–ä¸­å‡¶æ”¯å‹¾å…æ—¥å£¬ï½å…¬æœ¨æ‰‹å…ä»„åå…æœˆ    */
 			if( CHAR_getInt(charaindex, CHAR_INDEXOFEQTITLE) == i ){
 				CHAR_setInt(charaindex, CHAR_INDEXOFEQTITLE, -1 );
 			}
-			/*    ÔÈ»¯ÖĞÔÂ¾®ÈÕÛÕÔÊ  */
+			/*    åŒ€åŒ–ä¸­æœˆäº•æ—¥å£…å…  */
 			CHAR_setCharHaveTitle( charaindex,i,-1);
 			
 			del = TRUE;
@@ -257,12 +257,12 @@ BOOL TITLE_deltitle( int charaindex, int titleindex )
 	return del;
 }
 /*------------------------------------------------------------
- * ±¹Ä¯¼°âÙÓå¼ÀÃ«ÔÊÔÂ£Û
- * Â¦ĞÑ
- *  filename        char*       É¬ÀÃ°×ÑëÄÌ»ï  
- * ß¯Ô»°À
- *  ÔÀ      TRUE(1)
- *  ÁÃ      FALSE(0)
+ * æƒ«å¯åŠèµ“æ¸ç¥­æ¯›å…æœˆï¼»
+ * å¨„é†’
+ *  filename        char*       æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  
+ * å¿’æ›°è¢„
+ *  å²³      TRUE(1)
+ *  æ’©      FALSE(0)
  *------------------------------------------------------------*/
 BOOL TITLE_initTitleName( char* filename )
 {
@@ -279,7 +279,7 @@ BOOL TITLE_initTitleName( char* filename )
 
 	TITLE_titlenum=0;
 
-	/*  ÒıÄÚ  ¶ãØ¦µæ»¥ÖÏµæØ¤ÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ    */
+	/*  å¼•å†…  èº²å…å«äº’çª’å«ä¸æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆ    */
 	while( fgets( line, sizeof( line ), f ) ){
 		linenum ++;
 		if( line[0] == '#' )continue;        /* comment */
@@ -290,7 +290,7 @@ BOOL TITLE_initTitleName( char* filename )
 	}
 
 	if( fseek( f, 0, SEEK_SET ) == -1 ){
-		fprint( "Ñ°ÕÒ´íÎó\n" );
+		fprint( "å¯»æ‰¾é”™è¯¯\n" );
 		fclose(f);
 		return FALSE;
 	}
@@ -298,12 +298,12 @@ BOOL TITLE_initTitleName( char* filename )
 	TITLE_table = allocateMemory( sizeof(struct tagTITLE_Table)
 								   * TITLE_titlenum );
 	if( TITLE_table == NULL ){
-		fprint( "ÎŞ·¨·ÖÅäÄÚ´æ %d\n" ,
+		fprint( "æ— æ³•åˆ†é…å†…å­˜ %d\n" ,
 				sizeof(TITLE_table)*TITLE_titlenum);
 		fclose( f );
 		return FALSE;
 	}
-	/* âÙÓå¼À */
+	/* èµ“æ¸ç¥­ */
 {
 	int     i;
 	for( i = 0; i < TITLE_titlenum; i ++ ) {
@@ -315,7 +315,7 @@ BOOL TITLE_initTitleName( char* filename )
 	
 }
 
-	/*  ÒıĞ×  ĞÄ  ÔÊ    */
+	/*  å¼•å‡¶  å¿ƒ  å…    */
 	linenum = 0;
 	while( fgets( line, sizeof( line ), f ) ){
 		linenum ++;
@@ -323,10 +323,10 @@ BOOL TITLE_initTitleName( char* filename )
 		if( line[0] == '\n' )continue;       /* none    */
 		chomp( line );
 
-		/*  µæÃ«°ïäßÔÊÔÂ    */
-		/*  ÒıÄÚ tab Ã« " " ±å  Îå¾§ÒüÔÂ    */
+		/*  å«æ¯›å¸®æº¥å…æœˆ    */
+		/*  å¼•å†… tab æ¯› " " å  äº”æ™¶å°¹æœˆ    */
 		replaceString( line, '\t' , ' ' );
-		/* ÛÆ  ¼°µ©Ê¸¡õµ©Ã«äúÔÂ£Û*/
+		/* ç‡®  åŠæ—¦çŸ¢â–¡æ—¦æ¯›æ½¸æœˆï¼»*/
 {
 		int     i;
 		char    buf[256];
@@ -344,24 +344,24 @@ BOOL TITLE_initTitleName( char* filename )
 		char    token[256];
 		int     ret;
 
-		/*  ·òÎç¹´»§¼°Ğş¡õÛÍ¼şÃ«Î­ÔÂ    */
+		/*  å¤«åˆå‹¾æˆ·åŠç„â–¡å¼ä»¶æ¯›è‹‡æœˆ    */
 		ret = getStringFromIndexWithDelim( line,",",1,token,
 										   sizeof(token));
 		if( ret==FALSE ){
-			fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+			fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 			continue;
 		}
 		TITLE_table[title_readlen].index = atoi(token);
 
-		/*  2¹´»§¼°Ğş¡õÛÍ¼şÃ«Î­ÔÂ    */
+		/*  2å‹¾æˆ·åŠç„â–¡å¼ä»¶æ¯›è‹‡æœˆ    */
 		ret = getStringFromIndexWithDelim( line,",",2,token,
 										   sizeof(token));
 		if( ret==FALSE ){
-			fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+			fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 			continue;
 		}
 		if( strlen( token) > sizeof( TITLE_table[title_readlen].name)-1) {
-			fprint("¾¯¸æ! Í·ÏÎÃû³Æ½áÊøÎÄ¼ş:%s µÚ%dĞĞ\n",
+			fprint("è­¦å‘Š! å¤´è¡”åç§°ç»“æŸæ–‡ä»¶:%s ç¬¬%dè¡Œ\n",
 					filename, linenum);
 		}
 		strcpysafe( TITLE_table[title_readlen].name, 
@@ -375,14 +375,14 @@ BOOL TITLE_initTitleName( char* filename )
 
 	TITLE_titlenum = title_readlen;
 
-	print( "ÓĞĞ§Í·ÏÎÃû³ÆÊıÊÇ %d...", TITLE_titlenum );
+	print( "æœ‰æ•ˆå¤´è¡”åç§°æ•°æ˜¯ %d...", TITLE_titlenum );
 
 #ifdef DEBUG
 
 	{
 		int i;
 		for( i=0; i <TITLE_titlenum ; i++ )
-			print( "Í·ÏÎË÷Òı[%d] Ãû³Æ[%s] \n",
+			print( "å¤´è¡”ç´¢å¼•[%d] åç§°[%s] \n",
 				   TITLE_table[i].index,
 				   TITLE_table[i].name);
 	}
@@ -390,12 +390,12 @@ BOOL TITLE_initTitleName( char* filename )
 	return TRUE;
 }
 /*------------------------------------------------------------
- * ±¹Ä¯¼°·èâÙÓå¼ÀÃ«ÔÊÔÂ£Û
- * Â¦ĞÑ
- *  filename        char*       É¬ÀÃ°×ÑëÄÌ»ï  
- * ß¯Ô»°À
- *  ÔÀ      TRUE(1)
- *  ÁÃ      FALSE(0)
+ * æƒ«å¯åŠç–¯èµ“æ¸ç¥­æ¯›å…æœˆï¼»
+ * å¨„é†’
+ *  filename        char*       æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  
+ * å¿’æ›°è¢„
+ *  å²³      TRUE(1)
+ *  æ’©      FALSE(0)
  *------------------------------------------------------------*/
 BOOL TITLE_reinitTitleName( void)
 {
@@ -403,12 +403,12 @@ BOOL TITLE_reinitTitleName( void)
 	return(TITLE_initTitleName( getTitleNamefile()));
 }
 /*------------------------------------------------------------
- * ±¹Ä¯É¬ÀÃ¼°âÙÓå¼ÀÃ«ÔÊÔÂ£Û
- * Â¦ĞÑ
- *  filename        char*       É¬ÀÃ°×ÑëÄÌ»ï  
- * ß¯Ô»°À
- *  ÔÀ      TRUE(1)
- *  ÁÃ      FALSE(0)
+ * æƒ«å¯æ¶©çƒ‚åŠèµ“æ¸ç¥­æ¯›å…æœˆï¼»
+ * å¨„é†’
+ *  filename        char*       æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  
+ * å¿’æ›°è¢„
+ *  å²³      TRUE(1)
+ *  æ’©      FALSE(0)
  *------------------------------------------------------------*/
 static void TITLE_initTitleData( int array)
 {
@@ -425,7 +425,7 @@ static void TITLE_initTitleData( int array)
 	
 }
 /*------------------------------------------------------------
- *   ĞÑµæÉ¬ÀÃÃ«ÒıÎç»§»¯¨àµæ±åØÆ»¯Ö§ÔÂ£Û  ¸ê¼°ÊÖ³ğ³ğÆ¥ÔÊÔÂ£Û
+ *   é†’å«æ¶©çƒ‚æ¯›å¼•åˆæˆ·åŒ–ã„ å«åä»„åŒ–æ”¯æœˆï¼»  æˆˆåŠæ‰‹ä»‡ä»‡åŒ¹å…æœˆï¼»
  *------------------------------------------------------------*/
 static int TITLE_getConfigOneLine( FILE *fp, char *line, int linelen)
 {
@@ -438,15 +438,15 @@ static int TITLE_getConfigOneLine( FILE *fp, char *line, int linelen)
 		linenum ++;
 		if( buf[0] == '#' )continue;        /* comment */
 		if( buf[0] == '\n' )continue;       /* none    */
-		/*  µæÃ«°ïäßÔÊÔÂ    */
-		/*  ÒıÄÚ tab Ã« " " ±å  Îå¾§ÒüÔÂ    */
+		/*  å«æ¯›å¸®æº¥å…æœˆ    */
+		/*  å¼•å†… tab æ¯› " " å  äº”æ™¶å°¹æœˆ    */
 		replaceString( buf, '\t' , ' ' );
-		/* µ©Ê¸¡õµ©´ÂÂÖ */
+		/* æ—¦çŸ¢â–¡æ—¦ç»°è½® */
 		deleteCharFromString( buf, " ");
 
 		if( buf[0] == '{' ) {
 			if( startflg == TRUE ) {
-				print( "titleconfig:Ã÷Ã÷Ã»ÓĞ¹Ø±Õ¡¸{¡¹È´³öÏÖÁË: %d \n",linenum);
+				print( "titleconfig:æ˜æ˜æ²¡æœ‰å…³é—­ã€Œ{ã€å´å‡ºç°äº†: %d \n",linenum);
 				/* } */
 				return -1;
 			}
@@ -454,25 +454,25 @@ static int TITLE_getConfigOneLine( FILE *fp, char *line, int linelen)
 		}
 		else if( buf[0] == '}' ) {
 			if( startflg == FALSE) {
-				print( "titleconfig:Ã÷Ã÷Ã»ÓĞ¹Ø±Õ¡¸{¡¹È´³öÏÖÁË: %d \n",linenum);
+				print( "titleconfig:æ˜æ˜æ²¡æœ‰å…³é—­ã€Œ{ã€å´å‡ºç°äº†: %d \n",linenum);
 				/* } */
 				return -1;
 			}
 			return 1;
 		}
 		else {
-			/* "{"Æ¥ÅÈ±åï§ÒıÔÈ»¯ÖĞĞ×ÈÕ }*/
+			/* "{"åŒ¹æ¹ƒåé“µå¼•åŒ€åŒ–ä¸­å‡¶æ—¥ }*/
 			if( startflg == TRUE ) {
 				if( strlen( line) != 0 ) {
 					if( line[strlen(line) -1] != ',' ) {
 						strcatsafe( line, linelen, ",");
 					}
 				}
-				/* ¨àµæ±åÒıÎç»§»¯ÖĞÈÊ*/
+				/* ã„ å«åå¼•åˆæˆ·åŒ–ä¸­ä»*/
 				chompex( buf );
 				strcatsafe( line,linelen,  buf);
 			}
-			/*   ¶ãµæ·Ö»¥"{"Æ¥·´ÔªÒıÔÈ»¯Ø¦ÖĞèëÄş·´¹«¼°ÒıÒı¨àµæÆ¥ß¯ÔÊ }*/
+			/*   èº²å«åˆ†äº’"{"åŒ¹åå…ƒå¼•åŒ€åŒ–å…ä¸­æ¡¦å®åå…¬åŠå¼•å¼•ã„ å«åŒ¹å¿’å… }*/
 			else {
 				chompex( buf );
 				strcatsafe( line,linelen,  buf);
@@ -480,7 +480,7 @@ static int TITLE_getConfigOneLine( FILE *fp, char *line, int linelen)
 			}
 		}
 	}
-	/* ³ğ³ğ±åÈÊÔÂÎçÍÉµ¤ÒÇ·´EOF   Ñ±ÎåÔªÔúØ¦ÖĞÎì¡õÓñ·Ö   */
+	/* ä»‡ä»‡åä»æœˆåˆèœ•ä¸¹ä»ªåEOF   é©¯äº”å…ƒæ‰å…ä¸­æˆŠâ–¡ç‰åˆ†   */
 	return 0;
 }
 static int TITLE_getParamData( int readarray, int array,char *src)
@@ -506,12 +506,12 @@ static int TITLE_getParamData( int readarray, int array,char *src)
 }
 
 /*------------------------------------------------------------
- * ±¹Ä¯É¬ÀÃ¼°âÙÓå¼ÀÃ«ÔÊÔÂ£Û
- * Â¦ĞÑ
- *  filename        char*       É¬ÀÃ°×ÑëÄÌ»ï  
- * ß¯Ô»°À
- *  ÔÀ      TRUE(1)
- *  ÁÃ      FALSE(0)
+ * æƒ«å¯æ¶©çƒ‚åŠèµ“æ¸ç¥­æ¯›å…æœˆï¼»
+ * å¨„é†’
+ *  filename        char*       æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  
+ * å¿’æ›°è¢„
+ *  å²³      TRUE(1)
+ *  æ’©      FALSE(0)
  *------------------------------------------------------------*/
 BOOL TITLE_initTitleConfig( char* filename )
 {
@@ -528,7 +528,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 
 	TITLE_titlecfgnum=0;
 
-	/*  ÒıÄÚ  ¶ãØ¦µæ»¥ÖÏµæØ¤ÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ    */
+	/*  å¼•å†…  èº²å…å«äº’çª’å«ä¸æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆ    */
 	/*while( fgets( line, sizeof( line ), f ) ){}*/
 	while( 1 ) {
 		int rc;
@@ -553,7 +553,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 		fclose( f );
 		return FALSE;
 	}
-	/* âÙÓå¼À */
+	/* èµ“æ¸ç¥­ */
 	{
 		int     i;
 		for( i = 0; i < TITLE_titlecfgnum; i ++ ) {
@@ -568,7 +568,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 		return FALSE;
 	}
 	
-	/*  ÒıĞ×  ĞÄ  ÔÊ    */
+	/*  å¼•å‡¶  å¿ƒ  å…    */
 	linenum = 0;
 	/*while( fgets( line, sizeof( line ), f ) ){}*/
 	while( 1) {
@@ -586,23 +586,23 @@ BOOL TITLE_initTitleConfig( char* filename )
 		int     comppos;
 		BOOL    errflg =FALSE;
 		for( i = 1; ; i ++ ){
-			/*  Ğş¡õÛÍ¼şÃ«Î­ÔÂ    */
+			/*  ç„â–¡å¼ä»¶æ¯›è‹‡æœˆ    */
 			ret = getStringFromIndexWithDelim( line,",",i,token,
 											   sizeof(token));
 			if( ret == FALSE ){
 				break;
 			}
-			/*     Ù¯±å  ¾§ */
+			/*     ä¾¬å  æ™¶ */
 			for( j = 0; j < strlen( token); j ++ ) {
 				token[j] = toupper( token[j]);
 			}
-			/* ±¹Ä¯Ï¶ÀÃÃ«Æ©ÍÍÔÂ */
+			/* æƒ«å¯éš™çƒ‚æ¯›è­¬å±¯æœˆ */
 			if( strncmp( "TITLE", token, 5) == 0 ) {
 				char    buf[64];
 				ret = getStringFromIndexWithDelim( token,"=",2,buf,
 												   sizeof(buf));
 				if( ret == FALSE) {
-					fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+					fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 					TITLE_initTitleData( titlecfg_readlen);
 					errflg = TRUE;
 					break;
@@ -610,7 +610,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 				TITLE_ConfigTable[titlecfg_readlen].title = atoi( buf);
 			}
 			else {
-				/* ÓÉ·Â¶ª¡õÕıÏ¶ÀÃÃ«  ¸ê */
+				/* ç”±ä»¿ä¸¢â–¡æ­£éš™çƒ‚æ¯›  æˆˆ */
 				for( j = 0; j < arraysizeof( TITLE_param); j ++ ) {
 					if( strncmp( TITLE_param[j].paramname, 
 								token, 
@@ -618,39 +618,39 @@ BOOL TITLE_initTitleConfig( char* filename )
 						== 0 )
 					{
 						TITLE_ConfigTable[titlecfg_readlen].paramindex[i-1] = j;
-						/* Á¥  ÄÌÃ¬¼şĞşÆ¥±¹Ä¯Ã«ÃñÄáÓÀÛÍÔÊÔÂ°×·ÂºëÃ«  »¯ÔÂ£Û */
+						/* éš¶  å¥¶çŸ›ä»¶ç„åŒ¹æƒ«å¯æ¯›æ°‘å°¼æ°¸å¼å…æœˆç™½ä»¿å¼˜æ¯›  åŒ–æœˆï¼» */
 						if( j == 0 || j == 1 || j == 2) {
 							TITLE_ConfigTable[titlecfg_readlen].equipcheckflg = TRUE;
 						}
 						break;
 					}
 				}
-				/* ÓÉ·Â¶ª¡õÕı»¥  Ø¦¼°Ã«Ï¶ÀÃ½ñÄ¾Ğ× */
+				/* ç”±ä»¿ä¸¢â–¡æ­£äº’  å…åŠæ¯›éš™çƒ‚ä»Šæœ¨å‡¶ */
 				if( j == arraysizeof( TITLE_param) ) {
-					fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",
+					fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",
 							filename,linenum);
 					TITLE_initTitleData( titlecfg_readlen);
 					errflg = TRUE;
 					break;
 				}
-				/* î¿Ä¯£İæØî¿Ä¯»¥Ğå»şÔÊÔÂ¾®Æ©ÍÍÔÂ */
+				/* ç¾å¯ï¼½å°•ç¾å¯äº’ç»£ç®•å…æœˆäº•è­¬å±¯æœˆ */
 				comppos = charInclude( token, "<>=");
 				if( comppos == -1 ) {
-					fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+					fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 					TITLE_initTitleData( titlecfg_readlen);
 					errflg = TRUE;
 					break;;
 				}
-				/* î¿Ä¯£İæØî¿Ä¯»¥¨á¹´¶¯Ïş  ÔÂÎçÎå */
+				/* ç¾å¯ï¼½å°•ç¾å¯äº’ã„¡å‹¾åŠ¨æ™“  æœˆåˆäº” */
 				if( charInclude( &token[comppos+1], "<>=") != -1 ) {
-					/* ÉıÊÏØ¦  Ê¤¾®Ã«  ¸ê */
+					/* å‡æ°å…  èƒœäº•æ¯›  æˆˆ */
 					for( j = 0; j < 3;  j ++ ) {
 						if( memcmp( TITLE_compare[j].compare, &token[comppos], 2 ) == 0 ) {
 							break;
 						}
 					}
 					if( j == 3 ) {
-						fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+						fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 						TITLE_initTitleData( titlecfg_readlen);
 						errflg = TRUE;
 						break;
@@ -658,7 +658,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 					else {
 						ret = TITLE_getParamData( titlecfg_readlen,i-1,&token[comppos+2]);
 						if( !ret ) {
-							fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+							fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 							TITLE_initTitleData( titlecfg_readlen);
 							errflg = TRUE;
 							break;
@@ -672,14 +672,14 @@ BOOL TITLE_initTitleConfig( char* filename )
 				else {
 					ret = TITLE_getParamData( titlecfg_readlen,i-1,&token[comppos+1]);
 					if( !ret ) {
-						fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+						fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 						TITLE_initTitleData( titlecfg_readlen);
 						errflg = TRUE;
 						break;
 					}
 					/*TITLE_ConfigTable[titlecfg_readlen].param[i-1] 
 							= atoi( &token[comppos+1]);*/
-					/* ÉıÊÏØ¦  Ê¤¾®Ã«  ¸ê */
+					/* å‡æ°å…  èƒœäº•æ¯›  æˆˆ */
 					for( j = 3; j < 6;  j ++ ) {
 						if( memcmp( TITLE_compare[j].compare, &token[comppos], 1 ) == 0 ) {
 							TITLE_ConfigTable[titlecfg_readlen].compareflg[i-1] = j;
@@ -689,9 +689,9 @@ BOOL TITLE_initTitleConfig( char* filename )
 				}
 			}
 		}
-		/* ±¹Ä¯  Ï¶ÀÃ»¥  ¾®ÔÈĞ× or Ø¦ÊÏ¾®ØÆÈÕ¼°¾Ş·Â¡õ*/
+		/* æƒ«å¯  éš™çƒ‚äº’  äº•åŒ€å‡¶ or å…æ°äº•ä»„æ—¥åŠå·¨ä»¿â–¡*/
 		if( errflg || TITLE_ConfigTable[titlecfg_readlen].title == -1 ) {
-			fprint("ÎÄ¼şÓï·¨´íÎó:%s µÚ%dĞĞ\n",filename,linenum);
+			fprint("æ–‡ä»¶è¯­æ³•é”™è¯¯:%s ç¬¬%dè¡Œ\n",filename,linenum);
 			TITLE_initTitleData( titlecfg_readlen);
 		}
 		else {
@@ -703,24 +703,24 @@ BOOL TITLE_initTitleConfig( char* filename )
 
 	TITLE_titlecfgnum = titlecfg_readlen;
 
-	print( "ÓĞĞ§Í·ÏÎÅäÖÃÊıÊÇ %d...", TITLE_titlecfgnum );
+	print( "æœ‰æ•ˆå¤´è¡”é…ç½®æ•°æ˜¯ %d...", TITLE_titlecfgnum );
 
 	return TRUE;
 }
 /*------------------------------------------------------------
- * ±¹Ä¯É¬ÀÃ±åÄşµ¤¾®Æ©ÍÍ»¯±¹Ä¯Ã«Ü¸ÒüÔÂ£Û
- * Â¦ĞÑ
- *  charaindex        int   Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  mode              BOOL  TRUE:item=¼°ÊÖ¼°¼°ĞÄÆ©ÍÍÔÂ FALSE:òå  
- * ß¯Ô»°À
- *  TRUE: ±¹Ä¯±å  ¼À  Ô»£Û
- *  FALSE:ÖÏÊÖ  ¾®ÔÈĞ×£Û
+ * æƒ«å¯æ¶©çƒ‚åå®ä¸¹äº•è­¬å±¯åŒ–æƒ«å¯æ¯›èŠ¨å°¹æœˆï¼»
+ * å¨„é†’
+ *  charaindex        int   å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  mode              BOOL  TRUE:item=åŠæ‰‹åŠåŠå¿ƒè­¬å±¯æœˆ FALSE:èˆ  
+ * å¿’æ›°è¢„
+ *  TRUE: æƒ«å¯å  ç¥­  æ›°ï¼»
+ *  FALSE:çª’æ‰‹  äº•åŒ€å‡¶ï¼»
  *------------------------------------------------------------*/
 static BOOL TITLE_TitleCheck_Main( int charaindex, BOOL mode, int *addcnt, int *delcnt)
 {
 	int     i, j,k, ret;
 	
-	/* âÙÓå¼À */
+	/* èµ“æ¸ç¥­ */
 {
 	int     i;
 	for( i = 0; i < TITLE_titlecfgnum && TITLE_configbuf[i].title != -1; i ++ ) {
@@ -755,8 +755,8 @@ static BOOL TITLE_TitleCheck_Main( int charaindex, BOOL mode, int *addcnt, int *
 				if( rc != TRUE ) break;
 			}
 		}
-		/*   ĞÑÍÖğö±å  Ôª±¹Ä¯»¥à«Ô»ñ²»¯ÈÕÄ¾»¯ÖĞÔÂÁİ¼°¿Ğ±å£İ
-		 * ÓòÒïÌïÓÀ°×Ñë±åö¯»§»¯¹«¼°çø°í¾®ÈÕadd,deltileÔÊÔÂ
+		/*   é†’æ¤­ç˜€å  å…ƒæƒ«å¯äº’å–ƒæ›°ç™«åŒ–æ—¥æœ¨åŒ–ä¸­æœˆå‡›åŠå•ƒåï¼½
+		 * åŸŸç»ç”°æ°¸ç™½å¤®åéœªæˆ·åŒ–å…¬åŠç‘›ç»Šäº•æ—¥add,deltileå…æœˆ
 		 */
 		for( k = 0; k < TITLE_titlecfgnum; k ++ ) {
 			if( TITLE_configbuf[k].title == title ) { 
@@ -788,13 +788,13 @@ static BOOL TITLE_TitleCheck_Main( int charaindex, BOOL mode, int *addcnt, int *
 	
 }
 /*------------------------------------------------------------
- * ±¹Ä¯É¬ÀÃ±åÄşµ¤¾®Æ©ÍÍ»¯±¹Ä¯Ã«Ü¸ÒüÔÂ£Û
- * Â¦ĞÑ
- *  charaindex        int   Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  mode              BOOL  TRUE:item=¼°ÊÖ¼°¼°ĞÄÆ©ÍÍÔÂ FALSE:òå  
- * ß¯Ô»°À
- *  TRUE: ±¹Ä¯±å  ¼À  Ô»£Û
- *  FALSE:ÖÏÊÖ  ¾®ÔÈĞ×£Û
+ * æƒ«å¯æ¶©çƒ‚åå®ä¸¹äº•è­¬å±¯åŒ–æƒ«å¯æ¯›èŠ¨å°¹æœˆï¼»
+ * å¨„é†’
+ *  charaindex        int   å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  mode              BOOL  TRUE:item=åŠæ‰‹åŠåŠå¿ƒè­¬å±¯æœˆ FALSE:èˆ  
+ * å¿’æ›°è¢„
+ *  TRUE: æƒ«å¯å  ç¥­  æ›°ï¼»
+ *  FALSE:çª’æ‰‹  äº•åŒ€å‡¶ï¼»
  *------------------------------------------------------------*/
 BOOL TITLE_TitleCheck( int charaindex, BOOL mode)
 {
@@ -807,13 +807,13 @@ BOOL TITLE_TitleCheck( int charaindex, BOOL mode)
 	if( rc ) {
 		if( delcnt > 0 ) {
 			snprintf( msgbuf, sizeof( msgbuf), 
-						"Ê§È¥%d%s ³ÆºÅ£¡", delcnt,
+						"å¤±å»%d%s ç§°å·ï¼", delcnt,
 						delcnt < 10 ?  TITLE_MSGUNIT1:TITLE_MSGUNIT2);
 			CHAR_talkToCli( charaindex, -1, msgbuf,  CHAR_COLORYELLOW);
 		}
 		if( addcnt > 0 ) {
 			snprintf( msgbuf, sizeof( msgbuf), 
-						"»ñµÃ%d%s ³ÆºÅ£¡", addcnt,
+						"è·å¾—%d%s ç§°å·ï¼", addcnt,
 						addcnt < 10 ?  TITLE_MSGUNIT1:TITLE_MSGUNIT2);
 			CHAR_talkToCli( charaindex, -1, msgbuf,  CHAR_COLORYELLOW);
 		}
@@ -821,13 +821,13 @@ BOOL TITLE_TitleCheck( int charaindex, BOOL mode)
 	return rc;
 }
 /*------------------------------------------------------------
- * ±¹Ä¯É¬ÀÃ±åÄşµ¤¾®Æ©ÍÍ»¯±¹Ä¯Ã«Ü¸ÒüÔÂ£Û
- * Â¦ĞÑ
- *  charaindex        int   Æ½ÅÒ·ÂÄÌ¼ş·¸ÓÀÛÍµ©
- *  mode              BOOL  TRUE:item=¼°ÊÖ¼°¼°ĞÄÆ©ÍÍÔÂ FALSE:òå  
- * ß¯Ô»°À
- *  TRUE: ±¹Ä¯±å  ¼À  Ô»£Û
- *  FALSE:ÖÏÊÖ  ¾®ÔÈĞ×£Û
+ * æƒ«å¯æ¶©çƒ‚åå®ä¸¹äº•è­¬å±¯åŒ–æƒ«å¯æ¯›èŠ¨å°¹æœˆï¼»
+ * å¨„é†’
+ *  charaindex        int   å¹³ä¹“ä»¿å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
+ *  mode              BOOL  TRUE:item=åŠæ‰‹åŠåŠå¿ƒè­¬å±¯æœˆ FALSE:èˆ  
+ * å¿’æ›°è¢„
+ *  TRUE: æƒ«å¯å  ç¥­  æ›°ï¼»
+ *  FALSE:çª’æ‰‹  äº•åŒ€å‡¶ï¼»
  *------------------------------------------------------------*/
 BOOL TITLE_TitleCheck_Nomsg( int charaindex, BOOL mode, int *addcnt, int *delcnt)
 {
@@ -900,7 +900,7 @@ static int TITLE_WorkIntCheck( int charaindex,int elem, int *data, int flg)
 	return rc;
 }
 /* --------------------------------------
- * Ï¶ÀÃ½ñÄ¾Ğ×dataÎç  ÔÈ»¯ÖĞÔÂÊ§ÄÌ  Ø©Ã«  Ê¤ÔÊÔÂ£Û
+ * éš™çƒ‚ä»Šæœ¨å‡¶dataåˆ  åŒ€åŒ–ä¸­æœˆå¤±å¥¶  ä¸æ¯›  èƒœå…æœˆï¼»
  * -------------------------------------*/
 static int TITLE_ItemCheckMain( int charaindex, int itemhaveindex, int *data, int flg)
 {
@@ -929,9 +929,9 @@ static int TITLE_ItemCheckMain( int charaindex, int itemhaveindex, int *data, in
 				  case 5:       /* "=" */
 					if( ITEM_getInt( itemindex, ITEM_ID) == *(data +j)) rc = TRUE;
 					break;
-				  /* ³ğÄ¾·ÖØê    ½¡ÖĞ£Û
-				   * Ê§ÄÌ  Ø©òå  Ã«Î­»¯¹«Ä¾Ã«  ÔÈ»¯ÖĞØ¦¾®ÔÈĞ×ÈÕŞ©ÎçÔÊÔÂ£Û
-				   * ³ğ³ğÆ¥·´  ÔÈ»¯ÖĞÔÂÒÇÃ«ĞõÎçØÆ»¯ÃñÄáÓÀÛÍ
+				  /* ä»‡æœ¨åˆ†ä»ƒ    å¥ä¸­ï¼»
+				   * å¤±å¥¶  ä¸èˆ  æ¯›è‹‡åŒ–å…¬æœ¨æ¯›  åŒ€åŒ–ä¸­å…äº•åŒ€å‡¶æ—¥è•åˆå…æœˆï¼»
+				   * ä»‡ä»‡åŒ¹å  åŒ€åŒ–ä¸­æœˆä»ªæ¯›çµ®åˆä»„åŒ–æ°‘å°¼æ°¸å¼
 				   */
 				  case 2:       /* "<>" */
 					if( ITEM_getInt( itemindex, ITEM_ID) == *(data +j)) rc = FALSE;
@@ -1019,7 +1019,7 @@ static int TITLE_SkillCheck( int charaindex,int elem, int *data, int flg)
 	return rc;
 }
 /* --------------------------------------
- * ñÉÆ½ÅÒ·Â¾®»ÔÆ½ÅÒ·Â¾®ÃñÄáÓÀÛÍÔÊÔÂ£Û
+ * è£†å¹³ä¹“ä»¿äº•è¾‰å¹³ä¹“ä»¿äº•æ°‘å°¼æ°¸å¼å…æœˆï¼»
  * -------------------------------------*/
 static int TITLE_SexCheck( int charaindex,int elem, int *data, int flg)
 {

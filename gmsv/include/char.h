@@ -8,7 +8,7 @@
 
 
 /*------------------------------------------------------------
- *°×ÇÉ¼þÐþ¼°çÆ¼°ÀÃñø
+ *ç™½å·§ä»¶çŽ„åŠç¼™åŠçƒ‚è’
  *------------------------------------------------------------*/
 typedef enum
 {
@@ -23,14 +23,14 @@ typedef enum
 	CHAR_COLORBLUE2,
 	CHAR_COLORGREEN2,
 }CHAR_COLOR;
-/*====================Æ½ÅÒ·Â¼°×ÛÔÀ±åèúÔÊÔÂèúÐÑ====================*/
+/*====================å¹³ä¹“ä»¿åŠç»¼å²³åžæ¥®å…æœˆæ¥®é†’====================*/
 void CHAR_createNewChar( int clifd, int dataplacenum,char* charname ,
 						  int imgno,int faceimgno,
 						  int vital,int str,int tgh,int dex,
 						  int earth,int water,int fire,int wind,
 						  int hometown , char *cdkey );
 
-/*====================Æ½ÅÒ·Â¼°·òºëÄÌ¼þ====================*/
+/*====================å¹³ä¹“ä»¿åŠå¤«å¼˜å¥¶ä»¶====================*/
 
 void CHAR_login( int clifd, char* data, int saveindex );
 
@@ -39,8 +39,8 @@ BOOL _CHAR_warpToSpecificPoint( char *file, int line,
 							int charaindex, int fl, int x, int y);
 
 
-/*====================Æ½ÅÒ·Â¼°±¾¡õÆ¤====================*/
-/*====================Æ½ÅÒ·Â¼°·òºëÊ§ËüÐþ====================*/
+/*====================å¹³ä¹“ä»¿åŠæœ¬â–¡çš®====================*/
+/*====================å¹³ä¹“ä»¿åŠå¤«å¼˜å¤±å®ƒçŽ„====================*/
 BOOL CHAR_charSaveFromConnectAndChar( int fd,Char* ch, int unlock );
 BOOL CHAR_charSaveFromConnect( int fd,int unlock );
 #define	CHAR_logout( clifd, save)	_CHAR_logout( __FILE__, __LINE__, clifd, save)
@@ -49,24 +49,24 @@ BOOL _CHAR_logout( char *file, int line, int clifd, BOOL save);
 /*====================watch event    ====================*/
 void CHAR_sendWatchEvent( int objindex, int chac, int* opt,int optlen,BOOL myflg );
 
-/*====================µ©Æ½»ï====================*/
+/*====================æ—¦å¹³ä¼™====================*/
 BOOL CHAR_Skillupsend(int charaindex );
 void CHAR_SkillUp(  int charaindex, int skillid );
 void CHAR_useSkill( int charaindex, int dir ,int skindex );
 
 typedef enum
 {
-    CHAR_WALKSUCCESSED,     /* ÔÀ      */
-    CHAR_WALKSYSTEMERROR,   /* ÆËµ©  Ø©¾Þ·Â¡õ    ¼°indexÃñÄáÓÀÛÍ±å
-                             * ·òÔÈ¾®¾®ÔÈÐ×Îç¾® */
-    CHAR_WALKEXTEND,        /*    Çø×ó¡õÌï¡õØÆ»¯ÐÚ³ðµ¤ÎçØÆÐ×£ÛNPC±å¼°ÐÄ*/
-    CHAR_WALKHITOBJECT,     /*  ÖÏ¾®  ±åñ²ÔÈ»¯£ýÐÚØêØ¦¾®ÔÈÐ×    */
-    CHAR_WALKPREWALK,       /*  prewalkÄÌÃ¬¼þÐþÆ¥ÐÚØêØ¦¾®ÔÈÐ×( éÞ¼À ) */
-    CHAR_WALKDIE,           /*  ÉØÊÏÆ¥ÖÐ»¯ÐÚØêØ¦ÖÐ  */
-    CHAR_WALK1357,          /*  ±ê»§  éù±åÐÚ³ðµ¤ÎçØÆ»¯ÐÚØêØ¦¾®ÔÈÐ×  */
+    CHAR_WALKSUCCESSED,     /* å²³      */
+    CHAR_WALKSYSTEMERROR,   /* æ‰‘æ—¦  ä¸žå·¨ä»¿â–¡    åŠindexæ°‘å°¼æ°¸å¼åž
+                             * å¤«åŒ€äº•äº•åŒ€å‡¶åˆäº• */
+    CHAR_WALKEXTEND,        /*    åŒºå·¦â–¡ç”°â–¡ä»„åŒ–æ±¹ä»‡ä¸¹åˆä»„å‡¶ï¼»NPCåžåŠå¿ƒ*/
+    CHAR_WALKHITOBJECT,     /*  çª’äº•  åžç™«åŒ€åŒ–ï½æ±¹ä»ƒå…äº•åŒ€å‡¶    */
+    CHAR_WALKPREWALK,       /*  prewalkå¥¶çŸ›ä»¶çŽ„åŒ¹æ±¹ä»ƒå…äº•åŒ€å‡¶( æª—ç¥­ ) */
+    CHAR_WALKDIE,           /*  éŸ¶æ°åŒ¹ä¸­åŒ–æ±¹ä»ƒå…ä¸­  */
+    CHAR_WALK1357,          /*  æ ‡æˆ·  è½¾åžæ±¹ä»‡ä¸¹åˆä»„åŒ–æ±¹ä»ƒå…äº•åŒ€å‡¶  */
 }CHAR_WALKRET;
 
-/*====================Æ½ÅÒ·Â¼°à¢  ±åèúÔÊÔÂèúÐÑ====================*/
+/*====================å¹³ä¹“ä»¿åŠå•–  åžæ¥®å…æœˆæ¥®é†’====================*/
 void CHAR_ctodirmode(char moji , int* dir , int* mode);
 INLINE void CHAR_getDXDY( int dir , int* dx, int* dy );
 INLINE int CHAR_getDX( int dir );
@@ -237,27 +237,27 @@ typedef enum
 
 typedef enum
 {
-    CHAR_WINDOWTYPE_RETURNTOELDER=-1,   /*  Ó®  ³ß  ÔÂËüÅ«¼þÓñËü    */
-    CHAR_WINDOWTYPE_RESURRECTION=-2,   /*  ãâÍÙÔÊÔÂËüÅ«¼þÓñËü    */
+    CHAR_WINDOWTYPE_RETURNTOELDER=-1,   /*  èµ¢  å°º  æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ    */
+    CHAR_WINDOWTYPE_RESURRECTION=-2,   /*  æ±Šå”¾å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ    */
 
-	CHAR_WINDOWTYPE_SELECTBATTLE = 1,		/*   ÔÂ¾ô  Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTDUEL = 2,  		/*   ÔÂDUELÃ«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTTRADECARD = 3, 	/*   Í­¸ú¾§Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTPARTY = 4, 		/* ÓÉ¡õ  Å«Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTBATTLEWATCH = 5, 	/* Æå¾ôÃ«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_MICMESSAGE = 6,			/* MICNPCÃ«ÒøÔÈ»¯ÇëÔÂËüÅ«¼þÓñËü */
+	CHAR_WINDOWTYPE_SELECTBATTLE = 1,		/*   æœˆçˆµ  æ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTDUEL = 2,  		/*   æœˆDUELæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTTRADECARD = 3, 	/*   é“œè·Ÿæ™¶æ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTPARTY = 4, 		/* ç”±â–¡  å¥´æ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTBATTLEWATCH = 5, 	/* æ£‹çˆµæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_MICMESSAGE = 6,			/* MICNPCæ¯›é“¶åŒ€åŒ–è¯·æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
 
 	// CoolFish: Trade 2001/4/18
-	CHAR_WINDOWTYPE_SELECTTRADE = 7,	/* ½»Ò× Window */
+	CHAR_WINDOWTYPE_SELECTTRADE = 7,	/* äº¤æ˜“ Window */
 
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE1 = 10,	/*   ó¡Ã«  µÊÔÊÔÂÊ§ÄÌ  Ø©Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE2 = 11,	/*   ó¡Ã«  µÊÔÊÔÂÊ§ÄÌ  Ø©Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE3 = 12,	/*   ó¡Ã«  µÊÔÊÔÂÊ§ÄÌ  Ø©Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE4 = 13,	/*   ó¡Ã«  µÊÔÊÔÂÊ§ÄÌ  Ø©Ã«¼»  ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_RENAME = 14,	/*   ó¡Ã«    ÔÊÔÂËüÅ«¼þÓñËü */
-	CHAR_WINDOWTYPE_SELECTRENAMEITEM_RENAME_ATTENTION  = 15,	/*   ó¡Ã«    ÔÊÔÂËüÅ«¼þÓñËü */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE1 = 10,	/*   èŸ†æ¯›  å‡³å…æœˆå¤±å¥¶  ä¸žæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE2 = 11,	/*   èŸ†æ¯›  å‡³å…æœˆå¤±å¥¶  ä¸žæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE3 = 12,	/*   èŸ†æ¯›  å‡³å…æœˆå¤±å¥¶  ä¸žæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_PAGE4 = 13,	/*   èŸ†æ¯›  å‡³å…æœˆå¤±å¥¶  ä¸žæ¯›è“Ÿ  å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_RENAME = 14,	/*   èŸ†æ¯›    å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
+	CHAR_WINDOWTYPE_SELECTRENAMEITEM_RENAME_ATTENTION  = 15,	/*   èŸ†æ¯›    å…æœˆå®ƒå¥´ä»¶çŽ‰å®ƒ */
 	
-	CHAR_WINDOWTYPE_DENGON = 50,			/* ÷©ÍÉ   */
+	CHAR_WINDOWTYPE_DENGON = 50,			/* é³—èœ•   */
 
 	CHAR_WINDOWTYPE_WINDOWMAN_START = 100,
 	CHAR_WINDOWTYPE_WINDOWMAN_STARTMSG = CHAR_WINDOWTYPE_WINDOWMAN_START,
@@ -368,16 +368,16 @@ typedef enum
 	CHAR_WINDOWTYPE_MANORPK_END = 362,
 
         // shan
-        CHAR_WINDOWTYPE_FM_DENGON      = 370,     // ¼Ò×åÁôÑÔ°å
-        CHAR_WINDOWTYPE_FM_FMSDENGON   = 371,     // ¼Ò×åÖ®¼äÁôÑÔ°å
-        CHAR_WINDOWTYPE_FM_MESSAGE1    = 372,     // ËµÃ÷ÊÓ´°(¾Ýµã)
-        CHAR_WINDOWTYPE_FM_MESSAGE2    = 373,     // ËµÃ÷ÊÓ´°(³ÉÔ±)
-        CHAR_WINDOWTYPE_FM_SELECT      = 374,     // Ñ¡ÏîÊÓ´°
-        CHAR_WINDOWTYPE_FM_MEMBERLIST  = 375,     // ³ÉÔ±ÁÐ±í
-        CHAR_WINDOWTYPE_FM_POINTLIST   = 376,     // ¾ÝµãÁÐ±í
-        CHAR_WINDOWTYPE_FM_DPTOP       = 377,     // Ç¿Õß±í(Ç°ÈþÊ®´óÁÐ°ñ)
-        CHAR_WINDOWTYPE_FM_DPME        = 378,     // Ç¿Õß±í(×Ô¼ºµÄÁÐ°ñ)
-        CHAR_WINDOWTYPE_FM_DPSELECT    = 379,     // Ç¿Õß±íµÄÑ¡ÏîÊÓ´°
+        CHAR_WINDOWTYPE_FM_DENGON      = 370,     // å®¶æ—ç•™è¨€æ¿
+        CHAR_WINDOWTYPE_FM_FMSDENGON   = 371,     // å®¶æ—ä¹‹é—´ç•™è¨€æ¿
+        CHAR_WINDOWTYPE_FM_MESSAGE1    = 372,     // è¯´æ˜Žè§†çª—(æ®ç‚¹)
+        CHAR_WINDOWTYPE_FM_MESSAGE2    = 373,     // è¯´æ˜Žè§†çª—(æˆå‘˜)
+        CHAR_WINDOWTYPE_FM_SELECT      = 374,     // é€‰é¡¹è§†çª—
+        CHAR_WINDOWTYPE_FM_MEMBERLIST  = 375,     // æˆå‘˜åˆ—è¡¨
+        CHAR_WINDOWTYPE_FM_POINTLIST   = 376,     // æ®ç‚¹åˆ—è¡¨
+        CHAR_WINDOWTYPE_FM_DPTOP       = 377,     // å¼ºè€…è¡¨(å‰ååå¤§åˆ—æ¦œ)
+        CHAR_WINDOWTYPE_FM_DPME        = 378,     // å¼ºè€…è¡¨(è‡ªå·±çš„åˆ—æ¦œ)
+        CHAR_WINDOWTYPE_FM_DPSELECT    = 379,     // å¼ºè€…è¡¨çš„é€‰é¡¹è§†çª—
 
 #ifdef _PET_TRANS
 		CHAR_WINDOWTYPE_PETTRANS_START		= 384,
@@ -425,11 +425,11 @@ typedef enum
 	NPC_ITEMCHANGE_MESSAGE,
 	NPC_ITEMCHANGE_END,
 #endif
-#ifdef _ADD_FAMILY_TAX			   // WON ADD Ôö¼Ó×¯Ô°Ë°ÊÕ
+#ifdef _ADD_FAMILY_TAX			   // WON ADD å¢žåŠ åº„å›­ç¨Žæ”¶
 	CHAR_WINDOWTYPE_FAMILY_TAX = 450,
 #endif
 
-#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅÐÐ°ñNPC
+#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æŽ’è¡Œæ¦œNPC
 	NPC_ALLDOMAN_START = 460,
 	NPC_ALLDOMAN_START2,
 	NPC_ALLDOMAN_START3,
@@ -498,10 +498,10 @@ void CHAR_PetAddVariableAi( int petindex, int iValue );
 void CHAR_PartyUpdate( int charaindex, int senddata );
 char *CHAR_getUseName( int charaindex );
 char *CHAR_getUseID( int charaindex );
-EXTERN int EnemyMoveNum;	/*   ÁÝ±å  æÎ  ØêÔÂ³Ä¼°ÐÑ */
+EXTERN int EnemyMoveNum;	/*   å‡›åž  å«–  ä»ƒæœˆè¡¬åŠé†’ */
 
-#define DB_DUELPOINT	"db_duel"			// ·¸Ø¨¾Þ»ïºÌÄÌ¼þÐþ·¸¡õÕýÃ¬¡õµ©
-#define DB_ADDRESSBOOK	"db_addressbook"	// Ê§ÓñÒÁµ©Æ¤ÓÀÛÍ·¸¡õÕýÃ¬¡õµ©
+#define DB_DUELPOINT	"db_duel"			// çŠ¯äº˜å·¨ä¼™ç¦¾å¥¶ä»¶çŽ„çŠ¯â–¡æ­£çŸ›â–¡æ—¦
+#define DB_ADDRESSBOOK	"db_addressbook"	// å¤±çŽ‰ä¼Šæ—¦çš®æ°¸å¼çŠ¯â–¡æ­£çŸ›â–¡æ—¦
 
 BOOL CHAR_send_DpDBUpdate( int charaindex );
 BOOL CHAR_send_DpDBUpdate_AddressBook( int charaindex, int mode );
@@ -522,7 +522,7 @@ int CHAR_setChatMagicCDKey( int mode, char *cdkey);
 
 float GetRecoveryRate( int charaindex );
 int storeCharaData( void );
-#ifdef _MAGIC_REHPAI	//²¹ÑªAI
+#ifdef _MAGIC_REHPAI	//è¡¥è¡€AI
 int Magic_RideGetHP( int toindex, int petindex, int flg);
 #endif
 // CoolFish: Trade 2001/4/18
@@ -533,19 +533,19 @@ int CHAR_findTotalEmptyItem(int index);
 int CHAR_CHECKJOINENEMY( int index);
 #endif
 
-#ifdef _SEND_EFFECT	   	        // WON ADD ACËÍÏÂÑ©¡¢ÏÂÓêµÈÌØÐ§
+#ifdef _SEND_EFFECT	   	        // WON ADD ACé€ä¸‹é›ªã€ä¸‹é›¨ç­‰ç‰¹æ•ˆ
 #define		CHAR_EFFECT_SETTINGBUFFER	256
 typedef struct tagCHAR_effectsetting
 {
-    int     floor;								//	°×·òÊ§
-	int		effect;								//	ÉÒÇë  Ä¯
-	int		level;								//	ÉÒÇë¼°ÒÁÃ¬»ï£Û  òØ¼°ÐÛ½ñ£Û
-	int		sendflg;							//	  Ô÷¾Þ°×ÄáÛÍÐþÃ«ËªÔÈÐ×¾®Éýµ¤¾®£Û
-	char	month[CHAR_EFFECT_SETTINGBUFFER];	//	  µæÔÊÔÂ»û
-	char	day[CHAR_EFFECT_SETTINGBUFFER];		//	  µæÔÊÔÂ  
-	char	hour[CHAR_EFFECT_SETTINGBUFFER];	//	  µæÔÊÔÂÁÝÃÞ
-	char	min[CHAR_EFFECT_SETTINGBUFFER];		//	  µæÔÊÔÂÛÐ
-	char	expire[CHAR_EFFECT_SETTINGBUFFER];	//	  µæØÆ»¯ÖÐÔÂÓ®½ñ£Û(    
+    int     floor;								//	ç™½å¤«å¤±
+	int		effect;								//	æ¢¢è¯·  å¯ž
+	int		level;								//	æ¢¢è¯·åŠä¼ŠçŸ›ä¼™ï¼»  èœ‡åŠé›„ä»Šï¼»
+	int		sendflg;							//	  æ†Žå·¨ç™½å°¼å¼çŽ„æ¯›éœœåŒ€å‡¶äº•å‡ä¸¹äº•ï¼»
+	char	month[CHAR_EFFECT_SETTINGBUFFER];	//	  åž«å…æœˆç•¸
+	char	day[CHAR_EFFECT_SETTINGBUFFER];		//	  åž«å…æœˆ  
+	char	hour[CHAR_EFFECT_SETTINGBUFFER];	//	  åž«å…æœˆå‡›æ£‰
+	char	min[CHAR_EFFECT_SETTINGBUFFER];		//	  åž«å…æœˆåŒ
+	char	expire[CHAR_EFFECT_SETTINGBUFFER];	//	  åž«ä»„åŒ–ä¸­æœˆèµ¢ä»Šï¼»(    
 	
 }CHAR_effectsetting;
 

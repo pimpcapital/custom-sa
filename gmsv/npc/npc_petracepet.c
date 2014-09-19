@@ -10,8 +10,8 @@
 #ifdef _PETRACE
 #include "npc_petracepet.h"
 
-#define PETRACEPET_WAIT_LOOPTIME			30000	// 30Ãë
-#define PETRACEPET_SHOWWIN_LOOPTIME			10000	// 10Ãë
+#define PETRACEPET_WAIT_LOOPTIME			30000	// 30ç§’
+#define PETRACEPET_SHOWWIN_LOOPTIME			10000	// 10ç§’
 
 static void	NPC_PetRacePet_Walk(int meindex);
 static int NPC_PetRacePetSetPoint(int meindex, char *argstr);
@@ -113,7 +113,7 @@ void NPC_PetRacePetLoop( int meindex)
 						random = 3;
 				else
 					random = RAND(0, 8);
-				if (random == 0) // ¹¥»÷
+				if (random == 0) // æ”»å‡»
 				{
 					int rands = RAND(0, 3);
 					interval = 1500;
@@ -125,19 +125,19 @@ void NPC_PetRacePetLoop( int meindex)
 						int master = CHAR_getWorkInt(meindex, NPC_WORK_MASTER);
 						int randomi = RAND(1, 9);
 						if (randomi == 1)
-							snprintf(tmpbuf, sizeof(tmpbuf), "Å¶¡«¿´À´%sºÃÏñ·¢ÍşÁËà¡£¡",
+							snprintf(tmpbuf, sizeof(tmpbuf), "å“¦ï½çœ‹æ¥%så¥½åƒå‘å¨äº†å”·ï¼",
 								CHAR_getChar(meindex, CHAR_NAME));
 						else if (randomi == 2)
-							snprintf(tmpbuf, sizeof(tmpbuf), "%sÊ¹³öÁË·ÜÁ¦µÄÒ»»÷¡«",
+							snprintf(tmpbuf, sizeof(tmpbuf), "%sä½¿å‡ºäº†å¥‹åŠ›çš„ä¸€å‡»ï½",
 								CHAR_getChar(meindex, CHAR_NAME));
 						else if (randomi == 3)
-							snprintf(tmpbuf, sizeof(tmpbuf), "ß×...%s·¢Å­ÁË£¿",
+							snprintf(tmpbuf, sizeof(tmpbuf), "å’¦...%så‘æ€’äº†ï¼Ÿ",
 								CHAR_getChar(meindex, CHAR_NAME));
 						if (randomi > 0 && randomi < 4)
 							CHAR_talkToFloor(floor, master, tmpbuf, CHAR_COLORWHITE);
 					}
 				}
-				else if (random == 1) // ÔÎµ¹
+				else if (random == 1) // æ™•å€’
 				{
 					int rands = RAND(0, 3);
 					interval = 2500;
@@ -149,24 +149,24 @@ void NPC_PetRacePetLoop( int meindex)
 						int master = CHAR_getWorkInt(meindex, NPC_WORK_MASTER);
 						int randomi = RAND(1, 9);
 						if (randomi == 1)
-							snprintf(tmpbuf, sizeof(tmpbuf), "%sºÃÏñÔÎµ¹ÁËÄØ...",
+							snprintf(tmpbuf, sizeof(tmpbuf), "%så¥½åƒæ™•å€’äº†å‘¢...",
 								CHAR_getChar(meindex, CHAR_NAME));
 						else if (randomi == 2)
-							snprintf(tmpbuf, sizeof(tmpbuf), "%sÊÜÉËÁËÂğ£¿",
+							snprintf(tmpbuf, sizeof(tmpbuf), "%så—ä¼¤äº†å—ï¼Ÿ",
 								CHAR_getChar(meindex, CHAR_NAME));
 						else if (randomi == 3)
-							snprintf(tmpbuf, sizeof(tmpbuf), "ºÙ...%sÔÎµ¹ááÓÖÓÂ¸ÒµÄÅÀÆğÀ´ÁË£¡",
+							snprintf(tmpbuf, sizeof(tmpbuf), "å˜¿...%sæ™•å€’å¾Œåˆå‹‡æ•¢çš„çˆ¬èµ·æ¥äº†ï¼",
 								CHAR_getChar(meindex, CHAR_NAME));
 						if (randomi > 0 && randomi < 4)
 							CHAR_talkToFloor(floor, master, tmpbuf, CHAR_COLORWHITE);
 					}
 				}
-				else if (random == 2) // Õ¾Á¢
+				else if (random == 2) // ç«™ç«‹
 				{
 					interval = 500;
 					CHAR_sendAction(meindex, 3, FALSE);
 				}
-				else // Ò»°ã
+				else // ä¸€èˆ¬
 					interval = RAND(20, 100);
 				NPC_PetRacePet_Walk(meindex);
 				CHAR_setInt(meindex, CHAR_LOOPINTERVAL, interval);
@@ -202,7 +202,7 @@ static void NPC_PetRacePet_Walk(int meindex)
 
 		if (NPC_PetRacePetSetPoint(meindex, argstr) == FALSE)
 		{
-			// µ½´ïÄ¿µÄµØáá£¬³õÊ¼×´Ì¬
+			// åˆ°è¾¾ç›®çš„åœ°å¾Œï¼Œåˆå§‹çŠ¶æ€
 			char tmpbuf[256];
 			int masterindex = CHAR_getWorkInt(meindex, NPC_WORK_MASTER);
 			int petgoal = CHAR_getWorkInt(masterindex, CHAR_NPCWORKINT9);
@@ -212,7 +212,7 @@ static void NPC_PetRacePet_Walk(int meindex)
 				CHAR_warpToSpecificPoint(meindex, 7005,42,44);
 				CHAR_setWorkInt(masterindex, CHAR_NPCWORKINT8, meindex);
 				CHAR_sendAction(meindex, 3, FALSE);
-				snprintf(tmpbuf, sizeof(tmpbuf), "Ê×ÏÈµ½´ïÄ¿µÄµØµÄÊÇ...%s",
+				snprintf(tmpbuf, sizeof(tmpbuf), "é¦–å…ˆåˆ°è¾¾ç›®çš„åœ°çš„æ˜¯...%s",
 					CHAR_getChar(meindex, CHAR_NAME));
 				raceflag++;
 			}
@@ -220,17 +220,17 @@ static void NPC_PetRacePet_Walk(int meindex)
 			{
 				if(raceflag == 1)
 				{
-					//½«³èÎïËÍ»Øµ½Ö¸¶¨µÄ×ø±ê
+					//å°†å® ç‰©é€å›åˆ°æŒ‡å®šçš„åæ ‡
 					CHAR_warpToSpecificPoint(meindex, 7005,43,47);
-					snprintf(tmpbuf, sizeof(tmpbuf), "½Ó×Åµ½´ïÄ¿µÄµØµÄÊÇ...%s",
+					snprintf(tmpbuf, sizeof(tmpbuf), "æ¥ç€åˆ°è¾¾ç›®çš„åœ°çš„æ˜¯...%s",
 						CHAR_getChar(meindex, CHAR_NAME));
 					raceflag++;
 				}
 				else
 				{
-					//Íê³É×îºóÒ»¸ö³èÎïµÄ´«ËÍ£¬³õÊ¼»¯
+					//å®Œæˆæœ€åä¸€ä¸ªå® ç‰©çš„ä¼ é€ï¼Œåˆå§‹åŒ–
 					CHAR_warpToSpecificPoint(meindex, 7005,45,44);
-					snprintf(tmpbuf, sizeof(tmpbuf), "×îºóµ½´ïÄ¿µÄµØµÄÊÇ...%s",
+					snprintf(tmpbuf, sizeof(tmpbuf), "æœ€ååˆ°è¾¾ç›®çš„åœ°çš„æ˜¯...%s",
 						CHAR_getChar(meindex, CHAR_NAME));
 					raceflag=0;
 				}
@@ -264,7 +264,7 @@ static void NPC_PetRacePet_Walk(int meindex)
 
 static int NPC_PetRacePetSetPoint(int meindex, char *argstr)
 {
-	// Ñ°ÕÒÏÂÒ»²½ x , y
+	// å¯»æ‰¾ä¸‹ä¸€æ­¥ x , y
 	char buf[4096], buf2[256], buf3[256];
 	int ret;
 	char routetostring[64];

@@ -2,7 +2,7 @@
 
 static Char    player=
 {
-    FALSE,      /*  use     ¤É¤¦¤Ç¤â¤¤¤¤*/
+    FALSE,      /*  use     ã©ã†ã§ã‚‚ã„ã„*/
     {
 		0,		/*  CHAR_DATAPLACENUMBER */
         0,      /*  CHAR_BASEIMAGENUMBER */
@@ -11,7 +11,7 @@ static Char    player=
         0,      /*  CHAR_FLOOR  */
         0,      /*  CHAR_X */
         0,      /*  CHAR_Y  */
-        5,      /*  CHAR_DIR 12»þ¤ò0¤Ë»þ·×¼þ¤ê¤Ë */
+        5,      /*  CHAR_DIR 12ç®•ã‚’0ã«ç®•çº·ä»¶ã‚Šã« */
         1,      /*  CHAR_LV  */
         0,      /*  CHAR_GOLD    */
         1,      /*  CHAR_HP  */
@@ -26,10 +26,10 @@ static Char    player=
 
     	0,		/*  CHAR_CHARM	*/
     	0,		/*  CHAR_LUCK	*/
-		0,		/* ÃÏÂ°À­ */
-		0,		/* ¿åÂ°À­ */
-		0,		/* ²ÐÂ°À­ */
-		0,		/* É÷Â°À­ */
+		0,		/* å­ŸæŽ³æ‹‰ */
+		0,		/* åž®æŽ³æ‹‰ */
+		0,		/* æ®‹æŽ³æ‹‰ */
+		0,		/* æ…ŽæŽ³æ‹‰ */
 
 		0,		/* CHAR_SLOT*/
 		0,		/* CHAR_CRITIAL */
@@ -109,25 +109,25 @@ static Char    player=
 //#endif
 
 		0,	//CHAR_SILENT,				/* char shutup time */    
-		0,	//    CHAR_FMINDEX,				// ®a±Ú index
+		0,	//    CHAR_FMINDEX,				// ç”¢å£ index
 		0,	//    CHAR_FMLEADERFLAG,			
-								/* ®a±Ú¦¨­ûºØÃþ
-    							 * FMMEMBER_NONE	:¨S¦³¥[¤J¥ô¦ó®a±Ú
-    							 * FMMEMBER_APPLY	:¥Ó½Ð¥[¤J®a±Ú¤¤
-    							 * FMMEMBER_LEADER	:±Úªø
-    							 * FMMEMBER_MEMBER	:¤@¯ë¦¨­û
-    							 * FMMEMBER_ELDER	:ªø¦Ñ    
-    							 * FMMEMBER_INVITE	:²½¥q			// ¼È®É¤£¥Î
-    							 * FMMEMBER_BAILEE	:°]°Èªø			// ¼È®É¤£¥Î
-    							 * FMMEMBER_VICELEADER  :°Æ±Úªø		// ¼È®É¤£¥Î
+								/* ç”¢å£Î˜î…´è´ºæ‘¸
+    							 * FMMEMBER_NONE	:âŠ¿Î¤î™¡î—°ãƒ´îž–ç”¢å£
+    							 * FMMEMBER_APPLY	:ãƒ“å«î™¡î—°ç”¢å£ã„
+    							 * FMMEMBER_LEADER	:å£î—
+    							 * FMMEMBER_MEMBER	:î—¦îˆ Î˜î…´
+    							 * FMMEMBER_ELDER	:î—Ï    
+    							 * FMMEMBER_INVITE	:æ­¥î™·			// æ—¢î† ãƒãƒŽ
+    							 * FMMEMBER_BAILEE	:ç™©å­î—			// æ—¢î† ãƒãƒŽ
+    							 * FMMEMBER_VICELEADER  :æŒå£î—		// æ—¢î† ãƒãƒŽ
     							*/
-		0,	//    CHAR_FMSPRITE,		// ®a±Ú¦uÅ@ºëÆF
+		0,	//    CHAR_FMSPRITE,		// ç”¢å£î››è‡”å¼˜è‰¶
 
 		0,	//    CHAR_BANKGOLD,
 		0,	//    CHAR_RIDEPET,
 		0,	//    CHAR_LEARNRIDE,
  		0,	//   CHAR_LIMITLEVEL,
-#ifdef _PERSONAL_FAME	// Arminius 8.30: ®a±Ú­Ó¤HÁn±æ
+#ifdef _PERSONAL_FAME	// Arminius 8.30: ç”¢å£î…Œî—®ç¾˜è¾¨
 		0,	//    CHAR_FAME,
 #endif
 
@@ -136,32 +136,32 @@ static Char    player=
 #endif
  
 #ifdef _ATTACK_MAGIC
-		0,	//		CHAR_EARTH_EXP,						// ª±®aªº¦aÅ]ªk¼ô½m«×
-		0,	//		CHAR_WATER_EXP,						// ª±®aªº¤ôÅ]ªk¼ô½m«×
-		0,	//		CHAR_FIRE_EXP,						// ª±®aªº¤õÅ]ªk¼ô½m«×
-		0,	//		CHAR_WIND_EXP,						// ª±®aªº­·Å]ªk¼ô½m«×
-		0,	//		CHAR_EARTH_RESIST,					// ª±®aªº¦aÅ]ªk§Ü©Ê
-		0,	//		CHAR_WATER_RESIST,					// ª±®aªº¤ôÅ]ªk§Ü©Ê
-		0,	//		CHAR_FIRE_RESIST,					// ª±®aªº¤õÅ]ªk§Ü©Ê
-		0,	//		CHAR_WIND_RESIST,					// ª±®aªº­·Å]ªk§Ü©Ê
-		0,	//		CHAR_EARTH_ATTMAGIC_EXP,			// ª±®aªº¦aÅ]ªk¼ô½m«×¸gÅç­È
-		0,	//		CHAR_WATER_ATTMAGIC_EXP,			// ª±®aªº¤ôÅ]ªk¼ô½m«×¸gÅç­È
-		0,	//		CHAR_FIRE_ATTMAGIC_EXP,				// ª±®aªº¤õÅ]ªk¼ô½m«×¸gÅç­È
-		0,	//		CHAR_WIND_ATTMAGIC_EXP,				// ª±®aªº­·Å]ªk¼ô½m«×¸gÅç­È
-		0,	//	 	CHAR_EARTH_DEFMAGIC_EXP,			// ª±®aªº¦aÅ]ªk§Ü©Ê¸gÅç­È
-		0,	//		CHAR_WATER_DEFMAGIC_EXP,			// ª±®aªº¤ôÅ]ªk§Ü©Ê¸gÅç­È
-		0,	//		CHAR_FIRE_DEFMAGIC_EXP,				// ª±®aªº¤õÅ]ªk§Ü©Ê¸gÅç­È
-		0,	//		CHAR_WIND_DEFMAGIC_EXP,				// ª±®aªº­·Å]ªk§Ü©Ê¸gÅç­È
+		0,	//		CHAR_EARTH_EXP,						// î€ç”¢î€™î›‡è‡¸çŒ­å‰ªçµ¤î‚”
+		0,	//		CHAR_WATER_EXP,						// î€ç”¢î€™î²è‡¸çŒ­å‰ªçµ¤î‚”
+		0,	//		CHAR_FIRE_EXP,						// î€ç”¢î€™î³è‡¸çŒ­å‰ªçµ¤î‚”
+		0,	//		CHAR_WIND_EXP,						// î€ç”¢î€™î„°è‡¸çŒ­å‰ªçµ¤î‚”
+		0,	//		CHAR_EARTH_RESIST,					// î€ç”¢î€™î›‡è‡¸çŒ­Ðºâ”¦
+		0,	//		CHAR_WATER_RESIST,					// î€ç”¢î€™î²è‡¸çŒ­Ðºâ”¦
+		0,	//		CHAR_FIRE_RESIST,					// î€ç”¢î€™î³è‡¸çŒ­Ðºâ”¦
+		0,	//		CHAR_WIND_RESIST,					// î€ç”¢î€™î„°è‡¸çŒ­Ðºâ”¦
+		0,	//		CHAR_EARTH_ATTMAGIC_EXP,			// î€ç”¢î€™î›‡è‡¸çŒ­å‰ªçµ¤î‚”ç«’å–·î…
+		0,	//		CHAR_WATER_ATTMAGIC_EXP,			// î€ç”¢î€™î²è‡¸çŒ­å‰ªçµ¤î‚”ç«’å–·î…
+		0,	//		CHAR_FIRE_ATTMAGIC_EXP,				// î€ç”¢î€™î³è‡¸çŒ­å‰ªçµ¤î‚”ç«’å–·î…
+		0,	//		CHAR_WIND_ATTMAGIC_EXP,				// î€ç”¢î€™î„°è‡¸çŒ­å‰ªçµ¤î‚”ç«’å–·î…
+		0,	//	 	CHAR_EARTH_DEFMAGIC_EXP,			// î€ç”¢î€™î›‡è‡¸çŒ­Ðºâ”¦ç«’å–·î…
+		0,	//		CHAR_WATER_DEFMAGIC_EXP,			// î€ç”¢î€™î²è‡¸çŒ­Ðºâ”¦ç«’å–·î…
+		0,	//		CHAR_FIRE_DEFMAGIC_EXP,				// î€ç”¢î€™î³è‡¸çŒ­Ðºâ”¦ç«’å–·î…
+		0,	//		CHAR_WIND_DEFMAGIC_EXP,				// î€ç”¢î€™î„°è‡¸çŒ­Ðºâ”¦ç«’å–·î…
 #endif
 
 
 #ifdef _GAMBLE_BANK
-		0,	//		CHAR_PERSONAGOLD,	//½ä³õ­Ó¤H»È¦æ
+		0,	//		CHAR_PERSONAGOLD,	//æˆ’åˆî…Œî—®è—ï¸½
 #endif
 #ifdef _DROPSTAKENEW
-		0,	//		CHAR_GAMBLENUM,		//½ä³õ¿n¤À
+		0,	//		CHAR_GAMBLENUM,		//æˆ’åˆç¸©ã 
 #endif
-#ifdef _ADD_ACTION          //npc°Ê§@
+#ifdef _ADD_ACTION          //npcç¬†îœ†
 		0,	//		CHAR_ACTIONSTYLE,
 #endif
 
@@ -170,27 +170,27 @@ static Char    player=
 		0,	//		CHAR_FMTIMELIMIT,
 #endif
 
-#ifdef _ALLDOMAN // (¤£¥i¶}) Syu ADD ±Æ¦æº]NPC
+#ifdef _ALLDOMAN // (ãƒî™¯ç§¨) Syu ADD é€¼ï¸½ç¯¯NPC
 		0,	//		CHAR_HEROFLOOR, 
 #endif
 #ifdef _PETSKILL_BECOMEPIG
 		-1,	//		CHAR_BECOMEPIG,
 		100250, //CHAR_BECOMEPIG_BBI
 #endif
-		0,	//		CHAR_LASTLEAVETIME, // Robin add ³Ì«áÂ÷½u®É¶¡
+		0,	//		CHAR_LASTLEAVETIME, // Robin add ç¨‹î‚žçž’çµ¬î† ä¸
 
 #ifdef _ITEM_ADDEXP2
 		0,	//		CHAR_ADDEXPPOWER,
 		0,	//		CHAR_ADDEXPTIME,
 #endif
 #ifdef _GM_ITEM
-	  0, // Íæ¼ÒGMÃüÁî´ÎÊý
+	  0, // çŽ©å®¶GMå‘½ä»¤æ¬¡æ•°
 #endif
 #ifdef _VIP_SERVER
-	  0, // »áÔ±µãÊý
+	  0, // ä¼šå‘˜ç‚¹æ•°
 #endif
 #ifdef _VIP_RIDE
-	  0, // »áÔ±ÆïºÚ¼¦
+	  0, // ä¼šå‘˜éª‘é»‘é¸¡
 #endif
     },
 
