@@ -20,7 +20,7 @@
 #define MAXLSRPCARGS ( 7 + 1 )
 #endif
 
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅĞĞ°ñNPC
 void saacproto_UpdataStele_send( int fd , char *cdkey , char *name , char *title , int level , int trns , int time , int floor) ;
 void saacproto_UpdataStele_recv( int fd , char *token) ;
 void saacproto_S_UpdataStele_recv( int i , char *ocdkey , char *oname , char *ncdkey , 
@@ -86,7 +86,7 @@ void saacproto_SetClientLogFiles( char *read , char *write);
 void saacproto_CleanupClient(void);
 int saacproto_ClientDispatchMessage(int fd ,char*line);
 
-// æˆç«‹å®¶æ—
+// ³ÉÁ¢¼Ò×å
 #ifdef _PERSONAL_FAME
 void saacproto_ACAddFM_send(int fd, char *fmname, char *fmleadername,
 	char *fmleaderid, int fmleaderlv, char *petname, char *petarrt,
@@ -98,8 +98,8 @@ void saacproto_ACAddFM_send(int fd, char *fmname, char *fmleadername,
 #endif
 void saacproto_ACAddFM_recv(int fd, char *result, int fmindex, int index,
 	int charfdid);
-// åŠ å…¥å®¶æ—
-// #ifdef _PERSONAL_FAME	// Arminius: å®¶æ—ä¸ªäººå£°æœ›
+// ¼ÓÈë¼Ò×å
+// #ifdef _PERSONAL_FAME	// Arminius: ¼Ò×å¸öÈËÉùÍû
 void saacproto_ACJoinFM_send(int fd, char *fmname, int fmindex, char *charname,
         char *charid, int charlv, int index, int fame, int charfdid);
 // #else
@@ -107,27 +107,27 @@ void saacproto_ACJoinFM_send(int fd, char *fmname, int fmindex, char *charname,
 //        char *charid, int charlv, int index, int charfdid);
 // #endif
 void saacproto_ACJoinFM_recv(int fd, char *result, int recv, int charfdid);
-// é€€å‡ºå®¶æ—
+// ÍË³ö¼Ò×å
 void saacproto_ACLeaveFM_send(int fd, char *fmname, int fmindex, char *charname,
         char *charid, int index, int charfdid);
 void saacproto_ACLeaveFM_recv(int fd, char *result, int resultflag, int charfdid);
-// è§£æ•£å®¶æ—
+// ½âÉ¢¼Ò×å
 void saacproto_ACDelFM_send(int fd, char *fmname, int fmindex, int index,
 	char *charname, char *charid, int charfdid);
 
 void saacproto_ACDelFM_recv(int fd, char *result, int charfdid);
-// åˆ—å‡ºå®¶æ—åˆ—è¡¨
+// ÁĞ³ö¼Ò×åÁĞ±í
 void saacproto_ACShowFMList_send(int fd);
 void saacproto_ACShowFMList_recv(int fd, char *result, int num, char *data);
-// åˆ—å‡ºæˆå‘˜åˆ—è¡¨
+// ÁĞ³ö³ÉÔ±ÁĞ±í
 void saacproto_ACShowMemberList_send(int fd, int index);
 void saacproto_ACShowMemberList_recv(int fd, char *result, int index, int num,
 	int fmacceptflag, int fmjoinnum, char *data);
-// åˆ—å‡ºå®¶æ—è¯¦ç»†èµ„æ–™
+// ÁĞ³ö¼Ò×åÏêÏ¸×ÊÁÏ
 void saacproto_ACFMDetail_send(int fd, char *fmname, int fmindex,
 	int index, int charfdid);
 void saacproto_ACFMDetail_recv(int fd, char *result, char *data, int charfdid);
-//æ—é•¿å®¡æ ¸æˆå‘˜åŠ å…¥å®¶æ—ã€ä¿®æ”¹å®¶æ—æˆå‘˜èŒä½
+//×å³¤ÉóºË³ÉÔ±¼ÓÈë¼Ò×å¡¢ĞŞ¸Ä¼Ò×å³ÉÔ±Ö°Î»
 #ifdef _FMVER21
 void saacproto_ACMemberJoinFM_send(int fd, char *fmname, int fmindex, char *charname,
 	int charindex, int index, int result, int meindex, int charfdid);
@@ -136,7 +136,7 @@ void saacproto_ACMemberJoinFM_send(int fd, char *fmname, int fmindex, char *char
 	int charindex, int index, int result, int charfdid);
 #endif
 void saacproto_ACMemberJoinFM_recv(int fd, char *result, char *data, int charfdid);
-//æ—é•¿å®¡æ ¸æˆå‘˜ç¦»å¼€å®¶æ—
+//×å³¤ÉóºË³ÉÔ±Àë¿ª¼Ò×å
 #ifdef _FMVER21
 void saacproto_ACMemberLeaveFM_send(int fd, char *fmname, int fmindex, char *charname,
 	int charindex, int index, int meindex, int charfdid);
@@ -145,7 +145,7 @@ void saacproto_ACMemberLeaveFM_send(int fd, char *fmname, int fmindex, char *cha
 	int charindex, int index, int charfdid);
 #endif
 void saacproto_ACMemberLeaveFM_recv(int fd, char *result, char *data, int charfdid);
-//ç©å®¶ Login
+//Íæ¼Ò Login
 #ifdef _FM_MODIFY
 void saacproto_ACFMCharLogin_send(int fd, char *fmname, int fmindex, char *charname,
 		      char *charid, int charlv, int eventflag, int charfdid,int gsnum);
@@ -158,7 +158,7 @@ void saacproto_ACFMCharLogin_send(int fd, char *fmname, int fmindex, char *charn
 		char *charid, int result, int charfdid);
 	#endif
 #endif
-#ifdef _PERSONAL_FAME   // Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME   // Arminius: ¼Ò×å¸öÈËÉùÍû
 void saacproto_ACFMCharLogin_recv(int fd, char *result, int index, int floor,
 	int fmdp, int joinflag, int fmsetupflag, int flag, int charindex,
 	int charfame, int charfdid
@@ -168,42 +168,42 @@ void saacproto_ACFMCharLogin_recv(int fd, char *result, int index, int floor,
 	int fmdp, int joinflag, int fmsetupflag, int flag, int charindex,
 	int charfdid);
 #endif
-// ç©å®¶ Logout
+// Íæ¼Ò Logout
 void saacproto_ACFMCharLogout_send(int fd, char *fmname, int fmindex, char *charname,
 	char *charid, int result, int index, int charfdid);
 void saacproto_ACFMCharLogout_recv(int fd, char *result, int charfdid);
-// åˆ—å‡ºå®¶æ—ç•™è¨€æ¿
+// ÁĞ³ö¼Ò×åÁôÑÔ°å
 void saacproto_ACFMReadMemo_send(int fd, int index);
 void saacproto_ACFMReadMemo_recv(int fd, char *result, int index, int num,
         int dataindex, char *data);
-// å†™å…¥å®¶æ—ç•™è¨€æ¿
+// Ğ´Èë¼Ò×åÁôÑÔ°å
 void saacproto_ACFMWriteMemo_send(int fd, char *fmname, int fmindex,
         char *data, int index);
 void saacproto_ACFMWriteMemo_recv(int fd, char *result, int index);
-// åˆ—å‡ºå®¶æ—æ®ç‚¹
+// ÁĞ³ö¼Ò×å¾İµã
 void saacproto_ACFMPointList_send(int fd);
 void saacproto_ACFMPointList_recv(int fd, char *result, char *data);
 
-// ç”³è¯·å®¶æ—æ®ç‚¹
+// ÉêÇë¼Ò×å¾İµã
 void saacproto_ACSetFMPoint_send(int fd, char* fmname, int fmindex, int index,
 	int fmpointindex, int fl, int x, int y, int charfdid);
 void saacproto_ACSetFMPoint_recv(int fd, char *result, int r, int charfdid);
-// è®¾å®šå®¶æ—æ®ç‚¹
+// Éè¶¨¼Ò×å¾İµã
 void saacproto_ACFixFMPoint_send(int fd, char *winfmname, int winfmindex,
         int winindex, char *losefmname, int losefmindex, int loseindex,
         int village);
 void saacproto_ACFixFMPoint_recv(int fd, char *result, int r);
-// æ—é•¿å¯¹æ˜Ÿç³»å®¶æ—æˆå‘˜å¹¿æ’­
-// kindflag 1:æ—é•¿å¹¿æ’­ 2:å®¶æ—è¢«ç³»ç»Ÿåˆ é™¤ 3:ç³»ç»Ÿé€šçŸ¥è®¯æ¯
+// ×å³¤¶ÔĞÇÏµ¼Ò×å³ÉÔ±¹ã²¥
+// kindflag 1:×å³¤¹ã²¥ 2:¼Ò×å±»ÏµÍ³É¾³ı 3:ÏµÍ³Í¨ÖªÑ¶Ï¢
 void saacproto_ACFMAnnounce_send(int fd, char *fmname, int fmindex, int index,
 	char *data, int color);
 void saacproto_ACFMAnnounce_recv(int fd, char *result, char *fmname,
 	int fmindex, int index, int kindflag, char *data, int color);
-// åˆ—å‡º TOP 50 å®¶æ—åˆ—è¡¨
+// ÁĞ³ö TOP 50 ¼Ò×åÁĞ±í
 void saacproto_ACShowTopFMList_send(int fd, int kindflag);
 void saacproto_ACShowTopFMList_recv(int fd, char *result, int kindflag,
 	int num, char *data);
-// ä¿®æ­£å®¶æ—èµ„æ–™(æ˜¯å¦æ‹›æ”¶æˆå‘˜)
+// ĞŞÕı¼Ò×å×ÊÁÏ(ÊÇ·ñÕĞÊÕ³ÉÔ±)
 // flag 1:acceptjoinflag 2:dpchanged 3:change fmpet 4:change fminfo 5:predel FM Time
 void saacproto_ACFixFMData_send(int fd, char *fmname, int fmindex, int index,
 	int kindflag,char *data1,char *data2,int charindex, int charfdid);
@@ -211,22 +211,22 @@ void saacproto_ACFixFMData_send(int fd, char *fmname, int fmindex, int index,
 void saacproto_ACFixFMData_recv(int fd, char *result, int kindflag, char *data1,
 	char *data2, int charfdid);
 
-// ï¼°ï¼«å¾Œæ›´æ–°å®¶æ—å£°æœ›
+// £Ğ£Ëáá¸üĞÂ¼Ò×åÉùÍû
 void saacproto_ACFixFMPK_send(int fd, char *winfmname, int winfmindex,
         int winindex, char *losefmname, int losefmindex, int loseindex);
 void saacproto_ACFixFMPK_recv(int fd, char *result, int data, int winindex,
 	int loseindex);
-// å–å¾—å®¶æ—èµ„æ–™
-// kindflag 1:å®¶æ—é“¶è¡Œ
+// È¡µÃ¼Ò×å×ÊÁÏ
+// kindflag 1:¼Ò×åÒøĞĞ
 void saacproto_ACGetFMData_send(int fd, char *fmname, int fmindex, int index,
         int kindflag, int charfdid);
 void saacproto_ACGetFMData_recv(int fd, char *result, int kindflag, int data,
 	int charfdid);
-// ï¼§ï¼­ä¿®æ­£å®¶æ—èµ„æ–™
+// £Ç£ÍĞŞÕı¼Ò×å×ÊÁÏ
 void saacproto_ACGMFixFMData_send(int fd, int index, char *charid, char *cmd,
 	char *data, int charfdid);
 void saacproto_ACGMFixFMData_recv(int fd, char *result, char *fmindex, int charfdid);
-// åˆ é™¤å®¶æ—å¾Œæ¸…é™¤å¯¹æˆ˜æ’ç¨‹
+// É¾³ı¼Ò×åááÇå³ı¶ÔÕ½ÅÅ³Ì
 void saacproto_ACFMClearPK_recv(int fd, char *result, char *fmname, int fmindex,
         int index);
 
@@ -245,7 +245,7 @@ void saacproto_ACSendFmPk_send(int fd, int toindex, int PkFlg, int fmpks_pos, ch
 void saacproto_ACAuctionSold_send(int fd, char *data);
 void saacproto_ACAuctionSold_recv(int fd, char *data);
 
-#ifdef _WAEI_KICK	//è·¨æ˜Ÿçƒè¸¢äºº
+#ifdef _WAEI_KICK	//¿çĞÇÇòÌßÈË
 void saacproto_ACKick_send( int fd, char* kickid,int kickfd, int flg);
 void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd);
 #endif

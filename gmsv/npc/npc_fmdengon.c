@@ -10,26 +10,26 @@
 #include "npc_fmdengon.h"
 #include "family.h"
 
-#define DENGONFILELINENUM      35     // æ•´ä¸ªå…¬å¸ƒæ çš„èµ„æ–™ç¬”æ•°
-#define FMSDENGONFILELINENUM   140    // å®¶æ—é—´çš„ç•™è¨€æ¿èµ„æ–™ç¬”æ•°
-#define DENGONFILEENTRYSIZE    128    // æœ¬æ–‡å¤§å°
-#define MESSAGEINONEWINDOW     7      // æ¯é¡µæ‰€æ˜¾ç¤ºçš„ç¬”æ•°
-#define FMMAXNUM               1000   // å®¶æ—æ•°é‡çš„æœ€å¤§å€¼
-#define FM_MEMBERLIST          2      // å®¶æ—æˆå‘˜åˆ—è¡¨    (ä¸»åŠŸèƒ½è¡¨çš„æŒ‰é”®)
-#define FM_MEMBERMEMO          3      // å®¶æ—ç•™è¨€        (ä¸»åŠŸèƒ½è¡¨çš„æŒ‰é”®)
-#define FM_FMMEMO              4      // å®¶æ—ä¹‹é—´ç•™è¨€æ¿  (ä¸»åŠŸèƒ½è¡¨çš„æŒ‰é”®)
-#define FM_FMPOINT             5      // ç”³è¯·å®¶æ—æ®ç‚¹    (ä¸»åŠŸèƒ½è¡¨çš„æŒ‰é”®)
-#define FM_FMDPTOP             6      // å®¶æ—é—´å¼ºè€…è¡¨    (ä¸»åŠŸèƒ½è¡¨çš„æŒ‰é”®)
+#define DENGONFILELINENUM      35     // Õû¸ö¹«²¼À¸µÄ×ÊÁÏ±ÊÊı
+#define FMSDENGONFILELINENUM   140    // ¼Ò×å¼äµÄÁôÑÔ°å×ÊÁÏ±ÊÊı
+#define DENGONFILEENTRYSIZE    128    // ±¾ÎÄ´óĞ¡
+#define MESSAGEINONEWINDOW     7      // Ã¿Ò³ËùÏÔÊ¾µÄ±ÊÊı
+#define FMMAXNUM               1000   // ¼Ò×åÊıÁ¿µÄ×î´óÖµ
+#define FM_MEMBERLIST          2      // ¼Ò×å³ÉÔ±ÁĞ±í    (Ö÷¹¦ÄÜ±íµÄ°´¼ü)
+#define FM_MEMBERMEMO          3      // ¼Ò×åÁôÑÔ        (Ö÷¹¦ÄÜ±íµÄ°´¼ü)
+#define FM_FMMEMO              4      // ¼Ò×åÖ®¼äÁôÑÔ°å  (Ö÷¹¦ÄÜ±íµÄ°´¼ü)
+#define FM_FMPOINT             5      // ÉêÇë¼Ò×å¾İµã    (Ö÷¹¦ÄÜ±íµÄ°´¼ü)
+#define FM_FMDPTOP             6      // ¼Ò×å¼äÇ¿Õß±í    (Ö÷¹¦ÄÜ±íµÄ°´¼ü)
 #define FM_WAITTIME            (3*60)
-#define FMSDENGON_SN           10000  // å®¶æ—ä¹‹é—´çš„ç•™è¨€æ¿çš„è¯†åˆ«ç 
+#define FMSDENGON_SN           10000  // ¼Ò×åÖ®¼äµÄÁôÑÔ°åµÄÊ¶±ğÂë
 
-extern struct  FMMEMBER_LIST memberlist[FMMAXNUM];         // æ¥æ”¶ AC æˆå‘˜åˆ—è¡¨èµ„æ–™çš„ ARRAY 
-extern struct  FMS_MEMO fmsmemo;                           // å®¶æ—ä¹‹é—´çš„ç•™è¨€æ¿
-extern struct  FM_POINTLIST fmpointlist;                   // å®¶æ—æ®ç‚¹
-extern struct  FMS_DPTOP fmdptop;                          // å®¶æ—å¼ºè€…è¡¨
-extern int leaderdengonindex;                              // 777 å®¶æ—å…¬å¸ƒæ  index
-char NPC_sendbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];  // ä¸€æ•´é¡µçš„å¤§å°
-char enlistbuf[4096];                                        // å®¶æ—æˆå‘˜å¬å‹Ÿ BUF(æ˜¾ç¤ºç”¨çš„)
+extern struct  FMMEMBER_LIST memberlist[FMMAXNUM];         // ½ÓÊÕ AC ³ÉÔ±ÁĞ±í×ÊÁÏµÄ ARRAY 
+extern struct  FMS_MEMO fmsmemo;                           // ¼Ò×åÖ®¼äµÄÁôÑÔ°å
+extern struct  FM_POINTLIST fmpointlist;                   // ¼Ò×å¾İµã
+extern struct  FMS_DPTOP fmdptop;                          // ¼Ò×åÇ¿Õß±í
+extern int leaderdengonindex;                              // 777 ¼Ò×å¹«²¼À¸ index
+char NPC_sendbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];  // Ò»ÕûÒ³µÄ´óĞ¡
+char enlistbuf[4096];                                        // ¼Ò×å³ÉÔ±ÕÙÄ¼ BUF(ÏÔÊ¾ÓÃµÄ)
 
 unsigned long READTIME1 = 0,
               READTIME2 = 0,
@@ -40,7 +40,7 @@ unsigned long READTIME1 = 0,
 void ApplyFamilyPoint( int meindex, int toindex, int select);
 #endif
 
-// å…¬å¸ƒæ çš„åˆå§‹åŒ–(when gmsv start)
+// ¹«²¼À¸µÄ³õÊ¼»¯(when gmsv start)
 BOOL NPC_FmDengonInit( int meindex)
 {
     int fmindex=CHAR_getInt(meindex, CHAR_FMINDEX);
@@ -58,12 +58,12 @@ BOOL NPC_FmDengonInit( int meindex)
 	        READTIME3 = NowTime.tv_sec+FM_WAITTIME,
 	        READTIME4 = NowTime.tv_sec+FM_WAITTIME;
 	       
-	        // å–å¾—å®¶æ—çš„æˆå‘˜åˆ—è¡¨(memberlist struct)ï¼Œä»¥åŠå®¶æ—çš„ç•™è¨€æ¿
+	        // È¡µÃ¼Ò×åµÄ³ÉÔ±ÁĞ±í(memberlist struct)£¬ÒÔ¼°¼Ò×åµÄÁôÑÔ°å
 
 	        saacproto_ACShowMemberList_send( acfd, fmindex);
 	        saacproto_ACFMReadMemo_send( acfd, fmindex);
 
-	        // å®¶æ—ä¹‹é—´çš„ç•™è¨€æ¿æ‰€ä¼ çš„å€¼é¢„è®¾ä¸º FMSDENGON_SN
+	        // ¼Ò×åÖ®¼äµÄÁôÑÔ°åËù´«µÄÖµÔ¤ÉèÎª FMSDENGON_SN
 	        saacproto_ACFMReadMemo_send( acfd, FMSDENGON_SN);
 	        saacproto_ACFMPointList_send(acfd);
 	        saacproto_ACShowTopFMList_send(acfd, FM_TOP_INTEGRATE);
@@ -95,13 +95,13 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
     
     CONNECT_setLastrecvtime_D( getfdFromCharaIndex( talker), &NowTime);
 #ifndef _FM_MODIFY
-    // è·ç¦»è¶…å‡º DENGONDISTANCE çš„  å›´å†…æ—¶ï¼Œå³å–æ¶ˆåŠ¨ä½œ
+    // ¾àÀë³¬³ö DENGONDISTANCE µÄ  Î§ÄÚÊ±£¬¼´È¡Ïû¶¯×÷
 #define DENGONDISTANCE 3	
     if( CHAR_getInt(index, CHAR_FLOOR) != 777 )
         if(NPC_Util_CharDistance( index, talker) > DENGONDISTANCE) return;
 #endif
     
-    // å®¶æ—ç•™è¨€æ¿
+    // ¼Ò×åÁôÑÔ°å
     if( seqno == CHAR_WINDOWTYPE_FM_DENGON)
     {
 			int dengonindex;
@@ -260,7 +260,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
       }  // Switch End
     }  // If End
         
-    // å®¶æ—ä¹‹é—´ç•™è¨€æ¿
+    // ¼Ò×åÖ®¼äÁôÑÔ°å
     else if(seqno == CHAR_WINDOWTYPE_FM_FMSDENGON)
     {
 			int dengonindex;
@@ -355,7 +355,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 #else
 					if( CHAR_getInt( talker, CHAR_FMLEADERFLAG) != 1){              
 #endif              
-							sprintf( NPC_sendbuf, "              ã€è­¦       å‘Šã€\n æŠ±æ­‰ï¼ä½ ä¸æ˜¯æ—é•¿ï¼Œæ‰€ä»¥ä»…èƒ½æŸ¥çœ‹ã€‚");
+							sprintf( NPC_sendbuf, "              ¡º¾¯       ¸æ¡»\n ±§Ç¸£¡Äã²»ÊÇ×å³¤£¬ËùÒÔ½öÄÜ²é¿´¡£");
 							lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 								WINDOW_BUTTONTYPE_OK,
 								-1,
@@ -432,7 +432,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
       }  // Switch End
     }  // If End
         
-    // è¯´æ˜è§†çª—(å®¶æ—æ®ç‚¹)
+    // ËµÃ÷ÊÓ´°(¼Ò×å¾İµã)
     else if( seqno == CHAR_WINDOWTYPE_FM_MESSAGE1)
     {
 			int fd;
@@ -456,7 +456,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						int tkfmindex = CHAR_getWorkInt(talker, CHAR_WORKFMINDEXI);
 						int i,check=TRUE;
 						char fmindex[4];
-						for(i=0; i<MANORNUM; i++){	// 10ä¸ªåº„å›­
+						for(i=0; i<MANORNUM; i++){	// 10¸ö×¯Ô°
 						  getStringFromIndexWithDelim(fmpointlist.pointlistarray[i], "|", 5, fmindex, sizeof(fmindex));
 						  if(tkfmindex==atoi(fmindex)-1 ){
 						  	 check=FALSE;
@@ -464,7 +464,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						  }
 						}
 					  if(check==TRUE){
-							for (i=CHAR_getInt( talker, CHAR_LISTPAGE); i<CHAR_getInt( talker, CHAR_LISTPAGE)+5; i++){	// 10ä¸ªåº„å›­
+							for (i=CHAR_getInt( talker, CHAR_LISTPAGE); i<CHAR_getInt( talker, CHAR_LISTPAGE)+5; i++){	// 10¸ö×¯Ô°
 							  getStringFromIndexWithDelim(fmpointlist.pointlistarray[i], "|", 5, fmindex, sizeof(fmindex));
 						 	  if(atoi(fmindex)<=0 ){
 						   		check=TRUE;
@@ -474,46 +474,46 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						}
 					  if(check==TRUE){
 					   	windowtype = WINDOW_MESSAGETYPE_SELECT;
-							strcpy(pointbuf,"3\n        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+							strcpy(pointbuf,"3\n        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 					  }else{
 					  	windowtype = WINDOW_MESSAGETYPE_MESSAGE;
-					   	strcpy(pointbuf,"        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+					   	strcpy(pointbuf,"        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 							
 						}
 					}else{
-						strcpy(pointbuf,"        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+						strcpy(pointbuf,"        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 					}
-					strcat(pointbuf," â€œåœ°ã€€ç‚¹â€â€œä¸œâ€â€œå—â€â€œçŠ¶ã€€ã€€æ€â€\n");
+					strcat(pointbuf," ¡°µØ¡¡µã¡±¡°¶«¡±¡°ÄÏ¡±¡°×´¡¡¡¡Ì¬¡±\n");
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",3, x, sizeof( x));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",4, y, sizeof( y));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",5, fmindex, sizeof( fmindex));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",6, name, sizeof( name));
-					if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-					sprintf(pointbuf,"%s  è¨å§†å‰å°”  %3s   %3s   %s\n", pointbuf, x, y, name);
+					if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+					sprintf(pointbuf,"%s  ÈøÄ·¼ª¶û  %3s   %3s   %s\n", pointbuf, x, y, name);
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",3, x, sizeof( x));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",4, y, sizeof( y));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",5, fmindex, sizeof( fmindex));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",6, name, sizeof( name));
-					if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-					sprintf(pointbuf,"%s  ç›ä¸½å¨œæ–¯  %3s   %3s   %s\n", pointbuf, x, y, name);
+					if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+					sprintf(pointbuf,"%s  ÂêÀöÄÈË¹  %3s   %3s   %s\n", pointbuf, x, y, name);
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",3, x, sizeof( x));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",4, y, sizeof( y));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",5, fmindex, sizeof( fmindex));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",6, name, sizeof( name));
-					if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-					sprintf(pointbuf,"%s  åŠ ã€€ã€€åŠ   %3s   %3s   %s\n", pointbuf, x, y, name);
+					if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+					sprintf(pointbuf,"%s  ¼Ó¡¡¡¡¼Ó  %3s   %3s   %s\n", pointbuf, x, y, name);
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",3, x, sizeof( x));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",4, y, sizeof( y));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",5, fmindex, sizeof( fmindex));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",6, name, sizeof( name));
-					if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-					sprintf(pointbuf,"%s  å¡é²ä»–é‚£  %3s   %3s   %s\n", pointbuf, x, y, name);
+					if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+					sprintf(pointbuf,"%s  ¿¨Â³ËûÄÇ  %3s   %3s   %s\n", pointbuf, x, y, name);
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",3, x, sizeof( x));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",4, y, sizeof( y));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",5, fmindex, sizeof( fmindex));
 					getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",6, name, sizeof( name));
-					if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-					sprintf(pointbuf,"%s  ä¼Šã€€ã€€ç”¸  %3s   %3s   %s\n", pointbuf, x, y, name);
+					if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+					sprintf(pointbuf,"%s  ÒÁ¡¡¡¡µé  %3s   %3s   %s\n", pointbuf, x, y, name);
 #else
 					int i;
 					strcpy( pointbuf, fmpointlist.pointlistarray[0]);
@@ -551,7 +551,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 			}
     }        
 
-    // è¯´æ˜è§†çª—(æˆå‘˜åˆ—è¡¨)
+    // ËµÃ÷ÊÓ´°(³ÉÔ±ÁĞ±í)
     else if( seqno == CHAR_WINDOWTYPE_FM_MESSAGE2)
     {
 			int fd,i;
@@ -573,8 +573,8 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						strcat( numberlistbuf, memberlist[fmindex_wk].numberlistarray[i]);
 						strcat( numberlistbuf, "\n");
 					}
-					// å¢åŠ ç¨‹å¼ç (å‘ACè¦å¬å‹Ÿäººå‘˜çš„å€¼)
-					sprintf(enlistbuf, "æ˜¯å¦ç»§ç»­å¬å‹Ÿå®¶æ—äººå‘˜|0|%d",memberlist[fmindex_wk].accept);
+					// Ôö¼Ó³ÌÊ½Âë(ÏòACÒªÕÙÄ¼ÈËÔ±µÄÖµ)
+					sprintf(enlistbuf, "ÊÇ·ñ¼ÌĞøÕÙÄ¼¼Ò×åÈËÔ±|0|%d",memberlist[fmindex_wk].accept);
 					strcat( numberlistbuf, enlistbuf);
 					strcat( numberlistbuf, "\n");
 					lssproto_WN_send( fd, WINDOW_FMMESSAGETYPE_SELECT,
@@ -594,7 +594,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 			}
     }        
 
-    // å¼ºè€…è¡¨çš„é€‰é¡¹è§†çª—
+    // Ç¿Õß±íµÄÑ¡ÏîÊÓ´°
     else if( seqno == CHAR_WINDOWTYPE_FM_DPSELECT)
     {
 			int fmindex_wk;
@@ -609,7 +609,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 			
 			buttonevent = atoi(data);
 			switch( buttonevent ){
-			case 1:				// å‰ååå¤§å®¶æ—ç»¼åˆå£°æœ›åˆ—è¡¨
+			case 1:				// Ç°ÈşÊ®´ó¼Ò×å×ÛºÏÉùÍûÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -639,7 +639,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 2:				// å‰åå¤§å®¶æ—å†’é™©åˆ—è¡¨
+			case 2:				// Ç°Ê®´ó¼Ò×åÃ°ÏÕÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -665,7 +665,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 3:				// å‰åå¤§å®¶æ—ä¼ºè‚²åˆ—è¡¨
+			case 3:				// Ç°Ê®´ó¼Ò×åËÅÓıÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -691,7 +691,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 4:				// å‰åå¤§å®¶æ—åˆæˆåˆ—è¡¨
+			case 4:				// Ç°Ê®´ó¼Ò×åºÏ³ÉÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -717,7 +717,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 5:				// å‰åå¤§å®¶æ—æ–™ç†åˆ—è¡¨
+			case 5:				// Ç°Ê®´ó¼Ò×åÁÏÀíÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -743,7 +743,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 6:				// å‰åå¤§å®¶æ—ï¼°ï¼«åˆ—è¡¨
+			case 6:				// Ç°Ê®´ó¼Ò×å£Ğ£ËÁĞ±í
 				{
 					int  fd,i;
 					char listbuf[4096];
@@ -769,7 +769,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						makeEscapeString( listbuf, buf, sizeof(buf)));
 				}
 				break;
-			case 7:				// è‡ªå·±å®¶æ—å£°æœ›æ’è¡Œæ¦œ
+			case 7:				// ×Ô¼º¼Ò×åÉùÍûÅÅĞĞ°ñ
 				{
 					int  fd,i,h,k,fmid;
 					char listbuf[4096];
@@ -779,7 +779,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 					
 					fmid = CHAR_getWorkInt(talker, CHAR_WORKFMINDEXI);
 					if( fmid < 0 ){
-						sprintf( NPC_sendbuf, "              ã€è­¦       å‘Šã€\n æŠ±æ­‰ï¼ä½ ä¸æ˜¯å®¶æ—äººå‘˜ï¼Œæ— æ³•æŸ¥çœ‹ã€‚");
+						sprintf( NPC_sendbuf, "              ¡º¾¯       ¸æ¡»\n ±§Ç¸£¡Äã²»ÊÇ¼Ò×åÈËÔ±£¬ÎŞ·¨²é¿´¡£");
 						lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE, WINDOW_BUTTONTYPE_OK,
 							-1,
 							-1,
@@ -791,7 +791,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						if( fmdptop.fmtopid[h] == fmid ) 
 							break;
 						
-						k = h;                 // æ ‡ç¤ºé¢œè‰²ç”¨(å¤šä¼ ä¸€ä¸ª1ï¼Œä»¥ä¾›Clientä¹‹ç”¨)
+						k = h;                 // ±êÊ¾ÑÕÉ«ÓÃ(¶à´«Ò»¸ö1£¬ÒÔ¹©ClientÖ®ÓÃ)
 						if(h <= 4) h = 0;
 						else if(h >= 994 ) h = 990;
 						else h -= 4;
@@ -825,7 +825,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
         }
     }
         
-    // é€‰é¡¹è§†çª—
+    // Ñ¡ÏîÊÓ´°
     else if( seqno == CHAR_WINDOWTYPE_FM_SELECT)
     {
 			int fmindex_wk;
@@ -849,7 +849,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 					if( fd == -1 )  return;
 					
 					if( CHAR_getInt(talker, CHAR_FMINDEX) <= 0){  
-						sprintf( NPC_sendbuf, "              ã€è­¦       å‘Šã€\n æŠ±æ­‰ï¼ä½ ä¸æ˜¯å®¶æ—äººå‘˜ï¼Œä¸å¾—ä½¿ç”¨å…¬å¸ƒæ ã€‚");
+						sprintf( NPC_sendbuf, "              ¡º¾¯       ¸æ¡»\n ±§Ç¸£¡Äã²»ÊÇ¼Ò×åÈËÔ±£¬²»µÃÊ¹ÓÃ¹«²¼À¸¡£");
 						lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE, WINDOW_BUTTONTYPE_OK,
 							-1, -1, makeEscapeString( NPC_sendbuf, buf, sizeof(buf)));
 						return;
@@ -879,9 +879,9 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 #else
 						if( CHAR_getInt( talker, CHAR_FMLEADERFLAG) == 1 ){
 #endif              
-							sprintf( NPC_sendbuf, "               ã€æ— é•¿ éœ€ çŸ¥ã€\nè¯·å°å¿ƒå¤„ç†æ—å‘˜çš„èµ„æ–™ï¼Œä¸€ç»ä¿®æ”¹å¾Œå°±æ— æ³•å›å¤åŸæ€ï¼Œæ•¬è¯·å°å¿ƒã€‚");
+							sprintf( NPC_sendbuf, "               ¡º×å ³¤ Ğè Öª¡»\nÇëĞ¡ĞÄ´¦Àí×åÔ±µÄ×ÊÁÏ£¬Ò»¾­ĞŞ¸Äáá¾ÍÎŞ·¨»Ø¸´Ô­Ì¬£¬¾´ÇëĞ¡ĞÄ¡£");
 						}else{
-							sprintf( NPC_sendbuf, "               ã€åˆ— è¡¨ éœ€ çŸ¥ã€\n æ­¤è¡¨æ—é•¿å¯ä½œä¿®æ”¹ï¼Œæ—å‘˜ä»…èƒ½æŸ¥çœ‹ã€‚");
+							sprintf( NPC_sendbuf, "               ¡ºÁĞ ±í Ğè Öª¡»\n ´Ë±í×å³¤¿É×÷ĞŞ¸Ä£¬×åÔ±½öÄÜ²é¿´¡£");
 						}
 						
 						lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
@@ -908,11 +908,11 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						if( CHAR_getInt( talker, CHAR_FMLEADERFLAG) == 1 ){
 #endif              
 							saacproto_ACFMPointList_send(acfd);
-							sprintf( NPC_sendbuf, "               ã€æ— é•¿ éœ€ çŸ¥ã€\nè¯·å°å¿ƒæ…é€‰æ‰€ç”³è¯·çš„æ®ç‚¹ï¼Œä¸€ä½†é€‰å–æ®ç‚¹å¾Œå°±æ— æ³•å›å¤åŸæ€ï¼Œæ•¬è¯·å°å¿ƒã€‚");
+							sprintf( NPC_sendbuf, "               ¡º×å ³¤ Ğè Öª¡»\nÇëĞ¡ĞÄÉ÷Ñ¡ËùÉêÇëµÄ¾İµã£¬Ò»µ«Ñ¡È¡¾İµãáá¾ÍÎŞ·¨»Ø¸´Ô­Ì¬£¬¾´ÇëĞ¡ĞÄ¡£");
 							READTIME4 = NowTime.tv_sec+FM_WAITTIME;
 						}
 						else{
-							sprintf( NPC_sendbuf, "               ã€åˆ— è¡¨ éœ€ çŸ¥ã€\næ­¤è¡¨æ—é•¿å¯ä»¥ç”³è¯·ï¼Œå…¶é¦€ä»…èƒ½æŸ¥çœ‹ã€‚");
+							sprintf( NPC_sendbuf, "               ¡ºÁĞ ±í Ğè Öª¡»\n´Ë±í×å³¤¿ÉÒÔÉêÇë£¬ÆäâÅ½öÄÜ²é¿´¡£");
 						}
 						
 						if( NowTime.tv_sec > READTIME4 ){
@@ -948,13 +948,13 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						READTIME3 = NowTime.tv_sec+FM_WAITTIME;
 					}
 					memset(NPC_sendbuf,0,sizeof(NPC_sendbuf));
-					strcpy( NPC_sendbuf, "\n              ä¸‰åå¤§å®¶æ—å£°æœ›åˆ—è¡¨\n");
-					strcat( NPC_sendbuf, "              åå¤§å†’é™©å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§é¥²è‚²å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§åˆæˆå®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§æ–™ç†å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§æˆ˜æ–—å®¶æ—\n");
-					strcat( NPC_sendbuf, "              è‡ªå·±å®¶æ—å£°æœ›åˆ—è¡¨\n");			
+					strcpy( NPC_sendbuf, "\n              ÈıÊ®´ó¼Ò×åÉùÍûÁĞ±í\n");
+					strcat( NPC_sendbuf, "              Ê®´óÃ°ÏÕ¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óËÇÓı¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óºÏ³É¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óÁÏÀí¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óÕ½¶·¼Ò×å\n");
+					strcat( NPC_sendbuf, "              ×Ô¼º¼Ò×åÉùÍûÁĞ±í\n");			
 						
 					lssproto_WN_send( fd, WINDOW_MESSAGETYPE_SELECT,
 						WINDOW_BUTTONTYPE_NONE,
@@ -977,7 +977,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 					if( fd == -1 )  return;
 					
 					if( CHAR_getInt(talker, CHAR_FMINDEX) <= 0){  
-						sprintf( NPC_sendbuf, "              ã€è­¦       å‘Šã€\n æŠ±æ­‰ï¼ä½ ä¸æ˜¯å®¶æ—äººå‘˜ï¼Œä¸å¾—ä½¿ç”¨å…¬å¸ƒæ ã€‚");
+						sprintf( NPC_sendbuf, "              ¡º¾¯       ¸æ¡»\n ±§Ç¸£¡Äã²»ÊÇ¼Ò×åÈËÔ±£¬²»µÃÊ¹ÓÃ¹«²¼À¸¡£");
 						
 						lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 							WINDOW_BUTTONTYPE_OK,
@@ -1095,7 +1095,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
         }
     }
         
-    // æˆå‘˜åˆ—è¡¨
+    // ³ÉÔ±ÁĞ±í
     else if( seqno == CHAR_WINDOWTYPE_FM_MEMBERLIST)
     {
 			char numberlistbuf[4096],tmp_buffer[4096],dutybuf[64];
@@ -1134,7 +1134,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 					
 					int_status = atoi(getstatus);
 					
-					// å®¶æ—çš„åŠ å…¥ã€é€€å‡ºã€ç”³è¯·ç­‰é€‰é¡¹
+					// ¼Ò×åµÄ¼ÓÈë¡¢ÍË³ö¡¢ÉêÇëµÈÑ¡Ïî
 					if( buttonevent!=11 )
 #ifdef _FMVER21            
 						strcpy( memberlist[fmindex_wk].numberlistarray[numberlistindex+buttonevent - 1]
@@ -1154,7 +1154,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						break;
 					}              
 #endif                 
-					// å®¶æ—çš„å¬å‹Ÿé€‰é¡¹
+					// ¼Ò×åµÄÕÙÄ¼Ñ¡Ïî
 					if( buttonevent == 11 )
 					{
 						strcpy( getstatus, enlistbuf + (strlen(enlistbuf) - 1));
@@ -1163,11 +1163,11 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						switch( int_status ){
 						case 1:
 							memberlist[fmindex_wk].accept = 0;
-							sprintf(enlistbuf, "æ˜¯å¦ç»§ç»­å¬å‹Ÿå®¶æ—äººå‘˜|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
+							sprintf(enlistbuf, "ÊÇ·ñ¼ÌĞøÕÙÄ¼¼Ò×åÈËÔ±|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
 							break;
 						case 0:
 							memberlist[fmindex_wk].accept = 1;
-							sprintf(enlistbuf, "æ˜¯å¦ç»§ç»­å¬å‹Ÿå®¶æ—äººå‘˜|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
+							sprintf(enlistbuf, "ÊÇ·ñ¼ÌĞøÕÙÄ¼¼Ò×åÈËÔ±|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
 							break;
 						default:
 							break;    
@@ -1180,7 +1180,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						strcat( numberlistbuf, memberlist[fmindex_wk].numberlistarray[i]);
 						strcat( numberlistbuf, "\n");
 					}
-					sprintf(enlistbuf, "æ˜¯å¦ç»§ç»­å¬å‹Ÿå®¶æ—äººå‘˜|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
+					sprintf(enlistbuf, "ÊÇ·ñ¼ÌĞøÕÙÄ¼¼Ò×åÈËÔ±|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
 					strcat( numberlistbuf, enlistbuf);
 					strcat( numberlistbuf, "\n");
 					
@@ -1236,7 +1236,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 							strcat( numberlistbuf, memberlist[fmindex_wk].numberlistarray[i]);
 							strcat( numberlistbuf, "\n");
 						}
-						sprintf(enlistbuf, "æ˜¯å¦ç»§ç»­å¬å‹Ÿå®¶æ—äººå‘˜|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
+						sprintf(enlistbuf, "ÊÇ·ñ¼ÌĞøÕÙÄ¼¼Ò×åÈËÔ±|%d|%d",numberlistindex,memberlist[fmindex_wk].accept);
 						strcat( numberlistbuf, enlistbuf);
 						strcat( numberlistbuf, "\n");
 						lssproto_WN_send( fd, WINDOW_FMMESSAGETYPE_SELECT,
@@ -1257,7 +1257,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
         }
     }
     
-    // å®¶æ—å¼ºè€…è¡¨(å‰åå)
+    // ¼Ò×åÇ¿Õß±í(Ç°ÈşÊ®)
     else if( seqno == CHAR_WINDOWTYPE_FM_DPTOP)
     {
 			char listbuf[4096],tmp_buffer[4096];
@@ -1324,7 +1324,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 			}
     }
 
-    // æ®ç‚¹åˆ—è¡¨
+    // ¾İµãÁĞ±í
     else if( seqno == CHAR_WINDOWTYPE_FM_POINTLIST)
     {
 			char pointbuf[1024];
@@ -1364,7 +1364,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						int tkfmindex = CHAR_getWorkInt(talker, CHAR_WORKFMINDEXI);
 						int i,check=TRUE;
 						char fmindex[4];
-						for(i=0; i<MANORNUM; i++){	// 10ä¸ªåº„å›­
+						for(i=0; i<MANORNUM; i++){	// 10¸ö×¯Ô°
 						  getStringFromIndexWithDelim(fmpointlist.pointlistarray[i], "|", 5, fmindex, sizeof(fmindex));
 						  if(tkfmindex==atoi(fmindex)-1 ){
 						  	 check=FALSE;
@@ -1372,7 +1372,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						  }
 						}
 					  if(check==TRUE){
-							for (i=CHAR_getInt( talker, CHAR_LISTPAGE); i<CHAR_getInt( talker, CHAR_LISTPAGE)+5; i++){	// 10ä¸ªåº„å›­
+							for (i=CHAR_getInt( talker, CHAR_LISTPAGE); i<CHAR_getInt( talker, CHAR_LISTPAGE)+5; i++){	// 10¸ö×¯Ô°
 							  getStringFromIndexWithDelim(fmpointlist.pointlistarray[i], "|", 5, fmindex, sizeof(fmindex));
 						 	  if(atoi(fmindex)<=0 ){
 						   		check=TRUE;
@@ -1382,79 +1382,79 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						}
 					  if(check==TRUE){
 					   	windowtype = WINDOW_MESSAGETYPE_SELECT;
-							strcpy(pointbuf,"3\n        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+							strcpy(pointbuf,"3\n        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 					  }else{
 					  	windowtype = WINDOW_MESSAGETYPE_MESSAGE;
-					   	strcpy(pointbuf,"        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+					   	strcpy(pointbuf,"        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 							
 						}
 					}else{
-						strcpy(pointbuf,"        ã€€    â€œå®¶æ—æ®åœ°åˆ—è¡¨â€\n\n");
+						strcpy(pointbuf,"        ¡¡    ¡°¼Ò×å¾İµØÁĞ±í¡±\n\n");
 					}
-					strcat(pointbuf," â€œåœ°ã€€ç‚¹â€â€œä¸œâ€â€œå—â€â€œçŠ¶ã€€ã€€æ€â€\n");
+					strcat(pointbuf," ¡°µØ¡¡µã¡±¡°¶«¡±¡°ÄÏ¡±¡°×´¡¡¡¡Ì¬¡±\n");
 					if( (pointlistindex + 5) > 5){
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[5],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[5],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[5],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[5],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  å¡” å°” å¡”  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  Ëş ¶û Ëş  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[6],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[6],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[6],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[6],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  å°¼ å…‹ æ–¯  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  Äá ¿Ë Ë¹  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[7],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[7],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[7],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[7],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  å¼— åˆ— é¡¿  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ¸¥ ÁĞ ¶Ù  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[8],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[8],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[8],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[8],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  äºš ä¼Š æ¬§  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ÑÇ ÒÁ Å·  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[9],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[9],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[9],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[9],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  ç‘å°”äºšæ–¯  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  Èğ¶ûÑÇË¹  %3s   %3s   %s\n", pointbuf, x, y, name);
 							buttontype |= WINDOW_BUTTONTYPE_PREV;
 					}else if( pointlistindex==0 ){
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[0],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  è¨å§†å‰å°”  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ÈøÄ·¼ª¶û  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[1],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  ç›ä¸½å¨œæ–¯  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ÂêÀöÄÈË¹  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[2],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  åŠ ã€€ã€€åŠ   %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ¼Ó¡¡¡¡¼Ó  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[3],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  å¡é²ä»–é‚£  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ¿¨Â³ËûÄÇ  %3s   %3s   %s\n", pointbuf, x, y, name);
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",3, x, sizeof( x));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",4, y, sizeof( y));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",5, fmindex, sizeof( fmindex));
 							getStringFromIndexWithDelim( fmpointlist.pointlistarray[4],"|",6, name, sizeof( name));
-							if(atoi(fmindex)<=0)strcpy(name,"  æœªå é¢†");
-							sprintf(pointbuf,"%s  ä¼Šã€€ã€€ç”¸  %3s   %3s   %s\n", pointbuf, x, y, name);
+							if(atoi(fmindex)<=0)strcpy(name,"  Î´Õ¼Áì");
+							sprintf(pointbuf,"%s  ÒÁ¡¡¡¡µé  %3s   %3s   %s\n", pointbuf, x, y, name);
 							buttontype |= WINDOW_BUTTONTYPE_NEXT;
 					}else{
 							buttontype |= WINDOW_BUTTONTYPE_PREV;
@@ -1515,7 +1515,7 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 			}
     }        
 
-    // å®¶æ—å¼ºè€…è¡¨(è‡ªå·±åŠå‰åå¤§)
+    // ¼Ò×åÇ¿Õß±í(×Ô¼º¼°Ç°Ê®´ó)
     else if( seqno == CHAR_WINDOWTYPE_FM_DPME )
     {
 			switch( select ){
@@ -1536,13 +1536,13 @@ void NPC_FmDengonWindowTalked( int index, int talker, int seqno, int select, cha
 						READTIME3 = NowTime.tv_sec+FM_WAITTIME;
 					}
 					
-					strcpy( NPC_sendbuf, "\n              ä¸‰åå¤§å®¶æ—å£°æœ›åˆ—è¡¨\n");
-					strcat( NPC_sendbuf, "              åå¤§å†’é™©å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§é¥²è‚²å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§åˆæˆå®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§æ–™ç†å®¶æ—\n");
-					strcat( NPC_sendbuf, "              åå¤§æˆ˜æ–—å®¶æ—\n");
-					strcat( NPC_sendbuf, "              è‡ªå·±å®¶æ—å£°æœ›åˆ—è¡¨\n");		
+					strcpy( NPC_sendbuf, "\n              ÈıÊ®´ó¼Ò×åÉùÍûÁĞ±í\n");
+					strcat( NPC_sendbuf, "              Ê®´óÃ°ÏÕ¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óËÇÓı¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óºÏ³É¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óÁÏÀí¼Ò×å\n");
+					strcat( NPC_sendbuf, "              Ê®´óÕ½¶·¼Ò×å\n");
+					strcat( NPC_sendbuf, "              ×Ô¼º¼Ò×åÉùÍûÁĞ±í\n");		
 					lssproto_WN_send( fd, WINDOW_MESSAGETYPE_SELECT,
 						WINDOW_BUTTONTYPE_NONE,
 						CHAR_WINDOWTYPE_FM_DPSELECT,
@@ -1576,15 +1576,15 @@ void NPC_FmDengonLooked( int meindex, int lookedindex )
     fd = getfdFromCharaIndex( lookedindex );
     if( fd == -1 )  return;
     
-    // å¿…é¡»ç«™åœ¨å¸ƒå‘Šæ çš„å‰é¢ä¸€æ ¼
+    // ±ØĞëÕ¾ÔÚ²¼¸æÀ¸µÄÇ°ÃæÒ»¸ñ
     if( NPC_Util_CharDistance( lookedindex, meindex ) > 1) return;
-    // ç©ºç™½å¤„è¯·å‹¿æ›´åŠ¨
-    strcpy( menubuf, "                ã€å®¶æ—å¸ƒå‘Šæ ã€\n\n");
-	strcat( menubuf, "                 å®¶æ—æˆå‘˜åˆ—è¡¨\n");
-	strcat( menubuf, "                   å®¶æ—ç•™è¨€\n");
-	strcat( menubuf, "                å®¶æ—ä¹‹é—´ç•™è¨€æ¿\n");
-	strcat( menubuf, "                 ç”³è¯·å®¶æ—æ®ç‚¹\n");
-	strcat( menubuf, "                å®¶æ—ä¹‹é—´å¼ºè€…è¡¨");
+    // ¿Õ°×´¦ÇëÎğ¸ü¶¯
+    strcpy( menubuf, "                ¡º¼Ò×å²¼¸æÀ¸¡»\n\n");
+	strcat( menubuf, "                 ¼Ò×å³ÉÔ±ÁĞ±í\n");
+	strcat( menubuf, "                   ¼Ò×åÁôÑÔ\n");
+	strcat( menubuf, "                ¼Ò×åÖ®¼äÁôÑÔ°å\n");
+	strcat( menubuf, "                 ÉêÇë¼Ò×å¾İµã\n");
+	strcat( menubuf, "                ¼Ò×åÖ®¼äÇ¿Õß±í");
         
     lssproto_WN_send(fd, WINDOW_MESSAGETYPE_SELECT,
         	     WINDOW_BUTTONTYPE_CANCEL,
@@ -1604,13 +1604,13 @@ void NPC_FmDengonLooked( int meindex, int lookedindex )
     fd = getfdFromCharaIndex( lookedindex );
     if( fd == -1 )  return;
     
-    // ç©ºç™½å¤„è¯·å‹¿æ›´åŠ¨
-    strcpy( menubuf, "                ã€å®¶æ—å¸ƒå‘Šæ ã€\n\n");
-		strcat( menubuf, "                 å®¶æ—æˆå‘˜åˆ—è¡¨\n");
-		strcat( menubuf, "                   å®¶æ—ç•™è¨€\n");
-		strcat( menubuf, "                å®¶æ—ä¹‹é—´ç•™è¨€æ¿\n");
-		strcat( menubuf, "                 ç”³è¯·å®¶æ—æ®ç‚¹\n");
-		strcat( menubuf, "                å®¶æ—ä¹‹é—´å¼ºè€…è¡¨");
+    // ¿Õ°×´¦ÇëÎğ¸ü¶¯
+    strcpy( menubuf, "                ¡º¼Ò×å²¼¸æÀ¸¡»\n\n");
+		strcat( menubuf, "                 ¼Ò×å³ÉÔ±ÁĞ±í\n");
+		strcat( menubuf, "                   ¼Ò×åÁôÑÔ\n");
+		strcat( menubuf, "                ¼Ò×åÖ®¼äÁôÑÔ°å\n");
+		strcat( menubuf, "                 ÉêÇë¼Ò×å¾İµã\n");
+		strcat( menubuf, "                ¼Ò×åÖ®¼äÇ¿Õß±í");
         
     lssproto_WN_send(fd,
 										 WINDOW_MESSAGETYPE_SELECT,
@@ -1630,7 +1630,7 @@ void ApplyFamilyPoint( int meindex, int toindex, int select)
 		char buf[64];
 		int tkfmindex = CHAR_getWorkInt(toindex, CHAR_WORKFMINDEXI);
 		int i,check=0;
-		for (i=0; i<=MANORNUM-1; i++) {	// 10ä¸ªåº„å›­
+		for (i=0; i<=MANORNUM-1; i++) {	// 10¸ö×¯Ô°
        getStringFromIndexWithDelim(fmpointlist.pointlistarray[i], "|", 5, fmindex, sizeof(fmindex));
        if (tkfmindex==atoi(fmindex)-1){
        	 return;
@@ -1644,16 +1644,16 @@ void ApplyFamilyPoint( int meindex, int toindex, int select)
 		if(atoi(fmindex)<=0 && check==0){
 			saacproto_ACFixFMPoint_send(acfd,CHAR_getChar(toindex, CHAR_FMNAME),tkfmindex+1,tkfmindex,
 																		CHAR_getChar(toindex, CHAR_FMNAME),tkfmindex+1,tkfmindex,select);
-			sprintf(buf, "æ­å–œä½ ï¼\n    è¯¥åº„å›­å·²ç»æ˜¯ä½ çš„äº†ã€‚");
+			sprintf(buf, "¹§Ï²Äã£¡\n    ¸Ã×¯Ô°ÒÑ¾­ÊÇÄãµÄÁË¡£");
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,	WINDOW_BUTTONTYPE_OK,
 	    												0,	CHAR_getWorkInt(meindex, CHAR_WORKOBJINDEX),	buf);
 	  }else{
 	  	if(check==0)
-					sprintf(buf, "è¯¥åº„å›­æ®ç‚¹å·²æœ‰äººå é¢†äº†ï¼Œè¯·åˆ°è¯¥åº„å›­çš„è¸¢é¦†ç®¡ç†å‘˜å¤„ç”³è¯·è¸¢é¦†æŠ¢å¤ºåº„å›­å§ï¼");
+					sprintf(buf, "¸Ã×¯Ô°¾İµãÒÑÓĞÈËÕ¼ÁìÁË£¬Çëµ½¸Ã×¯Ô°µÄÌß¹İ¹ÜÀíÔ±´¦ÉêÇëÌß¹İÇÀ¶á×¯Ô°°É£¡");
 			else if(check==1)
-					sprintf(buf, "å¾ˆæŠ±æ­‰ï¼Œç”³è¯·åº„å›­æ®ç‚¹å®¶æ—äººå¿…æ•°éœ€æ»¡30äººï¼");
+					sprintf(buf, "ºÜ±§Ç¸£¬ÉêÇë×¯Ô°¾İµã¼Ò×åÈË±ØÊıĞèÂú30ÈË£¡");
 			else if(check==2)
-					sprintf(buf, "å¾ˆæŠ±æ­‰ï¼Œç”³è¯·åº„å›­æ®ç‚¹å®¶æ—å£°æœ›å¿…éœ€3000ä»¥ä¸Šï¼");
+					sprintf(buf, "ºÜ±§Ç¸£¬ÉêÇë×¯Ô°¾İµã¼Ò×åÉùÍû±ØĞè3000ÒÔÉÏ£¡");
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,	WINDOW_BUTTONTYPE_OK,
 	    												0,	CHAR_getWorkInt(meindex, CHAR_WORKOBJINDEX),	buf);
 	  }

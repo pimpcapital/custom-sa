@@ -2,7 +2,7 @@
 /*----------  Shan (BEGIN) ----------*/
 /*---------  AD 2001/05/28  ---------*/
 // 
-//            å®¶æ—åŒ»ç–— 
+//            ¼Ò×åÒ½ÁÆ 
 // 
 /*----------   Shan(END)   ----------*/
 #include <stdio.h>
@@ -56,7 +56,7 @@ void NPC_FmHealerTalked( int meindex , int talker , char *msg ,int color )
         //print("\n npc floor->%d player floor->%d",CHAR_getInt(meindex, CHAR_FLOOR),
         //       CHAR_getWorkInt(talker, CHAR_WORKFMFLOOR));
     //    CHAR_talkToCli(talker, meindex,
-    //             "æŠ±æ­‰ï¼ä½ ä¸æ˜¯æœ¬å®¶æ—äººå‘˜ï¼Œæ— æ³•å¸®ä½ å›å¤ã€‚",CHAR_COLORWHITE);
+    //             "±§Ç¸£¡Äã²»ÊÇ±¾¼Ò×åÈËÔ±£¬ÎŞ·¨°ïÄã»Ø¸´¡£",CHAR_COLORWHITE);
     //    return;
     //}
      
@@ -65,10 +65,10 @@ void NPC_FmHealerTalked( int meindex , int talker , char *msg ,int color )
 	NPC_FmHealerAllHeal( talker);
 	if(msgNo == 1) {
 	    CHAR_talkToCli( talker, meindex,
-		    "å·²ç»å…¨éƒ¨å›å¤ã€‚è¯·å°å¿ƒè‡ªå·±çš„èº«ä½“å”·ï¼",CHAR_COLORWHITE);
+		    "ÒÑ¾­È«²¿»Ø¸´¡£ÇëĞ¡ĞÄ×Ô¼ºµÄÉíÌåà¡£¡",CHAR_COLORWHITE);
 	}else if(msgNo == 2){
 	    CHAR_talkToCli( talker, meindex,
-	       	   "ç”±æ–¼ä½ æ˜¯æœ¬å®¶æ—äººå‘˜ï¼Œè¯·è®©æˆ‘å¸®ä½ å›å¤å§ï¼",CHAR_COLORWHITE);
+	       	   "ÓÉì¶ÄãÊÇ±¾¼Ò×åÈËÔ±£¬ÇëÈÃÎÒ°ïÄã»Ø¸´°É£¡",CHAR_COLORWHITE);
 	}
     }else{
 	int i = 0;
@@ -79,10 +79,10 @@ void NPC_FmHealerTalked( int meindex , int talker , char *msg ,int color )
 	    	NPC_FmHealerAllHeal( otherindex);
 		if(msgNo == 1){
                     CHAR_talkToCli( otherindex, meindex,
-		       	"å·²ç»å…¨éƒ¨å›å¤ã€‚è¯·å°å¿ƒè‡ªå·±çš„èº«ä½“å”·ï¼",CHAR_COLORWHITE);
+		       	"ÒÑ¾­È«²¿»Ø¸´¡£ÇëĞ¡ĞÄ×Ô¼ºµÄÉíÌåà¡£¡",CHAR_COLORWHITE);
 		}else if(msgNo == 2){
 		    CHAR_talkToCli( otherindex, meindex, 
-			"ç”±æ–¼ä½ æ˜¯æœ¬å®¶æ—äººå‘˜ï¼Œè¯·è®©æˆ‘å¸®ä½ å›å¤å§ï¼",CHAR_COLORWHITE);
+			"ÓÉì¶ÄãÊÇ±¾¼Ò×åÈËÔ±£¬ÇëÈÃÎÒ°ïÄã»Ø¸´°É£¡",CHAR_COLORWHITE);
 		}
             }
         }

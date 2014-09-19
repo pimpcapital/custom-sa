@@ -18,35 +18,35 @@ typedef struct tagLevelUpPattern
         int origin;
         int multi;
     }exptbl[3];
-    int     hpupminpoint;   /*  hp åŠä¸äº’æœˆ   æ–“è¢„*/
-    int     hpupmaxpoint;   /*  hp åŠä¸äº’æœˆ   æ–“è¢„*/
+    int     hpupminpoint;   /*  hp ¼°Ø¤»¥ÔÂ   ìµ°À*/
+    int     hpupmaxpoint;   /*  hp ¼°Ø¤»¥ÔÂ   ìµ°À*/
 
-    int     needexp;        /*    é‚°å…çƒ¦è‘£è¢„    */
+    int     needexp;        /*    Û¢Ø¦·³¶­°À    */
 #else
     int     uppoint[5];
 #endif
 }LevelUpPattern;
 
-/*====================èµ“æ¸è¢„ï½ä¼Šçš®ä¼™å¤±æ°¸çš¿æ¥®æº¢====================*/
+/*====================âÙÓå°À£ıÒÁÆ¤»ïÊ§ÓÀÃóèúÒç====================*/
 BOOL CHAR_getDefaultChar( Char*  nc, int imagenumber );
 
-/*====================éš¶    ï½  é£“  å¯èµ˜å°¹æ¥®æº¢====================*/
+/*====================Á¥    £ı  ì«  Ä¯×¸ÒüèúÒç====================*/
 int CHAR_getNewImagenumberFromEquip( int basebaseimagenumber,
                                      ITEM_CATEGORY category );
-/*====================  é£“  å¯  ä¾¬   ->   å¯æ¥®æº¢====================*/
+/*====================  ì«  Ä¯  Ù¯   ->   Ä¯èúÒç====================*/
 //void CHAR_initSeekGraphicNumberFromString();
 int CHAR_seekGraphicNumberFromString( char* string );
 
 
 
-/*====================å¹³ä¹“ä»¿åŠèµ“æ¸è¢„æ¥®æº¢====================*/
+/*====================Æ½ÅÒ·Â¼°âÙÓå°ÀèúÒç====================*/
 BOOL CHAR_getInitElderPosition( Char* ch,int hometown);
 BOOL CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y );
 
 void CHAR_setInitValues( Char* ch );
 
 
-/*====================  è¡¬åŒ  æ¥®æº¢====================*/
+/*====================  ³ÄŞË  èúÒç====================*/
 typedef enum
 {
     CHAR_INVAREA,
@@ -63,13 +63,13 @@ BOOL CHAR_isAppearPosition( int floor, int *x, int *y);
 BOOL CHAR_isCannotDropArea( int floor , int x, int y );
 
 
-/* èµ¢  æ¥®æº¢ */
+/* Ó®  èúÒç */
 BOOL CHAR_ElderSetPosition( int elderindex ,int fl,int x ,int y);
 
 
 
 /*************************************************
-é…µçƒ‚ä¼ŠçŸ›ä¼™å¤±æ°¸çš¿è´¨  
+½ÍÀÃÒÁÃ¬»ïÊ§ÓÀÃóÖÊ  
 *************************************************/
 
 
@@ -84,8 +84,8 @@ int CHAR_PetLevelUp( int petindex );
 BOOL CHAR_checkFaceImageNumber( int imagenumber, int faceimagenumber);
 BOOL CHAR_checkPlayerImageNumber( int imagenumber);
 
-int CHAR_PetTakeLevelUp( int petindex, int lv);	//å¼ºåˆ¶å® ç‰©å‡çº§
-int CHAR_PetTakeDrop( int petindex, int floor, int ox, int oy);	//å¼ºåˆ¶ä¸¢å¼ƒå® ç‰©å‡çº§
+int CHAR_PetTakeLevelUp( int petindex, int lv);	//Ç¿ÖÆ³èÎïÉı¼¶
+int CHAR_PetTakeDrop( int petindex, int floor, int ox, int oy);	//Ç¿ÖÆ¶ªÆú³èÎïÉı¼¶
 
 int PETTRANS_PetTransManStatus( int toindex, int petindex1, int petindex2);
 #ifdef _PET_2TRANS

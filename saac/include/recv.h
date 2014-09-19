@@ -1,17 +1,17 @@
 #ifndef _RECV_H_
 #define _RECV_H_
 #include "acfamily.h"
-#ifdef _SEND_EFFECT		   // WON ADD 閫佷笅闆�佷笅闆ㄧ瓑鐗规晥
+#ifdef _SEND_EFFECT		   // WON ADD 送下雪、下雨等特效
 void SendEffect(char *ffect);
 #endif
 
-#ifdef _AC_SEND_FM_PK		 // WON ADD 搴勫洯瀵规垬鍒楄〃鍌ㄥ瓨鍦ˋC
+#ifdef _AC_SEND_FM_PK		 // WON ADD 庄园对战列表储存在AC
 void load_fm_pk_list(void);
 void save_fm_pk_list(void);
 char fm_pk_list[FMPKLIST_MAXNUM][255];
 #endif
 
-#ifdef _ALLDOMAN // Syu ADD 鎺掕姒淣PC
+#ifdef _ALLDOMAN // Syu ADD 排行榜NPC
 void LOAD_herolist(); 
 void SAVE_herolist(int);
 void Send_A_herolist(int);

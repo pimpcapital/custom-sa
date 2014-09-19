@@ -22,7 +22,7 @@ char subbuf[128];
 int i, j;
 
 /* 
- * æ¶©çƒ‚ä»Šæœ¨å‡¶å®ƒå¥´ä»¶ç‰å®ƒæ¯›è¯·å…NPC
+ * É¬ÀÃ½ñÄ¾Ğ×ËüÅ«¼şÓñËüÃ«ÇëÔÊNPC
  *
  */
  
@@ -46,7 +46,7 @@ struct	{
 	int		warp;
 	int		battle;
 	int		gotowin;
-}buttonproc[13];		/* ok,cancel, yes,no,prev,next åŠå‡›åŠè´¨   */
+}buttonproc[13];		/* ok,cancel, yes,no,prev,next ¼°Áİ¼°ÖÊ   */
 
 
 
@@ -78,10 +78,10 @@ BOOL NPC_RidermanInit( int meindex )
 	
 	if( NPC_Util_GetStrFromStrWithDelim( argstr, "conff", buf, sizeof( buf))== NULL ) 
 	{
-		print( "riderman:æ²¡æœ‰æŒ‡å®šè®¾å®šçš„æ¡£æ¡ˆ ã€‚\n");
+		print( "riderman:Ã»ÓĞÖ¸¶¨Éè¶¨µÄµµ°¸ ¡£\n");
 		return FALSE;
 	}
-	/* èµ“æ¸å‡›åæ¶©çƒ‚çŠ¯â–¡æ­£æ¯›æ°‘å°¼æ°¸å¼ä»„åŒ–æ”¯æœˆ */
+	/* âÙÓåÁİ±åÉ¬ÀÃ·¸¡õÕıÃ«ÃñÄáÓÀÛÍØÆ»¯Ö§ÔÂ */
 	if( !NPC_Riderman_readData( meindex, -1, TRUE) ) {
 		return FALSE;
 	}
@@ -154,7 +154,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 		print( "riderman:readdata error\n");
 		return;
 	}
-	/* ç“·ä»„å‡¶ç¤ºæ­£ä»¶æ¯›è­¬å±¯æœˆ */
+	/* ´ÉØÆĞ×Ê¾Õı¼şÃ«Æ©ÍÍÔÂ */
 	if( w.windowtype == WINDOW_MESSAGETYPE_SELECT ) {
 		button = atoi( data)+5;
 		if( button > 12 ) {
@@ -186,7 +186,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 		//print(" takegold:%d ", w.takegold );
 		
 		// Robin
-		// å­¦ä¹  Lv 40
+		// Ñ§Ï° Lv 40
 		if( newwin == 6 )	{
 			
 			int charImg;
@@ -197,7 +197,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å·²ç»å­¦ä¼šåˆçº§ç­äº†å‘€ã€‚\nä¸éœ€è¦å†å­¦äº†ã€‚",
+					makeEscapeString( "\n\nÄãÒÑ¾­Ñ§»á³õ¼¶°àÁËÑ½¡£\n²»ĞèÒªÔÙÑ§ÁË¡£",
 							buf, sizeof(buf)));
 				return;
 			}
@@ -206,7 +206,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				char buf2[512];
 				
-				sprintf( buf2, "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„å­¦è´¹ä¸è¶³ï¼\nå­¦ä¹ éª‘ä¹˜å® ç‰©åˆçº§ç­éœ€è¦%dçŸ³å¸ã€‚", w.takegold);
+				sprintf( buf2, "\nºÜ±§Ç¸à¸£¡ÄãµÄÑ§·Ñ²»×ã£¡\nÑ§Ï°Æï³Ë³èÎï³õ¼¶°àĞèÒª%dÊ¯±Ò¡£", w.takegold);
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
 					makeEscapeString( buf2, buf, sizeof(buf)));
@@ -223,10 +223,10 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
 					makeEscapeString(
-						"\n\næ­å–œä½ ï¼ä½ å·²ç»å®Œæˆéª‘ä¹˜åˆçº§ç­äº†ã€‚\nå¯ä»¥éª‘ä¹˜ Lv40 ä»¥ä¸‹çš„å® ç‰©ï¼Œ\nè¯·å°å¿ƒéª‘ä¹˜å–”ï¼",
+						"\n\n¹§Ï²Äã£¡ÄãÒÑ¾­Íê³ÉÆï³Ë³õ¼¶°àÁË¡£\n¿ÉÒÔÆï³Ë Lv40 ÒÔÏÂµÄ³èÎï£¬\nÇëĞ¡ĞÄÆï³Ëà¸£¡",
 						buf, sizeof(buf)));
 						
-			// å®¶æ—æ”¶å…¥
+			// ¼Ò×åÊÕÈë
 			{
 			 int fmindex, fmindexi, village, i;
 			 char fmname[256], token[256], buf2[64];
@@ -255,7 +255,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			return;
 		}
 		
-		// å­¦ä¹  Lv 80
+		// Ñ§Ï° Lv 80
 		if( newwin == 7 )	{
 			
 			int charImg;
@@ -267,7 +267,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å·²ç»å­¦ä¼šä¸­çº§ç­äº†å‘€ã€‚\nä¸éœ€è¦å†å­¦äº†ã€‚",
+					makeEscapeString( "\n\nÄãÒÑ¾­Ñ§»áÖĞ¼¶°àÁËÑ½¡£\n²»ĞèÒªÔÙÑ§ÁË¡£",
 							buf, sizeof(buf)));
 				return;
 			}
@@ -275,7 +275,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å¿…é¡»å…ˆå­¦è¿‡åˆçº§ç­æ‰èƒ½æ¥ä¸­çº§ç­å”·ã€‚",
+					makeEscapeString( "\n\nÄã±ØĞëÏÈÑ§¹ı³õ¼¶°à²ÅÄÜÀ´ÖĞ¼¶°àà¡¡£",
 							buf, sizeof(buf)));
 				return;
 			}
@@ -284,7 +284,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				char buf2[512];
 				
-				sprintf( buf2, "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„å­¦è´¹ä¸è¶³ï¼\nå­¦ä¹ éª‘ä¹˜å® ç‰©ä¸­çº§ç­éœ€è¦%dçŸ³å¸", w.takegold);
+				sprintf( buf2, "\nºÜ±§Ç¸à¸£¡ÄãµÄÑ§·Ñ²»×ã£¡\nÑ§Ï°Æï³Ë³èÎïÖĞ¼¶°àĞèÒª%dÊ¯±Ò", w.takegold);
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
 					makeEscapeString( buf2, buf, sizeof(buf)));
@@ -300,10 +300,10 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			//lssproto_FM_send( fd, buf );
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\næ­å–œä½ ï¼ä½ å·²ç»å®Œæˆéª‘ä¹˜ä¸­çº§ç­äº†ã€‚\nå¯ä»¥éª‘ä¹˜ Lv80 ä»¥ä¸‹çš„å® ç‰©ï¼Œ\nè¯·å°å¿ƒéª‘ä¹˜å–”ï¼",
+					makeEscapeString( "\n\n¹§Ï²Äã£¡ÄãÒÑ¾­Íê³ÉÆï³ËÖĞ¼¶°àÁË¡£\n¿ÉÒÔÆï³Ë Lv80 ÒÔÏÂµÄ³èÎï£¬\nÇëĞ¡ĞÄÆï³Ëà¸£¡",
 							buf, sizeof(buf)));
 
-			// å®¶æ—æ”¶å…¥
+			// ¼Ò×åÊÕÈë
 			{
 			 int fmindex, fmindexi, village, i;
 			 char fmname[256], token[256], buf2[64];
@@ -332,7 +332,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			return;
 		}
 		
-		// å­¦ä¹  Lv 120
+		// Ñ§Ï° Lv 120
 		if( newwin == 8 )	{
 			
 			int charImg;
@@ -344,7 +344,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å·²ç»å­¦ä¼šé«˜çº§ç­äº†å‘€ã€‚\nä¸éœ€è¦å†å­¦äº†ã€‚",
+					makeEscapeString( "\n\nÄãÒÑ¾­Ñ§»á¸ß¼¶°àÁËÑ½¡£\n²»ĞèÒªÔÙÑ§ÁË¡£",
 							buf, sizeof(buf)));
 				return;
 			}
@@ -352,7 +352,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å¿…é¡»å…ˆå­¦è¿‡ä¸­çº§ç­æ‰èƒ½æ¥é«˜çº§ç­å”·ã€‚",
+					makeEscapeString( "\n\nÄã±ØĞëÏÈÑ§¹ıÖĞ¼¶°à²ÅÄÜÀ´¸ß¼¶°àà¡¡£",
 							buf, sizeof(buf)));
 				return;
 			}			
@@ -361,7 +361,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				char buf2[512];
 				
-				sprintf( buf2, "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„å­¦è´¹ä¸è¶³ï¼\nå­¦ä¹ éª‘ä¹˜å® ç‰©é«˜çº§ç­éœ€è¦%dçŸ³å¸", w.takegold);
+				sprintf( buf2, "\nºÜ±§Ç¸à¸£¡ÄãµÄÑ§·Ñ²»×ã£¡\nÑ§Ï°Æï³Ë³èÎï¸ß¼¶°àĞèÒª%dÊ¯±Ò", w.takegold);
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
 					makeEscapeString( buf2, buf, sizeof(buf)));
@@ -377,10 +377,10 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			//lssproto_FM_send( fd, buf );
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\næ­å–œä½ ï¼ä½ å·²ç»å®Œæˆéª‘ä¹˜é«˜çº§ç­äº†ã€‚\nå¯ä»¥éª‘ä¹˜ Lv120 ä»¥ä¸‹çš„å® ç‰©ï¼Œ\nè¯·å°å¿ƒéª‘ä¹˜å–”ï¼",
+					makeEscapeString( "\n\n¹§Ï²Äã£¡ÄãÒÑ¾­Íê³ÉÆï³Ë¸ß¼¶°àÁË¡£\n¿ÉÒÔÆï³Ë Lv120 ÒÔÏÂµÄ³èÎï£¬\nÇëĞ¡ĞÄÆï³Ëà¸£¡",
 							buf, sizeof(buf)));						
 
-			// å®¶æ—æ”¶å…¥
+			// ¼Ò×åÊÕÈë
 			{
 			 int fmindex, fmindexi, village, i;
 			 char fmname[256], token[256], buf2[64];
@@ -409,7 +409,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			return;
 		}
 		
-		// å­¦ä¹   Lv All
+		// Ñ§Ï°  Lv All
 		if( newwin == 9 )	{
 			
 			int charImg;
@@ -420,7 +420,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å·²ç»å­¦ä¼šç‰¹çº§ç­äº†å‘€ã€‚\nä¸éœ€è¦å†å­¦äº†ã€‚",
+					makeEscapeString( "\n\nÄãÒÑ¾­Ñ§»áÌØ¼¶°àÁËÑ½¡£\n²»ĞèÒªÔÙÑ§ÁË¡£",
 							buf, sizeof(buf)));
 				return;
 			}
@@ -428,7 +428,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\nä½ å¿…é¡»å…ˆå­¦è¿‡é«˜çº§ç­æ‰èƒ½æ¥ç‰¹çº§ç­å”·ã€‚",
+					makeEscapeString( "\n\nÄã±ØĞëÏÈÑ§¹ı¸ß¼¶°à²ÅÄÜÀ´ÌØ¼¶°àà¡¡£",
 							buf, sizeof(buf)));
 				return;
 			}			
@@ -437,7 +437,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			{
 				char buf2[512];
 				
-				sprintf( buf2, "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„å­¦è´¹ä¸è¶³ï¼\nå­¦ä¹ éª‘ä¹˜å® ç‰©ç‰¹çº§ç­éœ€è¦%dçŸ³å¸", w.takegold);
+				sprintf( buf2, "\nºÜ±§Ç¸à¸£¡ÄãµÄÑ§·Ñ²»×ã£¡\nÑ§Ï°Æï³Ë³èÎïÌØ¼¶°àĞèÒª%dÊ¯±Ò", w.takegold);
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
 					makeEscapeString( buf2, buf, sizeof(buf)));
@@ -453,10 +453,10 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			//lssproto_FM_send( fd, buf );
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\n\næ­å–œä½ ï¼ä½ å·²ç»å®Œæˆéª‘ä¹˜ç‰¹çº§ç­äº†ã€‚\nå¯ä»¥éª‘ä¹˜æ‰€æœ‰ç­‰çº§çš„å® ç‰©ï¼Œ\nè¯·å°å¿ƒéª‘ä¹˜å–”ï¼",
+					makeEscapeString( "\n\n¹§Ï²Äã£¡ÄãÒÑ¾­Íê³ÉÆï³ËÌØ¼¶°àÁË¡£\n¿ÉÒÔÆï³ËËùÓĞµÈ¼¶µÄ³èÎï£¬\nÇëĞ¡ĞÄÆï³Ëà¸£¡",
 							buf, sizeof(buf)));
 
-			// å®¶æ—æ”¶å…¥
+			// ¼Ò×åÊÕÈë
 			{
 			 int fmindex, fmindexi, village, i;
 			 char fmname[256], token[256], buf2[64];
@@ -485,7 +485,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 			return;
 		}
 		
-		// è¯´æ˜ , åˆ—è¡¨
+		// ËµÃ÷ , ÁĞ±í
 		if( newwin == 5 )
 		{
 
@@ -516,8 +516,8 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
 }
 /* 
  * 
- * å¨„é†’â€œ
- *		meindex		int		ä»‡åŠNPCåŠcharaindex
+ * Â¦ĞÑ¡°
+ *		meindex		int		³ğ¼°NPC¼°charaindex
  *		
  */
 static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
@@ -565,7 +565,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 		b_mode = -1;
 		errflg = FALSE;
 
-		/* èµ“æ¸ç¥­ */
+		/* âÙÓå¼À */
 		w.windowno = -1;
 		w.windowtype = -1;
 		w.buttontype = -1;
@@ -596,10 +596,10 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 			linenum ++;
 			
 			if( line[0] == '#' || line[0] == '\n') continue;
-			/* è¼å«æ½¸æœˆ */
+			/* İ±µæäúÔÂ */
 			chomp( line );
 			
-			/*  å«æ¯›å¸®æº¥å…æœˆ    */
+			/*  µæÃ«°ïäßÔÊÔÂ    */
 			replaceString( line, '\t' , ' ' );
 			for( i = 0; i < strlen( line); i ++) {
 				if( line[i] != ' ' ) {
@@ -626,19 +626,19 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 			
 			if( strcasecmp( firstToken, "winno") == 0 ) {
 				if( winno != -1 ) {
-					print( "riderman:å·²æœ‰winnoå´é‡æ–°å®šä¹‰winno\n");
+					print( "riderman:ÒÑÓĞwinnoÈ´ÖØĞÂ¶¨Òåwinno\n");
 					print( "filename:[%s] line[%d]\n", filename, linenum);
 					errflg = TRUE;
 					readflg = FALSE;
 					break;
 				}
-				/* å®ƒå¥´ä»¶ç‰å®ƒNoæ¯›å¿¡ç»£ */
+				/* ËüÅ«¼şÓñËüNoÃ«âçĞå */
 				winno = atoi( secondToken);
 				continue;
 			}
 			
 			if( winno == -1 ) {
-				print( "riderman:winno å°šæœªå®šä¹‰ï¼Œèµ„æ–™å´å·²è®¾å®šã€‚\n");
+				print( "riderman:winno ÉĞÎ´¶¨Òå£¬×ÊÁÏÈ´ÒÑÉè¶¨¡£\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				readflg = FALSE;
 				errflg = FALSE;
@@ -682,7 +682,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 						}
 						
 						if( errflg == TRUE) {
-							print( "riderman: æ‰¾ä¸åˆ°gotowin\n");
+							print( "riderman: ÕÒ²»µ½gotowin\n");
 							print( "filename:[%s] line[%d]\n", filename, linenum);
 							readflg = FALSE;
 							errflg = TRUE;
@@ -696,24 +696,24 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 				else {
 					
 					w.windowno = winno;
-					/* å®ƒå¥´ä»¶ç‰å®ƒæ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* ËüÅ«¼şÓñËüÕıÄÌÃó¼°É¬ÀÃ */
 					if( strcasecmp( firstToken, "wintype") == 0 ) {
 						w.windowtype = atoi( secondToken);
 					}
-					/* ç¤ºæ­£ä»¶æ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÕıÄÌÃó¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "buttontype") == 0 ) {
 						w.buttontype = NPC_Riderman_restoreButtontype( secondToken);
 					}
-					/* getitemåŠæ¶©çƒ‚ */
+					/* getitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "takeitem") == 0 ) {
 						w.takeitem = atoi( secondToken);
 					}
-					/* giveitemåŠæ¶©çƒ‚ */
+					/* giveitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "giveitem") == 0 ) {
 						w.giveitem = atoi( secondToken);
 					}
 					
-					/* takegold å­¦è´¹ */
+					/* takegold Ñ§·Ñ */
 					else if( strcasecmp( firstToken, "takegold") == 0 ) {
 						w.takegold = atoi( secondToken);
 					}
@@ -732,7 +732,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 						w.letter[3] = atoi( secondToken);
 					}
 					
-					/* messageåŠæ¶©çƒ‚ */
+					/* message¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "message") == 0 ) {
 						if( messagepos == 0 ) {
 							strcpy(  w.message, secondToken);
@@ -745,7 +745,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 							messagepos+=strlen(secondToken);
 						}
 					}
-					/* ç¤ºæ­£ä»¶æ¯›ç“·ä»„å‡¶å‡›åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÃ«´ÉØÆĞ×Áİ¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "okpressed") == 0 ) {
 						buttonconfmode = TRUE;
 						b_mode = 0;
@@ -782,7 +782,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 						buttonendflg = FALSE;
 						selectnum ++;
 					}
-					/* æ¶©çƒ‚è”½æ­¹æ›° */
+					/* É¬ÀÃ±Î´õÔ» */
 					else if( strcasecmp( firstToken, "endwin") == 0 ) {
 						endflg = TRUE;
 						if( chkflg == FALSE) {
@@ -791,7 +791,7 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 						break;
 					}
 					else {
-						print( "riderman:è®¾å®šæ˜¯ä¸å¯èƒ½çš„å‚æ•°\n");
+						print( "riderman:Éè¶¨ÊÇ²»¿ÉÄÜµÄ²ÎÊı\n");
 						print( "filename:[%s] line[%d]\n", filename, linenum);
 					}
 				}
@@ -803,26 +803,26 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 			}
 		}
 		if( buttonendflg == FALSE) {
-			print( "riderman: æ‰¾ä¸åˆ°endbutton\n");
+			print( "riderman: ÕÒ²»µ½endbutton\n");
 			print( "filename:[%s] line[%d]\n", filename, linenum);
 			errflg = TRUE;
 			break;
 		}
 		if( winno != -1 ) {
 			if( w.windowtype == -1 ) {
-				print( "riderman: æ‰¾ä¸åˆ°wintype\n");
+				print( "riderman: ÕÒ²»µ½wintype\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( w.buttontype == -1 ) {
-				print( "riderman: æ‰¾ä¸åˆ°button\n");
+				print( "riderman: ÕÒ²»µ½button\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( strlen( w.message) == 0 ) {
-				print( "riderman: æ‰¾ä¸åˆ°message\n");
+				print( "riderman: ÕÒ²»µ½message\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
@@ -832,12 +832,12 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 	fclose( fp);
 	
 	if( chkflg == FALSE && w.windowno == -1 ) {
-		print( "riderman: æ‰¾ä¸åˆ°æ‰€æŒ‡å®šçš„windowno\n");
+		print( "riderman: ÕÒ²»µ½ËùÖ¸¶¨µÄwindowno\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
 	if( winno != -1 && endflg == FALSE) {
-		print( "riderman: æ‰¾ä¸åˆ°endwin\n");
+		print( "riderman: ÕÒ²»µ½endwin\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}

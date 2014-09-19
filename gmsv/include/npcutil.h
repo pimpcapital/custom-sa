@@ -68,11 +68,11 @@ void AddFMAdv(int talker, int shiftbit);
 // Robin 0817 family income
 int addNpcFamilyTax( int meindex, int talkerindex, int income );
 
-#define		NPC_ENEMY_ENEMYNUMBER		10		/* è¯·èœ‡è¡¬    é†’ */
+#define		NPC_ENEMY_ENEMYNUMBER		10		/* ÇëòØ³Ä    ĞÑ */
 
-/* å¨„é†’ç™½å¤®å¥¶ä¼™  å¿ƒ  å¿ƒåŠã„ å«åŠ  ä¾¬é†’æ™“èœƒ */
+/* Â¦ĞÑ°×ÑëÄÌ»ï  ĞÄ  ĞÄ¼°¨àµæ¼°  Ù¯ĞÑÏşò× */
 #define NPC_UTIL_GETARGSTR_LINEMAX	4096
-/* å¨„é†’ç™½å¤®å¥¶ä¼™åŠ  å¿ƒ  å¿ƒç”°æ°¸ç™½å¤®æ‰”å¥¶æœ¯*/
+/* Â¦ĞÑ°×ÑëÄÌ»ï¼°  ĞÄ  ĞÄÌïÓÀ°×ÑëÈÓÄÌÊõ*/
 #ifdef _NEWEVENT
 //#define NPC_UTIL_GETARGSTR_BUFSIZE	1024*1200
 #define NPC_UTIL_GETARGSTR_BUFSIZE	1024*32

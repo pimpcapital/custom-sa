@@ -14,43 +14,43 @@
 #include "log.h"
 #include "function.h"
 /*
- * çŸ¢æ°¸ç„è´¨  åæ¥®å…æœˆæœ«â–¡æ—¦
+ * Ê¸ÓÀĞşÖÊ  ±åèúÔÊÔÂÄ©¡õµ©
  */
 /*------------------------------------------------------------------------
- * çŸ¢æ°¸ç„æ¯›ã„ å‹¾å–ƒæ›°ç™«åŒ–æœˆï¼»çŠ¯ç”°æ°¸å¼˜è¿•ï¼»
- * CHARåŒç»  ååŠå¿ƒç»¼å²³ä»Šæœ¨æœˆï¼»
- *   æ›°è¢„â€œç»¼å²³ä»Šæœ¨å‡¶å¹³ä¹“ä»¿index æ’©  â€œ-1
+ * Ê¸ÓÀĞşÃ«¨à¹´à«Ô»ñ²»¯ÔÂ£Û·¸ÌïÓÀºëåÃ£Û
+ * CHARÑáÕ°  ±å¼°ĞÄ×ÛÔÀ½ñÄ¾ÔÂ£Û
+ *   Ô»°À¡°×ÛÔÀ½ñÄ¾Ğ×Æ½ÅÒ·Âindex ÁÃ  ¡°-1
  *-----------------------------------------------------------------------*/
 int PET_DEBUG_initPetOne( int charaindex)
 {
     Char    ch;
     int     havepetindex;
     int     index;
-    /* çŸ¢æ°¸ç„æ¯›  åŒ–æœˆäº•è­¬å±¯æœˆ */
+    /* Ê¸ÓÀĞşÃ«  »¯ÔÂ¾®Æ©ÍÍÔÂ */
     havepetindex = CHAR_getCharPetElement( charaindex) ;
 
     memset( &ch, 0, sizeof( ch));
     if( !CHAR_getDefaultChar( &ch,31010 ) )return -1;
 
-    /*    é£“  å¯    */
+    /*    ì«  Ä¯    */
     ch.data[CHAR_BASEBASEIMAGENUMBER]
         = ch.data[CHAR_BASEIMAGENUMBER] = 30008;
     ch.data[CHAR_WHICHTYPE] = CHAR_TYPEPET;
-    /*    çŒ¾   */
+    /*    »«   */
     ch.workint[CHAR_WORKATTACKPOWER] = 100;
-    /*  æ½®     */
+    /*  ³±     */
     ch.workint[CHAR_WORKDEFENCEPOWER] = 50;
     /*  HP */
     ch.data[CHAR_HP] = 100;
-    /*    èŸ† */
-    strcpysafe( ch.string[CHAR_NAME].string, 32, "å® ç‰©ï¼‘" );
+    /*    ó¡ */
+    strcpysafe( ch.string[CHAR_NAME].string, 32, "³èÎï£±" );
 
-    /* CHARåå–ƒæ›°ç™«åŒ–æœˆ */
+    /* CHAR±åà«Ô»ñ²»¯ÔÂ */
     index = PET_initCharOneArray( &ch);
 
     if( index < 0 ) return -1;
 
-    /* ä»æ½œè°›æœ¬æ°¸ç„ */
+    /* ÈÔÇ±ÚĞ±¾ÓÀĞş */
     CHAR_setWorkInt( index, CHAR_WORKPLAYERINDEX, charaindex);
     CHAR_setWorkInt( index,CHAR_WORKOBJINDEX,-1);
     CHAR_setCharPet( charaindex, havepetindex, index);
@@ -75,19 +75,19 @@ static int _PET_dropPet( int charaindex, int havepetindex, int tofl, int tox, in
     if( !CHAR_CHECKINDEX( charaindex ) )return FALSE;
     if( CHAR_CHECKINDEX( petindex) == FALSE ) return FALSE;
 
-#ifdef _AVID_TRADETRYBUG //ä¸¢å‡ºå® ç‰©
+#ifdef _AVID_TRADETRYBUG //¶ª³ö³èÎï
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKTRADEMODE) == CHAR_TRADE_TRADING ){
-		CHAR_talkToCli( charaindex, -1, "äº¤æ˜“çŠ¶æ€ä¸­æ— æ³•ä¸¢å‡ºå® ç‰©ã€‚", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "½»Ò××´Ì¬ÖĞÎŞ·¨¶ª³ö³èÎï¡£", CHAR_COLORYELLOW );
 		return FALSE;
 	}
 #endif
     // CoolFish: Family 2001/6/13
     if (CHAR_getInt(petindex, CHAR_PETFAMILY) == 1){
-    	CHAR_talkToCli(charaindex, -1, "å®¶æ—å®ˆæŠ¤å…½æ— æ³•ä¸¢å‡ºï¼", CHAR_COLORYELLOW);
+    	CHAR_talkToCli(charaindex, -1, "¼Ò×åÊØ»¤ÊŞÎŞ·¨¶ª³ö£¡", CHAR_COLORYELLOW);
     	return	FALSE;
     }
     if (CHAR_getInt(charaindex, CHAR_RIDEPET) == havepetindex ){
-    	CHAR_talkToCli(charaindex, -1, "éª‘ä¹˜ä¸­çš„å® ç‰©æ— æ³•ä¸¢å‡ºï¼", CHAR_COLORYELLOW);
+    	CHAR_talkToCli(charaindex, -1, "Æï³ËÖĞµÄ³èÎïÎŞ·¨¶ª³ö£¡", CHAR_COLORYELLOW);
     	return	FALSE;
     }    
 
@@ -113,7 +113,7 @@ static int _PET_dropPet( int charaindex, int havepetindex, int tofl, int tox, in
 		}
 	}
 		if( count_item > 80 || count_chara > 80 ) {
-			CHAR_talkToCli( charaindex, -1, "è¿™é‡Œå·²ç»å¤ªæ‹¥æŒ¤äº†ï¼Œä¸èƒ½å†ä¸¢äº†ã€‚", CHAR_COLORYELLOW );
+			CHAR_talkToCli( charaindex, -1, "ÕâÀïÒÑ¾­Ì«Óµ¼·ÁË£¬²»ÄÜÔÙ¶ªÁË¡£", CHAR_COLORYELLOW );
 			return FALSE;
 		}
 	}
@@ -175,16 +175,16 @@ static int _PET_dropPet( int charaindex, int havepetindex, int tofl, int tox, in
 
 
 /*------------------------------------------------------------
- *     æ³«  çŸ¢æ°¸ç„æ¯›  ä»
- * å¨„é†’
- *  itemindex       int         å¤±å¥¶  ä¸å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
- *  floor           int         ç™½å¤«å¤±ID
- *  x               int         xç”„  
- *  y               int         yç”„  
- *  net             BOOL        ç”Ÿæ°¸ç„ä¼â–¡å¼åŠä»‡åˆæ¯›å…æœˆäº•å‡ä¸¹äº•
- * å¿’æ›°è¢„
- *  å²³      objindex
- *  æ’©      -1
+ *     ãù  Ê¸ÓÀĞşÃ«  ÈÊ
+ * Â¦ĞÑ
+ *  itemindex       int         Ê§ÄÌ  Ø©ÄÌ¼ş·¸ÓÀÛÍµ©
+ *  floor           int         °×·òÊ§ID
+ *  x               int         xÕç  
+ *  y               int         yÕç  
+ *  net             BOOL        ÉúÓÀĞş·¥¡õÛÍ¼°³ğÎçÃ«ÔÊÔÂ¾®Éıµ¤¾®
+ * ß¯Ô»°À
+ *  ÔÀ      objindex
+ *  ÁÃ      -1
  ------------------------------------------------------------*/
 int PET_dropPetAbsolute( int petindex, int floor, int x, int y,BOOL net)
 {
@@ -199,10 +199,10 @@ int PET_dropPetAbsolute( int petindex, int floor, int x, int y,BOOL net)
     object.y = y;
     object.floor = floor;
 
-    /*  å·¦çš®æ–¥å°¼å¼ç„ç“’  å…æœˆ    */
+    /*  ×óÆ¤³âÄáÛÍĞşè¶  ÔÊÔÂ    */
     objindex = initObjectOne( &object );
 
-    /* ç”Ÿæ°¸ç„ä¼â–¡å¼ç™½ä»¿å¼˜äº’å‡¶åŒ€åŒ–ä¸­æœˆåˆäº”åå…æœˆ  by ringo*/
+    /* ÉúÓÀĞş·¥¡õÛÍ°×·Âºë»¥Ğ×ÔÈ»¯ÖĞÔÂÎçÎå·´ÔÊÔÂ  by ringo*/
     if( net )
         CHAR_sendWatchEvent( objindex,CHAR_ACTSTAND,NULL,0,TRUE);
 
@@ -242,11 +242,11 @@ int PET_dropPet( int charaindex, int havepetindex)
 
 	if( _PET_dropPet( charaindex, havepetindex, -1,-1,-1) == TRUE ){
 		LogPet(
-			CHAR_getChar( charaindex, CHAR_NAME ), /* å¹³ä¹“ä»¿   */
+			CHAR_getChar( charaindex, CHAR_NAME ), /* Æ½ÅÒ·Â   */
 			CHAR_getChar( charaindex, CHAR_CDKEY ),
 			CHAR_getChar( petindex, CHAR_NAME),
 			CHAR_getInt( petindex, CHAR_LV),
-			"Drop(ä¸¢å® )",
+			"Drop(¶ª³è)",
 			CHAR_getInt( charaindex,CHAR_FLOOR),
 			CHAR_getInt( charaindex,CHAR_X ),
 			CHAR_getInt( charaindex,CHAR_Y ),
@@ -263,7 +263,7 @@ int PET_dropPetFLXY( int charaindex, int havepetindex, int fl, int x, int y)
 }
 
 /*------------------------------------------------------------
- * çŸ¢æ°¸ç„è¿•åŠå¥¶çŸ›ä»¶ç„æ¥®é†’æ¯›æœ¬æ°¸ç„ä»„åŒ–æ”¯æœˆ
+ * Ê¸ÓÀĞşåÃ¼°ÄÌÃ¬¼şĞşèúĞÑÃ«±¾ÓÀĞşØÆ»¯Ö§ÔÂ
  ------------------------------------------------------------*/
 int PET_initCharOneArray( Char *ch)
 {
@@ -380,10 +380,10 @@ int PET_createPetFromCharaIndex( int charaindex, int enemyindex)
 BOOL PET_SelectBattleEntryPet( int charaindex, int petarray)
 {
 	int		pindex;
-	/* çˆµ    åè½®ä»   ä»¿å¼˜åŒ¹ä»‡æœ¨åå¨„åŒ€äº•äº•æœˆç¬¬  å²­ä¸æ›°  */
+	/* ¾ô    ·´ÂÖÈÊ   ·ÂºëÆ¥³ğÄ¾±åÂ¦ÔÈ¾®¾®ÔÂµÚ  ÁëØ¤Ô»  */
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE)
 		!= BATTLE_CHARMODE_NONE) return FALSE;
-	/* -1åŠæ¡¦å®åï¼½-1åä»„åŒ–æœ¬æ°¸ç„ä»„åŒ–è”½æ­¹æ›°ï¼»*/
+	/* -1¼°èëÄş·´£İ-1±åØÆ»¯±¾ÓÀĞşØÆ»¯±Î´õÔ»£Û*/
 	if( petarray == -1 ) {
 		CHAR_setInt( charaindex, CHAR_DEFAULTPET, -1 );
 		return TRUE;
@@ -418,11 +418,11 @@ int PET_dropPetFollow( int charaindex, int havepetindex, int tofl, int tox, int 
     if( CHAR_CHECKINDEX( petindex) == FALSE ) return FALSE;
 
 	if (CHAR_getInt(petindex, CHAR_PETFAMILY) == 1){
-     	CHAR_talkToCli(charaindex, -1, "å®¶æ—å®ˆæŠ¤å…½æ— æ³•ä¸¢å‡ºï¼", CHAR_COLORYELLOW);
+     	CHAR_talkToCli(charaindex, -1, "¼Ò×åÊØ»¤ÊŞÎŞ·¨¶ª³ö£¡", CHAR_COLORYELLOW);
     	return	FALSE;  
     }
     if (CHAR_getInt(charaindex, CHAR_RIDEPET) == havepetindex){
-    	CHAR_talkToCli(charaindex, -1, "éª‘ä¹˜ä¸­çš„å® ç‰©æ— æ³•è·Ÿéšï¼", CHAR_COLORYELLOW);
+    	CHAR_talkToCli(charaindex, -1, "Æï³ËÖĞµÄ³èÎïÎŞ·¨¸úËæ£¡", CHAR_COLORYELLOW);
     	return	FALSE;
     }
 	if( tofl == -1 ) {
@@ -490,7 +490,7 @@ int PET_dropPetFollow( int charaindex, int havepetindex, int tofl, int tox, int 
 		CHAR_getChar( charaindex, CHAR_CDKEY ),
 		CHAR_getChar( petindex, CHAR_NAME),
 		CHAR_getInt( petindex, CHAR_LV),
-		"Follow(æºœå® )",
+		"Follow(Áï³è)",
 		CHAR_getInt( charaindex,CHAR_FLOOR),
 		CHAR_getInt( charaindex,CHAR_X ),
 		CHAR_getInt( charaindex,CHAR_Y ),
@@ -517,8 +517,8 @@ void PET_showEditBaseMsg( int charaindex, int toindex, int itemindex, int *work)
 {
 	int i, maxnums = 6000;
 	char buf1[256];
-	char buf2[][32]={"è…•åŠ›æˆé•¿ç‡","è€ä¹…åŠ›æˆé•¿ç‡","é€Ÿåº¦æˆé•¿ç‡","ä½“åŠ›æˆé•¿ç‡","èƒ½åŠ›"};
-	char buf3[][32]={"å¤§å¹…æé«˜","ç•¥ä¸ºæé«˜","ç•¥ä¸ºå‡å°‘"};
+	char buf2[][32]={"ÍóÁ¦³É³¤ÂÊ","ÄÍ¾ÃÁ¦³É³¤ÂÊ","ËÙ¶È³É³¤ÂÊ","ÌåÁ¦³É³¤ÂÊ","ÄÜÁ¦"};
+	char buf3[][32]={"´ó·ùÌá¸ß","ÂÔÎªÌá¸ß","ÂÔÎª¼õÉÙ"};
 	
 	if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPET)
 		return;
@@ -526,24 +526,24 @@ void PET_showEditBaseMsg( int charaindex, int toindex, int itemindex, int *work)
 
 	for( i=0; i<4; i++)	{
 		int type = ITEM_getInt( itemindex, (ITEM_MODIFYATTACK + i));
-//		print(" å–‚[%d]%d+%d ", i, work[i], type);
+//		print(" Î¹[%d]%d+%d ", i, work[i], type);
 		work[i] += type;
 		strcpy( buf1,"\0");
 		if( work[i] > maxnums )	{
-			sprintf(buf1,"%s å·²ç»è¾¾åˆ°æœ€é«˜äº†ã€‚", buf2[i]);
+			sprintf(buf1,"%s ÒÑ¾­´ïµ½×î¸ßÁË¡£", buf2[i]);
 			work[i] = maxnums;
 		}else if( work[i] < 0 )	{
-			sprintf(buf1,"%s å·²ç»ä¸ºé›¶äº†ã€‚", buf2[i]);
+			sprintf(buf1,"%s ÒÑ¾­ÎªÁãÁË¡£", buf2[i]);
 			work[i] = 0;
 		}else	{
 			if( type > 0 )	{
 				if( type > 2 )	{
-					sprintf(buf1,"%s %s %s", buf2[i], buf3[0], "ã€‚");
+					sprintf(buf1,"%s %s %s", buf2[i], buf3[0], "¡£");
 				}else	{
-					sprintf(buf1,"%s %s %s", buf2[i], buf3[1], "ã€‚");
+					sprintf(buf1,"%s %s %s", buf2[i], buf3[1], "¡£");
 				}
 			}else if( type < 0 ){
-				sprintf(buf1,"%s %s %s", buf2[i], buf3[2], "ã€‚");	
+				sprintf(buf1,"%s %s %s", buf2[i], buf3[2], "¡£");	
 			}
 		}
 		if( strcmp( buf1, "\0"))	{
@@ -571,7 +571,7 @@ BOOL CHAR_DelPetForIndex( int charaindex, int petindex)
 		snprintf( szPet, sizeof( szPet ), "K%d", i);
 		CHAR_sendStatusString( charaindex, szPet );
 
-		snprintf( msgbuf,sizeof( msgbuf), "äº¤å‡º%sã€‚", CHAR_getChar( petindex, CHAR_NAME));
+		snprintf( msgbuf,sizeof( msgbuf), "½»³ö%s¡£", CHAR_getChar( petindex, CHAR_NAME));
 		CHAR_talkToCli( charaindex, -1, msgbuf,  CHAR_COLORYELLOW);
 		CHAR_endCharOneArray( petindex );
 	}

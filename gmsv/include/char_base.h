@@ -17,7 +17,7 @@
 #define CHAR_MAXBANKGOLDHAVE    (10000*10000)
 #define CHAR_MAXFMBANKGOLDHAVE	(10000*10000*2)
 
-#ifdef _PERSONAL_FAME	// Arminius 8.30: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME	// Arminius 8.30: ¼Ò×å¸öÈËÉùÍû
 #define MAX_PERSONALFAME (10000 * 10000)
 #endif
 #define CHAR_SKILLMAXHAVE   5
@@ -29,7 +29,7 @@
 #define CHAR_MAXPETHAVE         5
 #define CHAR_MAXPERSONAGOLD		50000000
 
-#ifdef _ADD_POOL_ITEM			   // WON ADD å¢žåŠ å¯å¯„æ”¾çš„é“å…·
+#ifdef _ADD_POOL_ITEM			   // WON ADD Ôö¼Ó¿É¼Ä·ÅµÄµÀ¾ß
 #define CHAR_MAXPOOLPETHAVE         15
 #else
 #define CHAR_MAXPOOLPETHAVE         10
@@ -43,18 +43,18 @@
 #define CHAR_DEFAULTMAXAI		(60)
 #define CHAR_MAXVARIABLEAI		(100*100)
 #define CHAR_MINVARIABLEAI		(-100*100)
-#define CHAR_POISONSTRING           "ä¸­æ¯’"
-#define CHAR_RECOVERPOISONSTRING    "è§£æ¯’äº†"
-#define CHAR_PARALYSISSTRING        "éº»ç—¹äº†"
-#define CHAR_RECOVERPARALYSISSTRING "éº»é†‰é€€äº†"
-#define CHAR_SILENCESTRING          "æ— æ³•å¿µé­”æ³•äº†"
-#define CHAR_RECOVERSILENCESTRING   "å¯ä»¥å¿µé­”æ³•äº†"
-#define CHAR_STONESTRING            "çŸ³åŒ–äº†"
-#define CHAR_RECOVERSTONESTRING     "å˜çµæ´»äº†"
-#define CHAR_DARKNESSSTRING         "å››å‘¨ä¸è§äº†"
-#define CHAR_RECOVERDARKNESSSTRING  "å››å‘¨å‡ºçŽ°äº†"
-#define CHAR_CONFUSIONSTRING        "é™·å…¥ææ…Œ"
-#define CHAR_RECOVERCONFUSIONSTRING "æ¢å¤æ­£å¸¸"
+#define CHAR_POISONSTRING           "ÖÐ¶¾"
+#define CHAR_RECOVERPOISONSTRING    "½â¶¾ÁË"
+#define CHAR_PARALYSISSTRING        "Âé±ÔÁË"
+#define CHAR_RECOVERPARALYSISSTRING "Âé×íÍËÁË"
+#define CHAR_SILENCESTRING          "ÎÞ·¨ÄîÄ§·¨ÁË"
+#define CHAR_RECOVERSILENCESTRING   "¿ÉÒÔÄîÄ§·¨ÁË"
+#define CHAR_STONESTRING            "Ê¯»¯ÁË"
+#define CHAR_RECOVERSTONESTRING     "±äÁé»îÁË"
+#define CHAR_DARKNESSSTRING         "ËÄÖÜ²»¼ûÁË"
+#define CHAR_RECOVERDARKNESSSTRING  "ËÄÖÜ³öÏÖÁË"
+#define CHAR_CONFUSIONSTRING        "ÏÝÈë¿Ö»Å"
+#define CHAR_RECOVERCONFUSIONSTRING "»Ö¸´Õý³£"
 
 #define CHAR_DEFAULTSEESIZ  23
 #define MAP_CHAR_DEFAULTSEESIZ      (CHAR_DEFAULTSEESIZ+4)
@@ -169,9 +169,9 @@ typedef enum
 	CHAR_TYPECHECKMAN,
 	CHAR_TYPEJANKEN,
 	CHAR_TYPETRANSMIGRATION,
-	CHAR_TYPEFMWARPMAN,			// å®¶æ—ï¼°ï¼«åœºç®¡ç†å‘˜
-	CHAR_TYPEFMSCHEDULEMAN,		// å®¶æ—ï¼°ï¼«åœºç™»è®°å‘˜
-	CHAR_TYPEMANORSCHEDULEMAN,	// åº„å›­ï¼°ï¼«åœºé¢„çº¦äºº
+	CHAR_TYPEFMWARPMAN,			// ¼Ò×å£Ð£Ë³¡¹ÜÀíÔ±
+	CHAR_TYPEFMSCHEDULEMAN,		// ¼Ò×å£Ð£Ë³¡µÇ¼ÇÔ±
+	CHAR_TYPEMANORSCHEDULEMAN,	// ×¯Ô°£Ð£Ë³¡Ô¤Ô¼ÈË
 #ifdef _GAMBLE_BANK
 	CHAR_GAMBLEBANK,
 #endif
@@ -194,11 +194,11 @@ typedef enum
 	CHAR_FREESKILLSHOP,
 #endif
 #ifdef _PETRACE
-	CHAR_PETRACEMASTER,			// å® ç‰©ç«žé€Ÿ
+	CHAR_PETRACEMASTER,			// ³èÎï¾ºËÙ
 	CHAR_PETRACEPET,
 #endif
 
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æŽ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅÐÐ°ñNPC
   CHAR_TYPEALLDOMAN,
 #endif
 
@@ -230,10 +230,10 @@ typedef enum
 
 typedef enum
 {
-      CHAR_TRADE_FREE,      /* å¯äº¤æ˜“ */
-      CHAR_TRADE_SENDING,   /* äº¤æ˜“è¯·æ±‚ä¸­ */
-      CHAR_TRADE_TRADING,   /* äº¤æ˜“ä¸­ */
-      CHAR_TRADE_LOCK,	    /* äº¤æ˜“é”å®šä¸­ */
+      CHAR_TRADE_FREE,      /* ¿É½»Ò× */
+      CHAR_TRADE_SENDING,   /* ½»Ò×ÇëÇóÖÐ */
+      CHAR_TRADE_TRADING,   /* ½»Ò×ÖÐ */
+      CHAR_TRADE_LOCK,	    /* ½»Ò×Ëø¶¨ÖÐ */
 }CHAR_TRADE_MODE;
                   
 typedef enum
@@ -256,12 +256,12 @@ typedef enum
 #ifdef _DROPSTAKENEW
 typedef enum
 {
-	DICE_BIG = 1,		// éª°å­_å¤§
-	DICE_SMALL,			// éª°å­_å°
-	DICE_ALLEAT,		// éª°å­_é€šåƒ
-	PET_RACE1 = 5,		// ç«žé€Ÿåœº_å® ç‰©1
-	PET_RACE2,			// ç«žé€Ÿåœº_å® ç‰©2
-	PET_RACE3,			// ç«žé€Ÿåœº_å® ç‰©3
+	DICE_BIG = 1,		// ÷»×Ó_´ó
+	DICE_SMALL,			// ÷»×Ó_Ð¡
+	DICE_ALLEAT,		// ÷»×Ó_Í¨³Ô
+	PET_RACE1 = 5,		// ¾ºËÙ³¡_³èÎï1
+	PET_RACE2,			// ¾ºËÙ³¡_³èÎï2
+	PET_RACE3,			// ¾ºËÙ³¡_³èÎï3
 	ROULETTE1 = 11,	ROULETTE2, ROULETTE3, ROULETTE4, ROULETTE5,	ROULETTE6, ROULETTE7, 
 	ROULETTE8, ROULETTE9, ROULETTE10, ROULETTE11, ROULETTE12, ROULETTE13, ROULETTE14,
 	ROULETTE15,	ROULETTE16,	ROULETTE17,	ROULETTE18,	ROULETTE19,	ROULETTE20,	
@@ -270,15 +270,15 @@ typedef enum
 	ROULETTE33,	ROULETTE34,	ROULETTE35,	ROULETTE36,	ROULETTE37,	ROULETTE38,
 	ROULETTE39,	ROULETTE40,
 	ROULETTE41 = 71, ROULETTE42, ROULETTE43, ROULETTE44, ROULETTE45,
-	ROULETTE51 = 101, ROULETTE52, ROULETTE53,	//æ¨ªåˆ—
-	ROULETTE61 = 111, ROULETTE62,				//1åˆ°10 10åˆ°11
+	ROULETTE51 = 101, ROULETTE52, ROULETTE53,	//ºáÁÐ
+	ROULETTE61 = 111, ROULETTE62,				//1µ½10 10µ½11
 	PETFIGHT_WIN1 = 120,
 	PETFIGHT_WIN2,
 	PETFIGHT_DUEL,
 }GAMBLE_TYPE;
 #endif
 
-#ifdef _ADD_POOL_ITEM				// (ä¸å¯å¼€) WON ADD å¢žåŠ å¯å¯„æ”¾çš„é“å…·
+#ifdef _ADD_POOL_ITEM				// (²»¿É¿ª) WON ADD Ôö¼Ó¿É¼Ä·ÅµÄµÀ¾ß
 #define CHAR_MAXPOOLITEMHAVE	30
 #else
 #define CHAR_MAXPOOLITEMHAVE	20
@@ -379,18 +379,18 @@ typedef enum
 	CHAR_TRANSEQUATION,
   CHAR_INITDATA,
   CHAR_SILENT,				/* char shutup time */    
-  CHAR_FMINDEX,				// å®¶æ— index
-  CHAR_FMLEADERFLAG,			/* å®¶æ—æˆå‘˜ç§ç±»
-    							 * FMMEMBER_NONE	:æ²¡æœ‰åŠ å…¥ä»»ä½•å®¶æ—
-    							 * FMMEMBER_APPLY	:ç”³è¯·åŠ å…¥å®¶æ—ä¸­
-    							 * FMMEMBER_LEADER	:æ—é•¿
-    							 * FMMEMBER_MEMBER	:ä¸€èˆ¬æˆå‘˜
-    							 * FMMEMBER_ELDER	:é•¿è€    
-    							 * FMMEMBER_INVITE	:ç¥­å¸			// æš‚æ—¶ä¸ç”¨
-    							 * FMMEMBER_BAILEE	:è´¢åŠ¡é•¿			// æš‚æ—¶ä¸ç”¨
-    							 * FMMEMBER_VICELEADER  :å‰¯æ—é•¿		// æš‚æ—¶ä¸ç”¨
+  CHAR_FMINDEX,				// ¼Ò×å index
+  CHAR_FMLEADERFLAG,			/* ¼Ò×å³ÉÔ±ÖÖÀà
+    							 * FMMEMBER_NONE	:Ã»ÓÐ¼ÓÈëÈÎºÎ¼Ò×å
+    							 * FMMEMBER_APPLY	:ÉêÇë¼ÓÈë¼Ò×åÖÐ
+    							 * FMMEMBER_LEADER	:×å³¤
+    							 * FMMEMBER_MEMBER	:Ò»°ã³ÉÔ±
+    							 * FMMEMBER_ELDER	:³¤ÀÏ    
+    							 * FMMEMBER_INVITE	:¼ÀË¾			// ÔÝÊ±²»ÓÃ
+    							 * FMMEMBER_BAILEE	:²ÆÎñ³¤			// ÔÝÊ±²»ÓÃ
+    							 * FMMEMBER_VICELEADER  :¸±×å³¤		// ÔÝÊ±²»ÓÃ
     							*/
-  CHAR_FMSPRITE,		// å®¶æ—å®ˆæŠ¤ç²¾çµ
+  CHAR_FMSPRITE,		// ¼Ò×åÊØ»¤¾«Áé
 
   CHAR_BANKGOLD,
   CHAR_RIDEPET,
@@ -400,7 +400,7 @@ typedef enum
 #endif
   CHAR_LIMITLEVEL,
     
-#ifdef _PERSONAL_FAME	// Arminius 8.30: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME	// Arminius 8.30: ¼Ò×å¸öÈËÉùÍû
     CHAR_FAME,
 #endif
 
@@ -409,32 +409,32 @@ typedef enum
 #endif
  
 #ifdef _ATTACK_MAGIC
-		CHAR_EARTH_EXP,						// çŽ©å®¶çš„åœ°é­”æ³•ç†Ÿç»ƒåº¦
-		CHAR_WATER_EXP,						// çŽ©å®¶çš„æ°´é­”æ³•ç†Ÿç»ƒåº¦
-		CHAR_FIRE_EXP,						// çŽ©å®¶çš„ç«é­”æ³•ç†Ÿç»ƒåº¦
-		CHAR_WIND_EXP,						// çŽ©å®¶çš„é£Žé­”æ³•ç†Ÿç»ƒåº¦
-		CHAR_EARTH_RESIST,					// çŽ©å®¶çš„åœ°é­”æ³•æŠ—æ€§
-		CHAR_WATER_RESIST,					// çŽ©å®¶çš„æ°´é­”æ³•æŠ—æ€§
-		CHAR_FIRE_RESIST,					// çŽ©å®¶çš„ç«é­”æ³•æŠ—æ€§
-		CHAR_WIND_RESIST,					// çŽ©å®¶çš„é£Žé­”æ³•æŠ—æ€§
-		CHAR_EARTH_ATTMAGIC_EXP,			// çŽ©å®¶çš„åœ°é­”æ³•ç†Ÿç»ƒåº¦ç»éªŒå€¼
-		CHAR_WATER_ATTMAGIC_EXP,			// çŽ©å®¶çš„æ°´é­”æ³•ç†Ÿç»ƒåº¦ç»éªŒå€¼
-		CHAR_FIRE_ATTMAGIC_EXP,				// çŽ©å®¶çš„ç«é­”æ³•ç†Ÿç»ƒåº¦ç»éªŒå€¼
-		CHAR_WIND_ATTMAGIC_EXP,				// çŽ©å®¶çš„é£Žé­”æ³•ç†Ÿç»ƒåº¦ç»éªŒå€¼
-	 	CHAR_EARTH_DEFMAGIC_EXP,			// çŽ©å®¶çš„åœ°é­”æ³•æŠ—æ€§ç»éªŒå€¼
-		CHAR_WATER_DEFMAGIC_EXP,			// çŽ©å®¶çš„æ°´é­”æ³•æŠ—æ€§ç»éªŒå€¼
-		CHAR_FIRE_DEFMAGIC_EXP,				// çŽ©å®¶çš„ç«é­”æ³•æŠ—æ€§ç»éªŒå€¼
-		CHAR_WIND_DEFMAGIC_EXP,				// çŽ©å®¶çš„é£Žé­”æ³•æŠ—æ€§ç»éªŒå€¼
+		CHAR_EARTH_EXP,						// Íæ¼ÒµÄµØÄ§·¨ÊìÁ·¶È
+		CHAR_WATER_EXP,						// Íæ¼ÒµÄË®Ä§·¨ÊìÁ·¶È
+		CHAR_FIRE_EXP,						// Íæ¼ÒµÄ»ðÄ§·¨ÊìÁ·¶È
+		CHAR_WIND_EXP,						// Íæ¼ÒµÄ·çÄ§·¨ÊìÁ·¶È
+		CHAR_EARTH_RESIST,					// Íæ¼ÒµÄµØÄ§·¨¿¹ÐÔ
+		CHAR_WATER_RESIST,					// Íæ¼ÒµÄË®Ä§·¨¿¹ÐÔ
+		CHAR_FIRE_RESIST,					// Íæ¼ÒµÄ»ðÄ§·¨¿¹ÐÔ
+		CHAR_WIND_RESIST,					// Íæ¼ÒµÄ·çÄ§·¨¿¹ÐÔ
+		CHAR_EARTH_ATTMAGIC_EXP,			// Íæ¼ÒµÄµØÄ§·¨ÊìÁ·¶È¾­ÑéÖµ
+		CHAR_WATER_ATTMAGIC_EXP,			// Íæ¼ÒµÄË®Ä§·¨ÊìÁ·¶È¾­ÑéÖµ
+		CHAR_FIRE_ATTMAGIC_EXP,				// Íæ¼ÒµÄ»ðÄ§·¨ÊìÁ·¶È¾­ÑéÖµ
+		CHAR_WIND_ATTMAGIC_EXP,				// Íæ¼ÒµÄ·çÄ§·¨ÊìÁ·¶È¾­ÑéÖµ
+	 	CHAR_EARTH_DEFMAGIC_EXP,			// Íæ¼ÒµÄµØÄ§·¨¿¹ÐÔ¾­ÑéÖµ
+		CHAR_WATER_DEFMAGIC_EXP,			// Íæ¼ÒµÄË®Ä§·¨¿¹ÐÔ¾­ÑéÖµ
+		CHAR_FIRE_DEFMAGIC_EXP,				// Íæ¼ÒµÄ»ðÄ§·¨¿¹ÐÔ¾­ÑéÖµ
+		CHAR_WIND_DEFMAGIC_EXP,				// Íæ¼ÒµÄ·çÄ§·¨¿¹ÐÔ¾­ÑéÖµ
 #endif
 
 
 #ifdef _GAMBLE_BANK
-		CHAR_PERSONAGOLD,	//èµŒåœºä¸ªäººé“¶è¡Œ
+		CHAR_PERSONAGOLD,	//¶Ä³¡¸öÈËÒøÐÐ
 #endif
 #ifdef _DROPSTAKENEW
-		CHAR_GAMBLENUM,		//èµŒåœºç§¯åˆ†
+		CHAR_GAMBLENUM,		//¶Ä³¡»ý·Ö
 #endif
-#ifdef _ADD_ACTION          //npcåŠ¨ä½œ
+#ifdef _ADD_ACTION          //npc¶¯×÷
 		CHAR_ACTIONSTYLE,
 #endif
 
@@ -442,14 +442,14 @@ typedef enum
 		CHAR_FMTIMELIMIT,
 #endif
 
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æŽ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅÐÐ°ñNPC
 		CHAR_HEROFLOOR, 
 #endif
 #ifdef _PETSKILL_BECOMEPIG
 		CHAR_BECOMEPIG,
-		CHAR_BECOMEPIG_BBI,//è¦å˜æˆçš„å›¾å·
+		CHAR_BECOMEPIG_BBI,//Òª±ä³ÉµÄÍ¼ºÅ
 #endif
-		CHAR_LASTLEAVETIME, // Robin add æœ€å¾Œç¦»çº¿æ—¶é—´
+		CHAR_LASTLEAVETIME, // Robin add ×îááÀëÏßÊ±¼ä
 
 #ifdef _ITEM_ADDEXP2
 		CHAR_ADDEXPPOWER,
@@ -457,21 +457,21 @@ typedef enum
 #endif
 
 #ifdef _GM_ITEM
-	CHAR_GMTIME,       // çŽ©å®¶GMå‘½ä»¤æ¬¡æ•°
+	CHAR_GMTIME,       // Íæ¼ÒGMÃüÁî´ÎÊý
 #endif
 
 #ifdef _VIP_SERVER
-	CHAR_AMPOINT,      // ä¼šå‘˜ç‚¹æ•°
+	CHAR_AMPOINT,      // »áÔ±µãÊý
 #endif
 
 #ifdef _VIP_RIDE
-	CHAR_VIPRIDE,      // ä¼šå‘˜éª‘é»‘é¸¡
+	CHAR_VIPRIDE,      // »áÔ±ÆïºÚ¼¦
 #endif
 
 		CHAR_LISTPAGE,
 
 #ifdef _AUTO_PK
-		CHAR_AUTOPK,       // è‡ªåŠ¨åŒ–PK
+		CHAR_AUTOPK,       // ×Ô¶¯»¯PK
 #endif
 #ifdef _BATTLE_PK
 		CHAR_BATTLEPK,
@@ -489,23 +489,23 @@ typedef enum
 
 
 typedef enum {
-    CHAR_MODAI    			= CHAR_CHARM,    		/*  çŸ¢æ°¸çŽ„  åŠåŠé•æ“¦è‰˜è†œæ³è¢„    */
-	CHAR_VARIABLEAI 		= CHAR_LUCK,			/*  çŸ¢æ°¸çŽ„åŠé•æ“¦è‰˜  ç¥­è¢„  ã„ ã„Ÿã„Ÿ  ä»„å‡¶è¢„åŒ¹  åŒ€åŒ–äº‘ä»   */
-    CHAR_SLOT 				= CHAR_DEFAULTPET,		/* æª—  æ¯›æœ¬æ°¸çŽ„è¯·  æœˆæ—¦å¤«æ°¸çŽ„é†’  çŸ¢æ°¸çŽ„äº’é“¶è¿•  */
-   	CHAR_PETGETLV			= CHAR_CHATVOLUME,		/* å¿…æ°¸çŽ„ä»Šæœ¨å‡¶ä¼ŠçŸ›ä¼™  çŸ¢æ°¸çŽ„åŠå¿ƒé“¶è¿•   */
-    CHAR_PUTPETTIME			= CHAR_LOGINCOUNT,		/*  çŸ¢æ°¸çŽ„äº’å“—  åž  äº•æœ¨å‡¶å‡›æ£‰ */
-	CHAR_MAILMODE 			= CHAR_RADARSTRENGTH,	/*   çŸ¢æ°¸çŽ„åŠå¿ƒé“¶è¿•  ä¸¢â–¡ä¼™éœœè€¨æ©‡è°ª */
-    CHAR_ALLOCPOINT			= CHAR_LEVELUPPOINT,	/* ä¼ŠçŸ›ä¼™å¤±æ°¸çš¿å‡›åŠå–ƒæ›°è•Šæ›°ç¦¾å¥¶ä»¶çŽ„(çŸ¢æ°¸çŽ„è¿•) */
-    CHAR_PETMAILBUFINDEX	= CHAR_GETPETCOUNT, 	/* çŸ¢æ°¸çŽ„ä¸¢â–¡ä¼™(offmsg)å°ºåŠindex */
-	CHAR_PETMAILIDLETIME	= CHAR_SENDMAILCOUNT,	/* çŸ¢æ°¸çŽ„ä¸¢â–¡ä¼™åŠå•ƒåŠå‡›æ£‰å…å‡ */
-	CHAR_PETMAILFROMFLOOR	= CHAR_DUELBATTLECOUNT,	/* ä¸¢â–¡ä¼™æ¯›éœœåŒ€å‡¶å‡›åŠç™½å¤«å¤± */
-	CHAR_PETMAILFROMX		= CHAR_DUELWINCOUNT,	/* ä¸¢â–¡ä¼™æ¯›éœœåŒ€å‡¶å‡›åŠ  ç”„   */
-	CHAR_PETMAILFROMY		= CHAR_DUELLOSECOUNT,	/* ä¸¢â–¡ä¼™æ¯›éœœåŒ€å‡¶å‡›åŠ  ç”„   */
-	CHAR_PETMAILEFFECT		= CHAR_DUELSTWINCOUNT,	/* çŸ¢æ°¸çŽ„ä¸¢â–¡ä¼™åŠè¯·èœ‡åŠå·¨ç™½å°¼å¼çŽ„  å¯ž */
-	CHAR_PETSENDMAILCOUNT	= CHAR_TALKCOUNT,		/* çŸ¢æ°¸çŽ„äº’ä¸¢â–¡ä¼™æ¯›æ‰ªæ°åˆ†èšé†’ */
-    CHAR_PETRANK			= CHAR_LASTTIMESETLUCK, /* çŸ¢æ°¸çŽ„åŠä»¿ä»¶å¼(çŸ¢æ°¸çŽ„è¿•  ã„   ã„¥ï¼»ã„Ÿåå·¨ä»¿â–¡è¿• */
-	CHAR_PETID				= CHAR_DUELMAXSTWINCOUNT,/* çŸ¢æ°¸çŽ„åŠ  ä»¶çš¿ä¼Šâ–¡çŽ„åŠ     */
-    CHAR_PETFAMILY		= CHAR_FMLEADERFLAG,		// CoolFish: Family åˆ¤æ–­æ˜¯å¦ä¸ºå®¶æ—å®ˆæŠ¤å…½
+    CHAR_MODAI    			= CHAR_CHARM,    		/*  Ê¸ÓÀÐþ  ¼°¼°ïá²ÁËÒÄ¤¿Ò°À    */
+	CHAR_VARIABLEAI 		= CHAR_LUCK,			/*  Ê¸ÓÀÐþ¼°ïá²ÁËÒ  ¼À°À  ¨à¨ß¨ß  ØÆÐ×°ÀÆ¥  ÔÈ»¯ÔÆÈÊ   */
+    CHAR_SLOT 				= CHAR_DEFAULTPET,		/* éÞ  Ã«±¾ÓÀÐþÇë  ÔÂµ©·òÓÀÐþÐÑ  Ê¸ÓÀÐþ»¥ÒøåÃ  */
+   	CHAR_PETGETLV			= CHAR_CHATVOLUME,		/* ±ØÓÀÐþ½ñÄ¾Ð×ÒÁÃ¬»ï  Ê¸ÓÀÐþ¼°ÐÄÒøåÃ   */
+    CHAR_PUTPETTIME			= CHAR_LOGINCOUNT,		/*  Ê¸ÓÀÐþ»¥»©  ±å  ¾®Ä¾Ð×ÁÝÃÞ */
+	CHAR_MAILMODE 			= CHAR_RADARSTRENGTH,	/*   Ê¸ÓÀÐþ¼°ÐÄÒøåÃ  ¶ª¡õ»ïËªññÇÁÚØ */
+    CHAR_ALLOCPOINT			= CHAR_LEVELUPPOINT,	/* ÒÁÃ¬»ïÊ§ÓÀÃóÁÝ¼°à«Ô»ÈïÔ»ºÌÄÌ¼þÐþ(Ê¸ÓÀÐþåÃ) */
+    CHAR_PETMAILBUFINDEX	= CHAR_GETPETCOUNT, 	/* Ê¸ÓÀÐþ¶ª¡õ»ï(offmsg)³ß¼°index */
+	CHAR_PETMAILIDLETIME	= CHAR_SENDMAILCOUNT,	/* Ê¸ÓÀÐþ¶ª¡õ»ï¼°¿Ð¼°ÁÝÃÞØ¦Éý */
+	CHAR_PETMAILFROMFLOOR	= CHAR_DUELBATTLECOUNT,	/* ¶ª¡õ»ïÃ«ËªÔÈÐ×ÁÝ¼°°×·òÊ§ */
+	CHAR_PETMAILFROMX		= CHAR_DUELWINCOUNT,	/* ¶ª¡õ»ïÃ«ËªÔÈÐ×ÁÝ¼°  Õç   */
+	CHAR_PETMAILFROMY		= CHAR_DUELLOSECOUNT,	/* ¶ª¡õ»ïÃ«ËªÔÈÐ×ÁÝ¼°  Õç   */
+	CHAR_PETMAILEFFECT		= CHAR_DUELSTWINCOUNT,	/* Ê¸ÓÀÐþ¶ª¡õ»ï¼°ÇëòØ¼°¾Þ°×ÄáÛÍÐþ  Ä¯ */
+	CHAR_PETSENDMAILCOUNT	= CHAR_TALKCOUNT,		/* Ê¸ÓÀÐþ»¥¶ª¡õ»ïÃ«ÞÑÊÏ·Ö¼ÔÐÑ */
+    CHAR_PETRANK			= CHAR_LASTTIMESETLUCK, /* Ê¸ÓÀÐþ¼°·Â¼þÛÍ(Ê¸ÓÀÐþåÃ  ¨à  ¨å£Û¨ß·´¾Þ·Â¡õåÃ */
+	CHAR_PETID				= CHAR_DUELMAXSTWINCOUNT,/* Ê¸ÓÀÐþ¼°  ¼þÃóÒÁ¡õÐþ¼°     */
+    CHAR_PETFAMILY		= CHAR_FMLEADERFLAG,		// CoolFish: Family ÅÐ¶ÏÊÇ·ñÎª¼Ò×åÊØ»¤ÊÞ
 }CHAR_PET;
 
 
@@ -527,12 +527,12 @@ typedef enum
 #endif
 
 #ifdef _ITEM_SETLOVER
-	CHAR_LOVE,         // ç»“å©šåˆ¤æ–­
-	CHAR_LOVERID,      // çˆ±äººå¸å·
-	CHAR_LOVERNAME,    // çˆ±äººåå­—
+	CHAR_LOVE,         // ½á»éÅÐ¶Ï
+	CHAR_LOVERID,      // °®ÈËÕÊºÅ
+	CHAR_LOVERNAME,    // °®ÈËÃû×Ö
 #endif
 #ifdef _GM_ITEM
-	CHAR_GMFUNCTION,   // çŽ©å®¶GMå‘½ä»¤
+	CHAR_GMFUNCTION,   // Íæ¼ÒGMÃüÁî
 #endif
        CHAR_NEWNAME,
     CHAR_DATACHARNUM,
@@ -563,7 +563,7 @@ typedef enum
 #define CHAR_FS_PARTY			(1 << 0)
 #define CHAR_FS_BATTLE		(1 << 1)
 #define CHAR_FS_DUEL    	(1 << 2)
-#define CHAR_FS_PARTYCHAT	(1 << 3)	//é˜Ÿä¼é¢‘é“å¼€å…³
+#define CHAR_FS_PARTYCHAT	(1 << 3)	//¶ÓÎéÆµµÀ¿ª¹Ø
 #define CHAR_FS_TRADECARD	(1 << 4)
 #define CHAR_FS_TRADE			(1 << 5)
 typedef enum
@@ -602,7 +602,7 @@ typedef enum
 	CHAR_WORKFIXSEQUENCE,
 	CHAR_WORKSEQUENCEPOWER,
 	CHAR_WORKATTACHPILE,
-	CHAR_WORKHITRIGHT,	//é¢å¤–å‘½ä¸­
+	CHAR_WORKHITRIGHT,	//¶îÍâÃüÖÐ
 #endif
 #ifdef _ITEMSET6_TXT
 	CHAR_WORKNEGLECTGUARD,
@@ -628,10 +628,10 @@ typedef enum
     CHAR_WORKSTONE,
     CHAR_WORKDRUNK,
     CHAR_WORKCONFUSION,
-    CHAR_WORKWEAKEN,             //è™šå¼±  vincent add  _MAGIC_WEAKEN
-	CHAR_WORKDEEPPOISON,         //å‰§æ¯’  vincent add _MAGIC_DEEPPOISON
-	CHAR_WORKBARRIER,            //é­”éšœ  vincent add _MAGIC_BARRIER
-	CHAR_WORKNOCAST,             //æ²‰é»˜  vincent add _MAGIC_NOCAST  
+    CHAR_WORKWEAKEN,             //ÐéÈõ  vincent add  _MAGIC_WEAKEN
+	CHAR_WORKDEEPPOISON,         //¾ç¶¾  vincent add _MAGIC_DEEPPOISON
+	CHAR_WORKBARRIER,            //Ä§ÕÏ  vincent add _MAGIC_BARRIER
+	CHAR_WORKNOCAST,             //³ÁÄ¬  vincent add _MAGIC_NOCAST  
     CHAR_WORKMODPOISON,
     CHAR_WORKMODPARALYSIS,
     CHAR_WORKMODSLEEP,
@@ -640,16 +640,16 @@ typedef enum
     CHAR_WORKMODCONFUSION,
 	CHAR_WORKMODWEAKEN,
 	CHAR_WORKMODDEEPPOISON,
-	CHAR_WORKMODBARRIER,		//é­”éšœ
-	CHAR_WORKMODNOCAST,			//æ²‰é»˜
-	CHAR_WORKMODCRITICAL,		//ä¸€å‡»å¿…æ€
+	CHAR_WORKMODBARRIER,		//Ä§ÕÏ
+	CHAR_WORKMODNOCAST,			//³ÁÄ¬
+	CHAR_WORKMODCRITICAL,		//Ò»»÷±ØÉ±
     CHAR_WORKULTIMATE,
     CHAR_WORKPARTYMODE,
-    CHAR_WORKTRADEMODE,         /* äº¤æ˜“æ¨¡å¼
-    							 * 0: CHAR_TRADE_FREE   :å¯äº¤æ˜“
-                                 * 1: CHAR_TRADE_SENDING:äº¤æ˜“è¯·æ±‚ä¸­
-                                 * 2: CHAR_TRADE_TRADING:äº¤æ˜“ä¸­
-                                 * 3: CHAR_TRADE_LOCK   :äº¤æ˜“é”å®šä¸­
+    CHAR_WORKTRADEMODE,         /* ½»Ò×Ä£Ê½
+    							 * 0: CHAR_TRADE_FREE   :¿É½»Ò×
+                                 * 1: CHAR_TRADE_SENDING:½»Ò×ÇëÇóÖÐ
+                                 * 2: CHAR_TRADE_TRADING:½»Ò×ÖÐ
+                                 * 3: CHAR_TRADE_LOCK   :½»Ò×Ëø¶¨ÖÐ
                                 */
     CHAR_WORKPARTYINDEX1,
     CHAR_WORKPARTYINDEX2,
@@ -686,16 +686,16 @@ typedef enum
 	CHAR_NPCWORKINT13,
     CHAR_WORKWARPCHECK,
     CHAR_TENSEICHECKED,    
-    CHAR_WORKFMINDEXI,		// å®¶æ—ç´¢å¼• index
-    CHAR_WORKFMCHANNEL,		// å®¶æ—é¢‘é“
+    CHAR_WORKFMINDEXI,		// ¼Ò×åË÷Òý index
+    CHAR_WORKFMCHANNEL,		// ¼Ò×åÆµµÀ
     CHAR_WORKFMCHANNELQUICK,
-    CHAR_WORKFMFLOOR,		// å®¶æ—æ®ç‚¹å›¾å±‚
-    CHAR_WORKFMDP,			// å®¶æ—ï¼¤ï¼°å€¼
-    CHAR_WORKFMPKFLAG,		// æ˜¯å¦æ­£å‚ä¸Žå®¶æ—ï¼°ï¼« 1:Yes
-    CHAR_WORKFMSETUPFLAG,	// å®¶æ—æ˜¯å¦å·²æ­£å¼æˆç«‹
+    CHAR_WORKFMFLOOR,		// ¼Ò×å¾ÝµãÍ¼²ã
+    CHAR_WORKFMDP,			// ¼Ò×å£Ä£ÐÖµ
+    CHAR_WORKFMPKFLAG,		// ÊÇ·ñÕý²ÎÓë¼Ò×å£Ð£Ë 1:Yes
+    CHAR_WORKFMSETUPFLAG,	// ¼Ò×åÊÇ·ñÒÑÕýÊ½³ÉÁ¢
     CHAR_WORKFMMANINDEX,	// FMWARPMAN Index
-    CHAR_WORKFMCHARINDEX,	// å®¶æ—æˆå‘˜ç´¢å¼• index
-    CHAR_WORKBATTLEFLAG,    // -1(æˆ˜æ–—ä¸èƒ½)ï¼Œ1(å¯æˆ˜æ–—)    
+    CHAR_WORKFMCHARINDEX,	// ¼Ò×å³ÉÔ±Ë÷Òý index
+    CHAR_WORKBATTLEFLAG,    // -1(Õ½¶·²»ÄÜ)£¬1(¿ÉÕ½¶·)    
 
 	CHAR_WORK_PET0_STAT,        
 	CHAR_WORK_PET1_STAT,
@@ -703,12 +703,12 @@ typedef enum
 	CHAR_WORK_PET3_STAT,
 	CHAR_WORK_PET4_STAT,	
 
-    CHAR_WORKLOGINTIME,		// çŽ©å®¶ç™»å…¥æ—¶é—´
+    CHAR_WORKLOGINTIME,		// Íæ¼ÒµÇÈëÊ±¼ä
     CHAR_WORKTALKCOUNT,
     CHAR_WORKTALKTIME,
-    CHAR_WORKPETFOLLOW,		// å® ç‰©è·Ÿéš
-    CHAR_WORKPETFALL,		// æˆ˜æ–—è½é©¬
-    CHAR_WORKLEADERCHANGE,	// æ—é•¿æ¢ä½index
+    CHAR_WORKPETFOLLOW,		// ³èÎï¸úËæ
+    CHAR_WORKPETFALL,		// Õ½¶·ÂäÂí
+    CHAR_WORKLEADERCHANGE,	// ×å³¤»»Î»index
 #ifdef _EQUIT_DEFMAGIC
 	CHAR_EQUITDEFMAGIC_E,
 	CHAR_EQUITDEFMAGIC_WA,
@@ -729,7 +729,7 @@ typedef enum
 #endif
 
 #ifdef _LOSE_FINCH_ 
-	CHAR_WORKSPETRELIFE,	//å® ç‰©å¤æ´»ç‰¹æ€§
+	CHAR_WORKSPETRELIFE,	//³èÎï¸´»îÌØÐÔ
 #endif
 
 #ifdef _CHIKULA_STONE
@@ -781,29 +781,29 @@ typedef enum
 	CHAR_WORKSUITDEX,
 	CHAR_WORKSUITMODSTR,
 #ifdef _SUIT_ADDENDUM
-    CHAR_WORKRESIST, //å¼‚å¸¸æŠ—æ€§çŽ‡
-	CHAR_WORKCOUNTER,//åå‡»çŽ‡
-	CHAR_WORKMPOWER, //åŠ å¼ºæ³•å¸ˆçš„é­”æ³•( å—å½±å“çš„æ³•æœ¯:ç«å±±æ³‰ ç«æ˜Ÿçƒ å¬é›·æœ¯ ç”µæµæœ¯ æš´é£Žé›¨ å†°ç®­æœ¯ å†°çˆ†æœ¯ ä¸–ç•Œæœ«æ—¥ ç«é¾™æžª å—œè¡€æˆæ€§ å—œè¡€è›Š ä¸€é’ˆè§è¡€ é™„èº«æœ¯ )
+    CHAR_WORKRESIST, //Òì³£¿¹ÐÔÂÊ
+	CHAR_WORKCOUNTER,//·´»÷ÂÊ
+	CHAR_WORKMPOWER, //¼ÓÇ¿·¨Ê¦µÄÄ§·¨( ÊÜÓ°ÏìµÄ·¨Êõ:»ðÉ½Èª »ðÐÇÇò ÕÙÀ×Êõ µçÁ÷Êõ ±©·çÓê ±ù¼ýÊõ ±ù±¬Êõ ÊÀ½çÄ©ÈÕ »ðÁúÇ¹ ÊÈÑª³ÉÐÔ ÊÈÑª¹Æ Ò»Õë¼ûÑª ¸½ÉíÊõ )
 #endif
 #ifdef _SUIT_TWFWENDUM
-	CHAR_WORK_EA,//åœ°
-	CHAR_WORK_WR,//æ°´
-	CHAR_WORK_FI,//ç«
-	CHAR_WORK_WI,//é£Ž
+	CHAR_WORK_EA,//µØ
+	CHAR_WORK_WR,//Ë®
+	CHAR_WORK_FI,//»ð
+	CHAR_WORK_WI,//·ç
 #endif
 #ifdef _SUIT_ADDPART3
-	CHAR_WORKDUCKPOWER,//å¥—è£…å›žé¿
-    CHAR_WORKRENOCAST, //æ²‰é»˜æŠ—æ€§çŽ‡
-	CHAR_WORKSUITSTR_P,//æ”»æå‡ å•ä½ä¸º%
-	CHAR_WORKSUITTGH_P,//é˜²æå‡ å•ä½ä¸º%
-	CHAR_WORKSUITDEX_P,//æ•æå‡ å•ä½ä¸º%
+	CHAR_WORKDUCKPOWER,//Ì××°»Ø±Ü
+    CHAR_WORKRENOCAST, //³ÁÄ¬¿¹ÐÔÂÊ
+	CHAR_WORKSUITSTR_P,//¹¥ÌáÉý µ¥Î»Îª%
+	CHAR_WORKSUITTGH_P,//·ÀÌáÉý µ¥Î»Îª%
+	CHAR_WORKSUITDEX_P,//ÃôÌáÉý µ¥Î»Îª%
 #endif
 #endif//_SUIT_ITEM
 
 #ifdef _IMPRECATE_ITEM
-	CHAR_WORKHURTMP,		//ä¼¤å®³ MP
-	CHAR_WORKWISHESHP,		//ç¥ç¦ hp
-	CHAR_WORKWISHESMP,		//ç¥ç¦ MP
+	CHAR_WORKHURTMP,		//ÉËº¦ MP
+	CHAR_WORKWISHESHP,		//×£¸£ hp
+	CHAR_WORKWISHESMP,		//×£¸£ MP
 	CHAR_WORKIMPRECATENUM1,
 	CHAR_WORKIMPRECATENUM2,
 	CHAR_WORKIMPRECATENUM3,
@@ -817,21 +817,21 @@ typedef enum
 #ifdef _ITEM_CRACKER
 	CHAR_WORKITEM_CRACKER,
 #endif
-#ifdef _ITEM_ADDEXP	//vincent ç»éªŒæå‡
+#ifdef _ITEM_ADDEXP	//vincent ¾­ÑéÌáÉý
 	CHAR_WORKITEM_ADDEXP,
     CHAR_WORKITEM_ADDEXPTIME,
 #endif
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æŽ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅÐÐ°ñNPC
 	CHAR_WORKHEROFLOOR, 
 #endif
 
 #ifdef _MAGICSTAUTS_RESIST
-	CHAR_MAGICFIRE, //ç«æŠ—ç²¾çµ
-	CHAR_MAGICTHUNDER,//ç”µæŠ—ç²¾çµ
-	CHAR_MAGICICE,//å†°æŠ—ç²¾çµ
+	CHAR_MAGICFIRE, //»ð¿¹¾«Áé
+	CHAR_MAGICTHUNDER,//µç¿¹¾«Áé
+	CHAR_MAGICICE,//±ù¿¹¾«Áé
 #endif
 
-#ifdef _PET_SKILL_SARS			// WON ADD æ¯’ç…žè”“å»¶
+#ifdef _PET_SKILL_SARS			// WON ADD ¶¾É·ÂûÑÓ
 	CHAR_WORKSARS,
 	CHAR_WORKMODSARS,
 #endif
@@ -841,23 +841,23 @@ typedef enum
 #endif
 
 #ifdef _PETSKILL_BECOMEFOX
-     CHAR_WORKFOXROUND,  //è®¡ç®—ç‹ç‹¸å˜èº«å›žåˆæ•°
+     CHAR_WORKFOXROUND,  //¼ÆËãºüÀê±äÉí»ØºÏÊý
 #endif
 
-	CHAR_WORKSTANDBYPET, // Robin add å¾…æœºå® 
+	CHAR_WORKSTANDBYPET, // Robin add ´ý»ú³è
 #ifdef _MAP_TIME
-	CHAR_WORK_MAP_TIME,	// ç‰¹æ®Šåœ°å›¾å€’æ•°
+	CHAR_WORK_MAP_TIME,	// ÌØÊâµØÍ¼µ¹Êý
 #endif
-	CHAR_WORKSKYWALKER, // GMå¤©è¡Œè€…??
+	CHAR_WORKSKYWALKER, // GMÌìÐÐÕß??
 
-	CHAR_WORKLASTMERGETIME, // æœ€å¾Œåˆæˆæ—¶é—´
+	CHAR_WORKLASTMERGETIME, // ×îááºÏ³ÉÊ±¼ä
 
 #ifdef _TIME_TICKET
 	CHAR_WORKTICKETTIME,
 	CHAR_WORKTICKETTIMESTART,
 #endif
 
-	CHAR_WORKDEBUGMODE, // é™¤é”™æ¨¡å¼ä¸­
+	CHAR_WORKDEBUGMODE, // ³ý´íÄ£Ê½ÖÐ
 
 	CHAR_WORKDATAINTNUM,
 
@@ -1196,7 +1196,7 @@ typedef enum
 } CHAR_PET_STAT;
 
 
-#ifdef _PERSONAL_FAME	// Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME	// Arminius: ¼Ò×å¸öÈËÉùÍû
 void CHAR_earnFame(int index, int fame);
 #endif
 
@@ -1207,10 +1207,10 @@ void ITEM_setItemUniCode(int itemindex);
 void Check_P_I_UniCode(int charindex);
 #endif
 
-// Arminius 12.15 åˆ¤æ–­æ˜¯å¦æ˜¯ç”·å£«
+// Arminius 12.15 ÅÐ¶ÏÊÇ·ñÊÇÄÐÊ¿
 int IsMale(int charindex);
 
-// Arminius 12.15 åˆ¤æ–­æ˜¯å¦æ˜¯å¥³å£«
+// Arminius 12.15 ÅÐ¶ÏÊÇ·ñÊÇÅ®Ê¿
 int IsFemale(int charindex);
 
 #ifdef _NEW_RIDEPETS

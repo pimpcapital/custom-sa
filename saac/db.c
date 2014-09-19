@@ -1,9 +1,9 @@
 /*
-  ä»¿ä»¶å¹³ä»¶å¼˜çª—  å‹¾äº”çŠ¯â–¡æ­£çŸ›â–¡æ—¦åŠ  éš¶ï¼»
+  ·Â¼şÆ½¼şºë´°  ¹´Îå·¸¡õÕıÃ¬¡õµ©¼°  Á¥£Û
 
   1999 Aug 14 Created by ringo
 
-  çŠ¯â–¡æ­£çŸ›â–¡æ—¦å1  åŠä¼‰ä»¶å¼åŠæº¥åŒ¹å¿¡ç»£ä»Šæœ¨æœˆï¼»
+  ·¸¡õÕıÃ¬¡õµ©·´1  ¼°Øø¼şÛÍ¼°äßÆ¥âçĞå½ñÄ¾ÔÂ£Û
   
   
  */
@@ -21,32 +21,32 @@
 #include <string.h>
 #include <sys/stat.h>
 
-/*   ä¾¬  å·¨ä»¶ç„ä¼‰åŠ    length */
+/*   Ù¯  ¾Ş¼şĞşØø¼°    length */
 //#define CHARVALUE_MAX 1024
 #define MAXTABLE 16
 // Spock 2000/10/12
-#define CHARVALUE_MAX 256	// DB å­—ä¸²èµ„æ–™çš„bufferå¤§å°
-#define KEY_MAX 64		// DB Keyå­—ä¸²çš„bufferå¤§å°
-#define HASH_SIZE 65536		// Hash table ä¸€æ¬¡å¢åŠ çš„Entryæ•°é‡
-#define HASH_PRIME 65521	// Hash function ä½¿ç”¨çš„è´¨æ•°
-#define DBINIT_SIZE 16384	// DB æ¯æ¬¡é…ç½®Entryçš„æ•°é‡
+#define CHARVALUE_MAX 256	// DB ×Ö´®×ÊÁÏµÄbuffer´óĞ¡
+#define KEY_MAX 64		// DB Key×Ö´®µÄbuffer´óĞ¡
+#define HASH_SIZE 65536		// Hash table Ò»´ÎÔö¼ÓµÄEntryÊıÁ¿
+#define HASH_PRIME 65521	// Hash function Ê¹ÓÃµÄÖÊÊı
+#define DBINIT_SIZE 16384	// DB Ã¿´ÎÅäÖÃEntryµÄÊıÁ¿
 // Spock end
 
-/* çŠ¯â–¡æ­£çŸ›â–¡æ—¦åŠä¼‰ä»¶å¼åŠé‚°è±³1èœŠæ¯›ä¸æ—¥æ­¹å…ï¼» */
+/* ·¸¡õÕıÃ¬¡õµ©¼°Øø¼şÛÍ¼°Û¢áÙ1òÛÃ«Ø¤ÈÕ´õÔÊ£Û */
 struct dbentry
 {
     int use;
-//    unsigned int keyhash;       /* è…¹ç»¸å¹³â–¡åŠç”©æ°¸æ‰‘äº˜æˆŠâ–¡ç‰ */
-    int ivalue;                  /* æ—¦æˆŠå¤±ï¼»ç„æ°¸çš¿ NODE å  -1 åŒ¹ï½
-                                 å…å±¯åŒ–åŠæ—¦æˆŠå¤±å 0 åŠ¨æ™“åŒ¹å…ä¸­åˆä¸­ä»ƒå…ä¸­*/
-//    int nextind;                /* -1 åˆ†åŒ€å‡¶æ—¥    æ¯›å•¦  å…æœˆ */
+//    unsigned int keyhash;       /* ¸¹³ñÆ½¡õ¼°Ë¦ÓÀÆËØ¨Îì¡õÓñ */
+    int ivalue;                  /* µ©ÎìÊ§£ÛĞşÓÀÃó NODE ·´  -1 Æ¥£ı
+                                 ÔÊÍÍ»¯¼°µ©ÎìÊ§·´ 0 ¶¯ÏşÆ¥Ø¦ÖĞÎçÖĞØêØ¦ÖĞ*/
+//    int nextind;                /* -1 ·ÖÔÈĞ×ÈÕ    Ã«À²  ÔÊÔÂ */
     // Spock 2000/10/12
-    int prev;	// å‰ä¸€ä¸ªdbentry, -1è¡¨ç¤ºæ­¤é¡¹ä¸ºhead
-    int next;	// ä¸‹ä¸€ä¸ªdbentry, -1è¡¨ç¤ºæ­¤é¡¹ä¸ºtail
+    int prev;	// Ç°Ò»¸ödbentry, -1±íÊ¾´ËÏîÎªhead
+    int next;	// ÏÂÒ»¸ödbentry, -1±íÊ¾´ËÏîÎªtail
     char key[KEY_MAX];
     char charvalue[CHARVALUE_MAX];
-//    char key[64];               /* è…¹ç»¸å¹³â–¡åˆå…æœˆ  ä¾¬   */
-//    int charvalue_index;        /*   ä¾¬  ç”°æ°¸ç™½å¤®æ¯›ä»Šå…index */
+//    char key[64];               /* ¸¹³ñÆ½¡õÎçØ¦ÔÂ  Ù¯   */
+//    int charvalue_index;        /*   Ù¯  ÌïÓÀ°×ÑëÃ«½ñÔÊindex */
     // Spock end
 };
 
@@ -54,11 +54,11 @@ struct dbentry
 // Database hashtable
 struct hashentry
 {
-    char key[KEY_MAX];	// ç´¢å¼•keyå€¼
-    int use;		// æ˜¯å¦å·²è¢«ä½¿ç”¨
-    int dbind;		// æŒ‡å‘ dbentry çš„ index
-    int prev;		// åŒä¸€keyå€¼çš„ä¸Šä¸€ä¸ª hashentry, -1ä¸ºhead
-    int next;		// åŒä¸€keyå€¼çš„ä¸‹ä¸€ä¸ª hashentry, -1ä¸ºtail
+    char key[KEY_MAX];	// Ë÷ÒıkeyÖµ
+    int use;		// ÊÇ·ñÒÑ±»Ê¹ÓÃ
+    int dbind;		// Ö¸Ïò dbentry µÄ index
+    int prev;		// Í¬Ò»keyÖµµÄÉÏÒ»¸ö hashentry, -1Îªhead
+    int next;		// Í¬Ò»keyÖµµÄÏÂÒ»¸ö hashentry, -1Îªtail
 };
 // Spock end
 
@@ -68,24 +68,24 @@ typedef enum
     DB_STRING,
 }DBTYPE;
 
-/* 1èœŠåŠçŠ¯â–¡æ­£çŸ›â–¡æ—¦æ¯›ä¸æ—¥æ­¹å… */
+/* 1òÛ¼°·¸¡õÕıÃ¬¡õµ©Ã«Ø¤ÈÕ´õÔÊ */
 struct table
 {
-    int use;		// 0:æœªä½¿ç”¨ 1:å·²ä½¿ç”¨
-    DBTYPE type;                    /* DBåŠæ½˜   */
-    char name[32];                  /* çŠ¯â–¡æ­£çŸ›â–¡æ—¦åŠ  èŸ† */
-    int num;                        /* å·¨ä»¶ç„ä¼‰åŠé†’ */
+    int use;		// 0:Î´Ê¹ÓÃ 1:ÒÑÊ¹ÓÃ
+    DBTYPE type;                    /* DB¼°ÅË   */
+    char name[32];                  /* ·¸¡õÕıÃ¬¡õµ©¼°  ó¡ */
+    int num;                        /* ¾Ş¼şĞşØø¼°ĞÑ */
     int toplinkindex;
     // Spock 2000/10/12
     struct hashentry *hashtable;
     int hashsize;
-    int updated;	// 0:dbflushå¾Œæœªæ›´æ–° 1:å·²æ›´æ–°
-    int ent_finder;	// æŒ‡å‘æœ€å¾Œä¸€æ¬¡é…ç½®çš„ hashentry
+    int updated;	// 0:dbflushááÎ´¸üĞÂ 1:ÒÑ¸üĞÂ
+    int ent_finder;	// Ö¸Ïò×îááÒ»´ÎÅäÖÃµÄ hashentry
     // Spock end
 };
 
-struct dbentry *master_buf;     /* å·¨ä»¶ç„ä¼‰ç­ç››è¿• */
-int dbsize = 0;                 /*   èµ“0åŒ¹ï½1,2,4,8,16...*/
+struct dbentry *master_buf;     /* ¾Ş¼şĞşØø·¤Ê¢åÃ */
+int dbsize = 0;                 /*   âÙ0Æ¥£ı1,2,4,8,16...*/
 static int dbent_finder = 0;
 
 struct table dbt[MAXTABLE];
@@ -119,7 +119,7 @@ int charvaluesize=0;
 */
 
 /*
-    ä¾¬  ç”°æ°¸ç™½å¤®â–¡æ¯›å‚€èˆ°å…æœˆ
+    Ù¯  ÌïÓÀ°×Ñë¡õÃ«¿ş½¢ÔÊÔÂ
  */
 /* Spock deleted 2000/10/12
 int
@@ -157,8 +157,8 @@ reallocCharValue(void)
 */
 
 /*
-    ä¾¬  ç”°æ°¸ç™½å¤®â–¡æ¯›1èœŠæ­¹æ›°ä¸åŒ–æœˆï¼»
-  å‡¶æ›°å…ä»å…åŒ€å‡¶æ—¥reallocå…æœˆï¼»
+    Ù¯  ÌïÓÀ°×Ñë¡õÃ«1òÛ´õÔ»Ø¤»¯ÔÂ£Û
+  Ğ×Ô»Ø¦ÈÊØ¦ÔÈĞ×ÈÕreallocÔÊÔÂ£Û
   
 */
 /* Spock deleted 2000/10/12
@@ -188,7 +188,7 @@ dbAllocCharValue( void )
 */
 
 /*
-  charvalue äº•æ—¥/åè¢„æ¯›å¿…æ°¸ç„/æœ¬æ°¸ç„å…æœˆ
+  charvalue ¾®ÈÕ/±å°ÀÃ«±ØÓÀĞş/±¾ÓÀĞşÔÊÔÂ
   int index : charvalue index
   
  */
@@ -209,8 +209,8 @@ dbSetString( int index , char *data )
 */
 
 /*
-  DBåŠäº‘äº‘äº”ä»Šäº’å‡¶æ—¥æ°ä»å…åŒ€å‡¶æ—¥æ­¹æ›°ä¸åŒ–å…äº‘å…ï¼»ä¸­å¼•åŠæ‰”å¥¶æœ¯åŠ2  åå…æœˆ
-  0åˆ†åŒ€å‡¶æ—¥1åå…æœˆ
+  DB¼°ÔÆÔÆÎå½ñ»¥Ğ×ÈÕÊÏÈÊØ¦ÔÈĞ×ÈÕ´õÔ»Ø¤»¯Ø¦ÔÆÔÊ£ÛÖĞÒı¼°ÈÓÄÌÊõ¼°2  ±åÔÊÔÂ
+  0·ÖÔÈĞ×ÈÕ1±åÔÊÔÂ
  */
 static int
 reallocDB( void )
@@ -230,20 +230,20 @@ reallocDB( void )
     
     newbuf = (struct dbentry* ) calloc( 1, new_dbsize *
                                          sizeof( struct dbentry) );
-    /* ä¸¢ä¹’ä¼‰å‡¶æ›°å…ä¸­   */
+    /* ¶ªÆ¹ØøĞ×Ô»Ø¦ÖĞ   */
     if( newbuf == NULL ){
-        log( "é‡æ–°åˆ†é…æ•°æ®: å†…å­˜ä¸è¶³!!! æ–°æ•°æ®å¤§å°: %d\n", new_dbsize );
+        log( "ÖØĞÂ·ÖÅäÊı¾İ: ÄÚ´æ²»×ã!!! ĞÂÊı¾İ´óĞ¡: %d\n", new_dbsize );
         return -1;
     }
 
-    /* è¡™ä¸­å¹»ä¸¹äº•æ—¥è•™ä»„ä¸­  åæˆŠç–‹â–¡ä»„åŒ– */
+    /* ÑÃÖĞ»Ãµ¤¾®ÈÕŞ¥ØÆÖĞ  ±åÎìñâ¡õØÆ»¯ */
 
     memset( newbuf , 0 , new_dbsize * sizeof( struct dbentry ) );
     /* Spock deleted 2000/10/19
     if( previous )memcpy( (char*)newbuf, (char*)previous,
             dbsize * sizeof( struct dbentry ));
 
-    // è¡™ä¸­å¹»ä¸¹æ¯›è¸  ä»„
+    // ÑÃÖĞ»Ãµ¤Ã«İ©  ØÆ
     free( previous );
     */
     // Spock 2000/10/19
@@ -254,11 +254,11 @@ reallocDB( void )
     }
     // Spock end
 
-    dbent_finder = dbsize;	// å°† dbent_finder æŒ‡å‘æœªä½¿ç”¨çš„ entry
+    dbent_finder = dbsize;	// ½« dbent_finder Ö¸ÏòÎ´Ê¹ÓÃµÄ entry
     dbsize = new_dbsize;
     master_buf = newbuf;
     
-    log( "é‡æ–°åˆ†é…æ•°æ®: æ–°æ•°æ®å¤§å°:%d æ—§åœ°å€: %x æ–°åœ°å€:%x\n",
+    log( "ÖØĞÂ·ÖÅäÊı¾İ: ĞÂÊı¾İ´óĞ¡:%d ¾ÉµØÖ·: %x ĞÂµØÖ·:%x\n",
          new_dbsize , (unsigned int)previous, (unsigned int)newbuf );
 
     return 0;
@@ -283,11 +283,11 @@ dbAllocNode()
         if( master_buf[dbent_finder].use == 0 ){
             master_buf[dbent_finder].use = 1;
             /* Spock deleted 2000/10/12
-            // int åŒ¹æ‰‹å°¥ç¬›æ ‘  åŠå•ƒåstringbufferæ¯›  å‹¾ä»ªåå…æœˆ kawata
+            // int Æ¥ÊÖŞÍµÑÊ÷  ¼°¿Ğ±åstringbufferÃ«  ¹´ÒÇ±åÔÊÔÂ kawata
             if( type == DB_STRING || type == DB_INT_SORTED){
                 if( ( master_buf[dbent_finder].charvalue_index =
                       dbAllocCharValue() ) < 0 ){
-                    //   ä¾¬  ç”°æ°¸ç™½å¤®â–¡äº’å‡¶æ›°å…ä¸­å†—
+                    //   Ù¯  ÌïÓÀ°×Ñë¡õ»¥Ğ×Ô»Ø¦ÖĞÈß
                     return -1;
                 }
             }
@@ -295,14 +295,14 @@ dbAllocNode()
             return dbent_finder;
         }
     }
-    log( "æ•°æ®è¿›å…¥é˜Ÿåˆ—å¤±è´¥. é‡æ–°åˆ†é…ä¸­....\n" );
+    log( "Êı¾İ½øÈë¶ÓÁĞÊ§°Ü. ÖØĞÂ·ÖÅäÖĞ....\n" );
     if( reallocDB() < 0 ){
-        log( "é‡æ–°åˆ†é…å¤±è´¥\n" );
+        log( "ÖØĞÂ·ÖÅäÊ§°Ü\n" );
     } else {
         //return dbAllocNode( type );
         // Spock 2000/10/13
         master_buf[dbent_finder].use = 1;
-        log( "æ•°æ®æ¢æµ‹=%d\n" , dbent_finder );
+        log( "Êı¾İÌ½²â=%d\n" , dbent_finder );
         return dbent_finder;
         // Spock end
     }
@@ -329,7 +329,7 @@ dbShowLink( int topind )
 {
     int cur = topind;
 
-    log( "å¼€å§‹ä» %d é“¾æ¥æ•°æ®\n", cur );
+    log( "¿ªÊ¼´Ó %d Á´½ÓÊı¾İ\n", cur );
     
     /* Spock deleted 2000/10/19
     for(;;){
@@ -363,7 +363,7 @@ reallocHash( int dbi )
     newbuf = (struct hashentry* ) calloc( 1, new_hashsize *
                                          sizeof( struct hashentry) );
     if( newbuf == NULL ){
-        log( "é‡æ–°åˆ†é…æ— ç”¨ä¿¡æ¯: å†…å­˜ä¸è¶³!!! æ–°æ— ç”¨ä¿¡æ¯å¤§å°: %d\n", new_hashsize );
+        log( "ÖØĞÂ·ÖÅäÎŞÓÃĞÅÏ¢: ÄÚ´æ²»×ã!!! ĞÂÎŞÓÃĞÅÏ¢´óĞ¡: %d\n", new_hashsize );
         return -1;
     }
 
@@ -382,7 +382,7 @@ reallocHash( int dbi )
     dbt[dbi].hashsize = new_hashsize;
     dbt[dbi].hashtable = newbuf;
     
-    log( "é‡æ–°åˆ†é…æ— ç”¨ä¿¡æ¯: æ–°æ— ç”¨ä¿¡æ¯å¤§å°:%d æ—§åœ°å€: %x æ–°åœ°å€:%x\n",
+    log( "ÖØĞÂ·ÖÅäÎŞÓÃĞÅÏ¢: ĞÂÎŞÓÃĞÅÏ¢´óĞ¡:%d ¾ÉµØÖ·: %x ĞÂµØÖ·:%x\n",
          new_hashsize , (unsigned int)previous, (unsigned int)newbuf );
 
     return 0;
@@ -474,8 +474,8 @@ tableReleaseNode( int dbi , int ind )
 }
 // Spock end
 /*
-  ä¼‰ä»¶å¼åŠç„æ°¸çš¿æ¯›èŠ¨å°¹æ—¥æœ¨å‡¶æ—¥ï½å¹³â–¡æ¯›  æ›°åç”¨â–¡ç‰æ¯›è…¹ç»¸å…æœˆï¼»
-  å¿ƒå‹¾äº•æ—¥å…ä¸­æ¡¦å®åå·¨ä»¿â–¡åŒ¹åå…ä¸­åŠåŒ¹0
+  Øø¼şÛÍ¼°ĞşÓÀÃóÃ«Ü¸ÒüÈÕÄ¾Ğ×ÈÕ£ıÆ½¡õÃ«  Ô»±åÓÃ¡õÓñÃ«¸¹³ñÔÊÔÂ£Û
+  ĞÄ¹´¾®ÈÕØ¦ÖĞèëÄş·´¾Ş·Â¡õÆ¥·´Ø¦ÖĞ¼°Æ¥0
 
  */
 /* Spock deleted 2000/10/13
@@ -486,20 +486,20 @@ dbExtractNodeByKey( int topind , char *k  )
     int prev = -1;
     unsigned int h = hashpjw( k );
 
-    // ä¼‰ä»¶å¼äº’ååŒ¹æ‰‹å¿ƒå‹¾äº•æ—¥å…ä¸­åˆ†ä»ƒå…åŠåŒ¹0æ¯›äº•å°¹å…
+    // Øø¼şÛÍ»¥ÎëÆ¥ÊÖĞÄ¹´¾®ÈÕØ¦ÖĞ·ÖØêØ¦¼°Æ¥0Ã«¾®ÒüÔÊ
     if( topind == -1 ) return 0;
 
     for(;;){
         if( cur == -1 )break;
         if( master_buf[cur].keyhash == h
             && strcmp( master_buf[cur].key , k ) == 0 ){
-            // prev åŠ æˆšäº’ cur åŠæˆšåå…æœˆæ–¹ä¸¹åå…æœˆ
+            // prev ¼° Æİ»¥ cur ¼°Æİ±åØ¦ÔÂ·½µ¤±åÔÊÔÂ
             if( prev == -1 ){
-                // ç‡®  åˆ†åŒ€å‡¶åŠåŒ¹ä¼‰ä»¶å¼åä¸­å…ƒæ—¥å…ä¸­
+                // ÛÆ  ·ÖÔÈĞ×¼°Æ¥Øø¼şÛÍ·´ÖĞÔªÈÕØ¦ÖĞ
             } else {                
                 master_buf[prev].nextind = master_buf[cur].nextind;
             }
-            // å…¬æœ¨åŒ¹æ„¤åŒäº’ä¼‰æ—¦ç„äº•æ—¥é™†æœ¨æœˆåŠåŒ¹è¸  å…æœˆ
+            // ¹«Ä¾Æ¥·ßÛĞ»¥Øøµ©Ğş¾®ÈÕÂ½Ä¾ÔÂ¼°Æ¥İ©  ÔÊÔÂ
             dbReleaseNode( cur );
             log( "find key %s deleted\n", k );
             return 0;
@@ -554,9 +554,9 @@ dbGetEntryByKey( int topind , char *k )
 */
 
 /*
-  ä¼‰ä»¶å¼åŠç„æ°¸çš¿æ¯›èŠ¨å°¹æ—¥æœ¨å‡¶æ—¥ï½è¢„æ¯›  æ›°åç”¨â–¡ç‰æ¯›è…¹ç»¸ä»„åŒ–
-  èµæ¿ å…åˆä»‡æ¬ å Insert å…æœˆï¼»åˆ‡ä¸­ä»Šä¸­  äº•æ—¥äº‘äº‘äº”ä¸­  åå…æ—¥æ°åŒ¹ä¸­æœˆåˆ
-  ç§»çƒ‚
+  Øø¼şÛÍ¼°ĞşÓÀÃóÃ«Ü¸ÒüÈÕÄ¾Ğ×ÈÕ£ı°ÀÃ«  Ô»±åÓÃ¡õÓñÃ«¸¹³ñØÆ»¯
+  ØÍå©Ø¦Îç³ğÇ·±å Insert ÔÊÔÂ£ÛÇĞÖĞ½ñÖĞ  ¾®ÈÕÔÆÔÆÎåÖĞ  ±åØ¦ÈÕÊÏÆ¥ÖĞÔÂÎç
+  ÒÆÀÃ
 
  */
 /* Spock deleted 2000/10/13
@@ -570,7 +570,7 @@ dbInsertNodeByIValue( int topind , int ins )
     
     for(;;){
         if( cur == -1 ){
-            //     å¼•åŒ¹ä¸­åŒ€å‡¶åŠåŒ¹é¦¨ç¬›å…æœˆ
+            //     ÒıÆ¥ÖĞÔÈĞ×¼°Æ¥Ü°µÑÔÊÔÂ
             master_buf[prev].nextind = ins;
             master_buf[ins].nextind = -1;
             return 0;
@@ -647,10 +647,10 @@ dbAppendNode( int topind , int ins )
 // Spock end
 
 /*
-  çŠ¯â–¡æ­£çŸ›â–¡æ—¦åŠ  èŸ†æ¯›  æœˆï¼»dbåé†’äº’å‰‚å…ä¸­åŠåŒ¹  éªšåstrcmpä»„åŒ–æ–¹ä¸­
-  DBTYPE :æ½˜  ï¼»
+  ·¸¡õÕıÃ¬¡õµ©¼°  ó¡Ã«  ÔÂ£Ûdb·´ĞÑ»¥¼ÁØ¦ÖĞ¼°Æ¥  É§±åstrcmpØÆ»¯·½ÖĞ
+  DBTYPE :ÅË  £Û
 
-  äº‘å…å…ƒå…å¼•å°¹åŠ  åï½å¸®é†’åˆ  ä¾¬  åŠ    åç»£ç®•å…æœˆä»‡åˆäº’åŒ¹äº”æœˆï¼»
+  ÔÆØ¦ÔªØ¦ÒıÒü¼°  ·´£ı°ïĞÑÎç  Ù¯  ¼°    ±åĞå»şÔÊÔÂ³ğÎç»¥Æ¥ÎåÔÂ£Û
   
  */
 static int
@@ -665,7 +665,7 @@ dbGetTableIndex( char *tname , DBTYPE type )
         }
     }
 
-    /* å¿ƒå‹¾äº•æ—¥å…äº•åŒ€å‡¶åŠåŒ¹è•™ç­‹åˆ† */
+    /* ĞÄ¹´¾®ÈÕØ¦¾®ÔÈĞ×¼°Æ¥Ş¥½î·Ö */
     for(i=0;i<MAXTABLE;i++){
         if( dbt[i].use == 0 ){
             int topind;
@@ -675,7 +675,7 @@ dbGetTableIndex( char *tname , DBTYPE type )
             // Spock 2000/10/16
             if ( reallocHash( i ) < 0 )
             {
-            	log( "é‡æ–°åˆ†é…æ— ç”¨ä¿¡æ¯å¤±è´¥\n");
+            	log( "ÖØĞÂ·ÖÅäÎŞÓÃĞÅÏ¢Ê§°Ü\n");
             	return -2;
             }
             dbt[i].ent_finder = HASH_PRIME;
@@ -685,7 +685,7 @@ dbGetTableIndex( char *tname , DBTYPE type )
             // Spock +1 2000/10/16
             topind = dbAllocNode();
             if( topind < 0 ){
-                log( "æ•°æ®åˆ†é…èŠ‚ç‚¹å¤±è´¥\n" );
+                log( "Êı¾İ·ÖÅä½ÚµãÊ§°Ü\n" );
                 return -2;
             }
             /* Spock deleted 2000/10/16
@@ -695,9 +695,9 @@ dbGetTableIndex( char *tname , DBTYPE type )
             master_buf[topind].nextind = -1;
             */
             
-            /* ç„æ°¸çš¿åŠç”¨â–¡ç‰æ¯›èµ“æ¸ç¥­å…æœˆå…æ›°ï¼»
-               ä¾¬  åŠæ¡¦å®æ‰‹å¸®é†’åŠæ¡¦å®æ‰‹äº‘å…å…ƒåŒ¹æ–¹ä¸­ï¼»
-             0x7fffffffåˆä¸­ä¸¹è¢„åï½  ä¾¬  åŠæ¡¦å®åä»Šå¹»å‡å•¦  æ¯›æ‰‹å‡¶å…ä¸­åŠåˆ†ï¼»*/
+            /* ĞşÓÀÃó¼°ÓÃ¡õÓñÃ«âÙÓå¼ÀÔÊÔÂØ¦Ô»£Û
+               Ù¯  ¼°èëÄşÊÖ°ïĞÑ¼°èëÄşÊÖÔÆØ¦ÔªÆ¥·½ÖĞ£Û
+             0x7fffffffÎçÖĞµ¤°À·´£ı  Ù¯  ¼°èëÄş·´½ñ»ÃÉıÀ²  Ã«ÊÖĞ×Ø¦ÖĞ¼°·Ö£Û*/
             master_buf[topind].ivalue = 0x7fffffff;    
             /* Spock deleted 2000/10/16
             if( type == DB_INT_SORTED ){
@@ -718,7 +718,7 @@ dbGetTableIndex( char *tname , DBTYPE type )
         }
     }
 
-    /*   äº’ä¸­åŒ€å¤©ä¸­åˆ†ï¼» */
+    /*   »¥ÖĞÔÈÌìÖĞ·Ö£Û */
     log( "dbGetTableIndex: table full. now tables are:\n" );
     dbShowAllTable();
 
@@ -727,11 +727,11 @@ dbGetTableIndex( char *tname , DBTYPE type )
 
 /*
 
-  åˆæ›°ä¸å°¹å†… strtol åŒ¹äº”æœˆè¢„ä»„äº•æ‰”ç¦¾â–¡ç„ä»„å…ä¸­æ–¹
+  ÎçÔ»Ø¤ÒüÄÚ strtol Æ¥ÎåÔÂ°ÀØÆ¾®ÈÓºÌ¡õĞşØÆØ¦ÖĞ·½
 
-  è…¹ç»¸ä»„åŒ–è‹‡å‹¾ä»ƒå‡¶ç”¨â–¡ç‰åè¦†ä»„åŒ–ï½
-  ä¼‰ä»¶å¼äº•æ—¥  äº”åˆåŒ€åŒ–äº•æ—¥ï½æ¼†è˜¸åæœ«â–¡ç„å…æœˆåŠåé“¶ä¸¹è¢„æ¯›å‡¶æ–¹æ›°å
-  è…¹ç»¸ä»„åŒ–ï½ä¸­ä¸­æ¡¦èµ­æ¯›å¿ƒå‹¾ä»ƒå‡¶æ—¥ï½å…¬ä»‡åçŠ’ä»„ä»‡æˆˆï¼»
+  ¸¹³ñØÆ»¯Î­¹´ØêĞ×ÓÃ¡õÓñ±å¸²ØÆ»¯£ı
+  Øø¼şÛÍ¾®ÈÕ  ÎåÎçÔÈ»¯¾®ÈÕ£ıÆáÕº·´Ä©¡õĞşÔÊÔÂ¼°±åÒøµ¤°ÀÃ«Ğ×·½Ô»±å
+  ¸¹³ñØÆ»¯£ıÖĞÖĞèëô÷Ã«ĞÄ¹´ØêĞ×ÈÕ£ı¹«³ğ±åêûØÆ³ğ¸ê£Û
   
  */
 /* Spock deleted 2000/10/16
@@ -758,7 +758,7 @@ int dbUpdateEntryInt( char *table , char *key , int value, char *info )
     master_buf[entind].keyhash = hashpjw( master_buf[entind].key );
     master_buf[entind].nextind = -1; 
 	
-	// å°¥ç¬›æ ‘  æ¯›æœ¬æ°¸ç„å…æœˆ
+	// ŞÍµÑÊ÷  Ã«±¾ÓÀĞşÔÊÔÂ
     dbSetString( master_buf[entind].charvalue_index, info );
 	
 	
@@ -901,7 +901,7 @@ dbDeleteEntryInt( char *table, char *key )
     }
     // Spock +1 2000/10/19
     dbt[dbi].updated = 1;
-    log( "åˆ é™¤äººç‰© %s æ¥è‡³è¡¨ %s\n", key, table );
+    log( "É¾³ıÈËÎï %s À´ÖÁ±í %s\n", key, table );
     return 0;
 }
 
@@ -919,7 +919,7 @@ dbShowAllTable(void)
     
 }
 
-/* çŠ¯â–¡æ­£æ¯›1èœŠæ½¸æ›°åˆ†å…ï¼»
+/* ·¸¡õÕıÃ«1òÛäúÔ»·ÖÔÊ£Û
  */
 int
 dbGetEntryInt( char *table, char *key, int *output )
@@ -949,19 +949,19 @@ dbGetEntryInt( char *table, char *key, int *output )
     	log( "dbGetEntryInt: Invalid dbind in hashtable of %s\n" , table );
     	return -1;
     }
-    /* å¿ƒå‹¾äº•åŒ€å‡¶åŠåŒ¹è¢„æ¯›è¯·  å  æœ¨åŒ–å¿’å… */
+    /* ĞÄ¹´¾®ÔÈĞ×¼°Æ¥°ÀÃ«Çë  ±å  Ä¾»¯ß¯ÔÊ */
     *output = master_buf[entind].ivalue;
 
     return 0;
 }
 
 /*
-  å·¨ä»¿â–¡åŠæ¡¦å®å  ï¼»0åˆ†åŒ€å‡¶æ—¥å²³  ï¼»
+  ¾Ş·Â¡õ¼°èëÄş·´  £Û0·ÖÔÈĞ×ÈÕÔÀ  £Û
 
-  int *rank_out : ä»¿ä»¶å¼åŠè¯·  
-  int *count_out : æ™“äº•æ—¥çª’èœŠ  äº•åŠè¯·  
+  int *rank_out : ·Â¼şÛÍ¼°Çë  
+  int *count_out : Ïş¾®ÈÕÖÏòÛ  ¾®¼°Çë  
 
-  int çŠ¯â–¡æ­£çŸ›â–¡æ—¦æ¯è¿•å‹
+  int ·¸¡õÕıÃ¬¡õµ©»ÙåÃÓÑ
   
  */
 
@@ -972,7 +972,7 @@ dbGetEntryRank( char *table, char *key , int *rank_out, int *count_out)
     // Spock deleted 2000/10/19
     //unsigned int hash = hashpjw(key);
     int cur;
-    int now_score = 0x7fffffff;     /*int åŒ¹ä¸­åˆ‡å£¬æ°åŒ¹äº•ä¸­è¢„ */
+    int now_score = 0x7fffffff;     /*int Æ¥ÖĞÇĞÈÉÊÏÆ¥¾®ÖĞ°À */
     int r = -1 , i=0;
 
     // Spock 2000/10/23
@@ -1021,14 +1021,14 @@ dbGetEntryRank( char *table, char *key , int *rank_out, int *count_out)
 }
 
 /*
-  int æ¯è¿•å‹
+  int »ÙåÃÓÑ
  */
 int
 dbGetEntryRankRange( char *table,
                      int start, int end, char *output, int outlen )
 {
-#define MAXHITS 1024        /* èµç™«æ”¯å…ä¸ï¼»åŒ¹æ‰‹ä»‡æœ¨åŒ¹èœ—åŒæ—¥ä»„ä¸­å†— ringo */
-    struct hitent{          /* ä»‡åŠåŒç»  åç”²æ°¸ç„ä»„å‡¶æ”¯å‹¾æ¯›å‡¶æˆ·åŒ–ä¸­ä» */
+#define MAXHITS 1024        /* ØÍñ²Ö§Ø¦Ø¤£ÛÆ¥ÊÖ³ğÄ¾Æ¥ÎÏÛĞÈÕØÆÖĞÈß ringo */
+    struct hitent{          /* ³ğ¼°ÑáÕ°  ±å¼×ÓÀĞşØÆĞ×Ö§¹´Ã«Ğ×»§»¯ÖĞÈÊ */
         int entind;
         int rank;
     };
@@ -1161,11 +1161,11 @@ int dbRead( char *dir )
         char tmp[1024];
         snprintf( tmp, sizeof( tmp ), "%s/int" , dir );
         if( mkdir( tmp, 0755 )==0){
-            log( "åˆ›å»º %s\n", tmp );
+            log( "´´½¨ %s\n", tmp );
         }
         snprintf( tmp, sizeof( tmp ), "%s/string" , dir );
         if( mkdir( tmp, 0755 )==0){
-            log( "åˆ›å»º %s\n", tmp );
+            log( "´´½¨ %s\n", tmp );
         }        
     }
         
@@ -1173,7 +1173,7 @@ int dbRead( char *dir )
               "%s/int" , dir );
     d = opendir(dirname);
     if( d == NULL ){
-        log( "ä¸èƒ½æ‰“å¼€æ–‡ä»¶ %s\n", dirname );
+        log( "²»ÄÜ´ò¿ªÎÄ¼ş %s\n", dirname );
         return -1;
     }
 
@@ -1185,7 +1185,7 @@ int dbRead( char *dir )
             FILE *fp;
             struct stat s;
             snprintf( filename, sizeof(filename),"%s/%s",dirname, de->d_name );
-			log( "è¯»å–æ•°æ®:%s\n..", filename);
+			log( "¶ÁÈ¡Êı¾İ:%s\n..", filename);
             if( stat( filename, &s ) < 0 ){
                 continue;
             }
@@ -1195,7 +1195,7 @@ int dbRead( char *dir )
             
             fp = fopen( filename, "r" );            
             if( fp == NULL ){
-                log( "ä¸èƒ½æ‰“å¼€æ–‡ä»¶ %s %s\n",
+                log( "²»ÄÜ´ò¿ªÎÄ¼ş %s %s\n",
                          filename, strerror( errno ));
                 continue;
             }
@@ -1219,7 +1219,7 @@ int dbRead( char *dir )
     snprintf( dirname, sizeof( dirname), "%s/string" , dir );
     d = opendir( dirname );
     if( d == NULL ){
-        log( "ä¸èƒ½æ‰“å¼€æ–‡ä»¶ %s\n", dirname );
+        log( "²»ÄÜ´ò¿ªÎÄ¼ş %s\n", dirname );
         return -1;
     }
     while(1){
@@ -1230,7 +1230,7 @@ int dbRead( char *dir )
             FILE *fp;
             struct stat s;
             snprintf( filename, sizeof( filename),"%s/%s",dirname,de->d_name );
-			log( "è¯»å–æ•°æ®:%s\n..", filename);
+			log( "¶ÁÈ¡Êı¾İ:%s\n..", filename);
 
             if( stat( filename, &s ) < 0 ){
                 continue;
@@ -1240,7 +1240,7 @@ int dbRead( char *dir )
             }
             fp = fopen( filename, "r" );
             if( fp == NULL ){
-                log( "ä¸èƒ½æ‰“å¼€æ–‡ä»¶ %s %s\n",
+                log( "²»ÄÜ´ò¿ªÎÄ¼ş %s %s\n",
                      filename, strerror(errno ));
                 continue;
             }
@@ -1262,11 +1262,11 @@ int dbRead( char *dir )
     return 0;
 }
 
-/* éš™çƒ‚ä»„å‡¶åŒ  äº•æ—¥éš™çƒ‚ä»„å‡¶èœŠé†’æ½¸æ›°åˆ†å…ï¼»
- æ’©  ä»„å‡¶æ—¥  ï½å²³  ä»„å‡¶æ—¥0ï¼»å²³  ä»„åŒ–æ‰‹ååŠè¯·  åŠåˆäº”äº’ä¸æœˆå†—ï¼»
-   â€œnumäº’0åŠåˆäº”åˆäº•ï½ç«Ÿç™«å…æœˆå·¨ä»¶ç„ä¼‰äº’å…ä¸­åˆäº”ï¼»
+/* Ï¶ÀÃØÆĞ×ŞË  ¾®ÈÕÏ¶ÀÃØÆĞ×òÛĞÑäúÔ»·ÖÔÊ£Û
+ ÁÃ  ØÆĞ×ÈÕ  £ıÔÀ  ØÆĞ×ÈÕ0£ÛÔÀ  ØÆ»¯ÊÖÎë¼°Çë  ¼°ÎçÎå»¥Ø¤ÔÂÈß£Û
+   ¡°num»¥0¼°ÎçÎåÎç¾®£ı¾¹ñ²ÔÊÔÂ¾Ş¼şĞşØø»¥Ø¦ÖĞÎçÎå£Û
 
- int çŠ¯â–¡æ­£çŸ›â–¡æ—¦æ¯è¿•åˆ†å†—
+ int ·¸¡õÕıÃ¬¡õµ©»ÙåÃ·ÖÈß
 
  */
 int dbGetEntryCountRange( char *table, int count_start, int  num,
@@ -1319,7 +1319,7 @@ int dbGetEntryCountRange( char *table, int count_start, int  num,
 
 
 /*
-    ä¾¬  çŠ¯â–¡æ­£çŸ›â–¡æ—¦åŠè´¨  
+    Ù¯  ·¸¡õÕıÃ¬¡õµ©¼°ÖÊ  
  */
 /* Spock deleted 2000/10/19
 int
@@ -1476,6 +1476,6 @@ dbDeleteEntryString( char *table, char *key )
         return -1;
     }
     dbt[dbi].updated = 1;
-    log( "åˆ é™¤äººç‰© %s æ¥è‡³è¡¨ %s\n", key, table );
+    log( "É¾³ıÈËÎï %s À´ÖÁ±í %s\n", key, table );
     return 0;
 }

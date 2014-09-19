@@ -19,7 +19,7 @@
 #include "family.h"
 #include "log.h"
 #include "buf.h"
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅĞĞ°ñNPC
 #include "npc_alldoman.h"
 #endif
 
@@ -34,7 +34,7 @@ void saacproto_ACGmsvDownRequest_recv( int fd, int min)
     int     i;
     int     playernum = CHAR_getPlayerMaxNum();
 
-		snprintf( buff, sizeof( buff),"%så…¬å‘Šã€‚",getGameserverID());
+		snprintf( buff, sizeof( buff),"%s¹«¸æ¡£",getGameserverID());
     for( i = 0 ; i < playernum ; i++) {
         if( CHAR_getCharUse(i) != FALSE ) {
 			CHAR_talkToCli( i, -1, buff, CHAR_COLORYELLOW);
@@ -45,45 +45,45 @@ void saacproto_ACGmsvDownRequest_recv( int fd, int min)
 	SERVSTATE_setDsptime( 0 );
 	
 }
-//æ£€æŸ¥æ˜¯å¦æœ‰å’Œacè¿æ¥,ä»¥åŠè½½å…¥å®¶æ—
+//¼ì²éÊÇ·ñÓĞºÍacÁ¬½Ó,ÒÔ¼°ÔØÈë¼Ò×å
 void saacproto_ACServerLogin_recv (int fd, char* result,char* data)
 {
     if( strcmp( result , SUCCESSFUL ) != 0 ){
-        print( "ä¸ACæœåŠ¡å™¨è¿æ¥å¤±è´¥!é€€å‡ºè¿è¡Œ...[%s][%s]\n",
+        print( "ÓëAC·şÎñÆ÷Á¬½ÓÊ§°Ü!ÍË³öÔËĞĞ...[%s][%s]\n",
               result,data );
         shutdownProgram( );
         exit(1);
     }
-    print("ä¸ACæœåŠ¡å™¨è¿æ¥æˆåŠŸï¼\n");
+    print("ÓëAC·şÎñÆ÷Á¬½Ó³É¹¦£¡\n");
 	time(&initTime);
 /*
-		print("æœåŠ¡å™¨ç±»å‹ï¼š");
+		print("·şÎñÆ÷ÀàĞÍ£º");
     if( bNewServer )
-    	print("æ–°æœåŠ¡å™¨! \n");
+    	print("ĞÂ·şÎñÆ÷! \n");
     else
-    	print("æ—§æœåŠ¡å™¨! \n");
+    	print("¾É·şÎñÆ÷! \n");
 */
 #ifdef _SERVER_NUMS
-		print(" æ­£å¸¸æœåŠ¡å™¨!\n");
+		print(" Õı³£·şÎñÆ÷!\n");
 #endif
 #ifdef _VIP_ALL
-		print( "æœåŠ¡ç«¯ç‰ˆæœ¬: <%s %s>\n" , SERVER_VERSION, "ä¼šå‘˜ç‰ˆ");
+		print( "·şÎñ¶Ë°æ±¾: <%s %s>\n" , SERVER_VERSION, "»áÔ±°æ");
 #else
 #ifdef _PUB_ALL
-		print( "æœåŠ¡ç«¯ç‰ˆæœ¬: <%s %s>\n" , SERVER_VERSION, "æ™®é€šç‰ˆ");
+		print( "·şÎñ¶Ë°æ±¾: <%s %s>\n" , SERVER_VERSION, "ÆÕÍ¨°æ");
 #else
-		print( "æœåŠ¡ç«¯ç‰ˆæœ¬: <%s %s>\n" , SERVER_VERSION, "åŸå§‹ç‰ˆ");
+		print( "·şÎñ¶Ë°æ±¾: <%s %s>\n" , SERVER_VERSION, "Ô­Ê¼°æ");
 #endif
 #endif
-		print( "æœåŠ¡ç«¯ç¼–è¯‘å®Œæˆæ—¶é—´: %s %s by é¾™zoroå·¥ä½œå®¤\n" , __DATE__ , __TIME__ );
-		print( "ä¸»é¡µï¼šhttp://www.longzoro.com\n" );
-		print( "è®ºå›ï¼šhttp://bbs.longzoro.com\n" );
+		print( "·şÎñ¶Ë±àÒëÍê³ÉÊ±¼ä: %s %s by Áúzoro¹¤×÷ÊÒ\n" , __DATE__ , __TIME__ );
+		print( "Ö÷Ò³£ºhttp://www.longzoro.com\n" );
+		print( "ÂÛÌ³£ºhttp://bbs.longzoro.com\n" );
 		
     // Robin 0530
     //saacproto_ACShowFMList_send( acfd );
-    print("åˆå§‹åŒ–å®¶æ—...");
+    print("³õÊ¼»¯¼Ò×å...");
     FAMILY_Init();
-    print("å®Œæˆ\n");
+    print("Íê³É\n");
 }
 
 void saacproto_ACCharList_recv(int fd, char* result, char* data,int retfd)
@@ -105,11 +105,11 @@ void saacproto_ACCharLoad_recv(int fd , char* result,char* data,int retfd,int sa
 			CHAR_login( clifd,data,saveindex );
     }else{
 		char cdkey[64];
-#ifndef _FIX_MESSAGE             // WON ADD ä¿®æ”¹WORKERå°åŒ…å†…å®¹        
+#ifndef _FIX_MESSAGE             // WON ADD ĞŞ¸ÄWORKER·â°üÄÚÈİ        
 		data = "";		
 #endif
 		CONNECT_getCdkey( clifd, cdkey , sizeof( cdkey ));
-		print(" (%s)ACCharLoadé”™è¯¯:%s ", cdkey, data);
+		print(" (%s)ACCharLoad´íÎó:%s ", cdkey, data);
         lssproto_CharLogin_send( clifd, result ,data );
         CONNECT_setState( clifd, NOTLOGIN );
     }
@@ -129,7 +129,7 @@ void saacproto_ACCharSave_recv(int fd ,char* result, char* data,int retfd)
     fdid = CONNECT_getFdid( clifd );
     switch( CONNECT_getState( clifd ) ){
     case WHILECREATE:
-        /* å…¬æœ¨æ¯›å¼ä»¿å¥¶å¤±ä»¶ç„åä¸­ä¸¹( å…¬åŠå¼•å¼• )*/
+        /* ¹«Ä¾Ã«ÛÍ·ÂÄÌÊ§¼şĞş±åÖĞµ¤( ¹«¼°ÒıÒı )*/
         if( strcmp(result,FAILED) ==0 ) data ="";
         lssproto_CreateNewChar_send( clifd , result , data);
         CONNECT_setState( clifd, NOTLOGIN );
@@ -139,7 +139,7 @@ void saacproto_ACCharSave_recv(int fd ,char* result, char* data,int retfd)
         if( strcmp( result , SUCCESSFUL ) == 0 )
             lssproto_CharLogout_send( clifd, result , "success" );
         else
-            /* å·¨ä»¿â–¡æ”¯åˆä»„æ‰å±¯æœˆ   */
+            /* ¾Ş·Â¡õÖ§ÎçØÆÔúÍÍÔÂ   */
             lssproto_CharLogout_send( clifd, result , "Cannot save" );
         CONNECT_setState( clifd, NOTLOGIN );
         CONNECT_setCharaindex( clifd, -1 );
@@ -160,10 +160,10 @@ void saacproto_ACCharSave_recv(int fd ,char* result, char* data,int retfd)
         SERVSTATE_decrementCloseallsocketnum();
         if( SERVSTATE_getCloseallsocketnum() == 0 ) {
 		    SERVSTATE_SetAcceptMore( -1 );
-            print( "æ‰€æœ‰äººç‰©å­˜æ¡£\n" );
-            print("\n å…³é—­æœåŠ¡å™¨æ—¶é—´ =%d",i_shutdown_time);//ttom
+            print( "ËùÓĞÈËÎï´æµµ\n" );
+            print("\n ¹Ø±Õ·şÎñÆ÷Ê±¼ä =%d",i_shutdown_time);//ttom
             if(i_shutdown_time==1){
-		    system( "æ­£å¸¸å…³é—­" );
+		    system( "Õı³£¹Ø±Õ" );
 			sigshutdown( 0 );
 	    }		
 	}
@@ -180,12 +180,12 @@ void saacproto_ACCharDelete_recv(int fd,char* result,char* data,int retfd)
 
     switch( CONNECT_getState(clifd) ){
     case WHILELOSTCHARDELETE:
-        /*  çª’æ‰‹ä»„å…ä¸­  */
+        /*  ÖÏÊÖØÆØ¦ÖĞ  */
         CONNECT_setState(clifd, NOTLOGIN );
         CONNECT_setCharaindex( clifd, -1 );
         break;
     case WHILECHARDELETE:
-        /*  å…¬åŠå¼•å¼•éœœæœˆ  */
+        /*  ¹«¼°ÒıÒıËªÔÂ  */
         if( strcmp(result,FAILED) == 0)data="";
         lssproto_CharDelete_send( clifd, result , data );
         CONNECT_setState( clifd,  NOTLOGIN );
@@ -235,7 +235,7 @@ void saacproto_ACLock_recv(int fd , char* result, char* data ,int retfd)
 
         }else{
             /*
-             * ä¸¢æ°¸æœ¬â–¡æ–¥æ¯›è‹‡æœˆ
+             * ¶ªÓÀ±¾¡õ³âÃ«Î­ÔÂ
              */
             char    mesg[128];
             snprintf( mesg ,sizeof( mesg ), "%s hasn't been locked" ,cdkey);
@@ -245,7 +245,7 @@ void saacproto_ACLock_recv(int fd , char* result, char* data ,int retfd)
                 CONNECT_setState( clifd, NOTLOGIN );
             }else{
                 /*
-                 * ç–¯è˜¸å¤«æ°¸å¼è¸è½®ä»„æ–¹ä¸¹åˆå…æœˆ
+                 * ·èÕº·òÓÀÛÍİ©ÂÖØÆ·½µ¤ÎçÔÊÔÂ
                  */
                 saacproto_ACLock_send(fd, cdkey ,
                                       UNLOCK, CONNECT_getFdid( clifd) );
@@ -389,7 +389,7 @@ void saacproto_DBGetEntryByCount_recv( int fd,char* result,char* list,
 		NPC_Duelranking_PrintRanking( list, count_start, msgid, msgid2);
 	}
 }
-#ifdef _ALLDOMAN // (ä¸å¯å¼€) Syu ADD æ’è¡Œæ¦œNPC
+#ifdef _ALLDOMAN // (²»¿É¿ª) Syu ADD ÅÅĞĞ°ñNPC
 void saacproto_UpdataStele_recv( int fd , char *token)
 {
 	NPC_AlldomanWriteStele( token ); 
@@ -397,13 +397,13 @@ void saacproto_UpdataStele_recv( int fd , char *token)
 void saacproto_S_UpdataStele_recv( int i , char *ocdkey , char *oname , char *ncdkey , 
 			  char *nname , char *title	, int level , int trns , int floor ) 
 {
-	print("\nSyu log æ”¶åˆ°Single=> %s , %s , %s , %s ",ocdkey , oname , ncdkey , nname);
+	print("\nSyu log ÊÕµ½Single=> %s , %s , %s , %s ",ocdkey , oname , ncdkey , nname);
 	NPC_Alldoman_S_WriteStele( ocdkey , oname , ncdkey , nname , title	, level , trns , floor ) ;
 }
 
 #endif
 /* ---------------------------------------------
- * çš®å¤«â–¡ç‰å¹³ä¹“æ—¦ç„ä¸¢æ°¸æœ¬â–¡æ–¥ç†¬ä»ƒåˆæ›°
+ * Æ¤·ò¡õÓñÆ½ÅÒµ©Ğş¶ªÓÀ±¾¡õ³â°¾ØêÎçÔ»
  * --------------------------------------------*/
 void saacproto_Broadcast_recv( int fd,char* id,char* charname,char *message )
 {
@@ -499,7 +499,7 @@ void saacproto_ACShowMemberList_recv(int fd, char *result, int index, int fmmemn
 	int fmacceptflag, int fmjoinnum, char *data)
 {
 	int ret;
-	// fmmemnum -1:æ— æ­¤ç´¢å¼•å€¼, -2:æ— æ›´æ–° else:è¡¨ç¤ºæ­¤å®¶æ—äººæ•°
+	// fmmemnum -1:ÎŞ´ËË÷ÒıÖµ, -2:ÎŞ¸üĞÂ else:±íÊ¾´Ë¼Ò×åÈËÊı
 	if (strcmp(result, SUCCESSFUL) == 0)	ret = 1;
 	else	ret = 0;
 	ACShowMemberList(ret, index, fmmemnum, fmacceptflag, fmjoinnum, data);
@@ -521,7 +521,7 @@ void saacproto_ACMemberLeaveFM_recv(int fd, char *result, char *data, int charfd
 {
 
 }
-#ifdef _PERSONAL_FAME   // Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME   // Arminius: ¼Ò×å¸öÈËÉùÍû
 void saacproto_ACFMCharLogin_recv(int fd, char *result, int index, int floor,
 	int fmdp, int joinflag, int fmsetupflag, int flag, int charindex,
 	int charfame, int charfdid
@@ -539,7 +539,7 @@ void saacproto_ACFMCharLogin_recv(int fd, char *result, int index, int floor,
 	else	ret = 0;
 //	print("Login fd:%d result:%s index:%d floor:%d fmdp:%d joinflag:%d setup:%d charfdid:%d\n",
 //		fd, result, index, floor, fmdp, joinflag, fmsetupflag, charfdid);
-#ifdef _PERSONAL_FAME   // Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME   // Arminius: ¼Ò×å¸öÈËÉùÍû
 //        print("Login charfame:%d\n", charfame);
 	ACFMCharLogin(clifd, ret, index, floor, fmdp, joinflag, fmsetupflag,
 		flag, charindex, charfame
@@ -556,9 +556,9 @@ void saacproto_ACFMReadMemo_recv(int fd, char *result, int index, int num,
         int dataindex, char *data)
 {
 	int ret;
-	// index(å®¶æ— WORK çš„ç´¢å¼•)ï¼Œnum(èµ„æ–™ç¬”æ•°ï¼Œæœ€å¤§35ç¬”)
-	// dataindex(æœ€æ–°çš„èµ„æ–™æ•°)ï¼Œdata(èµ„æ–™)ã€‚
-	// æ³¨ï¼šnum -1:æ— æ­¤ç´¢å¼•å€¼, -2:æ— æ›´æ–° else:è¡¨ç¤ºæ­¤å®¶æ—äººæ•°
+	// index(¼Ò×å WORK µÄË÷Òı)£¬num(×ÊÁÏ±ÊÊı£¬×î´ó35±Ê)
+	// dataindex(×îĞÂµÄ×ÊÁÏÊı)£¬data(×ÊÁÏ)¡£
+	// ×¢£ºnum -1:ÎŞ´ËË÷ÒıÖµ, -2:ÎŞ¸üĞÂ else:±íÊ¾´Ë¼Ò×åÈËÊı
 	if (strcmp(result, SUCCESSFUL) == 0)	ret = 1;
 	else	ret = 0;
 	ACShowFMMemo(ret, index, num, dataindex, data);
@@ -623,7 +623,7 @@ void saacproto_ACFixFMData_recv(int fd, char *result, int kindflag, char *data1,
 	
 	if( !CHAR_CHECKINDEX(charaindex) )	return;
 	if( kindflag == FM_FIX_FMRULE ){
-		CHAR_talkToCli( charaindex , -1, "å®¶æ—ä¸»æ—¨ä¿®æ”¹ï¼¯ï¼«ï¼", CHAR_COLORWHITE);
+		CHAR_talkToCli( charaindex , -1, "¼Ò×åÖ÷Ö¼ĞŞ¸Ä£Ï£Ë£¡", CHAR_COLORWHITE);
 	}else if( kindflag == FM_FIX_FMGOLD ) {
 		intdata = atoi( data1 );
 		if( ret == 0 ) {
@@ -643,7 +643,7 @@ void saacproto_ACFixFMData_recv(int fd, char *result, int kindflag, char *data1,
 				CHAR_getChar( charaindex, CHAR_CDKEY ),
 				-intdata,
 				CHAR_getInt( charaindex, CHAR_GOLD ),
-				"FMBank(å®¶æ—é“¶è¡Œ)",
+				"FMBank(¼Ò×åÒøĞĞ)",
 				CHAR_getInt( charaindex,CHAR_FLOOR),
 				CHAR_getInt( charaindex,CHAR_X ),
 				CHAR_getInt( charaindex,CHAR_Y )
@@ -680,7 +680,7 @@ void saacproto_ACFixFMPK_recv(int fd, char *result, int data, int winindex,
         {
         	char	tmpbuf[256];
         	ACFixFMPK(winindex, loseindex, data);
-        	sprintf(tmpbuf, "FMPK(å®¶æ—PK)::win(ä¼˜èƒœå®¶æ—):%d lose(è½è´¥å®¶æ—):%d point:%d", winindex, loseindex, data);
+        	sprintf(tmpbuf, "FMPK(¼Ò×åPK)::win(ÓÅÊ¤¼Ò×å):%d lose(Âä°Ü¼Ò×å):%d point:%d", winindex, loseindex, data);
 		//print("FixFMPK tmpbuf:%s\n", tmpbuf);
         	LogFMPOP(tmpbuf);
         }
@@ -699,12 +699,12 @@ void saacproto_ACGMFixFMData_recv(int fd, char *result, char *fmname, int charfd
         
         if (ret == 1)
         {
-           sprintf(buf, "ä¿®æ”¹%sèµ„æ–™ï¼¯ï¼«ï¼", fmname);
+           sprintf(buf, "ĞŞ¸Ä%s×ÊÁÏ£Ï£Ë£¡", fmname);
            CHAR_talkToCli(CONNECT_getCharaindex(clifd) , -1, buf, CHAR_COLORWHITE);
         }
         else
         {
-           sprintf(buf, "ä¿®æ”¹%sèµ„æ–™å¤±è´¥ï¼", fmname);
+           sprintf(buf, "ĞŞ¸Ä%s×ÊÁÏÊ§°Ü£¡", fmname);
            CHAR_talkToCli(CONNECT_getCharaindex(clifd) , -1, buf, CHAR_COLORWHITE);
         }
 }
@@ -767,10 +767,10 @@ void saacproto_ACSendFmPk_recv( int fd, int toindex, int flg)
 {
 	char buf[256];
 	if( flg == 0){
-		sprintf( buf, "åº„å›­æŒ‘æˆ˜ç™»å½•å¤±è´¥ï¼ï¼");
+		sprintf( buf, "×¯Ô°ÌôÕ½µÇÂ¼Ê§°Ü£¡£¡");
 		CHAR_talkToCli( toindex, -1, buf, CHAR_COLORRED);
 	}else{
-		sprintf( buf, "åº„å›­æŒ‘æˆ˜ç™»å½•ç¡®è®¤OKï¼Œè¯·å¥½å¥½å‡†å¤‡ã€‚");
+		sprintf( buf, "×¯Ô°ÌôÕ½µÇÂ¼È·ÈÏOK£¬ÇëºÃºÃ×¼±¸¡£");
 		CHAR_talkToCli( toindex, -1, buf, CHAR_COLORYELLOW);
 	}
 }
@@ -830,7 +830,7 @@ void saacproto_ACLoadFmPk_recv(int fd, char *data)
 
 void saacproto_ACManorPKAck_recv(int fd, char *data)
 {
-  // æ›´æ–°è¿™ä¸ª server çš„ åº„å›­ pk scheduleman
+  // ¸üĞÂÕâ¸ö server µÄ ×¯Ô° pk scheduleman
   int i;
   char token[256], skip[256];
   int char_max=CHAR_getCharNum();
@@ -844,7 +844,7 @@ void saacproto_ACManorPKAck_recv(int fd, char *data)
           if (CHAR_getWorkInt(i, CHAR_NPCWORKINT2)==atoi(token)) {	// manor id
             int fmpks_pos = CHAR_getWorkInt(i, CHAR_NPCWORKINT1)*MAX_SCHEDULE;
 
-            // å¯¹æˆ˜æ˜Ÿçƒ
+            // ¶ÔÕ½ĞÇÇò
             if (getStringFromIndexWithDelim(data,"|",10,token,sizeof(token))) {
               strcpy(skip, makeStringFromEscaped(token));
               print("ACManorPKAck: %d %s\n", fmpks_pos, skip);
@@ -852,39 +852,39 @@ void saacproto_ACManorPKAck_recv(int fd, char *data)
               if (strcmp(getGameserverID(), skip)!=0) {
                 strcpy(fmpks[fmpks_pos+2].host_name, skip);
                 
-                // æ—¶é—´
+                // Ê±¼ä
                 if (getStringFromIndexWithDelim(data,"|",2,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].dueltime=atoi(token);
                 }
-                // ä¸»é˜Ÿ familyindex
+                // Ö÷¶Ó familyindex
                 if (getStringFromIndexWithDelim(data,"|",3,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].host_index=atoi(token);
                 }
-                // ä¸»é˜Ÿ å®¶æ—å
+                // Ö÷¶Ó ¼Ò×åÃû
                 if (getStringFromIndexWithDelim(data,"|",4,token,sizeof(token))) {
                   strcpy(fmpks[fmpks_pos+1].host_name,makeStringFromEscaped(token));
                 }
-                // å®¢é˜Ÿ familyindex
+                // ¿Í¶Ó familyindex
                 if (getStringFromIndexWithDelim(data,"|",5,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].guest_index=atoi(token);
                 }
-                // å®¢é˜Ÿ å®¶æ—å
+                // ¿Í¶Ó ¼Ò×åÃû
                 if (getStringFromIndexWithDelim(data,"|",6,token,sizeof(token))) {
                   strcpy(fmpks[fmpks_pos+1].guest_name,makeStringFromEscaped(token));
                 }
-                // å‡†å¤‡æ—¶é—´
+                // ×¼±¸Ê±¼ä
                 if (getStringFromIndexWithDelim(data,"|",7,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].prepare_time=atoi(token);
                 }
-                // æœ€å¤§äººæ•°
+                // ×î´óÈËÊı
                 if (getStringFromIndexWithDelim(data,"|",8,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].max_player=atoi(token);
                 }
-                // æ——æ ‡
+                // Æì±ê
                 if (getStringFromIndexWithDelim(data,"|",9,token,sizeof(token))) {
                   fmpks[fmpks_pos+1].flag=atoi(token);
                 }
-                // å¯¹æˆ˜æ˜Ÿçƒ
+                // ¶ÔÕ½ĞÇÇò
                 if (getStringFromIndexWithDelim(data,"|",10,token,sizeof(token))) {
                   strcpy(fmpks[fmpks_pos+2].host_name,makeStringFromEscaped(token));
                 }
@@ -904,21 +904,21 @@ void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
     //char cdkey[CDKEYLEN];
   int cindex = getCharindexFromFdid(retfd);
   
-	print("çŠ¶æ€ï¼š%s ", data);
+	print("×´Ì¬£º%s ", data);
 	
 	switch( act)	{
 	case 0:	//FAIL
 		if( CONNECT_checkfd(clifd) == FALSE) return;
 		CHAR_talkToCli( cindex, -1, data, CHAR_COLORYELLOW);	
 		break;
-	case 1:	//è·¨æ˜Ÿçƒè¸¢äºº
+	case 1:	//¿çĞÇÇòÌßÈË
 		{
 			char cdkey[64];
 			char szName[64];
 			int i, MAX_USER=0;
 			BOOL find=FALSE;
 			
-			print("è·¨æœè¸¢äºº:%s", data);
+			print("¿ç·şÌßÈË:%s", data);
 
 			MAX_USER=getFdnum();
 			for(i=0;i<MAX_USER;i++){
@@ -931,11 +931,11 @@ void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
 						int fd_charaindex = CONNECT_getCharaindex( i );
 						CONNECT_getCharname( i, szName, sizeof( szName ) );
 						if( retfd == -1 ){
-							print("å› é‡å¤ç™»å…¥");
-							CHAR_talkToCli( fd_charaindex, -1, "å› é‡å¤å¸å·ç™»å…¥è€Œæ–­çº¿ï¼",CHAR_COLORYELLOW);
+							print("ÒòÖØ¸´µÇÈë");
+							CHAR_talkToCli( fd_charaindex, -1, "ÒòÖØ¸´ÕÊºÅµÇÈë¶ø¶ÏÏß£¡",CHAR_COLORYELLOW);
 						}else{
-							print("å› åšåäº‹ ");
-							CHAR_talkToCli(fd_charaindex, -1, "å› åšåäº‹è€Œæ–­çº¿ã€‚",CHAR_COLORYELLOW);
+							print("Òò×ö»µÊÂ ");
+							CHAR_talkToCli(fd_charaindex, -1, "Òò×ö»µÊÂ¶ø¶ÏÏß¡£",CHAR_COLORYELLOW);
 						}
 						CONNECT_setCloseRequest( i , 1 );
 						find=TRUE;
@@ -945,7 +945,7 @@ void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
 			
 			if( find == TRUE && retfd != -1 && CHAR_CHECKINDEX( cindex) )	{
 				char buf1[256];//, buf2[256];
-				sprintf(buf1,"ç³»ç»Ÿå°†[%s]é€å‡ºä¼ºæœå™¨ã€‚", /*CHAR_getChar( cindex, CHAR_NAME),*/ szName);
+				sprintf(buf1,"ÏµÍ³½«[%s]Öğ³öËÅ·şÆ÷¡£", /*CHAR_getChar( cindex, CHAR_NAME),*/ szName);
 				for( i=0; i<MAX_USER; i++){
 					if( CONNECT_getUse(i) )	{
 						int fd_charaindex = CONNECT_getCharaindex( i);

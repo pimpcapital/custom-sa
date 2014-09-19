@@ -88,7 +88,7 @@ BOOL NPC_WarpManInit( int meindex )
    	CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEWARPMAN );
 #ifdef _NEW_WARPMAN
 	if( strstr( npcarg,"NEWWARPMAN") )      {
-			//timeman åŠŸèƒ½
+			//timeman ¹¦ÄÜ
 			CHAR_setWorkInt( meindex, NPC_TIME_MODE, 1);
 			if(NPC_Util_GetStrFromStrWithDelim( npcarg, "NEWTIME", buff2, sizeof( buff2)) != NULL ){
 				CHAR_setInt( meindex, CHAR_LOOPINTERVAL, 60*1000);
@@ -162,7 +162,7 @@ void NPC_WarpManTalked( int meindex , int talkerindex , char *szMes ,int color )
 		NPC_NewWarpMan_selectWindow( meindex ,talkerindex, 0, -1, szMes);
 		return;
 	}else	{
-		if(NPC_PARTY_CHAECK( meindex, talkerindex) == FALSE)	{//æœ‰ç»„é˜Ÿ
+		if(NPC_PARTY_CHAECK( meindex, talkerindex) == FALSE)	{//ÓĞ×é¶Ó
 			NPC_ERR_DiSP( meindex, talkerindex, 1);
 			return;
 		}
@@ -181,7 +181,7 @@ void NPC_WarpManTalked( int meindex , int talkerindex , char *szMes ,int color )
 #else
 	
 	
-	if(NPC_PARTY_CHAECK( meindex, talkerindex) == FALSE)	{//æœ‰ç»„é˜Ÿ
+	if(NPC_PARTY_CHAECK( meindex, talkerindex) == FALSE)	{//ÓĞ×é¶Ó
 		NPC_ERR_DiSP( meindex, talkerindex, 1);
 		return;
 	}
@@ -579,8 +579,8 @@ void NPC_ERR_DiSP(int meindex,int talker,int errNO)
 	}	
 	if(errNO==1){
 		if(NPC_Util_GetStrFromStrWithDelim( npcarg, "PartyMsg",token, sizeof( token))==NULL) {
-			sprintf(token,"\n\nã€€ã€€ã€€ã€€æ— æ³•åŠ å…¥å›¢é˜Ÿã€‚ã€€ã€€"
-				"\n\nã€€ã€€ã€€ è¯·è§£æ•£å›¢é˜Ÿ ã€‚ã€€");
+			sprintf(token,"\n\n¡¡¡¡¡¡¡¡ÎŞ·¨¼ÓÈëÍÅ¶Ó¡£¡¡¡¡"
+				"\n\n¡¡¡¡¡¡ Çë½âÉ¢ÍÅ¶Ó ¡£¡¡");
 		}
 		if(CHAR_getWorkInt(talker,CHAR_WORKPARTYMODE)==CHAR_PARTY_CLIENT){			
 		}else{	
@@ -600,8 +600,8 @@ void NPC_ERR_DiSP(int meindex,int talker,int errNO)
 		}
 	}else if (errNO==2){
 		if(NPC_Util_GetStrFromStrWithDelim( npcarg, "MoneyMsg", token, sizeof( token))==NULL){
-			sprintf(token,"\n\nã€€ã€€ã€€ã€€ä¼¼ä¹é‡‘é’±ä¸è¶³å”·ã€‚ã€€ã€€"
-				"\n\nã€€è¯·å­˜å¥½é’±å¾Œï¼Œå†è¿‡æ¥ã€‚");
+			sprintf(token,"\n\n¡¡¡¡¡¡¡¡ËÆºõ½ğÇ®²»×ãà¡¡£¡¡¡¡"
+				"\n\n¡¡Çë´æºÃÇ®áá£¬ÔÙ¹ıÀ´¡£");
 		}
 	}
 	lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
@@ -677,12 +677,12 @@ BOOL NPC_WarpMsg(int meindex,int talker,char *arg)
 			if( !ITEM_CHECKINDEX( itemi) ) continue;
 			if( strcmp( ITEM_getChar( itemi, ITEM_USEFUNC), "ITEM_timeticket") )	continue;
 			//if( ITEM_getInt( itemi ,ITEM_ID) != 20646 )	continue;
-			CHAR_talkToCli( talker, -1, "è‡ªåŠ¨ä½¿ç”¨é—¨ç¥¨ã€‚", CHAR_COLORYELLOW);
+			CHAR_talkToCli( talker, -1, "×Ô¶¯Ê¹ÓÃÃÅÆ±¡£", CHAR_COLORYELLOW);
 			ITEM_timeticketEx( talker, talker, havei, 1);
 			break;
 		}
 		if( havei == CHAR_MAXITEMHAVE ) {
-			CHAR_talkToCli( talker, -1, "è¯·å…ˆå‡†å¤‡ä¸“ç”¨é—¨ç¥¨æ‰å¯è¿›å…¥ã€‚", CHAR_COLORYELLOW);
+			CHAR_talkToCli( talker, -1, "ÇëÏÈ×¼±¸×¨ÓÃÃÅÆ±²Å¿É½øÈë¡£", CHAR_COLORYELLOW);
 			return FALSE;
 		}
 	}
@@ -739,10 +739,10 @@ static void NPC_NewWarpMan_selectWindow( int meindex, int toindex, int num,int s
 
 	windowtype = WINDOW_MESSAGETYPE_MESSAGE;
 	sprintf( buf1,"TALKEVENT");
-	//å¯»æ‰¾å¤šç§æ¡ä»¶ FREE
+	//Ñ°ÕÒ¶àÖÖÌõ¼ş FREE
 	while(getStringFromIndexWithDelim( npcarg,"OVER",talkNo,buf,sizeof( buf)) != FALSE)	{ 
 	  if(strstr(buf, buf1) != NULL) {
-	    //æ£€æŸ¥å¯¹è¯  æš—è¯­
+	    //¼ì²é¶Ô»°  °µÓï
 		RunType = CheckWarpMsg( meindex, toindex, buf , TalkStr);
 		if( RunType > 1 )	{
 			return;
@@ -755,11 +755,11 @@ static void NPC_NewWarpMan_selectWindow( int meindex, int toindex, int num,int s
 	      return;
 	    }
 
-	    //æ£€æŸ¥ç©å®¶æ˜¯å¦é™„åˆæ¡ä»¶		
+	    //¼ì²éÍæ¼ÒÊÇ·ñ¸½ºÏÌõ¼ş		
 	    if((NPC_ActionPassCheck(meindex,toindex,token)==TRUE) || (strstr( token, "ALLFREE")!=NULL) )	{
 		  CHAR_setWorkInt( toindex, CHAR_WORKSHOPRELEVANT, talkNo-1);
 
-	      //è‹¥é™„åˆæ¡ä»¶ å–å‡º FreeMsg å­—ä¸²
+	      //Èô¸½ºÏÌõ¼ş È¡³ö FreeMsg ×Ö´®
 	      if(NPC_Util_GetStrFromStrWithDelim( buf, "FreeMsg", token, sizeof( token))==NULL)
 	        return;
 	      CONNECT_set_pass(fd,TRUE);
@@ -774,7 +774,7 @@ static void NPC_NewWarpMan_selectWindow( int meindex, int toindex, int num,int s
 	  talkNo++;
 	}
 
-	//æ— ä»»ä½•æ¡ä»¶æˆç«‹
+	//ÎŞÈÎºÎÌõ¼ş³ÉÁ¢
 	if( tenflg == FALSE )	{
 		if( getStringFromIndexWithDelim( npcarg,"OVER",1,buf,sizeof( buf)) == FALSE )
 			return;
@@ -789,7 +789,7 @@ static void NPC_NewWarpMan_selectWindow( int meindex, int toindex, int num,int s
 		}
 	}
 
-	//é€è®¯æ¯ç»™ CLI						
+	//ËÍÑ¶Ï¢¸ø CLI						
 	lssproto_WN_send( fd, windowtype, buttontype, windowno,
 			CHAR_getWorkInt( meindex, CHAR_WORKOBJINDEX), token	);																				
 }
@@ -911,14 +911,14 @@ void NPC_WarpManWatch( int meobjindex, int objindex, CHAR_ACTION act,
 #ifdef _TREASURE_BOX
 	if( CHAR_getWorkInt( meindex, NPC_TIME_EVENTMODE) == NPC_EVENTMODE_OPEN ){
 		if( CHAR_getWorkInt( meindex, NPC_TIME_EVENTTIME) < NowTime.tv_sec ){
-			//å˜å›å®ç®±
+			//±ä»Ø±¦Ïä
 			CHAR_setWorkInt( meindex, NPC_TIME_EVENTMODE, NPC_EVENTMODE_EVENT);
-			//å˜å›¾
+			//±äÍ¼
 			CHAR_setInt( meindex, CHAR_BASEBASEIMAGENUMBER,
 				CHAR_getWorkInt( meindex, NPC_TIME_EVENOFFDBBI));
 			CHAR_setInt( meindex, CHAR_BASEIMAGENUMBER,
 				CHAR_getWorkInt( meindex, NPC_TIME_EVENOFFDBBI));
-			NPC_TreasureEventRunMsg( meindex);	//æ˜¯å¦warp
+			NPC_TreasureEventRunMsg( meindex);	//ÊÇ·ñwarp
 			CHAR_sendCToArroundCharacter( CHAR_getWorkInt( meindex, CHAR_WORKOBJINDEX ) );
 		}
 	}
@@ -976,7 +976,7 @@ BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 	char token[128];
 
 	if(rand_j == 0) {
-		print("Event:ç”±æ–¼ï¼çš„ä»‹å…¥ï¼Œå‡ºç°é”™è¯¯ã€‚");
+		print("Event:ÓÉì¶£°µÄ½éÈë£¬³öÏÖ´íÎó¡£");
  		return FALSE;
  	}
  	
@@ -989,7 +989,7 @@ BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 
 	if(itemindex == -1) return FALSE;
 	
-	/*å¤±å¥¶  ä¸åŠé¦¨ç¬›(  æ¶›å¤±å¥¶  ä¸  åä¸­æœ¨åŒ–ä»„å¼•ä¸¹  */
+	/*Ê§ÄÌ  Ø©¼°Ü°µÑ(  ÌÎÊ§ÄÌ  Ø©  ±åÖĞÄ¾»¯ØÆÒıµ¤  */
 	ret = CHAR_addItemSpecificItemIndex( talker, itemindex);
 	if( !CHAR_CHECKITEMINDEX( talker, ret) ){
 		print( "npc_exchangeman.c: additem error itemindex[%d]\n", itemindex);
@@ -999,14 +999,14 @@ BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 
 	if(itemindex != -1) {
 		LogItem(
-			CHAR_getChar( talker, CHAR_NAME ), /* å¹³ä¹“ä»¿   */
+			CHAR_getChar( talker, CHAR_NAME ), /* Æ½ÅÒ·Â   */
 			CHAR_getChar( talker, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
+#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
 			itemindex,
 #else
-			ITEM_getInt( itemindex, ITEM_ID),  /* å¤±å¥¶  ä¸  å¯ */
+			ITEM_getInt( itemindex, ITEM_ID),  /* Ê§ÄÌ  Ø©  Ä¯ */
 #endif
-			"EventAddItem(ä»»åŠ¡éœ€æ±‚æ‰€å¾—åˆ°çš„é“å…·)",
+			"EventAddItem(ÈÎÎñĞèÇóËùµÃµ½µÄµÀ¾ß)",
 			CHAR_getInt( talker,CHAR_FLOOR),
 			CHAR_getInt( talker,CHAR_X ),
  			CHAR_getInt( talker,CHAR_Y ),
@@ -1016,7 +1016,7 @@ BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 		);
 	}
 					
-	sprintf(token,"æ”¶ä¸‹äº†%s",ITEM_getChar( itemindex, ITEM_NAME));
+	sprintf(token,"ÊÕÏÂÁË%s",ITEM_getChar( itemindex, ITEM_NAME));
 	CHAR_talkToCli( talker, -1, token, CHAR_COLORWHITE);
 
 	CHAR_sendItemDataOne( talker, ret);

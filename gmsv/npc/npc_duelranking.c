@@ -57,10 +57,10 @@ static void NPC_Duelranking_selectWindow( int meindex, int toindex, int num, int
 			char	buf[2048];
 			strcpy( message, 
 				"1\n"
-				"             è¦çœ‹å“ªä¸€ä¸ªï¼Ÿ              \n\n\n"
-				"             ï¼œå¼ºè€…ä»¬ï¼ž              \n\n"
-				"             ï¼œ è‡ªå·± ï¼ž              \n\n"
-				"             ï¼œéƒ½ä¸çœ‹ï¼ž              \n\n" );
+				"             Òª¿´ÄÄÒ»¸ö£¿              \n\n\n"
+				"             £¼Ç¿ÕßÃÇ£¾              \n\n"
+				"             £¼ ×Ô¼º £¾              \n\n"
+				"             £¼¶¼²»¿´£¾              \n\n" );
 			lssproto_WN_send( fd, WINDOW_MESSAGETYPE_SELECT, 
 							WINDOW_BUTTONTYPE_NONE,
 							CHAR_WINDOWTYPE_DUELRANKING_START,
@@ -134,7 +134,7 @@ void NPC_Duelranking_PrintRanking( char *data, int count_start, int fdid, int ms
 	if( fd == -1 ) return;
 	message[0] = '\0';
 	snprintf( message, sizeof( message), 
-			"                        ä¸–ç•Œçš„å¼ºè€…ä»¬\n\n"
+			"                        ÊÀ½çµÄÇ¿ÕßÃÇ\n\n"
 			"      Rank       DuelPoint      Lv     Name\n\n" );
 	for( i = 1; ; i ++ ) {
 		char	rankdata[256];
@@ -176,9 +176,9 @@ void NPC_Duelranking_PrintRanking( char *data, int count_start, int fdid, int ms
 			if( dsprank > 3) dsprank = 3;
 			if( mycdkey != NULL && myname != NULL && strcmp( cdkey, mycdkey) == 0 && 
 				strcmp( charaname, myname) == 0 ) {
-				strcpy( hosi, "â˜…");
+				strcpy( hosi, "¡ï");
 			}else {
-				strcpy( hosi, "ã€€");
+				strcpy( hosi, "¡¡");
 			}
 			snprintf( msgbuf, sizeof( msgbuf), "%s %5d%s      %10s     %3s     %s\n",
 											hosi,
@@ -190,7 +190,7 @@ void NPC_Duelranking_PrintRanking( char *data, int count_start, int fdid, int ms
 		cnt ++;
 	}
 	if( cnt == 0 ) {
-		strcpy( message, "\n      æ²¡æœ‰å…¶ä»–çš„èµ„æ–™äº†ã€‚");
+		strcpy( message, "\n      Ã»ÓÐÆäËûµÄ×ÊÁÏÁË¡£");
 		button = WINDOW_BUTTONTYPE_PREV|WINDOW_BUTTONTYPE_OK;
 	}else if( cnt < NPC_DUELRANKING_WINDOWLINENUM ) {
 		if( count_start >= NPC_DUELRANKING_WINDOWLINENUM) {

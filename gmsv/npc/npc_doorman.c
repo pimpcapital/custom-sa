@@ -12,40 +12,40 @@
 #include "configfile.h"
 /*
  *
- *    æ›°åç‰å¤±äº’ä¸æœˆåˆäº”åå…¬åŠç‰å¤±æ¯›çª’æ—¥äº•åŠæ¤­ç˜€åæ–¹åŒ€åŒ–é’’ä»NPC.
- *  ç‰å¤±åŠåˆå…æ›°åcreateå…æœˆåˆ†ä»ƒåŒ¹ï½å…¬åŠç‰å¤±æ¯›ä¸‘ç»¼ä»Šå…­æœˆä»‡åˆäº’åŒ¹äº”æœˆï¼»
- *  åå…ä»„äº•ä»ƒæ—¥æœ¨å‡¶åˆäº”åèˆå¹³ä¹“ä»¿æ¯›è…¹ç»¸ä»„åŒ–ï½å¼•æ­¹æ›°8ç©´æ—¦åç‰å¤±äº’ä¸­æœˆ
- *  æ¡¦å®åå…¬åŠå…å±¯åŒ–åè¦†ä»„åŒ–æ’é»å…æœˆï¼»å­”å‡¶å‹¾åŠç‰å¤±äº’  å‡›åé’’ä»ä»‡åˆåå…æœˆï¼»
+ *    Ô»±åÓñÊ§»¥Ø¤ÔÂÎçÎå±å¹«¼°ÓñÊ§Ã«ÖÏÈÕ¾®¼°ÍÖğö±å·½ÔÈ»¯·°ÈÊNPC.
+ *  ÓñÊ§¼°ÎçØ¦Ô»±åcreateÔÊÔÂ·ÖØêÆ¥£ı¹«¼°ÓñÊ§Ã«³ó×Û½ñÁùÔÂ³ğÎç»¥Æ¥ÎåÔÂ£Û
+ *  ·´Ø¦ØÆ¾®ØêÈÕÄ¾Ğ×ÎçÎå±åòåÆ½ÅÒ·ÂÃ«¸¹³ñØÆ»¯£ıÒı´õÔ»8Ñ¨µ©±åÓñÊ§»¥ÖĞÔÂ
+ *  èëÄş·´¹«¼°ÔÊÍÍ»¯±å¸²ØÆ»¯ÅÅÊòÔÊÔÂ£Û¿×Ğ×¹´¼°ÓñÊ§»¥  Áİ±å·°ÈÊ³ğÎç±åØ¦ÔÂ£Û
  *
- *  å¥¶ä»¶æ­£â–¡ç™½å°¼å¥¶æ—¦åTalkåŒ¹
+ *  ÄÌ¼şÕı¡õ°×ÄáÄÌµ©·´TalkÆ¥
  *
- * ç‰å¤±æ¯›é’’ä»å‡¶æˆ·å
+ * ÓñÊ§Ã«·°ÈÊĞ×»§±å
  *
- * 1 äº‘å—¯æ¯›è”¼ç’‹å…æœˆï¼»è”¼ç’‹åŒ¹äº”å‡¶æ—¥å¤«æ—¥ä»     gold|100
- * 2 å¤±å¥¶  ä¸æ¯›1èœŠè”¼ç’‹å…æœˆ ï¼»è”¼ç’‹åŒ¹äº”å‡¶æ—¥å¤«æ—¥ä»  item|45
- * 3 å¤±å¥¶  ä¸æ¯›  åŒ€åŒ–ä¸­æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆï¼»   åŒ€åŒ–ä¸­å‡¶æ—¥é’’ä»ï¼»itemhave|44
- * 4 å¤±å¥¶  ä¸æ¯›  åŒ€åŒ–ä¸­å…ä¸­äº•å‡ä¸¹äº•è­¬å±¯æœˆï¼»  åŒ€åŒ–ä¸­å…äº•åŒ€å‡¶æ—¥é’’ä»ï¼»
+ * 1 ÔÆàÅÃ«°ªè°ÔÊÔÂ£Û°ªè°Æ¥ÎåĞ×ÈÕ·òÈÕÈÊ     gold|100
+ * 2 Ê§ÄÌ  Ø©Ã«1òÛ°ªè°ÔÊÔÂ £Û°ªè°Æ¥ÎåĞ×ÈÕ·òÈÕÈÊ  item|45
+ * 3 Ê§ÄÌ  Ø©Ã«  ÔÈ»¯ÖĞÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ£Û   ÔÈ»¯ÖĞĞ×ÈÕ·°ÈÊ£Ûitemhave|44
+ * 4 Ê§ÄÌ  Ø©Ã«  ÔÈ»¯ÖĞØ¦ÖĞ¾®Éıµ¤¾®Æ©ÍÍÔÂ£Û  ÔÈ»¯ÖĞØ¦¾®ÔÈĞ×ÈÕ·°ÈÊ£Û
  *          itemnothave|333
- * 5 æƒ«å¯æ¯›æ‰‹åŒ€åŒ–ä¸­æœˆäº•å‡ä¸¹äº•è­¬å±¯æœˆï¼»  åŒ€åŒ–ä¸­å‡¶æ—¥é’’ä»ï¼» titlehave|string
- * 6 æƒ«å¯æ¯›æ‰‹åŒ€åŒ–ä¸­å…ä¸­äº•å‡ä¸¹äº•è­¬å±¯æœˆï¼»  åŒ€åŒ–ä¸­å…äº•åŒ€å‡¶æ—¥é’’ä»ï¼»
+ * 5 ±¹Ä¯Ã«ÊÖÔÈ»¯ÖĞÔÂ¾®Éıµ¤¾®Æ©ÍÍÔÂ£Û  ÔÈ»¯ÖĞĞ×ÈÕ·°ÈÊ£Û titlehave|string
+ * 6 ±¹Ä¯Ã«ÊÖÔÈ»¯ÖĞØ¦ÖĞ¾®Éıµ¤¾®Æ©ÍÍÔÂ£Û  ÔÈ»¯ÖĞØ¦¾®ÔÈĞ×ÈÕ·°ÈÊ£Û
  *      titlenothave|string
  *
- * äº•å…æ—¥å†…æ’™  åèš•å°¹æœˆåˆé’’ä»ï¼»å—¯åŠæ¡¦å®åï½
- *ï¼100æ‰“â–¡ä¼™ç‰ä¸­å‡¶åˆ†äº”å¼•å…äº’ä¸­ä¸­åŒ¹å…äº•ï¼‚ï¼åŒ¹ï¼åä¸­ï¼åˆä¸­ä¸¹åˆ100æ‰“â–¡ä¼™ç‰
- * åˆæ—¥æœ¨æœˆï¼»ä¸­äº”å…æ›°ï¼åä¸­ï¼åˆ†ä»ƒèœ•åŒ€åŒ–æ‰‹åˆæ—¥æœ¨æœˆï¼»åŒ¹ï½ï¼100æ‰“â–¡ä¼™ç‰
- * ä¸­å‡¶åˆ†äº”å¼•ä»„å‡¶ï¼»ï¼åˆèœ•æ­¹æœ¨æœˆï¼»
+ * ¾®Ø¦ÈÕÄÚß¤  ±å²ÏÒüÔÂÎç·°ÈÊ£ÛàÅ¼°èëÄş·´£ı
+ *£¾100´ò¡õ»ïÓñÖĞĞ×·ÖÎåÒıÔÊ»¥ÖĞÖĞÆ¥ÔÊ¾®£¢£½Æ¥£¾·´ÖĞ£½ÎçÖĞµ¤Îç100´ò¡õ»ïÓñ
+ * ÎçÈÕÄ¾ÔÂ£ÛÖĞÎåØ¦Ô»£¾·´ÖĞ£½·ÖØêÍÉÔÈ»¯ÊÖÎçÈÕÄ¾ÔÂ£ÛÆ¥£ı£¾100´ò¡õ»ïÓñ
+ * ÖĞĞ×·ÖÎåÒıØÆĞ×£Û£½ÎçÍÉ´õÄ¾ÔÂ£Û
  *
- * å¤±å¥¶  ä¸è”¼ç’‹åŠæ¡¦å®åï½ï¼çª’â˜…æ¯›åŸŸèœŠä¸­å‡¶åˆ†äº”å¼•å…äº’ä¸­ä¸­åŒ¹å…äº•ï¼‚ï¼åˆäº”ä»ï¼»
- *  3äº•æ—¥6åŠæ¡¦å®åï½çª’äº•åå…ä»„äº•ä»ƒåŒ–æ¤­ç˜€äº’å…¬æ¬ åŒ€åŒ–å‡¶æ—¥é’’ä»ï¼»
+ * Ê§ÄÌ  Ø©°ªè°¼°èëÄş·´£ı£¾ÖÏ¡ïÃ«ÓòòÛÖĞĞ×·ÖÎåÒıÔÊ»¥ÖĞÖĞÆ¥ÔÊ¾®£¢£½ÎçÎåÈÊ£Û
+ *  3¾®ÈÕ6¼°èëÄş·´£ıÖÏ¾®·´Ø¦ØÆ¾®Øê»¯ÍÖğö»¥¹«Ç·ÔÈ»¯Ğ×ÈÕ·°ÈÊ£Û
  *
  *
  *
- *    æ—¦ç„åŠ  èŠŠ
+ *    µ©Ğş¼°  Ü·
  *
- *1  ç‰å¤±æ¯›åŒ–äº”åˆä¸¹å  ä»
- *2  ä»‡åŠNPCæ¯›èµç™«åç‰å¤±åŠåˆå…æ›°å  ä»ï¼»å¨„é†’æ¯› gold|100 åå…æœˆ
- *3  ä»‡åŠNPCåè¦†ä»„åŒ–ï½100æ‰“â–¡ä¼™ç‰åŠ¨æ™“æ‰‹åŒ€åŒ–ä¸­æœˆæ©‡è°ªåŒ¹ï¼åä¸­ï¼åˆèœ•ä¸¹
- *4  ç‰å¤±äº’å¤«æ—¥ä¸­åŒ–å—¯äº’è›¹åŒ€å‡¶æ—¥å²³  ï¼»
+ *1  ÓñÊ§Ã«»¯ÎåÎçµ¤±å  ÈÊ
+ *2  ³ğ¼°NPCÃ«ØÍñ²±åÓñÊ§¼°ÎçØ¦Ô»±å  ÈÊ£ÛÂ¦ĞÑÃ« gold|100 ±åÔÊÔÂ
+ *3  ³ğ¼°NPC±å¸²ØÆ»¯£ı100´ò¡õ»ïÓñ¶¯ÏşÊÖÔÈ»¯ÖĞÔÂÇÁÚØÆ¥£¾·´ÖĞ£½ÎçÍÉµ¤
+ *4  ÓñÊ§»¥·òÈÕÖĞ»¯àÅ»¥Ó¼ÔÈĞ×ÈÕÔÀ  £Û
  *
  */
 
@@ -56,7 +56,7 @@ BOOL NPC_DoormanInit( int meindex )
 	char	arg[NPC_UTIL_GETARGSTR_BUFSIZE];
     char dname[1024];
 
-	/* å¥¶çŸ›ä»¶ç„åŠæ­£å¥¶çš¿æ¶©çƒ‚ */
+	/* ÄÌÃ¬¼şĞş¼°ÕıÄÌÃóÉ¬ÀÃ */
 	CHAR_setWorkInt( meindex, CHAR_WORKEVENTTYPE,CHAR_EVENT_NPC);
 
     CHAR_setInt( meindex , CHAR_HP , 0 );
@@ -68,12 +68,12 @@ BOOL NPC_DoormanInit( int meindex )
 
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPETOWNPEOPLE );
     CHAR_setFlg( meindex , CHAR_ISOVERED , 0 );
-    CHAR_setFlg( meindex , CHAR_ISATTACKED , 0 );  /*   çŒ¾ä»Šæœ¨å…ä¸­æ–¹æ° */
+    CHAR_setFlg( meindex , CHAR_ISATTACKED , 0 );  /*   »«½ñÄ¾Ø¦ÖĞ·½ÊÏ */
 
 	NPC_Util_GetArgStr( meindex, arg, sizeof( arg));
 
     if(!getStringFromIndexWithDelim( arg, "|", 3, dname, sizeof(dname ))){
-        print("RINGO: è®¾å®šçœ‹é—¨è€…æ—¶éœ€è¦é—¨çš„åå­—å”·ï¼:%s:\n",
+        print("RINGO: Éè¶¨¿´ÃÅÕßÊ±ĞèÒªÃÅµÄÃû×Öà¡£¡:%s:\n",
               arg );
         return FALSE;
     }
@@ -90,7 +90,7 @@ void NPC_DoormanTalked( int meindex , int talkerindex , char *msg ,
     char opt[256];
     char	arg[NPC_UTIL_GETARGSTR_BUFSIZE];
 
-    /* çš¿ä¼Šå¥¶ä¹©â–¡äº’ç‰å¤±ç©´ä»¶åŠ1å¼˜ä¼‰æ°¸ç‰åŠ¨  å…æ—¥åæ°åŠä¸¹ */
+    /* ÃóÒÁÄÌØÀ¡õ»¥ÓñÊ§Ñ¨¼ş¼°1ºëØøÓÀÓñ¶¯  Ø¦ÈÕ·´ÊÏ¼°µ¤ */
     if(NPC_Util_CharDistance( talkerindex, meindex ) > 1)return;
 
 	NPC_Util_GetArgStr( meindex, arg, sizeof( arg));
@@ -109,53 +109,53 @@ void NPC_DoormanTalked( int meindex , int talkerindex , char *msg ,
 
         if( g > 0 && yn < 0 ){
             snprintf( msg ,sizeof( msg ) ,
-                      "æ‰“å¼€é—¨éœ€è¦ç»™æˆ‘%dçš„é‡‘å­è¿™æ ·å¯ä»¥å—ï¼Ÿ", g );
+                      "´ò¿ªÃÅĞèÒª¸øÎÒ%dµÄ½ğ×ÓÕâÑù¿ÉÒÔÂğ£¿", g );
             CHAR_talkToCli( talkerindex, meindex , msg, CHAR_COLORWHITE );
         } else if( g > 0 && yn == 0 ){
             snprintf( msg , sizeof( msg ),
-                      "æ‰“å¼€é—¨ %dçš„é‡‘å­æ˜¯å¿…è¦çš„ã€‚", g );
+                      "´ò¿ªÃÅ %dµÄ½ğ×ÓÊÇ±ØÒªµÄ¡£", g );
         } else if( g > 0 && yn == 1 ){
             int now_g = CHAR_getInt( talkerindex, CHAR_GOLD );
             if( now_g < g ){
                 snprintf( msg , sizeof( msg ) ,
-                          "æ‰“å¼€é—¨ %dçš„é‡‘å­æ˜¯å¿…è¦çš„ã€‚", g );
+                          "´ò¿ªÃÅ %dµÄ½ğ×ÓÊÇ±ØÒªµÄ¡£", g );
             	CHAR_talkToCli( talkerindex, meindex , msg, CHAR_COLORWHITE );
             } else {
                 snprintf( msg , sizeof( msg ),
-                          "%d æ”¶åˆ°é‡‘å­äº†ã€‚ç°åœ¨å°±æ¥å¼€é—¨ã€‚", g );
+                          "%d ÊÕµ½½ğ×ÓÁË¡£ÏÖÔÚ¾ÍÀ´¿ªÃÅ¡£", g );
             	CHAR_talkToCli( talkerindex, meindex , msg, CHAR_COLORWHITE );
 
-                /* äº‘å—¯æ¯›å¿…æ°¸ç„ */
+                /* ÔÆàÅÃ«±ØÓÀĞş */
                 now_g -= g;
                 CHAR_setInt( talkerindex , CHAR_GOLD , now_g );
-                /* ä¸å‡¶æ—¥ä»„ä¸­æ—¦  â–¡æ­£æ—¦æ¯›éœœè€¨ */
+                /* Ø¤Ğ×ÈÕØÆÖĞµ©  ¡õÕıµ©Ã«Ëªññ */
                 CHAR_send_P_StatusString(talkerindex, CHAR_P_STRING_GOLD);
 
-                /* ç‰å¤±å¤«æ—¥ä» */
+                /* ÓñÊ§·òÈÕÈÊ */
                 NPC_DoormanOpenDoor(
                     CHAR_getWorkChar( meindex, CHAR_WORKDOORMANDOORNAME));
             }
         }
     } else if( strcmp( mode , "item" ) == 0 ){
         CHAR_talkToCli( talkerindex, meindex ,
-                        "å°šåœ¨æœªæ”¯æ´æ¨¡å¼ã€‚",
+                        "ÉĞÔÚÎ´Ö§Ô®Ä£Ê½¡£",
                         CHAR_COLORWHITE);
     } else if( strcmp( mode , "itemhave" ) == 0 ){
         CHAR_talkToCli( talkerindex, meindex ,
-                        "å°šåœ¨æœªæ”¯æ´æ¨¡å¼ã€‚",
+                        "ÉĞÔÚÎ´Ö§Ô®Ä£Ê½¡£",
                         CHAR_COLORWHITE);
     } else if( strcmp( mode , "itemnothave" ) == 0 ){
         CHAR_talkToCli( talkerindex, meindex ,
-                        "å°šåœ¨æœªæ”¯æ´æ¨¡å¼ã€‚",
+                        "ÉĞÔÚÎ´Ö§Ô®Ä£Ê½¡£",
                         CHAR_COLORWHITE);
     } else if( strcmp( mode , "titlehave" ) == 0 ){
         CHAR_talkToCli( talkerindex, meindex ,
-                        "å°šåœ¨æœªæ”¯æ´æ¨¡å¼ã€‚",
+                        "ÉĞÔÚÎ´Ö§Ô®Ä£Ê½¡£",
                         CHAR_COLORWHITE);
 
     } else if( strcmp( mode , "roomlimit" ) == 0 ){
 
-		/*   ç›’åŠè°›é†’å­ºèœƒäº’ä¸æœˆæ¡¦å® */
+		/*   ºĞ¼°ÚĞĞÑÈæò×»¥Ø¤ÔÂèëÄş */
 		char szOk[256], szNg[256], szBuf[32];
 		int checkfloor;
 		int maxnum, i, iNum;
@@ -163,31 +163,31 @@ void NPC_DoormanTalked( int meindex , int talkerindex , char *msg ,
 	    if( !getStringFromIndexWithDelim( arg, "|", 2, szBuf, sizeof( szBuf ) ))
     	    return;
 
-		/* è­¬å±¯æœˆç™½å¤«å¤±åˆ    è°›é†’ */
+		/* Æ©ÍÍÔÂ°×·òÊ§Îç    ÚĞĞÑ */
 		if( sscanf( szBuf, "%d:%d", &checkfloor, &maxnum ) != 2 ){
 			return;
 		}
 
 		for( iNum = 0,i = 0; i < getFdnum(); i ++ ){
-			/* çš¿ä¼Šå¥¶ä¹©â–¡åŠ¨é™†ååé¥¬  äº’  ä¸­ */
+			/* ÃóÒÁÄÌØÀ¡õ¶¯Â½±å·´âÁ  »¥  ÖĞ */
 			if( CHAR_getCharUse( i ) == FALSE )continue;
 			if( CHAR_getInt( i, CHAR_WHICHTYPE ) != CHAR_TYPEPLAYER )continue;
-			/* éš™çƒ‚åŠç™½å¤«å¤±åŠ¨é™†åé¥¬  äº’  ä¸­ */
+			/* Ï¶ÀÃ¼°°×·òÊ§¶¯Â½±åâÁ  »¥  ÖĞ */
 			if( CHAR_getInt( i, CHAR_FLOOR ) != checkfloor )continue;
 			iNum++;
 		}
 	    if( !getStringFromIndexWithDelim( arg, "|", 5, szNg, sizeof( szNg ))){
-   			strcpy( szNg, "ã€‚ã€‚ã€‚ã€‚" );	/* å‡¤ä¼å…ä»„åŠæœ¬ä¼‰ç™½ */
+   			strcpy( szNg, "¡£¡£¡£¡£" );	/* ·ïÉ¡Ø¦ØÆ¼°±¾Øø°× */
 		}
     	if( !getStringFromIndexWithDelim( arg, "|", 4, szOk, sizeof( szOk ))){
-   			strcpy( szOk, "å¼€é—¨å§ã€‚ã€‚ã€‚" );	/* å‡¤ä¼ä¸æ›°åŠæœ¬ä¼‰ç™½ */
+   			strcpy( szOk, "¿ªÃÅ°É¡£¡£¡£" );	/* ·ïÉ¡Ø¤Ô»¼°±¾Øø°× */
    		}
 
 		if( iNum >= maxnum ){
-			/*     æ¯›è¯‘å°¹åŒ–ä¸­æœˆæ¡¦å® */
+			/*     Ã«ÒëÒü»¯ÖĞÔÂèëÄş */
 	        CHAR_talkToCli( talkerindex, meindex ,szNg, CHAR_COLORWHITE);
 		}else{
-			/*     å  å‡¶å…ä¸­æ¡¦å® */
+			/*     ±å  Ğ×Ø¦ÖĞèëÄş */
 	        CHAR_talkToCli( talkerindex, meindex ,szOk, CHAR_COLORWHITE);
             NPC_DoormanOpenDoor(
                     CHAR_getWorkChar( meindex, CHAR_WORKDOORMANDOORNAME));
@@ -195,13 +195,13 @@ void NPC_DoormanTalked( int meindex , int talkerindex , char *msg ,
 
     } else if( strcmp( mode , "titlenothave" ) == 0 ){
         CHAR_talkToCli( talkerindex, meindex ,
-                        "å°šåœ¨æœªæ”¯æ´æ¨¡å¼ã€‚",
+                        "ÉĞÔÚÎ´Ö§Ô®Ä£Ê½¡£",
                         CHAR_COLORWHITE);
     }
 }
 
 /*
- *    èŸ†åŒ¹è…¹ç»¸ä»„åŒ–ç”²æ°¸ç„ä»„å‡¶åŠæ¯›å…å±¯åŒ–é’’ä»ï¼»
+ *    ó¡Æ¥¸¹³ñØÆ»¯¼×ÓÀĞşØÆĞ×¼°Ã«ÔÊÍÍ»¯·°ÈÊ£Û
  *
  */
 static void NPC_DoormanOpenDoor( char *nm)

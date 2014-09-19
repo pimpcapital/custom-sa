@@ -12,27 +12,27 @@
 
 #define MAX_FMPOINT             4               // 4
 
-#define PREDEL_TIME             60*60*24*7      // ä¸ƒå¤© 60*60*24*3
-#define PREDELMEMBER_TIME       60*60*24*15     // 30å¤© 60*60*24*30
-#define FAMILY_MEMONUM          35              // å®¶æ—ç•™è¨€æ¿æœ€å¤§ç•™è¨€æ•°é‡
+#define PREDEL_TIME             60*60*24*7      // ÆßÌì 60*60*24*3
+#define PREDELMEMBER_TIME       60*60*24*15     // 30Ìì 60*60*24*30
+#define FAMILY_MEMONUM          35              // ¼Ò×åÁôÑÔ°å×î´óÁôÑÔÊıÁ¿
 #define FAMILY_MEMOLEN          256
-#define FMSMEMOINDEX            10000           // å®¶æ—ä¹‹é—´ç•™è¨€æ¿ index
+#define FMSMEMOINDEX            10000           // ¼Ò×åÖ®¼äÁôÑÔ°å index
 #define FMSMEMONUM              140
-#define TOPFMLISTNUM            10              // å®¶æ—æ’è¡Œæ¦œæ•°é‡
+#define TOPFMLISTNUM            10              // ¼Ò×åÅÅĞĞ°ñÊıÁ¿
 #define MINFMPOPNUM             -20000000
 // shan 20011207
 #define MAXFMPOPNUM             100000000
 //#define MAXFMPOPNUM           5000000
-#define MINAPPLYPNUM            1              // ç”³è¯·å®¶æ—æœ€ä½äººæ•°
+#define MINAPPLYPNUM            1              // ÉêÇë¼Ò×å×îµÍÈËÊı
 #define FMMEMBERINDEX           "fmmember"
 #define FMMEMOLIST              "memo"
-#define FMELDERNUM		3		// é•¿è€æ•°é‡
-#define FMMAXGOLD			100000000	// å®¶æ—åŸºé‡‘ä¸Šé™
+#define FMELDERNUM		3		// ³¤ÀÏÊıÁ¿
+#define FMMAXGOLD			100000000	// ¼Ò×å»ù½ğÉÏÏŞ
 
 // shan 20011207
-#define MAXRECVPOP				5000000	// å®¶æ—å£°æœ›è½¬ç§»ä¸Šé™
+#define MAXRECVPOP				5000000	// ¼Ò×åÉùÍû×ªÒÆÉÏÏŞ
 // CoolFish: 2001/11/26
-//#define MAXRECVPOP			2500000		// å®¶æ—å£°æœ›è½¬ç§»ä¸Šé™
+//#define MAXRECVPOP			2500000		// ¼Ò×åÉùÍû×ªÒÆÉÏÏŞ
                 
 typedef enum
 {
@@ -130,7 +130,7 @@ int ACAddFM(int fd, int *workindex, char *fmname, char *fmleadername,
 	char *fmleaderid, int fmleaderlv, char *petname, char *petattr,
 	char *fmrule, int fmsprite, int fmleadergrano, int charfdid);
 #endif
-#ifdef _PERSONAL_FAME	// Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME	// Arminius: ¼Ò×å¸öÈËÉùÍû
 int ACJoinFM(int fd, int index, char *fmname, int fmindex,
         char *charname, char *charid, int charlv, int fame, int charfdid);
 #else
@@ -160,7 +160,7 @@ int ACMemberLeaveFM(int index, char *fmname, int fmindex,
 int ACFMAssignOcp(int index, char *fmname, int fmindex,
         char *charname, int charindex, int result);
 
-#ifdef _PERSONAL_FAME   // Arminius: å®¶æ—ä¸ªäººå£°æœ›
+#ifdef _PERSONAL_FAME   // Arminius: ¼Ò×å¸öÈËÉùÍû
 int ACFMCharLogin(int fd, int index, char *fmname, int fmindex,
 	char *charname, char *charid, int charlv, int *floor, int *fmpopular,
 	int *joinflag, int *fmsetupflag, int *charindex, int charfdid,

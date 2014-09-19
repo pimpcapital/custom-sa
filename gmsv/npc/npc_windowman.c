@@ -26,7 +26,7 @@ struct	{
 	int		warp;
 	int		battle;
 	int		gotowin;
-}buttonproc[13];		/* ok,cancel, yes,no,prev,next åŠå‡›åŠè´¨   */
+}buttonproc[13];		/* ok,cancel, yes,no,prev,next ¼°Áİ¼°ÖÊ   */
 
 
 
@@ -54,10 +54,10 @@ BOOL NPC_WindowmanInit( int meindex )
 	if( NPC_Util_GetStrFromStrWithDelim( argstr, "conff", buf, sizeof( buf))
 		== NULL ) 
 	{
-		print( "windowman:æ²¡æœ‰æŒ‡å®šè®¾å®šçš„æ¡£æ¡ˆ ã€‚\n");
+		print( "windowman:Ã»ÓĞÖ¸¶¨Éè¶¨µÄµµ°¸ ¡£\n");
 		return FALSE;
 	}
-	/* èµ“æ¸å‡›åæ¶©çƒ‚çŠ¯â–¡æ­£æ¯›æ°‘å°¼æ°¸å¼ä»„åŒ–æ”¯æœˆ */
+	/* âÙÓåÁİ±åÉ¬ÀÃ·¸¡õÕıÃ«ÃñÄáÓÀÛÍØÆ»¯Ö§ÔÂ */
 	if( !NPC_Windowman_readData( meindex, -1, TRUE) ) {
 		return FALSE;
 	}
@@ -244,7 +244,7 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 		b_mode = -1;
 		errflg = FALSE;
 
-		/* èµ“æ¸ç¥­ */
+		/* âÙÓå¼À */
 		w.windowno = -1;
 		w.windowtype = -1;
 		w.buttontype = -1;
@@ -274,10 +274,10 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 			linenum ++;
 			
 			if( line[0] == '#' || line[0] == '\n') continue;
-			/* è¼å«æ½¸æœˆ */
+			/* İ±µæäúÔÂ */
 			chomp( line );
 			
-			/*  å«æ¯›å¸®æº¥å…æœˆ    */
+			/*  µæÃ«°ïäßÔÊÔÂ    */
 			replaceString( line, '\t' , ' ' );
 			for( i = 0; i < strlen( line); i ++) {
 				if( line[i] != ' ' ) {
@@ -304,18 +304,18 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 			
 			if( strcasecmp( firstToken, "winno") == 0 ) {
 				if( winno != -1 ) {
-					print( "windowman:å·²æœ‰winnoå´é‡æ–°å®šä¹‰winno\n");
+					print( "windowman:ÒÑÓĞwinnoÈ´ÖØĞÂ¶¨Òåwinno\n");
 					print( "filename:[%s] line[%d]\n", filename, linenum);
 					errflg = TRUE;
 					readflg = FALSE;
 					break;
 				}
-				/* å®ƒå¥´ä»¶ç‰å®ƒNoæ¯›å¿¡ç»£ */
+				/* ËüÅ«¼şÓñËüNoÃ«âçĞå */
 				winno = atoi( secondToken);
 				continue;
 			}
 			if( winno == -1 ) {
-				print( "windowman:winno å°šæœªå®šä¹‰ï¼Œèµ„æ–™å´å·²è®¾å®šã€‚\n");
+				print( "windowman:winno ÉĞÎ´¶¨Òå£¬×ÊÁÏÈ´ÒÑÉè¶¨¡£\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				readflg = FALSE;
 				errflg = FALSE;
@@ -359,7 +359,7 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 						}
 						
 						if( errflg == TRUE) {
-							print( "windowman: æ‰¾ä¸åˆ°gotowin\n");
+							print( "windowman: ÕÒ²»µ½gotowin\n");
 							print( "filename:[%s] line[%d]\n", filename, linenum);
 							readflg = FALSE;
 							errflg = TRUE;
@@ -373,23 +373,23 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 				else {
 					
 					w.windowno = winno;
-					/* å®ƒå¥´ä»¶ç‰å®ƒæ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* ËüÅ«¼şÓñËüÕıÄÌÃó¼°É¬ÀÃ */
 					if( strcasecmp( firstToken, "wintype") == 0 ) {
 						w.windowtype = atoi( secondToken);
 					}
-					/* ç¤ºæ­£ä»¶æ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÕıÄÌÃó¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "buttontype") == 0 ) {
 						w.buttontype = NPC_Windowman_restoreButtontype( secondToken);
 					}
-					/* getitemåŠæ¶©çƒ‚ */
+					/* getitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "takeitem") == 0 ) {
 						w.takeitem = atoi( secondToken);
 					}
-					/* giveitemåŠæ¶©çƒ‚ */
+					/* giveitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "giveitem") == 0 ) {
 						w.giveitem = atoi( secondToken);
 					}
-					/* messageåŠæ¶©çƒ‚ */
+					/* message¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "message") == 0 ) {
 						if( messagepos == 0 ) {
 							strcpy(  w.message, secondToken);
@@ -402,7 +402,7 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 							messagepos+=strlen(secondToken);
 						}
 					}
-					/* ç¤ºæ­£ä»¶æ¯›ç“·ä»„å‡¶å‡›åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÃ«´ÉØÆĞ×Áİ¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "okpressed") == 0 ) {
 						buttonconfmode = TRUE;
 						b_mode = 0;
@@ -439,7 +439,7 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 						buttonendflg = FALSE;
 						selectnum ++;
 					}
-					/* æ¶©çƒ‚è”½æ­¹æ›° */
+					/* É¬ÀÃ±Î´õÔ» */
 					else if( strcasecmp( firstToken, "endwin") == 0 ) {
 						endflg = TRUE;
 						if( chkflg == FALSE) {
@@ -448,7 +448,7 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 						break;
 					}
 					else {
-						print( "windowman:è®¾å®šæ˜¯ä¸å¯èƒ½çš„å‚æ•°\n");
+						print( "windowman:Éè¶¨ÊÇ²»¿ÉÄÜµÄ²ÎÊı\n");
 						print( "filename:[%s] line[%d]\n", filename, linenum);
 					}
 				}
@@ -460,26 +460,26 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 			}
 		}
 		if( buttonendflg == FALSE) {
-			print( "windowman: æ‰¾ä¸åˆ°endbutton\n");
+			print( "windowman: ÕÒ²»µ½endbutton\n");
 			print( "filename:[%s] line[%d]\n", filename, linenum);
 			errflg = TRUE;
 			break;
 		}
 		if( winno != -1 ) {
 			if( w.windowtype == -1 ) {
-				print( "windowman: æ‰¾ä¸åˆ°wintype\n");
+				print( "windowman: ÕÒ²»µ½wintype\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( w.buttontype == -1 ) {
-				print( "windowman: æ‰¾ä¸åˆ°button\n");
+				print( "windowman: ÕÒ²»µ½button\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( strlen( w.message) == 0 ) {
-				print( "windowman: æ‰¾ä¸åˆ°message\n");
+				print( "windowman: ÕÒ²»µ½message\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
@@ -489,12 +489,12 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 	fclose( fp);
 	
 	if( chkflg == FALSE && w.windowno == -1 ) {
-		print( "windowman: æ‰¾ä¸åˆ°æ‰€æŒ‡å®šçš„windowno\n");
+		print( "windowman: ÕÒ²»µ½ËùÖ¸¶¨µÄwindowno\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
 	if( winno != -1 && endflg == FALSE) {
-		print( "windowman: æ‰¾ä¸åˆ°endwin\n");
+		print( "windowman: ÕÒ²»µ½endwin\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}

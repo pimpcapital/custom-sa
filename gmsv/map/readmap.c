@@ -102,7 +102,7 @@ BOOL MAP_readMapConfFile( char* filename )
 
     file = fopen( filename , "r" );
     if( file == NULL ){
-        fprint( "æ— æ³•æ‰“å¼€æ–‡ä»¶ %s\n", filename );
+        fprint( "ÎŞ·¨´ò¿ªÎÄ¼ş %s\n", filename );
         return FALSE;
     }
     while( fgets( line , sizeof( line ) , file ) ){
@@ -125,14 +125,14 @@ BOOL MAP_readMapConfFile( char* filename )
     MAP_imagedatanum = maximagenumber + 1;
     MAP_imagedata=allocateMemory(sizeof(MAP_ImageData)*MAP_imagedatanum);
     if( MAP_imagedata == NULL ){
-        fprint("æ— æ³•åˆ†é…åœ°å›¾æ•°æ®å¤§å°=%d\n",MAP_imagedatanum);
+        fprint("ÎŞ·¨·ÖÅäµØÍ¼Êı¾İ´óĞ¡=%d\n",MAP_imagedatanum);
         return FALSE;
     }
     
     for( i = 0; i <arraysizeof( MAP_imgfilt) ; i ++ )
         MAP_imgfilt[i] = -1;
     if( fseek( file, 0 , SEEK_SET ) != 0 ){
-        fprint( "æ— æ³•æŸ¥æ‰¾ SEEK_SET %s\n" , strerror( errno ));
+        fprint( "ÎŞ·¨²éÕÒ SEEK_SET %s\n" , strerror( errno ));
         return FALSE;
     }
     while( fgets( line , sizeof( line ) , file ) ){
@@ -216,7 +216,7 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 
     file = fopen( filename , "r" );
     if( file == NULL ){
-        fprint( "æ— æ³•æ‰“å¼€ %s\n", filename );
+        fprint( "ÎŞ·¨´ò¿ª %s\n", filename );
         return FALSE;
     }
 
@@ -238,12 +238,12 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 			iRet = sscanf( line+1, "%d %d %d", &iPre[0], &iPre[1], &iPre[2] );
 			BattleMapNo[0] = BattleMapNo[1] = BattleMapNo[2] = iPre[0];
 			if( iRet < 1 ){
-				print( "!!!!!é”™è¯¯ æ— æ³•è¯»å–æˆ˜æ–—åœ°å›¾(%s)( line %d )\n", filename, linenum );
+				print( "!!!!!´íÎó ÎŞ·¨¶ÁÈ¡Õ½¶·µØÍ¼(%s)( line %d )\n", filename, linenum );
 			}
 			for( i = 0; i < iRet; i ++ ){
 				BattleMapNo[i] = iPre[i];
 				if( BattleMapNo[i] < 0 ){
-					print( "!!!!!é”™è¯¯ æˆ˜æ–—åœ°å›¾å·ç ä¸ºè´Ÿå€¼ (%s)( line %d )\n", filename, linenum );
+					print( "!!!!!´íÎó Õ½¶·µØÍ¼ºÅÂëÎª¸ºÖµ (%s)( line %d )\n", filename, linenum );
 				}
 			}
 
@@ -254,7 +254,7 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 			continue;
 		}
 		if( iWork < 0 ){
-			print( "!!!!!é”™è¯¯ é‡‘é’±å·ç ä¸ºè´Ÿå€¼ (%s)( line %d )\n", filename, linenum );
+			print( "!!!!!´íÎó ½ğÇ®ºÅÂëÎª¸ºÖµ (%s)( line %d )\n", filename, linenum );
 			continue;
 		}
 		iFirst = iWork;
@@ -266,7 +266,7 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 				iLast = iWork;
 			}
 			if( iWork < 0 ){
-				print( "!!!!!é”™è¯¯ é‡‘é’±å·ç ä¸ºè´Ÿå€¼ (%s)( line %d )\n", filename, linenum );
+				print( "!!!!!´íÎó ½ğÇ®ºÅÂëÎª¸ºÖµ (%s)( line %d )\n", filename, linenum );
 				continue;
 			}
 		}else{
@@ -275,13 +275,13 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 
 		for( i = iFirst; i <= iLast; i ++ ){
 			if( MAP_getImageInt( i, MAP_SETED_BATTLEMAP ) > 0 ){
-				print( "!!!!!é”™è¯¯ ç›¸åŒé‡‘é’±é‡å¤è®¾å®šäº†ä¸¤æ¬¡(%s)( line %d )(%d)(%d & %d)\n",
+				print( "!!!!!´íÎó ÏàÍ¬½ğÇ®ÖØ¸´Éè¶¨ÁËÁ½´Î(%s)( line %d )(%d)(%d & %d)\n",
 					filename, linenum, i,
 					MAP_getImageInt( i, MAP_BATTLEMAP ),
 					BattleMapNo[0] );
 			}
 
-			//   é£“  å¯æ³ä»„ä¸­äº•ï¼‚
+			//   ì«  Ä¯¿ÒØÆÖĞ¾®£¢
 			if( IsValidImagenumber( i ) == FALSE ){
 				continue;
 			}
@@ -297,7 +297,7 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 	for( j = 0; j < arraysizeof( MAP_imgfilt ); j ++ ){
 		if( MAP_imgfilt[j] == -1 )continue;
 		if( MAP_getImageInt( j, MAP_SETED_BATTLEMAP ) == 0 ){
-			print( "!!!!!é”™è¯¯ é‡‘é’±(%d)å°šæœªè®¾å®š (%s)\n", j, filename );
+			print( "!!!!!´íÎó ½ğÇ®(%d)ÉĞÎ´Éè¶¨ (%s)\n", j, filename );
 		}
 	}
     return TRUE;
@@ -403,23 +403,23 @@ FCLOSERETURNTRUE:
 
 static BOOL MAP_readMapOne( char*   filename )
 {
-    FILE*   f;					/*  ç™½å¤®å¥¶ä¼™    */
-    char    buf[16];            /*  ç©´æ–¥æ°¸å¼ç“œä»¶ç”°â–¡  å¿ƒè¿•  */
-    short   data[1024];         /*  æ‰‘äº¦â–¡ç„  å¿ƒè¿•ç”°æ°¸ç™½å¤®  */
-    int     ret;                /*  å¿’æ›°è¢„ç†¬ä»ƒæ½¸æ›°è¿•        */
-    int     i;                  /*  ä¼™â–¡çš¿  é†’  */
+    FILE*   f;					/*  °×ÑëÄÌ»ï    */
+    char    buf[16];            /*  Ñ¨³âÓÀÛÍ¹Ï¼şÌï¡õ  ĞÄåÃ  */
+    short   data[1024];         /*  ÆËÒà¡õĞş  ĞÄåÃÌïÓÀ°×Ñë  */
+    int     ret;                /*  ß¯Ô»°À°¾ØêäúÔ»åÃ        */
+    int     i;                  /*  »ï¡õÃó  ĞÑ  */
     int     mapindex;
 
-    int     id=0,xsiz=0,ysiz=0;     /*  ç©´æ°¸çš¿çŠ¯â–¡æ­£åŠåŸŸå‡›ä¼  æ¡¦èµ­  */
+    int     id=0,xsiz=0,ysiz=0;     /*  Ñ¨ÓÀÃó·¸¡õÕı¼°ÓòÁİÉ¡  èëô÷  */
 
     short   *tile=NULL;
     short   *obj=NULL;
     MAP_Objlink**   olink=NULL;
-    char    showstring[32];         /*  ç©´æ°¸çš¿çŠ¯â–¡æ­£åŠåŸŸå‡›ä¼  æ¡¦èµ­  */
-    struct  stat    filestat;       /*  æ°‘å°¼æ°¸å¼è¿•åé“¶ä¸¹    */
+    char    showstring[32];         /*  Ñ¨ÓÀÃó·¸¡õÕı¼°ÓòÁİÉ¡  èëô÷  */
+    struct  stat    filestat;       /*  ÃñÄáÓÀÛÍåÃ±åÒøµ¤    */
     BOOL    invaliddata=FALSE;
     if( MAP_mapnum_index >= MAP_mapnum ){
-        fprint( "è¿™é‡Œæ²¡æœ‰è¶³å¤Ÿç©ºé—´è£…è½½åœ°å›¾æ•°ç»„.\n" );
+        fprint( "ÕâÀïÃ»ÓĞ×ã¹»¿Õ¼ä×°ÔØµØÍ¼Êı×é.\n" );
         return FALSE;
     }
     mapindex=MAP_mapnum_index;
@@ -469,19 +469,19 @@ static BOOL MAP_readMapOne( char*   filename )
     ysiz = ntohs( data[0] );
     tile = allocateMemory( sizeof( short ) * xsiz * ysiz );
     if( tile == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ç»™åœ°å›¾åç§°:%s xsiz:%d ysiz:%d\n", filename, xsiz, ysiz);
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ¸øµØÍ¼Ãû³Æ:%s xsiz:%d ysiz:%d\n", filename, xsiz, ysiz);
         goto FREEOBJHP;
     }
 
     obj = allocateMemory( sizeof( short ) * xsiz * ysiz );
     if( obj == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ç»™å¯¹è±¡\n");
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ¸ø¶ÔÏó\n");
         goto FREETILE;
     }
 
     olink = allocateMemory( sizeof(MAP_Objlink*)  * xsiz * ysiz );
     if( olink == NULL ){
-        fprint( "æ— æ³•åˆ†é…å†…å­˜ç»™é“¾æ¥\n");
+        fprint( "ÎŞ·¨·ÖÅäÄÚ´æ¸øÁ´½Ó\n");
         goto FREEOBJ;
     }
 
@@ -495,7 +495,7 @@ static BOOL MAP_readMapOne( char*   filename )
     for( i = 0 ; i < xsiz * ysiz ; i ++ ){
     		tile[i] = ntohs( tile[i] );
         if( !IsValidImagenumber( tile[i] ) ){
-            fprint("åœ°å›¾çš„å›¾ç‰‡æœ‰é—®é¢˜:%d x:%d y:%d æ•°é‡:%d\n",
+            fprint("µØÍ¼µÄÍ¼Æ¬ÓĞÎÊÌâ:%d x:%d y:%d ÊıÁ¿:%d\n",
                 id, i % xsiz, (int)(i / xsiz) , tile[i]);
             invaliddata = TRUE;
         }
@@ -511,20 +511,20 @@ static BOOL MAP_readMapOne( char*   filename )
     		obj[i] = ntohs( obj[i] );
         if( !IsValidImagenumber( obj[i] ) ){
             fprint(
-                "åœ°å›¾çš„å›¾ç‰‡æœ‰é—®é¢˜:%d x:%d y:%d æ•°é‡:%d\n",
+                "µØÍ¼µÄÍ¼Æ¬ÓĞÎÊÌâ:%d x:%d y:%d ÊıÁ¿:%d\n",
                 id, i % xsiz, (int)(i / xsiz) , obj[i]);
             invaliddata = TRUE;
         }
     }
     if( invaliddata )goto FREELINK;
 /*    if( ftell(f) != filestat.st_size)
-        fprintf(stderr,"æ–‡ä»¶å¤§å°ä¸æ­£ç¡®(%s). ç›®æ ‡æ–‡ä»¶å¤§å°:%"
+        fprintf(stderr,"ÎÄ¼ş´óĞ¡²»ÕıÈ·(%s). Ä¿±êÎÄ¼ş´óĞ¡:%"
 #ifdef linux
                 "l"
 #elif __FreeBSD__
                 "ll"
 #endif
-                "d å®é™…å¤§å°:%ld\n",
+                "d Êµ¼Ê´óĞ¡:%ld\n",
                 filename, filestat.st_size,ftell(f));
 */
 
@@ -561,7 +561,7 @@ static BOOL MAP_readMapOne( char*   filename )
 			// Nuke 1204: Bug fix
 			fclose(fp);
 		}else	{
-			print("\n **é”™è¯¯** æ‰¾ä¸åˆ° map_noexit.txt æ–‡ä»¶!!!");
+			print("\n **´íÎó** ÕÒ²»µ½ map_noexit.txt ÎÄ¼ş!!!");
 		}
 	}
 #endif
@@ -617,8 +617,8 @@ BOOL CHECKFLOORID( id)
 }
 #endif
 
-#define MAX_MAP_FILES 1300 // åœ°å›¾ç›®å½•æœ€å¤§æ¡£æ¡ˆæ•°
-//#define MAX_MAP_FILES 2000 // åœ°å›¾ç›®å½•æœ€å¤§æ¡£æ¡ˆæ•°
+#define MAX_MAP_FILES 1300 // µØÍ¼Ä¿Â¼×î´óµµ°¸Êı
+//#define MAX_MAP_FILES 2000 // µØÍ¼Ä¿Â¼×î´óµµ°¸Êı
 
 BOOL MAP_readMapDir( char*  dirname )
 {
@@ -630,7 +630,7 @@ BOOL MAP_readMapDir( char*  dirname )
 
     filenum = rgetFileName( dirname, filenames, arraysizeof(filenames) );
     if( filenum == -1 ){
-        fprint( "æ— æ³•åœ¨ç›®å½•ä¸‹è·å–æ–‡ä»¶ %s \n" , dirname );
+        fprint( "ÎŞ·¨ÔÚÄ¿Â¼ÏÂ»ñÈ¡ÎÄ¼ş %s \n" , dirname );
         return FALSE;
     }
 
@@ -639,10 +639,10 @@ BOOL MAP_readMapDir( char*  dirname )
         if( MAP_IsMapFile( filenames[i].string ) )
             mapfilenum++;
 
-    print( "æ‰¾åˆ° %d åœ°å›¾\n" , mapfilenum );
+    print( "ÕÒµ½ %d µØÍ¼\n" , mapfilenum );
     if( mapfilenum == 0 )return FALSE;
     if( !MAP_initMapArray( mapfilenum ) ){
-        fprint( "å¼€å¯åœ°å›¾æ•°ç»„é”™è¯¯\n" );
+        fprint( "¿ªÆôµØÍ¼Êı×é´íÎó\n" );
         return FALSE;
     }
 
@@ -651,7 +651,7 @@ BOOL MAP_readMapDir( char*  dirname )
             MAP_readMapOne( filenames[i].string );
 //            print(".");
         }
-    print( "æ­£ç¡®åœ°å›¾æ–‡ä»¶ %d...",MAP_mapnum_index );
+    print( "ÕıÈ·µØÍ¼ÎÄ¼ş %d...",MAP_mapnum_index );
     if( MAP_mapnum_index == 0 ){
         MAP_endMapArray();
         return FALSE;
@@ -1192,12 +1192,12 @@ BOOL MAP_removeObj( int floor, int x, int y, int objindex )
 
     mapindex = MAP_getfloorIndex( floor );
     if( mapindex == -1 ) {
-    	print( "%s:%d:é”™è¯¯\n", __FILE__, __LINE__);
+    	print( "%s:%d:´íÎó\n", __FILE__, __LINE__);
     	return FALSE;
 	}
     xsiz = MAP_map[mapindex].xsiz;
     if( 0 > x || x >= xsiz || 0 >y || y >= MAP_map[mapindex].ysiz ) {
-    	print( "%s:%d:é”™è¯¯ åœ°å›¾å·[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, floor, x, y);
+    	print( "%s:%d:´íÎó µØÍ¼ºÅ[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, floor, x, y);
         return FALSE;
 	}
     dataindex = y*xsiz+x;
@@ -1214,7 +1214,7 @@ BOOL MAP_removeObj( int floor, int x, int y, int objindex )
         last = c;
         c = c->next;
     }
-    print( "%s:%d:é”™è¯¯\n", __FILE__, __LINE__);
+    print( "%s:%d:´íÎó\n", __FILE__, __LINE__);
     return FALSE;
 }
 
@@ -1233,7 +1233,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
 
     oldmapindex = MAP_getfloorIndex( ofloor );
     if( oldmapindex == -1 ) {
-    	print( "%s:%d:é”™è¯¯ åœ°å›¾å·[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
+    	print( "%s:%d:´íÎó µØÍ¼ºÅ[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
 		    				 ofloor, ox, oy);
     	return FALSE;
 	}
@@ -1241,7 +1241,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
     if( 0 > ox || ox >= oldxsiz
         || 0 >oy || oy >= MAP_map[oldmapindex].ysiz )
 	{
-    	print( "%s:%d:é”™è¯¯ åœ°å›¾å·[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
+    	print( "%s:%d:´íÎó µØÍ¼ºÅ[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
 		    				 ofloor, ox, oy);
         return FALSE;
 	}
@@ -1262,7 +1262,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
         c = c->next;
     }
     if( !pointer ) {
-    	print( "\n%s:%d:é”™è¯¯( %d,%d,%d )->(%d,%d,%d)\n", __FILE__, __LINE__,
+    	print( "\n%s:%d:´íÎó( %d,%d,%d )->(%d,%d,%d)\n", __FILE__, __LINE__,
 			ofloor, ox, oy, nfloor, nx, ny );
     	return FALSE;
 	}
@@ -1277,7 +1277,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
         }else{
             newmapindex = MAP_getfloorIndex( nfloor );
             if( newmapindex == -1 ) {
-		    	print( "%s:%d:é”™è¯¯ åœ°å›¾å·[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
+		    	print( "%s:%d:´íÎó µØÍ¼ºÅ[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
 		    				 nfloor, nx, ny);
             	return FALSE;
 			}
@@ -1286,7 +1286,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
         if( 0 > nx || nx >= newxsiz
             || 0 >ny || ny >= MAP_map[newmapindex].ysiz )
 		{
-	    	print( "%s:%d:é”™è¯¯ åœ°å›¾å·[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
+	    	print( "%s:%d:´íÎó µØÍ¼ºÅ[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
 	    				 nfloor, nx, ny);
             return FALSE;
 		}
@@ -1309,7 +1309,7 @@ BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int o
         && MAP_appendTailObj( nfloor, nx ,ny, objindex ) )
         return TRUE;
 #endif
-    print( "%s:%d:é”™è¯¯\n", __FILE__, __LINE__);
+    print( "%s:%d:´íÎó\n", __FILE__, __LINE__);
     return FALSE;
 }
 
@@ -1440,7 +1440,7 @@ void MAP_sendAroundMapdata( int fl, int fromx, int fromy)
 			}
 		}
 	}else {
-		print( "åœ°å›¾æ•°æ®é”™è¯¯ %s:%d \n" , __FILE__, __LINE__);
+		print( "µØÍ¼Êı¾İ´íÎó %s:%d \n" , __FILE__, __LINE__);
 	}
 }
 

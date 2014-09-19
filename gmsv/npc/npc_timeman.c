@@ -18,12 +18,12 @@
 
 
 enum {
-	E_INT_GRAPHIC = CHAR_NPCWORKINT1,		/*   è¤¥èŸ†åŠ  é£“ */
-	E_INT_GRAPHIC2 = CHAR_NPCWORKINT2,		/*   è¤¥  åŠ  é£“ */
-	E_INT_BORN = CHAR_NPCWORKINT3,			/* è—•æˆå‡›æ£‰ */
-	E_INT_DEAD = CHAR_NPCWORKINT4,			/* å£…å°¹æœˆå‡›æ£‰*/ 
-	E_INT_MODE = CHAR_NPCWORKINT5,			/* èœ‡ç®•åŠä¹’â–¡ç‰ */
-	E_INT_NOWGRAPHIC = CHAR_NPCWORKINT6,	/* èœ‡ç®•åŠå¼˜ä»¿ç™½å¥´æ°¸å¼ç“œä»¶ç”°â–¡ */
+	E_INT_GRAPHIC = CHAR_NPCWORKINT1,		/*   Èìó¡¼°  ì« */
+	E_INT_GRAPHIC2 = CHAR_NPCWORKINT2,		/*   Èì  ¼°  ì« */
+	E_INT_BORN = CHAR_NPCWORKINT3,			/* ÅºÏ·ÁİÃŞ */
+	E_INT_DEAD = CHAR_NPCWORKINT4,			/* ÛÕÒüÔÂÁİÃŞ*/ 
+	E_INT_MODE = CHAR_NPCWORKINT5,			/* òØ»ş¼°Æ¹¡õÓñ */
+	E_INT_NOWGRAPHIC = CHAR_NPCWORKINT6,	/* òØ»ş¼°ºë·Â°×Å«ÓÀÛÍ¹Ï¼şÌï¡õ */
 
 };
 
@@ -42,14 +42,14 @@ typedef struct {
 
 static NPC_TimeMan	TimeTble[] = {
 
-	{"ALLNIGHT",	NICHIBOTU+1,	YOAKE}, 	/* è„  äº’è¯·åŒ–ä¸­å…ä¸­å‡› */
-	{"ALLNOON",		YOAKE+1,		NICHIBOTU},/* è„  äº’è¯·åŒ–ä¸­æœˆå‡› */
-	{"AM",			YONAKA+1,		SHOUGO}, 	/* AM å‡›åŠå¿ƒ */
-	{"PM",			SHOUGO+1,		YONAKA}, 	/* PM å‡›åŠå¿ƒ */
-	{"FORE",		YOAKE+1,		SHOUGO},	/* è„  äº’åŒ¹åŒ–äº•æ—¥æ³è¯Ÿå¼•åŒ¹ */
-	{"AFTER",		SHOUGO+1,		NICHIBOTU},/* æ³è¯Ÿäº•æ—¥è„  äº’é‡Šæˆˆå¼•åŒ¹ */
-	{"EVNING",		NICHIBOTU+1,	YONAKA}, 	/* è„  äº’é‡Šæ°åŒ¹äº•æ—¥è•    å¼•åŒ¹ */
-	{"MORNING",		YONAKA+1,		YOAKE}, 	/* è•    äº•æ—¥è„  äº’å“æœˆå¼•åŒ¹ */
+	{"ALLNIGHT",	NICHIBOTU+1,	YOAKE}, 	/* Æê  »¥Çë»¯ÖĞØ¦ÖĞÁİ */
+	{"ALLNOON",		YOAKE+1,		NICHIBOTU},/* Æê  »¥Çë»¯ÖĞÔÂÁİ */
+	{"AM",			YONAKA+1,		SHOUGO}, 	/* AM Áİ¼°ĞÄ */
+	{"PM",			SHOUGO+1,		YONAKA}, 	/* PM Áİ¼°ĞÄ */
+	{"FORE",		YOAKE+1,		SHOUGO},	/* Æê  »¥Æ¥»¯¾®ÈÕ¿ÒÚ¸ÒıÆ¥ */
+	{"AFTER",		SHOUGO+1,		NICHIBOTU},/* ¿ÒÚ¸¾®ÈÕÆê  »¥ÊÍ¸êÒıÆ¥ */
+	{"EVNING",		NICHIBOTU+1,	YONAKA}, 	/* Æê  »¥ÊÍÊÏÆ¥¾®ÈÕŞ©    ÒıÆ¥ */
+	{"MORNING",		YONAKA+1,		YOAKE}, 	/* Ş©    ¾®ÈÕÆê  »¥ßæÔÂÒıÆ¥ */
 	{"FREE",		0,				1024},
 };
 
@@ -110,7 +110,7 @@ void NPC_TimeManTalked( int meindex , int talkerindex , char *msg ,int color )
 	}
 
 	if(CHAR_getInt(meindex,CHAR_BASEIMAGENUMBER)==9999){
-		/*--å£…å°¹åŒ–ä¸­æœˆä¹’â–¡ç‰--*/
+		/*--ÛÕÒü»¯ÖĞÔÂÆ¹¡õÓñ--*/
 		return;
 	}
 
@@ -128,7 +128,7 @@ void NPC_TimeManTalked( int meindex , int talkerindex , char *msg ,int color )
 
 
 	if(CHAR_getWorkInt(meindex,E_INT_MODE)==0){
-		/*--ä¸¢æ°¸æœ¬â–¡æ–¥æ¯›å¿’å… */
+		/*--¶ªÓÀ±¾¡õ³âÃ«ß¯ÔÊ */
 		NPC_Util_GetStrFromStrWithDelim(argstr,"main_msg",buf,sizeof( buf) );
  	
  	}else{
@@ -136,19 +136,19 @@ void NPC_TimeManTalked( int meindex , int talkerindex , char *msg ,int color )
  	}
 
    	tokennum = 1;
-   	/* æˆŠä»¶ç©´åŒ¹å—‰æ¿ æ—¥æœ¨å‡¶ç„â–¡å¼ä»¶äº’çª’ä»‡ä¸æœˆäº•é†’å°¹æœˆ */
+   	/* Îì¼şÑ¨Æ¥à¼å©ÈÕÄ¾Ğ×Ğş¡õÛÍ¼ş»¥ÖÏ³ğØ¤ÔÂ¾®ĞÑÒüÔÂ */
 	 for( i=0;buf[i]!='\0';i++ ){
           if( buf[i] == ',' ) tokennum++;
      }
  
     getStringFromIndexWithDelim( buf,",", rand()%tokennum+1,token, sizeof(token));
-	/*--ä»„æ‰å±¯æœˆ--*/
+	/*--ØÆÔúÍÍÔÂ--*/
 	CHAR_talkToCli( talkerindex, meindex, token, CHAR_COLORWHITE );
 
 
 }
 
-/** å¼•æ­¹æ›°åçª’äº•äº’ç²Ÿä»‡åŒ€å‡¶åˆäº”åè£Ÿå£¬æœ¨æœˆ*/
+/** Òı´õÔ»±åÖÏ¾®»¥ËÚ³ğÔÈĞ×ÎçÎå±åôÄÈÉÄ¾ÔÂ*/
 void NPC_TimeManWatch( int meobjindex, int objindex, CHAR_ACTION act,
                     int x,int y,int dir, int* opt,int optlen )
 {
@@ -169,7 +169,7 @@ void NPC_TimeManWatch( int meobjindex, int objindex, CHAR_ACTION act,
 
 //	print("now_hour=%d",nowlstime.hour);
 	
-	/* å‡›æ£‰æ¯›è‹‡åŒ–æ©‡è°ªæ¯›ç‘æˆ·æœˆ */
+	/* ÁİÃŞÃ«Î­»¯ÇÁÚØÃ«è£»§ÔÂ */
 	if(born < dead){
 		RealTimeToLSTime( NowTime.tv_sec, &nowlstime);
 		if( (born < nowlstime.hour) && (dead > nowlstime.hour) ){
@@ -183,7 +183,7 @@ void NPC_TimeManWatch( int meobjindex, int objindex, CHAR_ACTION act,
 			CHAR_setWorkInt(meindex,E_INT_NOWGRAPHIC,
 								CHAR_getInt(meindex,CHAR_BASEIMAGENUMBER));
 		}else{
-			/*-å£…å°¹åŒ–ä¸­æœˆ--*/
+			/*-ÛÕÒü»¯ÖĞÔÂ--*/
 			if(CHAR_getWorkInt(meindex,E_INT_NOWGRAPHIC)
 				==CHAR_getWorkInt( meindex, E_INT_GRAPHIC2)) return;
 

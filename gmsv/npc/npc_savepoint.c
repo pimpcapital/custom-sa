@@ -37,7 +37,7 @@ BOOL NPC_SavePointInit( int meindex )
 	}
 
 	if(NPC_Util_GetStrFromStrWithDelim(argstr,"ID",buf2,sizeof( buf2) )==NULL){
-		print("SavePoint:IDå°šæœªè®¾å®š ");
+		print("SavePoint:IDÉĞÎ´Éè¶¨ ");
 		return FALSE;
 	}
 		
@@ -139,25 +139,25 @@ void NPC_SavePointTalked( int meindex , int talkerindex , char *msg ,
 #ifdef _SAVE_GAME_ID
 					if (dd>0) {
 	        	snprintf( timeMsg, sizeof( timeMsg ) ,
-        			  "æœ¬æ˜Ÿçƒ%så·²ç»å¯åŠ¨äº† %d æ—¥ %d å°æ—¶ %d åˆ† %d ç§’ã€‚",getGameserverID(),dd,hh,mm,ss);
+        			  "±¾ĞÇÇò%sÒÑ¾­Æô¶¯ÁË %d ÈÕ %d Ğ¡Ê± %d ·Ö %d Ãë¡£",getGameserverID(),dd,hh,mm,ss);
                 } else if (hh>0) {
  	                snprintf( timeMsg, sizeof( timeMsg ) ,
-      		                  "æœ¬æ˜Ÿçƒ%så·²ç»å¯åŠ¨äº† %d å°æ—¶ %d åˆ† %d ç§’ã€‚",getGameserverID(),hh,mm,ss);
+      		                  "±¾ĞÇÇò%sÒÑ¾­Æô¶¯ÁË %d Ğ¡Ê± %d ·Ö %d Ãë¡£",getGameserverID(),hh,mm,ss);
                 } else {
                         snprintf( timeMsg, sizeof( timeMsg ) ,
-                                  "æœ¬æ˜Ÿçƒ%så·²ç»å¯åŠ¨äº† %d åˆ† %d ç§’ã€‚",getGameserverID(),mm,ss);
+                                  "±¾ĞÇÇò%sÒÑ¾­Æô¶¯ÁË %d ·Ö %d Ãë¡£",getGameserverID(),mm,ss);
                 }
                 strcat(buf2,timeMsg);
 #else
 					if (dd>0) {
 	        	snprintf( timeMsg, sizeof( timeMsg ) ,
-        			  "æœ¬æ˜Ÿçƒå·²ç»å¯åŠ¨äº† %d æ—¥ %d å°æ—¶ %d åˆ† %d ç§’ã€‚",dd,hh,mm,ss);
+        			  "±¾ĞÇÇòÒÑ¾­Æô¶¯ÁË %d ÈÕ %d Ğ¡Ê± %d ·Ö %d Ãë¡£",dd,hh,mm,ss);
                 } else if (hh>0) {
  	                snprintf( timeMsg, sizeof( timeMsg ) ,
-      		                  "æœ¬æ˜Ÿçƒå·²ç»å¯åŠ¨äº† %d å°æ—¶ %d åˆ† %d ç§’ã€‚",hh,mm,ss);
+      		                  "±¾ĞÇÇòÒÑ¾­Æô¶¯ÁË %d Ğ¡Ê± %d ·Ö %d Ãë¡£",hh,mm,ss);
                 } else {
                         snprintf( timeMsg, sizeof( timeMsg ) ,
-                                  "æœ¬æ˜Ÿçƒå·²ç»å¯åŠ¨äº† %d åˆ† %d ç§’ã€‚",mm,ss);
+                                  "±¾ĞÇÇòÒÑ¾­Æô¶¯ÁË %d ·Ö %d Ãë¡£",mm,ss);
                 }
                 strcat(buf2,timeMsg);
 #endif
@@ -166,16 +166,16 @@ void NPC_SavePointTalked( int meindex , int talkerindex , char *msg ,
 	        char temp[1024];
 	        //char *answer;// CoolFish: Rem 2001/4/18
 		extern unsigned int StateTable[];
-		// Robin 03/20 ä¸‡èƒ½çš„å¤©ç¥ï¼Œè¯·èµç»™æˆ‘çŒæ°´çš„åŠ›é‡!!!!
+		// Robin 03/20 ÍòÄÜµÄÌìÉñ£¬Çë´Í¸øÎÒ¹àË®µÄÁ¦Á¿!!!!
 
 #ifdef _PLAYER_NUM
 					srand(time(0));
 					if(getPlayerNum()>0)
-						sprintf(temp,"ç›®å‰çº¿ä¸Šäººæ•°ä¸º %d äººã€‚",abs(StateTable[LOGIN])+getPlayerNum()+rand()%10);
+						sprintf(temp,"Ä¿Ç°ÏßÉÏÈËÊıÎª %d ÈË¡£",abs(StateTable[LOGIN])+getPlayerNum()+rand()%10);
 					else
-						sprintf(temp,"ç›®å‰çº¿ä¸Šäººæ•°ä¸º %d äººã€‚",abs(StateTable[LOGIN]));
+						sprintf(temp,"Ä¿Ç°ÏßÉÏÈËÊıÎª %d ÈË¡£",abs(StateTable[LOGIN]));
 #else
-					sprintf(temp,"ç›®å‰çº¿ä¸Šäººæ•°ä¸º %d äººã€‚",abs(StateTable[LOGIN]));
+					sprintf(temp,"Ä¿Ç°ÏßÉÏÈËÊıÎª %d ÈË¡£",abs(StateTable[LOGIN]));
 #endif	
 	       
 	        strcat(buf2,temp);
@@ -236,7 +236,7 @@ BOOL NPC_AndReduce(int meindex,int talker,char *buf,int flg)
 				kosuu = atoi(buf3);
 	
 				
-				/*--æ°‘å°¼æ°¸å¼ä¹’â–¡ç‰--*/
+				/*--ÃñÄáÓÀÛÍÆ¹¡õÓñ--*/
 				if(NPC_SavePointItemCheck(meindex,talker,itemNo,kosuu)==FALSE){
 					return FALSE;
 				}
@@ -244,7 +244,7 @@ BOOL NPC_AndReduce(int meindex,int talker,char *buf,int flg)
 			}else{
 				itemNo = atoi(buf2);
 
-				/*--æ°‘å°¼æ°¸å¼ä¹’â–¡ç‰--*/
+				/*--ÃñÄáÓÀÛÍÆ¹¡õÓñ--*/
 				if(NPC_SavePointItemCheck(meindex,talker,itemNo,1)==FALSE){
 					return FALSE;
 				}
@@ -259,14 +259,14 @@ BOOL NPC_AndReduce(int meindex,int talker,char *buf,int flg)
 			getStringFromIndexWithDelim(buf,"*",2,buf3,sizeof(buf3));
 			kosuu = atoi(buf3);
 
-			/*--æ°‘å°¼æ°¸å¼ä¹’â–¡ç‰--*/
+			/*--ÃñÄáÓÀÛÍÆ¹¡õÓñ--*/
 			if(NPC_SavePointItemCheck(meindex,talker,itemNo,kosuu)==FALSE){
 				return FALSE;
 			}
 
 		}else{
 			itemNo = atoi(buf);
-			/*--æ°‘å°¼æ°¸å¼ä¹’â–¡ç‰--*/
+			/*--ÃñÄáÓÀÛÍÆ¹¡õÓñ--*/
 			if(NPC_SavePointItemCheck(meindex,talker,itemNo,1)==FALSE){
 					return FALSE;
 			}
@@ -299,14 +299,14 @@ BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 				getStringFromIndexWithDelim(buf2,"*",2,buf3,sizeof(buf3));
 				kosuu = atoi(buf3);
 
-				/*--ç»°è½®ä¹’â–¡ç‰--*/
+				/*--´ÂÂÖÆ¹¡õÓñ--*/
 				if(NPC_SavePointItemDelete(meindex,talker,itemNo,kosuu)==FALSE){
 					return FALSE;
 				}
 
 			}else{
 				itemNo = atoi(buf2);
-				/*--ç»°è½®ä¹’â–¡ç‰--*/
+				/*--´ÂÂÖÆ¹¡õÓñ--*/
 				if(NPC_SavePointItemDelete(meindex,talker,itemNo,1)==FALSE){
 					return FALSE;
 				}
@@ -321,7 +321,7 @@ BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 			getStringFromIndexWithDelim(buf,"*",2,buf3,sizeof(buf3));
 			kosuu = atoi(buf3);
 
-			/*--ç»°è½®ä¹’â–¡ç‰--*/
+			/*--´ÂÂÖÆ¹¡õÓñ--*/
 			if(NPC_SavePointItemDelete(meindex,talker,itemNo,kosuu)==FALSE){
 				return FALSE;
 			}
@@ -329,7 +329,7 @@ BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 		}else{
 			itemNo = atoi(buf);
 			
-			/*--ç»°è½®ä¹’â–¡ç‰--*/
+			/*--´ÂÂÖÆ¹¡õÓñ--*/
 			if(NPC_SavePointItemDelete(meindex,talker,itemNo,1)==FALSE){
 				return FALSE;
 			}
@@ -344,7 +344,7 @@ BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 
 
 /*
- * æ¤­ç˜€æ¯›è‹‡å‡¶ä»„å‡¶äº•åŠæ°‘å°¼æ°¸å¼
+ * ÍÖğöÃ«Î­Ğ×ØÆĞ×¾®¼°ÃñÄáÓÀÛÍ
  */
 BOOL NPC_UsedCheck(int meindex,int talker,int flg)
 {
@@ -383,7 +383,7 @@ BOOL NPC_UsedCheck(int meindex,int talker,int flg)
 			}
 		}
 		if(checkflg==0) return FALSE;
-  } else return TRUE;   // Arminius 2.5 å¦‚æœæ²¡æœ‰è®¾ GetItem åˆ™ä¸€å¾‹å‚¨å­˜
+  } else return TRUE;   // Arminius 2.5 Èç¹ûÃ»ÓĞÉè GetItem ÔòÒ»ÂÉ´¢´æ
 
 	if(flg==1){
 		if(checkflg==1){
@@ -421,21 +421,21 @@ void NPC_MessageDisp(int meindex,int talker,int MesNo)
 	}
 
 	switch(MesNo){
-	  case 0:/*--  é‚°å…å¤±å¥¶  ä¸æ¯›æ‰‹åŒ€åŒ–ä¸­æœˆäº•åŠæ°‘å°¼æ°¸å¼-*/
+	  case 0:/*--  Û¢Ø¦Ê§ÄÌ  Ø©Ã«ÊÖÔÈ»¯ÖĞÔÂ¾®¼°ÃñÄáÓÀÛÍ-*/
 		NPC_Util_GetStrFromStrWithDelim(argstr,"RequestMsg",token,sizeof( token) );
 
 		break;
 
-	  case 1:/*--  é‚°å…å¤±å¥¶  ä¸æ¯›æ‰‹åŒ€åŒ–ä¸­æœˆäº•åŠæ°‘å°¼æ°¸å¼-*/
+	  case 1:/*--  Û¢Ø¦Ê§ÄÌ  Ø©Ã«ÊÖÔÈ»¯ÖĞÔÂ¾®¼°ÃñÄáÓÀÛÍ-*/
 		NPC_Util_GetStrFromStrWithDelim(argstr,"OkMsg",token,sizeof( token) );
 		NPC_Util_GetStrFromStrWithDelim(argstr,"ID",buf,sizeof( buf) );
 		NPC_SetFlg(talker,atoi(buf));
-		/*--æœ¬â–¡çš®ä»Šå…­åŒ–ä¸ä»†æœˆ--*/
-		/* åå…ä»„äº•ä»ƒå‡¶è›Šåï½æ„¤åŒåŠIDæ¯›ç­ç››ä»Šå…­æœˆ */
+		/*--±¾¡õÆ¤½ñÁù»¯Ø¤ÆÍÔÂ--*/
+		/* ·´Ø¦ØÆ¾®ØêĞ×¹Æ±å£ı·ßÛĞ¼°IDÃ«·¤Ê¢½ñÁùÔÂ */
 		CHAR_setInt( talker, CHAR_LASTTALKELDER ,CHAR_getWorkInt( meindex, CHAR_WORKOLDMANID ) );
 	
-		/* æœ¬â–¡çš®å…æœˆ */
-		/*  å¤«æ°¸å¼ä»„åŒ–ä¸­æœˆåå†…äº’å…ä¸­åŠåŒ¹å¤±ä»¶å¤«æ°¸å¼ä»„å…ä¸­    */
+		/* ±¾¡õÆ¤ÔÊÔÂ */
+		/*  ·òÓÀÛÍØÆ»¯ÖĞÔÂ·´ÄÚ»¥Ø¦ÖĞ¼°Æ¥Ê§¼ş·òÓÀÛÍØÆØ¦ÖĞ    */
 		fd = getfdFromCharaIndex( talker);
 		if( fd != -1 ) {
 #ifndef _NPC_NOSAVEPOINT
@@ -449,7 +449,7 @@ void NPC_MessageDisp(int meindex,int talker,int MesNo)
 
 		break;
 	
-	  case 2:/*--  é‚°å…å¤±å¥¶  ä¸æ¯›æ‰‹åŒ€åŒ–ä¸­æœˆäº•åŠæ°‘å°¼æ°¸å¼-*/
+	  case 2:/*--  Û¢Ø¦Ê§ÄÌ  Ø©Ã«ÊÖÔÈ»¯ÖĞÔÂ¾®¼°ÃñÄáÓÀÛÍ-*/
 		NPC_Util_GetStrFromStrWithDelim(argstr,"RealyMsg",token,sizeof( token) );
 	  	buttontype=WINDOW_BUTTONTYPE_YESNO;
 		break;
@@ -482,12 +482,12 @@ BOOL NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu)
 					LogItem(
 					CHAR_getChar( talker, CHAR_NAME ),
 					CHAR_getChar( talker, CHAR_CDKEY ),
-#ifdef _add_item_log_name  // WON ADD åœ¨itemçš„logä¸­å¢åŠ itemåç§°
+#ifdef _add_item_log_name  // WON ADD ÔÚitemµÄlogÖĞÔö¼ÓitemÃû³Æ
 					itemindex,
 #else
 	       			ITEM_getInt( itemindex, ITEM_ID ),
 #endif
-					"SP_DelItem(äº¤ç»™è®°å½•ç‚¹è®°å½•çš„é“å…·)",
+					"SP_DelItem(½»¸ø¼ÇÂ¼µã¼ÇÂ¼µÄµÀ¾ß)",
 					CHAR_getInt( talker,CHAR_FLOOR),
 					CHAR_getInt( talker,CHAR_X ),
 					CHAR_getInt( talker,CHAR_Y ),

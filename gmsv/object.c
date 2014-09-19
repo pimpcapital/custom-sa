@@ -31,7 +31,7 @@ BOOL initObjectArray( int num )
         memset( &obj[i], 0 , sizeof( Object ));
         obj[i].type = OBJTYPE_NOUSE;
     }
-    print( "åˆ†é… %.2f MB MB ç©ºé—´...", sizeof( Object ) * objnum / 1024.0 / 1024.0 );
+    print( "·ÖÅä %.2f MB MB ¿Õ¼ä...", sizeof( Object ) * objnum / 1024.0 / 1024.0 );
     return TRUE;
 }
 
@@ -179,10 +179,10 @@ INLINE int OBJECT_setTime( int index, int newvalue )
 
 
 /*------------------------------------------------------------
- * index æ¯›  æœˆ
- * å¨„é†’
- *  index      int     å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
- * å¿’æ›°è¢„
+ * index Ã«  ÔÂ
+ * Â¦ĞÑ
+ *  index      int     ÄÌ¼ş·¸ÓÀÛÍµ©
+ * ß¯Ô»°À
  *  int
  ------------------------------------------------------------*/
 INLINE int OBJECT_getIndex( int index )
@@ -190,12 +190,12 @@ INLINE int OBJECT_getIndex( int index )
     return obj[index].index;
 }
 /*------------------------------------------------------------
- * y æ¯›æ¶©çƒ‚å…æœˆ
- * å¨„é†’
- *  index      int     å¥¶ä»¶çŠ¯æ°¸å¼æ—¦
- *  newvalue    int     è•™ä»„ä¸­è¢„
- * å¿’æ›°è¢„
- *  int æ¨¯åŠè¢„
+ * y Ã«É¬ÀÃÔÊÔÂ
+ * Â¦ĞÑ
+ *  index      int     ÄÌ¼ş·¸ÓÀÛÍµ©
+ *  newvalue    int     Ş¥ØÆÖĞ°À
+ * ß¯Ô»°À
+ *  int éÉ¼°°À
  ------------------------------------------------------------*/
 INLINE int OBJECT_setIndex( int index, int newvalue )
 {
@@ -207,10 +207,10 @@ INLINE int OBJECT_setIndex( int index, int newvalue )
 
 
 /*------------------------------------------------------------
- * å·¦çš®æ–¥å°¼å¼ç„åŠ    é†’æ¯›è²æˆ·æœˆ
- * å¨„é†’
- *  å…ä»„
- * å¿’æ›°è¢„
+ * ×óÆ¤³âÄáÛÍĞş¼°    ĞÑÃ«·Æ»§ÔÂ
+ * Â¦ĞÑ
+ *  Ø¦ØÆ
+ * ß¯Ô»°À
  *  int
  ------------------------------------------------------------*/
 INLINE int OBJECT_getNum( void )
@@ -219,17 +219,17 @@ INLINE int OBJECT_getNum( void )
 }
 
 /*------------------------------------------------------------
- *  å·¦çš®æ–¥å°¼å¼ç„åŒç»  åŠä¸¢ä»¶ç”°æ¯›èˆ  å¨„é†’å  åŒ€åŒ–
- *  å·¦çš®æ–¥å°¼å¼ç„åŒç»  æ¯›ç»¼æ›°è¯·ä»„åŒ–ï½ç“’  å…æœˆï¼»
+ *  ×óÆ¤³âÄáÛÍĞşÑáÕ°  ¼°¶ª¼şÌïÃ«òå  Â¦ĞÑ±å  ÔÈ»¯
+ *  ×óÆ¤³âÄáÛÍĞşÑáÕ°  Ã«×ÛÔ»ÇëØÆ»¯£ıè¶  ÔÊÔÂ£Û
  *
- * å¨„é†’
- *  type    OBJTYPE     å·¦çš®æ–¥å°¼å¼ç„åŠæ­£å¥¶çš¿
- *  index   int         å…¬æœ¨å†—æœ¨åŠ    åŒ¹åŠindex
- *  x       int         xç”„  
- *  y       int         yç”„  
+ * Â¦ĞÑ
+ *  type    OBJTYPE     ×óÆ¤³âÄáÛÍĞş¼°ÕıÄÌÃó
+ *  index   int         ¹«Ä¾ÈßÄ¾¼°    Æ¥¼°index
+ *  x       int         xÕç  
+ *  y       int         yÕç  
  *  floor   int         floorid
- * å¿’æ›°è¢„
- *   int  å–ƒæ›°ç™«åŒ–æœ¨å‡¶index, æ’©  åŠå‡›åï½ -1
+ * ß¯Ô»°À
+ *   int  à«Ô»ñ²»¯Ä¾Ğ×index, ÁÃ  ¼°Áİ·´£ı -1
  ------------------------------------------------------------*/
 int initObjectFromObjectMember(
     OBJTYPE type, int index, int x, int y , int floor )

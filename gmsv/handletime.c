@@ -6,11 +6,11 @@
 #include "common.h"
 #include "handletime.h"
 
-#define LSTIME_SECONDS_PER_DAY 5400 /* LSTIMEåŸŸ  å°‘æ°åŠèœ‡  åŠ  é†’ */
+#define LSTIME_SECONDS_PER_DAY 5400 /* LSTIMEÓò  ÉÙÊÏ¼°òØ  ¼°  ĞÑ */
 
    
-#define LSTIME_HOURS_PER_DAY 1024 /* LSTIMEåŸŸ  å°‘æ°åŠLSTIMEåŠå‡›æ£‰é†’ */
-#define LSTIME_DAYS_PER_YEAR 100 /* LSTIMEåŸŸ  å°‘æ°åŠLSTIMEåŠ  é†’ */
+#define LSTIME_HOURS_PER_DAY 1024 /* LSTIMEÓò  ÉÙÊÏ¼°LSTIME¼°ÁİÃŞĞÑ */
+#define LSTIME_DAYS_PER_YEAR 100 /* LSTIMEÓò  ÉÙÊÏ¼°LSTIME¼°  ĞÑ */
 
 
 /*
@@ -33,9 +33,9 @@ struct tm *localtime(const time_t *timep)
 */
 
 /*------------------------------------------------------------
- * å¨„é†’
- *  å…ä»„
- * å¿’æ›°è¢„
+ * Â¦ĞÑ
+ *  Ø¦ØÆ
+ * ß¯Ô»°À
  ------------------------------------------------------------*/
 BOOL setNewTime( void )
 {
@@ -53,16 +53,16 @@ BOOL setNewTime( void )
 /*******************************************************************
 *******************************************************************/
 static long era = (long)912766409 + 5400; 
-									/* SAåŠå•ƒåå†…æ—¥ä»„å‡¶ */
+									/* SA¼°¿Ğ±åÄÚÈÕØÆĞ× */
 void RealTimeToLSTime(long t , LSTIME *lstime)
 {
-	long lsseconds = t - era; /* LSè‘­  äº•æ—¥åŠ  é†’ */
-    long lsdays; /* LSè‘­  äº•æ—¥åŠ  é†’ */
+	long lsseconds = t - era; /* LSİç  ¾®ÈÕ¼°  ĞÑ */
+    long lsdays; /* LSİç  ¾®ÈÕ¼°  ĞÑ */
 
 	lstime->year = (int)( lsseconds/(LSTIME_SECONDS_PER_DAY*LSTIME_DAYS_PER_YEAR) );
 
-    lsdays = lsseconds/LSTIME_SECONDS_PER_DAY;/* å¼•å†…è‘­  äº•æ—¥åŠ  é†’æ¯›ç…Œé¥ä»„åŒ– */
-	lstime->day  = lsdays % LSTIME_DAYS_PER_YEAR;/*   ç™«å‡¶æ›°åŠ  é†’åŒ¹å–ƒåŒ€å‡¶ä¸å¼•æ›°äº’  */
+    lsdays = lsseconds/LSTIME_SECONDS_PER_DAY;/* ÒıÄÚİç  ¾®ÈÕ¼°  ĞÑÃ«»ÍÒ£ØÆ»¯ */
+	lstime->day  = lsdays % LSTIME_DAYS_PER_YEAR;/*   ñ²Ğ×Ô»¼°  ĞÑÆ¥à«ÔÈĞ×Ø¤ÒıÔ»»¥  */
 
 
     lstime->hour = (int)(lsseconds % LSTIME_SECONDS_PER_DAY )
@@ -72,12 +72,12 @@ void RealTimeToLSTime(long t , LSTIME *lstime)
 }
 
 /*******************************************************************
-	LSå‡›æ£‰äº•æ—¥ç©´æ‰‘ä»¶å‡›æ£‰åå…æœˆ
+	LSÁİÃŞ¾®ÈÕÑ¨ÆË¼şÁİÃŞ±åÔÊÔÂ
 *******************************************************************/
 void LSTimeToRealTime( LSTIME *lstime, long *t)
 {
 	*t=(long)(
-        ( lstime->hour*LSTIME_DAYS_PER_YEAR+lstime->day) /* å‡›æ£‰ */
+        ( lstime->hour*LSTIME_DAYS_PER_YEAR+lstime->day) /* ÁİÃŞ */
                *LSTIME_HOURS_PER_DAY
 
         +     lstime->year)

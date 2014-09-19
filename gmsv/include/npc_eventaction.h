@@ -89,8 +89,8 @@ void NPC_ActionDoPileClearItem( int toindex, int itemID);
 
 #ifdef _NPC_ADDWARPMAN1
 BOOL NPC_ActionPartyCountCheck( int toindex, int nums, int flg);
-BOOL NPC_ActionManCountCheck( int toindex, int nums, int flg);//æ£€æŸ¥ç”·ç”Ÿäººæ•°
-BOOL NPC_ActionWomanCountCheck( int toindex, int nums, int flg);//æ£€æŸ¥å¥³ç”Ÿäººæ•°
+BOOL NPC_ActionManCountCheck( int toindex, int nums, int flg);//¼ì²éÄĞÉúÈËÊı
+BOOL NPC_ActionWomanCountCheck( int toindex, int nums, int flg);//¼ì²éÅ®ÉúÈËÊı
 #endif
 
 #endif

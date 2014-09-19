@@ -1,9 +1,9 @@
 #ifndef _BATTLE_ITEM_H_
 #define _BATTLE_ITEM_H_
 //--------------------------------------------------------------
-//  èšæ±Šå¤±å¥¶  ä¸æ¯›é“¶åŒ€å‡¶æ¡¦å®åŠè´¨  
+//  ¼ÔãâÊ§ÄÌ  Ø©Ã«ÒøÔÈĞ×èëÄş¼°ÖÊ  
 //--------------------------------------------------------------
-// çˆµ    åŠæ¡¦å®
+// ¾ô    ¼°èëÄş
 void ITEM_useRecovery_Battle( int charaindex, int toindex, int itemindex );
 void ITEM_useStatusChange_Battle( int charaindex, int toindex, int itemindex );
 void ITEM_useMagicDef_Battle( int charaindex, int toindex, int itemindex );
@@ -15,10 +15,10 @@ void ITEM_useCaptureUp_Battle( int charaindex, int toindex, int itemindex );
 #ifdef _ITEM_CRACKER
 void ITEM_useCracker_Effect( int charaindex, int toindex, int haveitemindex);
 #endif
-#ifdef _ITEM_ADDEXP	//vincent ç»éªŒæå‡
+#ifdef _ITEM_ADDEXP	//vincent ¾­ÑéÌáÉı
 void ITEM_useAddexp_Effect( int charaindex, int toindex, int haveitemindex);
 #endif
-#ifdef _ITEM_REFRESH //vincent è§£é™¤å¼‚å¸¸çŠ¶æ€é“å…·
+#ifdef _ITEM_REFRESH //vincent ½â³ıÒì³£×´Ì¬µÀ¾ß
 void ITEM_useRefresh_Effect( int charaindex, int toindex, int haveitemindex);
 #endif
 //Terry add 2001/12/24

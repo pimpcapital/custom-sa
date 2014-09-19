@@ -45,12 +45,12 @@ int MAGIC_Use( int charaindex, int haveitemindex, int toindex)
 	
         // shan add begin
         if( CHAR_getInt( charaindex, CHAR_FMINDEX ) >= 1 ){
-            // å…‰ç²¾
+            // ¹â¾«
             if( CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 0){
                 if( (marray >=0 && marray <=31) || (marray >= 105 && marray <=107 ))
                     mp *= MP_RATE;
             }
-            // æš—ç²¾
+            // °µ¾«
             if( CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 1){
                 if( marray >=32 && marray <=81 )
                     mp *= MP_RATE;
@@ -86,9 +86,9 @@ int MAGIC_DirectUse(
 	MAGIC_CALLFUNC func;
 	int mp, ret, marray;
 	int itemindex=-1;
-#ifdef _MAGIC_NOCAST//æ²‰é»˜çŠ¶æ€æ— æ³•æ–½æ³•
+#ifdef _MAGIC_NOCAST//³ÁÄ¬×´Ì¬ÎŞ·¨Ê©·¨
     if( CHAR_getWorkInt( charaindex, CHAR_WORKNOCAST ) > 0 ){
-		CHAR_talkToCli(charaindex, -1, "æ²‰é»˜ä¸­æ— æ³•åŸå”±å’’æœ¯", CHAR_COLORYELLOW);
+		CHAR_talkToCli(charaindex, -1, "³ÁÄ¬ÖĞÎŞ·¨Ò÷³ªÖäÊõ", CHAR_COLORYELLOW);
 		return FALSE;
 	}
 #endif
@@ -109,12 +109,12 @@ int MAGIC_DirectUse(
 	}
         // shan add begin
         if( CHAR_getInt( charaindex, CHAR_FMINDEX ) >= 1 ){
-            // å…‰ç²¾
+            // ¹â¾«
             if( CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 0){
                 if( (marray >=0 && marray <=31) )
                     mp *= MP_RATE;
             }
-            // æš—ç²¾
+            // °µ¾«
             if( CHAR_getInt( charaindex, CHAR_FMSPRITE ) == 1){
                 if( marray >=32 && marray <=81 )
                     mp *= MP_RATE;
@@ -143,10 +143,10 @@ int MAGIC_Recovery( int charaindex, int toindex, int marray, int mp )
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 	if( IsBATTLING( charaindex ) == TRUE ){
-		if (toindex==22){print("jinchao err\n");return FALSE;}  // shan(å¯¹å…¨ä½“ä½¿ç”¨é­”æ³•çš„bug)ï¼Œä¿®æ”¹è€…jinchao+2001/12/07
+		if (toindex==22){print("jinchao err\n");return FALSE;}  // shan(¶ÔÈ«ÌåÊ¹ÓÃÄ§·¨µÄbug)£¬ĞŞ¸ÄÕßjinchao+2001/12/07
 		MAGIC_Recovery_Battle( charaindex, toindex, marray, mp );
 	}else{
-		if( CHAR_CHECKINDEX( toindex ) == FALSE )return FALSE;  // shan(å¯¹å…¨ä½“ä½¿ç”¨é­”æ³•çš„bug)ï¼Œä¿®æ”¹è€…jinchao+2001/12/07
+		if( CHAR_CHECKINDEX( toindex ) == FALSE )return FALSE;  // shan(¶ÔÈ«ÌåÊ¹ÓÃÄ§·¨µÄbug)£¬ĞŞ¸ÄÕßjinchao+2001/12/07
 		MAGIC_Recovery_Field( charaindex, marray);
 	}
 
@@ -156,50 +156,50 @@ int MAGIC_Recovery( int charaindex, int toindex, int marray, int mp )
 int MAGIC_OtherRecovery( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 	if( IsBATTLING( charaindex ) == TRUE ){
 		MAGIC_Recovery_Battle( charaindex, toindex, marray, mp );
 	}else{
-		if( CHAR_CHECKINDEX( toindex ) == FALSE )return FALSE; //ï½›æ’©  
+		if( CHAR_CHECKINDEX( toindex ) == FALSE )return FALSE; //£ûÁÃ  
 		MAGIC_OtherRecovery_Field( charaindex, toindex, marray);
 	}
 	return TRUE;
 }
 
-// ç™½å¥´â–¡ä¼™ç‰åŠç®ªå²­æ¯›  ç¥­ä»Šå…­æœˆ  èŠŠ
+// °×Å«¡õ»ïÓñ¼°óìÁëÃ«  ¼À½ñÁùÔÂ  Ü·
 int	MAGIC_FieldAttChange( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//     å£…  æ°‘å°¼æ°¸å¼
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
-	// ä»‡åŠ  èŠŠå  éªšå    å£…  ä»„åŒ–  ä¸­ï¼»ç©´å¥¶ç“œæ—¦åå…æœˆä»‡åˆå  ä¸­
+	//     ÛÕ  ÃñÄáÓÀÛÍ
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
+	// ³ğ¼°  Ü··´  É§±å    ÛÕ  ØÆ»¯  ÖĞ£ÛÑ¨ÄÌ¹Ïµ©±åØ¦ÔÂ³ğÎç·´  ÖĞ
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_FieldAttChange_Battle( charaindex, toindex, marray, mp );
 	}else{
-	// çˆµ    åŒ¹å…äº•åŒ€å‡¶æ—¥
+	// ¾ô    Æ¥Ø¦¾®ÔÈĞ×ÈÕ
 		return FALSE;
 	}
 }
@@ -241,23 +241,23 @@ int	MAGIC_MagicStatusChange( int charaindex, int toindex, int marray, int mp )
 }
 #endif
 
-#ifdef _MAGIC_DEEPPOISON//æ–°å¢ver2,ä¸»è¦è®¾å®šæ¯’çŠ¶æ€5å›æœªè§£æ—¶äººç‰©ä¼šé˜µäº¡
-// æ—¦  â–¡æ­£æ—¦å”±æ©˜æ¯›èŠ¨å°¹æœˆ  èŠŠ
+#ifdef _MAGIC_DEEPPOISON//ĞÂÔöver2,Ö÷ÒªÉè¶¨¶¾×´Ì¬5»ØÎ´½âÊ±ÈËÎï»áÕóÍö
+// µ©  ¡õÕıµ©³ªéÙÃ«Ü¸ÒüÔÂ  Ü·
 int	MAGIC_StatusChange2( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-    //æ‰£æ°”
+    //¿ÛÆø
 	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; 
 
 	CHAR_setInt( charaindex, CHAR_MP,
@@ -271,32 +271,32 @@ int	MAGIC_StatusChange2( int charaindex, int toindex, int marray, int mp )
 	}
 }
 #endif
-// æ—¦  â–¡æ­£æ—¦å”±æ©˜èšæ±Šä»Šå…­æœˆ  èŠŠ
+// µ©  ¡õÕıµ©³ªéÙ¼Ôãâ½ñÁùÔÂ  Ü·
 int	MAGIC_StatusRecovery( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//     å£…  æ°‘å°¼æ°¸å¼
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
-	// ä»‡åŠ  èŠŠå  éªšå    å£…  ä»„åŒ–  ä¸­ï¼»ç©´å¥¶ç“œæ—¦åå…æœˆä»‡åˆå  ä¸­
+	//     ÛÕ  ÃñÄáÓÀÛÍ
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
+	// ³ğ¼°  Ü··´  É§±å    ÛÕ  ØÆ»¯  ÖĞ£ÛÑ¨ÄÌ¹Ïµ©±åØ¦ÔÂ³ğÎç·´  ÖĞ
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_StatusRecovery_Battle( charaindex, toindex, marray, mp );
 	}else{
-	// çˆµ    åŒ¹å…äº•åŒ€å‡¶æ—¥
+	// ¾ô    Æ¥Ø¦¾®ÔÈĞ×ÈÕ
 		return FALSE;
 	}
 }
@@ -320,94 +320,94 @@ int	MAGIC_MagicDef( int charaindex, int toindex, int marray, int mp )
 }
 
 
-// ç«£æ¿®äº•æ—¥æ±Šå”¾ä»Šå…­æœˆ  èŠŠ
+// ¿¢å§¾®ÈÕãâÍÙ½ñÁùÔÂ  Ü·
 int	MAGIC_Ressurect( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//     å£…  æ°‘å°¼æ°¸å¼
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
-	// ä»‡åŠ  èŠŠå  éªšå    å£…  ä»„åŒ–  ä¸­ï¼»ç©´å¥¶ç“œæ—¦åå…æœˆä»‡åˆå  ä¸­
+	//     ÛÕ  ÃñÄáÓÀÛÍ
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
+	// ³ğ¼°  Ü··´  É§±å    ÛÕ  ØÆ»¯  ÖĞ£ÛÑ¨ÄÌ¹Ïµ©±åØ¦ÔÂ³ğÎç·´  ÖĞ
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_Ressurect_Battle( charaindex, toindex, marray, mp );
 	}else{
-	// çˆµ    åŒ¹å…äº•åŒ€å‡¶æ—¥
+	// ¾ô    Æ¥Ø¦¾®ÔÈĞ×ÈÕ
 		return FALSE;
 	}
 }
 
-// ç®ªå²­æ¯›  é³–ä»Šå…­æœˆ  èŠŠ
+// óìÁëÃ«  ±î½ñÁùÔÂ  Ü·
 int	MAGIC_AttReverse( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//     å£…  æ°‘å°¼æ°¸å¼
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
-	// ä»‡åŠ  èŠŠå  éªšå    å£…  ä»„åŒ–  ä¸­ï¼»ç©´å¥¶ç“œæ—¦åå…æœˆä»‡åˆå  ä¸­
+	//     ÛÕ  ÃñÄáÓÀÛÍ
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
+	// ³ğ¼°  Ü··´  É§±å    ÛÕ  ØÆ»¯  ÖĞ£ÛÑ¨ÄÌ¹Ïµ©±åØ¦ÔÂ³ğÎç·´  ÖĞ
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_AttReverse_Battle( charaindex, toindex, marray, mp );
 	}else{
-	// çˆµ    åŒ¹å…äº•åŒ€å‡¶æ—¥
+	// ¾ô    Æ¥Ø¦¾®ÔÈĞ×ÈÕ
 		return FALSE;
 	}
 }
 
 
 
-// ç«£æ¿®äº•æ—¥æ±Šå”¾â‰ˆ  èŠŠ  è±¢
+// ¿¢å§¾®ÈÕãâÍÙ¡Ö  Ü·  »¿
 int	MAGIC_ResAndDef( int charaindex, int toindex, int marray, int mp )
 {
 	int battlemode;
 
-	// INDEXæ°‘å°¼æ°¸å¼
-	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //ï½›æ’©  
+	// INDEXÃñÄáÓÀÛÍ
+	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE; //£ûÁÃ  
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//     å£…  æ°‘å°¼æ°¸å¼
-	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   äº•åŒ€å‡¶æ—¥æ¯ä¸¢
-	// ä»‡åŠ  èŠŠå  éªšå    å£…  ä»„åŒ–  ä¸­ï¼»ç©´å¥¶ç“œæ—¦åå…æœˆä»‡åˆå  ä¸­
+	//     ÛÕ  ÃñÄáÓÀÛÍ
+	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; //   ¾®ÔÈĞ×ÈÕÄ¸¶ª
+	// ³ğ¼°  Ü··´  É§±å    ÛÕ  ØÆ»¯  ÖĞ£ÛÑ¨ÄÌ¹Ïµ©±åØ¦ÔÂ³ğÎç·´  ÖĞ
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_ResAndDef_Battle( charaindex, toindex, marray, mp );
 	}else{
-	// çˆµ    åŒ¹å…äº•åŒ€å‡¶æ—¥
+	// ¾ô    Æ¥Ø¦¾®ÔÈĞ×ÈÕ
 		return FALSE;
 	}
 }
@@ -426,7 +426,7 @@ int MAGIC_AttMagic( int charaindex , int toindex , int marray , int mp )
    battlemode = CHAR_getWorkInt( charaindex , CHAR_WORKBATTLEMODE );
    if( BATTLE_CHARMODE_INIT == battlemode )
    	return FALSE;
-	 // è‹¥æ˜¯å® ç‰©é­”æ³•,ä¸æ‰£mp
+	 // ÈôÊÇ³èÎïÄ§·¨,²»¿Ûmp
    if(CHAR_getInt(charaindex,CHAR_WHICHTYPE) == CHAR_TYPEPLAYER)
 	 {
      if( CHAR_getInt( charaindex , CHAR_MP ) < mp )
@@ -453,11 +453,11 @@ int MAGIC_Metamo( int charaindex, int toindex, int marray, int mp )
 	if( CHAR_CHECKINDEX( charaindex ) == FALSE ) return FALSE;
 	
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
-	// çˆµ    åˆ†åŒ€å‡¶æ—¥
+	// ¾ô    ·ÖÔÈĞ×ÈÕ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		//MAGIC_Recovery_Battle( charaindex, toindex, marray, mp );
 		//return FALSE;
@@ -469,17 +469,17 @@ int MAGIC_Metamo( int charaindex, int toindex, int marray, int mp )
 	if( CHAR_CHECKINDEX( toindex ) == FALSE ) return FALSE;
 
 	if( CHAR_getInt( charaindex, CHAR_RIDEPET ) != -1 ){
-		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œéª‘ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬Æï³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORWHITE );
 		return FALSE;
 	}
 #ifdef _FIX_METAMORIDE
 	if( CHAR_CHECKJOINENEMY( charaindex) == TRUE ){
-		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORYELLOW );
+		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORYELLOW );
 		return FALSE;
 	}
 #else
 	if( CHAR_getInt( charaindex, CHAR_BASEIMAGENUMBER) == 100259 ){
-		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œæ­ä¹˜ä¸­ä¸èƒ½å˜èº«ï¼", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬´î³ËÖĞ²»ÄÜ±äÉí£¡", CHAR_COLORWHITE );
 		return FALSE;
 	}
 #endif
@@ -490,7 +490,7 @@ int MAGIC_Metamo( int charaindex, int toindex, int marray, int mp )
 			int armtype = BATTLE_GetWepon( charaindex);
 			if( armtype == ITEM_BOW || armtype == ITEM_BOUNDTHROW ||
 				armtype == ITEM_BREAKTHROW || armtype == ITEM_BOOMERANG)	{
-				CHAR_talkToCli( charaindex, -1, "ä½¿ç”¨è¿œè·ç¦»æ­¦å™¨æ— æ³•å˜èº«ï¼", CHAR_COLORYELLOW );
+				CHAR_talkToCli( charaindex, -1, "Ê¹ÓÃÔ¶¾àÀëÎäÆ÷ÎŞ·¨±äÉí£¡", CHAR_COLORYELLOW );
 				return FALSE;
 			}
 		}
@@ -506,12 +506,12 @@ int MAGIC_Metamo( int charaindex, int toindex, int marray, int mp )
 	}
 	if( haveindex == -1 && charaindex != toindex )
 	{
-		CHAR_talkToCli( charaindex, -1, "æ— æ³•å˜èº«ï¼Œåªèƒ½å˜æˆè‡ªå·±çš„å® ç‰©ï¼", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨±äÉí£¬Ö»ÄÜ±ä³É×Ô¼ºµÄ³èÎï£¡", CHAR_COLORWHITE );
 		return FALSE;
 	}
 
 	if( CHAR_getInt( toindex, CHAR_BASEIMAGENUMBER) == 100259 ){
-		CHAR_talkToCli( charaindex, -1, "ä¸èƒ½å˜èº«æˆåŠ ç¾ï¼", CHAR_COLORWHITE );
+		CHAR_talkToCli( charaindex, -1, "²»ÄÜ±äÉí³É¼ÓÃÀ£¡", CHAR_COLORWHITE );
 		return FALSE;
 	}
 
@@ -524,11 +524,11 @@ int MAGIC_Metamo( int charaindex, int toindex, int marray, int mp )
 
 	if( toindex != charaindex ) {
 		CHAR_setWorkInt( charaindex, CHAR_WORKITEMMETAMO, NowTime.tv_sec +power);
-		sprintf( msg, "å˜èº«æˆ%sï¼", CHAR_getChar( toindex, CHAR_NAME) );
+		sprintf( msg, "±äÉí³É%s£¡", CHAR_getChar( toindex, CHAR_NAME) );
 	}
 	else {
 		CHAR_setWorkInt( charaindex, CHAR_WORKITEMMETAMO, 0);
-		sprintf( msg, "å˜å›è‡ªå·±ï¼");
+		sprintf( msg, "±ä»Ø×Ô¼º£¡");
 	}
 	CHAR_talkToCli( charaindex, -1, msg, CHAR_COLORWHITE );
 
@@ -586,7 +586,7 @@ int MAGIC_AttSkill( int charaindex, int toindex,int marray, int mp )
 
 }
 #endif
-#ifdef _MAGIC_BARRIER// vincent  ç²¾çµ:é­”éšœ
+#ifdef _MAGIC_BARRIER// vincent  ¾«Áé:Ä§ÕÏ
 int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 {
 
@@ -597,7 +597,7 @@ int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 	int  attackNo=0;
 	int battleindex,Success = 0;
 	char szTurn[] = "turn";
-	char szSuccess[] = "æˆ";
+	char szSuccess[] = "³É";
 	char *pszP;
 
 	//check index
@@ -605,17 +605,17 @@ int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ//??
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ//??
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//mpä¸è¶³
+	//mp²»×ã
 	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; 
-	//æ¶ˆè€—mp
+	//ÏûºÄmp
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
-    //é­”æ³•åç§°
+    //Ä§·¨Ãû³Æ
 	magicarg = MAGIC_getChar( marray, MAGIC_OPTION );
 	if( magicarg == "\0" )	{
 		print("\n magicarg == NULL ");
@@ -623,12 +623,12 @@ int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 	}
 	pszP = magicarg;
 
-    //è¯»å–ä½œç”¨å›åˆæ•°
+    //¶ÁÈ¡×÷ÓÃ»ØºÏÊı
 	if( ( pszP = strstr( pszP, szTurn ) ) != NULL){
 		pszP += sizeof( szTurn );
 		sscanf( pszP, "%d", &turn );
 	}
-	// å²³    æ¶©çƒ‚//å‘½ä¸­ç‡
+	// ÔÀ    É¬ÀÃ//ÃüÖĞÂÊ
 	if( ( pszP = strstr( pszP, szSuccess ) ) != NULL){
 		pszP += sizeof( szSuccess );
 		sscanf( pszP, "%d", &Success );
@@ -637,11 +637,11 @@ int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 	battleindex = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEINDEX );
 	attackNo =  BATTLE_Index2No( battleindex, charaindex );
 	BATTLE_MultiList( battleindex, toindex, ToList );
-//æ–½é­”æ³•åŠ¨ç”»æ•ˆæœ
+//Ê©Ä§·¨¶¯»­Ğ§¹û
 	BATTLE_MagicEffect(battleindex, attackNo, ToList, MAGIC_EFFECT_USER, SPR_hoshi);
 
 	charaindex = BATTLE_No2Index( battleindex, attackNo );
-	//checkæ˜¯å¦æˆ˜æ–—ä¸­
+	//checkÊÇ·ñÕ½¶·ÖĞ
 	if( IsBATTLING( charaindex ) == TRUE )
 	{
 
@@ -660,7 +660,7 @@ int	MAGIC_Barrier( int charaindex, int toindex, int marray, int mp )
 	}
 }
 #endif
-#ifdef _MAGIC_NOCAST// vincent  ç²¾çµ:æ²‰é»˜
+#ifdef _MAGIC_NOCAST// vincent  ¾«Áé:³ÁÄ¬
 int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 {
 
@@ -671,7 +671,7 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 	int  attackNo=0;
 	int battleindex,Success = 0;
 	char szTurn[] = "turn";
-	char szSuccess[] = "æˆ";
+	char szSuccess[] = "³É";
 	char *pszP;
 
 	//check index
@@ -679,17 +679,17 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ//??
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ//??
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//mpä¸è¶³
+	//mp²»×ã
 	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; 
-	//æ¶ˆè€—mp
+	//ÏûºÄmp
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
-    //é­”æ³•åç§°
+    //Ä§·¨Ãû³Æ
 	magicarg = MAGIC_getChar( marray, MAGIC_OPTION );
 	if( magicarg == "\0" )	{
 		print("\n magicarg == NULL ");
@@ -697,12 +697,12 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 	}
 	pszP = magicarg;
 
-    //è¯»å–ä½œç”¨å›åˆæ•°
+    //¶ÁÈ¡×÷ÓÃ»ØºÏÊı
 	if( ( pszP = strstr( pszP, szTurn ) ) != NULL){
 		pszP += sizeof( szTurn );
 		sscanf( pszP, "%d", &turn );
 	}
-	// å²³    æ¶©çƒ‚//å‘½ä¸­ç‡
+	// ÔÀ    É¬ÀÃ//ÃüÖĞÂÊ
 	if( ( pszP = strstr( pszP, szSuccess ) ) != NULL){
 		pszP += sizeof( szSuccess );
 		sscanf( pszP, "%d", &Success );
@@ -711,10 +711,10 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 	battleindex = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEINDEX );
 	attackNo =  BATTLE_Index2No( battleindex, charaindex );
 	BATTLE_MultiList( battleindex, toindex, ToList );
-//æ–½é­”æ³•åŠ¨ç”»æ•ˆæœ
+//Ê©Ä§·¨¶¯»­Ğ§¹û
 	BATTLE_MagicEffect(battleindex, attackNo, ToList, MAGIC_EFFECT_USER, SPR_hoshi);
 	charaindex = BATTLE_No2Index( battleindex, attackNo );
-	//checkæ˜¯å¦æˆ˜æ–—ä¸­
+	//checkÊÇ·ñÕ½¶·ÖĞ
 	if( IsBATTLING( charaindex ) == TRUE )
 	{
 
@@ -725,7 +725,7 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 				&& CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPET)
 			{
 		       CHAR_setWorkInt( toindex, CHAR_WORKNOCAST, turn );
-//æ— æ³•å±•å¼€å’’æœ¯é¡µ
+//ÎŞ·¨Õ¹¿ªÖäÊõÒ³
 	           lssproto_NC_send( getfdFromCharaIndex( toindex ), 1);
                //print("\nvincent-->NOCASTING2");
 //		       BATTLE_BadStatusString( ToList[i], BATTLE_ST_NOCAST );
@@ -738,7 +738,7 @@ int	MAGIC_Nocast( int charaindex, int toindex, int marray, int mp )
 }
 #endif
 
-#ifdef _MAGIC_WEAKEN// vincent  ç²¾çµ:è™šå¼±
+#ifdef _MAGIC_WEAKEN// vincent  ¾«Áé:ĞéÈõ
 int	MAGIC_Weaken( int charaindex, int toindex, int marray, int mp )
 {
 
@@ -748,18 +748,18 @@ int	MAGIC_Weaken( int charaindex, int toindex, int marray, int mp )
 
 	battlemode = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE );
 
-	// çˆµ  é’’é“µå‡›å  éª°å…æœˆ//??
+	// ¾ô  ·°ï§Áİ·´  ÷»ÔÊÔÂ//??
 	if( battlemode == BATTLE_CHARMODE_INIT ){
 		return FALSE;
 	}
 
-	//mpä¸è¶³
+	//mp²»×ã
 	if( CHAR_getInt( charaindex, CHAR_MP ) < mp )return FALSE; 
-	//æ¶ˆè€—mp
+	//ÏûºÄmp
 	CHAR_setInt( charaindex, CHAR_MP,
 		CHAR_getInt( charaindex, CHAR_MP ) - mp );
 
-	//checkæ˜¯å¦æˆ˜æ–—ä¸­
+	//checkÊÇ·ñÕ½¶·ÖĞ
 	if( IsBATTLING( charaindex ) == TRUE ){
 		return MAGIC_ParamChange_Turn_Battle( charaindex, toindex, marray, mp );
 	}else{

@@ -19,8 +19,8 @@ char subbuf[128];
 int i, j;
 
 /* 
- * æ¶©çƒ‚ä»Šæœ¨å‡¶å®ƒå¥´ä»¶ç‰å®ƒæ¯›è¯·å…NPC
- * æ£µå“‘  å¹³æ—¦ç„å¤±ç‰çŸ›ä»¶æ°‘ä¹“â–¡ä»æ—¥ä¸­å…æ—¥ç»¼æœ¨æœˆäº•æ‰‹ï¼»
+ * É¬ÀÃ½ñÄ¾Ğ×ËüÅ«¼şÓñËüÃ«ÇëÔÊNPC
+ * ¿ÃÑÆ  Æ½µ©ĞşÊ§ÓñÃ¬¼şÃñÅÒ¡õÈÊÈÕÖĞØ¦ÈÕ×ÛÄ¾ÔÂ¾®ÊÖ£Û
  *
  */
  
@@ -42,7 +42,7 @@ struct	{
 	int		warp;
 	int		battle;
 	int		gotowin;
-}buttonproc[13];		/* ok,cancel, yes,no,prev,next åŠå‡›åŠè´¨   */
+}buttonproc[13];		/* ok,cancel, yes,no,prev,next ¼°Áİ¼°ÖÊ   */
 
 
 
@@ -56,7 +56,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg);
 static int NPC_Familyman_restoreButtontype( char *data );
 
 /*********************************
-* èµ“æ¸è´¨  
+* âÙÓåÖÊ  
 *********************************/
 BOOL NPC_FamilymanInit( int meindex )
 {
@@ -73,10 +73,10 @@ BOOL NPC_FamilymanInit( int meindex )
 	if( NPC_Util_GetStrFromStrWithDelim( argstr, "conff", buf, sizeof( buf))
 		== NULL ) 
 	{
-		print( "familyman:æ²¡æœ‰æŒ‡å®šè®¾å®šçš„æ¡£æ¡ˆ ã€‚\n");
+		print( "familyman:Ã»ÓĞÖ¸¶¨Éè¶¨µÄµµ°¸ ¡£\n");
 		return FALSE;
 	}
-	/* èµ“æ¸å‡›åæ¶©çƒ‚çŠ¯â–¡æ­£æ¯›æ°‘å°¼æ°¸å¼ä»„åŒ–æ”¯æœˆ */
+	/* âÙÓåÁİ±åÉ¬ÀÃ·¸¡õÕıÃ«ÃñÄáÓÀÛÍØÆ»¯Ö§ÔÂ */
 	if( !NPC_Familyman_readData( meindex, -1, TRUE) ) {
 		return FALSE;
 	}
@@ -90,7 +90,7 @@ BOOL NPC_FamilymanInit( int meindex )
 
 
 /*********************************
-*   ä»„äº•ä»ƒæ—¥æœ¨å‡¶å‡›åŠè´¨  
+*   ØÆ¾®ØêÈÕÄ¾Ğ×Áİ¼°ÖÊ  
 *********************************/
 void NPC_FamilymanTalked( int meindex , int talkerindex , char *szMes ,int color )
 {
@@ -99,7 +99,7 @@ void NPC_FamilymanTalked( int meindex , int talkerindex , char *szMes ,int color
 	
 }
 /*********************************
-* è‹‡æ—¥æœ¨å‡¶å‡›åŠè´¨  
+* Î­ÈÕÄ¾Ğ×Áİ¼°ÖÊ  
 *********************************/
 void NPC_FamilymanLooked( int meindex , int lookedindex)
 {
@@ -115,11 +115,11 @@ static void NPC_Familyman_selectWindow( int meindex, int toindex, int num)
 	int		fd;
 	char	buf[256];
 	
-	/* çš¿ä¼Šå¥¶ä¹©â–¡åè¦†ä»„åŒ–åˆ†ä»ƒ  æ€å…æœˆ */
+	/* ÃóÒÁÄÌØÀ¡õ±å¸²ØÆ»¯·ÖØê  É±ÔÊÔÂ */
 	if( CHAR_getInt( toindex , CHAR_WHICHTYPE ) != CHAR_TYPEPLAYER ) {
 		return;
 	}
-	/* ã„ å¼˜ä¼‰æ°¸ç‰åŠ¨  åŠå¿ƒ */
+	/* ¨àºëØøÓÀÓñ¶¯  ¼°ĞÄ */
 	if( !NPC_Util_charIsInFrontOfChar( toindex, meindex, 1 )) return; 
 
 	if( !NPC_Familyman_readData( meindex, num, FALSE) ) {
@@ -146,7 +146,7 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 	int		button = -1;
 	char	buf[256];
 
-	/* ã„ å¼˜ä¼‰æ°¸ç‰åŠ¨  åŠå¿ƒ */
+	/* ¨àºëØøÓÀÓñ¶¯  ¼°ĞÄ */
 	if( NPC_Util_CharDistance( talkerindex, meindex ) > 1) return;
 	
 	// CoolFish Add For Check Old Leader Del Family
@@ -159,12 +159,12 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 	}
 	// CoolFish End
 
-	/* ä»‡åŠå®ƒå¥´ä»¶ç‰å®ƒ  å¯åŠçŠ¯â–¡æ­£æ¯›  å¿ƒ  æˆˆ */	
+	/* ³ğ¼°ËüÅ«¼şÓñËü  Ä¯¼°·¸¡õÕıÃ«  ĞÄ  ¸ê */	
 	if( !NPC_Familyman_readData( meindex, seqno - 100, FALSE) ) {
 		print( "familyman:readdata error\n");
 		return;
 	}
-	/* ç“·ä»„å‡¶ç¤ºæ­£ä»¶æ¯›è­¬å±¯æœˆ */
+	/* ´ÉØÆĞ×Ê¾Õı¼şÃ«Æ©ÍÍÔÂ */
 	if( w.windowtype == WINDOW_MESSAGETYPE_SELECT ) {
 		button = atoi( data)+5;
 		if( button > 12 ) {
@@ -188,29 +188,29 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 	
 		fd = getfdFromCharaIndex( talkerindex);
 		
-		/* ç¤ºæ­£ä»¶åæ–¹åŒ€åŒ–è´¨  æ¯›å­”æ›°æ­¹ä»ƒæœˆ */
+		/* Ê¾Õı¼ş±å·½ÔÈ»¯ÖÊ  Ã«¿×Ô»´õØêÔÂ */
 		if( newwin == -1 ) {
 			newwin = buttonproc[button].gotowin;
 		}
 		
 		// Robin
-		// æˆç«‹
+		// ³ÉÁ¢
 		if( newwin == 5 )	{
 			if( CHAR_getInt( talkerindex, CHAR_FMINDEX ) > 0 )
 			{
-				//CHAR_talkToCli( talkerindex, -1, "èµ„æ ¼ä¸ç¬¦ï¼å·²ç»åŠ å…¥å®¶æ—ã€‚", CHAR_COLORWHITE );
+				//CHAR_talkToCli( talkerindex, -1, "×Ê¸ñ²»·û£¡ÒÑ¾­¼ÓÈë¼Ò×å¡£", CHAR_COLORWHITE );
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ å·²ç»åŠ å…¥å®¶æ—äº†ï¼", buf, sizeof(buf)));
+					makeEscapeString( "\nºÜ±§Ç¸à¸£¡ÄãÒÑ¾­¼ÓÈë¼Ò×åÁË£¡", buf, sizeof(buf)));
 				return;
 			}		
 			if( (CHAR_getInt( talkerindex, CHAR_TRANSMIGRATION ) == 0)
 				&& (CHAR_getInt( talkerindex, CHAR_LV) < 30)  )
 			{
-				//CHAR_talkToCli( talkerindex, -1, "å¾ˆæŠ±æ­‰ï¼ç­‰çº§ä¸è¶³ã€‚", CHAR_COLORWHITE );
+				//CHAR_talkToCli( talkerindex, -1, "ºÜ±§Ç¸£¡µÈ¼¶²»×ã¡£", CHAR_COLORWHITE );
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„ç­‰çº§ä¸è¶³ï¼", buf, sizeof(buf)));
+					makeEscapeString( "\nºÜ±§Ç¸à¸£¡ÄãµÄµÈ¼¶²»×ã£¡", buf, sizeof(buf)));
 				return;
                         }
                         
@@ -218,7 +218,7 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
                         {
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ å¿…é¡»å…ˆå®Œæˆæˆäººç¤¼æ‰è¡Œï¼", buf, sizeof(buf)));
+					makeEscapeString( "\nºÜ±§Ç¸à¸£¡Äã±ØĞëÏÈÍê³É³ÉÈËÀñ²ÅĞĞ£¡", buf, sizeof(buf)));
 				return;
                         }
                         
@@ -226,7 +226,7 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 			{
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ çš„ç”³è¯·æ‰‹ç»­è´¹ä¸è¶³ï¼", buf, sizeof(buf)));
+					makeEscapeString( "\nºÜ±§Ç¸à¸£¡ÄãµÄÉêÇëÊÖĞø·Ñ²»×ã£¡", buf, sizeof(buf)));
 				return;
 			}
 						
@@ -235,7 +235,7 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 			
 			return;
 		}
-		// åˆ—è¡¨ , åŠ å…¥
+		// ÁĞ±í , ¼ÓÈë
 		if( newwin == 6 )
 		{
 			/*
@@ -261,19 +261,19 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 			return;
 				  
 		}
-		// é€€å‡º
+		// ÍË³ö
 		if( newwin == 7 )
 		{
 			if( CHAR_getInt( talkerindex, CHAR_FMINDEX ) == -1 ) {
-				// CHAR_talkToCli( talkerindex, -1, "ä½ è¿˜æœªåŠ å…¥ä»»ä½•å®¶æ—å‘€ã€‚", CHAR_COLORWHITE );
+				// CHAR_talkToCli( talkerindex, -1, "Äã»¹Î´¼ÓÈëÈÎºÎ¼Ò×åÑ½¡£", CHAR_COLORWHITE );
 				lssproto_WN_send( fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_OK, -1, -1,
-					makeEscapeString( "\nå¾ˆæŠ±æ­‰å–”ï¼ä½ è¿˜æ²¡æœ‰åŠ å…¥ä»»ä½•å®¶æ—å‘€ï¼", buf, sizeof(buf)));
+					makeEscapeString( "\nºÜ±§Ç¸à¸£¡Äã»¹Ã»ÓĞ¼ÓÈëÈÎºÎ¼Ò×åÑ½£¡", buf, sizeof(buf)));
 				return;
 			}
 						
 			//if (CHAR_getInt(talkerindex, CHAR_FMLEADERFLAG) == FMMEMBER_LEADER) {
-			//	CHAR_talkToCli( talkerindex, -1, "æ—é•¿....", CHAR_COLORWHITE );
+			//	CHAR_talkToCli( talkerindex, -1, "×å³¤....", CHAR_COLORWHITE );
 			//	return;
 			//}
 			
@@ -285,7 +285,7 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 				lssproto_WN_send(fd, WINDOW_MESSAGETYPE_MESSAGE,
 					WINDOW_BUTTONTYPE_YESNO, CHAR_WINDOWTYPE_FAMILYMAN_OUT,
 					CHAR_getWorkInt(meindex, CHAR_WORKOBJINDEX),
-					makeEscapeString("\næ‚¨ç°åœ¨æ˜¯è¿™ä¸ªå®¶æ—çš„æ—é•¿å–”...\n\nå®¶æ—è§£æ•£äº†å°±æ— æ³•å†æ•‘å›å”·ï¼ï½\n\nç¡®å®šè¦è§£æ•£å®¶æ—å—ï¼Ÿ",buf, sizeof(buf)));		
+					makeEscapeString("\nÄúÏÖÔÚÊÇÕâ¸ö¼Ò×åµÄ×å³¤à¸...\n\n¼Ò×å½âÉ¢ÁË¾ÍÎŞ·¨ÔÙ¾È»Øà¡£¡¡«\n\nÈ·¶¨Òª½âÉ¢¼Ò×åÂğ£¿",buf, sizeof(buf)));		
 				return;
 			}
 			else
@@ -313,11 +313,11 @@ void NPC_FamilymanWindowTalked( int meindex, int talkerindex,
 	}
 }
 /* 
- * æ¶©çƒ‚ç™½å¤®å¥¶ä¼™æ¯›  æ°åŒ¹éš™çƒ‚ä»Šæœ¨å‡¶windownoåŠçŠ¯â–¡æ­£æ¯›æœ¬æ°¸ç„å…æœˆ
+ * É¬ÀÃ°×ÑëÄÌ»ïÃ«  ÊÏÆ¥Ï¶ÀÃ½ñÄ¾Ğ×windowno¼°·¸¡õÕıÃ«±¾ÓÀĞşÔÊÔÂ
  * 
- * å¨„é†’â€œ
- *		meindex		int		ä»‡åŠNPCåŠcharaindex
- *		windowno	int		å®ƒå¥´ä»¶ç‰å®ƒ  å¯
+ * Â¦ĞÑ¡°
+ *		meindex		int		³ğ¼°NPC¼°charaindex
+ *		windowno	int		ËüÅ«¼şÓñËü  Ä¯
  *		
  */
 static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
@@ -342,10 +342,10 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 	char	firstToken[1024];
 	char	secondToken[1024];
 	
-	/* å®ƒå¥´ä»¶ç‰å®ƒåŠæ¶©çƒ‚æ¯›  æ›°  æˆˆåŒç»   */
+	/* ËüÅ«¼şÓñËü¼°É¬ÀÃÃ«  Ô»  ¸êÑáÕ°   */
 	
 	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
-	/* æ¶©çƒ‚ç™½å¤®å¥¶ä¼™  æ½¸   */
+	/* É¬ÀÃ°×ÑëÄÌ»ï  äú   */
 	NPC_Util_GetStrFromStrWithDelim( argstr, "conff", filename, sizeof( filename));
 
 	sprintf( opfile, "%s/", getNpcdir( ) );
@@ -367,7 +367,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 		b_mode = -1;
 		errflg = FALSE;
 
-		/* èµ“æ¸ç¥­ */
+		/* âÙÓå¼À */
 		w.windowno = -1;
 		w.windowtype = -1;
 		w.buttontype = -1;
@@ -396,15 +396,15 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 			
 			linenum ++;
 			
-			/* æˆŠä¸¢ä»¶ç„å  éª° */
+			/* Îì¶ª¼şĞş·´  ÷» */
 			if( line[0] == '#' || line[0] == '\n') continue;
-			/* è¼å«æ½¸æœˆ */
+			/* İ±µæäúÔÂ */
 			chomp( line );
 			
-			/*  å«æ¯›å¸®æº¥å…æœˆ    */
-			/*  å¼•å†… tab æ¯› " " å  äº”æ™¶å°¹æœˆ    */
+			/*  µæÃ«°ïäßÔÊÔÂ    */
+			/*  ÒıÄÚ tab Ã« " " ±å  Îå¾§ÒüÔÂ    */
 			replaceString( line, '\t' , ' ' );
-			/* ç‡®  åŠæ—¦çŸ¢â–¡æ—¦æ¯›æ½¸æœˆï¼»*/
+			/* ÛÆ  ¼°µ©Ê¸¡õµ©Ã«äúÔÂ£Û*/
 			for( i = 0; i < strlen( line); i ++) {
 				if( line[i] != ' ' ) {
 					break;
@@ -413,7 +413,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 			}
 			if( i != 0 ) strcpy( line, buf);
 
-			/* delim "=" åŒ¹  èµ“(1)åŠç„â–¡å¼ä»¶æ¯›  æœˆ*/
+			/* delim "=" Æ¥  âÙ(1)¼°Ğş¡õÛÍ¼şÃ«  ÔÂ*/
 			ret = getStringFromIndexWithDelim( line, "=",  1, firstToken,
 											   sizeof( firstToken ) );
 			if( ret == FALSE ){
@@ -421,7 +421,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 					   filename , linenum);
 				continue;
 			}
-			/* delim "=" åŒ¹2    åŠç„â–¡å¼ä»¶æ¯›  æœˆ*/
+			/* delim "=" Æ¥2    ¼°Ğş¡õÛÍ¼şÃ«  ÔÂ*/
 			ret = getStringFromIndexWithDelim( line, "=", 2, secondToken,
 											   sizeof( secondToken ) );
 			if( ret == FALSE ){
@@ -432,26 +432,26 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 			
 			if( strcasecmp( firstToken, "winno") == 0 ) {
 				if( winno != -1 ) {
-					print( "familyman:å·²æœ‰winnoå´é‡æ–°å®šä¹‰winno\n");
+					print( "familyman:ÒÑÓĞwinnoÈ´ÖØĞÂ¶¨Òåwinno\n");
 					print( "filename:[%s] line[%d]\n", filename, linenum);
 					errflg = TRUE;
 					readflg = FALSE;
 					break;
 				}
-				/* å®ƒå¥´ä»¶ç‰å®ƒNoæ¯›å¿¡ç»£ */
+				/* ËüÅ«¼şÓñËüNoÃ«âçĞå */
 				winno = atoi( secondToken);
 				continue;
 			}
-			/* å®ƒå¥´ä»¶ç‰å®ƒNo äº’ç‘å¼•åŒ€åŒ–ä¸­å…ä¸­å‡›åŠå«å  éª°å…æœˆ */
+			/* ËüÅ«¼şÓñËüNo »¥è£ÒıÔÈ»¯ÖĞØ¦ÖĞÁİ¼°µæ·´  ÷»ÔÊÔÂ */
 			if( winno == -1 ) {
-				print( "familyman:winno å°šæœªå®šä¹‰ï¼Œèµ„æ–™å´å·²è®¾å®šã€‚\n");
+				print( "familyman:winno ÉĞÎ´¶¨Òå£¬×ÊÁÏÈ´ÒÑÉè¶¨¡£\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				readflg = FALSE;
 				errflg = FALSE;
 				break;
 			}
-			/* å®ƒå¥´ä»¶ç‰å®ƒNo äº’åŸŸè°¯ä»„å‡¶å‡›åæ¤­ç˜€æ¯›  æˆˆï¼»
-			 * å…¬æœ¨åŠ¨é™†å  éª°å…æœˆ */
+			/* ËüÅ«¼şÓñËüNo »¥ÓòÚÛØÆĞ×Áİ·´ÍÖğöÃ«  ¸ê£Û
+			 * ¹«Ä¾¶¯Â½·´  ÷»ÔÊÔÂ */
 			if( (chkflg == FALSE && winno == windowno )||
 				chkflg == TRUE) 
 			{
@@ -479,7 +479,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 								errflg = TRUE;
 							}
 							else {
-								/* å‡åŒ€åˆ‡äº•äº•å‡¶åŒ€åŠåˆ†ä»ƒåŒ¹æ‰‹æ¶©çƒ‚ä»Šæœ¨åŒ–ä¸­æœ¨å£¬     */
+								/* ÉıÔÈÇĞ¾®¾®Ğ×ÔÈµõ·ÖØêÆ¥ÊÖÉ¬ÀÃ½ñÄ¾»¯ÖĞÄ¾ÈÉ     */
 								if( !((buttonproc[b_mode].checkhaveitem != -1 && 
 									   buttonproc[b_mode].checkhaveitemgotowin != -1)
 									 || (buttonproc[b_mode].checkdonthaveitem != -1 && 
@@ -491,7 +491,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 						}
 						
 						if( errflg == TRUE) {
-							print( "familyman: æ‰¾ä¸åˆ°gotowin\n");
+							print( "familyman: ÕÒ²»µ½gotowin\n");
 							print( "filename:[%s] line[%d]\n", filename, linenum);
 							readflg = FALSE;
 							errflg = TRUE;
@@ -505,23 +505,23 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 				else {
 					
 					w.windowno = winno;
-					/* å®ƒå¥´ä»¶ç‰å®ƒæ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* ËüÅ«¼şÓñËüÕıÄÌÃó¼°É¬ÀÃ */
 					if( strcasecmp( firstToken, "wintype") == 0 ) {
 						w.windowtype = atoi( secondToken);
 					}
-					/* ç¤ºæ­£ä»¶æ­£å¥¶çš¿åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÕıÄÌÃó¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "buttontype") == 0 ) {
 						w.buttontype = NPC_Familyman_restoreButtontype( secondToken);
 					}
-					/* getitemåŠæ¶©çƒ‚ */
+					/* getitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "takeitem") == 0 ) {
 						w.takeitem = atoi( secondToken);
 					}
-					/* giveitemåŠæ¶©çƒ‚ */
+					/* giveitem¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "giveitem") == 0 ) {
 						w.giveitem = atoi( secondToken);
 					}
-					/* messageåŠæ¶©çƒ‚ */
+					/* message¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "message") == 0 ) {
 						if( messagepos == 0 ) {
 							strcpy(  w.message, secondToken);
@@ -534,7 +534,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 							messagepos+=strlen(secondToken);
 						}
 					}
-					/* ç¤ºæ­£ä»¶æ¯›ç“·ä»„å‡¶å‡›åŠæ¶©çƒ‚ */
+					/* Ê¾Õı¼şÃ«´ÉØÆĞ×Áİ¼°É¬ÀÃ */
 					else if( strcasecmp( firstToken, "okpressed") == 0 ) {
 						buttonconfmode = TRUE;
 						b_mode = 0;
@@ -571,7 +571,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 						buttonendflg = FALSE;
 						selectnum ++;
 					}
-					/* æ¶©çƒ‚è”½æ­¹æ›° */
+					/* É¬ÀÃ±Î´õÔ» */
 					else if( strcasecmp( firstToken, "endwin") == 0 ) {
 						endflg = TRUE;
 						if( chkflg == FALSE) {
@@ -580,7 +580,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 						break;
 					}
 					else {
-						print( "familyman:è®¾å®šæ˜¯ä¸å¯èƒ½çš„å‚æ•°\n");
+						print( "familyman:Éè¶¨ÊÇ²»¿ÉÄÜµÄ²ÎÊı\n");
 						print( "filename:[%s] line[%d]\n", filename, linenum);
 					}
 				}
@@ -592,26 +592,26 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 			}
 		}
 		if( buttonendflg == FALSE) {
-			print( "familyman: æ‰¾ä¸åˆ°endbutton\n");
+			print( "familyman: ÕÒ²»µ½endbutton\n");
 			print( "filename:[%s] line[%d]\n", filename, linenum);
 			errflg = TRUE;
 			break;
 		}
 		if( winno != -1 ) {
 			if( w.windowtype == -1 ) {
-				print( "familyman: æ‰¾ä¸åˆ°wintype\n");
+				print( "familyman: ÕÒ²»µ½wintype\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( w.buttontype == -1 ) {
-				print( "familyman: æ‰¾ä¸åˆ°button\n");
+				print( "familyman: ÕÒ²»µ½button\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
 			}
 			if( strlen( w.message) == 0 ) {
-				print( "familyman: æ‰¾ä¸åˆ°message\n");
+				print( "familyman: ÕÒ²»µ½message\n");
 				print( "filename:[%s] line[%d]\n", filename, linenum);
 				errflg = TRUE;
 				break;
@@ -621,12 +621,12 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 	fclose( fp);
 	
 	if( chkflg == FALSE && w.windowno == -1 ) {
-		print( "familyman: æ‰¾ä¸åˆ°æ‰€æŒ‡å®šçš„windowno\n");
+		print( "familyman: ÕÒ²»µ½ËùÖ¸¶¨µÄwindowno\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
 	if( winno != -1 && endflg == FALSE) {
-		print( "familyman: æ‰¾ä¸åˆ°endwin\n");
+		print( "familyman: ÕÒ²»µ½endwin\n");
 		print( "filename:[%s] line[%d]\n", filename, linenum);
 		return FALSE;
 	}
@@ -635,7 +635,7 @@ static BOOL NPC_Familyman_readData( int meindex, int windowno, BOOL chkflg)
 	return TRUE;
 }
 /*
- * buttontype=åŒ¹éš™çƒ‚ä»„å‡¶  ä¾¬  æ¯›é†’è¢„å  æ™¶å…æœˆï¼»
+ * buttontype=Æ¥Ï¶ÀÃØÆĞ×  Ù¯  Ã«ĞÑ°À±å  ¾§ÔÊÔÂ£Û
  *
  */
 static int NPC_Familyman_restoreButtontype( char *data )
