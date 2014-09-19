@@ -40,7 +40,7 @@ static int Callfromcli_Util_getTargetCharaindex( int fd, int toindex)
 	int	to_charaindex = -1;
     int fd_charaindex = CONNECT_getCharaindex( fd );
 
-	/* ·ßÛĞ·ßÈì */
+	/* æ„¤åŒæ„¤è¤¥ */
 	if( toindex == 0 ) {
 		to_charaindex = fd_charaindex;
 	}
@@ -56,11 +56,11 @@ static int Callfromcli_Util_getTargetCharaindex( int fd, int toindex)
 	return to_charaindex;
 }
 /*----------------------------------------
- * ÛÍ·ÂÄÌÊ§¼şĞş»¥·òºëÄÌ¼şÔÊÔÂ Æ¥ÊÖ¶ªÆ¹Øø±åÚá»§ÔÂ·ÖØêØ¦¼°Æ¥ÃñÄáÓÀÛÍ·´Ø¦ÖĞ
+ * å¼ä»¿å¥¶å¤±ä»¶ç„äº’å¤«å¼˜å¥¶ä»¶å…æœˆ åŒ¹æ‰‹ä¸¢ä¹’ä¼‰ååºæˆ·æœˆåˆ†ä»ƒå…åŠåŒ¹æ°‘å°¼æ°¸å¼åå…ä¸­
  ----------------------------------------*/
 void lssproto_ClientLogin_recv( int fd,char* cdkey, char* passwd )
 {
-    /*  2ºÖ±å³ğÄ¾»¥ôÄÈÉÄ¾ÔÂ¼°·´ÖĞÖĞ    */
+    /*  2è¤åä»‡æœ¨äº’è£Ÿå£¬æœ¨æœˆåŠåä¸­ä¸­    */
     {//ttom avoid the restore 2001/01/09
 			if(CONNECT_isNOTLOGIN(fd)==FALSE){
 				print("\n the Client had  Logined fd=%d",fd);
@@ -68,7 +68,7 @@ void lssproto_ClientLogin_recv( int fd,char* cdkey, char* passwd )
 			}
     }
     //print( "CliLogin cdkey=%s\n" , cdkey );
-    /* connect±åÎìñâ¡õÔÊÔÂ */
+    /* connectåæˆŠç–‹â–¡å…æœˆ */
     CONNECT_setCdkey( fd, cdkey );
     CONNECT_setPasswd( fd, passwd );
     CONNECT_setCtype( fd, CLI );
@@ -82,9 +82,9 @@ void lssproto_ClientLogin_recv( int fd,char* cdkey, char* passwd )
     c=(tmpip % 0x100); tmpip=tmpip / 0x100;
     d=(tmpip % 0x100);
     sprintf(ip,"%d.%d.%d.%d",a,b,c,d);
-    print( "\nµÇÂ½ÕËºÅ=%s ÃÜÂë=%s À´×Ô=%s\n",cdkey,passwd,ip);
+    print( "\nç™»é™†è´¦å·=%s å¯†ç =%s æ¥è‡ª=%s\n",cdkey,passwd,ip);
     
-    /* ß¯²Ï */
+    /* å¿’èš• */
     saacproto_ACCharLogin_send( acfd, fd, cdkey, passwd, ip);
 }
 
@@ -109,12 +109,12 @@ void lssproto_CreateNewChar_recv( int fd,int dataplacenum,char* charname,
         lssproto_CreateNewChar_send(fd,FAILED, "Too long charname\n");
         return;
     // Nuke start 0711: Avoid naming as WAEI
-    }else if (strstr(charname,"»ªÒå")
+    }else if (strstr(charname,"åä¹‰")
 // WON ADD
 			 || strstr(charname,"gm")   || strstr(charname,"GM")
 			 || strstr(charname,"Gm")   || strstr(charname,"gM")
-			 || strstr(charname,"£ç£í") || strstr(charname,"£Ç£Í")
-			 || strstr(charname,"£Ç£í") || strstr(charname,"£ç£Í")
+			 || strstr(charname,"ï½‡ï½") || strstr(charname,"ï¼§ï¼­")
+			 || strstr(charname,"ï¼§ï½") || strstr(charname,"ï½‡ï¼­")
 #ifdef _UNREG_NEMA
 			 || (strstr(charname,getUnregname(0)) && strlen(getUnregname(0))>0)
 			 || (strstr(charname,getUnregname(1)) && strlen(getUnregname(1))>0)
@@ -122,7 +122,7 @@ void lssproto_CreateNewChar_recv( int fd,int dataplacenum,char* charname,
 			 || (strstr(charname,getUnregname(3)) && strlen(getUnregname(3))>0)
 			 || (strstr(charname,getUnregname(4)) && strlen(getUnregname(4))>0)
 #endif
-			 || strstr(charname,"ÉñÃØÈËÎï")
+			 || strstr(charname,"ç¥ç§˜äººç‰©")
 // WON END
 		) {
  
@@ -136,7 +136,7 @@ void lssproto_CreateNewChar_recv( int fd,int dataplacenum,char* charname,
 
 	ck= (
 			( (a== 10) && (b==0)   && (c==0) ) ||
-			( (a==211) && (b==76) && (c==176) && (d==21) ) ||	// Ì¨±±wayi
+			( (a==211) && (b==76) && (c==176) && (d==21) ) ||	// å°åŒ—wayi
 			( (a==210) && (b==64)  && (c==97)  && ((d>=21)&&(d<=25)) ) ||
 			( (a==61)  && (b==222) && (c==142) && (d==66)) ||
 			( (a==172) && (b==16)  && (c==172)  && (d==29) )
@@ -182,7 +182,7 @@ void lssproto_CharLogin_recv( int fd,char* charname )
     char cdkey[CDKEYLEN], passwd[PASSWDLEN];
 
     if( CONNECT_isCLI( fd ) == FALSE )return;
-    print( "\n³¢ÊÔµÇÂ½: ÈËÎïÃû³Æ=%s\n", charname);
+    print( "\nå°è¯•ç™»é™†: äººç‰©åç§°=%s\n", charname);
     if( charname[0] == '\0' ){
         lssproto_CharLogin_send( fd, FAILED, "Can't access char have no name\n" );
         return;
@@ -305,7 +305,7 @@ void lssproto_CharList_recv( int fd )
 		for( i=0; i<playernum; i++){
 			if( !CHAR_CHECKINDEX( i) )continue;
 			if( !strcmp( CHAR_getChar( i, CHAR_CDKEY), cdkey) ){
-				CHAR_talkToCli(i, -1, "ÒòÖØ¸´µÇÂ½¶øµôÏß!",CHAR_COLORYELLOW);
+				CHAR_talkToCli(i, -1, "å› é‡å¤ç™»é™†è€Œæ‰çº¿!",CHAR_COLORYELLOW);
 				CONNECT_setCloseRequest( getfdFromCharaIndex( i ) , 1 );
 //				lssproto_CharList_send( fd, FAILED, "-1" );
 //				CONNECT_setState( fd, NOTLOGIN );
@@ -345,13 +345,13 @@ void lssproto_W_recv( int fd,int x,int y,char* direction )
 	if (checkNu(fd)<0) {
            // Robin 0521
            print(" NU-Err ");
-           CHAR_talkToCli(fd_charaindex, -1, "Ñ¶ºÅ´íÎó¡£", CHAR_COLORYELLOW);
+           CHAR_talkToCli(fd_charaindex, -1, "è®¯å·é”™è¯¯ã€‚", CHAR_COLORYELLOW);
            CONNECT_setCloseRequest( fd , 1 );
 	   return;
 	}
         //ttom debug
         if((x==0)&&(y==0)){
-           //CHAR_talkToCli(fd_charaindex, -1, "Òò×ù±ê´íÎó¶ø¶ÏÏß¡£", CHAR_COLORYELLOW);
+           //CHAR_talkToCli(fd_charaindex, -1, "å› åº§æ ‡é”™è¯¯è€Œæ–­çº¿ã€‚", CHAR_COLORYELLOW);
            // Roibn 03/14
            return;
         }
@@ -363,7 +363,7 @@ void lssproto_W_recv( int fd,int x,int y,char* direction )
           // Robin 03/14
           if( (i_diff_x>1)||(i_diff_y>1) ){
                // Robin 0518
-               //CHAR_talkToCli(fd_charaindex, -1, "Òò×ßÂ·×ù±ê´íÎó¶ø¶ÏÏß¡£", CHAR_COLORYELLOW);
+               //CHAR_talkToCli(fd_charaindex, -1, "å› èµ°è·¯åº§æ ‡é”™è¯¯è€Œæ–­çº¿ã€‚", CHAR_COLORYELLOW);
 
                //return;
                x = ix;
@@ -455,7 +455,7 @@ void lssproto_ID_recv( int fd,int x,int y,int haveitemindex,int toindex )
 
 
 /*------------------------------------------------------------
- * ±¹Ä¯Ã«¼»ÉÙ
+ * æƒ«å¯æ¯›è“Ÿå°‘
  ------------------------------------------------------------*/
 void lssproto_ST_recv( int fd,int titleindex )
 {
@@ -463,7 +463,7 @@ void lssproto_ST_recv( int fd,int titleindex )
     CHAR_selectTitle( CONNECT_getCharaindex( fd) , titleindex );
 }
 /*------------------------------------------------------------
- * ±¹Ä¯Ã«´ÂÂÖÔÊÔÂ
+ * æƒ«å¯æ¯›ç»°è½®å…æœˆ
  ------------------------------------------------------------*/
 void lssproto_DT_recv( int fd,int titleindex )
 {
@@ -594,7 +594,7 @@ void lssproto_MI_recv( int fd,int fromindex,int toindex )
 }
 
 /*------------------------------------------------------------
- * µ©Æ½»ïÊ§ÓÀÃó
+ * æ—¦å¹³ä¼™å¤±æ°¸çš¿
  ------------------------------------------------------------*/
 void lssproto_SKUP_recv( int fd,int skillid )
 {
@@ -608,7 +608,7 @@ void lssproto_SKUP_recv( int fd,int skillid )
 }
 
 /*------------------------------------------------------------
- * ÎìÉúÛÍÆËÒà¼şÇÂÅì±å¶ªÓÀ±¾¡õ³âÃ«Ëªññ
+ * æˆŠç”Ÿå¼æ‰‘äº¦ä»¶é”¹æ¾åä¸¢æ°¸æœ¬â–¡æ–¥æ¯›éœœè€¨
  ------------------------------------------------------------*/
 void lssproto_MSG_recv( int fd,int index,char* message, int color )
 {
@@ -667,7 +667,7 @@ void lssproto_L_recv( int fd, int dir )
 
 
 /*------------------------------------------------------------
- * ÃñÅÒÓÀĞşåÃ¶ªÓÀ±¾¡õ³â¼°Ëªññ
+ * æ°‘ä¹“æ°¸ç„è¿•ä¸¢æ°¸æœ¬â–¡æ–¥åŠéœœè€¨
  ------------------------------------------------------------*/
 void lssproto_TK_recv( int fd,int x, int y,char* message,int color, int area )
 {
@@ -686,7 +686,7 @@ void lssproto_TK_recv( int fd,int x, int y,char* message,int color, int area )
 		char buf[256];
 		int leftSec;
 		loginTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKLOGINTIME );
-		// ·ÀÖ¹Ê±¼äĞŞÕı»ØË·áá¡¡Òì³£½ûÑÔ  Robin 20040817
+		// é˜²æ­¢æ—¶é—´ä¿®æ­£å›æœ”å¾Œã€€å¼‚å¸¸ç¦è¨€  Robin 20040817
 		if( (int)NowTime.tv_sec < loginTime) {
 			CHAR_setInt(fd_charaindex, CHAR_SILENT, 0 );
 			return;
@@ -695,10 +695,10 @@ void lssproto_TK_recv( int fd,int x, int y,char* message,int color, int area )
 			CHAR_setInt(fd_charaindex, CHAR_SILENT, 0 );
 			return;
 		}
-		silentSec += 10;  //¶à½û10Ãë
+		silentSec += 10;  //å¤šç¦10ç§’
 
 		leftSec = silentSec - ((int)NowTime.tv_sec - loginTime);
-		sprintf(buf, "½ûÑÔÖĞ!!»¹ÓĞ%dÃë£¬ÔÙ½²¶à½û10ÃëÖÓ¡£", leftSec );
+		sprintf(buf, "ç¦è¨€ä¸­!!è¿˜æœ‰%dç§’ï¼Œå†è®²å¤šç¦10ç§’é’Ÿã€‚", leftSec );
 		CHAR_talkToCli(fd_charaindex, -1, buf, color);
 		CHAR_setInt(fd_charaindex, CHAR_SILENT, silentSec );
 		return;
@@ -712,7 +712,7 @@ void lssproto_TK_recv( int fd,int x, int y,char* message,int color, int area )
 		if( (int)NowTime.tv_sec - lastTalkTime < 10 ) {
 			CHAR_setInt( fd_charaindex,CHAR_SILENT, 60 );
 			CHAR_setWorkInt( fd_charaindex, CHAR_WORKLOGINTIME, (int)NowTime.tv_sec );
-			CHAR_talkToCli( fd_charaindex, -1, "ÄãÌ«¶à»°ÁËà¡£¬ÇëÄãµÄ×ì°ÍÏÈĞİÏ¢¸öÒ»·ÖÖÓ°É£¡", color);
+			CHAR_talkToCli( fd_charaindex, -1, "ä½ å¤ªå¤šè¯äº†å”·ï¼Œè¯·ä½ çš„å˜´å·´å…ˆä¼‘æ¯ä¸ªä¸€åˆ†é’Ÿå§ï¼", color);
 			CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0 );
 			return;
 		}else {
@@ -749,7 +749,7 @@ void lssproto_M_recv( int fd, int fl, int x1, int y1 , int x2, int y2 )
  ------------------------------------------------------------*/
 void lssproto_C_recv( int fd, int index )
 {
-    /*  ³ğÄ¾·ÖØêÁİÃŞ¼°É¬ÀÃÃ«Î­Ø¦ÖĞÒÇ±åÔÊÔÂ  */
+    /*  ä»‡æœ¨åˆ†ä»ƒå‡›æ£‰åŠæ¶©çƒ‚æ¯›è‹‡å…ä¸­ä»ªåå…æœˆ  */
     CHECKFD;
     CHAR_sendCSpecifiedObjindex( fd, index);
 }
@@ -899,14 +899,14 @@ void lssproto_DU_recv( int fd , int x,int y )
 		!= CHAR_PARTY_CLIENT)
 	{
 		int		i;
-		// ·ßÛĞ¼°ÄÌ¼ş·¸ÓÀÛÍµ©
+		// æ„¤åŒåŠå¥¶ä»¶çŠ¯æ°¸å¼æ—¦
 	    charaindex = fd_charaindex;
 	    CHAR_setMyPosition( charaindex, x,y,TRUE);
-	    /* WALKARRAYÃ«ÛÍØøÊ§ÔÊÔÂ */
+	    /* WALKARRAYæ¯›å¼ä¼‰å¤±å…æœˆ */
 		CHAR_setWorkChar( charaindex, CHAR_WORKWALKARRAY,"");
 
 
-		/* âÙÓå¼ÀÔÊÔÂ */
+		/* èµ“æ¸ç¥­å…æœˆ */
 		for( i = 0; i < CONNECT_WINDOWBUFSIZE ; i ++ ) {
             CONNECT_setDuelcharaindex( fd, i, -1 );
 	    }
@@ -923,10 +923,10 @@ void lssproto_DU_recv( int fd , int x,int y )
 	    {
 	        int toindex;
 	        int objindex = GET_OBJINDEX(object);
-	        /* Æ½ÅÒ·ÂÛÍÕı¡õÔªÔúØ¦ÖĞ */
+	        /* å¹³ä¹“ä»¿å¼æ­£â–¡å…ƒæ‰å…ä¸­ */
 	        if( OBJECT_getType( objindex) != OBJTYPE_CHARA) continue;
 	        toindex = OBJECT_getIndex( objindex);
-	        /* ÃóÒÁÄÌØÀ¡õÔªÔúØ¦ÖĞ */
+	        /* çš¿ä¼Šå¥¶ä¹©â–¡å…ƒæ‰å…ä¸­ */
 	        if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER ) continue;
 					found = TRUE;
 	        if( CHAR_getWorkInt( toindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE )continue;
@@ -934,7 +934,7 @@ void lssproto_DU_recv( int fd , int x,int y )
 
 			if(!CHAR_getFlg( toindex, CHAR_ISDUEL)
 #ifdef _BATTLE_FLOOR
-			  && (!strcmp(getBattleFloorCF(),"ÊÇ")
+			  && (!strcmp(getBattleFloorCF(),"æ˜¯")
 					&& floor!=getBattleFloor(1)
 					&& floor!=getBattleFloor(2)
 					&& floor!=getBattleFloor(3)
@@ -968,12 +968,12 @@ void lssproto_DU_recv( int fd , int x,int y )
 			}
 		        // shan end
 
-			// ºÒ¼äØ¦ÈÕÍÊÃ«ôÄÊÏÆ¥ÈÊÔÂ
+			// é˜‚é—´å…æ—¥è¤ªæ¯›è£Ÿæ°åŒ¹ä»æœˆ
 			if( CHAR_getWorkInt( toindex, CHAR_WORKPARTYMODE )
 				== CHAR_PARTY_CLIENT )
 			{
 				int tmpindex = CHAR_getWorkInt( toindex, CHAR_WORKPARTYINDEX1 );
-				/* ÇÂÅì»¥ÃóÒÁÄÌØÀ¡õÆ¥Ø¦ÖĞÒÇÊÖØ¤ÔÂ */
+				/* é”¹æ¾äº’çš¿ä¼Šå¥¶ä¹©â–¡åŒ¹å…ä¸­ä»ªæ‰‹ä¸æœˆ */
 				if( CHAR_CHECKINDEX( tmpindex)) {
 					if( CHAR_getWorkInt( tmpindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER){
 						continue;
@@ -985,20 +985,20 @@ void lssproto_DU_recv( int fd , int x,int y )
 			cnt++;
 			if( cnt == CONNECT_WINDOWBUFSIZE ) break;
 		}
-		/* ÖĞØ¦¾®ÔÈĞ× */
+		/* ä¸­å…äº•åŒ€å‡¶ */
 		if( cnt == 0 ) {
 			goto lssproto_DU_recv_Err;
 		}
-		/* ¨àÚĞ·ÖØê·ÖÔÈĞ×ÈÕğ£¾Ş¼şĞşØø¡õ */
+		/* ã„ è°›åˆ†ä»ƒåˆ†åŒ€å‡¶æ—¥ç©‘å·¨ä»¶ç„ä¼‰â–¡ */
 		else if( cnt == 1 ) {
 			enemyindex = CONNECT_getDuelcharaindex(fd,0);
-			// ÇÂÅì»¥ÍÊØ¦ÈÕ¹«¼°ÒıÒı¾Ş¼şÊĞËü¼şĞş½ñÁùÔÂ»¥
-			// ºÒ¼äØ¦ÈÕÍÊÃ«ôÄÊÏÆ¥ÈÊÔÂ
+			// é”¹æ¾äº’è¤ªå…æ—¥å…¬åŠå¼•å¼•å·¨ä»¶å¸‚å®ƒä»¶ç„ä»Šå…­æœˆäº’
+			// é˜‚é—´å…æ—¥è¤ªæ¯›è£Ÿæ°åŒ¹ä»æœˆ
 			if( CHAR_getWorkInt( enemyindex, CHAR_WORKPARTYMODE )
 				== CHAR_PARTY_CLIENT )
 			{
 				enemyindex = CHAR_getWorkInt( enemyindex, CHAR_WORKPARTYINDEX1 );
-				// Ø¦Ùâ¾®ÍÊ»¥ÖĞØ¦ÖĞ
+				// å…å…®äº•è¤ªäº’ä¸­å…ä¸­
 				if( enemyindex < 0 )goto lssproto_DU_recv_Err;
 			}
 			ret = BATTLE_CreateVsPlayer( charaindex, enemyindex );
@@ -1012,7 +1012,7 @@ void lssproto_DU_recv( int fd , int x,int y )
 			int		strlength;
 			char	msgbuf[1024];
 			char	escapebuf[2048];
-			strcpy( msgbuf, "1\nÒªºÍË­Õ½¶·£¿\n");
+			strcpy( msgbuf, "1\nè¦å’Œè°æˆ˜æ–—ï¼Ÿ\n");
 			strlength = strlen( msgbuf);
 			for( i = 0;
 				CONNECT_getDuelcharaindex( fd,i) != -1
@@ -1026,9 +1026,9 @@ void lssproto_DU_recv( int fd , int x,int y )
 							CHAR_getWorkInt(
                                 CONNECT_getDuelcharaindex(fd,i),
                                 CHAR_WORKPARTYMODE )
-							!= CHAR_PARTY_NONE ? "ÍÅÌå": "µ¥¶À");
+							!= CHAR_PARTY_NONE ? "å›¢ä½“": "å•ç‹¬");
 				if( strlength + strlen( buf) > arraysizeof( msgbuf)){
-					print( "%s:%dÊÓ´°Ñ¶Ï¢buffer²»×ã¡£\n",
+					print( "%s:%dè§†çª—è®¯æ¯bufferä¸è¶³ã€‚\n",
 							__FILE__,__LINE__);
 					break;
 				}
@@ -1048,11 +1048,11 @@ void lssproto_DU_recv( int fd , int x,int y )
 
 lssproto_DU_recv_Err:;
 	if( ret == FALSE ) {
-		/* çø°íËªññ */
+		/* ç‘›ç»Šéœœè€¨ */
 		lssproto_EN_send( fd, FALSE, 0 );
-		if( cnt > 0 ) CHAR_talkToCli( charaindex, -1, "ÔâÓöÊ§°Ü£¡", CHAR_COLORYELLOW);
-		else if( found ) CHAR_talkToCli( charaindex, -1, "ÎŞÈË¿ÉÒÔ¶ÔÕ½¡£", CHAR_COLORYELLOW);
-		else CHAR_talkToCli( charaindex, -1, "ÄÇÀïÃ»ÓĞÈÎºÎÈË¡£", CHAR_COLORYELLOW);
+		if( cnt > 0 ) CHAR_talkToCli( charaindex, -1, "é­é‡å¤±è´¥ï¼", CHAR_COLORYELLOW);
+		else if( found ) CHAR_talkToCli( charaindex, -1, "æ— äººå¯ä»¥å¯¹æˆ˜ã€‚", CHAR_COLORYELLOW);
+		else CHAR_talkToCli( charaindex, -1, "é‚£é‡Œæ²¡æœ‰ä»»ä½•äººã€‚", CHAR_COLORYELLOW);
 	}
 }
 /*------------------------------------------------------------
@@ -1076,7 +1076,7 @@ void lssproto_EO_recv( int fd, int dummy )
                return;
             }
             else if (checkBEOTime( fd ) < 0) {
-                //CHAR_talkToCli(fd_charaindex, -1, "Äã¼ÓËÙà¸¡£", CHAR_COLORYELLOW);
+                //CHAR_talkToCli(fd_charaindex, -1, "ä½ åŠ é€Ÿå–”ã€‚", CHAR_COLORYELLOW);
             }
          }
          // Nuke end
@@ -1121,7 +1121,7 @@ void lssproto_FS_recv( int fd,int flg )
     CHECKFDANDTIME;
 
     fd_charaindex = CONNECT_getCharaindex( fd );
-	/* ÍÖğö·´¿¢±åÁùÄÚ±å¹«¼°ÒıÒı°×·ÂºëµÊŞ¥ */
+	/* æ¤­ç˜€åç«£åå…­å†…åå…¬åŠå¼•å¼•ç™½ä»¿å¼˜å‡³è•™ */
 	CHAR_setFlg( fd_charaindex, CHAR_ISPARTY,
 				(flg & CHAR_FS_PARTY )? TRUE:FALSE);
 	//CHAR_setFlg( fd_charaindex, CHAR_ISBATTLE,
@@ -1154,7 +1154,7 @@ void lssproto_PR_recv( int fd,int x, int y, int request )
 
     fd_charaindex = CONNECT_getCharaindex( fd );
 
-#if 1 // ½ûÖ¹×é¶ÓÇøÓò
+#if 1 // ç¦æ­¢ç»„é˜ŸåŒºåŸŸ
 	if( request == 1 )
 	{
 		int nowFloor;
@@ -1172,7 +1172,7 @@ void lssproto_PR_recv( int fd,int x, int y, int request )
 			|| check_TimeTicketMap(nowFloor)
 #endif
 			){
-			print("\n ¸Ä·â°ü!½ûÖ¹×é¶ÓÇøÓò!!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
+			print("\n æ”¹å°åŒ…!ç¦æ­¢ç»„é˜ŸåŒºåŸŸ!!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
 			return;
 		}
 	}
@@ -1193,7 +1193,7 @@ void lssproto_PR_recv( int fd,int x, int y, int request )
    CHAR_setMyPosition( fd_charaindex, x,y,TRUE);
 
 	if( request == 0 ) {
-		/* ÂÖåÇÔÊÔÂ */
+		/* è½®è¿©å…æœˆ */
 		result = CHAR_DischargeParty(fd_charaindex, 0);
 	}
 	else if( request == 1 ) {
@@ -1226,7 +1226,7 @@ void lssproto_SPET_recv( int fd, int standbypet )
 
 	if( CHAR_getWorkInt( fd_charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE 
 		&& standbypet >= CHAR_getWorkInt( fd_charaindex, CHAR_WORKSTANDBYPET) ) {
-		print("\n ¸Ä·â°ü!??Õ½¶·ÖĞÓÃSPETÔö¼Ó´ı»ú³è!!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
+		print("\n æ”¹å°åŒ…!??æˆ˜æ–—ä¸­ç”¨SPETå¢åŠ å¾…æœºå® !!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
 		return;
 	}
 
@@ -1242,7 +1242,7 @@ void lssproto_SPET_recv( int fd, int standbypet )
 
 			cnt++;
 			if( cnt > 3 ) {
-				print("\n ¸Ä·â°ü!´ı»ú³è³¬¹ıÊıÁ¿!!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
+				print("\n æ”¹å°åŒ…!å¾…æœºå® è¶…è¿‡æ•°é‡!!:%s ", CHAR_getChar( fd_charaindex, CHAR_CDKEY) );
 				//lssproto_SPET_send( fd, s_pet, FALSE);
 				break;
 			}
@@ -1335,7 +1335,7 @@ void lssproto_JB_recv( int fd,int x,int y )
 		|| floor == getWatchFloor(3)
 		|| floor == getWatchFloor(4)
 		|| floor == getWatchFloor(5)
-		|| !strcmp(getWatchFloorCF(),"ÊÇ")
+		|| !strcmp(getWatchFloorCF(),"æ˜¯")
 #endif	
 	){
 		BATTLE_WatchTry( charaindex );
@@ -1438,7 +1438,7 @@ void lssproto_WN_recv( int fd,int x,int y,int seqno,
 FIRST:
 		
            lssproto_EN_send( fd, FALSE, 0 );
-           CHAR_talkToCli(fd_charaindex, -1, "ÊÂ¼ş´íÎó¡£", CHAR_COLORYELLOW);
+           CHAR_talkToCli(fd_charaindex, -1, "äº‹ä»¶é”™è¯¯ã€‚", CHAR_COLORYELLOW);
            goto END_WN;
         }
      }
@@ -1475,7 +1475,7 @@ void lssproto_HL_recv( int fd,int flg )
 	{
 		return;
 	}
-#ifdef _LOCKHELP_OK				// (²»¿É¿ª) Syu ADD Ëø¶¨²»¿É¼ÓÈëÕ½¶·
+#ifdef _LOCKHELP_OK				// (ä¸å¯å¼€) Syu ADD é”å®šä¸å¯åŠ å…¥æˆ˜æ–—
 	if((CHAR_getInt(fd_charaindex,CHAR_FLOOR) >= 8200 && CHAR_getInt(fd_charaindex,CHAR_FLOOR) <= 8213) ||
 		 (CHAR_getInt(fd_charaindex,CHAR_FLOOR) >= 30017 && CHAR_getInt(fd_charaindex,CHAR_FLOOR) <= 30021)
 		 || CHAR_getInt(fd_charaindex,CHAR_FLOOR) == 20000
@@ -1490,7 +1490,7 @@ void lssproto_HL_recv( int fd,int flg )
 			CHAR_WORKBATTLESIDE)].flg |= BSIDE_FLG_HELP_OK;
 
 		snprintf( msgbuf, sizeof( msgbuf),
-				  "%s ÔÚÇó¾È£¡",
+				  "%s åœ¨æ±‚æ•‘ï¼",
 				  CHAR_getChar( fd_charaindex, CHAR_NAME));
 	}
 	else {
@@ -1500,7 +1500,7 @@ void lssproto_HL_recv( int fd,int flg )
 			CHAR_WORKBATTLESIDE)].flg &= ~BSIDE_FLG_HELP_OK;
 
 		snprintf( msgbuf, sizeof( msgbuf),
-				  "%s ¾ö¶¨¾Ü¾ø°ïÖú¡£",
+				  "%s å†³å®šæ‹’ç»å¸®åŠ©ã€‚",
 				  CHAR_getChar( fd_charaindex, CHAR_NAME));
 	}
 
@@ -1514,7 +1514,7 @@ void lssproto_HL_recv( int fd,int flg )
 			if( tofd != -1 ) {
 				lssproto_HL_send( tofd, flg);
 			}
-			/* ¶ªÓÀ±¾¡õ³âËªññ */
+			/* ä¸¢æ°¸æœ¬â–¡æ–¥éœœè€¨ */
 			CHAR_talkToCli( toindex, -1, msgbuf, CHAR_COLORYELLOW);
 			CHAR_sendBattleEffect( toindex, ON);
 		}
@@ -1566,7 +1566,7 @@ void lssproto_LB_recv( int fd,int x,int y )
        }
     }   
     CHAR_setMyPosition( fd_charaindex, x,y,TRUE);
-	/* É±ÁºÆ¥ÎåÔÂ¾®ÃñÄáÓÀÛÍØÆ»¯É±ÁºÔÊÔÂ */
+	/* æ€æ¢åŒ¹äº”æœˆäº•æ°‘å°¼æ°¸å¼ä»„åŒ–æ€æ¢å…æœˆ */
 	BATTLE_WatchTry( fd_charaindex );
 }
 /*------------------------------------------------------------
@@ -1577,7 +1577,7 @@ void lssproto_Shutdown_recv( int fd,char* passwd,int min )
 	if( strcmp( passwd, "hogehoge") == 0 ) {
 	    int     i;
 	    int     playernum = CHAR_getPlayerMaxNum();
-		snprintf( buff, sizeof( buff),"%s¹«¸æ¡£",getGameserverID());
+		snprintf( buff, sizeof( buff),"%så…¬å‘Šã€‚",getGameserverID());
 	    for( i = 0 ; i < playernum ; i++) {
 	        if( CHAR_getCharUse(i) != FALSE ) {
 				CHAR_talkToCli( i, -1, buff, CHAR_COLORYELLOW);

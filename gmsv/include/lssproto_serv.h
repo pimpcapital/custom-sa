@@ -125,14 +125,14 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded);
 #define LSSPROTO_IC_SEND    100
 #endif
 
-#ifdef _MAGIC_NOCAST             // ¾«Áé:³ÁÄ¬
+#ifdef _MAGIC_NOCAST             // ç²¾çµ:æ²‰é»˜
 #define LSSPROTO_NC_SEND    101
 #endif
 
 #ifdef _PETS_SELECTCON
 #define LSSPROTO_PETST_SEND 107
 #endif
-#define LSSPROTO_SPET_RECV 	114		// Robin ´ı»ú³è
+#define LSSPROTO_SPET_RECV 	114		// Robin å¾…æœºå® 
 #define LSSPROTO_SPET_SEND 	115
 
 

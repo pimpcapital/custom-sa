@@ -9,7 +9,7 @@
 // CoolFish: Family 2001/5/9
 #include "acfamily.h"
 #include "version.h"
-#ifdef _SEND_EFFECT				  // WON ADD ����ѩ���������Ч 
+#ifdef _SEND_EFFECT				  // WON ADD 锟斤拷锟斤拷雪锟斤拷锟斤拷锟斤拷锟斤拷锟叫?
 #include "recv.h"
 #endif
 
@@ -74,18 +74,18 @@ int mbuse ;
 int cpuuse;
 
 
-int mainsockfd;             /* accept ��  ��¦�ѱ���ľ�� */
-struct sockaddr_in localaddr;       /* bind ����ʧ������ */
+int mainsockfd;             /* accept 锟斤拷  锟斤拷娄锟窖憋拷锟斤拷木锟斤拷 */
+struct sockaddr_in localaddr;       /* bind 锟斤拷锟斤拷失锟斤拷锟斤拷锟斤拷 */
     
 
-struct connection *con;        /* �����������     */
+struct connection *con;        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?    */
 
-static int mb_finder=0;              /* mb������ë���������׻���
-                               ������������  ��ʢ�� */
+static int mb_finder=0;              /* mb锟斤拷锟斤拷锟斤拷毛锟斤拷锟斤拷锟斤拷锟斤拷锟阶伙拷锟斤拷
+                               锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  锟斤拷盛锟斤拷 */
 // WON FIX
 //char tmpbuf[65536];
 char tmpbuf[1024*32];
-//char tmpbuf[65536*3];         /* read�� */
+//char tmpbuf[65536*3];         /* read锟斤拷 */
 
 struct timeval select_timeout;
 
@@ -106,23 +106,23 @@ int tcpstruct_connect( char *addr , int port );
 void set_nodelay( int sock );
 
 
-#define OK     0        /* ��   */
-#define TCPSTRUCT_ENOMEM -1       /* malloc ��   */
-#define TCPSTRUCT_ESOCK -2        /* socket ��   */
-#define TCPSTRUCT_EBIND -3        /* bind ��   */
-#define TCPSTRUCT_ELISTEN -4      /* listen ��   */
-#define TCPSTRUCT_EBUG -6         /* ���ƥؤ�� */
-#define TCPSTRUCT_EINVCIND -7     /* con�߼�index���ƾ����з� */
-#define TCPSTRUCT_EREADFIN -8     /* read ���·�����ئ�ʻ� closed by remote */
-#define TCPSTRUCT_EHOST -9        /* gethostbyname ��   */
-#define TCPSTRUCT_ECONNECT -10    /* connect ��   */
-#define TCPSTRUCT_ECFULL -11      /* con ���������� */
-#define TCPSTRUCT_ETOOLONG -12    /* �滥ئ���ʿ� */
-#define TCPSTRUCT_EMBFULL -13     /* mb ����������  */
-#define TCPSTRUCT_ECLOSEAGAIN -14 /* close ��2�Խ�ľ�� */
+#define OK     0        /* 锟斤拷   */
+#define TCPSTRUCT_ENOMEM -1       /* malloc 锟斤拷   */
+#define TCPSTRUCT_ESOCK -2        /* socket 锟斤拷   */
+#define TCPSTRUCT_EBIND -3        /* bind 锟斤拷   */
+#define TCPSTRUCT_ELISTEN -4      /* listen 锟斤拷   */
+#define TCPSTRUCT_EBUG -6         /* 锟斤拷锟狡ヘわ拷锟?*/
+#define TCPSTRUCT_EINVCIND -7     /* con锟竭硷拷index锟斤拷锟狡撅拷锟斤拷锟叫凤拷 */
+#define TCPSTRUCT_EREADFIN -8     /* read 锟斤拷锟铰凤拷锟斤拷锟斤拷卅锟绞伙拷 closed by remote */
+#define TCPSTRUCT_EHOST -9        /* gethostbyname 锟斤拷   */
+#define TCPSTRUCT_ECONNECT -10    /* connect 锟斤拷   */
+#define TCPSTRUCT_ECFULL -11      /* con 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+#define TCPSTRUCT_ETOOLONG -12    /* 锟芥互卅锟斤拷锟绞匡拷 */
+#define TCPSTRUCT_EMBFULL -13     /* mb 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷  */
+#define TCPSTRUCT_ECLOSEAGAIN -14 /* close 锟斤拷2锟皆斤拷木锟斤拷 */
 
 
-int port;               /* �ء�ة�ӡ�����������ƻ����º̡��� */
+int port;               /* 锟截★拷丞锟接★拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷苹锟斤拷锟斤拷潞獭锟斤拷锟?*/
 int Total_Charlist;
 int Expired_mail;
 int Del_Family_or_Member;
@@ -142,12 +142,12 @@ char *chartime()
 static int initRankTable( void );
 
 /*
-  sigaction����
+  sigaction锟斤拷锟斤拷
  */
 void sighandle( int a )
 {
-  if (a==SIGUSR1) log("sigusr1�ź�!\n");
-  log("�õ�һ���ź�! �쳣�ж�......\n" );
+  if (a==SIGUSR1) log("sigusr1锟脚猴拷!\n");
+  log("锟矫碉拷一锟斤拷锟脚猴拷! 锟届常锟叫讹拷......\n" );
   writeFamily(familydir);
   writeFMPoint(fmpointdir);
   writeFMSMemo(fmsmemodir);
@@ -187,14 +187,14 @@ void sigusr1(int a)
       sprintf(key, "echo \"%s\" > ./sigusr1.result", buf);
       system(key);
     break;
-#ifdef _SEND_EFFECT		   // WON ADD ����ѩ���������Ч
+#ifdef _SEND_EFFECT		   // WON ADD 锟斤拷锟斤拷雪锟斤拷锟斤拷锟斤拷锟斤拷锟叫?
 	case 'E':	
-		log("\nAC �� GS ������ѩ��Ч!!\n");
+		log("\nAC 锟斤拷 GS 锟斤拷锟斤拷锟斤拷雪锟斤拷效!!\n");
 	    SendEffect(&key[1]);
 	break;
 #endif
 
-	case 'L':  // Robin �г�����Server����
+	case 'L':  // Robin 锟叫筹拷锟斤拷锟斤拷Server锟斤拷锟斤拷
 		log("\nList All Server Conncet!!!!!\n");
 		for( i =0; i <MAXCONNECTION; i++)
 			if( gs[i].use)
@@ -232,11 +232,11 @@ int login_game_server( int ti , char *svname , char *svpas ,
 #else
 		if( strcmp( svpas , svpass ) == 0 ){
 #endif
-        log( "������������ȷ %s\n" , svname );
+        log( "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷确 %s\n" , svname );
     } else {
-        log( "������������� %s\n" , svname );
-        snprintf( result , resultlen , "ʧ��" );
-        snprintf( retdata , retdatalen , "�������" );
+        log( "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?%s\n" , svname );
+        snprintf( result , resultlen , "失锟斤拷" );
+        snprintf( retdata , retdatalen , "锟斤拷锟斤拷锟斤拷锟? );
         return 0;
     }
     {
@@ -290,59 +290,59 @@ static int readConfig( char *path )
 
         if( strcmp( command , "port" ) == 0 ){
             port = atoi( param );
-        		log( "�˿�:%d\n",port );
+        		log( "锟剿匡拷:%d\n",port );
         } else if( strcmp( command , "logdir" ) == 0 ){
             snprintf( logdir , sizeof( logdir) , param );
-            log( "��־Ŀ¼:%s\n",logdir );
+            log( "锟斤拷志目录:%s\n",logdir );
         } else if( strcmp( command , "chardir" ) == 0 ){
             snprintf( chardir , sizeof( chardir) , param );
-            log( "����Ŀ¼:%s\n",chardir );
+            log( "锟斤拷锟斤拷目录:%s\n",chardir );
 #ifdef _SLEEP_CHAR
 						snprintf( sleepchardir , sizeof( sleepchardir), "%s_sleep", chardir);
-						log( "˯��Ŀ¼:%s\n",sleepchardir );
+						log( "睡锟斤拷目录:%s\n",sleepchardir );
 #endif
         } else if( strcmp( command , "pass" ) == 0 ){
         		snprintf( svpass , sizeof( svpass ) , param);
-            log( "����:%s\n",param );
+            log( "锟斤拷锟斤拷:%s\n",param );
         } else if( strcmp( command , "dbdir" ) == 0 ){
             snprintf( dbdir , sizeof( dbdir) , param );    
-            log( "���Ŀ¼:%s\n",dbdir );        
+            log( "锟斤拷锟侥柯?%s\n",dbdir );        
         } else if( strcmp( command, "rotate_interval" ) == 0 ){
             log_rotate_interval = atoi( param );
-            log( "��־ѭ�����:%d\n",log_rotate_interval ); 
+            log( "锟斤拷志循锟斤拷锟斤拷锟?%d\n",log_rotate_interval ); 
         } else if( strcmp( command, "maildir" ) == 0 ){
             snprintf( maildir, sizeof( maildir ), param );
-            log( "�ʼ�Ŀ¼:%s\n",maildir );
+            log( "锟绞硷拷目录:%s\n",maildir );
 #ifdef	_FAMILY
         // CoolFish: Family 2001/5/9
         } else if( strcmp( command, "familydir" ) == 0 ){
             snprintf( familydir, sizeof( familydir ), param );
-            log( "����Ŀ¼:%s\n",familydir );
+            log( "锟斤拷锟斤拷目录:%s\n",familydir );
         } else if( strcmp( command, "fmpointdir" ) == 0 ){
             snprintf( fmpointdir, sizeof( fmpointdir ), param );
-            log( "ׯ԰����:%s\n",fmpointdir );
+            log( "庄园锟斤拷锟斤拷:%s\n",fmpointdir );
         } else if( strcmp( command, "fmsmemodir" ) == 0 ){
             snprintf( fmsmemodir, sizeof( fmsmemodir ), param );
-            log( "���屸��:%s\n",fmsmemodir );
+            log( "锟斤拷锟藉备锟斤拷:%s\n",fmsmemodir );
 #endif
 			  } else if( strcmp( command , "Total_Charlist" ) == 0 ){
         	Total_Charlist = atoi( param );
-        	log( "�������������:%d��\n",Total_Charlist );
+        	log( "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?%d锟斤拷\n",Total_Charlist );
         } else if( strcmp( command , "Expired_mail" ) == 0 ){
         	Expired_mail = atoi( param );
-        	log( "���¹����ʼ����:%d��\n",Expired_mail );
+        	log( "锟斤拷锟铰癸拷锟斤拷锟绞硷拷锟斤拷锟?%d锟斤拷\n",Expired_mail );
         } else if( strcmp( command , "Del_Family_or_Member" ) == 0 ){
         	Del_Family_or_Member = atoi( param );
-        	log( "ɾ������Ա���:%d��\n",Del_Family_or_Member );
+        	log( "删锟斤拷锟斤拷锟斤拷员锟斤拷锟?%d锟斤拷\n",Del_Family_or_Member );
         } else if( strcmp( command , "Write_Family" ) == 0 ){
         	Write_Family = atoi( param );
-        	log( "���¼�����Ϣ���:%d��\n",Write_Family );
+        	log( "锟斤拷锟铰硷拷锟斤拷锟斤拷息锟斤拷锟?%d锟斤拷\n",Write_Family );
 				} else if( strcmp( command , "SameIpMun" ) == 0 ){
         	sameipmun = atoi( param );
         	if(sameipmun>0){
-        		log( "ͬIP����ͬʱ��½:%d��\n",sameipmun );
+        		log( "同IP锟斤拷锟斤拷同时锟斤拷陆:%d锟斤拷\n",sameipmun );
         	}else{
-        		log( "ͬIP����ͬʱ��½:������\n" );
+        		log( "同IP锟斤拷锟斤拷同时锟斤拷陆:锟斤拷锟斤拷锟斤拷\n" );
         	}
 				}
     }
@@ -368,10 +368,10 @@ static void parseOpts( int argc, char **argv )
         switch( c ){
         case 'h':
             fprintf( stderr ,
-                     "ʹ�÷���: saac [-h] [-w port] [-w port] ... \n"
-                     "-h : ��ʾsaac�İ���\n"
-                     "-w port : ���һ������վ��̶˿�\n"
-                     "Copyright 2006 ��zoro������ "
+                     "使锟矫凤拷锟斤拷: saac [-h] [-w port] [-w port] ... \n"
+                     "-h : 锟斤拷示saac锟侥帮拷锟斤拷\n"
+                     "-w port : 锟斤拷锟揭伙拷锟斤拷锟斤拷锟秸撅拷锟教端匡拷\n"
+                     "Copyright 2006 锟斤拷zoro锟斤拷锟斤拷锟斤拷 "
                      "( Longzoro System Supply )\n");
             exit(0);
             break;
@@ -395,7 +395,7 @@ static void parseOpts( int argc, char **argv )
         		nice(atoi( optarg ));
         		break;
         default:
-            log( "���ܶ���ѡ�� %c\n" , c );
+            log( "锟斤拷锟杰讹拷锟斤拷选锟斤拷 %c\n" , c );
             exit(0);
         }
     }
@@ -425,47 +425,47 @@ int main( int argc , char **argv )
 		UNlockM_Init();
     
     if(readConfig( "acserv.cf" )<0){
-        log( "�޷��ڵ�ǰĿ¼���ȡ acserv.cf .\n" );
+        log( "锟睫凤拷锟节碉拷前目录锟斤拷锟饺?acserv.cf .\n" );
         exit(1);
     }
 
 #ifdef _SASQL
     sasql_init();
 #endif	
-    log( "��ȡ���Ŀ¼\n" );
+    log( "锟斤拷取锟斤拷锟侥柯?n" );
     dbRead( dbdir );
 #ifdef	_FAMILY
-    log("��ȡ ����ׯ԰\n");
+    log("锟斤拷取 锟斤拷锟斤拷庄园\n");
     readFMSMemo(fmsmemodir);
-    log("��ȡ ��������\n");
+    log("锟斤拷取 锟斤拷锟斤拷锟斤拷锟斤拷\n");
     readFMPoint(fmpointdir);
-    log("��ȡ ����Ŀ¼\n");
+    log("锟斤拷取 锟斤拷锟斤拷目录\n");
     readFamily(familydir);
 #endif
-    log( "׼�� ����Ŀ¼\n" );
+    log( "准锟斤拷 锟斤拷锟斤拷目录\n" );
     prepareDirectories( chardir );
-    log( "׼�� ��־Ŀ¼\n" );
+    log( "准锟斤拷 锟斤拷志目录\n" );
     prepareDirectories( logdir );
-    log( "׼�� �ʼ�Ŀ¼\n" );
+    log( "准锟斤拷 锟绞硷拷目录\n" );
     prepareDirectories( maildir );
 
 #ifdef _SLEEP_CHAR
     prepareDirectories( sleepchardir );
-    log( "׼�� ˯�ߵ���Ŀ¼\n" );
+    log( "准锟斤拷 睡锟竭碉拷锟斤拷目录\n" );
 #endif
 
-    /* �����Ȼ��¶�����ë  �ĳ�� */
+    /* 锟斤拷锟斤拷锟饺伙拷锟铰讹拷锟斤拷锟斤拷毛  锟侥筹拷锟?*/
     if( readMail(maildir) < 0 ){
-        log( "���ܳ�ʼ���ʼ�\n" );
+        log( "锟斤拷锟杰筹拷始锟斤拷锟绞硷拷\n" );
         exit(1);
 		}
 
-    /* TCPSTRUCT ë����� */
+    /* TCPSTRUCT 毛锟斤拷锟斤拷锟?*/
     {
         int tcpr;
         if( ( tcpr = tcpstruct_init( NULL , port , 0 ,
 						CHARDATASIZE * 16 * MAXCONNECTION , 1 /* DEBUG */ ) ) < 0 ){
-            log( "���ܿ���TCP: %d\n", tcpr );
+            log( "锟斤拷锟杰匡拷锟斤拷TCP: %d\n", tcpr );
             return 1;
         }
     }
@@ -491,7 +491,7 @@ int main( int argc , char **argv )
 
     }
 
-#ifdef _AC_SEND_FM_PK		 // WON ADD ׯ԰��ս�б?����AC
+#ifdef _AC_SEND_FM_PK		 // WON ADD 庄园锟斤拷战锟叫?锟斤拷锟斤拷AC
 	load_fm_pk_list();
 #endif
 
@@ -499,17 +499,17 @@ int main( int argc , char **argv )
 	FMPK_LoadList();
 #endif
 #ifdef _ALLDOMAN
-	LOAD_herolist();  // Syu ADD ���а�NPC
+	LOAD_herolist();  // Syu ADD 锟斤拷锟叫帮拷NPC
 #endif
 
 #ifdef _VIP
-		log( "\n����˰汾: <%s ��Ա��>\n" , SERVER_VERSION );
+		log( "\n锟斤拷锟斤拷税姹? <%s 锟斤拷员锟斤拷>\n" , SERVER_VERSION );
 #else
-		log( "\n����˰汾: <%s ��ͨ��>\n" , SERVER_VERSION );
+		log( "\n锟斤拷锟斤拷税姹? <%s 锟斤拷通锟斤拷>\n" , SERVER_VERSION );
 #endif
-		log( "\n����˱������ʱ��:%s %s by ��zoro������\n" , __DATE__ , __TIME__ );
+		log( "\n锟斤拷锟斤拷吮锟斤拷锟斤拷锟斤拷时锟斤拷:%s %s by 锟斤拷zoro锟斤拷锟斤拷锟斤拷\n" , __DATE__ , __TIME__ );
 		
-    log( "\n��ʼ����...\n" );
+    log( "\n锟斤拷始锟斤拷锟斤拷...\n" );
 
     signal(SIGUSR1,sigusr1);	// Arminius 7.20 memory lock
 	int itime=0;
@@ -544,7 +544,7 @@ int main( int argc , char **argv )
                     dbFlush(dbdir);
                     gettimeofday( &et,NULL);
                     log( "Flushed db(%fsec)\n", time_diff(et,st) );
-                    log( "������������:%d NG:%d\n",
+                    log( "锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷:%d NG:%d\n",
                          total_ok_charlist, total_ng_charlist );
                 }
             }
@@ -556,7 +556,7 @@ int main( int argc , char **argv )
                 gettimeofday( &st,NULL);
                 expireMail();
                 gettimeofday( &et,NULL);
-                log( "�����ʼ�(%fsec)\n", time_diff(et,st) );
+                log( "锟斤拷锟斤拷锟绞硷拷(%fsec)\n", time_diff(et,st) );
             }
 #ifdef	_FAMILY
             //if ((counter % 300) == 0) // 300( -> 60)
@@ -569,13 +569,13 @@ int main( int argc , char **argv )
          	writeFMPoint(fmpointdir);
          	writeFMSMemo(fmsmemodir);
          	gettimeofday(&et, NULL);
-         	log("��¼����(%fsec)\n", time_diff(et, st));
+         	log("锟斤拷录锟斤拷锟斤拷(%fsec)\n", time_diff(et, st));
       }
 #endif
         }
     newti = tcpstruct_accept1();
     if( newti >= 0 ){
-			log( "ͬ��: %d\n" , newti );
+			log( "同锟斤拷: %d\n" , newti );
 			gs[newti].use = 1;
     }
 
@@ -592,13 +592,13 @@ int main( int argc , char **argv )
                     if( saacproto_ServerDispatchMessage( i , buf, debugfun)<0){
                         // Nuke start
                         tcpstruct_close(i);// avoid the shutdown the gmsv ttom
-                        log( "GMSV(%s) ��Ϣ:%s\n", gs[i].name, debugfun);
+                        log( "GMSV(%s) 锟斤拷息:%s\n", gs[i].name, debugfun);
                     }
                 } else if( l == TCPSTRUCT_ETOOLONG ){
-                    log( "�ܳ�:%d ��������::%s\n", i , gs[i].name );
+                    log( "锟杰筹拷:%d 锟斤拷锟斤拷锟斤拷锟斤拷::%s\n", i , gs[i].name );
                     logout_game_server( i );
                 } else if( l < 0 ){
-                    log( "�ر�:%d ��������:%s\n", i , gs[i].name );
+                    log( "锟截憋拷:%d 锟斤拷锟斤拷锟斤拷锟斤拷:%s\n", i , gs[i].name );
                     logout_game_server(i);
                 } else if( l == 0 ){
                     ;
@@ -617,9 +617,9 @@ int main( int argc , char **argv )
             tv_loop_store = now;
         }
 
-        /* �����С�������ةʧ����ëƩ���£�
-           ����ةʧ���������շ��ë���ƻ������С�ëڽ�ƻ������
-           ƥ�ء�ة�ӡ������  �ζ��巴ɧ������           */
+        /* 锟斤拷锟斤拷锟叫★拷锟斤拷锟斤拷锟斤拷丞失锟斤拷锟斤拷毛譬锟斤拷锟铰ｏ拷
+           锟斤拷锟斤拷丞失锟斤拷锟斤拷锟斤拷锟斤拷锟秸凤拷锟矫 锟斤拷锟狡伙拷锟斤拷锟斤拷锟叫★拷毛诮锟狡伙拷锟斤拷锟斤拷锟?
+           匹锟截★拷丞锟接★拷锟斤拷锟斤拷锟? 锟轿讹拷锟藉反骚锟斤拷锟斤拷锟斤拷           */
     }
     return 0;       
 }
@@ -634,11 +634,11 @@ time_diff(struct timeval subtrahend,
 
 
 /*
-  ��뼰���  �����������ë  �£�
-  ��ئԪ���弰�ּ������ͻ����������̻ﻥ��ئԪ��ئ�·��������£�
+  锟斤拷爰帮拷锟斤拷  锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟矫   锟铰ｏ拷
+  锟斤拷卅元锟斤拷锟藉及锟街硷拷锟斤拷锟斤拷锟酵伙拷锟斤拷锟斤拷锟斤拷锟斤拷锟教伙互锟斤拷卅元锟斤拷卅锟铰凤拷锟斤拷锟斤拷锟斤拷锟铰ｏ拷
 
-  �𼰿�  ����ٯ��覻�������ئ�»���    ƥ�̼�������ë  ���ƻ���
-    ��ᨷ֣�
+  锟金及匡拷  锟斤拷锟斤拷侬锟斤拷瑕伙拷锟斤拷锟斤拷锟斤拷卅锟铰伙拷锟斤拷    匹锟教硷拷锟斤拷锟斤拷锟斤拷毛  锟斤拷锟狡伙拷锟斤拷
+    锟斤拷屺分ｏ拷
   
  */
 int get_rotate_count(void )
@@ -761,7 +761,7 @@ int tcpstruct_accept( int *tis , int ticount )
 					} else {
 						appendReadBuffer( i , tmpbuf , rr );
 #ifdef _DEBUG
-						printf("��ȡ����:%s\n",tmpbuf);
+						printf("锟斤拷取锟斤拷锟斤拷:%s\n",tmpbuf);
 #endif
 					}
 				}
@@ -780,7 +780,7 @@ int tcpstruct_accept( int *tis , int ticount )
 							con[i].closed_by_remote = 1;
 						} else {
 #ifdef _DEBUG
-							printf("��������:%s\n",send_buf);
+							printf("锟斤拷锟斤拷锟斤拷锟斤拷:%s\n",send_buf);
 #endif
 							consumeMemBufList( con[i].mbtop_wi , send_buf, l, 1 , 0 );
 						}
@@ -813,7 +813,7 @@ int tcpstruct_accept( int *tis , int ticount )
       newcon = findregBlankCon( );
       if( newcon < 0 ) continue;
         newsockfd = accept( mainsockfd, (struct sockaddr*)&c , &len );
-        log( "ͬ��: %d\n" , newsockfd );
+        log( "同锟斤拷: %d\n" , newsockfd );
         if( newsockfd < 0 ){
           unregMemBuf( newcon );
           continue;
@@ -840,7 +840,7 @@ int tcpstruct_close( int ti )
     con[ti].use = 0;
     con[ti].fd = -1;
 
-    /* ����ë�����Ȼ���  ë����ʧ���� */
+    /* 锟斤拷锟斤拷毛锟斤拷锟斤拷锟饺伙拷锟斤拷  毛锟斤拷锟斤拷失锟斤拷锟斤拷 */
     consumeMemBufList( con[ti].mbtop_ri , NULL,
                    mbsize * sizeof( mb[0].buf ), 1, 0 );
     consumeMemBufList( con[ti].mbtop_wi , NULL,
@@ -853,7 +853,7 @@ int tcpstruct_close( int ti )
 }
 
 /*
-    �ĳ���ּ����ֵ�ئ�ʻ����ƾ��� remoteclose �������� -1 ë������
+    锟侥筹拷锟斤拷旨锟斤拷锟斤拷值锟截?拷驶锟斤拷锟斤拷凭锟斤拷锟?remoteclose 锟斤拷锟斤拷锟斤拷锟斤拷 -1 毛锟斤拷锟斤拷锟斤拷
   
  */
 int tcpstruct_read( int ti , char *buf , int len )
@@ -869,11 +869,11 @@ int tcpstruct_read( int ti , char *buf , int len )
 }
 
 /*
-  1��ë���ĳ���
-  int kend : 1ئ�յ�  �� \n ëڽ��
-  int kend_r : 1ئ�յ�  �� \r ��ڽ��(ؤľ��)
+  1锟斤拷毛锟斤拷锟侥筹拷锟斤拷
+  int kend : 1卅锟秸碉拷  锟斤拷 \n 毛诮锟斤拷
+  int kend_r : 1卅锟秸碉拷  锟斤拷 \r 锟斤拷诮锟斤拷(丐木锟斤拷)
 
-    �ĳ���ּ����ֵ�ئ�ʻ��� remote closed ��������-1ë������
+    锟侥筹拷锟斤拷旨锟斤拷锟斤拷值锟截?拷驶锟斤拷锟?remote closed 锟斤拷锟斤拷锟斤拷锟斤拷-1毛锟斤拷锟斤拷锟斤拷
   // Nuke
 	Read 1 line
 	if kend==1 then delete \n at the tail
@@ -953,7 +953,7 @@ int tcpstruct_connect( char *addr , int port )
     set_nodelay( s );
     newti = findregBlankCon( );
     if( newti < 0 ){
-        fprintf( stderr , "����ʧ��: newti:%d\n", newti );
+        fprintf( stderr , "锟斤拷锟斤拷失锟斤拷: newti:%d\n", newti );
         return TCPSTRUCT_ECFULL;
     }
     con[newti].fd = s;
@@ -1048,7 +1048,7 @@ static int consumeMemBufList( int top , char *out , int len ,
         if( consumeflag ){
             mb[top].len -= cpsize;
             if( mb[top].len > 0 ){
-                /* �����з����ƻ�ئ�м�ƥmemmove */
+                /* 锟斤拷锟斤拷锟叫凤拷锟斤拷锟狡伙拷卅锟叫硷拷匹memmove */
                 memmove( mb[top].buf , mb[top].buf + cpsize ,
                          sizeof( mb[top].buf ) - cpsize );
             }
@@ -1060,7 +1060,7 @@ static int consumeMemBufList( int top , char *out , int len ,
     }
 
     if( consumeflag ){
-        /* ئ����0��ئ�Ȼ���ئ��ݩ  ��ƥ��  �ټ�֧����ݩ  ��ئ���� */
+        /* 卅锟斤拷锟斤拷0锟斤拷卅锟饺伙拷锟斤拷卅锟斤拷荸  锟斤拷匹锟斤拷  锟劫硷拷支锟斤拷锟斤拷荸  锟斤拷卅锟斤拷锟斤拷 */
         top = mb[top_store].next;
         for(;;){
             if( top == -1 )break;
@@ -1100,10 +1100,10 @@ static int getLineReadBuffer( int index , char *buf, int len )
         top = mb[top].next;
     }
     if( ti > len ){
-        /* 1�滥ئ���ʿ��£�    ئ�޷¡�ë������ */
+        /* 1锟芥互卅锟斤拷锟绞匡拷锟铰ｏ拷    卅锟睫仿★拷毛锟斤拷锟斤拷锟斤拷 */
         return TCPSTRUCT_ETOOLONG;
     }
-    /* �滥�����ƻ�ئ�� */
+    /* 锟芥互锟斤拷锟斤拷锟狡伙拷卅锟斤拷 */
     if( breakflag == 0 ){
         return 0;
     }
@@ -1114,16 +1114,16 @@ static int getLineReadBuffer( int index , char *buf, int len )
 
 
 /*
-    �ĳ���    Ӯ��ë߯��
+    锟侥筹拷锟斤拷    赢锟斤拷毛忒锟斤拷
   int index : con index
 
   return:
-    ���޷¡�
-  0������������ read �ƻ��ַ���Ӯ���
+    锟斤拷锟睫仿★拷
+  0锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 read 锟狡伙拷锟街凤拷锟斤拷赢锟斤拷锟?
 
 
-  mbsize ����mbuse ë¦�л�������ë�����·����
-  ��������Ի���з�  �����£۹���ئ�ƾ��а����ִ���ئ�ʻ��ֵڣ�
+  mbsize 锟斤拷锟斤拷mbuse 毛娄锟叫伙拷锟斤拷锟斤拷锟斤拷毛锟斤拷锟斤拷锟铰凤拷锟斤拷锟?
+  锟斤拷锟斤拷锟斤拷锟斤拷曰锟斤拷锟叫凤拷  锟斤拷锟斤拷锟铰［癸拷锟斤拷卅锟狡撅拷锟叫帮拷锟斤拷锟街达拷锟斤拷卅锟绞伙拷锟街第ｏ拷
   
  */   
 static int getFreeMem( void )
@@ -1133,13 +1133,13 @@ static int getFreeMem( void )
 
 /*
   
-  membuf ������ë���Ʒ��ʣ�
+  membuf 锟斤拷锟斤拷锟斤拷毛锟斤拷锟狡凤拷锟绞ｏ拷
 
-  return : �Ĺ��������� >=0 ƥ index.
-  �Ĺ�����ئ��������  
+  return : 锟侥癸拷锟斤拷锟斤拷锟斤拷锟斤拷 >=0 匹 index.
+  锟侥癸拷锟斤拷锟斤拷卅锟斤拷锟斤拷锟斤拷锟斤拷  
 
-  ��������巴 mb_finder ë��������
-  ��ľƥ�����ƻ���    ��reg���£�
+  锟斤拷锟斤拷锟斤拷锟斤拷宸?mb_finder 毛锟斤拷锟斤拷锟斤拷锟斤拷
+  锟斤拷木匹锟斤拷锟斤拷锟狡伙拷锟斤拷    锟斤拷reg锟斤拷锟铰ｏ拷
  */
 
 static int findregBlankMemBuf( void  )
@@ -1161,7 +1161,7 @@ static int findregBlankMemBuf( void  )
 }
 
 /*
-  mb ëݩ  ����
+  mb 毛荸  锟斤拷锟斤拷
   
  */
 static int unregMemBuf(  int index )
@@ -1224,13 +1224,13 @@ void checkGSUCheck( char *id )
     if(!id[0])	return;
 	memset( gname, 0,  sizeof( gname) );
 	if( LockNode_getGname( (getHash(id) & 0xff), id, gname) <= 0 ){
-		log("�޷�����Ϸ���ҵ��˺�:%x/%s !!\n", getHash( id), id);
+		log("锟睫凤拷锟斤拷锟斤拷戏锟斤拷锟揭碉拷锟剿猴拷:%x/%s !!\n", getHash( id), id);
 		return;
 	}
 	log("\n");
     for(i=0; i < MAXCONNECTION; i++ ){
         if( gs[i].name[0] && strcmp( gs[i].name , gname )==0){
-          log("���ͽ�����[%s] �� %d.%x/%s ������:%d !!\n", id, i, getHash( id), gname, gs[i].fd);
+          log("锟斤拷锟酵斤拷锟斤拷锟斤拷[%s] 锟斤拷 %d.%x/%s 锟斤拷锟斤拷锟斤拷:%d !!\n", id, i, getHash( id), gname, gs[i].fd);
 					saacproto_ACUCheck_send( gs[i].fd , id );
 					return;
         }
@@ -1239,12 +1239,12 @@ void checkGSUCheck( char *id )
 
 	int ret = -1;
 		if( !isLocked( id) ) {
-			log( "ɾ���ڴ���Ϣ: �û�:%x/%s û����!!\n", getHash(id), id);
+			log( "删锟斤拷锟节达拷锟斤拷息: 锟矫伙拷:%x/%s 没锟斤拷锟斤拷!!\n", getHash(id), id);
 		}
 		if( DeleteMemLock( getHash(id) & 0xff, id, &ret) ) {
 
 		} else {
-			log( "���ܽ��� %x:%s !\n", getHash(id), id);
+			log( "锟斤拷锟杰斤拷锟斤拷 %x:%s !\n", getHash(id), id);
 		}
 }
 
@@ -1254,17 +1254,17 @@ void set_nodelay( int sock )
     int result = setsockopt( sock, IPPROTO_TCP, TCP_NODELAY,
                              (char*)&flag, sizeof(int));
     if( result < 0 ){
-        log( "���������ӳ�.\n" );
+        log( "锟斤拷锟斤拷锟斤拷锟斤拷锟接筹拷.\n" );
     } else {
-        log( "�����ӳ�: fd:%d\n", sock );
+        log( "锟斤拷锟斤拷锟接筹拷: fd:%d\n", sock );
     }
 }
 
 
 /*
-  ���ͻ����ء�ة�ӡ������  ˪��
+  锟斤拷锟酵伙拷锟斤拷锟截★拷丞锟接★拷锟斤拷锟斤拷锟? 霜锟斤拷
 
-  int flag : 1��������˪����巴������ئ��
+  int flag : 1锟斤拷锟斤拷锟斤拷锟斤拷霜锟斤拷锟斤拷宸达拷锟斤拷锟斤拷锟截?拷锟?
   
  */
 void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag )

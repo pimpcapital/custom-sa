@@ -63,12 +63,12 @@ BOOL memInit( void )
     }
     mem[0].pointer = calloc( 1, UNIT*UNITNUMBER );
     if( mem[0].pointer == NULL ){
-        print( "²»¿É·ÖÅä %d byte\n" , UNIT*UNITNUMBER );
+        print( "ä¸å¯åˆ†é… %d byte\n" , UNIT*UNITNUMBER );
         free( mem );
         return FALSE;
     }
     memset( mem[0].pointer , 0 , sizeof( UNIT*UNITNUMBER ));
-		print( "ÄÚ´æÒÑ·ÖÅä %.2f MB..." ,UNIT*UNITNUMBER/1024.0/1024.0);
+		print( "å†…å­˜å·²åˆ†é… %.2f MB..." ,UNIT*UNITNUMBER/1024.0/1024.0);
 #ifdef DEBUG
     print( "Allocate %d byte( %.2fK byte %.2fM byte )\n" ,
            UNIT*UNITNUMBER,
@@ -163,9 +163,9 @@ void* allocateMemory( const unsigned int nbyte )
 
 
 /*------------------------------------------------------------
- * Â¦ĞÑ
- * ß¯Ô»°À
- *  Ø¦ØÆ
+ * å¨„é†’
+ * å¿’æ›°è¢„
+ *  å…ä»„
  ------------------------------------------------------------*/
 void freeMemory( void* freepointer )
 {

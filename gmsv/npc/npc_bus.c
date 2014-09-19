@@ -9,14 +9,14 @@
 #include "handletime.h"
 
 /* 
- * Ìïµ©ĞÄĞ×ÖĞØ¦ÒÇÃ«ÔÊÔÂNPC
+ * ç”°æ—¦å¿ƒå‡¶ä¸­å…ä»ªæ¯›å…æœˆNPC
  */
  
 enum {
-	NPC_WORK_ROUTETOX = CHAR_NPCWORKINT1,		/* Éı³ğ³ß£¢  Õç   */
-	NPC_WORK_ROUTETOY = CHAR_NPCWORKINT2,		/* Éı³ğ³ß£¢  Õç   */
-	NPC_WORK_ROUTEPOINT = CHAR_NPCWORKINT3,		/* ÆáÖÏ    ¾® */
-	NPC_WORK_ROUNDTRIP = CHAR_NPCWORKINT4,		/* µæÎå¾®½ÑÔ»¾®  ¨ß¡°µæÎå ¨à¡°½ÑÔ»  */
+	NPC_WORK_ROUTETOX = CHAR_NPCWORKINT1,		/* å‡ä»‡å°ºï¼‚  ç”„   */
+	NPC_WORK_ROUTETOY = CHAR_NPCWORKINT2,		/* å‡ä»‡å°ºï¼‚  ç”„   */
+	NPC_WORK_ROUTEPOINT = CHAR_NPCWORKINT3,		/* æ¼†çª’    äº• */
+	NPC_WORK_ROUNDTRIP = CHAR_NPCWORKINT4,		/* å«äº”äº•çª–æ›°äº•  ã„Ÿâ€œå«äº” ã„ â€œçª–æ›°  */
 	NPC_WORK_MODE = CHAR_NPCWORKINT5,
 	NPC_WORK_CURRENTROUTE = CHAR_NPCWORKINT6, 
 	NPC_WORK_ROUTEMAX = CHAR_NPCWORKINT7,
@@ -25,7 +25,7 @@ enum {
 	NPC_WORK_SEFLG = CHAR_NPCWORKINT10,
 };
 
-/* òĞ  ¶ªÓÀ±¾¡õ³â¼°enum */
+/* è›  ä¸¢æ°¸æœ¬â–¡æ–¥åŠenum */
 enum {
 	NPC_BUS_MSG_GETTINGON,
 	NPC_BUS_MSG_NOTPARTY,
@@ -43,16 +43,16 @@ typedef struct {
 	char	defaultmsg[128];
 }NPC_BUS_MSG;
 NPC_BUS_MSG		busmsg[] = {
-	{ "msg_gettingon",	"PAON£¡£¨ÄãÎŞ·¨ì¶ÖĞÍ¾¼ÓÈëÎÒÃÇà¡£¡£©"},
-	{ "msg_notparty",	"PAPAON£¡£¡ÎŞ·¨ÒÔÍÅ¶Ó¼ÓÈëà¡£¡"},
-	{ "msg_overparty",	"PAON£¡£¡ÈËÊıÒÑÂú¡£"},
-	{ "msg_denieditem",		"PAPAON£¡£¡ÎÒ¿É²»ÒªÕâ¸öµÀ¾ß£¡"},
-	{ "msg_allowitem",		"ÍÛà¸~(ÏëÒªÄÇ¸öµÀ¾ß°¡!)"},
-	{ "msglevel",		"PAPAON£¡£¡ÄãµÄµÈ¼¶»¹²»¹»à¡£¡"},
-	{ "msg_stone",		"PAPAON£¡£¡½ğÇ®²»×ãà¡£¡"},
-	{ "msg_event",		"PAON£¡£¡ÄãÎŞ·¨¼ÓÈëà¡£¡"},
-	{ "msg_start",		"ÍÛà¸~(³ö·¢½øĞĞ)"},
-	{ "msg_end",		"ÍÛà¸~(µ½ÂŞ)"}
+	{ "msg_gettingon",	"PAONï¼ï¼ˆä½ æ— æ³•æ–¼ä¸­é€”åŠ å…¥æˆ‘ä»¬å”·ï¼ï¼‰"},
+	{ "msg_notparty",	"PAPAONï¼ï¼æ— æ³•ä»¥å›¢é˜ŸåŠ å…¥å”·ï¼"},
+	{ "msg_overparty",	"PAONï¼ï¼äººæ•°å·²æ»¡ã€‚"},
+	{ "msg_denieditem",		"PAPAONï¼ï¼æˆ‘å¯ä¸è¦è¿™ä¸ªé“å…·ï¼"},
+	{ "msg_allowitem",		"å“‡å–”~(æƒ³è¦é‚£ä¸ªé“å…·å•Š!)"},
+	{ "msglevel",		"PAPAONï¼ï¼ä½ çš„ç­‰çº§è¿˜ä¸å¤Ÿå”·ï¼"},
+	{ "msg_stone",		"PAPAONï¼ï¼é‡‘é’±ä¸è¶³å”·ï¼"},
+	{ "msg_event",		"PAONï¼ï¼ä½ æ— æ³•åŠ å…¥å”·ï¼"},
+	{ "msg_start",		"å“‡å–”~(å‡ºå‘è¿›è¡Œ)"},
+	{ "msg_end",		"å“‡å–”~(åˆ°ç½—)"}
 	
 };
 
@@ -67,13 +67,13 @@ static void NPC_Bus_walk( int meindex);
 
 #define		NPC_BUS_LOOPTIME		200
 
-/* ½÷ÇĞÁİÃŞ·¸°×ÇÉ»ïĞş */
+/* è°¨åˆ‡å‡›æ£‰çŠ¯ç™½å·§ä¼™ç„ */
 #define		NPC_BUS_WAITTIME_DEFAULT	180
 
 #define		NPC_BUS_WAITINGMODE_WAITTIME	5000
 
 /*********************************
-* âÙÓåÖÊ  
+* èµ“æ¸è´¨  
 *********************************/
 BOOL NPC_BusInit( int meindex )
 {
@@ -86,8 +86,8 @@ BOOL NPC_BusInit( int meindex )
 	
 	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
 
-	/* Ø¦ØêÄ¾ÈÉÖĞØêØ¦ÖĞÂ¦ĞÑ¼°ÃñÄáÓÀÛÍ */
-	routenum = NPC_Util_GetNumFromStrWithDelim( argstr, "routenum");//ĞĞÊ»Â·ÏßÊıÁ¿
+	/* å…ä»ƒæœ¨å£¬ä¸­ä»ƒå…ä¸­å¨„é†’åŠæ°‘å°¼æ°¸å¼ */
+	routenum = NPC_Util_GetNumFromStrWithDelim( argstr, "routenum");//è¡Œé©¶è·¯çº¿æ•°é‡
 
 	if( routenum == -1 ) {
 		print( "npcbus:nothing routenum \n");
@@ -126,36 +126,36 @@ BOOL NPC_BusInit( int meindex )
 	CHAR_setInt( meindex, CHAR_LOOPINTERVAL, 
 						NPC_BUS_WAITINGMODE_WAITTIME);
     
-    /* òØ»ş¼°ÁİÃŞÃ«±¾ÓÀĞş */
+    /* èœ‡ç®•åŠå‡›æ£‰æ¯›æœ¬æ°¸ç„ */
     CHAR_setWorkInt( meindex, NPC_WORK_CURRENTTIME, NowTime.tv_sec);
 
     for( i = 0; i < CHAR_PARTYMAX; i ++) {
     	CHAR_setWorkInt( meindex, CHAR_WORKPARTYINDEX1 + i, -1);
     }
 	
-	/* »ï¡õĞşè£ÀÃÔÊÔÂ */
+	/* ä¼™â–¡ç„ç‘çƒ‚å…æœˆ */
 {
 	int rev;
 	int r = CHAR_getWorkInt( meindex, NPC_WORK_ROUTEMAX);
 	CHAR_setWorkInt( meindex, NPC_WORK_CURRENTROUTE, RAND( 1, r));
 	//print( "route:%d\n",CHAR_getWorkInt( meindex, NPC_WORK_CURRENTROUTE));
 
-	/*   Ç·µ©Õı¡õĞş */
+	/*   æ¬ æ—¦æ­£â–¡ç„ */
 	rev = NPC_Util_GetNumFromStrWithDelim( argstr, "reverse");
 
 	if( rev == 1 ) {
 		int num = NPC_BusGetRoutePointNum( meindex, argstr);
 
 		if( num <= 0 ) {
-			print( "npcbus:ÕæÆæ¹Ö£¡\n");
+			print( "npcbus:çœŸå¥‡æ€ªï¼\n");
 			return FALSE;
 		}
 		CHAR_setWorkInt( meindex, NPC_WORK_ROUTEPOINT, num-1);
 		CHAR_setWorkInt( meindex, NPC_WORK_ROUNDTRIP, 1);
 	}
-	/* »ï¡õĞşÃ«±¾ÓÀĞşÔÊÔÂ */
+	/* ä¼™â–¡ç„æ¯›æœ¬æ°¸ç„å…æœˆ */
 	NPC_BusSetPoint( meindex, argstr);
-	/* µæÎåÛÆÃ«  Ô÷ÔÊÔÂ */
+	/* å«äº”ç‡®æ¯›  æ†å…æœˆ */
 	NPC_BusSetDestPoint( meindex, argstr);
 }
 
@@ -164,7 +164,7 @@ BOOL NPC_BusInit( int meindex )
 
 
 /*********************************
-*   ØÆ¾®ØêÈÕÄ¾Ğ×Áİ¼°ÖÊ  
+*   ä»„äº•ä»ƒæ—¥æœ¨å‡¶å‡›åŠè´¨  
 *********************************/
 void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
                      int color )
@@ -172,11 +172,11 @@ void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
     int i;
     int	partyflg = FALSE;
 	
-    /* ÃóÒÁÄÌØÀ¡õ±å¸²ØÆ»¯·ÖØê  É±ÔÊÔÂ */
+    /* çš¿ä¼Šå¥¶ä¹©â–¡åè¦†ä»„åŒ–åˆ†ä»ƒ  æ€å…æœˆ */
     if( CHAR_getInt( talkerindex , CHAR_WHICHTYPE ) != CHAR_TYPEPLAYER ) {
     	return;
     }
-	/* ·ßÛĞ¼°ÓÉ¡õ  Å«  ê¼İÎ  ¾®Éıµ¤¾®Æ©ÍÍÔÂ */
+	/* æ„¤åŒåŠç”±â–¡  å¥´  æ˜™è¸  äº•å‡ä¸¹äº•è­¬å±¯æœˆ */
 	for( i = 0; i < CHAR_PARTYMAX; i ++ ) {
 		int index = CHAR_getWorkInt( meindex, CHAR_WORKPARTYINDEX1+i);
 		if( CHAR_CHECKINDEX(index)){
@@ -192,16 +192,16 @@ void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
 		if( CHAR_getWorkInt( meindex, NPC_WORK_MODE) == 0 ) {
 			int i;
 	//		#define NPC_BUS_DEBUGROUTINTG	"routingtable:"
-			if( strstr( szMes, "³ö·¢" )  ||
-				strstr( szMes, "³ö·¢" )  ||
+			if( strstr( szMes, "å‡ºå‘" )  ||
+				strstr( szMes, "å‡ºå‘" )  ||
 				strstr( szMes, "Go" )  ||
 				strstr( szMes, "go" ))
 			{
 				CHAR_setWorkInt( meindex, NPC_WORK_MODE,1);
 				
-				/* »ï¡õÃóèúĞÑ¼°ôÄÇëØÆÃ«ĞÚÈÊ»ÉÕº±åÔÊÔÂ */
+				/* ä¼™â–¡çš¿æ¥®é†’åŠè£Ÿè¯·ä»„æ¯›æ±¹ä»ç°§è˜¸åå…æœˆ */
 	 			CHAR_setInt( meindex, CHAR_LOOPINTERVAL, NPC_BUS_LOOPTIME);
-				/* SE   ÈÕÔÊ  Ñ¨¼şÆ¹µ©¼°ÚïÌ«   */
+				/* SE   æ—¥å…  ç©´ä»¶ä¹’æ—¦åŠé™²å¤ª   */
 				if( CHAR_getWorkInt( meindex, NPC_WORK_SEFLG )) {
 					CHAR_sendSEoArroundCharacter( 
 									CHAR_getInt( meindex, CHAR_FLOOR),
@@ -210,7 +210,7 @@ void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
 									60,
 									TRUE);
 				}
-				/* Çë  ÔÊÔÂÁİ¼°¶ªÓÀ±¾¡õ³â*/
+				/* è¯·  å…æœˆå‡›åŠä¸¢æ°¸æœ¬â–¡æ–¥*/
 				for( i = 1; i < CHAR_PARTYMAX; i ++ ) {
 					int partyindex = CHAR_getWorkInt( meindex, CHAR_WORKPARTYINDEX1+i);
 					if( CHAR_CHECKINDEX( partyindex)) {
@@ -222,20 +222,20 @@ void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
 	}
 }
 /**************************************
- * »ï¡õÃóèúĞÑ
+ * ä¼™â–¡çš¿æ¥®é†’
  **************************************/
 void NPC_BusLoop( int meindex)
 {
 	int	i;
 	switch( CHAR_getWorkInt( meindex, NPC_WORK_MODE )) {
 	  case 0:
-	    /* ½÷ÇĞÆ¹¡õÓñ¼°Áİ£İÁİÃŞÃ«ÃñÄáÓÀÛÍÔÊÔÂ */
-		/* ÁİÃŞ»¥·³ÔÈĞ×¼°Æ¥£İÇë  ÔÊÔÂ */
+	    /* è°¨åˆ‡ä¹’â–¡ç‰åŠå‡›ï¼½å‡›æ£‰æ¯›æ°‘å°¼æ°¸å¼å…æœˆ */
+		/* å‡›æ£‰äº’çƒ¦åŒ€å‡¶åŠåŒ¹ï¼½è¯·  å…æœˆ */
 		if( CHAR_getWorkInt( meindex, NPC_WORK_CURRENTTIME) 
 			+ CHAR_getWorkInt( meindex, NPC_WORK_WAITTIME) 
 			< NowTime.tv_sec)
 		{
-			/* SE   ÈÕÔÊ  Ñ¨¼şÆ¹µ©¼°ÚïÌ«   */
+			/* SE   æ—¥å…  ç©´ä»¶ä¹’æ—¦åŠé™²å¤ª   */
 			if( CHAR_getWorkInt( meindex, NPC_WORK_SEFLG )) {
 				CHAR_sendSEoArroundCharacter( 
 								CHAR_getInt( meindex, CHAR_FLOOR),
@@ -244,7 +244,7 @@ void NPC_BusLoop( int meindex)
 								60,
 								TRUE);
 			}
-			/* Çë  ÔÊÔÂÁİ¼°¶ªÓÀ±¾¡õ³â*/
+			/* è¯·  å…æœˆå‡›åŠä¸¢æ°¸æœ¬â–¡æ–¥*/
 			for( i = 1; i < CHAR_PARTYMAX; i ++ ) {
 				int partyindex = CHAR_getWorkInt( meindex, CHAR_WORKPARTYINDEX1+i);
 				if( CHAR_CHECKINDEX( partyindex)) {
@@ -253,29 +253,29 @@ void NPC_BusLoop( int meindex)
 			}
 			
 			CHAR_setWorkInt( meindex, NPC_WORK_MODE,1);
-			/* »ï¡õÃóèúĞÑ¼°ôÄÇëØÆÃ«ĞÚÈÊ»ÉÕº±åÔÊÔÂ */
+			/* ä¼™â–¡çš¿æ¥®é†’åŠè£Ÿè¯·ä»„æ¯›æ±¹ä»ç°§è˜¸åå…æœˆ */
 			CHAR_setInt( meindex, CHAR_LOOPINTERVAL, NPC_BUS_LOOPTIME);
 		}
 		return;
 	  case 1:
-	  	/* ĞÚÈÊ */
+	  	/* æ±¹ä» */
 	  	NPC_Bus_walk( meindex);
 	  case 2:
-		/* ÷±ÒıÔÈ»¯ÖĞÔÂÆ¹¡õÓñ */
-		/* ÁİÃŞ»¥·³ÔÈĞ×¼°Æ¥£İÇë  ÔÊÔÂ */
+		/* é…å¼•åŒ€åŒ–ä¸­æœˆä¹’â–¡ç‰ */
+		/* å‡›æ£‰äº’çƒ¦åŒ€å‡¶åŠåŒ¹ï¼½è¯·  å…æœˆ */
 		if( CHAR_getWorkInt( meindex, NPC_WORK_CURRENTTIME) 
 			+ (CHAR_getWorkInt( meindex, NPC_WORK_WAITTIME) /3)
 			< NowTime.tv_sec)
 		{
 			CHAR_setWorkInt( meindex, NPC_WORK_MODE,1);
-			/* »ï¡õÃóèúĞÑ¼°ôÄÇëØÆÃ«ĞÚÈÊ»ÉÕº±åÔÊÔÂ */
+			/* ä¼™â–¡çš¿æ¥®é†’åŠè£Ÿè¯·ä»„æ¯›æ±¹ä»ç°§è˜¸åå…æœˆ */
 			CHAR_setInt( meindex, CHAR_LOOPINTERVAL, NPC_BUS_LOOPTIME);
 		
 		}
 		return;
 	  case 3:
-		/* ²÷ååØÆ»¯ÊÖ£İÛÍ·ÂÄÌÊ§¼şĞş¼°  ÕÁ½÷ÇĞ¼°¿Ğ±å£İ
-		 * ¼ÁØÆ³ğ³ğÆ¥ËüÄáÄÌĞşÃ«ÖĞÄ¾»¯Ö§ÔÂ
+		/* è°—é‚‹ä»„åŒ–æ‰‹ï¼½å¼ä»¿å¥¶å¤±ä»¶ç„åŠ  æ¨Ÿè°¨åˆ‡åŠå•ƒåï¼½
+		 * å‰‚ä»„ä»‡ä»‡åŒ¹å®ƒå°¼å¥¶ç„æ¯›ä¸­æœ¨åŒ–æ”¯æœˆ
 		 */
 		if( CHAR_getWorkInt( meindex, NPC_WORK_CURRENTTIME) + 3
 			< NowTime.tv_sec)
@@ -283,24 +283,24 @@ void NPC_BusLoop( int meindex)
 			char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 
 			NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
-			/* »ï¡õÃóèúĞÑ¼°ôÄÇëØÆÃ«ÔŞÈÊÔÊÔÂ */
+			/* ä¼™â–¡çš¿æ¥®é†’åŠè£Ÿè¯·ä»„æ¯›èµä»å…æœˆ */
 			CHAR_setInt( meindex, CHAR_LOOPINTERVAL, 
 						NPC_BUS_WAITINGMODE_WAITTIME);
 			
-			/* »ï¡õĞşè£ÀÃÔÊÔÂ */
+			/* ä¼™â–¡ç„ç‘çƒ‚å…æœˆ */
 			{
 				int r = CHAR_getWorkInt( meindex, NPC_WORK_ROUTEMAX);
 				CHAR_setWorkInt( meindex, NPC_WORK_CURRENTROUTE, RAND( 1, r));
 				//print( "route:%d\n",CHAR_getWorkInt( meindex, NPC_WORK_CURRENTROUTE));
 			}
-			/* µæÎå½ÑÔ»°×·Âºë  µÊ */
+			/* å«äº”çª–æ›°ç™½ä»¿å¼˜  å‡³ */
 			CHAR_setWorkInt( meindex, NPC_WORK_ROUNDTRIP, 
 							CHAR_getWorkInt( meindex, NPC_WORK_ROUNDTRIP)^1);
 
-			/* ÆİºÌÄÌ¼şĞş¼°Æ©å¦ */
-			/* ½ÑÔ»·´  À£ÖÊ   */
+			/* æˆšç¦¾å¥¶ä»¶ç„åŠè­¬æ¿¡ */
+			/* çª–æ›°å  æºƒè´¨   */
 			if( CHAR_getWorkInt( meindex, NPC_WORK_ROUNDTRIP) == 1)  {
-				/* ¹«¼°»ï¡õĞş¼°  æÎºÌÄÌ¼şĞşĞÑÃ«  ÔÂ */
+				/* å…¬åŠä¼™â–¡ç„åŠ  å«–ç¦¾å¥¶ä»¶ç„é†’æ¯›  æœˆ */
 				int num = NPC_BusGetRoutePointNum( meindex, argstr);
 				CHAR_setWorkInt( meindex, NPC_WORK_ROUTEPOINT, num-1);
 			}
@@ -308,15 +308,15 @@ void NPC_BusLoop( int meindex)
 				CHAR_setWorkInt( meindex, NPC_WORK_ROUTEPOINT, 
 							CHAR_getWorkInt( meindex, NPC_WORK_ROUTEPOINT) +1);
 			}
-			/* Æİ¼°ºÌÄÌ¼şĞş¼°Õç  Ã«±¾ÓÀĞşÔÊÔÂ */
+			/* æˆšåŠç¦¾å¥¶ä»¶ç„åŠç”„  æ¯›æœ¬æ°¸ç„å…æœˆ */
 			NPC_BusSetPoint( meindex, argstr);
-			/* µæÎåÛÆÃ«  Ô÷ÔÊÔÂ */
+			/* å«äº”ç‡®æ¯›  æ†å…æœˆ */
 			NPC_BusSetDestPoint( meindex, argstr);
-			/* ÓÉ¡õ  Å«  ØêÔÂÖÊ  Ã«ÔÊÔÂ */
+			/* ç”±â–¡  å¥´  ä»ƒæœˆè´¨  æ¯›å…æœˆ */
 			CHAR_DischargeParty( meindex, 0);
-		    /* òØ»ş¼°ÁİÃŞÃ«±¾ÓÀĞş */
+		    /* èœ‡ç®•åŠå‡›æ£‰æ¯›æœ¬æ°¸ç„ */
 		    CHAR_setWorkInt( meindex, NPC_WORK_CURRENTTIME, NowTime.tv_sec);
-			/* Æ¹¡õÓñÛÍØøÊ§ */
+			/* ä¹’â–¡ç‰å¼ä¼‰å¤± */
 			CHAR_setWorkInt( meindex, NPC_WORK_MODE, 0);
 		}
 		return;
@@ -325,7 +325,7 @@ void NPC_BusLoop( int meindex)
 	}
 }
 /**************************************
- * ĞÚÈÊ£Û
+ * æ±¹ä»ï¼»
  **************************************/
 static void NPC_Bus_walk( int meindex)
 {	
@@ -334,14 +334,14 @@ static void NPC_Bus_walk( int meindex)
 	int ret;
 	int i;
 
-	/* ĞÚÈÊèúÒç */
-	/* ²÷ååØÆĞ×Áİ¼°ÖÊ   */
+	/* æ±¹ä»æ¥®æº¢ */
+	/* è°—é‚‹ä»„å‡¶å‡›åŠè´¨   */
 	start.x = CHAR_getInt( meindex, CHAR_X);
 	start.y = CHAR_getInt( meindex, CHAR_Y);
 	end.x = CHAR_getWorkInt( meindex, NPC_WORK_ROUTETOX);
 	end.y = CHAR_getWorkInt( meindex, NPC_WORK_ROUTETOY);
 	
-	/* ²÷ååØÆĞ×¼°Æ¥Æİ¼°ºÌÄÌ¼şĞş±å */
+	/* è°—é‚‹ä»„å‡¶åŠåŒ¹æˆšåŠç¦¾å¥¶ä»¶ç„å */
 	if( start.x == end.x && start.y == end.y ) {
 		int add = 1;
 		char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
@@ -354,11 +354,11 @@ static void NPC_Bus_walk( int meindex)
 		CHAR_setWorkInt( meindex, NPC_WORK_ROUTEPOINT, 
 						CHAR_getWorkInt( meindex, NPC_WORK_ROUTEPOINT) +add);
 		if( NPC_BusSetPoint( meindex, argstr) == FALSE ) {
-			/*     ±å²÷åå*/
-			/* ½÷ÇĞÆ¹¡õÓñ±åÔÊÔÂ */
+			/*     åè°—é‚‹*/
+			/* è°¨åˆ‡ä¹’â–¡ç‰åå…æœˆ */
 			CHAR_setWorkInt( meindex, NPC_WORK_MODE,3);
 			
-			/* SE   ÈÕÔÊ  Ñ¨¼şÆ¹µ©¼°ÚïÌ«   */
+			/* SE   æ—¥å…  ç©´ä»¶ä¹’æ—¦åŠé™²å¤ª   */
 			if( CHAR_getWorkInt( meindex, NPC_WORK_SEFLG )) {
 				CHAR_sendSEoArroundCharacter( 
 								CHAR_getInt( meindex, CHAR_FLOOR),
@@ -367,14 +367,14 @@ static void NPC_Bus_walk( int meindex)
 								60,
 								TRUE);
 			}
-			/* ååÖĞĞ×Áİ¼°¶ªÓÀ±¾¡õ³â*/
+			/* é‚‹ä¸­å‡¶å‡›åŠä¸¢æ°¸æœ¬â–¡æ–¥*/
 			for( i = 1; i < CHAR_PARTYMAX; i ++ ) {
 				int partyindex = CHAR_getWorkInt( meindex, CHAR_WORKPARTYINDEX1+i);
 				if( CHAR_CHECKINDEX( partyindex)) {
 					NPC_BusSendMsg( meindex, partyindex, NPC_BUS_MSG_END);
 				}
 			}
-		    /* òØ»ş¼°ÁİÃŞÃ«±¾ÓÀĞş */
+		    /* èœ‡ç®•åŠå‡›æ£‰æ¯›æœ¬æ°¸ç„ */
 		    CHAR_setWorkInt( meindex, NPC_WORK_CURRENTTIME, NowTime.tv_sec);
 			return;
 		}
@@ -383,16 +383,16 @@ static void NPC_Bus_walk( int meindex)
 		}
 	}
 	/*-------------------------------------------------------*/
-	/* ĞÚ¾®ÁùÔÂÖÊ   */
+	/* æ±¹äº•å…­æœˆè´¨   */
 	
-	/*   éùÃ«·Æ»§ÔÂ */
+	/*   è½¾æ¯›è²æˆ·æœˆ */
 	dir = NPC_Util_getDirFromTwoPoint( &start,&end );
 
-	/* ÆáÖĞÔÂèëô÷¼°½÷    ÓÉ¡õ  Å«ĞÚÎåÆ¥Òøµ¤   */
+	/* æ¼†ä¸­æœˆæ¡¦èµ­åŠè°¨    ç”±â–¡  å¥´æ±¹äº”åŒ¹é“¶ä¸¹   */
 	end.x = CHAR_getInt( meindex, CHAR_X);
 	end.y = CHAR_getInt( meindex, CHAR_Y);
 	
-	/* ·òÔÈ¾®¾®ÔÈĞ×Áİ¼°¿Ğ¼°ÖÊ   */
+	/* å¤«åŒ€äº•äº•åŒ€å‡¶å‡›åŠå•ƒåŠè´¨   */
 	for( i = 0; i < 100; i ++ ) {	
 		if( dir < 0 ) {
 			dir = RAND( 0,7);
@@ -402,23 +402,23 @@ static void NPC_Bus_walk( int meindex)
 	}
 	
 	if( dir >= 0 && dir <= 7 ) {
-		/* ĞÚÈÊ */
+		/* æ±¹ä» */
 		ret = CHAR_walk( meindex, dir, 0);
 
 		if( ret == CHAR_WALKSUCCESSED ) {
-			/* ·ßÛĞ»¥ÍÊØ¦ÈÕõ´ÃŞÃ«ĞÚ¾®ÁùÔÂ */
+			/* æ„¤åŒäº’è¤ªå…æ—¥é†®æ£‰æ¯›æ±¹äº•å…­æœˆ */
 			int	i;
 			for( i = 1; i < CHAR_PARTYMAX; i ++ ) {
 				int toindex = CHAR_getWorkInt( meindex, i + CHAR_WORKPARTYINDEX1);
 				if( CHAR_CHECKINDEX(toindex) ) {
 					int		parent_dir;
-					/* ºÒ¼°ŞË  Îç£İÍÊ¼°ĞÚÎåó¡¼°ŞË  ¾®ÈÕ  éùÃ«·Æ»§ÔÂ */
-					/* ĞÚÈÊ */
+					/* é˜‚åŠåŒ  åˆï¼½è¤ªåŠæ±¹äº”èŸ†åŠåŒ  äº•æ—¥  è½¾æ¯›è²æˆ·æœˆ */
+					/* æ±¹ä» */
 					start.x = CHAR_getInt( toindex, CHAR_X);
 					start.y = CHAR_getInt( toindex, CHAR_Y);
 					parent_dir = NPC_Util_getDirFromTwoPoint( &start,&end );
-					/* ºë·Â·¸Å«Ëüµ©×óÃóÆËÒà¼şĞÚÎåÃ«  òØÔÊÔÂ¿Ğ±å£İ
-					 * Æİ¼°ºÒ·´ó¡¼°ºÒ¼°  Ã«Ü°µ¤·½µ¤±åÔÊÔÂ
+					/* å¼˜ä»¿çŠ¯å¥´å®ƒæ—¦å·¦çš¿æ‰‘äº¦ä»¶æ±¹äº”æ¯›  èœ‡å…æœˆå•ƒåï¼½
+					 * æˆšåŠé˜‚åèŸ†åŠé˜‚åŠ  æ¯›é¦¨ä¸¹æ–¹ä¸¹åå…æœˆ
 					 */
 					end = start;
 					if( parent_dir != -1 ) {
@@ -430,7 +430,7 @@ static void NPC_Bus_walk( int meindex)
 	}
 }
 /**************************************
- * Æİ¼°èëô÷Ã«±¾ÓÀĞşÔÊÔÂ
+ * æˆšåŠæ¡¦èµ­æ¯›æœ¬æ°¸ç„å…æœˆ
  **************************************/
 static int NPC_BusSetPoint( int meindex, char *argstr)
 {
@@ -467,8 +467,8 @@ static int NPC_BusSetPoint( int meindex, char *argstr)
 	return TRUE;
 }
 /**************************************
- * route  Ä¯¾®ÈÕ£İ  ó¡»¥Ø¤ÔÈĞ×ÈÕ¹«Ä¾Ã«
- * ±¹Ä¯¼°Îç³ğ±å±¾ÓÀĞşÔÊÔÂ£Û
+ * route  å¯äº•æ—¥ï¼½  èŸ†äº’ä¸åŒ€å‡¶æ—¥å…¬æœ¨æ¯›
+ * æƒ«å¯åŠåˆä»‡åæœ¬æ°¸ç„å…æœˆï¼»
  **************************************/
 static void NPC_BusSetDestPoint( int meindex, char *argstr)
 {
@@ -486,8 +486,8 @@ static void NPC_BusSetDestPoint( int meindex, char *argstr)
 	}
 }
 /**************************************
- * Ï¶ÀÃ½ñÄ¾Ğ×Ê§ÄÌ  Ø©Ã«  ÔÈ»¯ÖĞÔÂ¾®ÃñÄáÓÀÛÍÔÊÔÂ
- *   ÔÈ»¯ÖĞĞ×ÈÕ·Ö»§
+ * éš™çƒ‚ä»Šæœ¨å‡¶å¤±å¥¶  ä¸æ¯›  åŒ€åŒ–ä¸­æœˆäº•æ°‘å°¼æ°¸å¼å…æœˆ
+ *   åŒ€åŒ–ä¸­å‡¶æ—¥åˆ†æˆ·
  **************************************/
 static BOOL NPC_BusCheckDeniedItem( int meindex, int charaindex, char *argstr)
 {
@@ -520,8 +520,8 @@ static BOOL NPC_BusCheckDeniedItem( int meindex, int charaindex, char *argstr)
 	return found;
 }
 /**************************************
- * Ï¶ÀÃ½ñÄ¾Ğ×Ê§ÄÌ  Ø©Ã«  ÔÈ»¯ÖĞÔÂ¾®ÃñÄáÓÀÛÍÔÊÔÂ
- *   ÔÈ»¯ÖĞØ¦ÖĞÎç·Ö»§
+ * éš™çƒ‚ä»Šæœ¨å‡¶å¤±å¥¶  ä¸æ¯›  åŒ€åŒ–ä¸­æœˆäº•æ°‘å°¼æ°¸å¼å…æœˆ
+ *   åŒ€åŒ–ä¸­å…ä¸­åˆåˆ†æˆ·
  **************************************/
 BOOL NPC_BusCheckAllowItem( int meindex, int charaindex, BOOL pickupmode)
 {
@@ -569,13 +569,13 @@ BOOL NPC_BusCheckAllowItem( int meindex, int charaindex, BOOL pickupmode)
 }
 
 /**************************************
- * Ï¶ÀÃ½ñÄ¾Ğ×ÒÁÃ¬»ï¶¯Ïş¾®ÃñÄáÓÀÛÍÔÊÔÂ
+ * éš™çƒ‚ä»Šæœ¨å‡¶ä¼ŠçŸ›ä¼™åŠ¨æ™“äº•æ°‘å°¼æ°¸å¼å…æœˆ
  **************************************/
 static BOOL NPC_BusCheckLevel( int meindex, int charaindex, char *argstr)
 {
 	int		level;
 	
-	/* Ø¦ØêÄ¾ÈÉÖĞØêØ¦ÖĞÂ¦ĞÑ¼°ÃñÄáÓÀÛÍ */
+	/* å…ä»ƒæœ¨å£¬ä¸­ä»ƒå…ä¸­å¨„é†’åŠæ°‘å°¼æ°¸å¼ */
 	level = NPC_Util_GetNumFromStrWithDelim( argstr, "needlevel");
 	if( level == -1 ) {
 		return TRUE;
@@ -585,14 +585,14 @@ static BOOL NPC_BusCheckLevel( int meindex, int charaindex, char *argstr)
 	return FALSE;
 }
 /**************************************
- * »¿àÅÃ«ÃñÄáÓÀÛÍÔÊÔÂ
- * -1 òÍ   0¶¯Ïş¡±    £İ¾®¹´  Û¢Stone
+ * è±¢å—¯æ¯›æ°‘å°¼æ°¸å¼å…æœˆ
+ * -1 è›²   0åŠ¨æ™“â€    ï¼½äº•å‹¾  é‚°Stone
  **************************************/
 static int NPC_BusCheckStone( int meindex, int charaindex, char *argstr)
 {
 	int		gold;
 	
-	/* Ø¦ØêÄ¾ÈÉÖĞØêØ¦ÖĞÂ¦ĞÑ¼°ÃñÄáÓÀÛÍ */
+	/* å…ä»ƒæœ¨å£¬ä¸­ä»ƒå…ä¸­å¨„é†’åŠæ°‘å°¼æ°¸å¼ */
 	gold = NPC_Util_GetNumFromStrWithDelim( argstr, "needstone");
 	if( gold == -1 ) {
 		return 0;
@@ -602,8 +602,8 @@ static int NPC_BusCheckStone( int meindex, int charaindex, char *argstr)
 	return -1;
 }
 /**************************************
- * ¶ªÓÀ±¾¡õ³âÃ«ËªÔÂ
- * Â¦ĞÑ¼°¶ªÓÀ±¾¡õ³â»¥Ø¦ØêÄ¾ÈÉ·¸°×ÇÉ»ïĞş¶ªÓÀ±¾¡õ³âÃ«ËªÔÂ
+ * ä¸¢æ°¸æœ¬â–¡æ–¥æ¯›éœœæœˆ
+ * å¨„é†’åŠä¸¢æ°¸æœ¬â–¡æ–¥äº’å…ä»ƒæœ¨å£¬çŠ¯ç™½å·§ä¼™ç„ä¸¢æ°¸æœ¬â–¡æ–¥æ¯›éœœæœˆ
  **************************************/
 static void NPC_BusSendMsg( int meindex, int talkerindex, int tablenum)
 {
@@ -625,7 +625,7 @@ static void NPC_BusSendMsg( int meindex, int talkerindex, int tablenum)
 	CHAR_talkToCli( talkerindex, meindex, msg, CHAR_COLORYELLOW);
 }
 /**************************************
- * »ï¡õĞş  ¡õÆ¤»ï¼°ºÌÄÌ¼şĞş¼°ĞÑÃ«äú  ÔÊÔÂ
+ * ä¼™â–¡ç„  â–¡çš®ä¼™åŠç¦¾å¥¶ä»¶ç„åŠé†’æ¯›æ½¸  å…æœˆ
  **************************************/
 static int NPC_BusGetRoutePointNum( int meindex, char *argstr )
 {
@@ -657,45 +657,45 @@ BOOL NPC_BusCheckJoinParty( int meindex, int charaindex, BOOL msgflg)
 	int		ret;
 	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
 
-	/* ¨àºëØøÓÀÓñ¶¯  ¼°ĞÄ */
+	/* ã„ å¼˜ä¼‰æ°¸ç‰åŠ¨  åŠå¿ƒ */
 	if( !NPC_Util_charIsInFrontOfChar( charaindex, meindex, 1 )) return FALSE; 
-	/*     ê¼ÀÖ·´òĞ  ÔÊÔÂ */
+	/*     æ˜™ä¹åè›  å…æœˆ */
 	if( CHAR_getWorkInt( meindex, NPC_WORK_MODE) != 0 ) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_GETTINGON);
 		return FALSE;
 	}
-	/* Ìì¡õ»¯²»·ÖÔÈĞ×ÈÕ·Ö»§ */
+	/* å¤©â–¡åŒ–ä¸åˆ†åŒ€å‡¶æ—¥åˆ†æˆ· */
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKPARTYMODE ) != CHAR_PARTY_NONE) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_NOTPARTY);
 		return FALSE;
 	}
-	/* ÓÉ¡õ  Å«¼°ÚĞĞÑÃ«ÃñÄáÓÀÛÍÔÊÔÂ */
+	/* ç”±â–¡  å¥´åŠè°›é†’æ¯›æ°‘å°¼æ°¸å¼å…æœˆ */
 	if( CHAR_getEmptyPartyArray( meindex) == -1 ) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_OVERPARTY);
 		return FALSE;
 	}
-	/* Ê§ÄÌ  Ø©¼°ÃñÄáÓÀÛÍÃ«ÔÊÔÂ(àµ÷±Ê§ÄÌ  Ø©) */
+	/* å¤±å¥¶  ä¸åŠæ°‘å°¼æ°¸å¼æ¯›å…æœˆ(å—Ÿé…å¤±å¥¶  ä¸) */
 	if( !NPC_BusCheckDeniedItem( meindex, charaindex, argstr)) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_DENIEDITEM);
 		return FALSE;
 	}
 #ifdef _ITEM_CHECKWARES
 	if( CHAR_CheckInItemForWares( charaindex, 0) == FALSE )	{
-		CHAR_talkToCli( charaindex, -1, "ÎŞ·¨Ğ¯´ø»õÎïÉÏ³µ¡£", CHAR_COLORYELLOW);
+		CHAR_talkToCli( charaindex, -1, "æ— æ³•æºå¸¦è´§ç‰©ä¸Šè½¦ã€‚", CHAR_COLORYELLOW);
 		return FALSE;
 	}
 #endif
-	/* Ê§ÄÌ  Ø©¼°ÃñÄáÓÀÛÍÃ«ÔÊÔÂ(  Û¢Ê§ÄÌ  Ø©) */
+	/* å¤±å¥¶  ä¸åŠæ°‘å°¼æ°¸å¼æ¯›å…æœˆ(  é‚°å¤±å¥¶  ä¸) */
 	if( !NPC_BusCheckAllowItem( meindex, charaindex, FALSE)) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_ALLOWITEM);
 		return FALSE;
 	}
-	/* ÒÁÃ¬»ï¼°ÃñÄáÓÀÛÍÃ«ÔÊÔÂ */
+	/* ä¼ŠçŸ›ä¼™åŠæ°‘å°¼æ°¸å¼æ¯›å…æœˆ */
 	if( !NPC_BusCheckLevel( meindex, charaindex, argstr)) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_LEVEL);
 		return FALSE;
 	}
-	/* ÄÌÃ¬¼şĞş  ¾®ÃñÄáÓÀÛÍÔÊÔÂ */
+	/* å¥¶çŸ›ä»¶ç„  äº•æ°‘å°¼æ°¸å¼å…æœˆ */
 //	if( CHAR_getInt( charaindex, CHAR_NOWEVENT) != 0 ||
 //		CHAR_getInt( charaindex, CHAR_NOWEVENT2) != 0 ||
 //		CHAR_getInt( charaindex, CHAR_NOWEVENT3) != 0 )
@@ -703,7 +703,7 @@ BOOL NPC_BusCheckJoinParty( int meindex, int charaindex, BOOL msgflg)
 //		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_EVENT);
 //		return FALSE;
 //	}
-	/* »¿àÅ¼°ÃñÄáÓÀÛÍÃ«ÔÊÔÂ  ÔÆàÅÃ«äúÔÂ¼°Æ¥£İ  ±ÎÃñÄáÓÀÛÍ±åÔÊÔÂ³ğÎç¡å   */
+	/* è±¢å—¯åŠæ°‘å°¼æ°¸å¼æ¯›å…æœˆ  äº‘å—¯æ¯›æ½¸æœˆåŠåŒ¹ï¼½  è”½æ°‘å°¼æ°¸å¼åå…æœˆä»‡åˆâ€³   */
 	ret = NPC_BusCheckStone( meindex, charaindex, argstr);
 	if( ret == -1 ) {
 		if( msgflg) NPC_BusSendMsg( meindex, charaindex, NPC_BUS_MSG_GOLD);
@@ -711,15 +711,15 @@ BOOL NPC_BusCheckJoinParty( int meindex, int charaindex, BOOL msgflg)
 	}
 	if( ret != 0 ) {
 		char msgbuf[128];
-		/* »¿àÅÃ«ÎçÔÂ */
+		/* è±¢å—¯æ¯›åˆæœˆ */
 		CHAR_setInt( charaindex, CHAR_GOLD, 
 					CHAR_getInt( charaindex, CHAR_GOLD) - ret);
-		/* Ëªññ */
+		/* éœœè€¨ */
 		CHAR_send_P_StatusString( charaindex, CHAR_P_STRING_GOLD);
-		snprintf( msgbuf, sizeof( msgbuf), "Ö§¸¶ÁË%d Stone£¡", ret);
+		snprintf( msgbuf, sizeof( msgbuf), "æ”¯ä»˜äº†%d Stoneï¼", ret);
 		CHAR_talkToCli( charaindex, -1, msgbuf, CHAR_COLORYELLOW);
 	}
-	/* ÓÉ¡õ  Å«±å  ÔÂ */
+	/* ç”±â–¡  å¥´å  æœˆ */
 	//CHAR_JoinParty_Main( charaindex, meindex);
 	
 	//fd = getfdFromCharaIndex( charaindex );

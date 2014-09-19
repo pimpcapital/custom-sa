@@ -17,7 +17,7 @@
 #include "petmail.h"
 
 /*------------------------------------------------------------
- *  Ø¦ØÆ
+ *  å…ä»„
  ------------------------------------------------------------*/
 static void endlsprotocol( void )
 {
@@ -26,8 +26,8 @@ static void endlsprotocol( void )
 }
 
 /*------------------------------------------------------------
- * ÔÊÍÍ»¯¼°âçĞåØÆØ¦ØêÄ¾ÈÉØ¦ÈÕØ¦ÖĞ·¸¡õÕıÃ«Ä¸¼şÃóÔÊÔÂèúĞÑ
- *  Ø¦ØÆ
+ * å…å±¯åŒ–åŠå¿¡ç»£ä»„å…ä»ƒæœ¨å£¬å…æ—¥å…ä¸­çŠ¯â–¡æ­£æ¯›æ¯ä»¶çš¿å…æœˆæ¥®é†’
+ *  å…ä»„
  ------------------------------------------------------------*/
 static void allDataDump( void )
 {
@@ -36,12 +36,12 @@ static void allDataDump( void )
 }
 
 /*------------------------------------------------------------
- *  Ø¦ØÆ
+ *  å…ä»„
  ------------------------------------------------------------*/
 void shutdownProgram( void )
 {
-    printf("¹Ø±ÕSAACÁ¬½Ó:%d\n",close( acfd ));
-    printf("¹Ø±Õ°ó¶¨¶Ë¿Ú:%d\n",close( bindedfd ));
+    printf("å…³é—­SAACè¿æ¥:%d\n",close( acfd ));
+    printf("å…³é—­ç»‘å®šç«¯å£:%d\n",close( bindedfd ));
     memEnd();
 }
 #ifdef _GMSV_DEBUG
@@ -54,16 +54,16 @@ char saacfunc[255]="";
 void sigshutdown( int number )
 {
 		if( number == 0 ){
-			print( "\nGMSVÕı³£¹Ø±Õ\n" );
+			print( "\nGMSVæ­£å¸¸å…³é—­\n" );
 		}else{
-			print( "\n=========ÒÔÏÂÊÇ·şÎñÆ÷³ö´íÔ­Òò=========\n");
-	    print( "±ê×¼ĞÅÏ¢: %d\n" , number  );
+			print( "\n=========ä»¥ä¸‹æ˜¯æœåŠ¡å™¨å‡ºé”™åŸå› =========\n");
+	    print( "æ ‡å‡†ä¿¡æ¯: %d\n" , number  );
 #ifdef _GMSV_DEBUG
-			print( "Ö÷ º¯ Êı: %s\n", DebugMainFunction );
+			print( "ä¸» å‡½ æ•°: %s\n", DebugMainFunction );
 #endif
-			print( "ÔÚÏßÈËÊı: %d\n", player_online);
-			print( "×î¸ßÔÚÏß: %d\n", player_maxonline);
-			print( "SAACº¯Êı: %s\n", saacfunc);
+			print( "åœ¨çº¿äººæ•°: %d\n", player_online);
+			print( "æœ€é«˜åœ¨çº¿: %d\n", player_maxonline);
+			print( "SAACå‡½æ•°: %s\n", saacfunc);
 #ifdef _GMSV_DEBUG
 	    {
 	    	time_t new_t;
@@ -71,7 +71,7 @@ void sigshutdown( int number )
 	    	char buf[128];
 	    	time(&new_t);
 	    	if(initTime==0){
-	    		print( "ÔËĞĞÊ±¼ä: ÉĞÎ´³õÊ¼»¯Íê\n" );
+	    		print( "è¿è¡Œæ—¶é—´: å°šæœªåˆå§‹åŒ–å®Œ\n" );
 	    	}else{
 		    	new_t-=initTime;
 			
@@ -81,17 +81,17 @@ void sigshutdown( int number )
 		      ss=(int) new_t;
 		      
 					if (dd>0) {
-		      	snprintf( buf, sizeof( buf ) , "·şÎñÆ÷¹²ÔËĞĞÁË %d ÈÕ %d Ğ¡Ê± %d ·Ö %d Ãë¡£",dd,hh,mm,ss);
+		      	snprintf( buf, sizeof( buf ) , "æœåŠ¡å™¨å…±è¿è¡Œäº† %d æ—¥ %d å°æ—¶ %d åˆ† %d ç§’ã€‚",dd,hh,mm,ss);
 		      } else if (hh>0) {
-		      	snprintf( buf, sizeof( buf ) , "·şÎñÆ÷¹²ÔËĞĞÁË %d Ğ¡Ê± %d ·Ö %d Ãë¡£",hh,mm,ss);
+		      	snprintf( buf, sizeof( buf ) , "æœåŠ¡å™¨å…±è¿è¡Œäº† %d å°æ—¶ %d åˆ† %d ç§’ã€‚",hh,mm,ss);
 		      } else {
-		       	snprintf( buf, sizeof( buf ) , "·şÎñÆ÷¹²ÔËĞĞÁË %d ·Ö %d Ãë¡£",mm,ss);
+		       	snprintf( buf, sizeof( buf ) , "æœåŠ¡å™¨å…±è¿è¡Œäº† %d åˆ† %d ç§’ã€‚",mm,ss);
 		      }
-		      print( "ÔËĞĞÊ±¼ä: %s\n", buf );
+		      print( "è¿è¡Œæ—¶é—´: %s\n", buf );
 	    	}
 			}
 #endif
-			print( "=========ÒÔÉÏÊÇ·şÎñÆ÷³ö´íÔ­Òò=========\n");
+			print( "=========ä»¥ä¸Šæ˜¯æœåŠ¡å™¨å‡ºé”™åŸå› =========\n");
 		}
 		remove( "gmsvlog.err2");
 		rename( "gmsvlog.err1", "gmsvlog.err2" );
@@ -116,7 +116,7 @@ void sigshutdown( int number )
 void signalset( void )
 {
     // CoolFish: Test Signal 2001/10/26
-    print("\n¿ªÊ¼»ñÈ¡ĞÅºÅ..\n");
+    print("\nå¼€å§‹è·å–ä¿¡å·..\n");
 
 		print("SIGINT:%d\n", SIGINT);
 		print("SIGQUIT:%d\n", SIGQUIT);

@@ -22,10 +22,10 @@ typedef enum
 
 	LOG_LOGIN,
 	PETTRANS,
-//Syu Ôö¼Ó×¯Ô°Õ½Ê¤¸ºLog
+//Syu å¢åŠ åº„å›­æˆ˜èƒœè´ŸLog
 	LOG_FMPKRESULT,
 
-// Syu ADD ĞÂÔö¼Ò×å¸öÈËÒøĞĞ´æÈ¡Log (²»º¬¼Ò×åÒøĞĞ)
+// Syu ADD æ–°å¢å®¶æ—ä¸ªäººé“¶è¡Œå­˜å–Log (ä¸å«å®¶æ—é“¶è¡Œ)
 	LOG_BANKSTONELOG,
 
 	LOG_ACMESS,
@@ -41,11 +41,11 @@ void printl( LOG_TYPE logtype, char* format , ... );
 void LogAcMess( int fd, char *type, char *mess );
 
 void LogItem(
-	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
 	char *CharID,
-	int ItemNo, 	/* Ê§ÄÌ  Ø©  Ä¯ */
-	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
-	int floor,		/* Õç   */
+	int ItemNo, 	/* å¤±å¥¶  ä¸  å¯ */
+	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
+	int floor,		/* ç”„   */
 	int x,
 	int y,
     char *uniquecode, // shan 2001/12/14
@@ -62,37 +62,37 @@ void LogPetTrans(
 );
 
 void LogPet(
-	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
 	char *CharID,
 	char *PetName,
 	int PetLv,
-	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
-	int floor,		/* Õç   */
+	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
+	int floor,		/* ç”„   */
 	int x,
 	int y,
 	char *uniquecode  // shan 2001/12/14
 );
 
 void LogTensei(
-	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
 	char *CharID,
-	char *Key, 		/* Æ½¡õ·¥¡õÓñ */
-	int level,		//ÒÁÃ¬»ï
-	int transNum,	//±îÏ·¼ÔĞÑ
-	int quest,		//ÛÍ¾Şµ©ĞşĞÑ
-	int home,		//ÇëÈì»©
-	int item,		//  µÑÊ§ÄÌ  Ø©  ¾®Ô»ĞÑ
-	int pet,		//  µÑÊ¸ÓÀĞş  ¾®Ô»ĞÑ
-	int vital,		//  ¼Àó¡Vital
-	int b_vital,	//  ¼À  vital
-	int str,		//  ¼Àó¡str
-	int b_str,		//  ¼À  str
-	int tgh,		//  ¼Àó¡      
-	int b_tgh,		//  ¼À        
-	int dex,		//  ¼Àó¡      
-	int b_dex		//  ¼À        
+	char *Key, 		/* å¹³â–¡ä¼â–¡ç‰ */
+	int level,		//ä¼ŠçŸ›ä¼™
+	int transNum,	//é³–æˆèšé†’
+	int quest,		//å¼å·¨æ—¦ç„é†’
+	int home,		//è¯·è¤¥å“—
+	int item,		//  ç¬›å¤±å¥¶  ä¸  äº•æ›°é†’
+	int pet,		//  ç¬›çŸ¢æ°¸ç„  äº•æ›°é†’
+	int vital,		//  ç¥­èŸ†Vital
+	int b_vital,	//  ç¥­  vital
+	int str,		//  ç¥­èŸ†str
+	int b_str,		//  ç¥­  str
+	int tgh,		//  ç¥­èŸ†      
+	int b_tgh,		//  ç¥­        
+	int dex,		//  ç¥­èŸ†      
+	int b_dex		//  ç¥­        
 );
-// Syu ADD ĞÂÔö¼Ò×å¸öÈËÒøĞĞ´æÈ¡Log (²»º¬¼Ò×åÒøĞĞ)
+// Syu ADD æ–°å¢å®¶æ—ä¸ªäººé“¶è¡Œå­˜å–Log (ä¸å«å®¶æ—é“¶è¡Œ)
 void LogFamilyBankStone(
         char *CharName,
         char *CharId,  
@@ -107,20 +107,20 @@ void LogFamilyBankStone(
 
 void LogStone(
 				int TotalGold,
-        char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
-        char *CharId,   /* ½»¡õ°Ç¡õID */
-        int Gold,               /* àÅº° */
+        char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
+        char *CharId,   /* äº¤â–¡æ‰’â–¡ID */
+        int Gold,               /* å—¯å–Š */
 		int MyGold,
-        char *Key,              /* Æ½¡õ·¥¡õÓñ */
-        int floor,              /* Õç   */
+        char *Key,              /* å¹³â–¡ä¼â–¡ç‰ */
+        int floor,              /* ç”„   */
         int x,
         int y
 );
 
 void LogTalk(
-	char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
+	char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
 	char *CharID,
-	int floor,		/* Õç   */
+	int floor,		/* ç”„   */
 	int x,
 	int y,
 	char *message
@@ -168,9 +168,9 @@ void LogFamily(
 
 // Shan 11/02
 void LogGM(
-        char *CharName,    //½ÇÉ«Ãû³Æ
-        char *CharID,      //Íæ¼ÒID
-        char *Message,     //Ö¸ÁîÄÚÈİ
+        char *CharName,    //è§’è‰²åç§°
+        char *CharID,      //ç©å®¶ID
+        char *Message,     //æŒ‡ä»¤å†…å®¹
         int  floor,
         int  x,
         int  y
@@ -178,8 +178,8 @@ void LogGM(
 
 
 void LogLogin(
-        char *CharID,   //Íæ¼ÒID
-        char *CharName, //½ÇÉ«Ãû³Æ
+        char *CharID,   //ç©å®¶ID
+        char *CharName, //è§’è‰²åç§°
 		int  saveIndex,
 		char *ipadress
 );
@@ -192,34 +192,34 @@ void LogCreatFUPet(
 #ifdef _GAMBLE_ROULETTE
 
 void LogGamble(
-        char *CharName, //½ÇÉ«Ãû³Æ
-        char *CharID,   //Íæ¼ÒID
-        char *Key,      //ËµÃ÷
+        char *CharName, //è§’è‰²åç§°
+        char *CharID,   //ç©å®¶ID
+        char *Key,      //è¯´æ˜
         int floor,
         int x,
         int y,
-		int player_stone,	//ËùÓµÓĞ½ğÇ®
-		int Gamble_stone,	//ÏÂ×¢±¾½ğ
-		int get_stone,		//»ñµÃ
+		int player_stone,	//æ‰€æ‹¥æœ‰é‡‘é’±
+		int Gamble_stone,	//ä¸‹æ³¨æœ¬é‡‘
+		int get_stone,		//è·å¾—
 		int Gamble_num,
-		int flg	//flg = 1 Íæ¼Ò 2 ×¯¼Ò
+		int flg	//flg = 1 ç©å®¶ 2 åº„å®¶
 );
 #endif
 
 void LogBankStone(
-        char *CharName, /* Æ½ÅÒ·ÂÛÍÕı   */
-        char *CharId, /* ½»¡õ°Ç¡õID */
+        char *CharName, /* å¹³ä¹“ä»¿å¼æ­£   */
+        char *CharId, /* äº¤â–¡æ‰’â–¡ID */
 		int	meindex,
-        int Gold,               /* àÅº° */
-        char *Key,              /* Æ½¡õ·¥¡õÓñ */
-        int floor,              /* Õç   */
+        int Gold,               /* å—¯å–Š */
+        char *Key,              /* å¹³â–¡ä¼â–¡ç‰ */
+        int floor,              /* ç”„   */
         int x,
         int y,
 		int my_gold,
 		int my_personagold
 );
 
-//Syu Ôö¼Ó×¯Ô°Õ½Ê¤¸ºLog
+//Syu å¢åŠ åº„å›­æˆ˜èƒœè´ŸLog
 void Logfmpk(
 			 char *winner, int winnerindex, int num1,
 			 char *loser, int loserindex, int num2, char *date, char *buf1, char *buf2, int flg);
