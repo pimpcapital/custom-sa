@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 2.6)
+
+configure_file(resources/log.cf ${CMAKE_CURRENT_BINARY_DIR}/log.cf COPYONLY)
+configure_file(resources/setup.cf ${CMAKE_CURRENT_BINARY_DIR}/setup.cf COPYONLY)
+
+include_directories(src/include)
+file(GLOB_RECURSE BATTLE_FILES src/battle/*.c)
+file(GLOB_RECURSE CHAR_FILES src/char/*.c)
+file(GLOB_RECURSE ITEM_FILES src/item/*.c)
+file(GLOB_RECURSE MAGIC_FILES src/magic/*.c)
+file(GLOB_RECURSE MAP_FILES src/map/*.c)
+file(GLOB_RECURSE NPC_FILES src/npc/*.c)
+file(GLOB_RECURSE MAIN_FILES src/*.c)
+add_executable(gmsv ${MAIN_FILES} ${BATTLE_FILES} ${CHAR_FILES} ${ITEM_FILES} ${MAGIC_FILES} ${MAP_FILES} ${NPC_FILES} ${MAIN_FILES})
