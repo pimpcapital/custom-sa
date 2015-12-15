@@ -1,12 +1,6 @@
 #ifndef __VERSION_H__
 #define __VERSION_H__
 
-/* 请将控制专案的 definition 放在这个档案
- * 然後藉由 remark/unmark 来开关功能
- */
- 
-#define SERVER_VERSION "龙zoro版SAAC服务端v2.3.12.31 for WIN 年未版"
-
 /* -------------------------------------------------------------------
  * 专案：族人职务与家族功能补充
  * 人员：小瑜、彦勋、志伟、小民

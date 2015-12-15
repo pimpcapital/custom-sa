@@ -75,12 +75,7 @@ void saacproto_ACServerLogin_recv (int fd, char* result,char* data)
 		print( "服务端版本: <%s %s>\n" , SERVER_VERSION, "原始版");
 #endif
 #endif
-		print( "服务端编译完成时间: %s %s by 龙zoro工作室\n" , __DATE__ , __TIME__ );
-		print( "主页：http://www.longzoro.com\n" );
-		print( "论坛：http://bbs.longzoro.com\n" );
-		
-    // Robin 0530
-    //saacproto_ACShowFMList_send( acfd );
+
     print("初始化家族...");
     FAMILY_Init();
     print("完成\n");

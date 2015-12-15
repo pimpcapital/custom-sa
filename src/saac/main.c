@@ -510,13 +510,6 @@ int main( int argc , char **argv )
 	LOAD_herolist();  // Syu ADD 排行榜NPC
 #endif
 
-#ifdef _VIP
-		log( "\n服务端版本: <%s 会员版>\n" , SERVER_VERSION );
-#else
-		log( "\n服务端版本: <%s 普通版>\n" , SERVER_VERSION );
-#endif
-		log( "\n服务端编译完成时间:%s %s by 龙zoro工作室\n" , __DATE__ , __TIME__ );
-		
     log( "\n开始工作...\n" );
 
     signal(SIGUSR1,sigusr1);	// Arminius 7.20 memory lock
@@ -624,10 +617,6 @@ int main( int argc , char **argv )
             }
             tv_loop_store = now;
         }
-
-        /* 伐□市□及正奶丞失它玄毛譬屯月［
-           正奶丞失它玄仄凶日夫弘毛分仄化伐□市□毛诮仄化仄引丹［
-           匹必□丞扔□田□卞  蔽读卞反骚襞允月           */
     }
     return 0;       
 }
@@ -641,14 +630,6 @@ time_diff(struct timeval subtrahend,
 }
 
 
-/*
-  夫弘及夫□  □玄市它件玄毛  月［
-  云卅元凛渝及手及反允屯化及夫弘白央奶伙互云卅元卞卅月方丹卞允月［
-
-  仇及酷  反醒侬及瑕互云云仁卅月互｝    匹奶件正□田伙毛  凳仄化手
-    暹屺分［
-  
- */
 int get_rotate_count(void )
 {
     int a;
