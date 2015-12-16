@@ -271,23 +271,23 @@ typedef struct tagITEM_table
 
 typedef struct tagITEM_index
 {
-    BOOL         use; 
+    int         use; 
     int         index;
 }ITEM_index;
 
 typedef struct tagITEM_exists
 {
-    BOOL        use;
+    int        use;
     ITEM_Item   itm;
 }ITEM_exists;
 
 #define		ITEM_CHECKINDEX(index)		\
 	_ITEM_CHECKINDEX( __FILE__, __LINE__, index)
-INLINE BOOL _ITEM_CHECKINDEX( char *file, int line, int index);
+int _ITEM_CHECKINDEX( char *file, int line, int index);
 
 
-BOOL ITEM_initExistItemsArray( int num );
-BOOL ITEM_endExistItemsArray( ITEM_table* ITEM_item );
+int ITEM_initExistItemsArray( int num );
+int ITEM_endExistItemsArray( ITEM_table* ITEM_item );
 #define		ITEM_initExistItemsOne( itm) \
 	_ITEM_initExistItemsOne( __FILE__, __LINE__, itm)
 int _ITEM_initExistItemsOne( char *file, int line, ITEM_Item* itm );
@@ -298,36 +298,36 @@ int _ITEM_initExistItemsOne( char *file, int line, ITEM_Item* itm );
 void _ITEM_endExistItemsOne( int index , char *file, int line);
 
 #define ITEM_getInt( Index, element) _ITEM_getInt( __FILE__, __LINE__, Index, element )
-INLINE int _ITEM_getInt( char *file, int line, int index ,ITEM_DATAINT element);
+int _ITEM_getInt( char *file, int line, int index ,ITEM_DATAINT element);
 
 
 #define ITEM_setInt( Index, element, data) _ITEM_setInt( __FILE__, __LINE__, Index, element, data)
-INLINE int _ITEM_setInt( char *file, int line, int index ,ITEM_DATAINT element, int data);
+int _ITEM_setInt( char *file, int line, int index ,ITEM_DATAINT element, int data);
 
 
-INLINE char* ITEM_getChar( int index ,ITEM_DATACHAR element );
-INLINE BOOL ITEM_setChar( int index ,ITEM_DATACHAR element , char* new);
+char* ITEM_getChar( int index ,ITEM_DATACHAR element );
+int ITEM_setChar( int index ,ITEM_DATACHAR element , char* new);
 
-INLINE int ITEM_getWorkInt( int index ,ITEM_WORKDATAINT element);
-INLINE int ITEM_setWorkInt( int index ,ITEM_WORKDATAINT element, int data);
-INLINE int ITEM_getITEM_itemnum( void );
-INLINE int ITEM_getITEM_UseItemnum( void );
-INLINE BOOL ITEM_getITEM_use( int index );
+int ITEM_getWorkInt( int index ,ITEM_WORKDATAINT element);
+int ITEM_setWorkInt( int index ,ITEM_WORKDATAINT element, int data);
+int ITEM_getITEM_itemnum( void );
+int ITEM_getITEM_UseItemnum( void );
+int ITEM_getITEM_use( int index );
 void ITEM_constructFunctable( int itemindex );
 void* ITEM_getFunctionPointer( int itemindex, int functype );
-INLINE ITEM_Item *ITEM_getItemPointer( int index );
+ITEM_Item *ITEM_getItemPointer( int index );
 int ITEM_getItemMaxIdNum( void);
 
 
 char* ITEM_makeStringFromItemData( ITEM_Item* one, int mode );
 char* ITEM_makeStringFromItemIndex( int index, int mode );
 
-BOOL ITEM_makeExistItemsFromStringToArg( char* src , ITEM_Item* item, int mode );
+int ITEM_makeExistItemsFromStringToArg( char* src , ITEM_Item* item, int mode );
 void ITEM_getDefaultItemSetting( ITEM_Item* itm);
 
 
-INLINE BOOL ITEM_CHECKITEMTABLE( int number );
-BOOL    ITEM_readItemConfFile( char* filename );
+int ITEM_CHECKITEMTABLE( int number );
+int    ITEM_readItemConfFile( char* filename );
 
 
 CHAR_EquipPlace ITEM_getEquipPlace( int charaindex, int itmid );
@@ -338,7 +338,7 @@ char*   ITEM_makeItemFalseString( void );
 char*   ITEM_makeItemFalseStringWithNum( int haveitemindex );
 
 
-BOOL ITEM_makeItem( ITEM_Item* itm, int number );
+int ITEM_makeItem( ITEM_Item* itm, int number );
 int ITEM_makeItemAndRegist( int number );
 
 
@@ -353,7 +353,7 @@ char* ITEM_getEffectString( int itemindex );
 int ITEM_getcostFromITEMtabl( int itemid );
 
 #define ITEM_getNameFromNumber( id) _ITEM_getNameFromNumber( __FILE__, __LINE__, id)
-INLINE char* _ITEM_getNameFromNumber( char *file, int line, int itemid );
+char* _ITEM_getNameFromNumber( char *file, int line, int itemid );
 
 
 int ITEM_getlevelFromITEMtabl( int itemid );
@@ -366,10 +366,10 @@ int ITEM_getcanpetmailFromITEMtabl( int itemid );
 int ITEM_getmergeItemFromFromITEMtabl( int itemid );
 
 #ifdef _ITEM_CHECKWARES
-BOOL CHAR_CheckInItemForWares( int charaindex, int flg);
+int CHAR_CheckInItemForWares( int charaindex, int flg);
 #endif
 
-BOOL ITEM_canuseMagic( int itemindex);
+int ITEM_canuseMagic( int itemindex);
 // Nuke +1 08/23 : For checking the validity of item target
 int ITEM_isTargetValid( int charaindex, int itemindex, int toindex);
 

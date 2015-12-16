@@ -10,7 +10,7 @@
 typedef struct
 {
     int use;
-    BOOL online;					/* 锹澎平乓仿互扔□田  卞中凶日TRUE,
+    int online;					/* 锹澎平乓仿互扔□田  卞中凶日TRUE,
                                 		公丹匹卅井匀凶日FALSE */
     int level;               		/* 锹澎平乓仿及伊矛伙 */
 	int	duelpoint;					/* duelpoint*/
@@ -25,14 +25,14 @@ typedef struct
 
 
 char *ADDRESSBOOK_makeAddressbookString( ADDRESSBOOK_entry *a );
-BOOL ADDRESSBOOK_makeAddressbookEntry( char *in , ADDRESSBOOK_entry *a );
-BOOL ADDRESSBOOK_deleteEntry( int meindex ,int index );
-BOOL ADDRESSBOOK_addEntry( int meindex );
-BOOL ADDRESSBOOK_sendAddressbookTable( int cindex );
-BOOL ADDRESSBOOK_sendAddressbookTableOne( int cindex, int num );
-BOOL ADDRESSBOOK_sendMessage( int cindex, int aindex , char *text ,
+int ADDRESSBOOK_makeAddressbookEntry( char *in , ADDRESSBOOK_entry *a );
+int ADDRESSBOOK_deleteEntry( int meindex ,int index );
+int ADDRESSBOOK_addEntry( int meindex );
+int ADDRESSBOOK_sendAddressbookTable( int cindex );
+int ADDRESSBOOK_sendAddressbookTableOne( int cindex, int num );
+int ADDRESSBOOK_sendMessage( int cindex, int aindex , char *text ,
                               int color );
-BOOL ADDRESSBOOK_sendMessage_FromOther( char *fromcdkey, char *fromcharaname, 
+int ADDRESSBOOK_sendMessage_FromOther( char *fromcdkey, char *fromcharaname, 
 										char *tocdkey, char *tocharaname,
 										char* text , int color );
 
@@ -40,6 +40,6 @@ void ADDRESSBOOK_notifyLoginLogout( int cindex , int flg );
 void ADDRESSBOOK_addAddressBook( int meindex, int toindex);
 void ADDRESSBOOK_DispatchMessage( char *cd, char *nm, char *value, int mode);
 int ADDRESSBOOK_getIndexInAddressbook(int cindex , char *cdkey, char *charname);
-BOOL ADDRESSBOOK_AutoaddAddressBook( int meindex, int toindex);
+int ADDRESSBOOK_AutoaddAddressBook( int meindex, int toindex);
 
 #endif

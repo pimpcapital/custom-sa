@@ -38,7 +38,7 @@ struct	{
 }w;
 
 struct	{
-	BOOL	use;
+	int	use;
 	int		checkhaveitem;
 	int		checkhaveitemgotowin;
 	int		checkdonthaveitem;
@@ -57,14 +57,14 @@ enum {
 };
 
 static void NPC_Riderman_selectWindow( int meindex, int toindex, int num);
-static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg);
+static int NPC_Riderman_readData( int meindex, int windowno, int chkflg);
 static int NPC_Riderman_restoreButtontype( char *data );
-// static BOOL getLetter(int meindex,int talker );
-// static BOOL checkLetter(int meindex,int talker );
+// static int getLetter(int meindex,int talker );
+// static int checkLetter(int meindex,int talker );
 
 /*********************************
 *********************************/
-BOOL NPC_RidermanInit( int meindex )
+int NPC_RidermanInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf[1024];
@@ -520,7 +520,7 @@ void NPC_RidermanWindowTalked( int meindex, int talkerindex,
  *		meindex		int		仇及NPC及charaindex
  *		
  */
-static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
+static int NPC_Riderman_readData( int meindex, int windowno, int chkflg)
 {
 	
 	int		i;
@@ -532,8 +532,8 @@ static BOOL NPC_Riderman_readData( int meindex, int windowno, BOOL chkflg)
 	int		b_mode;
 	int		selectnum ;
 	int		messagepos;
-	BOOL	errflg = FALSE;
-	BOOL	readflg = TRUE;
+	int	errflg = FALSE;
+	int	readflg = TRUE;
 	FILE	*fp;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	filename[64];

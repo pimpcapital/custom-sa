@@ -18,11 +18,11 @@ extern char PersonalKey[4096];
 #define DEFAULTFUNCBEGIN	"&"
 #define DEFAULTFUNCEND		"#"
 
-BOOL util_Init(void);
+int util_Init(void);
 
 // WON ADD
 //void util_SplitMessage(char *source, char *separator);
-BOOL util_SplitMessage(char *source, char *separator);
+int util_SplitMessage(char *source, char *separator);
 
 
 void util_EncodeMessage(char *dst, char *src);

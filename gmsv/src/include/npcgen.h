@@ -2,7 +2,7 @@
 #define __NPCGEN_H__
 
 
-void NPC_generateLoop( BOOL FlgInit );
+void NPC_generateLoop( int FlgInit );
 
 EXTERN int all_nosee;		/* ㄠ及凛｛蝈化及衬毛 no_see 卞 */
 EXTERN int all_nobody;		/* ㄠ及凛｛蝈化及衬毛 no_body 卞 */

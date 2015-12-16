@@ -8,7 +8,7 @@ int MAPPOINT_InitMapWarpPoint( void);
 void MAPPOINT_resetMapWarpPoint( int flg);
 int MAPPOINT_loadMapWarpPoint( void);
 
-BOOL MAPPOINT_CHECKINDEX( int ps);
+int MAPPOINT_CHECKINDEX( int ps);
 int MAPPOINT_getMPointEVType( int ps);
 
 int MAPPOINT_creatMapWarpObj( int pointindex, char *buf, int objtype);

@@ -199,7 +199,7 @@ static FUNC		functbl[] = {
 
 /*********************************
 *********************************/
-BOOL NPC_SysinfoInit( int meindex )
+int NPC_SysinfoInit( int meindex )
 {
 	int tmp;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];

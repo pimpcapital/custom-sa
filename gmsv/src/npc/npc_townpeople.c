@@ -44,7 +44,7 @@ void NPC_TownPeopleTalked( int index, int talker, char *msg, int color )
 
 /*
  */
-BOOL NPC_TownPeopleInit( int meindex )
+int NPC_TownPeopleInit( int meindex )
 {
 
     //CHAR_setInt( meindex , CHAR_HP , 0 );

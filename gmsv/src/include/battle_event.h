@@ -127,11 +127,11 @@ Battle_Attack_ReturnData_x1 Battle_Attack_ReturnData_x;
 
 int BATTLE_DamageCalc( int attackindex, int defindex );
 
-BOOL BATTLE_Attack( int battleindex, int attackNo, int defNo );
+int BATTLE_Attack( int battleindex, int attackNo, int defNo );
 
-BOOL BATTLE_Counter( int battleindex, int attackNo, int defNo );
+int BATTLE_Counter( int battleindex, int attackNo, int defNo );
 
-BOOL BATTLE_Capture( int battleindex, int attackNo, int defNo );
+int BATTLE_Capture( int battleindex, int attackNo, int defNo );
 
 void BATTLE_Guard( int battleindex, int attackNo );
 
@@ -141,7 +141,7 @@ void BATTLE_Guard( int battleindex, int attackNo );
 //int  BATTLE_BroadCast( int battleindex, char *pszBuffer, int color );
 //int  BATTLE_BroadCastOn( int battleindex, char *pszBuffer, int color );
 
-BOOL BATTLE_Escape( int battleindex, int attackNo, int flag);
+int BATTLE_Escape( int battleindex, int attackNo, int flag);
 
 int BATTLE_NoAction( int battleindex, int attackNo );
 
@@ -212,12 +212,12 @@ int BATTLE_GetDamageReact( int charaindex );
 void  BATTLE_talkToCli( int charaindex, char *pszBuffer, int color );
 
 #ifdef _PETSKILL_SETDUCK
-BOOL BATTLE_CheckMySkillDuck( int charaindex );
+int BATTLE_CheckMySkillDuck( int charaindex );
 #endif
 
-BOOL BATTLE_LostEscape( int battleindex, int attackNo );
+int BATTLE_LostEscape( int battleindex, int attackNo );
 
-BOOL BATTLE_Abduct( int battleindex, int attackNo, int defNo, int array );
+int BATTLE_Abduct( int battleindex, int attackNo, int defNo, int array );
 
 void BATTLE_Steal( int battleindex, int attackNo, int defNo );
 

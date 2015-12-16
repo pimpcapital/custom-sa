@@ -20,7 +20,7 @@
 #include "family.h"
 
 #define SPR_kmydam	CG_HIT_MARK_00
-BOOL CHAR_allprewalk( int index,int* dir,int* mode)
+int CHAR_allprewalk( int index,int* dir,int* mode)
 {
     int     poisonvalue;
     poisonvalue = CHAR_getInt(index, CHAR_POISON );
@@ -51,7 +51,7 @@ void CHAR_allpostwalk( int index )
     return;
 }
 
-BOOL CHAR_makeCADefaultString( int objindex,char* buf,int buflen, int act )
+int CHAR_makeCADefaultString( int objindex,char* buf,int buflen, int act )
 {
 	char	objindexbuf[64];
     /*  民尼永弁    */
@@ -72,7 +72,7 @@ static void CHAR_makeCADAMAGEStringFromSpecifiedCoordinate(
               -1,x,y, CHAR_ACTDAMAGE,0, ef1,damagevalue);
 }
 
-BOOL CHAR_makeCAOPT1String( int objindex,char* buf, int buflen, int act,int opt1 )
+int CHAR_makeCAOPT1String( int objindex,char* buf, int buflen, int act,int opt1 )
 {
 	char	objindexbuf[64];
     if( CHECKOBJECT(objindex) == FALSE )    return FALSE;
@@ -85,7 +85,7 @@ BOOL CHAR_makeCAOPT1String( int objindex,char* buf, int buflen, int act,int opt1
     return TRUE;
 }
 
-BOOL CHAR_makeCAOPT3String( int objindex,char* buf, int buflen, int act,int opt1,int opt2,int opt3 )
+int CHAR_makeCAOPT3String( int objindex,char* buf, int buflen, int act,int opt1,int opt2,int opt3 )
 {
 	char	objindexbuf[64];
 
@@ -262,7 +262,7 @@ void CHAR_recoveryStatus( int charaindex )
     }
 }
 
-static BOOL CHAR_clairvoyance_gold(int objindex,char* buf )
+static int CHAR_clairvoyance_gold(int objindex,char* buf )
 {
     if( OBJECT_getType( objindex ) == OBJTYPE_GOLD ){
         *buf = 'G';
@@ -271,7 +271,7 @@ static BOOL CHAR_clairvoyance_gold(int objindex,char* buf )
     return FALSE;
 }
 
-static BOOL CHAR_clairvoyance_item(int objindex,char* buf )
+static int CHAR_clairvoyance_item(int objindex,char* buf )
 {
     if( OBJECT_getType( objindex ) == OBJTYPE_ITEM){
         *buf = 'I';
@@ -280,7 +280,7 @@ static BOOL CHAR_clairvoyance_item(int objindex,char* buf )
     return FALSE;
 }
 
-static BOOL CHAR_clairvoyance_player(int objindex,char* buf )
+static int CHAR_clairvoyance_player(int objindex,char* buf )
 {
     if( OBJECT_getType( objindex ) == OBJTYPE_CHARA
         && CHAR_getInt(OBJECT_getIndex(objindex),CHAR_WHICHTYPE)
@@ -291,7 +291,7 @@ static BOOL CHAR_clairvoyance_player(int objindex,char* buf )
     return FALSE;
 }
 
-static BOOL CHAR_clairvoyance_enemy(int objindex,char* buf )
+static int CHAR_clairvoyance_enemy(int objindex,char* buf )
 {
     if( OBJECT_getType( objindex ) == OBJTYPE_CHARA
         && CHAR_getInt(OBJECT_getIndex(objindex),CHAR_WHICHTYPE)
@@ -311,10 +311,10 @@ static void CHAR_clairvoyance( int charaindex )
     int     clairvoyancelevel;
     int     centerx,centery,fl;
     int     i,j;
-    BOOL    sendclairvoyance=FALSE;
+    int    sendclairvoyance=FALSE;
 
 #define CHAR_CLAIRVOYANCEWIDTH  81
-    BOOL (*clairvoyancefunc[])(int,char*) ={
+    int (*clairvoyancefunc[])(int,char*) ={
         CHAR_clairvoyance_gold,
         CHAR_clairvoyance_item,
         CHAR_clairvoyance_player,
@@ -348,7 +348,7 @@ static void CHAR_clairvoyance( int charaindex )
                 if( OBJECT_getType(objindex) == OBJTYPE_CHARA
                     && OBJECT_getIndex(objindex) == charaindex) continue;
                 for( loop = 0 ; loop < clairvoyancelevel ; loop ++ ){
-                    BOOL    ret;
+                    int    ret;
                     char    id;
                     ret = clairvoyancefunc[loop](objindex,&id);
                     if( ret == TRUE ){
@@ -449,7 +449,7 @@ int CHAR_die( int charaindex )
                 CHAR_getInt(charaindex,CHAR_DEADCOUNT)+1);
     {
         int i;
-        BOOL old=FALSE;
+        int old=FALSE;
         for( i=0 ; i<arraysizeof(pShow);i++)
             if( CHAR_setInt( charaindex, pShow[i].paramindex, 0 ) > 0 ){
                 old = TRUE;

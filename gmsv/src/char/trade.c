@@ -59,7 +59,7 @@ typedef struct _tagTradeList{
 
 STradeList TradeList[MAX_TRADELISTNUM][2];
 
-BOOL TRADE_CheckTradeList( int meindex, STradeList *temp1, int toindex, STradeList *temp2);
+int TRADE_CheckTradeList( int meindex, STradeList *temp1, int toindex, STradeList *temp2);
 
 void TRADE_ShowItem(int fd, int meindex, char* message);
 void TRADE_Close(int fd, int meindex, char* message);
@@ -67,10 +67,10 @@ void TRADE_Close(int fd, int meindex, char* message);
 void TRADE_SwapItem(int meindex, int toindex, char* message, int fd, char* mycharaname, int tofd, char* tocharaname);
 
 int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mycharaname, char* tocharaname);
-BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b, int item1, int item2, int itemindex1, int itemindex2);
-BOOL TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess);
-BOOL TRADE_HandleGold( int meindex, int showindex, char *message, char *outmess);
-BOOL TRADE_HandlePet( int meindex, int showindex, char *message, char *outmess);
+int TRADE_ChangeItem(int meindex, int toindex, char *a, char *b, int item1, int item2, int itemindex1, int itemindex2);
+int TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess);
+int TRADE_HandleGold( int meindex, int showindex, char *message, char *outmess);
+int TRADE_HandlePet( int meindex, int showindex, char *message, char *outmess);
 
 
 
@@ -100,11 +100,11 @@ void CHAR_Trade(int fd, int index, char* message)
    }
 }
 
-BOOL TRADE_Search(int fd, int meindex, char* message)
+int TRADE_Search(int fd, int meindex, char* message)
 {
    int		objbuf[16];
    int		front_x, front_y, i, found_count;
-   BOOL		found =  FALSE, searchflg = FALSE;
+   int		found =  FALSE, searchflg = FALSE;
    int 		cnt = 0, tofd = -1, checkfd = -1;
    char		msgbuf[1024], mycharaname[256], tocharaname[256];
    char		token[256];
@@ -711,7 +711,7 @@ int TRADE_CheckItembuf(int fd, int meindex, int toindex, int tofd, char* mychara
 	return 2;
 }
 
-BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
+int TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
 	int item1, int item2, int itemindex1, int itemindex2)
 {
    int gold1 = 0, gold2 = 0, eptitem = -1;
@@ -879,7 +879,7 @@ BOOL TRADE_ChangeItem(int meindex, int toindex, char *a, char *b,
    return	TRUE;
 }
 
-BOOL TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess)
+int TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess)
 {
 	char token[256];
 	int item, itemindex;
@@ -913,7 +913,7 @@ BOOL TRADE_HandleItem( int meindex, int showindex, char *message, char *outmess)
 	return TRUE;
 }
 
-BOOL TRADE_HandleGold( int meindex, int showindex, char *message, char *outmess)
+int TRADE_HandleGold( int meindex, int showindex, char *message, char *outmess)
 {
 	int gold, tmpgold;
 	char token[256];
@@ -930,7 +930,7 @@ BOOL TRADE_HandleGold( int meindex, int showindex, char *message, char *outmess)
 	return TRUE;
 }
 
-BOOL TRADE_HandlePet( int meindex, int showindex, char *message, char *outmess)
+int TRADE_HandlePet( int meindex, int showindex, char *message, char *outmess)
 {
 	int havepetindex, petindex;
 	char token[256], buf[256];

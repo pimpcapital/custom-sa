@@ -37,7 +37,7 @@ struct tm *localtime(const time_t *timep)
  *  卅仄
  * 忒曰袄
  ------------------------------------------------------------*/
-BOOL setNewTime( void )
+int setNewTime( void )
 {
     if( gettimeofday( &NowTime, (struct timezone*)NULL) != 0 ) {
 		NowTime.tv_sec = time(0);

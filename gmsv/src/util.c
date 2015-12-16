@@ -74,7 +74,7 @@ void dchop( char* src , char* del)
 {
     int dellen, srclen;
     int i;
-    BOOL delete=FALSE;
+    int delete=FALSE;
 
     /*
      * src及  欠井日譬屯化中仁［1  侬卞勾五 del 允屯化毛伙□皿仄化
@@ -107,7 +107,7 @@ void pohcd( char* src , char* del)
 {
     int dellen, srclen;
     int i;
-    BOOL delete=FALSE;
+    int delete=FALSE;
 
     /*
      * src及蟆井日譬屯化中仁［1  侬卞勾五 del 允屯化毛伙□皿仄化
@@ -632,7 +632,7 @@ int texttoiTail( char *hoge)
  *      FALSE(0)   strtol互敦僬卞反岳  仄卅井匀凶
  *                  仇及凛及number反strtol及忒曰袄匹丐月
  ----------------------------------------*/
-BOOL strtolchecknum( char* arg , void* number,int base ,CTYPE type)
+int strtolchecknum( char* arg , void* number,int base ,CTYPE type)
 {
     char* buf;
     int     num;
@@ -855,7 +855,7 @@ char*  makeEscapeString( char* src , char* dest, int sizeofdest)
     srclen = strlen(src);
   
     for( i = 0 ; i < srclen ; i ++ ){
-         BOOL dirty=FALSE;
+         int dirty=FALSE;
          int  j;
          char escapechar='\0';
 		if( destindex + 1 >= sizeofdest )break;
@@ -946,7 +946,7 @@ char * ScanOneByte( char *src, char delim ){
  *      getStringFromIndexWithDelim( "aho=hoge","=",3,buf,sizeof(buf) );
  *      忒曰袄 FALSE
  ----------------------------------------*/
-BOOL getStringFromIndexWithDelim_body( char* src ,char* delim ,int index,
+int getStringFromIndexWithDelim_body( char* src ,char* delim ,int index,
                                  char* buf , int buflen ,
                                        char *file, int line )
 {//ttom this function all change,copy from the second
@@ -1294,7 +1294,7 @@ char* nindex( char* string, int c , int number )
     return NULL;
 }
 
-BOOL rrd( char* dirname , STRING64* buf ,int bufsize, int* index)
+int rrd( char* dirname , STRING64* buf ,int bufsize, int* index)
 {
     DIR*    d;
     char    dirn[1024];
@@ -1345,7 +1345,7 @@ int rgetFileName( char* dirname , STRING64* string, int size)
     else return index;
 }
 
-BOOL checkStringsUnique( char** strings, int num ,int verbose)
+int checkStringsUnique( char** strings, int num ,int verbose)
 {
     int     i,j;
     for( i = 0 ; i < num - 1; i ++ ){
@@ -1360,7 +1360,7 @@ BOOL checkStringsUnique( char** strings, int num ,int verbose)
     return TRUE;
 }
 
-BOOL PointInRect( RECT* rect, POINT* p )
+int PointInRect( RECT* rect, POINT* p )
 {
     if( rect->x         <= p->x && p->x <= rect->x + rect->width &&
         rect->y         <= p->y && p->y <= rect->y + rect->height )
@@ -1368,7 +1368,7 @@ BOOL PointInRect( RECT* rect, POINT* p )
     return FALSE;
 }
 
-BOOL CoordinateInRect( RECT* rect, int x, int y)
+int CoordinateInRect( RECT* rect, int x, int y)
 {
     POINT   p={x,y};
     return PointInRect(rect,&p);
@@ -1388,7 +1388,7 @@ int clipRect( RECT *rect1, RECT *rect2, RECT *ret )
     return 1;
 }
 
-BOOL isstring1or0( char*  string )
+int isstring1or0( char*  string )
 {
     if( strcasecmp(string,"TRUE" ) == 0 )return TRUE;
     if( strcasecmp(string,"FALSE") == 0 )return FALSE;
@@ -1486,7 +1486,7 @@ void makeRandomString( char *cand , char *out , int len )
  *  白央奶伙        TRUE(1)
  *  白央奶伙匹卅中  FALSE(0)
  ------------------------------------------------------------*/
-BOOL isExistFile( char* filename )
+int isExistFile( char* filename )
 {
     /*  fopen 匹譬屯月  */
     FILE*   fp;
@@ -1597,7 +1597,7 @@ char *cnv10to62( int a, char *out, int outlen )
  *   曰袄   褐  丐曰	TRUE
  *				卅仄	FALSE
  */
-BOOL checkRedundancy( int *src, int srclen)
+int checkRedundancy( int *src, int srclen)
 {
 	int		i,j;
 	int		ret = FALSE;
@@ -1713,7 +1713,7 @@ unsigned short CheckCRC( unsigned char *p , int size )
 }
 
 // Add Code By Shan  2001.06.16
-INLINE double time_diff(struct timeval subtrahend,
+double time_diff(struct timeval subtrahend,
                       struct timeval subtractor)
 {
     return( (subtrahend.tv_sec - subtractor.tv_sec)

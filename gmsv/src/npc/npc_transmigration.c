@@ -18,14 +18,14 @@
 
 static void NPC_Transmigration_selectWindow( int meindex, int toindex, int num);
 static int NPC_TransmigrationCheck(int meindex, int talker);
-BOOL NPC_TransmigrationAddPet(int meindex, int talker, int petid);
+int NPC_TransmigrationAddPet(int meindex, int talker, int petid);
 //楮醒及烂聒
 int NPC_StartpointCheck(int meindex,int talker);
-BOOL NPC_TransmigrationMain(int meindex, int toindex, char *buf);
+int NPC_TransmigrationMain(int meindex, int toindex, char *buf);
 int NPC_TransmigrationFlg_CLS(int meindex, int toindex);
-BOOL NPC_TransmigrationDelPet(int meindex, int talker);
-BOOL NPC_TransmigrationStatus(int meindex, int toindex,int *work);
-BOOL NPC_TransmigratiomWarp(int meindex, int toindex, char *buf);
+int NPC_TransmigrationDelPet(int meindex, int talker);
+int NPC_TransmigrationStatus(int meindex, int toindex,int *work);
+int NPC_TransmigratiomWarp(int meindex, int toindex, char *buf);
 void s_eventsetend( int charaindex, int shiftbit );
 
 #ifdef _PET_TRANS
@@ -34,7 +34,7 @@ int Pet_Select;
 
 /*********************************
 *********************************/
-BOOL NPC_TransmigrationInit( int meindex )
+int NPC_TransmigrationInit( int meindex )
 {
 
 	/*--平乓仿及正奶皿毛涩烂--*/
@@ -143,7 +143,7 @@ static void NPC_Transmigration_selectWindow( int meindex, int toindex, int num)
 	int tenseiNo = 1;
 	int fd = getfdFromCharaIndex( toindex);
 	int i = 1;
-	BOOL tenflg = FALSE;
+	int tenflg = FALSE;
 	char *elder[4] = {"samugiru","marinasu","jaja","karutarna"};
 	int point;
 	int ten_no;
@@ -444,7 +444,7 @@ void NPC_TransmigrationWindowTalked( int meindex, int talkerindex,
 
 //************************************************************
 //************************************************************
-BOOL NPC_TransmigratiomWarp(int meindex, int toindex, char *buf)
+int NPC_TransmigratiomWarp(int meindex, int toindex, char *buf)
 {
 	char buf2[512];
 	char buf3[128];
@@ -651,7 +651,7 @@ static int NPC_TransmigrationCheck(int meindex, int talker)
 	return CHAR_getInt(talker, CHAR_TRANSMIGRATION);
 }
 
-BOOL NPC_TransmigrationMain(int meindex, int toindex, char *buf)
+int NPC_TransmigrationMain(int meindex, int toindex, char *buf)
 {
 	int i = 1;
 	char buf2[128];
@@ -841,7 +841,7 @@ float Rounding(float work,int num)
 //
 //
 //*******************************************************
-BOOL NPC_TransmigrationStatus(int meindex, int toindex,int work[10])
+int NPC_TransmigrationStatus(int meindex, int toindex,int work[10])
 {
 	int vital, str, tgh, dex;
 	int quest , level ,equ;
@@ -936,7 +936,7 @@ BOOL NPC_TransmigrationStatus(int meindex, int toindex,int work[10])
 /*----------------------------
  *  矢永玄毛馨笛允月
  ------------------------------*/
-BOOL NPC_TransmigrationAddPet(int meindex, int talker, int petid)
+int NPC_TransmigrationAddPet(int meindex, int talker, int petid)
 {
 	int	ret;
 	char msgbuf[64];
@@ -1086,7 +1086,7 @@ int NPC_TransmigrationFlg_CLS(int meindex, int toindex)
 //******************************************************************
 //矢永玄毛壅允
 //******************************************************************
-BOOL NPC_TransmigrationDelPetDel(int meindex,int talker,int petsel)
+int NPC_TransmigrationDelPetDel(int meindex,int talker,int petsel)
 {
 
 	int petindex;
@@ -1130,7 +1130,7 @@ BOOL NPC_TransmigrationDelPetDel(int meindex,int talker,int petsel)
 
 //***********************************************************
 //***********************************************************
-BOOL NPC_TransmigrationDelPet(int meindex, int talker)
+int NPC_TransmigrationDelPet(int meindex, int talker)
 {
 	int petsel;
 	int petindex;
@@ -1225,7 +1225,7 @@ void NPC_PetTransMan_selectWindow(int meindex,int toindex,int num,int select)
 	int buttontype = 0, windowtype = 0, windowno = 0, errtype = 0;
 	int petindex = 0,i=1;
 	char *petname;
-	BOOL tenflg = FALSE;
+	int tenflg = FALSE;
 	int fd = getfdFromCharaIndex( toindex);
 
 	if( fd == -1 ) {
@@ -1396,7 +1396,7 @@ int NPC_PetTransManCheck( int meindex, int toindex, int select)
 	return -1;
 }
 
-BOOL NPC_PetTransManStatus( int meindex, int toindex, int petNo)
+int NPC_PetTransManStatus( int meindex, int toindex, int petNo)
 {
 	int petindex;
 	int LevelUpPoint = 0,petrank = 0;
@@ -1503,7 +1503,7 @@ BOOL NPC_PetTransManStatus( int meindex, int toindex, int petNo)
 		return FALSE;
 	}
 	{
-		BOOL FINDs = FALSE;
+		int FINDs = FALSE;
 #ifdef _PET_2TRANS
 		tpetidx1 = CHAR_getInt( petindex, CHAR_PETID);
 #endif		

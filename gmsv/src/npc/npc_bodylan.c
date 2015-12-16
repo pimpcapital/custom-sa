@@ -51,7 +51,7 @@ static void NPC_BodyLan_Window(
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_BodyLanInit( int meindex )
+int NPC_BodyLanInit( int meindex )
 {
 
 	char szP[256], szArg[4096];

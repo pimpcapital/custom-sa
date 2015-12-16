@@ -405,13 +405,13 @@ static struct ITEM_itemconfentry
 ITEM_table*  ITEM_tbl=NULL;
 ITEM_index*  ITEM_idx=NULL;
 
-static INLINE BOOL ITEM_CHECKARRAYINDEX(int index)
+static int ITEM_CHECKARRAYINDEX(int index)
 {
 	if( ITEM_itemnum<=(index) || (index)<0 )return FALSE;
 	return TRUE;
 }
 
-INLINE BOOL _ITEM_CHECKINDEX( char *file, int line, int index)
+int _ITEM_CHECKINDEX( char *file, int line, int index)
 {
 	if( !ITEM_CHECKARRAYINDEX(index) ) {
 		if( index != -1 ) {
@@ -425,23 +425,23 @@ INLINE BOOL _ITEM_CHECKINDEX( char *file, int line, int index)
 	return TRUE;
 }
 
-static INLINE int ITEM_CHECKINTDATAINDEX(int index)
+static int ITEM_CHECKINTDATAINDEX(int index)
 {
 	if( ITEM_DATAINTNUM <= index || index < 0 )return FALSE;
 	return TRUE;
 }
 
-static INLINE int ITEM_CHECKCHARDATAINDEX(int index)
+static int ITEM_CHECKCHARDATAINDEX(int index)
 {
 	if( ITEM_DATACHARNUM<=index || index<0 )return FALSE;
 	return TRUE;
 }
 
-BOOL ITEM_initExistItemsArray( int num )
+int ITEM_initExistItemsArray( int num )
 {
 	int     i;
 
-	BOOL ITEM_checksetdata( void );
+	int ITEM_checksetdata( void );
 	if( ITEM_checksetdata() == FALSE )return FALSE;
 
 	ITEM_itemnum = num;
@@ -457,7 +457,7 @@ BOOL ITEM_initExistItemsArray( int num )
 	return TRUE;
 }
 
-BOOL ITEM_endExistItemsArray( ITEM_table* ITEM_item )
+int ITEM_endExistItemsArray( ITEM_table* ITEM_item )
 {
 	freeMemory( ITEM_item );
 	return TRUE;
@@ -500,8 +500,8 @@ int _ITEM_initExistItemsOne( char *file, int line, ITEM_Item* itm )
 			memcpy( &ITEM_item[Sindex].itm , itm , sizeof( ITEM_Item ) );
 			ITEM_item[Sindex].use = TRUE;
 			{
-				BOOL    (*initfunc)(ITEM_Item*)=NULL;
-				initfunc = (BOOL(*)(ITEM_Item*)) getFunctionPointerFromName( itm->string[ITEM_INITFUNC].string );
+				int    (*initfunc)(ITEM_Item*)=NULL;
+				initfunc = (int(*)(ITEM_Item*)) getFunctionPointerFromName( itm->string[ITEM_INITFUNC].string );
 				if( initfunc ){
 					if( initfunc( &ITEM_item[Sindex].itm ) == FALSE ){
 						ITEM_item[Sindex].use = FALSE;
@@ -549,14 +549,14 @@ void _ITEM_endExistItemsOne( int index , char *file, int line)
 	}
 }
 
-INLINE int ITEM_getIntStrict( int index ,ITEM_DATAINT element,int* error)
+int ITEM_getIntStrict( int index ,ITEM_DATAINT element,int* error)
 {
 	if(!ITEM_CHECKINDEX(index))return *error=FALSE;
 	if(!ITEM_CHECKINTDATAINDEX(element))return *error=FALSE;
 	return ITEM_item[index].itm.data[element];
 }
 
-INLINE int _ITEM_getInt( char *file, int line, int index ,ITEM_DATAINT element)
+int _ITEM_getInt( char *file, int line, int index ,ITEM_DATAINT element)
 {
 	if(!ITEM_CHECKINDEX(index)){
 		return -1;
@@ -567,7 +567,7 @@ INLINE int _ITEM_getInt( char *file, int line, int index ,ITEM_DATAINT element)
 	return ITEM_item[index].itm.data[element];
 }
 
-INLINE int ITEM_setIntStrict( int index ,ITEM_DATAINT element,int data,
+int ITEM_setIntStrict( int index ,ITEM_DATAINT element,int data,
 							  int* error)
 {
 	int buf;
@@ -580,7 +580,7 @@ INLINE int ITEM_setIntStrict( int index ,ITEM_DATAINT element,int data,
 	return buf;
 }
 
-INLINE int _ITEM_setInt( char *file, int line, int index ,ITEM_DATAINT element, int data)
+int _ITEM_setInt( char *file, int line, int index ,ITEM_DATAINT element, int data)
 {
 	int buf;
 	if( !ITEM_CHECKINDEX( index) ){
@@ -596,14 +596,14 @@ INLINE int _ITEM_setInt( char *file, int line, int index ,ITEM_DATAINT element, 
 	return buf;
 }
 
-INLINE char* ITEM_getChar( int index ,ITEM_DATACHAR element )
+char* ITEM_getChar( int index ,ITEM_DATACHAR element )
 {
 	if(!ITEM_CHECKINDEX(index))return "\0";
 	if(!ITEM_CHECKCHARDATAINDEX(element))return "\0";
 	return ITEM_item[index].itm.string[element].string;
 }
 
-INLINE BOOL ITEM_setChar( int index ,ITEM_DATACHAR element , char* new)
+int ITEM_setChar( int index ,ITEM_DATACHAR element , char* new)
 {
 	if(!ITEM_CHECKINDEX(index))return FALSE;
 	if(!ITEM_CHECKCHARDATAINDEX(element))return FALSE;
@@ -613,14 +613,14 @@ INLINE BOOL ITEM_setChar( int index ,ITEM_DATACHAR element , char* new)
 	return TRUE;
 }
 
-INLINE int ITEM_getWorkInt( int index ,ITEM_WORKDATAINT element)
+int ITEM_getWorkInt( int index ,ITEM_WORKDATAINT element)
 {
 	if( !ITEM_CHECKINDEX(index) ) return -1;
 	if( element >= ITEM_WORKDATAINTNUM || element < 0 ) return -1;
 	return ITEM_item[index].itm.workint[element];
 }
 
-INLINE int ITEM_setWorkInt( int index ,ITEM_WORKDATAINT element, int data)
+int ITEM_setWorkInt( int index ,ITEM_WORKDATAINT element, int data)
 {
 	int buf;
 	if( !ITEM_CHECKINDEX( index) ) return -1;
@@ -631,18 +631,18 @@ INLINE int ITEM_setWorkInt( int index ,ITEM_WORKDATAINT element, int data)
 	return buf;
 }
 
-INLINE int ITEM_getITEM_itemnum( void )
+int ITEM_getITEM_itemnum( void )
 {
 	return ITEM_itemnum;
 }
 
-INLINE int ITEM_getITEM_UseItemnum( void )
+int ITEM_getITEM_UseItemnum( void )
 {
 	return ITEM_UseItemnum;
 }
 
 
-INLINE BOOL ITEM_getITEM_use( int index )
+int ITEM_getITEM_use( int index )
 {
 	if( !ITEM_CHECKINDEX(index))return FALSE;
 	return ITEM_item[index].use;
@@ -675,7 +675,7 @@ int ITEM_getItemMaxIdNum( void)
 	return ITEM_idxlen;
 }
 
-BOOL ITEM_checksetdata( void )
+int ITEM_checksetdata( void )
 {
 	int i;
 	char*   strings[ITEM_DATAINTNUM + ITEM_DATACHARNUM + 1];
@@ -719,7 +719,7 @@ char* ITEM_makeStringFromItemIndex( int index, int mode )
 }
 
 #ifdef _SIMPLIFY_ITEMSTRING2
-BOOL CHECK_HaveBeSave( int itemID, int oneNum, int type )
+int CHECK_HaveBeSave( int itemID, int oneNum, int type )
 {
 	if( ITEM_ID == type ) return TRUE;
 	if( ITEMTBL_getInt( itemID, type) == oneNum ) return FALSE;
@@ -795,7 +795,7 @@ char*   ITEM_makeStringFromItemData( ITEM_Item* one, int mode )
 	return ITEM_dataString;
 }
 
-BOOL ITEM_makeExistItemsFromStringToArg( char* src , ITEM_Item* item, int mode )
+int ITEM_makeExistItemsFromStringToArg( char* src , ITEM_Item* item, int mode )
 {
 	int     readindex=1;
 	char	delim1[2];
@@ -835,7 +835,7 @@ BOOL ITEM_makeExistItemsFromStringToArg( char* src , ITEM_Item* item, int mode )
 #endif
 
 	while( 1 ){
-		BOOL    ret;
+		int    ret;
 		char    linebuf[512];
 
 		char firstToken[256];
@@ -1000,7 +1000,7 @@ static char* ITEM_checkString( char* string )
 #undef ITEM_STRINGLEN
 }
 
-BOOL ITEM_readItemConfFile( char* filename )
+int ITEM_readItemConfFile( char* filename )
 {
 	FILE*   f;
 	char    line[512];
@@ -1108,7 +1108,7 @@ BOOL ITEM_readItemConfFile( char* filename )
 		char    token[256];
 		int     ret;
 		int		readpos = 1;
-		BOOL	dataerror = FALSE;
+		int	dataerror = FALSE;
 		ITEM_Item	itm;
 
 		ITEM_getDefaultItemSetting(&itm);
@@ -1355,7 +1355,7 @@ char*   ITEM_makeItemFalseStringWithNum( int haveitemindex )
 	return ITEM_itemStatusStringBuffer;
 }
 
-BOOL ITEM_makeItem( ITEM_Item* itm, int number )
+int ITEM_makeItem( ITEM_Item* itm, int number )
 {
 	int i;
 	if( ITEM_CHECKITEMTABLE(number) == FALSE ){
@@ -1617,7 +1617,7 @@ char *ITEM_getItemInfoFromNumber( int itemid )
 	return ITEMTBL_getChar( itemid, ITEM_EFFECTSTRING);
 }
 
-INLINE char* _ITEM_getNameFromNumber( char *file, int line, int itemid )
+char* _ITEM_getNameFromNumber( char *file, int line, int itemid )
 {
 	if( ITEM_CHECKITEMTABLE(itemid) == FALSE ){
 		print("Can't Get ItemTable for:%d! - %s:%d\n",itemid, file, line);
@@ -1661,7 +1661,7 @@ int ITEM_getmergeItemFromFromITEMtabl( int itemid )
 	return ITEMTBL_getInt( itemid, ITEM_CANMERGEFROM);
 }
 
-BOOL ITEM_canuseMagic( int itemindex)
+int ITEM_canuseMagic( int itemindex)
 {
 	if( !ITEM_CHECKINDEX(itemindex))return FALSE;
 	if( MAGIC_getMagicArray( ITEM_item[itemindex].itm.data[ITEM_MAGICID]) != -1 ) {
@@ -1670,7 +1670,7 @@ BOOL ITEM_canuseMagic( int itemindex)
 	return FALSE;
 }
 
-INLINE ITEM_Item *ITEM_getItemPointer( int index )
+ITEM_Item *ITEM_getItemPointer( int index )
 {
 	if(!ITEM_CHECKINDEX(index))return NULL;
 	return &ITEM_item[index].itm;
@@ -1707,7 +1707,7 @@ int ITEM_isTargetValid( int charaindex, int itemindex, int toindex)
 
 
 #ifdef _ITEM_CHECKWARES
-BOOL CHAR_CheckInItemForWares( int charaindex, int flg)
+int CHAR_CheckInItemForWares( int charaindex, int flg)
 {
 	int itemindex, i;
 	char token[256];
@@ -1745,7 +1745,7 @@ char *ITEMTBL_getChar( int ItemID, ITEM_DATACHAR datatype)
 	return ITEM_tbl[ITEM_idx[ItemID].index].itm.string[datatype].string; //new
 }
 
-INLINE BOOL ITEM_CHECKITEMTABLE( int number )
+int ITEM_CHECKITEMTABLE( int number )
 {
 	if( number < 0 || number >= ITEM_idxlen  ){
 		//andy_log

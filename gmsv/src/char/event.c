@@ -28,7 +28,7 @@ static FUNC		functbl[] = {
 	EVENT_onWarpNPC,	/* warp*/
 };
 
-INLINE	BOOL EVENT_CHECKEVENTINDEX( int event)
+int EVENT_CHECKEVENTINDEX( int event)
 {
 	if( event < 0 || event >= CHAR_EVENTNUM) return FALSE;
 	return TRUE;
@@ -37,7 +37,7 @@ INLINE	BOOL EVENT_CHECKEVENTINDEX( int event)
 int EVENT_main( int charaindex,int event, int x, int y)
 {
 	OBJECT	object;
-	BOOL	found = FALSE;
+	int	found = FALSE;
 	int		rc = FALSE;
 	int fl = CHAR_getInt( charaindex, CHAR_FLOOR);
 	if( !EVENT_CHECKEVENTINDEX( event)) return FALSE;

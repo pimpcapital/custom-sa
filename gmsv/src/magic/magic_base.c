@@ -75,30 +75,30 @@ static MAGIC_MagicFunctionTable MAGIC_functbl[] = {
 
 /* 湘  民尼永弁］失弁本旦楮溢 */
 /*----------------------------------------------------------------------*/
-INLINE BOOL MAGIC_CHECKINDEX( int index )
+int MAGIC_CHECKINDEX( int index )
 {
     if( MAGIC_magicnum<=index || index<0 )return FALSE;
     return TRUE;
 }
 /*----------------------------------------------------------------------*/
-static INLINE BOOL MAGIC_CHECKINTDATAINDEX( int index)
+static int MAGIC_CHECKINTDATAINDEX( int index)
 {
 	if( MAGIC_DATAINTNUM <= index || index < 0 ) return FALSE;
 	return TRUE;
 }
 /*----------------------------------------------------------------------*/
-static INLINE BOOL MAGIC_CHECKCHARDATAINDEX( int index)
+static int MAGIC_CHECKCHARDATAINDEX( int index)
 {
 	if( MAGIC_DATACHARNUM <= index || index < 0 ) return FALSE;
 	return TRUE;
 }
 /*----------------------------------------------------------------------*/
-INLINE int MAGIC_getInt( int index, MAGIC_DATAINT element)
+int MAGIC_getInt( int index, MAGIC_DATAINT element)
 {
 	return MAGIC_magic[index].data[element];
 }
 /*----------------------------------------------------------------------*/
-INLINE int MAGIC_setInt( int index, MAGIC_DATAINT element, int data)
+int MAGIC_setInt( int index, MAGIC_DATAINT element, int data)
 {
 	int buf;
 	buf = MAGIC_magic[index].data[element];
@@ -106,7 +106,7 @@ INLINE int MAGIC_setInt( int index, MAGIC_DATAINT element, int data)
 	return buf;
 }
 /*----------------------------------------------------------------------*/
-INLINE char* MAGIC_getChar( int index, MAGIC_DATACHAR element)
+char* MAGIC_getChar( int index, MAGIC_DATACHAR element)
 {
 	if( !MAGIC_CHECKINDEX( index)) return "\0";
 	if( !MAGIC_CHECKCHARDATAINDEX( element)) return "\0";
@@ -114,7 +114,7 @@ INLINE char* MAGIC_getChar( int index, MAGIC_DATACHAR element)
 }
 
 /*----------------------------------------------------------------------*/
-INLINE BOOL MAGIC_setChar( int index ,MAGIC_DATACHAR element, char* new )
+int MAGIC_setChar( int index ,MAGIC_DATACHAR element, char* new )
 {
     if(!MAGIC_CHECKINDEX(index))return FALSE;
     if(!MAGIC_CHECKCHARDATAINDEX(element))return FALSE;
@@ -134,7 +134,7 @@ int MAGIC_getMagicNum( void)
 /*----------------------------------------------------------------------
  *   芊及涩烂白央奶伙毛  戈
  *---------------------------------------------------------------------*/
-BOOL MAGIC_initMagic( char *filename)
+int MAGIC_initMagic( char *filename)
 {
     FILE*   f;
     char    line[256];
@@ -313,7 +313,7 @@ BOOL MAGIC_initMagic( char *filename)
 /*------------------------------------------------------------------------
  * Magic及涩烂白央奶伙  心  仄
  *-----------------------------------------------------------------------*/
-BOOL MAGIC_reinitMagic( void )
+int MAGIC_reinitMagic( void )
 {
 	freeMemory( MAGIC_magic);
 	return( MAGIC_initMagic( getMagicfile()));
@@ -325,7 +325,7 @@ BOOL MAGIC_reinitMagic( void )
 /*------------------------------------------------------------------------
  * AttMagic的初始化
  *-----------------------------------------------------------------------*/
-BOOL ATTMAGIC_initMagic( char *filename )
+int ATTMAGIC_initMagic( char *filename )
 {
     FILE *file;
 
@@ -380,7 +380,7 @@ BOOL ATTMAGIC_initMagic( char *filename )
 /*------------------------------------------------------------------------
  * AttMagic的再度初始化
  *-----------------------------------------------------------------------*/
-BOOL ATTMAGIC_reinitMagic( void )
+int ATTMAGIC_reinitMagic( void )
 {
    freeMemory( ATTMAGIC_magic );
    ATTMAGIC_magicnum = 0;

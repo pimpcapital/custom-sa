@@ -146,7 +146,7 @@ int createFile( char *fn , char *line )
     }
 }
 
-#define BOOL int
+#define int int
 #define FALSE 0
 #define TRUE  1
 
@@ -206,7 +206,7 @@ char *   makeEscapeString( char* src , char* dest, int sizeofdest)
     int     destindex=0;
 
     for( i = 0 ; i < srclen ; i ++ ){
-        BOOL dirty=FALSE;
+        int dirty=FALSE;
         int     j;
         char    escapechar='\0';
         if( destindex + 1 >= sizeofdest ) break;
@@ -254,7 +254,7 @@ char *   makeEscapeString1( char* src , char* dest, int sizeofdest)
     int     destindex=0;
 
     for( i = 0 ; i < srclen ; i ++ ){
-        BOOL dirty=FALSE;
+        int dirty=FALSE;
         int     j;
         char    escapechar='\0';
         if( destindex + 1 >= sizeofdest )

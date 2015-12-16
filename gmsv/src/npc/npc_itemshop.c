@@ -17,8 +17,8 @@ void NPC_ItemShop_BuyMain(int meindex,int talker,int before );
 void NPC_GetItemList(char *argstr,char * argtoken2);
 void NPC_ItemStrStr(int itemID,double rate,char *name,char *token2);
 
-BOOL NPC_SetNewItem(int meindex,int talker,char *data);
-BOOL NPC_SellNewItem(int meindex,int talker,char *data);
+int NPC_SetNewItem(int meindex,int talker,char *data);
+int NPC_SellNewItem(int meindex,int talker,char *data);
 
 void NPC_ItemShop_Menu(int meindex,int talker);
 
@@ -26,7 +26,7 @@ int NPC_GetLimtItemList(int talker,char *argstr,char *token2,int sell);
 
 void NPC_ItemShop_SellMain(int meindex,int talker,int select);
 int NPC_GetSellItemList(int itemindex,int flg,char *argstr,char *argtoken,int select,int sell);
-BOOL NPC_AddItemBuy(int meindex, int talker,int itemID,int kosuu,double rate);
+int NPC_AddItemBuy(int meindex, int talker,int itemID,int kosuu,double rate);
 int NPC_SellItemstrsStr(int itemindex,int flg,double rate,char *argtoken,int select,int sell);
 void NPC_LimitItemShop(int meindex,int talker,int select);
 void NPC_ExpressmanCheck(int meindex,int talker);
@@ -72,7 +72,7 @@ static NPC_Shop		TypeTable[] = {
 
 };
 
-BOOL NPC_ItemShopInit( int meindex )
+int NPC_ItemShopInit( int meindex )
 {
 
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -108,7 +108,7 @@ void NPC_ItemShopTalked( int meindex , int talker , char *szMes ,int color )
 	char	buf2[256];
 	char 	token[1024];
 	int 	i = 1;
-	BOOL	sellonlyflg = FALSE;
+	int		sellonlyflg = FALSE;
 	char	sellmsg[1024];
 
     if( CHAR_getInt( talker , CHAR_WHICHTYPE ) != CHAR_TYPEPLAYER ) {
@@ -434,7 +434,7 @@ void NPC_ItemStrStr(int itemID,double rate,char *name,char *token2)
 	sprintf( token2, "%s|0|%d|%d|%d|%s|", escape, level, gold, graNo, info);
 }
 
-BOOL NPC_SetNewItem(int meindex,int talker,char *data)
+int NPC_SetNewItem(int meindex,int talker,char *data)
 {
 
 	char buf[1024];
@@ -547,7 +547,7 @@ BOOL NPC_SetNewItem(int meindex,int talker,char *data)
 /*---------------------------------------------
  *失奶  丞及馨笛毛垫丹
  *--------------------------------------------*/
-BOOL NPC_AddItemBuy(int meindex, int talker,int itemID,int kosuu,double rate)
+int NPC_AddItemBuy(int meindex, int talker,int itemID,int kosuu,double rate)
 {
 
 	int itemindex;
@@ -879,7 +879,7 @@ int NPC_SellItemstrsStr(int itemindex,int flg,double rate,char *argtoken,int sel
 
 }
 
-BOOL NPC_SellNewItem(int meindex,int talker,char *data)
+int NPC_SellNewItem(int meindex,int talker,char *data)
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char token[256], token2[256];

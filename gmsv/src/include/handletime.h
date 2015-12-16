@@ -15,7 +15,7 @@
 EXTERN struct timeval NowTime;
 EXTERN int     DEBUG_ADJUSTTIME;
 
-BOOL setNewTime( void );
+int setNewTime( void );
 #ifdef _ASSESS_SYSEFFICACY
 void Assess_InitSysEfficacy( void);
 void Assess_SysEfficacy( int flg);

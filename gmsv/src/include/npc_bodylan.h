@@ -3,7 +3,7 @@
 
 void NPC_BodyLanTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_BodyLanInit( int meindex );
+int NPC_BodyLanInit( int meindex );
 void NPC_BodyLanWatch( int meindex , int lookedindex);
 void NPC_BodyLanWindowTalked(
 	int meindex,

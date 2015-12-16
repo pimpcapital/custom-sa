@@ -22,7 +22,7 @@ void NPC_CallFMMember(int meindex, int floor, int fmindex, char *fmname, int ind
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_FMPKCallManInit( int meindex )
+int NPC_FMPKCallManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf[1024];

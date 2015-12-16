@@ -35,7 +35,7 @@ struct	{
 }w;
 
 struct	{
-	BOOL	use;
+	int	use;
 	int		checkhaveitem;
 	int		checkhaveitemgotowin;
 	int		checkdonthaveitem;
@@ -54,13 +54,13 @@ enum {
 };
 
 static void NPC_FmLetter_selectWindow( int meindex, int toindex, int num);
-static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg);
+static int NPC_FmLetter_readData( int meindex, int windowno, int chkflg);
 static int NPC_FmLetter_restoreButtontype( char *data );
 
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_FmLetterInit( int meindex )
+int NPC_FmLetterInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf[1024];
@@ -312,7 +312,7 @@ void NPC_FmLetterWindowTalked( int meindex, int talkerindex,
  *		windowno	int		它奴件玉它  寞
  *		
  */
-static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
+static int NPC_FmLetter_readData( int meindex, int windowno, int chkflg)
 {
 	
 	int		i;
@@ -324,8 +324,8 @@ static BOOL NPC_FmLetter_readData( int meindex, int windowno, BOOL chkflg)
 	int		b_mode;
 	int		selectnum ;
 	int		messagepos;
-	BOOL	errflg = FALSE;
-	BOOL	readflg = TRUE;
+	int	errflg = FALSE;
+	int	readflg = TRUE;
 	FILE	*fp;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	filename[64];

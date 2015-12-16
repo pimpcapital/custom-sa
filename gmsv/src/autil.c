@@ -25,7 +25,7 @@ char PersonalKey[1024*4];
 // -------------------------------------------------------------------
 // Initialize utilities
 //
-BOOL util_Init( void)
+int util_Init( void)
 {
   int i;
 
@@ -49,7 +49,7 @@ BOOL util_Init( void)
 
 // WON ADD
 //void util_SplitMessage(char *source, char *separator)
-BOOL util_SplitMessage(char *source, char *separator)
+int util_SplitMessage(char *source, char *separator)
 {
   if (source && separator) {	// NULL input is invalid.
     char *ptr;

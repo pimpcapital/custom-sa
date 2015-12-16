@@ -68,7 +68,7 @@ typedef struct tagFamilyPKSchedule {
 
 extern FamilyPKSchedule fmpks[MAX_SCHEDULE*MAX_SCHEDULEMAN];
 
-BOOL NPC_SchedulemanInit(int meindex);
+int NPC_SchedulemanInit(int meindex);
 void NPC_SchedulemanTalked(int meindex, int talkerindex, char *msg, int color);
 void NPC_SchedulemanWindowTalked(int meindex, int talkerindex,
 				 int seqno, int select, char *data);

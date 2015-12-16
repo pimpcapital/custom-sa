@@ -338,7 +338,7 @@ typedef struct
 
 typedef struct _Battle
 {
-	BOOL	use;	/* 银匀化中月井升丹井 */
+	int		use;	/* 银匀化中月井升丹井 */
 	int		battleindex; /* 田玄伙  寞 */
 	int		mode;	/* 蜇箕及爵  乒□玉 */
 	int		type;	/* 爵  正奶皿 (0:骚橘)(1:DUEL)(2:示旦爵) */
@@ -465,7 +465,7 @@ int BATTLE_No2Index( int battleindex, int No);
 
 int BATTLE_Index2No( int battleindex, int charaindex);
 
-BOOL BATTLE_initBattleArray( int battlenum);
+int BATTLE_initBattleArray( int battlenum);
 
 int BATTLE_CreateBattle( void );
 int BATTLE_DeleteBattle( int battleindex);
@@ -473,10 +473,10 @@ int BATTLE_DeleteBattle( int battleindex);
 int BATTLE_NewEntry( int charaindex, int battleindex, int side);
 
 #define BATTLE_Exit( charaindex, battleindex) _BATTLE_Exit( __FILE__, __LINE__, charaindex, battleindex)
-INLINE int _BATTLE_Exit( char *file, int line, int charaindex ,int battleindex);
+int _BATTLE_Exit( char *file, int line, int charaindex ,int battleindex);
 
 #define BATTLE_ExitAll( battleindex) _BATTLE_ExitAll( __FILE__, __LINE__, battleindex)
-INLINE void _BATTLE_ExitAll( char *file, int line, int battleindex);
+void _BATTLE_ExitAll( char *file, int line, int battleindex);
 
 int BATTLE_CreateVsPlayer( int charaindex0,	int charaindex1);
 
@@ -498,21 +498,21 @@ int	BATTLE_PetDefaultEntry(
 	int side
 );
 
-BOOL BATTLE_RescueTry( int charaindex);
+int BATTLE_RescueTry( int charaindex);
 
-BOOL BATTLE_RescueParentTry(
+int BATTLE_RescueParentTry(
 		int charaindex,
 		int pindex
 	);
 
 int BATTLE_DefaultAttacker(	int battleindex, int side);
 
-BOOL BATTLE_IsThrowWepon( int itemindex);
+int BATTLE_IsThrowWepon( int itemindex);
 
 void BATTLE_BadStatusString( int defNo, int status );
 int BATTLE_MultiList( int battleindex, int toNo, int ToList[] );
-BOOL BATTLE_IsCharge( int com );
-BOOL BATTLE_CanMoveCheck( int charaindex );
+int BATTLE_IsCharge( int com );
+int BATTLE_CanMoveCheck( int charaindex );
 int BATTLE_TargetCheck( int battleindex, int defNo);
 char *BATTLE_CharTitle( int charaindex );
 void BATTLE_EscapeDpSend( int battleindex, int charaindex );
@@ -520,7 +520,7 @@ int BATTLE_GetDuelPoint( int battleindex, int side, int num);
 int BATTLE_TargetCheckDead(	int battleindex, int defNo);
 
 void BATTLE_MultiListDead( int battleindex, int toNo, int ToList[] );
-BOOL BATTLE_WatchTry( int charaindex);
+int BATTLE_WatchTry( int charaindex);
 int BATTLE_WatchEntry( int charaindex, int toindex);
 void BATTLE_WatchStop( int charaindex );
 int BATTLE_WatchUnLink( int battleindex );

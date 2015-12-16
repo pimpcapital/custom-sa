@@ -843,7 +843,7 @@ void ITEM_useFirecracker_Battle( charaindex, toindex, haveitemindex)
 	char szWork[128];
 #ifdef _FIX_FIRECRACKER
 	int petid=-1, i=1;
-	BOOL FINDPET=FALSE;
+	int FINDPET=FALSE;
 	char *buff1;
 	char token[256], buf1[256];
 #else

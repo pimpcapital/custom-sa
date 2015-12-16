@@ -23,7 +23,7 @@ void TalkAction(int charaindex, char *message);
 #endif
 
 #ifdef _GM_ITEM
-static BOOL player_useChatMagic( int charaindex, char* data, BOOL isDebug);
+static int player_useChatMagic( int charaindex, char* data, int isDebug);
 #endif
 /*------------------------------------------------------------
  * 民乓永玄楮  及末□旦
@@ -41,7 +41,7 @@ typedef struct tagCHAR_ChatMagicTable
 {
 	char*			magicname;
 	CHATMAGICFUNC	func;
-	BOOL            isdebug;
+	int            isdebug;
 	int             hash;
 	int				level;
 	char*			usestring;
@@ -424,7 +424,7 @@ int CHAR_setChatMagicCDKey( int mode, char *cdkey)
 {
 
 	int i;
-	BOOL found = FALSE;
+	int found = FALSE;
 	if( strlen( cdkey) > 8 ) {
 		return -1;
 	}
@@ -452,7 +452,7 @@ int CHAR_setChatMagicCDKey( int mode, char *cdkey)
 	return i;
 }
 
-static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, BOOL isDebug)
+static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, int isDebug)
 {
 	int i;
 	int hash = hashpjw( name );
@@ -464,7 +464,7 @@ static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, BOOL isDebug)
 	return NULL;
 }
 
-int CHAR_getChatMagicFuncLevel(char* name,BOOL isDebug)
+int CHAR_getChatMagicFuncLevel(char* name,int isDebug)
 {
 	int i;
 	int hash = hashpjw( name );
@@ -476,7 +476,7 @@ int CHAR_getChatMagicFuncLevel(char* name,BOOL isDebug)
 	return -1;
 }
 
-int CHAR_getChatMagicFuncNameAndString( int ti, char* name, char *usestring, int level, BOOL isDebug)
+int CHAR_getChatMagicFuncNameAndString( int ti, char* name, char *usestring, int level, int isDebug)
 {
 	if( name == NULL || usestring == NULL ) return -1;
 	if( ti < 0 || ti >= arraysizeof( CHAR_cmtbl) ) return -1;
@@ -499,11 +499,11 @@ int CHAR_getChatMagicFuncMaxNum( void)
  * 娄醒
  *  charaindex      int     平乓仿奶件犯永弁旦
  *  message         char*   丢永本□斥
- *  isDebug         BOOL    犯田永弘民乓永玄  芊井升丹井
+ *  isDebug         int    犯田永弘民乓永玄  芊井升丹井
  * 忒曰袄
  *  卅仄
  ------------------------------------------------------------*/
-static BOOL CHAR_useChatMagic( int charaindex, char* data, BOOL isDebug)
+static int CHAR_useChatMagic( int charaindex, char* data, int isDebug)
 {
 	char    magicname[256];
 	int     ret;
@@ -698,7 +698,7 @@ void CHAR_getMessageBody(char* message,char* kind,int kindlen,char** body)
 }
 
 
-static BOOL CHAR_Talk_check( int talkerindex, int talkedindex, int micflg )
+static int CHAR_Talk_check( int talkerindex, int talkedindex, int micflg )
 {
 #if 1
 	if( !CHAR_getFlg( talkerindex, CHAR_ISPARTYCHAT )){
@@ -1066,7 +1066,7 @@ if(messageeraseescape[0] == 'v'
 		int     j;
 		int xx[2]={ x, x+CHAR_getDX(CHAR_getInt(index,CHAR_DIR))};
 		int yy[2]={ y, y+CHAR_getDY(CHAR_getInt(index,CHAR_DIR))};
-		BOOL talk=FALSE;
+		int talk=FALSE;
 		for( j=0 ; j<2 ; j ++ ){
 			OBJECT  object;
 			for( object=MAP_getTopObj(fl,xx[j],yy[j]) ; object ; object = NEXT_OBJECT( object ) ){
@@ -1091,8 +1091,8 @@ if(messageeraseescape[0] == 'v'
 	}else{
 		int range = CHAR_getRangeFromVolume( lastvolume );
 		int i,j;
-		BOOL    talk=FALSE;
-		BOOL	channelTalk=FALSE;
+		int    talk=FALSE;
+		int	channelTalk=FALSE;
 		int		partyindex[CHAR_PARTYMAX];
 		for( i = 0; i < CHAR_PARTYMAX; i ++ ) {
 			partyindex[i] = -1;
@@ -1200,7 +1200,7 @@ if(messageeraseescape[0] == 'v'
 	}
 }
 
-BOOL CHAR_talkToCli( int talkedcharaindex,int talkcharaindex,
+int CHAR_talkToCli( int talkedcharaindex,int talkcharaindex,
 					 char* message, CHAR_COLOR color )
 {
 	static char    lastbuf[2048];
@@ -1280,7 +1280,7 @@ void TalkAction(int charaindex, char *message)
 }
 #endif
 #ifdef _GM_ITEM
-static BOOL player_useChatMagic( int charaindex, char* data, BOOL isDebug)
+static int player_useChatMagic( int charaindex, char* data, int isDebug)
 {
 	char    magicname[256];
 	int     ret;

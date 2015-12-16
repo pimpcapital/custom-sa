@@ -6,7 +6,7 @@
 #include "npcutil.h"
 #include "handletime.h"
 
-static BOOL NPC_DengonReadString( int meindex, int id, char *str );
+static int NPC_DengonReadString( int meindex, int id, char *str );
 static void NPC_DengonWriteString( int meindex, int talkerindex, int id, char *str );
 
 #define DENGONFILEDIR "./Dengon/"
@@ -18,7 +18,7 @@ static void NPC_DengonWriteString( int meindex, int talkerindex, int id, char *s
 
 char NPC_sendbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];
 
-BOOL NPC_DengonInit( int meindex )
+int NPC_DengonInit( int meindex )
 {
     char filename[256], tmp[256];
     FILE *f;
@@ -163,7 +163,7 @@ void NPC_DengonLooked( int meindex, int lookedindex )
     
 }
 
-static BOOL NPC_DengonReadString( int meindex, int id, char *str )
+static int NPC_DengonReadString( int meindex, int id, char *str )
 {
     char filename[256];
     char readbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];

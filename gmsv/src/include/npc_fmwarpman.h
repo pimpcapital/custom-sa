@@ -2,7 +2,7 @@
 #define __NPC_FMWARPMAN_H__
 
 void NPC_FMWarpManTalked(int meindex, int talkerindex, char *msg, int color);
-BOOL NPC_FMWarpManInit(int meindex);
+int NPC_FMWarpManInit(int meindex);
 void NPC_FMWarpManWindowTalked(int meindex, int talkerindex, int seqno,
 	int select, char *data);
 void NPC_FMWarpManLoop(int meindex);

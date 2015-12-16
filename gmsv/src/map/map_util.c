@@ -8,7 +8,7 @@
 #define MAP_CHARX(x)   CHAR_getInt(x,CHAR_X)
 #define MAP_CHARY(x)   CHAR_getInt(x,CHAR_Y)
 
-BOOL MAP_getMapDataFromCharIndex( int index  , int* map )
+int MAP_getMapDataFromCharIndex( int index  , int* map )
 {
     int     mapdata[2];
     int     ret;
@@ -22,7 +22,7 @@ BOOL MAP_getMapDataFromCharIndex( int index  , int* map )
     return ret;
 }
 
-BOOL MAP_getMapDataFromFXY( int f , int x , int y, int* map )
+int MAP_getMapDataFromFXY( int f , int x , int y, int* map )
 {
     int     mapdata[2];
     int     ret;

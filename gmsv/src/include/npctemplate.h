@@ -100,11 +100,11 @@ EXTERN NPC_Template*   NPC_template;
 EXTERN int             NPC_templatenum;
 EXTERN int             NPC_template_readindex;
 
-INLINE int NPC_CHECKTEMPLATEINDEX(int index);
+int NPC_CHECKTEMPLATEINDEX(int index);
 
-BOOL NPC_copyFunctionSetToChar( int id, Char* ch );
+int NPC_copyFunctionSetToChar( int id, Char* ch );
 
-BOOL NPC_readNPCTemplateFiles( char* topdirectory ,int templatesize);
+int NPC_readNPCTemplateFiles( char* topdirectory ,int templatesize);
 int NPC_templateGetTemplateIndex( char* templatename );
 
 #endif

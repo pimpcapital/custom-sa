@@ -109,7 +109,7 @@ int MAPPOINT_creatMapWarpObj( int pointindex, char *buf, int objtype)
 	return objindex;
 }
 
-BOOL MAPPOINT_CHECKINDEX( int ps)
+int MAPPOINT_CHECKINDEX( int ps)
 {
 	if( ps < 0 || ps >= MAP_MAXWARPPOINT )
 		return FALSE;

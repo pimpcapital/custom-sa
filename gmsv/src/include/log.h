@@ -34,7 +34,7 @@ typedef enum
 }LOG_TYPE;
 
 void closeAllLogFile( void );
-BOOL initLog( char* filename );
+int initLog( char* filename );
 void printl( LOG_TYPE logtype, char* format , ... );
 
 

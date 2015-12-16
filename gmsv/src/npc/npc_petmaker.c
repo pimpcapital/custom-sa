@@ -18,7 +18,7 @@
   
 void pet_make( int charaindex, char* message );
   
-BOOL NPC_PetMakerInit( int meindex )
+int NPC_PetMakerInit( int meindex )
 {
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEPETMAKER );
     CHAR_setFlg( meindex , CHAR_ISATTACKED , 0 );

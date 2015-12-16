@@ -65,7 +65,7 @@ void fix_item_bug(int charaindex, int i);
  *  岳      TRUE
  *  撩      FALSE
  ------------------------------------------------------------*/
-static BOOL CHAR_makeCharFromOptionAtCreate( Char* ch ,
+static int CHAR_makeCharFromOptionAtCreate( Char* ch ,
 		int	vital, int str, int tgh, int dex,
 		int earth, int water, int fire, int wind)
 {
@@ -607,7 +607,7 @@ void CHAR_LoginBesideSetWorkInt( int charaindex, int clifd)
 
 }
 
-BOOL CHAR_CheckProfessionEquit( int toindex)
+int CHAR_CheckProfessionEquit( int toindex)
 {
 	int i, j, itemindex, newindex;
 	int FixItem[16]={
@@ -1112,7 +1112,7 @@ void CHAR_login( int clifd, char* data, int saveindex )
 //		char c_temp1[4096];
 		int ID1;
 //		int tran_no;
-		BOOL b_find=FALSE;
+		int b_find=FALSE;
 		//ttom
 		for( i = 0; i < CHAR_MAXPOOLPETHAVE; i ++ ) {
 			int petindex = CHAR_getCharPoolPet(charaindex,i);
@@ -1396,7 +1396,7 @@ MAKECHARDATAERROR:
 	lssproto_CharLogin_send( clifd, FAILED, "Download data ok,but cannot make chara");
 }
 
-BOOL CHAR_charSaveFromConnectAndChar( int fd, Char* ch, BOOL unlock )
+int CHAR_charSaveFromConnectAndChar( int fd, Char* ch, int unlock )
 {
 	char*  chardata;
   char   cdkey[CDKEYLEN];
@@ -1423,7 +1423,7 @@ BOOL CHAR_charSaveFromConnectAndChar( int fd, Char* ch, BOOL unlock )
 	return TRUE;
 }
 
-BOOL CHAR_charSaveFromConnect( int fd , BOOL unlock)
+int CHAR_charSaveFromConnect( int fd , int unlock)
 {
 	Char*   ch;
 	int charaindex = CONNECT_getCharaindex(fd);
@@ -1475,10 +1475,10 @@ static void CHAR_dropItemAtLogout( int charaindex )
 	}
 }
 
-BOOL _CHAR_logout( char *file, int line, int clifd, BOOL save )
+int _CHAR_logout( char *file, int line, int clifd, int save )
 {
 	int     charindex, battleindex;
-	BOOL	ret = TRUE;
+	int	ret = TRUE;
 	int	fmindexi, channel, i;
 	charindex = CONNECT_getCharaindex( clifd );
 	if( !CHAR_CHECKINDEX( charindex)) {
@@ -1630,7 +1630,7 @@ BOOL _CHAR_logout( char *file, int line, int clifd, BOOL save )
  * 忒曰袄 		TRUE:	霜匀化中中方
  *				FALSE: 	蛲  
  ------------------------------------------------------------*/
-static BOOL CHAR_sendWatchEvent_sendCheck( int objindex, int index,
+static int CHAR_sendWatchEvent_sendCheck( int objindex, int index,
 											int recvindex, int chac)
 {
 	/* 愤坌互NPC匹锹澎手NPC及凛  仃月 */
@@ -1713,7 +1713,7 @@ static BOOL CHAR_sendWatchEvent_sendCheck( int objindex, int index,
 }
 
 void CHAR_sendWatchEvent( int objindex, int chac, int* opt,
-						  int optlen,BOOL myflg )
+						  int optlen,int myflg )
 {
 	int     i;
 	int j;
@@ -1814,7 +1814,7 @@ void CHAR_sendWatchEvent( int objindex, int chac, int* opt,
  *  岳      TRUE(1)
  *  撩  (  端卞霜日卅井匀凶日巨仿□手殖引木月)    FALSE(0)
  ------------------------------------------------------------*/
-BOOL CHAR_Skillupsend(int charaindex )
+int CHAR_Skillupsend(int charaindex )
 {
 #if 1
 	// 旦玄□件巨奶斥迕卞  凳仄凶手及
@@ -1882,7 +1882,7 @@ void CHAR_SkillUp(  int charaindex, int skillid )
 
 }
 
-INLINE void CHAR_getDXDY( int dir , int* dx, int* dy )
+void CHAR_getDXDY( int dir , int* dx, int* dy )
 {
 	static POINT CHAR_dxdy[8]=
 	{
@@ -1900,13 +1900,13 @@ INLINE void CHAR_getDXDY( int dir , int* dx, int* dy )
 	if( dx )*dx = CHAR_dxdy[dir].x;
 	if( dy )*dy = CHAR_dxdy[dir].y;
 }
-INLINE int CHAR_getDX( int dir )
+int CHAR_getDX( int dir )
 {
 	int tmp;
 	CHAR_getDXDY( dir,&tmp,NULL);
 	return tmp;
 }
-INLINE int CHAR_getDY( int dir )
+int CHAR_getDY( int dir )
 {
 	int tmp;
 	CHAR_getDXDY( dir,NULL,&tmp);
@@ -2315,7 +2315,7 @@ char* CHAR_makeStatusString( int index, char* category )
 			return  CHAR_statusSendBuffer;
 		}else{
 			int		attr[4];
-			BOOL	changenameflg = FALSE;
+			int	changenameflg = FALSE;
             char    *mycdkey;
 			char	*cdkey = NULL;
 			for( i = 0; i < 4; i ++ ) {
@@ -2725,8 +2725,8 @@ char* CHAR_makeStatusString( int index, char* category )
 	return CHAR_statusSendBuffer;
 }
 
-//BOOL CHAR_sendStatusString( int charaindex, char* category )
-BOOL _CHAR_sendStatusString( int charaindex, char* category, char* file, int line )
+//int CHAR_sendStatusString( int charaindex, char* category )
+int _CHAR_sendStatusString( int charaindex, char* category, char* file, int line )
 {
 	char*   string;
 
@@ -3137,7 +3137,7 @@ void CHAR_Look( int charaindex, int dir )
 	}
 }
 
-BOOL _CHAR_makeObjectCString( char *file, int line, int objindex,char* buf, int buflen )
+int _CHAR_makeObjectCString( char *file, int line, int objindex,char* buf, int buflen )
 {
 	char    objindexbuf[64];
 	if( CHECKOBJECT(objindex) == FALSE )    return FALSE;
@@ -3385,7 +3385,7 @@ void CHAR_sendCToArroundCharacter( int objindex )
 	}
 }
 
-void CHAR_sendCDArroundChar_Main( int fl, int x, int y, int objindex, BOOL mode )
+void CHAR_sendCDArroundChar_Main( int fl, int x, int y, int objindex, int mode )
 {
 #define CHAR_CDSEESIZ CHAR_DEFAULTSEESIZ+10
 
@@ -3564,7 +3564,7 @@ void CHAR_sendArroundCharaData( int charaindex )
 	lssproto_C_send( fd, c_msg);
 }
 
-BOOL _CHAR_warpToSpecificPoint( char *file, int line, int charaindex, int floor, int x, int y)
+int _CHAR_warpToSpecificPoint( char *file, int line, int charaindex, int floor, int x, int y)
 {
 	int     objindex;
 	int     per;
@@ -3678,7 +3678,7 @@ static void CHAR_walk_check( int charaindex )
 	}
 }
 
-static BOOL CHAR_callLoop( int charaindex )
+static int CHAR_callLoop( int charaindex )
 {
 	unsigned int timediff_us;
 	struct timeval old;
@@ -3775,8 +3775,8 @@ void CHAR_getCoordinationDir( int dir , int x, int y ,int c,
 	*yout = y + CHAR_getDY(dir) * c;
 }
 
-BOOL CHAR_createCharacter( int type, int floor, int x, int y,int dir,
-						   int* charaindex, int* objindex, BOOL seemap )
+int CHAR_createCharacter( int type, int floor, int x, int y,int dir,
+						   int* charaindex, int* objindex, int seemap )
 {
 	Char   ch;
 	Object  ob;
@@ -3965,7 +3965,7 @@ void CHAR_inputUserPetName( int index , int havepetindex, char* name )
 	int		petindex;
 	//char	category[3];
 	char	*mycdkey=NULL, *cdkey = NULL;
-	BOOL	changenameflg = FALSE;
+	int	changenameflg = FALSE;
 	
 	if( !CHAR_CHECKINDEX( index ) ) return;
 
@@ -4658,12 +4658,12 @@ static void CHAR_setMyPosition_sendData( int charaindex,int prev_x, int prev_y, 
 
 
 }
-BOOL CHAR_setMyPosition( int index, int x, int y, BOOL CAFlg)
+int CHAR_setMyPosition( int index, int x, int y, int CAFlg)
 {
     return CHAR_setMyPosition_main( index,x,y,-1,CAFlg);
 }
 
-BOOL CHAR_setMyPosition_main( int index, int x, int y, int setdir, BOOL CAFlg)
+int CHAR_setMyPosition_main( int index, int x, int y, int setdir, int CAFlg)
 {
 	int     objindex;
 	int		prev_x,prev_y;
@@ -4840,7 +4840,7 @@ static char *CHAR_make_P_StatusString( int charaindex, unsigned int indextable )
 	for( i = 1; i < sizeof( int) * 8; i ++ ){
 		if( indextable & (1 << i) ) {
 			char	tmp[256];
-			BOOL	found = FALSE;
+			int	found = FALSE;
 			for( j = 0; j < arraysizeof( chk); j ++ ) {
 				if( chk[j].kind ==  1 << i ) {
 					if( chk[j].gettype == 0 ) {
@@ -4897,7 +4897,7 @@ static char *CHAR_make_P_StatusString( int charaindex, unsigned int indextable )
 
 
 
-BOOL CHAR_send_P_StatusString( int charaindex, unsigned int indextable )
+int CHAR_send_P_StatusString( int charaindex, unsigned int indextable )
 {
 	char*   string;
 	//if( indextable >= ( CHAR_P_STRING_BASEBASEIMAGENUMBER << 1)) {
@@ -4975,7 +4975,7 @@ static char *CHAR_make_N_StatusString( int charaindex, int num, unsigned int ind
 	for( i = 1; i < sizeof( int) * 8; i ++ ){
 		if( indextable & (1 << i) ) {
 			char	tmp[256];
-			BOOL	found = FALSE;
+			int	found = FALSE;
 			/*   匀化中月申永玄午］chk卞甲永玄允月井譬屯月 */
 			for( j = 0; j < arraysizeof( chk); j ++ ) {
 				if( chk[j].kind ==  1 << i ) {
@@ -5044,7 +5044,7 @@ static char *CHAR_make_N_StatusString( int charaindex, int num, unsigned int ind
  *  霜匀凶［TRUE(1)
  *  霜木卅井匀凶［FALSE(0)
  *------------------------------------------------------------*/
-BOOL CHAR_send_N_StatusString( int charaindex, int num, unsigned int indextable )
+int CHAR_send_N_StatusString( int charaindex, int num, unsigned int indextable )
 {
 	char*   string;
 
@@ -5122,7 +5122,7 @@ static char *CHAR_make_K_StatusString( int charaindex, int num, unsigned int ind
 	for( i = 1; i < sizeof( int) * 8; i ++ ){
 		if( indextable & (1 << i) ) {
 			char	tmp[256];
-			BOOL	found = FALSE;
+			int	found = FALSE;
 			for( j = 0; j < arraysizeof( chk); j ++ ) {
 				if( chk[j].kind ==  1 << i ) {
 					if( chk[j].gettype == 0 ) {
@@ -5164,7 +5164,7 @@ static char *CHAR_make_K_StatusString( int charaindex, int num, unsigned int ind
 					found = TRUE;
 				}
 				if( indextable & CHAR_K_STRING_CHANGENAMEFLG ) {
-					BOOL	changenameflg = FALSE;
+					int	changenameflg = FALSE;
 					char	*mycdkey, *cdkey = NULL;
 					mycdkey = CHAR_getChar( charaindex, CHAR_CDKEY);
 					{
@@ -5207,7 +5207,7 @@ static char *CHAR_make_K_StatusString( int charaindex, int num, unsigned int ind
  *  霜匀凶［TRUE(1)
  *  霜木卅井匀凶［FALSE(0)
  *------------------------------------------------------------*/
-BOOL CHAR_send_K_StatusString( int charaindex, int num, unsigned int indextable )
+int CHAR_send_K_StatusString( int charaindex, int num, unsigned int indextable )
 {
 	char*   string;
 
@@ -5288,7 +5288,7 @@ int CHAR_makeDBKey( int charaindex, char *pszBuffer, int size ){
 //
 // DuelPoint 及 DBUpdateEntry毛霜月
 //------------------------------------------------------------
-BOOL CHAR_send_DpDBUpdate( int charaindex )
+int CHAR_send_DpDBUpdate( int charaindex )
 {
 	int fd,dp;
 	char szKey[256];
@@ -5347,7 +5347,7 @@ char *CHAR_getUseID( int charaindex )
 	return pName;
 }
 
-BOOL CHAR_send_DpDBUpdate_AddressBook( int charaindex, int mode )
+int CHAR_send_DpDBUpdate_AddressBook( int charaindex, int mode )
 {
 	int fd;
 	char szKey[256];
@@ -5545,7 +5545,7 @@ int                     CHAR_effectnum;
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL CHAR_initEffectSetting( char* filename )
+int CHAR_initEffectSetting( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -5740,9 +5740,9 @@ BOOL CHAR_initEffectSetting( char* filename )
 //	蜇箕凛对互］隙烂及椭瘀卞穴永民仄化中月井毛譬屯引允［
 //	宁匀化中木壬TRUE毛忒允［
 //-------------------------------------------------------------------------
-static BOOL CHAR_checkEffectTime( int num)
+static int CHAR_checkEffectTime( int num)
 {
-	BOOL returnflg = FALSE;
+	int returnflg = FALSE;
 	struct	tm	t;
 	
 	memcpy( &t, localtime( &NowTime.tv_sec), sizeof( struct tm));
@@ -5756,7 +5756,7 @@ static BOOL CHAR_checkEffectTime( int num)
 		
 		// 畸互域谯仄化中月井
 		if( strcmp( CHAR_effect[num].month, "*" ) != 0 ) {
-			BOOL flg = FALSE;
+			int flg = FALSE;
 			for( i = 1; ; i ++) {
 	            ret = getStringFromIndexWithDelim( CHAR_effect[num].month, 
 	            									",", i, 
@@ -5773,7 +5773,7 @@ static BOOL CHAR_checkEffectTime( int num)
 		
 		//   互域谯仄化中月井
 		if( strcmp( CHAR_effect[num].day, "*" ) != 0 ) {
-			BOOL flg = FALSE;
+			int flg = FALSE;
 			for( i = 1; ; i ++) {
 	            ret = getStringFromIndexWithDelim( CHAR_effect[num].day, 
 	            									",", i, 
@@ -5789,7 +5789,7 @@ static BOOL CHAR_checkEffectTime( int num)
 		}
 		// 凛棉互域谯仄化中月井
 		if( strcmp( CHAR_effect[num].hour, "*" ) != 0 ) {
-			BOOL flg = FALSE;
+			int flg = FALSE;
 			for( i = 1; ; i ++) {
 	            ret = getStringFromIndexWithDelim( CHAR_effect[num].hour, 
 	            									",", i, 
@@ -5808,7 +5808,7 @@ static BOOL CHAR_checkEffectTime( int num)
 		if( strcmp( CHAR_effect[num].min, "*" ) != 0 ) {
 			// 渝棉互←卅日手丹OK
 			if( strcmp( CHAR_effect[num].expire, "*" ) != 0 ) {
-				BOOL flg = FALSE;
+				int flg = FALSE;
 				for( i = 1; ; i ++) {
 		            struct tm tm_work;
 		            time_t tim;
@@ -5885,8 +5885,8 @@ void CHAR_checkEffectLoop( void)
 	struct {
 		int floor;
 		int effect;
-		BOOL on;
-		BOOL off;
+		int on;
+		int off;
 	} ef[2048];
 
 	memset( &ef, 0, sizeof( ef));
@@ -6164,7 +6164,7 @@ int storeCharaData( void ){
 
 
 #ifdef _FIX_METAMORIDE
-BOOL CHAR_CHECKJOINENEMY( int index)
+int CHAR_CHECKJOINENEMY( int index)
 {
 	int masterindex=-1;
 	if( CHAR_getWorkInt( index, CHAR_WORKPARTYMODE) == CHAR_PARTY_CLIENT ) {
@@ -6209,7 +6209,7 @@ void fix_item_bug(int charaindex, int itemindex)
 }
 
 #ifdef _PET_LOSTPET
-BOOL CHAR_CharSaveLostPet( int petindex, int type)//地上0 溜宠 1 宠邮 2
+int CHAR_CharSaveLostPet( int petindex, int type)//地上0 溜宠 1 宠邮 2
 {
 	int lv, cost=0;
     char* CdKey=NULL;
@@ -6302,7 +6302,7 @@ void InitHeroList( void)
 }
 #endif
 
-BOOL checkUnlawWarpFloor(int floor) // 检查禁止玩家互相传送地区
+int checkUnlawWarpFloor(int floor) // 检查禁止玩家互相传送地区
 {
 	
 	if( floor == 887 // 招待所

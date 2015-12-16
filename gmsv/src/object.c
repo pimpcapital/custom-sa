@@ -20,7 +20,7 @@
 static Object *obj;
 static int objnum;
 
-BOOL initObjectArray( int num )
+int initObjectArray( int num )
 {
     int     i;
     objnum = num;
@@ -36,17 +36,17 @@ BOOL initObjectArray( int num )
 }
 
 
-BOOL endObjectArray( void )
+int endObjectArray( void )
 {
     freeMemory( obj );
     return TRUE;
 }
 
-INLINE int _initObjectOne( char *file, int line, Object* ob )
+int _initObjectOne( char *file, int line, Object* ob )
 {
     static int allocobjnum = 0;
     int i;
-    BOOL    first;
+    int    first;
 
     i = allocobjnum;
     first = TRUE;
@@ -88,34 +88,34 @@ void endObjectOne( int index )
     obj[index].type = OBJTYPE_NOUSE;
 }
 
-BOOL CHECKOBJECT( int index )
+int CHECKOBJECT( int index )
 {
     if( 0<=index && index<objnum )return TRUE;
     return FALSE;
 }
 
-BOOL CHECKOBJECTUSE( int index )
+int CHECKOBJECTUSE( int index )
 {
     if( CHECKOBJECT(index) == FALSE )return FALSE;
     if( obj[index].type == OBJTYPE_NOUSE )return FALSE;
     return TRUE;
 }
 
-INLINE int OBJECT_getType( int index )
+int OBJECT_getType( int index )
 {
     return obj[index].type;
 }
 
-INLINE int OBJECT_getchartype( int index )
+int OBJECT_getchartype( int index )
 {
     return obj[index].chartype;
 }
-INLINE void OBJECT_setchartype( int index, int flg)
+void OBJECT_setchartype( int index, int flg)
 {
     obj[index].chartype = flg;
 }
 
-INLINE int OBJECT_setType( int index, int newvalue )
+int OBJECT_setType( int index, int newvalue )
 {
     int     old;
     old = obj[index].type;
@@ -123,12 +123,12 @@ INLINE int OBJECT_setType( int index, int newvalue )
     return old;
 }
 
-INLINE int OBJECT_getFloor( int index )
+int OBJECT_getFloor( int index )
 {
     return obj[index].floor;
 }
 
-INLINE int OBJECT_setFloor( int index, int newvalue )
+int OBJECT_setFloor( int index, int newvalue )
 {
     int     old;
     old = obj[index].floor;
@@ -136,12 +136,12 @@ INLINE int OBJECT_setFloor( int index, int newvalue )
     return old;
 }
 
-INLINE int OBJECT_getX( int index )
+int OBJECT_getX( int index )
 {
     return obj[index].x;
 }
 
-INLINE int OBJECT_setX( int index, int newvalue )
+int OBJECT_setX( int index, int newvalue )
 {
     int     old;
     old = obj[index].x;
@@ -149,12 +149,12 @@ INLINE int OBJECT_setX( int index, int newvalue )
     return old;
 }
 
-INLINE int OBJECT_getY( int index )
+int OBJECT_getY( int index )
 {
     return obj[index].y;
 }
 
-INLINE int OBJECT_setY( int index, int newvalue )
+int OBJECT_setY( int index, int newvalue )
 {
     int     old;
     old = obj[index].y;
@@ -163,12 +163,12 @@ INLINE int OBJECT_setY( int index, int newvalue )
 }
 
 #ifdef _DEL_DROP_GOLD
-INLINE int OBJECT_getTime( int index )
+int OBJECT_getTime( int index )
 {
     return obj[index].time;
 }
 
-INLINE int OBJECT_setTime( int index, int newvalue )
+int OBJECT_setTime( int index, int newvalue )
 {
     int     old;
     old = obj[index].time;
@@ -185,7 +185,7 @@ INLINE int OBJECT_setTime( int index, int newvalue )
  * 忒曰袄
  *  int
  ------------------------------------------------------------*/
-INLINE int OBJECT_getIndex( int index )
+int OBJECT_getIndex( int index )
 {
     return obj[index].index;
 }
@@ -197,7 +197,7 @@ INLINE int OBJECT_getIndex( int index )
  * 忒曰袄
  *  int 樯及袄
  ------------------------------------------------------------*/
-INLINE int OBJECT_setIndex( int index, int newvalue )
+int OBJECT_setIndex( int index, int newvalue )
 {
     int     old;
     old = obj[index].index;
@@ -213,7 +213,7 @@ INLINE int OBJECT_setIndex( int index, int newvalue )
  * 忒曰袄
  *  int
  ------------------------------------------------------------*/
-INLINE int OBJECT_getNum( void )
+int OBJECT_getNum( void )
 {
     return objnum;
 }

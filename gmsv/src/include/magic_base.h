@@ -117,19 +117,19 @@ typedef struct tagToCallMagic
 
 typedef int (*MAGIC_CALLFUNC)( int, int, int, int );
 
-INLINE BOOL MAGIC_CHECKINDEX( int index );
-INLINE int MAGIC_getInt( int index, MAGIC_DATAINT element);
-INLINE int MAGIC_setInt( int index, MAGIC_DATAINT element, int data);
-INLINE char* MAGIC_getChar( int index, MAGIC_DATACHAR element);
-INLINE BOOL MAGIC_setChar( int index ,MAGIC_DATACHAR element, char* new );
+int MAGIC_CHECKINDEX( int index );
+int MAGIC_getInt( int index, MAGIC_DATAINT element);
+int MAGIC_setInt( int index, MAGIC_DATAINT element, int data);
+char* MAGIC_getChar( int index, MAGIC_DATACHAR element);
+int MAGIC_setChar( int index ,MAGIC_DATACHAR element, char* new );
 int MAGIC_getMagicNum( void);
-BOOL MAGIC_initMagic( char *filename);
-BOOL MAGIC_reinitMagic( void );
+int MAGIC_initMagic( char *filename);
+int MAGIC_reinitMagic( void );
 
 #ifdef _ATTACK_MAGIC
 
-BOOL ATTMAGIC_initMagic( char *filename );
-BOOL ATTMAGIC_reinitMagic( void );
+int ATTMAGIC_initMagic( char *filename );
+int ATTMAGIC_reinitMagic( void );
 
 #endif
 

@@ -41,7 +41,7 @@ void ApplyFamilyPoint( int meindex, int toindex, int select);
 #endif
 
 // 公布栏的初始化(when gmsv start)
-BOOL NPC_FmDengonInit( int meindex)
+int NPC_FmDengonInit( int meindex)
 {
     int fmindex=CHAR_getInt(meindex, CHAR_FMINDEX);
     CHAR_setInt( meindex, CHAR_WHICHTYPE, CHAR_TYPEDENGON);

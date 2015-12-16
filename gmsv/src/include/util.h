@@ -49,7 +49,7 @@ void strcpysafe( char* dest ,size_t n,const char* src );
 void strncpysafe( char* dest ,const size_t n ,
                  const char* src ,const int length );
 char* strcatsafe( char* src, int size, char* ap );
-BOOL strtolchecknum( char* arg , void* number,int base ,CTYPE type);
+int strtolchecknum( char* arg , void* number,int base ,CTYPE type);
 int strcmptail( char *s1 , char *s2 );
 int texttoiTail( char *hoge);
 int textToInt( char *str );
@@ -59,7 +59,7 @@ void deleteCharFromStringNoEscape( char* src , char* dels );
 char*   replaceString( char* src, char oldc ,char newc );
 
 char*   escapeStrStr( char* src, char* needle );
-BOOL getStringFromIndexWithDelim_body( char* src ,char* delim ,int index, char* buf , int buflen, char *file, int line );
+int getStringFromIndexWithDelim_body( char* src ,char* delim ,int index, char* buf , int buflen, char *file, int line );
 #define getStringFromIndexWithDelim( src, delim, index, buf, buflen ) getStringFromIndexWithDelim_body( src, delim, index, buf, buflen, __FILE__, __LINE__ )
 
 void getFourIntsFromString(char* src,int* int1,int* int2,int* int3,
@@ -80,25 +80,25 @@ int rgetFileName( char* dirname , STRING64* string, int size);
                      (int)( (double)(y-(x-1))*rand()/(RAND_MAX+1.0)) )
 /*#define RAND(x,y)   (x+(int)( (double)(y)*rand() / (RAND_MAX+1.0)) )*/
 void makeRandomString( char *cand , char *out , int len );
-BOOL checkStringsUnique( char** strings, int num ,int verbose);
+int checkStringsUnique( char** strings, int num ,int verbose);
 
 char*   makeEscapeString( char* src , char* dest, int sizeofdest);
 char*   makeStringFromEscaped( char* src );
-INLINE double time_diff(struct timeval subtrahend,struct timeval subtractor);
-BOOL PointInRect( RECT* rect, POINT* p );
-BOOL CoordinateInRect( RECT* rect, int x, int y);
+double time_diff(struct timeval subtrahend,struct timeval subtractor);
+int PointInRect( RECT* rect, POINT* p );
+int CoordinateInRect( RECT* rect, int x, int y);
 int clipRect( RECT *rect1, RECT *rect2, RECT *ret );
-BOOL isstring1or0( char*  string );
+int isstring1or0( char*  string );
 void easyGetTokenFromString( char *src , int count , char*output , int len );
 
 float  linearDiv( float val1 , float val2 , float d );
-BOOL isExistFile( char* filename );
+int isExistFile( char* filename );
 char *cnv10to62( int a, char *out, int outlen );
-BOOL checkRedundancy( int *src, int srclen);
+int checkRedundancy( int *src, int srclen);
 void shuffle_ints( int num, int *a, int t );
 unsigned short CheckCRC( unsigned char *p , int size );
 // Shan Add
-INLINE double time_diff(struct timeval subtrahend,struct timeval subtractor);
+double time_diff(struct timeval subtrahend,struct timeval subtractor);
  
 
 /*  穴弁夫卅曰  */

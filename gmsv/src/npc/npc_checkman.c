@@ -18,12 +18,12 @@
 static void NPC_CheckMan_selectWindow( int meindex, int toindex, int num);
 int NPC_NowFlgCheck(int meindex,int talker,int now[MAXEVENTFLG]);
 int NPC_EndFlgCheck(int meindex,int talker ,int nowflg[MAXEVENTFLG]);
-BOOL NPC_FlgCheckMain( int meindex,int talker,int nowindex,int now[MAXEVENTFLG],char *work2);
+int NPC_FlgCheckMain( int meindex,int talker,int nowindex,int now[MAXEVENTFLG],char *work2);
 
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_CheckManInit( int meindex )
+int NPC_CheckManInit( int meindex )
 {
 	/*--平乓仿及正奶皿毛涩烂--*/
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPECHECKMAN);
@@ -403,7 +403,7 @@ int NPC_EndFlgCheck(int meindex,int talker ,int nowflg[MAXEVENTFLG])
  * 择称
  *
  */
-BOOL NPC_FlgCheckMain( int meindex,int talker,int nowindex,int now[MAXEVENTFLG],char *work2)
+int NPC_FlgCheckMain( int meindex,int talker,int nowindex,int now[MAXEVENTFLG],char *work2)
 {
 	int page;
 	int max;

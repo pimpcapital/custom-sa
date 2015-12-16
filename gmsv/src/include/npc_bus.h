@@ -1,12 +1,12 @@
 #ifndef __NPC_BUS_H__
 #define __NPC_BUS_H__
 
-BOOL NPC_BusInit( int meindex );
+int NPC_BusInit( int meindex );
 void NPC_BusLoop( int meindex );
 void NPC_BusTalked( int meindex , int talkerindex , char *szMes ,
                      int color );
-BOOL NPC_BusCheckAllowItem( int meindex, int charaindex, BOOL pickupmode);
-BOOL NPC_BusCheckJoinParty( int meindex, int charaindex, BOOL msgflg);
+int NPC_BusCheckAllowItem( int meindex, int charaindex, int pickupmode);
+int NPC_BusCheckJoinParty( int meindex, int charaindex, int msgflg);
 
 #endif
 

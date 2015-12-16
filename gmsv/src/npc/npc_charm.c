@@ -32,7 +32,7 @@ void NPC_CharmUp(int meindex,int talker);
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_CharmInit( int meindex )
+int NPC_CharmInit( int meindex )
 {
 	/*--平乓仿及正奶皿毛涩烂--*/
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPECHARM );

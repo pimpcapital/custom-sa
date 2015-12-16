@@ -17,15 +17,15 @@
  */
 static void NPC_Janken_selectWindow( int meindex, int talker, int num);
 void NPC_JnakenJudge(int meindex,int talker,int sel);
-BOOL NPC_JankenEntryItemCheck(int talker,char *buf);
-BOOL NPC_JankenEntryItemDel(int talker,char *buf);
+int NPC_JankenEntryItemCheck(int talker,char *buf);
+int NPC_JankenEntryItemDel(int talker,char *buf);
 void NPC_WarpPointGet(int meindex,int talker,int *fl,int *x,int *y,int judge);
 
 
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_JankenInit( int meindex )
+int NPC_JankenInit( int meindex )
 {
 
 	//正奶皿毛本永玄
@@ -344,13 +344,13 @@ void NPC_WarpPointGet(int meindex,int talker,int *fl,int *x,int *y,int judge)
 /*
  *--失奶  丞及民尼永弁分仃毛垫丹
  */
-BOOL NPC_JankenEntryItemCheck(int talker,char *buf)
+int NPC_JankenEntryItemCheck(int talker,char *buf)
 {
 
 	char buf2[512];
 	char buf3[256];
 	int id=0;
-	BOOL flg = FALSE;
+	int flg = FALSE;
 	int i;
 	int itemindex;
 	int itemno;
@@ -413,7 +413,7 @@ BOOL NPC_JankenEntryItemCheck(int talker,char *buf)
 
 }
 
-BOOL NPC_JankenEntryItemDel(int talker,char *buf)
+int NPC_JankenEntryItemDel(int talker,char *buf)
 {
 
 	int i = 1, j = 1,k = 1;
@@ -494,7 +494,7 @@ BOOL NPC_JankenEntryItemDel(int talker,char *buf)
 	return TRUE;
 }
 
-BOOL NPC_JankenItemGet(int meindex,int talker, char *wl)
+int NPC_JankenItemGet(int meindex,int talker, char *wl)
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf[64];

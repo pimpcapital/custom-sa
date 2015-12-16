@@ -42,12 +42,12 @@ enum {
 #define STANDBYTIME 50
 
 static void NPC_VipShop_selectWindow( int meindex, int toindex, int num,int select);
-BOOL VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token, int index );
+int VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token, int index );
 int VipShop_ShowMenulist( char *npcarg );
 
 int page;
 
-BOOL NPC_VipshopInit( int meindex )
+int NPC_VipshopInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 		
@@ -216,10 +216,10 @@ void NPC_VipshopLoop( int meindex)
 
 }
 
-BOOL VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token,int index )
+int VipShop_GetMenuStr( int meindex, int toindex, char *npcarg, char *token,int index )
 {
 	char buf1[1024], buf2[32], buf3[36];
-	BOOL FINDS=FALSE;
+	int FINDS=FALSE;
 	int talkNo=index*7+1;
 	if( npcarg == NULL ) return FALSE;
 	

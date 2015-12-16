@@ -409,7 +409,7 @@ CHAR_AFTERWALK:
 		}
     }else if( CHAR_getInt( charaindex, CHAR_WHICHTYPE ) == CHAR_TYPEPLAYER ){
 
-		BOOL	flg = FALSE;
+		int	flg = FALSE;
 		int		par;
 		int		count;
 		CHAR_setWorkInt( charaindex, CHAR_WORKACTION, -1 );
@@ -604,14 +604,14 @@ CHAR_AFTERWALK:
 CHAR_WALKRET CHAR_walk( int index, int dir, int mode)
 {
     CHAR_WALKRET ret;
-    BOOL (*prewalk)(int , int* , int* );
+    int (*prewalk)(int , int* , int* );
     void (*postwalk)(int);
     if( !CHAR_CHECKINDEX( index ) )return CHAR_WALKSYSTEMERROR;
 
     if( CHAR_getFlg(index,CHAR_ISDIE) ) return CHAR_WALKDIE;
 
     VALIDATEDIR(dir);
-    prewalk = (BOOL(*)(int,int*,int*))
+    prewalk = (int(*)(int,int*,int*))
         CHAR_getFunctionPointer(index, CHAR_WALKPREFUNC);
 
     if( prewalk != NULL )
@@ -821,7 +821,7 @@ void CHAR_walkcall( int index )
  * 忒曰袄
  *  卅仄
  ------------------------------------------------------------*/
-void CHAR_walk_start(int index, int x, int y, char* dir, BOOL mapsendmode )
+void CHAR_walk_start(int index, int x, int y, char* dir, int mapsendmode )
 {
 
     if( !CHAR_CHECKINDEX( index ) )return;
@@ -890,7 +890,7 @@ void CHAR_walk_start(int index, int x, int y, char* dir, BOOL mapsendmode )
  * 忒曰袄
  *  卅仄
  ------------------------------------------------------------*/
-void CHAR_walk_init( int fd, int x, int y, char *direction, BOOL mapsendmode)
+void CHAR_walk_init( int fd, int x, int y, char *direction, int mapsendmode)
 {
     if( strlen( direction) > 32) {
         print( "walkarray length over\n");

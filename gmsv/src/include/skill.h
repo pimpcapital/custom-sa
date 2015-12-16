@@ -67,7 +67,7 @@ typedef struct tagSkill
 }Skill;
 
 char* SKILL_makeStringFromSkillData( Skill* sk );
-BOOL  SKILL_makeSkillFromStringToArg( char* src, Skill* sk );
+int  SKILL_makeSkillFromStringToArg( char* src, Skill* sk );
 
 int SKILL_getInt( Skill* skill, int element);
 int SKILL_setInt( Skill* skill, int element, int new);
@@ -76,11 +76,11 @@ char* SKILL_makeSkillStatusString( Skill* skill );
 
 char* SKILL_makeSkillFalseString( void );
 
-BOOL SKILL_makeSkillData( Skill* sk ,int skid, int lev );
+int SKILL_makeSkillData( Skill* sk ,int skid, int lev );
 
 int SKILL_levelup( Skill* sk );
 int SKILL_getLevelFromSkillID( int charaindex, SKILL_ID id );
-BOOL SKILL_getUpableSkillID( int charaindex,char* buf, int buflen );
+int SKILL_getUpableSkillID( int charaindex,char* buf, int buflen );
 void SKILL_skillEffect( int charaindex );
 
 #endif 

@@ -85,7 +85,7 @@ void CHECK_FMPknumInFloor( int meindex)
 
 extern int familyMemberIndex[FAMILY_MAXNUM][FAMILY_MAXMEMBER];
 
-BOOL NPC_FMWarpManInit( int meindex )
+int NPC_FMWarpManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buff2[256];

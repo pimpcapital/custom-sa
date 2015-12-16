@@ -123,7 +123,7 @@ enum {
 #define		ROULETTE_STANDBY1	40
 #define		ROULETTE_LOOPTIME	3000
 
-BOOL NPC_Gamble_MasterInit( int meindex )
+int NPC_Gamble_MasterInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf1[256];
@@ -376,7 +376,7 @@ void defPlayerGold( int meindex , int flg)
 	//float def;
 	char token[256], buff[256];
 	char buf1[56],buf2[56];
-	BOOL GAMBLE_YES = FALSE;
+	int GAMBLE_YES = FALSE;
 	endpoint = CHAR_getWorkInt( meindex, NPC_WORK_ENDPOINT);
 	
 	X = (endpoint >> 16 );

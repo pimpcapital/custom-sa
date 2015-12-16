@@ -163,7 +163,7 @@ int FMAdvTbl[] = {		// 家族冒险 Table
 
 #endif
 
-BOOL NPC_Util_AddOneTitle(int charindex, int titleindex)
+int NPC_Util_AddOneTitle(int charindex, int titleindex)
 {
 	int i;
 	Char *c;
@@ -185,7 +185,7 @@ BOOL NPC_Util_AddOneTitle(int charindex, int titleindex)
 	return FALSE;
 }
 
-BOOL NPC_Util_HaveTitle(int charindex, int titleindex)
+int NPC_Util_HaveTitle(int charindex, int titleindex)
 {
 	int i;
 	Char *c;
@@ -205,7 +205,7 @@ BOOL NPC_Util_HaveTitle(int charindex, int titleindex)
 	return FALSE;
 }
 
-BOOL NPC_Util_Nearby(int x1, int y1, int x2, int y2)
+int NPC_Util_Nearby(int x1, int y1, int x2, int y2)
 {
 	if (ABS(x1 - x2) <= 1 && ABS(y1 - y2) <= 1) {
 		return TRUE;
@@ -214,7 +214,7 @@ BOOL NPC_Util_Nearby(int x1, int y1, int x2, int y2)
 	}
 }
 
-BOOL NPC_Util_CharNearby(int ind1, int ind2)
+int NPC_Util_CharNearby(int ind1, int ind2)
 {
 	if (!CHAR_CHECKINDEX(ind1))
 		return FALSE;
@@ -314,7 +314,7 @@ int NPC_Util_countHaveItem(int meindex, int itemid)
 	return count;
 }
 
-BOOL NPC_Util_isBackContact(int frontindex, int backindex)
+int NPC_Util_isBackContact(int frontindex, int backindex)
 {
 	int dir;
 	int x, y;
@@ -333,7 +333,7 @@ BOOL NPC_Util_isBackContact(int frontindex, int backindex)
 		return FALSE;
 }
 
-BOOL NPC_Util_isFaceToFace(int index1, int index2, int distance)
+int NPC_Util_isFaceToFace(int index1, int index2, int distance)
 {
 	int i;
 	if (CHAR_getInt(index1, CHAR_FLOOR) != CHAR_getInt(index2, CHAR_FLOOR)) {
@@ -366,7 +366,7 @@ BOOL NPC_Util_isFaceToFace(int index1, int index2, int distance)
 	return FALSE;
 }
 
-BOOL NPC_Util_isFaceToChara(int index1, int index2, int distance)
+int NPC_Util_isFaceToChara(int index1, int index2, int distance)
 {
 	int i;
 	if (CHAR_getInt(index1, CHAR_FLOOR) != CHAR_getInt(index2, CHAR_FLOOR)) {
@@ -395,7 +395,7 @@ BOOL NPC_Util_isFaceToChara(int index1, int index2, int distance)
 	return FALSE;
 }
 
-BOOL NPC_Util_charIsInFrontOfChar(int index1, int index2, int distance)
+int NPC_Util_charIsInFrontOfChar(int index1, int index2, int distance)
 {
 	int i;
 	if (CHAR_getInt(index1, CHAR_FLOOR) != CHAR_getInt(index2, CHAR_FLOOR)) {
@@ -434,7 +434,7 @@ void NPC_Util_AnnounceFloor(int floorid, char *msg)
 	}
 }
 
-BOOL NPC_Util_moveItemToChar(int charindex, int itemindex, BOOL net)
+int NPC_Util_moveItemToChar(int charindex, int itemindex, int net)
 {
 	int emptyindex, oind, cind;
 	emptyindex = CHAR_findEmptyItemBox(charindex);
@@ -477,7 +477,7 @@ BOOL NPC_Util_moveItemToChar(int charindex, int itemindex, BOOL net)
 	return FALSE;
 }
 
-BOOL NPC_Util_moveItemToMap(int itemindex, int fl, int x, int y, BOOL net)
+int NPC_Util_moveItemToMap(int itemindex, int fl, int x, int y, int net)
 {
 	int oind, cind;
 
@@ -517,7 +517,7 @@ int NPC_Util_GiveAllItemToChar(int give, int take)
 
 	for (i = 0; i < CHAR_MAXITEMHAVE; i++) {
 		int itemindex = CHAR_getItemIndex(give, i);
-		BOOL aho = NPC_Util_moveItemToChar(take, itemindex, FALSE);
+		int aho = NPC_Util_moveItemToChar(take, itemindex, FALSE);
 		if (aho) {
 			count++;
 		}
@@ -529,7 +529,7 @@ int NPC_Util_GiveAllItemToChar(int give, int take)
 	return count;
 }
 
-BOOL NPC_Util_createItemToChar(int charindex, int itemid, BOOL net)
+int NPC_Util_createItemToChar(int charindex, int itemid, int net)
 {
 	int emptyitemindexinchara, itemindex;
 	emptyitemindexinchara = CHAR_findEmptyItemBox(charindex);
@@ -825,7 +825,7 @@ int NPC_Util_SuberiWalk(int index, int dir)
 *----------------------------------------------------------------------*/
 int NPC_Util_GetNumFromArg(int meindex, char *in)
 {
-	BOOL rc;
+	int rc;
 	int i;
 	char outstr[sizeof(STRING32)];
 	int out = -1;
@@ -961,7 +961,7 @@ void NPC_Util_NPCDelete(int srcindex)
 
 char *NPC_Util_CheckAssignArgFile(int index, char *filename)
 {
-	BOOL rc;
+	int rc;
 	int i;
 	char *cret = NULL;
 	char outstr[64];
@@ -1044,7 +1044,7 @@ char *NPC_Util_GetArgStr(int index, char *argstr, int len)
 
 int NPC_Util_GetNumFromStrWithDelim(char *srcstr, char *in)
 {
-	BOOL rc;
+	int rc;
 	int i;
 	char outstr[32];
 	int out = -1;
@@ -1066,7 +1066,7 @@ int NPC_Util_GetNumFromStrWithDelim(char *srcstr, char *in)
 char *NPC_Util_GetStrFromStrWithDelim(char *srcstr, char *srhstr,
 				      char *buf, int buflen)
 {
-	BOOL rc;
+	int rc;
 	char *cret = NULL;
 	int i;
 	char outstr[1024];
@@ -1104,10 +1104,10 @@ inline double NPC_Util_buyRate(int buyer)
 	return (CHAR_getInt(buyer, CHAR_MERCHANTLEVEL) >> 16) * 0.01;
 }
 
-BOOL NPC_Util_IsVisiblePlayer(int meindex)
+int NPC_Util_IsVisiblePlayer(int meindex)
 {
 	int chr_fl, chr_x, chr_y, i, j;
-	BOOL found = FALSE;
+	int found = FALSE;
 
 	chr_fl = CHAR_getInt(meindex, CHAR_FLOOR);
 	chr_x = CHAR_getInt(meindex, CHAR_X);
@@ -1137,7 +1137,7 @@ BOOL NPC_Util_IsVisiblePlayer(int meindex)
 	return (found);
 }
 
-BOOL NPC_Util_WordInclude(char *text, char *word)
+int NPC_Util_WordInclude(char *text, char *word)
 {
 	if (strstr(text, word) == NULL) {
 		return FALSE;
@@ -1331,7 +1331,7 @@ void NPC_EventSetFlg(int talker, int shiftbit)
 	CHAR_setInt(talker, CHAR_ENDEVENT + array, point);
 }
 
-BOOL NPC_EventCheckFlg(int talker, int shiftbit)
+int NPC_EventCheckFlg(int talker, int shiftbit)
 {
 	int point = 0;
 	int array;
@@ -1383,7 +1383,7 @@ void NPC_NowEventSetFlgCls(int talker, int shiftbit)
 
 }
 
-BOOL NPC_NowEventCheckFlg(int talker, int shiftbit)
+int NPC_NowEventCheckFlg(int talker, int shiftbit)
 {
 	int point = 0;
 	int array;

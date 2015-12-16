@@ -71,7 +71,7 @@ enum {
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_PetShopInit( int meindex )
+int NPC_PetShopInit( int meindex )
 {
 
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];

@@ -38,8 +38,8 @@ int one_loop_born = 1;	/* ㄠ伙□皿匹  嫖戏心请允醒 oneloop_born */
  *  综木月凛反  TRUE
  *  综木卅中凛反  FALSE
  ------------------------------------------------------------*/
-static BOOL NPC_searchCreatePoint( NPC_Create* cr,int  nobody,int nosee,
-                            NPC_searchPoint* point, BOOL isflying )
+static int NPC_searchCreatePoint( NPC_Create* cr,int  nobody,int nosee,
+                            NPC_searchPoint* point, int isflying )
 {
     int     floor=cr->intdata[NPC_CREATEFLOORID];
     int     x   = cr->intdata[NPC_CREATEBORNLEFTUPX];
@@ -48,7 +48,7 @@ static BOOL NPC_searchCreatePoint( NPC_Create* cr,int  nobody,int nosee,
     int     height;
     int     area;
     int     loop;
-    BOOL    ret = FALSE;
+    int    ret = FALSE;
     int     i, j;
 
     width = cr->intdata[NPC_CREATEBORNRIGHTDOWNX]
@@ -57,7 +57,7 @@ static BOOL NPC_searchCreatePoint( NPC_Create* cr,int  nobody,int nosee,
         - cr->intdata[NPC_CREATEBORNLEFTUPY] + 1;
     area = width * height;
     if( nobody == 0 && all_nobody == 0 ) {
-        BOOL    found = FALSE;
+        int    found = FALSE;
         for( i = x ; i <= x +width && found == FALSE; i ++ ) {
             for( j = y; j <= y + height && found == FALSE; j ++ ) {
                 OBJECT  object;
@@ -99,7 +99,7 @@ static BOOL NPC_searchCreatePoint( NPC_Create* cr,int  nobody,int nosee,
             continue;
         }
         if( nosee == 0 && all_nosee == 0 ) {
-            BOOL    found = FALSE;
+            int    found = FALSE;
             for( i = crx - CHAR_DEFAULTSEESIZ/2 ;
                  i <= crx +CHAR_DEFAULTSEESIZ/2 && found == FALSE ; i ++ )
             {
@@ -189,7 +189,7 @@ static void NPC_copyFunction( Char* ch, NPC_Template*   temp )
                         temp->chardata[correspondfunction[i].template].string);
 }
 
-static BOOL NPC_generateNPC( int createindex, int createtemplateindex )
+static int NPC_generateNPC( int createindex, int createtemplateindex )
 {
     Char    one;
     NPC_searchPoint sp;
@@ -341,7 +341,7 @@ static BOOL NPC_generateNPC( int createindex, int createtemplateindex )
     return TRUE;
 }
 
-void NPC_generateLoop( BOOL checkall )
+void NPC_generateLoop( int checkall )
 {
     int     i,j;
     int    CreateOk=0;

@@ -14,9 +14,9 @@ enum {
 };
 
 static void NPC_PetSkillShop_selectWindow( int meindex, int toindex, int num,int select);
-BOOL NPC_PetSkillMakeStr(int meindex,int toindex,int select);
+int NPC_PetSkillMakeStr(int meindex,int toindex,int select);
 
-BOOL NPC_PetSkillShopInit( int meindex )
+int NPC_PetSkillShopInit( int meindex )
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char msg[256];
@@ -166,7 +166,7 @@ void NPC_PetSkillShopWindowTalked( int meindex, int talkerindex,
 	NPC_PetSkillShop_selectWindow( meindex, talkerindex,0,-1);
 }
 
-BOOL NPC_PetSkillMakeStr(int meindex,int toindex,int select)
+int NPC_PetSkillMakeStr(int meindex,int toindex,int select)
 {
 
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];

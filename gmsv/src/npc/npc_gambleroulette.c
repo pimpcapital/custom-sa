@@ -17,10 +17,10 @@ static void Gamble_Roulette_walk( int meindex);
 static int Gamble_RouletteSetPoint( int meindex );
 static void Find_Master( int meindex);
 int RunRand( int meindex, int flg );
-BOOL SetEndPoint( int meindex );
+int SetEndPoint( int meindex );
 void Gamble_Roulette_Reset( int meindex, int flg);
 void ResetDataStart( int meindex);
-BOOL ReadPointData( int meindex );
+int ReadPointData( int meindex );
 enum {
 	NPC_WORK_ROUTETOX = CHAR_NPCWORKINT1,
 	NPC_WORK_ROUTETOY = CHAR_NPCWORKINT2,
@@ -50,7 +50,7 @@ RoulettePoint TestPointData[4*8];
 
 #define		ROULETTE_RUNTIME1	50
 
-BOOL NPC_Gamble_RouletteInit( int meindex )
+int NPC_Gamble_RouletteInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 
@@ -292,7 +292,7 @@ int RunRand( int meindex, int flg )
 	return run_num1;
 }
 
-BOOL SetEndPoint( int meindex )
+int SetEndPoint( int meindex )
 {
 	int x,y;
 	int master;
@@ -376,7 +376,7 @@ void ResetDataStart( int meindex )
 #endif
 }
 
-BOOL ReadPointData( int meindex )
+int ReadPointData( int meindex )
 {
 
 	char	buf1[256], buf2[32], buf3[16];

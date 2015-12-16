@@ -56,7 +56,7 @@ static NPC_TimeMan	TimeTble[] = {
 
 
 
-BOOL NPC_TimeManInit( int meindex )
+int NPC_TimeManInit( int meindex )
 {
 
 	int i=0;

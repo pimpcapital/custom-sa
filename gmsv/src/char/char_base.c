@@ -847,7 +847,7 @@ static char* CHAR_setchardata[CHAR_DATACHARNUM]={
 	"newname",
 };
 
-INLINE BOOL _CHAR_CHECKINDEX( char *file, int line, int index )
+int _CHAR_CHECKINDEX( char *file, int line, int index )
 {
     if( CHAR_charanum<=index || index<0 ) {
     	return FALSE;
@@ -858,60 +858,60 @@ INLINE BOOL _CHAR_CHECKINDEX( char *file, int line, int index )
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKINTDATAINDEX(int index)
+int CHAR_CHECKINTDATAINDEX(int index)
 {
     if( CHAR_DATAINTNUM<=index || index<0 )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKCHARDATAINDEX(int index)
+int CHAR_CHECKCHARDATAINDEX(int index)
 {
     if( CHAR_DATACHARNUM<=index || index<0 )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKFLGDATAINDEX( int index )
+int CHAR_CHECKFLGDATAINDEX( int index )
 {
     if( CHAR_FLGNUM<=index || index<0 )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKCHARWORKDATAINDEX(int index)
+int CHAR_CHECKCHARWORKDATAINDEX(int index)
 {
     if( CHAR_WORKDATACHARNUM<=index || index<0 )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKCHARFUNCTABLEINDEX(int index)
+int CHAR_CHECKCHARFUNCTABLEINDEX(int index)
 {
     if( CHAR_FUNCTABLENUM <= index || index < 0 )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL _CHAR_CHECKITEMINDEX( char *file, int line, int charaindex, int ti )
+int _CHAR_CHECKITEMINDEX( char *file, int line, int charaindex, int ti )
 {
     if( 0 <= ti && ti < CHAR_MAXITEMHAVE ) return TRUE;
     return FALSE;
 }
 
-INLINE BOOL CHAR_CHECKSKILLINDEX( int skillindex )
+int CHAR_CHECKSKILLINDEX( int skillindex )
 {
     if( skillindex<0 || CHAR_SKILLMAXHAVE <= skillindex )return FALSE;
     return TRUE;
 }
-INLINE BOOL CHAR_CHECKADDRESSBOOKINDEX( int aindex )
+int CHAR_CHECKADDRESSBOOKINDEX( int aindex )
 {
     if( aindex < 0 || ADDRESSBOOK_MAX <= aindex ) return FALSE;
     return TRUE;
 }
 
-INLINE BOOL CHAR_CHECKTITLEINDEX( int titleindex )
+int CHAR_CHECKTITLEINDEX( int titleindex )
 {
     if( titleindex<0 || CHAR_TITLEMAXHAVE <= titleindex )return FALSE;
     return TRUE;
 }
 
-INLINE BOOL _CHAR_CHECKPETINDEX( char *file, int line, int petindex )
+int _CHAR_CHECKPETINDEX( char *file, int line, int petindex )
 {
     if( petindex < 0 || CHAR_MAXPETHAVE <= petindex ) {
 		if( petindex != -1 ) {
@@ -922,7 +922,7 @@ INLINE BOOL _CHAR_CHECKPETINDEX( char *file, int line, int petindex )
     return TRUE;
 }
 
-INLINE BOOL _CHAR_CHECKPOOLPETINDEX( char *file, int line, int petindex )
+int _CHAR_CHECKPOOLPETINDEX( char *file, int line, int petindex )
 {
     if( petindex < 0 || CHAR_MAXPOOLPETHAVE <= petindex ) {
 		
@@ -934,7 +934,7 @@ INLINE BOOL _CHAR_CHECKPOOLPETINDEX( char *file, int line, int petindex )
     return TRUE;
 }
 
-INLINE BOOL _CHAR_CHECKPETSKILLINDEX( char *file, int line, int havepetskillindex )
+int _CHAR_CHECKPETSKILLINDEX( char *file, int line, int havepetskillindex )
 {
     if( havepetskillindex < 0 || CHAR_MAXPETSKILLHAVE <= havepetskillindex ) {
 		if( havepetskillindex != -1 ) {
@@ -945,19 +945,19 @@ INLINE BOOL _CHAR_CHECKPETSKILLINDEX( char *file, int line, int havepetskillinde
     return TRUE;
 }
 
-INLINE int CHAR_getIntStrict( int index ,CHAR_DATAINT element,int* error)
+int CHAR_getIntStrict( int index ,CHAR_DATAINT element,int* error)
 {
     if(!CHAR_CHECKINDEX(index))return *error=FALSE;
     if(!CHAR_CHECKINTDATAINDEX(element))return *error=FALSE;
     return CHAR_chara[index].data[element];
 }
 
-INLINE int CHAR_getInt( int index , CHAR_DATAINT element)
+int CHAR_getInt( int index , CHAR_DATAINT element)
 {
     return CHAR_chara[index].data[element];
 }
 
-INLINE int CHAR_setIntStrict( int index ,CHAR_DATAINT element,int data,
+int CHAR_setIntStrict( int index ,CHAR_DATAINT element,int data,
                               int* error)
 {
     int buf;
@@ -968,7 +968,7 @@ INLINE int CHAR_setIntStrict( int index ,CHAR_DATAINT element,int data,
     return buf;
 }
 
-INLINE int _CHAR_setInt( char *file, int line, int index ,CHAR_DATAINT element, int data)
+int _CHAR_setInt( char *file, int line, int index ,CHAR_DATAINT element, int data)
 {
     int buf;
 	if( !CHAR_CHECKINDEX( index) )	{
@@ -985,9 +985,9 @@ INLINE int _CHAR_setInt( char *file, int line, int index ,CHAR_DATAINT element, 
 }
 
 #ifdef _FIX_SETWORKINT
-INLINE int _CHAR_getWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element)
+int _CHAR_getWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element)
 #else
-INLINE int CHAR_getWorkInt( int index ,CHAR_WORKDATAINT element)
+int CHAR_getWorkInt( int index ,CHAR_WORKDATAINT element)
 #endif
 {
 	if( CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM )	{
@@ -998,9 +998,9 @@ INLINE int CHAR_getWorkInt( int index ,CHAR_WORKDATAINT element)
 }
 
 #ifdef _FIX_SETWORKINT
-INLINE int _CHAR_setWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element, int data)
+int _CHAR_setWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element, int data)
 #else
-INLINE int CHAR_setWorkInt( int index ,CHAR_WORKDATAINT element, int data)
+int CHAR_setWorkInt( int index ,CHAR_WORKDATAINT element, int data)
 #endif
 {
     int buf;
@@ -1022,7 +1022,7 @@ INLINE int CHAR_setWorkInt( int index ,CHAR_WORKDATAINT element, int data)
     return buf;
 }
 
-INLINE char* _CHAR_getChar( char *file, int line, int index ,CHAR_DATACHAR element )
+char* _CHAR_getChar( char *file, int line, int index ,CHAR_DATACHAR element )
 {
     if(!CHAR_CHECKINDEX(index)) {
 			print( "err _CHAR_getChar %s:%d index[%d] !!\n", file, line, index);
@@ -1035,7 +1035,7 @@ INLINE char* _CHAR_getChar( char *file, int line, int index ,CHAR_DATACHAR eleme
     return CHAR_chara[index].string[element].string;
 }
 
-INLINE BOOL _CHAR_setChar( char *file, int line, int index ,CHAR_DATACHAR element, char* new )
+int _CHAR_setChar( char *file, int line, int index ,CHAR_DATACHAR element, char* new )
 {
     if(!CHAR_CHECKINDEX(index)){
 			print( "err _CHAR_setChar %s:%d !\n", file, line);
@@ -1051,7 +1051,7 @@ INLINE BOOL _CHAR_setChar( char *file, int line, int index ,CHAR_DATACHAR elemen
     return TRUE;
 }
 
-INLINE char* CHAR_getCharfunctable( int index ,CHAR_FUNCTABLE element )
+char* CHAR_getCharfunctable( int index ,CHAR_FUNCTABLE element )
 {
     if(!CHAR_CHECKINDEX(index))return (char*)NULL;
     if(!CHAR_CHECKCHARFUNCTABLEINDEX(element))return (char*)NULL;
@@ -1060,7 +1060,7 @@ INLINE char* CHAR_getCharfunctable( int index ,CHAR_FUNCTABLE element )
     return CHAR_chara[index].charfunctable[element].string;
 }
 
-INLINE char* _CHAR_getWorkChar( char *file, int line, int index ,CHAR_WORKDATACHAR element )
+char* _CHAR_getWorkChar( char *file, int line, int index ,CHAR_WORKDATACHAR element )
 {
     if(!CHAR_CHECKINDEX(index)) {
 			print( "err %s:%d \n", file, line);
@@ -1073,7 +1073,7 @@ INLINE char* _CHAR_getWorkChar( char *file, int line, int index ,CHAR_WORKDATACH
     return CHAR_chara[index].workchar[element].string;
 }
 
-INLINE BOOL _CHAR_setWorkChar( char *file, int line, int index ,CHAR_WORKDATACHAR element,
+int _CHAR_setWorkChar( char *file, int line, int index ,CHAR_WORKDATACHAR element,
                               char* new )
 {
     if(!CHAR_CHECKINDEX(index)) {
@@ -1102,7 +1102,7 @@ static char CHAR_flgbitmaskpattern[]=
     0x80,
 };
 
-INLINE BOOL _CHAR_getFlg( char *file, int line, int index ,CHAR_DATAFLG element )
+int _CHAR_getFlg( char *file, int line, int index ,CHAR_DATAFLG element )
 {
     int     elementnum;
     int     bitnum;
@@ -1126,7 +1126,7 @@ INLINE BOOL _CHAR_getFlg( char *file, int line, int index ,CHAR_DATAFLG element 
 
 }
 
-INLINE BOOL _CHAR_setFlg( char *file, int line, int index , CHAR_DATACHAR element, int newdata )
+int _CHAR_setFlg( char *file, int line, int index , CHAR_DATACHAR element, int newdata )
 {
     int buf;
     int elementnum;
@@ -1161,7 +1161,7 @@ INLINE BOOL _CHAR_setFlg( char *file, int line, int index , CHAR_DATACHAR elemen
     else     return FALSE;
 }
 
-INLINE int _CHAR_getItemIndex( char *file, int line, int charaindex ,int ti)
+int _CHAR_getItemIndex( char *file, int line, int charaindex ,int ti)
 {
     if( !CHAR_CHECKINDEX( charaindex)) {
 		print( "err %s:%d from %s:%d\n", __FILE__, __LINE__,file, line);
@@ -1174,7 +1174,7 @@ INLINE int _CHAR_getItemIndex( char *file, int line, int charaindex ,int ti)
     return CHAR_chara[charaindex].indexOfExistItems[ti];
 }
 
-INLINE int _CHAR_setItemIndex( char *file, int line, int index ,int iindex,int id )
+int _CHAR_setItemIndex( char *file, int line, int index ,int iindex,int id )
 {
     int buf;
     if( !CHAR_CHECKINDEX(index)) {
@@ -1214,7 +1214,7 @@ INLINE int _CHAR_setItemIndex( char *file, int line, int index ,int iindex,int i
   CHAR_chara[index].indexOfExistItems[iindex] = id;
   return buf;
 }
-INLINE int _CHAR_getPoolItemIndex( char *file, int line, int index ,int iindex)
+int _CHAR_getPoolItemIndex( char *file, int line, int index ,int iindex)
 {
     if( !CHAR_CHECKINDEX(index)) {
 		print( "err %s:%d from %s:%d\n", __FILE__, __LINE__,file, line);
@@ -1226,7 +1226,7 @@ INLINE int _CHAR_getPoolItemIndex( char *file, int line, int index ,int iindex)
     }
     return CHAR_chara[index].indexOfExistPoolItems[iindex];
 }
-INLINE int _CHAR_setPoolItemIndex( char *file, int line, int index ,int iindex,int id )
+int _CHAR_setPoolItemIndex( char *file, int line, int index ,int iindex,int id )
 {
     int buf;
     if( !CHAR_CHECKINDEX(index)) {
@@ -1242,7 +1242,7 @@ INLINE int _CHAR_setPoolItemIndex( char *file, int line, int index ,int iindex,i
     return buf;
 }
 
-INLINE BOOL CHAR_setAddressbookEntry( int index , int aindex ,
+int CHAR_setAddressbookEntry( int index , int aindex ,
                                  ADDRESSBOOK_entry *a )
 {
     if( !CHAR_CHECKINDEX(index))return FALSE;
@@ -1254,7 +1254,7 @@ INLINE BOOL CHAR_setAddressbookEntry( int index , int aindex ,
     return TRUE;
 }
 
-INLINE ADDRESSBOOK_entry* CHAR_getAddressbookEntry( int index ,
+ADDRESSBOOK_entry* CHAR_getAddressbookEntry( int index ,
                                                     int aindex)
 {
     if( !CHAR_CHECKINDEX(index))return (ADDRESSBOOK_entry*)NULL;
@@ -1264,39 +1264,39 @@ INLINE ADDRESSBOOK_entry* CHAR_getAddressbookEntry( int index ,
     return &CHAR_chara[index].addressBook[aindex];
 }
 
-INLINE Char* CHAR_getCharPointer( int index )
+Char* CHAR_getCharPointer( int index )
 {
     if( !CHAR_CHECKINDEX(index) )return (Char*)NULL;
     return &CHAR_chara[index];
 }
 
-INLINE int CHAR_getCharNum( void )
+int CHAR_getCharNum( void )
 {
     return CHAR_charanum;
 }
 
-INLINE int CHAR_getPlayerMaxNum( void )
+int CHAR_getPlayerMaxNum( void )
 {
     return CHAR_playernum;
 }
 
-INLINE int CHAR_getPetMaxNum( void )
+int CHAR_getPetMaxNum( void )
 {
     return CHAR_petnum;
 }
-INLINE int CHAR_getOthersMaxNum( void )
+int CHAR_getOthersMaxNum( void )
 {
     return CHAR_othersnum;
 }
 
-INLINE BOOL CHAR_getCharUse( int index )
+int CHAR_getCharUse( int index )
 {
     if( !CHAR_CHECKINDEX(index))
     	return FALSE;
     return CHAR_chara[index].use;
 }
 
-INLINE CHAR_HaveSkill* CHAR_getCharHaveSkill( int index,int sindex )
+CHAR_HaveSkill* CHAR_getCharHaveSkill( int index,int sindex )
 {
     if( !CHAR_CHECKINDEX(index))return (CHAR_HaveSkill*)NULL;
     if( !CHAR_CHECKSKILLINDEX(sindex))return (CHAR_HaveSkill*)NULL;
@@ -1304,7 +1304,7 @@ INLINE CHAR_HaveSkill* CHAR_getCharHaveSkill( int index,int sindex )
 }
 //------------------------------------------------------------------------
 //人物index  技能位置  索引
-INLINE int _CHAR_getIntPSkill( char *file, int line, int index, int skillti, SKILL_DATAINT ti)
+int _CHAR_getIntPSkill( char *file, int line, int index, int skillti, SKILL_DATAINT ti)
 {
     if( !CHAR_CHECKINDEX( index) ) return -1;
     if( !CHAR_CHECKSKILLINDEX( skillti) )  return -1;
@@ -1316,7 +1316,7 @@ INLINE int _CHAR_getIntPSkill( char *file, int line, int index, int skillti, SKI
 	return CHAR_chara[index].haveSkill[skillti].skill.data[ti];
 }
 //人物index  技能位置  索引 欲设定值
-INLINE void _CHAR_setIntPSkill( char *file, int line, int index, int skillti, SKILL_DATAINT ti, int data)
+void _CHAR_setIntPSkill( char *file, int line, int index, int skillti, SKILL_DATAINT ti, int data)
 {
     if( !CHAR_CHECKINDEX( index) ) return;
     if( !CHAR_CHECKSKILLINDEX( skillti) )  return;
@@ -1329,14 +1329,14 @@ INLINE void _CHAR_setIntPSkill( char *file, int line, int index, int skillti, SK
 }
 //------------------------------------------------------------------------
 
-INLINE int CHAR_getCharHaveTitle( int charaindex,int tindex )
+int CHAR_getCharHaveTitle( int charaindex,int tindex )
 {
     if( !CHAR_CHECKINDEX(charaindex))return 0;
     if( !CHAR_CHECKTITLEINDEX(tindex))return 0;
     return CHAR_chara[charaindex].indexOfHaveTitle[tindex];
 }
 
-INLINE int CHAR_setCharHaveTitle( int charaindex,int tindex, int new )
+int CHAR_setCharHaveTitle( int charaindex,int tindex, int new )
 {
     int ret;
     if( !CHAR_CHECKINDEX(charaindex))return 0;
@@ -1348,14 +1348,14 @@ INLINE int CHAR_setCharHaveTitle( int charaindex,int tindex, int new )
     return ret;
 }
 
-INLINE int CHAR_getCharPet( int charaindex,int petindex )
+int CHAR_getCharPet( int charaindex,int petindex )
 {
     if( !CHAR_CHECKINDEX(charaindex))return -1;
     if( !CHAR_CHECKPETINDEX(petindex))return -1;
     return CHAR_chara[charaindex].unionTable.indexOfPet[petindex];
 }
 
-INLINE int CHAR_setCharPet( int charaindex,int petindex, int new )
+int CHAR_setCharPet( int charaindex,int petindex, int new )
 {
     int ret;
     if( !CHAR_CHECKINDEX(charaindex))return -1;
@@ -1372,14 +1372,14 @@ INLINE int CHAR_setCharPet( int charaindex,int petindex, int new )
     return ret;
 }
 
-INLINE int CHAR_getCharPoolPet( int charaindex,int petindex )
+int CHAR_getCharPoolPet( int charaindex,int petindex )
 {
     if( !CHAR_CHECKINDEX(charaindex))return -1;
     if( !CHAR_CHECKPOOLPETINDEX(petindex))return -1;
     return CHAR_chara[charaindex].indexOfPoolPet[petindex];
 }
 
-INLINE int CHAR_setCharPoolPet( int charaindex,int petindex, int new )
+int CHAR_setCharPoolPet( int charaindex,int petindex, int new )
 {
     int ret;
     if( !CHAR_CHECKINDEX(charaindex))return -1;
@@ -1449,7 +1449,7 @@ int CHAR_getEmptyCharPoolItemIndexNum( int charaindex)
 	return cnt;
 }
 
-INLINE int _CHAR_getPetSkill( char *file, int line, int petindex, int havepetskillindex )
+int _CHAR_getPetSkill( char *file, int line, int petindex, int havepetskillindex )
 {
     if( !CHAR_CHECKINDEX(petindex)) {
     	print( "err %s:%d from %s:%d\n", __FILE__, __LINE__, file, line);
@@ -1462,7 +1462,7 @@ INLINE int _CHAR_getPetSkill( char *file, int line, int petindex, int havepetski
     return CHAR_chara[petindex].unionTable.indexOfPetskill[havepetskillindex];
 }
 
-INLINE int _CHAR_setPetSkill( char *file, int line, int petindex,int havepetskillindex, int new )
+int _CHAR_setPetSkill( char *file, int line, int petindex,int havepetskillindex, int new )
 {
     int ret;
     if( !CHAR_CHECKINDEX(petindex)) {
@@ -1492,7 +1492,7 @@ int _CHAR_getPetSkillElement( char *file, int line, int petindex )
 
 }
 
-INLINE int CHAR_getCharMakeSequenceNumber( int charaindex )
+int CHAR_getCharMakeSequenceNumber( int charaindex )
 {
     if( !CHAR_CHECKINDEX(charaindex))return -1;
     return CHAR_chara[charaindex].CharMakeSequenceNumber;
@@ -1516,11 +1516,11 @@ void* CHAR_getFunctionPointer( int charaindex, int functype )
     return CHAR_chara[charaindex].functable[functype];
 }
 
-BOOL CHAR_initCharArray( int pnum, int petnum,int onum )
+int CHAR_initCharArray( int pnum, int petnum,int onum )
 {
     int     i;
 
-    BOOL CHAR_checksetdata( void );
+    int CHAR_checksetdata( void );
     if( CHAR_checksetdata() == FALSE ){
 		print(" err CHAR_checksetdata() FALSE !!\n");
 		return FALSE;
@@ -1547,14 +1547,14 @@ BOOL CHAR_initCharArray( int pnum, int petnum,int onum )
     return TRUE;
 }
 
-BOOL CHAR_endCharArray( void )
+int CHAR_endCharArray( void )
 {
     freeMemory( CHAR_chara );
     CHAR_charanum = 0;
     return TRUE;
 }
 
-BOOL CHAR_getCharOnArrayPercentage( int mode, int *max, int *min, int *cnt)
+int CHAR_getCharOnArrayPercentage( int mode, int *max, int *min, int *cnt)
 {
 	int po=0, Dnums=0;
 	po = initCharCounter[0].endcnt;
@@ -1622,7 +1622,7 @@ int CHAR_initCharOneArray( Char* ch )
         }
     }
     if( ret ){
-        typedef BOOL (*INITFUNC)(int index);
+        typedef int (*INITFUNC)(int index);
         INITFUNC initfunc;
         memset( &CHAR_chara[i] , 0, sizeof( Char ) );
         memcpy( &CHAR_chara[i] , ch , sizeof( Char ) );
@@ -1698,7 +1698,7 @@ void CHAR_endCharOneArray( int index )
     CHAR_endCharData( ch );
 }
 static char CHAR_dataString[STRINGBUFSIZ*16*2];
-BOOL CHAR_checksetdata( void )
+int CHAR_checksetdata( void )
 {
     int     i;
     char*   strings[CHAR_DATAINTNUM + CHAR_DATACHARNUM];
@@ -1959,7 +1959,7 @@ char* CHAR_makeStringFromCharIndex( int index )
 
 }
 
-BOOL CHAR_makeCharFromStringToArg( char* data, Char* one)
+int CHAR_makeCharFromStringToArg( char* data, Char* one)
 {
     int i;
     int readindex=1, rightData=0;
@@ -1998,7 +1998,7 @@ BOOL CHAR_makeCharFromStringToArg( char* data, Char* one)
 #endif
 
     while( 1 ){
-        BOOL    ret;
+        int    ret;
         char    linebuf[4096];
         char firstToken[256];
         char secondToken[4096];
@@ -2061,7 +2061,7 @@ BOOL CHAR_makeCharFromStringToArg( char* data, Char* one)
                  ;
             }else{
                 ITEM_Item   itmone;
-                BOOL ret;
+                int ret;
 
                 ret = ITEM_makeExistItemsFromStringToArg( secondToken, &itmone, 0);
 
@@ -2084,7 +2084,7 @@ BOOL CHAR_makeCharFromStringToArg( char* data, Char* one)
                 ;
             }else{
                 ITEM_Item   itmone;
-                BOOL ret;
+                int ret;
                 ret = ITEM_makeExistItemsFromStringToArg( secondToken , &itmone, 0 );
 
                 if( ret == TRUE ){
@@ -2104,7 +2104,7 @@ BOOL CHAR_makeCharFromStringToArg( char* data, Char* one)
             if( skillindex < 0 || CHAR_SKILLMAXHAVE <=  skillindex
                 ||  one->haveSkill[skillindex].use == TRUE ){
             }else{
-                BOOL    ret;
+                int    ret;
                 Skill   skillone;
                 ret=SKILL_makeSkillFromStringToArg(secondToken,&skillone);
 
@@ -2301,7 +2301,7 @@ int CHAR_makePetFromStringToArg( char *src, Char *ch, int ti)
 {
 	int		readnum = 1;
 	int		rc;
-	BOOL	found;
+	int	found;
 	char	buff[4096];
 	char	petfirstToken[256];
 	char	petsecondToken[4096];
@@ -2581,7 +2581,7 @@ int IsFemale(int charindex) {
 }
 
 #ifdef _TYPE_TOXICATION
-BOOL CHAR_CanCureFlg( int charaindex, char *arg)
+int CHAR_CanCureFlg( int charaindex, char *arg)
 {
 	int fd = getfdFromCharaIndex( charaindex );
 	if( CHAR_getInt( charaindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER	) return TRUE;
@@ -2597,7 +2597,7 @@ BOOL CHAR_CanCureFlg( int charaindex, char *arg)
 }
 #endif
 
-INLINE int CHAR_AddMaxExp( int charaindex, int addexp)
+int CHAR_AddMaxExp( int charaindex, int addexp)
 {
 	int Myexp = CHAR_getInt( charaindex, CHAR_EXP);
 	Myexp = min( Myexp + addexp, 1224160000 );
@@ -2605,19 +2605,19 @@ INLINE int CHAR_AddMaxExp( int charaindex, int addexp)
 	return addexp;
 }
 
-INLINE int CHAR_setMaxExpFromLevel( int charaindex, int level)
+int CHAR_setMaxExpFromLevel( int charaindex, int level)
 {
 	CHAR_setInt( charaindex, CHAR_EXP, 0);
 	return 0;
 }
 
-INLINE int CHAR_setMaxExp( int charaindex, unsigned long int Setexp)
+int CHAR_setMaxExp( int charaindex, unsigned long int Setexp)
 {
 	if( !CHAR_CHECKINDEX( charaindex) ) return -1;
 	CHAR_setInt( charaindex, CHAR_EXP, Setexp);
 	return Setexp;
 }
-INLINE int CHAR_ChangeExp( int charaindex )
+int CHAR_ChangeExp( int charaindex )
 {
 	int level, defexp, Myexp;
 	if( !CHAR_CHECKINDEX( charaindex) ) return -1;
@@ -2635,7 +2635,7 @@ INLINE int CHAR_ChangeExp( int charaindex )
 	return Myexp;
 }
 
-INLINE int CHAR_HandleExp( int charaindex )
+int CHAR_HandleExp( int charaindex )
 {
 	int needexp, level, Myexp;
 	if( !CHAR_CHECKINDEX( charaindex) ) return -1;
@@ -2651,7 +2651,7 @@ INLINE int CHAR_HandleExp( int charaindex )
 	return Myexp;
 }
 
-INLINE int _CHAR_DelItem( char *file, int line, int charaindex, int ti, int num, int flg)
+int _CHAR_DelItem( char *file, int line, int charaindex, int ti, int num, int flg)
 {
 //	char token[256];
 	int pilenum;
@@ -2678,7 +2678,7 @@ int CHAR_getMaxHaveGold( int charaindex)
 	return MaxGold;
 }
 
-INLINE int _CHAR_AddGold( char *file, int line, int charaindex, int gold)
+int _CHAR_AddGold( char *file, int line, int charaindex, int gold)
 {
 	char token[256];
 	int MyGold, MaxGold;
@@ -2716,7 +2716,7 @@ INLINE int _CHAR_AddGold( char *file, int line, int charaindex, int gold)
 	return 1;
 }
 
-INLINE int _CHAR_DelGold( char *file, int line, int charaindex, int gold)
+int _CHAR_DelGold( char *file, int line, int charaindex, int gold)
 {
 	char token[256];
 	int MyGold, MaxGold;
@@ -2749,7 +2749,7 @@ int CHAR_Ride_CF_init()
 		print("无法打开文件\n");
 		return FALSE;
 	}
-	BOOL ride=FALSE; 
+	int ride=FALSE;
 	while(1){
 		char line[1024], buf[16];
 		if (fgets(line, sizeof(line), fp) == NULL)break;

@@ -146,7 +146,7 @@ static int eprintf(char* format, ...){
 #define fprint eprintf
 #endif
 
-static BOOL ITEM_isValidEffect(char* cmd, int value){
+static int ITEM_isValidEffect(char* cmd, int value){
     int i;
 
     for(i=0; i<arraysizeof(ITEM_restorableParam); i++){
@@ -165,7 +165,7 @@ static BOOL ITEM_isValidEffect(char* cmd, int value){
 
 #define ID_BUF_LEN_MAX  20
 #define SEPARATORI       '|'
-BOOL ITEM_MedicineInit(ITEM_Item* itm)
+int ITEM_MedicineInit(ITEM_Item* itm)
 {
     char cmd[ID_BUF_LEN_MAX], arg[ID_BUF_LEN_MAX];
     int value;
@@ -204,7 +204,7 @@ BOOL ITEM_MedicineInit(ITEM_Item* itm)
     return (effectCount == 0) ? FALSE : TRUE;
 }
 
-static BOOL ITEM_medicineRaiseEffect(int charaindex, char* cmd,int value)
+static int ITEM_medicineRaiseEffect(int charaindex, char* cmd,int value)
 {
     int i;
     char ansmsg[256];
@@ -365,12 +365,12 @@ void ITEM_SandClockLogout( int charaindex )
 
 // Arminius 7.2: Ra's amulet , remove "static"
 /*static*/
-BOOL ITEM_getArgument( char* argument , char* entryname, char* buf , int buflen )
+int ITEM_getArgument( char* argument , char* entryname, char* buf , int buflen )
 {
     int     i;
     char    dividedbypipeline[512];
     for( i=1;  ; i++ ){
-        BOOL   ret;
+        int   ret;
 		ret = getStringFromIndexWithDelim( argument, "|", i, dividedbypipeline,
                                            sizeof(dividedbypipeline) );
         if( ret == TRUE ){
@@ -1379,7 +1379,7 @@ static void ITEM_useRenameItem_PrintWindow( int charaindex, int page)
 	
 	for( i = page *5; i < page *5 +5; i ++ ) {
 		int itemindex = CHAR_getItemIndex( charaindex, i);
-		BOOL	flg = FALSE;
+		int	flg = FALSE;
 		while( 1 ) {
 			char *cdkey;
 			if( !ITEM_CHECKINDEX( itemindex)) break;
@@ -1519,7 +1519,7 @@ void ITEM_useRenameItem_WindowResult( int charaindex, int seqno, int select, cha
 		}
 	}
 	else {
-		BOOL	flg = FALSE;
+		int	flg = FALSE;
 		char	message[1024];
 		char	buf[2048];
 		while( 1 ) {
@@ -1683,7 +1683,7 @@ enum {
 //#define PRE_1		(1 + PRE_2)
 //
 //-------------------------------------------------------------------------
-BOOL ITEM_initLottery(ITEM_Item* itm)
+int ITEM_initLottery(ITEM_Item* itm)
 {
 	int r = RAND( 0, 49999);
 	int hit = ITEM_LOTTERY_NONE;		// 
@@ -1777,7 +1777,7 @@ void ITEM_useLottery( int charaindex, int toindex, int haveitemindex)
 	char numbuff[128];
 	char *n;
 	int result;
-	BOOL flg;
+	int flg;
 	if( !ITEM_CHECKINDEX( itemindex) ) return;
 	if( count == 0 ) {
 		ITEM_setChar( itemindex, ITEM_EFFECTSTRING, "");
@@ -1886,7 +1886,7 @@ void ITEM_WarpDelErrorItem( int charaindex )
 #endif
 }
 
-BOOL ITEM_WarpForAny(int charaindex, int haveitemindex, int ff, int fx, int fy,int flg)
+int ITEM_WarpForAny(int charaindex, int haveitemindex, int ff, int fx, int fy,int flg)
 {
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE ) != BATTLE_CHARMODE_NONE )
 		return FALSE;
@@ -2406,7 +2406,7 @@ void ITEM_UseDeathCounter( int charaindex, int toindex, int haveitemindex)
 	char *itemarg;
 	char itemnumstr[32];
 	int  okfloor = 0;
-	BOOL Useflag=FALSE;
+	int Useflag=FALSE;
 	int i = 1;
 
 	itemindex = CHAR_getItemIndex( charaindex, haveitemindex);
@@ -3037,7 +3037,7 @@ void ITEM_Constitution( int charaindex, int toindex, int haveitemindex)
 	char *itemarg;
 	char Free[][128]={"VI","ST","TG","DE"};
 	int index=0, FixPoint=0, itemindex;
-	BOOL FIXs=FALSE;
+	int FIXs=FALSE;
 	int AllPoint=0;
 
 	if( CHAR_getInt( charaindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER )

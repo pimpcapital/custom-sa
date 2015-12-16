@@ -634,7 +634,7 @@ correspondStringAndFunctionTable[]=
 		{ {"ITEM_NewName"}, ITEM_NewName, 0 },
 };
 
-BOOL initFunctionTable( void )
+int initFunctionTable( void )
 {
 
     int     i;

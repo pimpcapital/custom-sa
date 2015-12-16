@@ -3,7 +3,7 @@
 
 void NPC_LuckyManTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_LuckyManInit( int meindex );
+int NPC_LuckyManInit( int meindex );
 void NPC_LuckyManWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 
 #endif 

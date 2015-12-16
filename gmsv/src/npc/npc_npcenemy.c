@@ -46,24 +46,24 @@ static int gymbody[] = {
 };
 
 #ifdef _NEW_WARPMAN
-static BOOL NPC_NPCEnemy_CheckFree( int  meindex, int toindex, BOOL *Party);
-BOOL NPC_WarpAllMsg(int meindex,int toindex );
-BOOL NPCEnemy_CheckFree( int meindex, int talker, char *buf);
-BOOL NPCEnemy_BSCheck(int meindex,int talker,char* buf);
-BOOL NPCEnemy_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp);
-BOOL NPCEnemy_WarpManReduce(int meindex,int talker,char *buf);
-BOOL NPCEnemy_BigSmallLastCheck(int point1,int mypoint,int flg);
-BOOL NPCEnemy_CheckTrans(int meindex,int talker,int trans,int flg);
-BOOL NPCEnemy_LevelCheck(int meindex,int talker,int level,int flg);
-BOOL NPCEnemy_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid);
-BOOL NPCEnemy_ItemCheck(int meindex,int talker,int itemNo,int flg);
+static int NPC_NPCEnemy_CheckFree( int  meindex, int toindex, int *Party);
+int NPC_WarpAllMsg(int meindex,int toindex );
+int NPCEnemy_CheckFree( int meindex, int talker, char *buf);
+int NPCEnemy_BSCheck(int meindex,int talker,char* buf);
+int NPCEnemy_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp);
+int NPCEnemy_WarpManReduce(int meindex,int talker,char *buf);
+int NPCEnemy_BigSmallLastCheck(int point1,int mypoint,int flg);
+int NPCEnemy_CheckTrans(int meindex,int talker,int trans,int flg);
+int NPCEnemy_LevelCheck(int meindex,int talker,int level,int flg);
+int NPCEnemy_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid);
+int NPCEnemy_ItemCheck(int meindex,int talker,int itemNo,int flg);
 #endif
 #ifdef _NPC_REPLACEMENT
 void Check_EnemyWarpMe( int meindex, char *args );
 #endif
 static int NPC_NPCEnemy_StealItem( char *argstr, int meindex, int charaindex);
 
-BOOL NPC_NPCEnemyInit( int meindex )
+int NPC_NPCEnemyInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf[64];
@@ -217,7 +217,7 @@ int NPC_NPCEnemy_Encount( int meindex, int charaindex, int mode)
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf[512];
-	BOOL	flg = TRUE;
+	int	flg = TRUE;
 	int		battlemax = getBattlenum();
 	int		i;
 	if( CHAR_getInt( meindex, CHAR_BASEIMAGENUMBER) == 0 ) {
@@ -246,7 +246,7 @@ int NPC_NPCEnemy_Encount( int meindex, int charaindex, int mode)
 		char	buf[1024];
 		if( NPC_Util_GetStrFromStrWithDelim( argstr, "item", buf, sizeof( buf)) != NULL ) {
 			char	data[128];
-			BOOL	found = FALSE;
+			int	found = FALSE;
 
 			for( i = 0; i < CHAR_MAXITEMHAVE; i ++ ) {
 				int		j;
@@ -274,7 +274,7 @@ int NPC_NPCEnemy_Encount( int meindex, int charaindex, int mode)
 #ifdef _ADD_NOITEM_BATTLE
 		if(NPC_Util_GetStrFromStrWithDelim(argstr,"noitem",buf,sizeof(buf)) != NULL){
 			char data[128];
-			BOOL found = FALSE;
+			int found = FALSE;
 
 			for(i=0;i<CHAR_MAXITEMHAVE;i++){
 				int j;
@@ -301,7 +301,7 @@ int NPC_NPCEnemy_Encount( int meindex, int charaindex, int mode)
 		{
 			char data[256];
 
-			BOOL Evflg=TRUE;
+			int Evflg=TRUE;
 			if( NPC_Util_GetStrFromStrWithDelim( argstr, "B_evend", buf, sizeof( buf)) != NULL ) {
 				int i=1, event=-1;;
 				while( getStringFromIndexWithDelim( buf,",", i, data, sizeof( data)) ){
@@ -492,7 +492,7 @@ int NPC_NPCEnemy_Dying( int battleindex, int meindex )
 			if( CHAR_CHECKINDEX( toindex) ) {
 #ifdef _NEW_WARPMAN
 				if( strstr( argstr, "NEWNPCENEMY") )    {
-					BOOL Party=TRUE;
+					int Party=TRUE;
 					if( NPC_NPCEnemy_CheckFree( meindex, toindex , &Party) == FALSE )       {
 						continue;
 					}
@@ -554,7 +554,7 @@ void NPC_NPCEnemyLoop( int meindex )
 }
 
 
-BOOL NPC_NPCEnemy_BattleIn(  int meindex, int charaindex)
+int NPC_NPCEnemy_BattleIn(  int meindex, int charaindex)
 {
 	int		gym;
 	int		ret;
@@ -634,7 +634,7 @@ static int NPC_NPCEnemy_StealItem( char *argstr, int meindex, int charaindex)
 }
 
 #ifdef _NEW_WARPMAN
-static BOOL NPC_NPCEnemy_CheckFree( int  meindex, int toindex, BOOL *Party)
+static int NPC_NPCEnemy_CheckFree( int  meindex, int toindex, int *Party)
 {
   char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
   char buf1[1024],buf2[256],buf3[256],buf4[256];
@@ -727,7 +727,7 @@ static BOOL NPC_NPCEnemy_CheckFree( int  meindex, int toindex, BOOL *Party)
 }
 
 
-BOOL NPCEnemy_CheckFree( int meindex, int talker, char *buf)
+int NPCEnemy_CheckFree( int meindex, int talker, char *buf)
 {
 	char buff2[256];
 	char buff3[128];
@@ -760,7 +760,7 @@ BOOL NPCEnemy_CheckFree( int meindex, int talker, char *buf)
 	return FALSE;
 }
 
-BOOL NPCEnemy_BSCheck(int meindex,int talker,char* buf)
+int NPCEnemy_BSCheck(int meindex,int talker,char* buf)
 {
 	char buff2[128];
 	int kosuu,temp=-1,flg=0;
@@ -820,7 +820,7 @@ BOOL NPCEnemy_BSCheck(int meindex,int talker,char* buf)
 	return FALSE;
 }
 
-BOOL NPCEnemy_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp)
+int NPCEnemy_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp)
 {
 	if(strcmp(buf,"LV")==0){
 		if(NPCEnemy_LevelCheck(meindex,talker,kosuu,flg)==TRUE){
@@ -859,7 +859,7 @@ BOOL NPCEnemy_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, in
 
 }
 
-BOOL NPCEnemy_WarpManReduce(int meindex,int talker,char *buf)
+int NPCEnemy_WarpManReduce(int meindex,int talker,char *buf)
 {
 	char buf2[512];
 	char buf3[256];
@@ -893,7 +893,7 @@ BOOL NPCEnemy_WarpManReduce(int meindex,int talker,char *buf)
 
 }
 
-BOOL NPCEnemy_BigSmallLastCheck(int point1,int mypoint,int flg)
+int NPCEnemy_BigSmallLastCheck(int point1,int mypoint,int flg)
 {
 	if(flg==0){
 		if(point1==mypoint) {
@@ -915,7 +915,7 @@ BOOL NPCEnemy_BigSmallLastCheck(int point1,int mypoint,int flg)
 
 }
 
-BOOL NPCEnemy_LevelCheck(int meindex,int talker,int level,int flg)
+int NPCEnemy_LevelCheck(int meindex,int talker,int level,int flg)
 {
 	int mylevel;
 	mylevel=CHAR_getInt(talker,CHAR_LV);
@@ -925,7 +925,7 @@ BOOL NPCEnemy_LevelCheck(int meindex,int talker,int level,int flg)
 	return FALSE;
 }
 
-BOOL NPCEnemy_CheckTrans(int meindex,int talker,int trans,int flg)
+int NPCEnemy_CheckTrans(int meindex,int talker,int trans,int flg)
 {
 	int myTrans;
 	myTrans=CHAR_getInt(talker, CHAR_TRANSMIGRATION);
@@ -935,7 +935,7 @@ BOOL NPCEnemy_CheckTrans(int meindex,int talker,int trans,int flg)
 	return FALSE;
 }
 
-BOOL NPCEnemy_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
+int NPCEnemy_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
 {
 	int petsel,petindex=-1;	
 	for(petsel=0 ; petsel < CHAR_MAXPETHAVE ; petsel++)     {
@@ -972,7 +972,7 @@ BOOL NPCEnemy_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid
 	return FALSE;                                             
 }
 
-BOOL NPCEnemy_ItemCheck(int meindex,int talker,int itemNo,int flg)
+int NPCEnemy_ItemCheck(int meindex,int talker,int itemNo,int flg)
 {
 	int i;
 	int itemindex=-1;
@@ -992,7 +992,7 @@ BOOL NPCEnemy_ItemCheck(int meindex,int talker,int itemNo,int flg)
 
 }
 
-BOOL NPC_WarpAllMsg(int meindex,int toindex )
+int NPC_WarpAllMsg(int meindex,int toindex )
 {
 	int fl,x,y;
 	int subindex=-1;

@@ -10,9 +10,9 @@
 
 static void NPC_LuckyMan_selectWindow( int meindex, int toindex, int num,char *msg);
 void NPC_LuckyManAllHeal( int talker,int mode );
-BOOL NPC_LuckyManLevelCheck(int meindex,int talker);
+int NPC_LuckyManLevelCheck(int meindex,int talker);
 void NPC_LuckyDisp(int meindex,int talker);
-BOOL NPC_LuckyCostCheck(int meindex,int talker,int cost);
+int NPC_LuckyCostCheck(int meindex,int talker,int cost);
 int NPC_GetMoney(int meindex,int talker,char *buf);
 
 
@@ -20,7 +20,7 @@ int NPC_GetMoney(int meindex,int talker,char *buf);
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_LuckyManInit( int meindex )
+int NPC_LuckyManInit( int meindex )
 {
 
 	/*--平乓仿及正奶皿毛涩烂--**/
@@ -209,7 +209,7 @@ void NPC_LuckyDisp(int meindex,int talker)
 
 
 /*---云嗯及民尼永弁-**/
-BOOL NPC_LuckyCostCheck(int meindex,int talker,int cost)
+int NPC_LuckyCostCheck(int meindex,int talker,int cost)
 {
 	/*--蜇箕反移涩烂---*/
 	/*---云嗯互箫曰月井升丹井及民尼永弁---*/

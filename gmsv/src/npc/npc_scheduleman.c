@@ -50,7 +50,7 @@ void NPC_LoadPKSchedule(int meindex);	// Load schedule from disk
 void NPC_SavePKSchedule(int meindex);	// save schedule to disk
 void NPC_RemoveExpiredBattle(int meindex);	// 移除过期的战斗
 void NPC_ProcessTimeout(int meindex);	// 处理 timeout
-BOOL NPC_AlreadyScheduled(int meindex, int talkerindex);	// 检查, 一个家族只能安排一场
+int NPC_AlreadyScheduled(int meindex, int talkerindex);	// 检查, 一个家族只能安排一场
 // 产生排程表的 data
 void NPC_LIST_gendata(int meindex, int talkerindex, int page, char *buf, int size);
 // 产生选择家族的 data
@@ -58,7 +58,7 @@ void NPC_SELECT_gendata(int meindex, int talkerindex, int page, char *buf, int s
 // 产生排程详细的 data
 void NPC_DETAIL_gendata(int meindex, char *buf, int size, int dueltime);
 
-BOOL NPC_SchedulemanInit( int meindex )
+int NPC_SchedulemanInit( int meindex )
 {
   char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
   int meid;
@@ -553,7 +553,7 @@ void NPC_ProcessTimeout(int meindex)
 }
 
 // 检查, 一个家族只能安排一场战斗
-BOOL NPC_AlreadyScheduled(int meindex, int talkerindex)
+int NPC_AlreadyScheduled(int meindex, int talkerindex)
 {
   int i;
   int fmpks_pos = CHAR_getWorkInt(meindex, NPC_WORK_ID)*MAX_SCHEDULE;

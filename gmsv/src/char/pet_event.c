@@ -18,26 +18,26 @@
 #include "npc_eventaction.h"
 
 #ifdef _PET_TALK
-//BOOL PetTalk_CheckFree( int meindex, int  toindex, char *buf);
-BOOL PetTalk_CheckFree( int meindex, int talker, char *buf);
+//int PetTalk_CheckFree( int meindex, int  toindex, char *buf);
+int PetTalk_CheckFree( int meindex, int talker, char *buf);
 
-BOOL PetTalk_BSCheck(int meindex,int talker,char* buf);
-BOOL PetTalk_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp);
-BOOL PetTalk_WarpManReduce(int meindex,int talker,char *buf);
-BOOL PetTalk_BigSmallLastCheck(int point1,int mypoint,int flg);
-BOOL PetTalk_CheckTrans(int meindex,int talker,int trans,int flg);
-BOOL PetTalk_LevelCheck(int meindex,int talker,int level,int flg);
-BOOL PetTalk_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid);
-BOOL PetTalk_ItemCheck(int meindex,int talker,int itemNo,int flg);
-BOOL PetTalk_CheckMyType( int meindex, int toindex, int kosuu, int flg, int Type );
-BOOL PetTalk_CheckPetEvent( int meindex, int toindex, char *buf);
+int PetTalk_BSCheck(int meindex,int talker,char* buf);
+int PetTalk_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp);
+int PetTalk_WarpManReduce(int meindex,int talker,char *buf);
+int PetTalk_BigSmallLastCheck(int point1,int mypoint,int flg);
+int PetTalk_CheckTrans(int meindex,int talker,int trans,int flg);
+int PetTalk_LevelCheck(int meindex,int talker,int level,int flg);
+int PetTalk_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid);
+int PetTalk_ItemCheck(int meindex,int talker,int itemNo,int flg);
+int PetTalk_CheckMyType( int meindex, int toindex, int kosuu, int flg, int Type );
+int PetTalk_CheckPetEvent( int meindex, int toindex, char *buf);
 void PetTalk_RequestMain(int meindex,int talker,char *buf);
-BOOL PetTalk_AddItem(int meindex, int talker, char *buf);
-BOOL PetTalk_DelItem(int meindex,int talker,char *buf);
-BOOL PetTalk_RunEvent( int meindex, int talker, char *buf);
-BOOL PetTalk_CheckMyFloor( int meindex, int talker, char *buf, int flg);
+int PetTalk_AddItem(int meindex, int talker, char *buf);
+int PetTalk_DelItem(int meindex,int talker,char *buf);
+int PetTalk_RunEvent( int meindex, int talker, char *buf);
+int PetTalk_CheckMyFloor( int meindex, int talker, char *buf, int flg);
 #ifdef _PET_TALKBBI
-BOOL PET_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg);
+int PET_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg);
 #endif
 #ifdef _PET_TALKPRO
 #else
@@ -51,7 +51,7 @@ char *Pet_TalkGetFunStr( char *temp , char *buf, int len)
 	char	*cStr=NULL; 
 	int talkNo=1,mark=1;
 	char	line[4096];
-	BOOL find=FALSE;
+	int find=FALSE;
 	talkfun[0] ='\0';
 
 	while( getStringFromIndexWithDelim( pettalktext,"&",talkNo, buf1, sizeof( buf1) ) != FALSE){
@@ -113,7 +113,7 @@ void PET_Talkfunc( int meindex, int talkerindex, char *msg, int color)
   char AllTalk[PETTALK_MAXID][1024];
   int Type=0,j,i;
   int talkNo=0;
-  BOOL FREEs=FALSE;
+  int FREEs=FALSE;
   int buttontype = 0;
   int windowtype = 0;
 #ifdef _PET_TALKPRO
@@ -228,7 +228,7 @@ void PET_Talkfunc( int meindex, int talkerindex, char *msg, int color)
   
 }
 
-BOOL PetTalk_CheckMyFloor( int meindex, int talker, char *buf, int flg)	{
+int PetTalk_CheckMyFloor( int meindex, int talker, char *buf, int flg)	{
 	char buf1[16];
 	int Myfloor=-1;
 	Myfloor = CHAR_getInt( talker, CHAR_FLOOR);
@@ -245,7 +245,7 @@ BOOL PetTalk_CheckMyFloor( int meindex, int talker, char *buf, int flg)	{
 	return TRUE;
 }
 
-BOOL PetTalk_RunEvent( int meindex, int talker, char *buf)
+int PetTalk_RunEvent( int meindex, int talker, char *buf)
 {
 	char buf1[256];
 	int LimitLevel = -1;
@@ -268,7 +268,7 @@ BOOL PetTalk_RunEvent( int meindex, int talker, char *buf)
 	
 }
 
-BOOL PetTalk_DelItem(int meindex,int talker,char *buf)
+int PetTalk_DelItem(int meindex,int talker,char *buf)
 {
 
 	int i = 1, j = 1,k = 1;
@@ -354,7 +354,7 @@ BOOL PetTalk_DelItem(int meindex,int talker,char *buf)
 	return TRUE;
 }
 
-BOOL PetTalk_AddItem(int meindex, int talker, char *buf)
+int PetTalk_AddItem(int meindex, int talker, char *buf)
 {
 	int itemID,k=1,itemindex=-1;
 	int spaceNum=5,i;
@@ -399,7 +399,7 @@ BOOL PetTalk_AddItem(int meindex, int talker, char *buf)
 	return TRUE;	                                                                                                                                                                      
 }
 
-BOOL PetTalk_CheckPetEvent( int meindex, int toindex, char *buf)
+int PetTalk_CheckPetEvent( int meindex, int toindex, char *buf)
 {
 	char buf1[256],buf2[256];
 	int k = 0;
@@ -435,7 +435,7 @@ void PetTalk_RequestMain(int meindex,int talker,char *buf)
 	}
 }
 
-BOOL PetTalk_CheckFree( int meindex, int talker, char *buf)
+int PetTalk_CheckFree( int meindex, int talker, char *buf)
 {
 	char buff2[256];
 	char buff3[128];
@@ -468,7 +468,7 @@ BOOL PetTalk_CheckFree( int meindex, int talker, char *buf)
 	return FALSE;
 }
 
-BOOL PetTalk_BSCheck(int meindex,int talker,char* buf)
+int PetTalk_BSCheck(int meindex,int talker,char* buf)
 {
 	char buff2[128];
 	int kosuu,temp=-1,flg=0;
@@ -525,7 +525,7 @@ BOOL PetTalk_BSCheck(int meindex,int talker,char* buf)
 	return FALSE;
 }
 
-BOOL PetTalk_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp)
+int PetTalk_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int temp)
 {
 	int Type = -1;
 	if(strcmp(buf,"LV")==0){
@@ -575,7 +575,7 @@ BOOL PetTalk_FreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg, int
 #endif
 	return FALSE;
 }
-BOOL PetTalk_CheckMyType( int meindex, int toindex, int kosuu, int flg, int Type )	{
+int PetTalk_CheckMyType( int meindex, int toindex, int kosuu, int flg, int Type )	{
 	int MyType=0,MyMaxType=0;
 	switch( Type )	{
 	case 0:	//HP
@@ -590,7 +590,7 @@ BOOL PetTalk_CheckMyType( int meindex, int toindex, int kosuu, int flg, int Type
 	return FALSE;
 }
 
-BOOL PetTalk_WarpManReduce(int meindex,int talker,char *buf)
+int PetTalk_WarpManReduce(int meindex,int talker,char *buf)
 {
 	char buf2[512];
 	char buf3[256];
@@ -621,7 +621,7 @@ BOOL PetTalk_WarpManReduce(int meindex,int talker,char *buf)
 	return FALSE;
 }
 
-BOOL PetTalk_LevelCheck(int meindex,int talker,int level,int flg)
+int PetTalk_LevelCheck(int meindex,int talker,int level,int flg)
 {
 	int mylevel;
 	mylevel=CHAR_getInt(talker,CHAR_LV);
@@ -631,7 +631,7 @@ BOOL PetTalk_LevelCheck(int meindex,int talker,int level,int flg)
 	return FALSE;
 }
 
-BOOL PetTalk_CheckTrans(int meindex,int talker,int trans,int flg)
+int PetTalk_CheckTrans(int meindex,int talker,int trans,int flg)
 {
 	int myTrans;
 	myTrans=CHAR_getInt(talker, CHAR_TRANSMIGRATION);
@@ -641,7 +641,7 @@ BOOL PetTalk_CheckTrans(int meindex,int talker,int trans,int flg)
 	return FALSE;
 }
 
-BOOL PetTalk_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
+int PetTalk_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
 {
 	int petsel,petindex=-1;	
 
@@ -662,7 +662,7 @@ BOOL PetTalk_CheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
 	return FALSE;                                             
 }
 
-BOOL PetTalk_ItemCheck(int meindex,int talker,int itemNo,int flg)
+int PetTalk_ItemCheck(int meindex,int talker,int itemNo,int flg)
 {
 	int i;
 	int itemindex=-1;
@@ -678,7 +678,7 @@ BOOL PetTalk_ItemCheck(int meindex,int talker,int itemNo,int flg)
 	return FALSE;
 }
 
-BOOL PetTalk_BigSmallLastCheck(int point1,int mypoint,int flg)
+int PetTalk_BigSmallLastCheck(int point1,int mypoint,int flg)
 {
 	if(flg==0){
 		if(point1==mypoint) {
@@ -878,7 +878,7 @@ void PET_Watchfunc( int objmeindex, int objmoveindex, CHAR_ACTION act, int x, in
 }
 
 #ifdef _PET_TALKBBI
-BOOL PET_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg)
+int PET_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg)
 {
 	int MyBBI;
 	if( !CHAR_CHECKINDEX( charindex))

@@ -78,19 +78,19 @@ static void NPC_NewNpcMan_selectWindow( int meindex, int toindex, int num, int f
 
 void NPC_reCheckMyPetUnusual( int meindex, int toindex);//检查宠物异常
 
-BOOL CHECK_ReplacePET( int toindex); //更换宠物
+int CHECK_ReplacePET( int toindex); //更换宠物
 void NPC_reCheckItemPilenum( int meindex, int toindex);//还原铁枪三堆叠
-BOOL CHECK_ITEMEQUIT( int toindex);//更换灵力铠
-BOOL CHECK_PETBBI( int toindex);//修正宠物图号
+int CHECK_ITEMEQUIT( int toindex);//更换灵力铠
+int CHECK_PETBBI( int toindex);//修正宠物图号
 
 #ifdef _PET_LOSTPET
-BOOL NPC_reFindMyLostPet( int meindex, int toindex, char *buf);
-BOOL NPC_getLostPetString( int meindex, int toindex);
-BOOL NPC_backupLostPetString( int toindex);
+int NPC_reFindMyLostPet( int meindex, int toindex, char *buf);
+int NPC_getLostPetString( int meindex, int toindex);
+int NPC_backupLostPetString( int toindex);
 static char petstring[7][2048]={"","","","","","",""};
 #endif
 
-BOOL NPC_NewNpcManInit( int meindex )
+int NPC_NewNpcManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 		
@@ -411,7 +411,7 @@ void NPC_NewNpcManWindowTalked( int meindex, int talkerindex, int seqno, int sel
 	}
 }
 
-BOOL CHECK_ITEMEQUIT( int toindex)
+int CHECK_ITEMEQUIT( int toindex)
 {
 	int i, itemindex;
 	char token[256];
@@ -462,10 +462,10 @@ BOOL CHECK_ITEMEQUIT( int toindex)
 }
 
 
-BOOL CHECK_PETBBI( int toindex)
+int CHECK_PETBBI( int toindex)
 {
 	int i, petindex, PetID;
-	BOOL Finds = FALSE;
+	int Finds = FALSE;
 	char token[256];
 	for( i=0; i < CHAR_MAXPETHAVE; i++)	{
 		int parry, array, PetBBI;
@@ -555,10 +555,10 @@ void NPC_reCheckMyPetUnusual( int meindex, int toindex)//检查宠物异常
 	}
 }
 //更换宠物
-BOOL CHECK_ReplacePET( int toindex)
+int CHECK_ReplacePET( int toindex)
 {
 	int i, petindex;
-	BOOL Finds = FALSE;
+	int Finds = FALSE;
 	char szPet[256];
 
 	if( CHAR_getWorkInt( toindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE ) return FALSE;
@@ -667,7 +667,7 @@ void NPC_reCheckItemPilenum( int meindex, int toindex)
 }
 
 #ifdef _PET_LOSTPET
-BOOL NPC_reFindMyLostPet( int meindex, int toindex, char *buf)
+int NPC_reFindMyLostPet( int meindex, int toindex, char *buf)
 {
 	//地上0 溜宠 1 宠邮 2
 	FILE *fp = NULL;
@@ -719,7 +719,7 @@ BOOL NPC_reFindMyLostPet( int meindex, int toindex, char *buf)
 	return TRUE;
 }
 
-BOOL NPC_getLostPetString( int meindex, int toindex)
+int NPC_getLostPetString( int meindex, int toindex)
 {
 	FILE *fp = NULL;
 	char *CdKey=NULL;
@@ -751,7 +751,7 @@ BOOL NPC_getLostPetString( int meindex, int toindex)
 	return TRUE;
 }
 
-BOOL NPC_backupLostPetString( int toindex)
+int NPC_backupLostPetString( int toindex)
 {
 	FILE *fp = NULL;
 	char *CdKey=NULL;
@@ -802,17 +802,17 @@ enum {
 	NPC_WORK_CURRENTTIME = CHAR_NPCWORKINT3,
 };
 
-BOOL CHECK_YEARPET( int toindex);
+int CHECK_YEARPET( int toindex);
 static void NPC_NewNpcMan_selectWindow( int meindex, int toindex, int num, int flg);
 int NPC_NewNpcManDelPet(int meindex,int talker, int petsel);
-BOOL NPC_NewNpcManAddPet(int meindex, int talker, int petid);
+int NPC_NewNpcManAddPet(int meindex, int talker, int petid);
 
 //可换四种宠
 static	int Re_Pet[4];
 // shan
 char uStr[128]="";
 
-BOOL NPC_NewNpcManInit( int meindex )
+int NPC_NewNpcManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf1[256],buf2[256];
@@ -1079,7 +1079,7 @@ int NPC_NewNpcManDelPet(int meindex,int talker, int petsel)
 	return Re_Pet[k];
 }
 
-BOOL NPC_NewNpcManAddPet(int meindex, int talker, int petid)
+int NPC_NewNpcManAddPet(int meindex, int talker, int petid)
 {
 	int	ret;
 	char msgbuf[64];
@@ -1156,7 +1156,7 @@ BOOL NPC_NewNpcManAddPet(int meindex, int talker, int petid)
 	return TRUE;
 }
 
-BOOL CHECK_YEARPET( int toindex)
+int CHECK_YEARPET( int toindex)
 {
 			int i,k,petindex=-1;
 			for( i=0;i<CHAR_MAXPETHAVE;i++)	{

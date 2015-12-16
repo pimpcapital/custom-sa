@@ -3,7 +3,7 @@
 
 
 void NPC_PoolItemShopLoop( int meindex);
-BOOL NPC_PoolItemShopInit( int meindex);
+int NPC_PoolItemShopInit( int meindex);
 void NPC_PoolItemShopTalked( int meindex , int talkerindex , 
 							char *szMes ,int color );
 void NPC_PoolItemShopWindowTalked( int meindex, int talkerindex, 

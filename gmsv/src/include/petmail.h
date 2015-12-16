@@ -34,16 +34,16 @@ typedef struct
 } PETMAIL_offmsg;
 
 void PETMAIL_Loopfunc( int index);
-BOOL PETMAIL_CheckPlayerExist( int index, int mode);
+int PETMAIL_CheckPlayerExist( int index, int mode);
 
-BOOL PETMAIL_initOffmsgBuffer( int count );
-BOOL PETMAIL_addOffmsg( int fromindex, char *tocdkey, char *tocharaname,
+int PETMAIL_initOffmsgBuffer( int count );
+int PETMAIL_addOffmsg( int fromindex, char *tocdkey, char *tocharaname,
                             char *text, int color );
 PETMAIL_offmsg *PETMAIL_getOffmsg( int offmsgindex);
-BOOL PETMAIL_deleteOffmsg( int offmsgindex);
+int PETMAIL_deleteOffmsg( int offmsgindex);
 void PETMAIL_proc( void );
-BOOL storePetmail( void);
-BOOL PETMAIL_sendPetMail( int cindex, int aindex, 
+int storePetmail( void);
+int PETMAIL_sendPetMail( int cindex, int aindex,
 					int havepetindex, int haveitemindex, char* text , int color );
 
 #ifdef _PETMAIL_DEFNUMS

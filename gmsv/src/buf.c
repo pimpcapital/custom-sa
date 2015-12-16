@@ -17,7 +17,7 @@ static struct timeval AllocOldTime;
 typedef struct tagMemory
 {
     char*   pointer;
-    BOOL    used;
+    int    used;
 
     unsigned int     nsize;
 }Memory;
@@ -32,7 +32,7 @@ void memEnd( void )
   }
 }
 
-BOOL configmem( int unit , int unitnumber )
+int configmem( int unit , int unitnumber )
 {
     if( memconfig == TRUE )
         return FALSE;
@@ -43,7 +43,7 @@ BOOL configmem( int unit , int unitnumber )
     return memconfig = TRUE;
 }
 
-BOOL memInit( void )
+int memInit( void )
 {
     int i;
     if( memconfig == FALSE )
@@ -91,7 +91,7 @@ void* allocateMemory( const unsigned int nbyte )
 {
     int i;
     int arrayAllocSize;
-	BOOL flg = FALSE;
+	int flg = FALSE;
     void *ret;
 	int first = 0;
  
@@ -110,7 +110,7 @@ void* allocateMemory( const unsigned int nbyte )
 			i += mem[i].nsize;
 		}else{
             int	j;
-            BOOL	found = TRUE;
+            int	found = TRUE;
             for( j = i; j < i + arrayAllocSize; j ++ ) {
 			 	if( mem[j].used != FALSE ){
 			 		i = j + mem[j].nsize;

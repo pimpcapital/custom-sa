@@ -5,7 +5,7 @@
 void NPC_OldmanTalked( int meindex , int talkerindex , char *msg ,
                      int color );
 
-BOOL NPC_OldmanInit( int meindex );
+int NPC_OldmanInit( int meindex );
 
 
 #endif 

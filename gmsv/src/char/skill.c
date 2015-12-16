@@ -62,11 +62,11 @@ RETURN:
 }
 
 
-BOOL SKILL_makeSkillFromStringToArg( char* src, Skill* sk )
+int SKILL_makeSkillFromStringToArg( char* src, Skill* sk )
 {
     int     readindex=1;
     while( 1 ){
-        BOOL    ret;
+        int    ret;
         char    linebuf[512];
         char    first[256];
         char    second[256];
@@ -110,7 +110,7 @@ BOOL SKILL_makeSkillFromStringToArg( char* src, Skill* sk )
     return TRUE;
 }
 
-INLINE int SKILL_getInt( Skill* skill, int element)
+int SKILL_getInt( Skill* skill, int element)
 {
 	int value = skill->data[element];
 
@@ -120,7 +120,7 @@ INLINE int SKILL_getInt( Skill* skill, int element)
 }
 
 
-INLINE int SKILL_setInt( Skill* skill, int element, int new)
+int SKILL_setInt( Skill* skill, int element, int new)
 {
     int     buf = SKILL_getInt( skill, element );
     skill->data[element] = new;
@@ -244,13 +244,13 @@ char* SKILL_makeSkillFalseString( void )
 }
 
 
-BOOL  SKILL_CHECKID( int skillid )
+int  SKILL_CHECKID( int skillid )
 {
     if( SKILL_NUM <= skillid && skillid > 0 )return FALSE;
     return TRUE;
 }
 
-BOOL SKILL_makeSkillData( Skill* sk ,int skid, int lev )
+int SKILL_makeSkillData( Skill* sk ,int skid, int lev )
 {
     sk->data[SKILL_LEVEL] = lev;
     sk->data[SKILL_IDENTITY] = skid;
@@ -282,7 +282,7 @@ int SKILL_getLevelFromSkillID( int charaindex, SKILL_ID id )
     return -1;
 }
 
-BOOL SKILL_getUpableSkillID( int charaindex,char* buf, int buflen )
+int SKILL_getUpableSkillID( int charaindex,char* buf, int buflen )
 {
     int     i;
     if( !CHAR_CHECKINDEX(charaindex)) return FALSE;

@@ -7,7 +7,7 @@
 #include "npctemplate.h"
 #include "npccreate.h"
 
-BOOL NPC_readNPCSettingFiles( char* topdirectory ,int templatesize, int createsize)
+int NPC_readNPCSettingFiles( char* topdirectory ,int templatesize, int createsize)
 {
     print("\n");
     if( NPC_readNPCTemplateFiles( topdirectory ,templatesize) == FALSE )

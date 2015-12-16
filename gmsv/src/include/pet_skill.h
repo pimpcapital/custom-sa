@@ -59,18 +59,18 @@ typedef struct tagPetskill
 
 typedef int (*PETSKILL_CALLFUNC)( int, int, int, char * );
 
-INLINE BOOL PETSKILL_CHECKINDEX( int index );
-INLINE int PETSKILL_getInt( int index, PETSKILL_DATAINT element);
-INLINE int PETSKILL_setInt( int index, PETSKILL_DATAINT element, int data);
-INLINE char* PETSKILL_getChar( int index, PETSKILL_DATACHAR element);
-INLINE BOOL PETSKILL_setChar( int index ,PETSKILL_DATACHAR element, char* new );
+int PETSKILL_CHECKINDEX( int index );
+int PETSKILL_getInt( int index, PETSKILL_DATAINT element);
+int PETSKILL_setInt( int index, PETSKILL_DATAINT element, int data);
+char* PETSKILL_getChar( int index, PETSKILL_DATACHAR element);
+int PETSKILL_setChar( int index ,PETSKILL_DATACHAR element, char* new );
 int PETSKILL_getPetskillNum( void);
 
 #define		PETSKILL_GetArray( charaindex, havepetskill)	_PETSKILL_GetArray( __FILE__, __LINE__, charaindex, havepetskill)
 int _PETSKILL_GetArray( char *file, int line, int charaindex, int havepetskill );
 
-BOOL PETSKILL_initPetskill( char *filename);
-BOOL PETSKILL_reinitPetskill( void );
+int PETSKILL_initPetskill( char *filename);
+int PETSKILL_reinitPetskill( void );
 int PETSKILL_getPetskillArray( int petskillid);
 PETSKILL_CALLFUNC PETSKILL_getPetskillFuncPointer(char* name);
 
@@ -79,7 +79,7 @@ int PETSKILL_Use(
 	int toindex,
 	int array,
 	char *data
-	//BOOL isCLI	// Robin 2001/02/26 if owner is player
+	//int isCLI	// Robin 2001/02/26 if owner is player
 );
 
 int PETSKILL_ContinuationAttack(

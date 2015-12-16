@@ -45,9 +45,9 @@
 #define MIN(x,y)     ( ( (x) < (y) ) ? (x) : (y) )
 
 #ifdef _NEW_SERVER_
-BOOL bNewServer = TRUE;
+int bNewServer = TRUE;
 #else
-BOOL bNewServer = FALSE;
+int bNewServer = FALSE;
 #endif
 
 // Nuke +1 0901: For state monitor
@@ -64,7 +64,7 @@ int AC_WBSIZE = ( 1024*64*16 );
 //ttom+1 for the performatce
 static unsigned int MAX_item_use = 0;
 int i_shutdown_time = 0; //ttom
-BOOL b_first_shutdown = FALSE; //ttom
+int b_first_shutdown = FALSE; //ttom
 
 int mfdfulll = 0;
 
@@ -73,7 +73,7 @@ int mfdfulll = 0;
  ------------------------------------------------------------*/
 typedef struct tag_serverState
 {
-    BOOL            acceptmore;     /*  1分匀凶日｝accept 仄凶丐午
+    int            acceptmore;     /*  1分匀凶日｝accept 仄凶丐午
                                         切斤仁匹｝close 允月 */
     unsigned int    fdid;           /*  fd 及骚曰袄 */
     unsigned int    closeallsocketnum;  /*   closeallsocket   及酸曰及
@@ -87,7 +87,7 @@ typedef struct tag_serverState
 }ServerState;
 typedef struct tagCONNECT
 {
-  BOOL use;
+  int use;
   
   char *rb;
   int rbuse;
@@ -205,14 +205,14 @@ typedef struct tagCONNECT
 
   int appendwb_overflow_flag;  /* 1荚匹手appendWb互撩?仄凶日1卞允月 */
   //ttom+1 avoidance the watch the battle be kept out
-  BOOL in_watch_mode;
-  BOOL b_shut_up; //for avoid the user wash the screen
-  BOOL b_pass;      //for avoid the unlimited area
+  int in_watch_mode;
+  int b_shut_up; //for avoid the user wash the screen
+  int b_pass;      //for avoid the unlimited area
 
   struct timeval Wtime;
 
   struct timeval WLtime;
-  BOOL b_first_warp;
+  int b_first_warp;
   int state_trans;
 
   // CoolFish: Trade 2001/4/18
@@ -233,7 +233,7 @@ typedef struct tagCONNECT
 
   struct timeval battle_recvtime;
 
-  BOOL confirm_key;    // shan  trade(DoubleCheck)
+  int confirm_key;    // shan  trade(DoubleCheck)
 }
 CONNECT;
 
@@ -282,7 +282,7 @@ ANYTHREAD static void SERVSTATE_initserverState( void )
 
 ANYTHREAD int SERVSTATE_SetAcceptMore( int nvalue )
 {
-  BOOL buf;
+  int buf;
   SERVSTATE_LOCK();
   buf = servstate.acceptmore;
   servstate.acceptmore = nvalue;
@@ -494,7 +494,7 @@ SINGLETHREAD int lsrpcClientWriteFunc( int fd , char* buf , int size )
 }
 
 static int logRBuseErr = 0;
-SINGLETHREAD BOOL GetOneLine_fix( int fd, char *buf, int max )
+SINGLETHREAD int GetOneLine_fix( int fd, char *buf, int max )
 {
   int i;
 
@@ -547,7 +547,7 @@ SINGLETHREAD BOOL GetOneLine_fix( int fd, char *buf, int max )
   return FALSE;
 }
 
-ANYTHREAD BOOL initConnectOne( int sockfd, struct sockaddr_in* sin ,int len )
+ANYTHREAD int initConnectOne( int sockfd, struct sockaddr_in* sin ,int len )
 {
 
   CONNECT_LOCK( sockfd );
@@ -707,7 +707,7 @@ ANYTHREAD BOOL initConnectOne( int sockfd, struct sockaddr_in* sin ,int len )
   return TRUE;
 }
 
-ANYTHREAD BOOL _CONNECT_endOne( char *file, int fromline, int sockfd , int line )
+ANYTHREAD int _CONNECT_endOne( char *file, int fromline, int sockfd , int line )
 {
 //	if(errno==113 || errno==104){
 //		return;
@@ -746,7 +746,7 @@ ANYTHREAD BOOL _CONNECT_endOne( char *file, int fromline, int sockfd , int line 
   return TRUE;
 }
 	
-SINGLETHREAD BOOL initConnect( int size )
+SINGLETHREAD int initConnect( int size )
 {
   int i, j;
   ConnectLen = size;
@@ -798,7 +798,7 @@ SINGLETHREAD BOOL initConnect( int size )
 
   return TRUE;
 }
-BOOL CONNECT_acfdInitRB( int fd )
+int CONNECT_acfdInitRB( int fd )
 {
   if ( fd != acfd ) return FALSE;
 
@@ -812,7 +812,7 @@ BOOL CONNECT_acfdInitRB( int fd )
   memset( Connect[ acfd ].rb, 0, AC_RBSIZE );
   return TRUE;
 }
-BOOL CONNECT_acfdInitWB( int fd )
+int CONNECT_acfdInitWB( int fd )
 {
   if ( fd != acfd ) return FALSE;
 
@@ -846,7 +846,7 @@ ANYTHREAD void endConnect( void )
   freeMemory( Connect );
 }
 
-ANYTHREAD BOOL CONNECT_appendCAbuf( int fd , char* data, int size )
+ANYTHREAD int CONNECT_appendCAbuf( int fd , char* data, int size )
 {
   CONNECT_LOCK( fd );
     /*  呵稿のデリミタの ',' の尸驴く澄瘦しないかん祸に庙罢   */
@@ -1338,7 +1338,7 @@ ANYTHREAD void CAflush( int charaindex )
  *  喇根    TRUE(1)
  *  己窃    FALSE(0)
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_appendCDbuf( int fd , char* data, int size )
+ANYTHREAD int CONNECT_appendCDbuf( int fd , char* data, int size )
 {
     CONNECT_LOCK(fd);
 
@@ -1436,7 +1436,7 @@ void chardatasavecheck( void )
  *  valid   TRUE(1)
  *  invalid FALSE(0)
  ------------------------------------------------------------*/
-ANYTHREAD INLINE int CONNECT_checkfd( int fd )
+ANYTHREAD int CONNECT_checkfd( int fd )
 {
     if( 0 > fd ||  fd >= ConnectLen ){
         return FALSE;
@@ -1611,7 +1611,7 @@ ANYTHREAD int getFdidFromCharaIndex( int charind )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isCLI( int fd )
+ANYTHREAD int CONNECT_isCLI( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1627,7 +1627,7 @@ ANYTHREAD BOOL CONNECT_isCLI( int fd )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isAC( int fd )
+ANYTHREAD int CONNECT_isAC( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1642,7 +1642,7 @@ ANYTHREAD BOOL CONNECT_isAC( int fd )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isUnderLogin( int fd )
+ANYTHREAD int CONNECT_isUnderLogin( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1656,7 +1656,7 @@ ANYTHREAD BOOL CONNECT_isUnderLogin( int fd )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isWhileLogin( int fd )
+ANYTHREAD int CONNECT_isWhileLogin( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1671,7 +1671,7 @@ ANYTHREAD BOOL CONNECT_isWhileLogin( int fd )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isNOTLOGIN( int fd )
+ANYTHREAD int CONNECT_isNOTLOGIN( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1686,7 +1686,7 @@ ANYTHREAD BOOL CONNECT_isNOTLOGIN( int fd )
  * 苞眶
  *  fd  int     ファイルディスクリプタ
  ------------------------------------------------------------*/
-ANYTHREAD BOOL CONNECT_isLOGIN( int fd )
+ANYTHREAD int CONNECT_isLOGIN( int fd )
 {
     int a;
     CONNECT_LOCK(fd);
@@ -1713,7 +1713,7 @@ void closeAllConnectionandSaveData( void )
     /*  链婶猴近する    */
     for( i = 0 ; i<ConnectLen ; i++ ){
         if( CONNECT_getUse_debug(i,1413) == TRUE ){
-            BOOL    clilogin=FALSE;
+            int    clilogin=FALSE;
             if( CONNECT_isAC( i ) )continue;
             if( CONNECT_isCLI( i ) && CONNECT_isLOGIN( i ) )clilogin = TRUE;
             CONNECT_endOne_debug(i);
@@ -2034,7 +2034,7 @@ int isThereThisIP(unsigned long ip)
 extern int player_online = 0;
 extern int player_maxonline = 0;
 
-SINGLETHREAD BOOL netloop_faster( void )
+SINGLETHREAD int netloop_faster( void )
 {
 
   int ret , loop_num;
@@ -2897,29 +2897,29 @@ void sigusr2(int i)
 
 // Nuke end
 //ttom start
-void CONNECT_set_watchmode(int fd, BOOL B_Watch)
+void CONNECT_set_watchmode(int fd, int B_Watch)
 {
   int me;
   me = CONNECT_getCharaindex( fd );
   Connect[ me ].in_watch_mode = B_Watch;
 }
-BOOL CONNECT_get_watchmode(int fd)
+int CONNECT_get_watchmode(int fd)
 {
   int me;
-  BOOL B_ret;
+  int B_ret;
   me = CONNECT_getCharaindex( fd );
   B_ret = Connect[ me ].in_watch_mode;
   return B_ret;
 }
-BOOL CONNECT_get_shutup(int fd)
+int CONNECT_get_shutup(int fd)
 {
   int me;
-  BOOL B_ret;
+  int B_ret;
   me = CONNECT_getCharaindex( fd );
   B_ret = Connect[ me ].b_shut_up;
   return B_ret;
 }
-void CONNECT_set_shutup(int fd,BOOL b_shut)
+void CONNECT_set_shutup(int fd,int b_shut)
 {
   int me;
   me = CONNECT_getCharaindex( fd );
@@ -2931,30 +2931,30 @@ unsigned long CONNECT_get_userip(int fd)
   memcpy( &ip, &Connect[ fd ].sin.sin_addr, sizeof( long ) );
   return ip;
 }
-void CONNECT_set_pass(int fd,BOOL b_ps)
+void CONNECT_set_pass(int fd,int b_ps)
 {
   int me;
   me = CONNECT_getCharaindex( fd );
   Connect[ me ].b_pass = b_ps;
 }
-BOOL CONNECT_get_pass(int fd)
+int CONNECT_get_pass(int fd)
 {
   int me;
-  BOOL B_ret;
+  int B_ret;
   me = CONNECT_getCharaindex( fd );
   B_ret = Connect[ me ].b_pass;
   return B_ret;
 }
-void CONNECT_set_first_warp(int fd,BOOL b_ps)
+void CONNECT_set_first_warp(int fd,int b_ps)
 {
   int me;
   me = CONNECT_getCharaindex( fd );
   Connect[ me ].b_first_warp = b_ps;
 }
-BOOL CONNECT_get_first_warp(int fd)
+int CONNECT_get_first_warp(int fd)
 {
   int me;
-  BOOL B_ret;
+  int B_ret;
   me = CONNECT_getCharaindex( fd );
   B_ret = Connect[ me ].b_first_warp;
   return B_ret;
@@ -3002,7 +3002,7 @@ int CONNECT_get_confirm(int fd)
 {
   return Connect[ fd ].confirm_key;
 }
-void CONNECT_set_confirm(int fd, BOOL b)
+void CONNECT_set_confirm(int fd, int b)
 {
   Connect[ fd ].confirm_key = b;
 }
@@ -3143,7 +3143,7 @@ void RescueEntryBTime( int charaindex, int fd, unsigned int lowTime, unsigned in
   //Connect[fd].CBTime+battletime
 }
 
-BOOL CheckDefBTime( int charaindex, int fd, unsigned int lowTime, unsigned int battletime, unsigned int addTime)//lowTime延迟时间
+int CheckDefBTime( int charaindex, int fd, unsigned int lowTime, unsigned int battletime, unsigned int addTime)//lowTime延迟时间
 {
   int delayTime = 0;
   unsigned int NowTime = ( unsigned int ) time( NULL );
@@ -3177,7 +3177,7 @@ BOOL CheckDefBTime( int charaindex, int fd, unsigned int lowTime, unsigned int b
 }
 #endif
 
-BOOL MSBUF_CHECKbuflen( int size, float defp)
+int MSBUF_CHECKbuflen( int size, float defp)
 {
   return TRUE;
 }

@@ -40,7 +40,7 @@ enum
 
 int raceflag=0;
 
-BOOL NPC_PetRacePetInit( int meindex )
+int NPC_PetRacePetInit( int meindex )
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf[256];

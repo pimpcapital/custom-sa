@@ -2,7 +2,7 @@
 #define _MAKEPAIR_MAN_H
 
 void NPC_MakePairManTalked( int meindex, int talkerindex, char *msg, int color );
-BOOL NPC_MakePairManInit( int meindex );
+int NPC_MakePairManInit( int meindex );
 void NPC_MakePairManWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 void NPC_MakePairManLoop( int meindex);
 

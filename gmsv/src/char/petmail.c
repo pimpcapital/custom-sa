@@ -43,7 +43,7 @@ static int PETMAIL_offmsg_max;
 #define PETMAIL_DEFTOTALNUM 1000
 static int PetMailTotalnums = 0;
 
-BOOL PETMAIL_sendPetMail( int cindex, int aindex, 
+int PETMAIL_sendPetMail( int cindex, int aindex, 
 					int havepetindex, int haveitemindex, char* text , int color )
 {
 	char	textbuffer[2048];
@@ -238,7 +238,7 @@ BOOL PETMAIL_sendPetMail( int cindex, int aindex,
 }
 
 static PETMAIL_offmsg * PETMAIL_offmsgbuf;
-BOOL PETMAIL_initOffmsgBuffer( int count )
+int PETMAIL_initOffmsgBuffer( int count )
 {
     int size = sizeof( PETMAIL_offmsg )*count ;
 	FILE	*fp;
@@ -334,7 +334,7 @@ BOOL PETMAIL_initOffmsgBuffer( int count )
     
 }
 
-BOOL PETMAIL_addOffmsg( int fromindex, char *tocdkey, char *tocharaname,
+int PETMAIL_addOffmsg( int fromindex, char *tocdkey, char *tocharaname,
                             char *text , int color )
 {
 
@@ -366,7 +366,7 @@ PETMAIL_offmsg *PETMAIL_getOffmsg( int offmsgindex)
 	return &PETMAIL_offmsgbuf[offmsgindex];
 }
 
-BOOL PETMAIL_deleteOffmsg( int offmsgindex)
+int PETMAIL_deleteOffmsg( int offmsgindex)
 {
 	if( offmsgindex < 0 || offmsgindex >= PETMAIL_offmsg_max ) return FALSE;
 	PETMAIL_offmsgbuf[offmsgindex].use = FALSE;
@@ -388,7 +388,7 @@ void PETMAIL_proc( void )
     }
 }
 
-BOOL storePetmail( void)
+int storePetmail( void)
 {
 	FILE	*fp;
     char	filename[256];
@@ -418,7 +418,7 @@ BOOL storePetmail( void)
 	return TRUE;
 }
 
-BOOL PETMAIL_CheckPlayerExist( int index, int mode)
+int PETMAIL_CheckPlayerExist( int index, int mode)
 {
 	int		i;
 	char	*searchcd = NULL;

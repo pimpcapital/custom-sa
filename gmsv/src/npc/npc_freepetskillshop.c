@@ -32,16 +32,16 @@ enum {
 };
 
 static void NPC_FreePetSkillShop_selectWindow( int meindex, int toindex, int num,int select);
-BOOL NPC_FreePetSkillMakeStr(int meindex,int toindex, int select);
-//BOOL NPC_CHECKFREEPETSKILL( int toindex, int petindex, int skillID);
-BOOL NPC_SkillShopItemCheck(int meindex,int talker,int itemNo, int cou);
-BOOL NPC_SkillShopDelItems(int meindex,int talker, char *buf);
-BOOL NPC_SkillShopPetCheck( int toindex, int petindex, int skillID );
-BOOL NPC_SkillShopWarp( int meindex, int talkindex);
+int NPC_FreePetSkillMakeStr(int meindex,int toindex, int select);
+//int NPC_CHECKFREEPETSKILL( int toindex, int petindex, int skillID);
+int NPC_SkillShopItemCheck(int meindex,int talker,int itemNo, int cou);
+int NPC_SkillShopDelItems(int meindex,int talker, char *buf);
+int NPC_SkillShopPetCheck( int toindex, int petindex, int skillID );
+int NPC_SkillShopWarp( int meindex, int talkindex);
 
 #define MAXNPCPOINT 10
 
-BOOL NPC_FreePetSkillShopInit( int meindex )
+int NPC_FreePetSkillShopInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char msg[256];
@@ -105,7 +105,7 @@ static void NPC_FreePetSkillShop_selectWindow( int meindex, int toindex, int num
 	switch(num)	{
 	  case START_WINDOW:
 		  {
-		  BOOL Evflg = TRUE;
+		  int Evflg = TRUE;
 		if( NPC_Util_GetStrFromStrWithDelim( npcarg, "start_msg", token, sizeof( token)) == NULL)	{
 			CHAR_setWorkInt( toindex, CHAR_WORKSHOPRELEVANT, 0);
 			return;
@@ -259,7 +259,7 @@ void NPC_FreePetSkillShopWindowTalked( int meindex, int talkerindex, int seqno, 
 	return;
 }
 
-BOOL NPC_CHECKFREEPETSKILL( int toindex, int petindex, int skillID)
+int NPC_CHECKFREEPETSKILL( int toindex, int petindex, int skillID)
 {
 	int skillindex=-1;
 	char SCode[256];
@@ -315,7 +315,7 @@ BOOL NPC_CHECKFREEPETSKILL( int toindex, int petindex, int skillID)
 	return FALSE;
 }
 
-BOOL NPC_FreePetSkillMakeStr(int meindex,int toindex,int select)
+int NPC_FreePetSkillMakeStr(int meindex,int toindex,int select)
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char msg[256];
@@ -380,7 +380,7 @@ BOOL NPC_FreePetSkillMakeStr(int meindex,int toindex,int select)
 	return TRUE;
 }
 
-BOOL NPC_SkillShopItemCheck(int meindex,int talker,int itemNo, int cou)
+int NPC_SkillShopItemCheck(int meindex,int talker,int itemNo, int cou)
 {
 	int i;
 	int itemindex=-1;
@@ -399,12 +399,12 @@ BOOL NPC_SkillShopItemCheck(int meindex,int talker,int itemNo, int cou)
 
 }
 
-BOOL NPC_SkillShopDelItems(int meindex,int talker, char *buf)
+int NPC_SkillShopDelItems(int meindex,int talker, char *buf)
 {
 	char buf1[256];
 	char item[256], cout[256];
 	int i=1;
-	BOOL Evflg=TRUE;
+	int Evflg=TRUE;
 	while( getStringFromIndexWithDelim( buf, ",", i,buf1, sizeof( buf1)) != FALSE )	{
 		i++;
 		if( strstr( buf1, "*") != NULL )	{
@@ -429,7 +429,7 @@ BOOL NPC_SkillShopDelItems(int meindex,int talker, char *buf)
 	return FALSE;
 }
 
-BOOL NPC_SkillShopPetCheck( int toindex, int petindex, int skillID )
+int NPC_SkillShopPetCheck( int toindex, int petindex, int skillID )
 {
 	char Free[256];
 	int i;
@@ -440,7 +440,7 @@ BOOL NPC_SkillShopPetCheck( int toindex, int petindex, int skillID )
 	sprintf( Free, "%s", PETSKILL_getChar( skillindex, PETSKILL_FREE));
 
 	if( NPC_Util_GetStrFromStrWithDelim( Free, "FREE", data, sizeof( data)) != NULL ) {
-		BOOL EvFlg = TRUE;
+		int EvFlg = TRUE;
 		i=1;
 		while( getStringFromIndexWithDelim( data, "|", i, msg, sizeof( msg)) != FALSE )	{
 			i++;
@@ -495,12 +495,12 @@ BOOL NPC_SkillShopPetCheck( int toindex, int petindex, int skillID )
 	return TRUE;
 }
 
-BOOL NPC_SkillShopWarp( int meindex, int talkindex)
+int NPC_SkillShopWarp( int meindex, int talkindex)
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char data[1024], buf1[256], buf2[256];
 	int i=1, j=1;
-	BOOL EvFlg=FALSE;
+	int EvFlg=FALSE;
 	struct	{
 		int FLOOR;
 		int X;

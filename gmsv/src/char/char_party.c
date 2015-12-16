@@ -131,7 +131,7 @@ void CHAR_JoinParty_Main( int charaindex, int targetindex)
 /*------------------------------------------------------------
  * 由□  奴卞  欠丹午允月［
  ------------------------------------------------------------*/
-BOOL CHAR_JoinParty( int charaindex )
+int CHAR_JoinParty( int charaindex )
 {
 
 	int     result = -1;
@@ -328,7 +328,7 @@ BOOL CHAR_JoinParty( int charaindex )
 	return result;
 }
 
-static BOOL CHAR_DischargePartySub( int charaindex, int msgflg)
+static int CHAR_DischargePartySub( int charaindex, int msgflg)
 {
 	char buf[64], c[3];
 	int toindex,flg,i;
@@ -533,12 +533,12 @@ static BOOL CHAR_DischargePartySub( int charaindex, int msgflg)
 
 	return TRUE;
 }
-BOOL CHAR_DischargeParty( int charaindex, int flg)
+int CHAR_DischargeParty( int charaindex, int flg)
 {
 	return CHAR_DischargePartySub( charaindex, 1);
 }
 
-BOOL CHAR_DischargePartyNoMsg( int charaindex)
+int CHAR_DischargePartyNoMsg( int charaindex)
 {
 	return CHAR_DischargePartySub( charaindex, 0);
 }

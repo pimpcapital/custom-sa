@@ -28,16 +28,16 @@ enum {
 
 static void NPC_WindowHealer_selectWindow( int meindex, int toindex, int num);
 void NPC_WindowHealerAllHeal( int talker,int mode );
-BOOL NPC_WindowHealerLevelCheck(int meindex,int talker);
-BOOL NPC_WindowMoneyCheck(int meindex,int talker,int mode);
+int NPC_WindowHealerLevelCheck(int meindex,int talker);
+int NPC_WindowMoneyCheck(int meindex,int talker,int mode);
 int NPC_WindowCostCheck(int meindex,int talker);
-BOOL NPC_PetHealerCheck(int talker);
+int NPC_PetHealerCheck(int talker);
 int NPC_WindowCostCheckMp(int meindex,int talker);
 
 
 /*********************************
 *********************************/
-BOOL NPC_WindowHealerInit( int meindex )
+int NPC_WindowHealerInit( int meindex )
 {
 
 	char *npcarg;
@@ -468,7 +468,7 @@ void NPC_WindowHealerWindowTalked( int meindex, int talkerindex,
 }
 
 
-BOOL NPC_PetHealerCheck(int talker)
+int NPC_PetHealerCheck(int talker)
 {
 
 	int petindex;
@@ -579,7 +579,7 @@ void NPC_WindowHealerAllHeal( int talker,int mode )
 伊矛伙民尼永弁
 	涩烂伊矛伙动晓卅日	FALSE
 ---------------------------------------*/
-BOOL NPC_WindowHealerLevelCheck(int meindex,int talker)
+int NPC_WindowHealerLevelCheck(int meindex,int talker)
 {
 		int level;
 	
@@ -598,7 +598,7 @@ BOOL NPC_WindowHealerLevelCheck(int meindex,int talker)
 娄醒
 talker’’’’平乓仿弁正□及奶件犯永弁旦
 ---------------------------------------------*/
-BOOL NPC_WindowMoneyCheck(int meindex,int talker,int mode)
+int NPC_WindowMoneyCheck(int meindex,int talker,int mode)
 {
 	int cost=0;
 	int level;

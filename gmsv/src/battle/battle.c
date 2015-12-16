@@ -48,10 +48,10 @@ static int BATTLE_SearchTask( void );
 static int BATTLE_Battling( int battleindex );
 
 #ifdef _Item_ReLifeAct
-	BOOL CHECK_ITEM_RELIFE( int battleindex, int toindex);
+	int CHECK_ITEM_RELIFE( int battleindex, int toindex);
 #endif
 #ifdef _LOSE_FINCH_
-	BOOL CHECK_PET_RELIFE( int battleindex, int petindex);
+	int CHECK_PET_RELIFE( int battleindex, int petindex);
 #endif
 char szAllBattleString[BATTLE_STRING_MAX];
 #ifdef _OTHER_MAGICSTAUTS
@@ -564,7 +564,7 @@ void BATTLE_MultiListDead( int battleindex, int toNo, int ToList[] )
 		}
 }
 
-BOOL BATTLE_IsThrowWepon( int itemindex){
+int BATTLE_IsThrowWepon( int itemindex){
 	int itemtype;
 	if( ITEM_CHECKINDEX( itemindex ) == FALSE ){
 		return FALSE;
@@ -597,7 +597,7 @@ int BATTLE_ClearGetExp( int charaindex )
 	return 0;
 }
 
-INLINE void _BATTLE_ExitAll( char *file, int line, int battleindex)
+void _BATTLE_ExitAll( char *file, int line, int battleindex)
 {
 	int j,i, charaindex;
 	for( j = 0; j < 2; j ++ ){
@@ -624,7 +624,7 @@ void BATTLE_AllCharaFinishSet( int battleindex )
 	}
 }
 
-BOOL BATTLE_IsCharge( int charaindex )
+int BATTLE_IsCharge( int charaindex )
 {
 	int com;
 	com = CHAR_getWorkInt( charaindex, CHAR_WORKBATTLECOM1 );
@@ -694,7 +694,7 @@ void BATTLE_SurpriseSet(
 
 }
 
-BOOL BATTLE_initBattleArray(
+int BATTLE_initBattleArray(
 	int battlenum
 )
 {
@@ -1069,7 +1069,7 @@ int BATTLE_NewEntry(
 	return 0;
 }
 
-INLINE int _BATTLE_Exit( char *file, int line, int charaindex ,int battleindex)
+int _BATTLE_Exit( char *file, int line, int charaindex ,int battleindex)
 {
 	BATTLE_ENTRY  *pEntry;
 	int i, j, k;
@@ -1441,7 +1441,7 @@ int BATTLE_RescueEntry(	int charaindex, int toindex	)
 	return iRet;
 }
 
-BOOL BATTLE_RescueTry( int charaindex)
+int BATTLE_RescueTry( int charaindex)
 {
     int     x,y;
     OBJECT  object;
@@ -1552,7 +1552,7 @@ BOOL BATTLE_RescueTry( int charaindex)
 
 
 
-BOOL BATTLE_RescueParentTry( int charaindex, int pindex)
+int BATTLE_RescueParentTry( int charaindex, int pindex)
 {
     int     result = FALSE;
     if( CHAR_getFlg( charaindex, CHAR_ISDIE)) return FALSE;
@@ -1787,7 +1787,7 @@ int BATTLE_WatchEntry(
 
 
 
-BOOL BATTLE_WatchTry( int charaindex )
+int BATTLE_WatchTry( int charaindex )
 {
     int     x,y;
     OBJECT  object;
@@ -2802,12 +2802,12 @@ int BATTLE_CountEntry(
 	return cnt;
 }
 
-static BOOL BATTLE_CommandWait( int battleindex, int side)
+static int BATTLE_CommandWait( int battleindex, int side)
 {
 	int i, charaindex, BeOk=0;
 	BATTLE_ENTRY *pEntry;
-	BOOL iRet = TRUE;
-	BOOL TimeOut = FALSE;
+	int iRet = TRUE;
+	int TimeOut = FALSE;
 	if( BATTLE_CHECKSIDE( side ) == FALSE )return TRUE;//检查值是否在合法  围
 	if( BATTLE_CHECKINDEX( battleindex ) == FALSE )return TRUE;
 	if( BattleArray[battleindex].Side[side].type == BATTLE_S_TYPE_ENEMY ) return TRUE;
@@ -3714,7 +3714,7 @@ int BATTLE_OnlyRescue(
 	return cnt;
 }
 
-static BOOL BATTLE_TimeOutCheck( int battleindex )
+static int BATTLE_TimeOutCheck( int battleindex )
 {
 	int i, j, charaindex;
 	BATTLE			*pBattle;
@@ -3752,7 +3752,7 @@ static BOOL BATTLE_TimeOutCheck( int battleindex )
 int BATTLE_WatchWait( int battleindex )
 {
 	BATTLE *pBattle;
-	BOOL	commandflg = TRUE;
+	int	commandflg = TRUE;
 
 	if( BATTLE_CHECKINDEX( battleindex ) == FALSE )return BATTLE_ERR_BATTLEINDEX;
 	pBattle = &BattleArray[battleindex];
@@ -3797,7 +3797,7 @@ int BATTLE_WatchPre( int battleindex )
 static int BATTLE_Command( int battleindex )
 {
 	BATTLE *pBattle, *pWatchBattle;
-	BOOL	commandflg = TRUE, iFinish = FALSE;
+	int	commandflg = TRUE, iFinish = FALSE;
 	int OnlyRescue[2], i, j, charaindex;
 	if( BATTLE_CHECKINDEX( battleindex ) == FALSE )return BATTLE_ERR_BATTLEINDEX;
 	pBattle = &BattleArray[battleindex];
@@ -4183,7 +4183,7 @@ static void ComboCheck(
 //  戊件申生□扑亦件互  癫卞匹五月井民尼永弁
 //｛戚及谛互戊件示匹五月橇谪元扎卅井匀凶日 FALSE
 //
-static BOOL ComboCheck2(
+static int ComboCheck2(
 	BATTLE_CHARLIST *pEntryList,	// 巨件玄伉□伉旦玄
 	int nownum,		// 蜇箕及赐  
 	int entrynum	// 巨件玄伉□    醒
@@ -5506,7 +5506,7 @@ static int BATTLE_StatusSeq( int charaindex )
 }
 
 
-BOOL BATTLE_CanMoveCheck( int charaindex )
+int BATTLE_CanMoveCheck( int charaindex )
 {
 
 	//     
@@ -7498,7 +7498,7 @@ static int BATTLE_Battling( int battleindex )
 }
 
 #ifdef _Item_ReLifeAct
-BOOL CHECK_ITEM_RELIFE( int battleindex, int toindex)
+int CHECK_ITEM_RELIFE( int battleindex, int toindex)
 {
 	int i, itemindex;
 	CHAR_EquipPlace ep;
@@ -7535,7 +7535,7 @@ BOOL CHECK_ITEM_RELIFE( int battleindex, int toindex)
 #endif
 
 #ifdef _LOSE_FINCH_
-BOOL CHECK_PET_RELIFE( int battleindex, int petindex)
+int CHECK_PET_RELIFE( int battleindex, int petindex)
 {
 	int ReceveEffect=-1;
 	int toNo;

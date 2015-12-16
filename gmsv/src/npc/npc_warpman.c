@@ -18,16 +18,16 @@
 
 static void NPC_WarpMan_selectWindow( int meindex, int toindex, int num,int select);
 //ANDY_END
-BOOL NPC_GetDuelPointCheck(int meindex,int talker);
-BOOL NPC_PARTY_CHAECK( int meindex, int talkerindex);
+int NPC_GetDuelPointCheck(int meindex,int talker);
+int NPC_PARTY_CHAECK( int meindex, int talkerindex);
 void NPC_ERR_DiSP(int meindex,int talker,int errNO);
 
-BOOL NPC_BigSmallLastCheck(int point1,int mypoint,int flg);
+int NPC_BigSmallLastCheck(int point1,int mypoint,int flg);
 
-//BOOL NPC_ItemCheck(int meindex,int talker,int itemNo,int flg);
+//int NPC_ItemCheck(int meindex,int talker,int itemNo,int flg);
 int NPC_FloorUse(int talker,int floor);
-BOOL NPC_WarpMsg(int meindex,int talker,char *buf);
-BOOL NPC_NpcWarpMsg(int meindex,int talker,char *arg);
+int NPC_WarpMsg(int meindex,int talker,char *buf);
+int NPC_NpcWarpMsg(int meindex,int talker,char *arg);
 int NPC_FloorUseOtherFloor(int charaindex, char *buf);
 
 #define WARPMAN_STANDBY 3000
@@ -36,10 +36,10 @@ int NPC_FloorUseOtherFloor(int charaindex, char *buf);
 int CheckWarpMsg( int meindex, int talkerindex,char *npcarg ,char *TalkStr);
 
 #ifdef _TREASURE_BOX
-BOOL NPC_TreasureEventRunMsg( int meindex);
+int NPC_TreasureEventRunMsg( int meindex);
 #endif
 
-BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf);
+int NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf);
 
 enum {
 	NPC_WORK_CURRENTTIME = CHAR_NPCWORKINT1,
@@ -71,10 +71,10 @@ enum	{
 #endif
 #define TIMECHECKLOOP 20
 // Robin 0518
-//BOOL checkend = FALSE;
+//int checkend = FALSE;
 
 
-BOOL NPC_WarpManInit( int meindex )
+int NPC_WarpManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 	char buff2[256];
@@ -347,10 +347,10 @@ void NPC_WarpManWindowTalked( int meindex, int talkerindex,
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 	char buf[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 #ifdef _NEW_WARPMAN
-	BOOL checkp=TRUE;
+	int checkp=TRUE;
 	char buf1[1024];
 	int talkNo = 1;
-	BOOL tenflg=FALSE;
+	int tenflg=FALSE;
 #else
 	int fl,x,y;
 #endif
@@ -499,7 +499,7 @@ void NPC_WarpManWindowTalked( int meindex, int talkerindex,
 #endif
 }
 
-BOOL NPC_BigSmallLastCheck(int point1,int mypoint,int flg)
+int NPC_BigSmallLastCheck(int point1,int mypoint,int flg)
 {
 	if(flg==0){
 		if(point1==mypoint) {
@@ -521,7 +521,7 @@ BOOL NPC_BigSmallLastCheck(int point1,int mypoint,int flg)
 
 }
 
-BOOL NPC_GetDuelPointCheck(int meindex,int talker)
+int NPC_GetDuelPointCheck(int meindex,int talker)
 {
 
 	int fdid = getFdidFromCharaIndex( talker);
@@ -557,7 +557,7 @@ void NPC_GetDuelRank(int rank,int fdid,int objindex)
 
 }
 
-BOOL NPC_PARTY_CHAECK(int meindex,int talker)
+int NPC_PARTY_CHAECK(int meindex,int talker)
 {
 	if(CHAR_getWorkInt(talker,CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE){
 		return FALSE;
@@ -647,7 +647,7 @@ int NPC_FloorUseOtherFloor(int warp, char *buf)
 	return players;
 }
 
-BOOL NPC_WarpMsg(int meindex,int talker,char *arg)
+int NPC_WarpMsg(int meindex,int talker,char *arg)
 {
 	char buf[256];	
 	int fl=0,x=0,y=0;
@@ -720,7 +720,7 @@ static void NPC_NewWarpMan_selectWindow( int meindex, int toindex, int num,int s
 	int buttontype = 0, windowtype = 0, windowno = 0;
 	char buf[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20],buf1[256];
 	int fd = getfdFromCharaIndex( toindex);
-	BOOL tenflg =FALSE;
+	int tenflg =FALSE;
 	int talkNo=1,RunType=-1;
 
 	if(NPC_Util_GetArgStr( meindex, npcarg, sizeof(npcarg))==NULL){
@@ -846,7 +846,7 @@ int CheckWarpMsg( int meindex, int talkerindex,char *npcarg ,char *TalkStr)
   return 0;
 }
 
-BOOL NPC_NpcWarpMsg(int meindex,int talker,char *arg)
+int NPC_NpcWarpMsg(int meindex,int talker,char *arg)
 {
 	char buf[256];	
 	int fl=0,x=0,y=0;
@@ -930,7 +930,7 @@ void NPC_WarpManWatch( int meobjindex, int objindex, CHAR_ACTION act,
 }
 
 #ifdef _TREASURE_BOX
-BOOL NPC_TreasureEventRunMsg( int meindex)
+int NPC_TreasureEventRunMsg( int meindex)
 {
 	char buf[256];	
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
@@ -967,7 +967,7 @@ BOOL NPC_TreasureEventRunMsg( int meindex)
 
 #endif
 
-BOOL NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
+int NPC_TreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 {
 	char buff2[64];
 	int randitem;

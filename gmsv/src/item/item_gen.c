@@ -562,7 +562,7 @@ ITEM_merge_getPetFix( int petid, int *fixuse, int *fixatom,
  * 公及    互］宁岳葭失奶  丞卞丐匀凶日FALSE毛忒允
  */
 
-static BOOL ITEM_merge_checkitem( ITEM_Item *items, int itemsnum, int id)
+static int ITEM_merge_checkitem( ITEM_Item *items, int itemsnum, int id)
 {
 	int loop;
 	for( loop = 0; loop < itemsnum; loop ++ ) {
@@ -585,7 +585,7 @@ static int ITEM_merge_with_retry( ITEM_Item *items,int itemsnum,
 							{ 740,500,200,40,0}
 	};
 	int	endflg[5];
-	BOOL	first = TRUE;
+	int	first = TRUE;
 	int		extractcnt = 0;
 #define MAXMATCH 2048
 	int matchid[MAXMATCH];
@@ -1041,7 +1041,7 @@ int ITEM_merge_test(void)
 
 int ITEM_mergeItem_merge( int charaindex, int petid, char *data, int petindex, int alchemist)
 {
-	BOOL	result = FALSE;
+	int	result = FALSE;
 	int		i;
 	int		ret;
 	int		cnt = 0;

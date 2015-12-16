@@ -22,7 +22,7 @@ struct tagLogconf{
     char*   entry;
     char    filename[256];
     FILE*   f;
-    BOOL    append;             /* append 允月井｝踏五仇心及凶太卞SEEK_SET允月井 */
+    int    append;             /* append 允月井｝踏五仇心及凶太卞SEEK_SET允月井 */
 }LogConf[LOG_TYPE_NUM]={
     { "TALK: ", "talklog" ,"", NULL , TRUE},
     { "PROC: ", "proc" , "" , NULL , FALSE},
@@ -66,7 +66,7 @@ tagWarpCount warpCount[MAXMAPLINK];
  * 娄醒
  * 忒曰袄
  ------------------------------------------------------------*/
-static BOOL readLogConfFile( char* filename )
+static int readLogConfFile( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -91,7 +91,7 @@ static BOOL readLogConfFile( char* filename )
     while( fgets( line, sizeof( line ) ,f ) ){
         char    firstToken[256];
         int     i;
-        BOOL    ret;
+        int    ret;
 
         linenum++;
         deleteWhiteSpace(line);          /* remove whitespace    */
@@ -181,7 +181,7 @@ void printl( LOG_TYPE logtype, char* format , ... )
     }
 }
 
-BOOL initLog( char* filename )
+int initLog( char* filename )
 {
     if( readLogConfFile( filename ) == FALSE )return FALSE;
     openAllLogFile();

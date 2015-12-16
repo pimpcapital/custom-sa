@@ -91,7 +91,7 @@ static MAP_ImageData*  MAP_imagedata;
 static unsigned int    MAP_imagedatanum;
 static  int     MAP_imgfilt[65535];
 
-BOOL MAP_readMapConfFile( char* filename )
+int MAP_readMapConfFile( char* filename )
 {
     FILE*   file;
     char    line[512];
@@ -107,7 +107,7 @@ BOOL MAP_readMapConfFile( char* filename )
     }
     while( fgets( line , sizeof( line ) , file ) ){
         char    imgnum[16];
-        BOOL    ret;
+        int    ret;
         int     imgnumber;
         deleteSequentChar( line, " \t" );
         pohcd( line, " \t" );
@@ -161,7 +161,7 @@ BOOL MAP_readMapConfFile( char* filename )
         MAP_makeDefaultImageData(one);
         offset = 4 ;
         for( i = 0 ; i < MAP_DATAINT_NUM + MAP_DATACHAR_NUM ; i ++ ){
-            BOOL    ret;
+            int    ret;
             ret = getStringFromIndexWithDelim(line, " " ,i + offset, token, sizeof(token) );
             if( ret == FALSE )continue;
             switch( MAP_confentries[i].type ){
@@ -205,7 +205,7 @@ BOOL MAP_readMapConfFile( char* filename )
 }
 
 #if 1
-BOOL MAP_readBattleMapConfFile( char* filename )
+int MAP_readBattleMapConfFile( char* filename )
 {
     FILE*   file;
     char    line[512];
@@ -304,7 +304,7 @@ BOOL MAP_readBattleMapConfFile( char* filename )
 }
 #endif
 
-BOOL IsValidImagenumber( int imagenumber )
+int IsValidImagenumber( int imagenumber )
 {
     if( imagenumber < 0 || imagenumber >= arraysizeof( MAP_imgfilt ) )
         return FALSE;
@@ -323,7 +323,7 @@ int MAP_getImageInt( int imagenumber, int element )
     return MAP_imagedata[MAP_imgfilt[imagenumber]].data[element];
 }
 
-BOOL MAP_setImageInt( int imagenumber, int element, int value )
+int MAP_setImageInt( int imagenumber, int element, int value )
 {
     if( imagenumber < 0 || imagenumber >= arraysizeof( MAP_imgfilt ))
         return FALSE;
@@ -342,7 +342,7 @@ static unsigned int     MAP_mapnum_index;
 static int*             MAP_idjumptbl;
 static int              MAP_idtblsize;
 
-BOOL MAP_initMapArray( int num )
+int MAP_initMapArray( int num )
 {
     MAP_mapnum = num ;
 
@@ -371,7 +371,7 @@ void MAP_endMapArray( void )
     MAP_map = NULL;
 }
 
-static BOOL MAP_IsMapFile( char*    filename )
+static int MAP_IsMapFile( char*    filename )
 {
     FILE*   f;
     char    buf[16];
@@ -401,7 +401,7 @@ FCLOSERETURNTRUE:
     return TRUE;
 }
 
-static BOOL MAP_readMapOne( char*   filename )
+static int MAP_readMapOne( char*   filename )
 {
     FILE*   f;					/*  白央奶伙    */
     char    buf[16];            /*  穴斥永弁瓜件田□  心迕  */
@@ -417,7 +417,7 @@ static BOOL MAP_readMapOne( char*   filename )
     MAP_Objlink**   olink=NULL;
     char    showstring[32];         /*  穴永皿犯□正及域凛伞  桦赭  */
     struct  stat    filestat;       /*  民尼永弁迕卞银丹    */
-    BOOL    invaliddata=FALSE;
+    int    invaliddata=FALSE;
     if( MAP_mapnum_index >= MAP_mapnum ){
         fprint( "这里没有足够空间装载地图数组.\n" );
         return FALSE;
@@ -601,7 +601,7 @@ unsigned int MAP_getExFloor_XY( int floor, int *map_type)
 	}
 	return 0;
 }
-BOOL CHECKFLOORID( id)
+int CHECKFLOORID( id)
 {
 	int i;
 
@@ -620,7 +620,7 @@ BOOL CHECKFLOORID( id)
 #define MAX_MAP_FILES 1300 // 地图目录最大档案数
 //#define MAX_MAP_FILES 2000 // 地图目录最大档案数
 
-BOOL MAP_readMapDir( char*  dirname )
+int MAP_readMapDir( char*  dirname )
 {
     int     mapfilenum=0;
     STRING64    filenames[MAX_MAP_FILES];
@@ -680,7 +680,7 @@ BOOL MAP_readMapDir( char*  dirname )
 
 #define CHECKFLOORID(id)	if( MAP_mapnum<=(id) || (id)<0 )return (-1);
 
-INLINE int MAP_getfloorIndex( int floorid )
+int MAP_getfloorIndex( int floorid )
 {
     if( 0 <= floorid && floorid <= MAP_idtblsize  )
         return MAP_idjumptbl[floorid];
@@ -713,7 +713,7 @@ int MAP_getfloorY( int floorid )
     return MAP_map[index].ysiz;
 }
 
-BOOL MAP_checkCoordinates( int mapid, int x, int y )
+int MAP_checkCoordinates( int mapid, int x, int y )
 {
     if( MAP_getfloorIndex( mapid ) == -1 ||
         x < 0 || x > MAP_getfloorX(mapid) ||
@@ -810,7 +810,7 @@ char* MAP_getdataFromRECT( int floor, RECT* seekr, RECT* realr )
     for( i = realr->y ; i < realr->y + realr->height ; i ++ ){
         for( j = realr->x ; j < realr->x + realr->width ; j ++ ){
 			OBJECT	object;
-			BOOL	found = FALSE;
+			int	found = FALSE;
             for( object = MAP_getTopObj(floor,j,i) ; object ;
                  object = NEXT_OBJECT(object) ){
                 int o = GET_OBJINDEX(object);
@@ -899,7 +899,7 @@ char *MAP_getChecksumFromRECT( int floor, RECT* seekr, RECT* realr,
     for( i = realr->y ; i < realr->y + realr->height ; i ++ ){
         for( j = realr->x ; j < realr->x + realr->width ; j ++ ){
             OBJECT  object;
-            //BOOL found = FALSE;
+            //int found = FALSE;
             for( object = MAP_getTopObj(floor,j,i) ; object ;
                  object = NEXT_OBJECT(object) ){
                 int o = GET_OBJINDEX(object);
@@ -935,7 +935,7 @@ char *MAP_getChecksumFromRECT( int floor, RECT* seekr, RECT* realr,
     return MAP_dataString;
 }
 
-BOOL MAP_getTileAndObjData( int ff ,int fx, int fy, int* tile, int* obj)
+int MAP_getTileAndObjData( int ff ,int fx, int fy, int* tile, int* obj)
 {
     int     floorindex,xsiz;
     floorindex = MAP_getfloorIndex( ff );
@@ -960,7 +960,7 @@ BOOL MAP_getTileAndObjData( int ff ,int fx, int fy, int* tile, int* obj)
     return TRUE;
 }
 
-BOOL MAP_setTileAndObjData( int ff ,int fx, int fy, int tile, int obj)
+int MAP_setTileAndObjData( int ff ,int fx, int fy, int tile, int obj)
 {
     int     floorindex,xsiz;
     floorindex = MAP_getfloorIndex( ff );
@@ -982,7 +982,7 @@ BOOL MAP_setTileAndObjData( int ff ,int fx, int fy, int tile, int obj)
     return TRUE;
 }
 
-BOOL MAP_initReadMap( char* maptilefile , char* mapdir )
+int MAP_initReadMap( char* maptilefile , char* mapdir )
 {
     print("\n");
     if( !MAP_readMapConfFile(maptilefile) )
@@ -999,7 +999,7 @@ static int MAP_coKindAndInt[MAP_KINDNUM]=
     MAP_WALKABLE,
 };
 
-BOOL MAP_makeVariousMap(char* atile, char* aobj, int floor, int startx,
+int MAP_makeVariousMap(char* atile, char* aobj, int floor, int startx,
                         int starty, int xsiz, int ysiz, MAP_kind   kind )
 {
     int     i,j;
@@ -1033,7 +1033,7 @@ BOOL MAP_makeVariousMap(char* atile, char* aobj, int floor, int startx,
     return TRUE;
 }
 
-BOOL MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,
+int MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,
                           int xsiz, int ysiz )
 {
     int     i,j;
@@ -1065,13 +1065,13 @@ BOOL MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,
     return TRUE;
 }
 
-BOOL MAP_IsThereSpecificFloorid( int floorid )
+int MAP_IsThereSpecificFloorid( int floorid )
 {
     if( MAP_getfloorIndex(floorid)== -1)return FALSE;
     else                                return TRUE;
 }
 
-BOOL MAP_IsValidCoordinate( int floor, int x, int y )
+int MAP_IsValidCoordinate( int floor, int x, int y )
 {
     if( MAP_IsThereSpecificFloorid(floor)==FALSE )return FALSE;
     if( x < 0 || MAP_getfloorX(floor)<=x )return FALSE;
@@ -1143,7 +1143,7 @@ int MAP_attackSpecificPoint( int floor, int x, int y, int damage ,
 #endif
     return 3;
 }
-BOOL MAP_appendTailObj( int floor, int x, int y, int objindex )
+int MAP_appendTailObj( int floor, int x, int y, int objindex )
 {
     int     mapindex;
     int     xsiz;
@@ -1182,7 +1182,7 @@ BOOL MAP_appendTailObj( int floor, int x, int y, int objindex )
     return TRUE;
 }
 
-BOOL MAP_removeObj( int floor, int x, int y, int objindex )
+int MAP_removeObj( int floor, int x, int y, int objindex )
 {
     int     mapindex;
     int     xsiz;
@@ -1218,7 +1218,7 @@ BOOL MAP_removeObj( int floor, int x, int y, int objindex )
     return FALSE;
 }
 
-BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
+int _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
                   int nx, int ny )
 {
 #if 1
@@ -1341,10 +1341,10 @@ MAP_Objlink* _MAP_getTopObj( char *file, int line,int floor, int x, int y )
 #endif
 }
 
-BOOL MAP_addNewObj( int floor, int x, int y, int objindex )
+int MAP_addNewObj( int floor, int x, int y, int objindex )
 {
     OBJECT  map;
-    BOOL    ret;
+    int    ret;
 
     for( map=MAP_getTopObj(floor,x,y) ; map ; map = NEXT_OBJECT(map)) {
         if( GET_OBJINDEX(map) == objindex ) {
@@ -1383,7 +1383,7 @@ int MAP_getFloorXY( int floor, int *x, int *y)
 }
 #endif
 
-BOOL MAP_setObjData( int ff ,int fx, int fy, int obj, int objhp )
+int MAP_setObjData( int ff ,int fx, int fy, int obj, int objhp )
 {
     int     floorindex,xsiz;
 

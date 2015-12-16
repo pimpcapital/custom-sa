@@ -14,7 +14,7 @@ static void NPC_SignBoard_Window( int meindex, int toindex, int num,int select);
 
 /*********************************
 *********************************/
-BOOL NPC_SignBoardInit( int meindex )
+int NPC_SignBoardInit( int meindex )
 {
 
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];

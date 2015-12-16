@@ -121,7 +121,7 @@ static defaultCharacterGet CHAR_defaultCharacterGet[]=
     {SPR_pet011,&player,&lvplayer00,CHAR_IMAGETYPE_DOG},
 };
 
-BOOL CHAR_getDefaultChar( Char*  nc  , int imagenumber )
+int CHAR_getDefaultChar( Char*  nc  , int imagenumber )
 {
 	int     i, j;
 	int     defcharaindex;
@@ -184,7 +184,7 @@ static int CHAR_playerImageNumber[]=
     SPR_103em,SPR_104em,SPR_111em,SPR_112em,SPR_113em,SPR_114em
 };
 
-BOOL CHAR_checkPlayerImageNumber( int imagenumber)
+int CHAR_checkPlayerImageNumber( int imagenumber)
 {
 	int i;
 	for( i = 0; i < arraysizeof( CHAR_playerImageNumber); i ++  ) {
@@ -201,7 +201,7 @@ BOOL CHAR_checkPlayerImageNumber( int imagenumber)
  * CG_CHR_MAKE_FACE + (number*100) + (  缙  number * 25) + (     寞 * 5 ) + 轼  寞
  *
  ------------------------------------------------------------*/
-BOOL CHAR_checkFaceImageNumber( int imagenumber, int faceimagenumber)
+int CHAR_checkFaceImageNumber( int imagenumber, int faceimagenumber)
 {
 	int image = imagenumber - SPR_001em;
 	int number;
@@ -363,7 +363,7 @@ int                     CHAR_invareanum;
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL CHAR_initInvinciblePlace( char* filename )
+int CHAR_initInvinciblePlace( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -504,7 +504,7 @@ BOOL CHAR_initInvinciblePlace( char* filename )
     return TRUE;
 }
 
-BOOL CHAR_isInvincibleArea( int floor , int x, int y )
+int CHAR_isInvincibleArea( int floor , int x, int y )
 {
     int     i;
     for( i=0 ; i<CHAR_invareanum ; i++ )
@@ -515,7 +515,7 @@ BOOL CHAR_isInvincibleArea( int floor , int x, int y )
     return FALSE;
 }
 
-BOOL CHAR_isCannotMagicArea( int floor , int x, int y, int magicnum )
+int CHAR_isCannotMagicArea( int floor , int x, int y, int magicnum )
 {
     int     i;
     for( i=0 ; i<CHAR_invareanum ; i++ ) {
@@ -546,7 +546,7 @@ typedef struct tagCHAR_appearposition
 CHAR_appearposition*    CHAR_appear;
 int                     CHAR_appearnum;
 
-BOOL CHAR_initAppearPosition( char* filename )
+int CHAR_initAppearPosition( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -654,7 +654,7 @@ BOOL CHAR_initAppearPosition( char* filename )
     return TRUE;
 }
 
-BOOL CHAR_isAppearPosition( int floor, int *x, int *y)
+int CHAR_isAppearPosition( int floor, int *x, int *y)
 {
     int i;
     for( i = 0; i < CHAR_appearnum; i ++ ) {
@@ -667,7 +667,7 @@ BOOL CHAR_isAppearPosition( int floor, int *x, int *y)
     return( FALSE);
 }
 
-BOOL CHAR_isCannotDropArea( int floor , int x, int y )
+int CHAR_isCannotDropArea( int floor , int x, int y )
 {
     int     i;
     for( i=0 ; i<CHAR_invareanum ; i++ )
@@ -696,7 +696,7 @@ static EldersPosition elders[MAXELDERS]=
 
 };
 
-BOOL CHAR_getInitElderPosition( Char* ch,int hometown)
+int CHAR_getInitElderPosition( Char* ch,int hometown)
 {
     int     index = 0;
 	  int		point;
@@ -738,7 +738,7 @@ BOOL CHAR_getInitElderPosition( Char* ch,int hometown)
  *  岳    TRUE(1)
  *  撩    FALSE(0)
  ------------------------------------------------------------*/
-BOOL CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y )
+int CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y )
 {
 	    if( elderindex<0 || arraysizeof(elders)<=elderindex )return FALSE;
 
@@ -757,7 +757,7 @@ BOOL CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y )
  *  y       int
  * NPC及伙□民件井日银歹木月及分［
  ------------------------------------------------------------*/
-BOOL CHAR_ElderSetPosition( int elderindex ,int fl,int x ,int y)
+int CHAR_ElderSetPosition( int elderindex ,int fl,int x ,int y)
 {
     if( elderindex < ELDERINDEXSTART ||
         elderindex >= MAXELDERS ){
@@ -776,8 +776,8 @@ void CHAR_setInitValues( Char* ch )
     static int CHAR_titleindextbl[] ={ 0,1,2,3,4,5,6 };
     int     elderindex;
     int     i;
-    BOOL    magician=FALSE;
-    BOOL    priest=FALSE;
+    int    magician=FALSE;
+    int    priest=FALSE;
 
     elderindex = ch->data[CHAR_LASTTALKELDER];
     if( 0 <= elderindex
@@ -1527,7 +1527,7 @@ void CHAR_PlayerRide( int charaindex )
 #endif
 
 #ifdef _USER_EXP_CF
-BOOL LoadEXP( char* filename )
+int LoadEXP( char* filename )
 {
 	FILE* fp;
 	int i = 0;

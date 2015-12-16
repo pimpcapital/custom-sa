@@ -442,7 +442,7 @@ static int NPC_searchFunctionSet( char* name, int* unuse)
     return -1;
 }
 
-BOOL NPC_copyFunctionSetToChar( int id, Char* ch )
+int NPC_copyFunctionSetToChar( int id, Char* ch )
 {
     if( id<0 || id>=arraysizeof(functionSet) )return FALSE;
 
@@ -536,7 +536,7 @@ typedef enum
  *  valid       TRUE
  *  invalid     FALSE
  ------------------------------------------------------------*/
-INLINE int NPC_CHECKTEMPLATEINDEX(int index)
+int NPC_CHECKTEMPLATEINDEX(int index)
 {
     if(  NPC_templatenum <= index || index < 0 )return FALSE;
     return TRUE;
@@ -549,7 +549,7 @@ INLINE int NPC_CHECKTEMPLATEINDEX(int index)
  *  valid       TRUE
  *  invalid     FALSE
  ------------------------------------------------------------*/
-static INLINE int NPC_CHECKTEMPLATEINTINDEX(int index)
+static int NPC_CHECKTEMPLATEINTINDEX(int index)
 {
     if(  NPC_TEMPLATEINTNUM <= index || index < 0 )return FALSE;
     return TRUE;
@@ -562,7 +562,7 @@ static INLINE int NPC_CHECKTEMPLATEINTINDEX(int index)
  *  valid       TRUE
  *  invalid     FALSE
  ------------------------------------------------------------*/
-static INLINE int NPC_CHECKTEMPLATECHARINDEX(int index)
+static int NPC_CHECKTEMPLATECHARINDEX(int index)
 {
     if(  NPC_TEMPLATECHARNUM <= index || index < 0 )return FALSE;
     return TRUE;
@@ -575,7 +575,7 @@ static INLINE int NPC_CHECKTEMPLATECHARINDEX(int index)
  *  filenum    int      白央奶伙醒
  * 忒曰袄
  ------------------------------------------------------------*/
-BOOL NPC_initTemplateArray( int templatenum )
+int NPC_initTemplateArray( int templatenum )
 {
     NPC_templatenum = templatenum;
     NPC_template = (NPC_Template*)allocateMemory( sizeof( NPC_Template ) *
@@ -622,7 +622,7 @@ void NPC_setDefaultNPCTemplate( NPC_Template*  temp )
     temp->haveitem=NULL;
 }
 
-BOOL NPC_IsNPCTemplateFile( char* filename )
+int NPC_IsNPCTemplateFile( char* filename )
 {
     FILE*   f;
     char    line1[128];
@@ -700,7 +700,7 @@ static int NPC_getRandomValue( char*  string,int* randomwidth )
  * 娄醒
  * 忒曰袄
  ------------------------------------------------------------*/
-BOOL    NPC_readTemplateFile( char* filename )
+int    NPC_readTemplateFile( char* filename )
 {
     FILE*   f;
     char    line[512];
@@ -972,7 +972,7 @@ FCLOSERETURNFALSE:
     return FALSE;
 }
 
-BOOL NPC_readNPCTemplateFiles( char* topdirectory ,int templatesize)
+int NPC_readNPCTemplateFiles( char* topdirectory ,int templatesize)
 {
     STRING64    *filenames;
     int         filenum;

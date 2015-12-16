@@ -137,7 +137,7 @@ PetRaceGraTable petracegra[27] =
 	{100891, 100892, 100893, "嘎吱拉", "哥斯哥斯", "蒙哥拉斯", 0, 0, 0, 2, 2, 2, "良好", "良好", "良好"},
 };
 #endif
-BOOL NPC_PetRaceMasterInit( int meindex )
+int NPC_PetRaceMasterInit( int meindex )
 {
 	CHAR_setInt(meindex, CHAR_LOOPINTERVAL,	PETRACEMASTER_INITPET_LOOPTIME);
 	CHAR_setInt(meindex, CHAR_WHICHTYPE, CHAR_PETRACEMASTER);

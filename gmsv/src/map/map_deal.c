@@ -21,7 +21,7 @@
  *  汹仃月      TRUE(1)
  *  汹仃卅中    FALSE(0)
  ------------------------------------------------------------*/
-BOOL MAP_walkAbleFromPoint( int ff, int fx, int fy, BOOL isfly )
+int MAP_walkAbleFromPoint( int ff, int fx, int fy, int isfly )
 {
     int map[2];
 
@@ -72,7 +72,7 @@ BOOL MAP_walkAbleFromPoint( int ff, int fx, int fy, BOOL isfly )
  *  汹中化方中      TRUE(1)
  *  汹中化反母丢    FALSE(0)
  ------------------------------------------------------------*/
-BOOL MAP_walkAble( int index,int ff, int fx, int fy)
+int MAP_walkAble( int index,int ff, int fx, int fy)
 {
     /*      平乓仿卅日OK    */
     if( CHAR_getFlg( index, CHAR_ISTRANSPARENT ) )      return TRUE;
@@ -99,7 +99,7 @@ BOOL MAP_walkAble( int index,int ff, int fx, int fy)
  *  嫖今互丐月  TRUE
  *  嫖今互卅中  FALSE
  ------------------------------------------------------------*/
-BOOL MAP_haveHeight( int fl, int x, int y )
+int MAP_haveHeight( int fl, int x, int y )
 {
     int     map[2];
 
@@ -114,10 +114,10 @@ BOOL MAP_haveHeight( int fl, int x, int y )
  * Map 奶矛件玄及 pre post毛质  允月
  * 娄醒
  *  index       int     昙欠丹午仄化中月平乓仿及奶件犯永弁旦
- *  mode        BOOL    TRUE及凛反｝in  FALSE及凛反 out 卞覆杀
+ *  mode        int    TRUE及凛反｝in  FALSE及凛反 out 卞覆杀
  * 忒曰袄卅仄
  ------------------------------------------------------------*/
-static void MAP_dealprepostevent( int index, BOOL mode )
+static void MAP_dealprepostevent( int index, int mode )
 {
     int     map[2];
     int     i;
@@ -189,7 +189,7 @@ void MAP_postovered( int index )
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  ----------------------------------------*/
-BOOL MAP_sendArroundCharNeedFD( int fd,int charaindex )
+int MAP_sendArroundCharNeedFD( int fd,int charaindex )
 {
     char*   stringdata;
     int     x=CHAR_getInt(charaindex,CHAR_X);
@@ -238,7 +238,7 @@ BOOL MAP_sendArroundCharNeedFD( int fd,int charaindex )
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  ----------------------------------------*/
-BOOL MAP_sendArroundChar(int charaindex)
+int MAP_sendArroundChar(int charaindex)
 {
     int fd;
     fd = getfdFromCharaIndex( charaindex );

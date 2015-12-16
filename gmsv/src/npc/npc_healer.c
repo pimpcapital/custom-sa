@@ -15,7 +15,7 @@
 #define RANGE 2
 void NPC_HealerSpeak( int index, int talker);
 void NPC_HealerAllHeal( int talker );
-BOOL NPC_MoneyCheck(int meindex,int talker);
+int NPC_MoneyCheck(int meindex,int talker);
 int NPC_CostCheck(int talker);
 void NPC_CharCheckPoint(int meindex,int talker);
 int NPC_WorkInput(int meindex,int talker);
@@ -24,7 +24,7 @@ int NPC_WorkInput(int meindex,int talker);
 /**********************************
 赓渝祭
 ************************************/
-BOOL NPC_HealerInit( int meindex )
+int NPC_HealerInit( int meindex )
 {
 	//正奶皿毛甲□仿□卞涩烂
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEHEALER );

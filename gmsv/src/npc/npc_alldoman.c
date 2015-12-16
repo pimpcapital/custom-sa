@@ -216,7 +216,7 @@ static void NPC_Alldoman_selectWindow( int meindex, int talker, int num, char *d
 }
 
 static int loadherolist = 0;
-BOOL NPC_AlldomanInit( int meindex )
+int NPC_AlldomanInit( int meindex )
 {
 	if( loadherolist == 0){
 		loadherolist = 1;

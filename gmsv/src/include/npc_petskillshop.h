@@ -3,7 +3,7 @@
 
 void NPC_PetSkillShopTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_PetSkillShopInit( int meindex );
+int NPC_PetSkillShopInit( int meindex );
 void NPC_PetSkillShopWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 void NPC_PetSkillShopLooked( int meindex , int lookedindex);
 

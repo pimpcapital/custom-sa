@@ -3,8 +3,8 @@
 
 #define		ENCOUNT_GROUPMAXNUM		10
 
-BOOL ENCOUNT_initEncount( char* filename );
-BOOL ENCOUNT_reinitEncount( void );
+int ENCOUNT_initEncount( char* filename );
+int ENCOUNT_reinitEncount( void );
 int ENCOUNT_getEncountAreaArray( int floor, int x, int y);
 int ENCOUNT_getEncountPercentMin( int charaindex, int floor , int x, int y );
 int ENCOUNT_getEncountPercentMax( int charaindex, int floor , int x, int y );

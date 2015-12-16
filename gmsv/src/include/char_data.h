@@ -28,7 +28,7 @@ typedef struct tagLevelUpPattern
 }LevelUpPattern;
 
 /*====================赓渝袄｝伊皮伙失永皿楮溢====================*/
-BOOL CHAR_getDefaultChar( Char*  nc, int imagenumber );
+int CHAR_getDefaultChar( Char*  nc, int imagenumber );
 
 /*====================隶    ｝  飓  寞赘尹楮溢====================*/
 int CHAR_getNewImagenumberFromEquip( int basebaseimagenumber,
@@ -40,8 +40,8 @@ int CHAR_seekGraphicNumberFromString( char* string );
 
 
 /*====================平乓仿及赓渝袄楮溢====================*/
-BOOL CHAR_getInitElderPosition( Char* ch,int hometown);
-BOOL CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y );
+int CHAR_getInitElderPosition( Char* ch,int hometown);
+int CHAR_getElderPosition( int elderindex, int* fl, int* x, int* y );
 
 void CHAR_setInitValues( Char* ch );
 
@@ -55,16 +55,16 @@ typedef enum
 	CHAR_AREAKIND_NONE,
 }CHAR_AREAKIND;
 
-BOOL CHAR_initInvinciblePlace( char* filename );
-BOOL CHAR_isCannotMagicArea( int floor , int x, int y, int magicnum );
-BOOL CHAR_initAppearPosition( char* filename );
-BOOL CHAR_isInvincibleArea( int floor , int x, int y );
-BOOL CHAR_isAppearPosition( int floor, int *x, int *y);
-BOOL CHAR_isCannotDropArea( int floor , int x, int y );
+int CHAR_initInvinciblePlace( char* filename );
+int CHAR_isCannotMagicArea( int floor , int x, int y, int magicnum );
+int CHAR_initAppearPosition( char* filename );
+int CHAR_isInvincibleArea( int floor , int x, int y );
+int CHAR_isAppearPosition( int floor, int *x, int *y);
+int CHAR_isCannotDropArea( int floor , int x, int y );
 
 
 /* 赢  楮溢 */
-BOOL CHAR_ElderSetPosition( int elderindex ,int fl,int x ,int y);
+int CHAR_ElderSetPosition( int elderindex ,int fl,int x ,int y);
 
 
 
@@ -81,8 +81,8 @@ int CHAR_LevelUpCheck( int charaindex , int toindex);
 
 int CHAR_PetLevelUp( int petindex );
 
-BOOL CHAR_checkFaceImageNumber( int imagenumber, int faceimagenumber);
-BOOL CHAR_checkPlayerImageNumber( int imagenumber);
+int CHAR_checkFaceImageNumber( int imagenumber, int faceimagenumber);
+int CHAR_checkPlayerImageNumber( int imagenumber);
 
 int CHAR_PetTakeLevelUp( int petindex, int lv);	//强制宠物升级
 int CHAR_PetTakeDrop( int petindex, int floor, int ox, int oy);	//强制丢弃宠物升级
@@ -111,6 +111,6 @@ void CHAR_ReMetamo( int charaindex );
 void CHAR_PlayerRide( int charaindex );
 #endif 
 #ifdef _USER_EXP_CF
-BOOL LoadEXP( char* filename );
+int LoadEXP( char* filename );
 #endif 
 #endif 

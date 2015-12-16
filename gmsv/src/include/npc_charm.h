@@ -3,7 +3,7 @@
 
 void NPC_CharmTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_CharmInit( int meindex );
+int NPC_CharmInit( int meindex );
 void NPC_CharmWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 void NPC_CharmLooked( int meindex , int lookedindex);
 

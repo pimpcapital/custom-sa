@@ -181,12 +181,12 @@ static int _PET_dropPet( int charaindex, int havepetindex, int tofl, int tox, in
  *  floor           int         白夫失ID
  *  x               int         x甄  
  *  y               int         y甄  
- *  net             BOOL        生永玄伐□弁及仇午毛允月井升丹井
+ *  net             int        生永玄伐□弁及仇午毛允月井升丹井
  * 忒曰袄
  *  岳      objindex
  *  撩      -1
  ------------------------------------------------------------*/
-int PET_dropPetAbsolute( int petindex, int floor, int x, int y,BOOL net)
+int PET_dropPetAbsolute( int petindex, int floor, int x, int y,int net)
 {
     Object object;
     int objindex;
@@ -209,7 +209,7 @@ int PET_dropPetAbsolute( int petindex, int floor, int x, int y,BOOL net)
     return objindex;
 }
 
-BOOL PET_isPutPoint( int fl,int x, int y)
+int PET_isPutPoint( int fl,int x, int y)
 {
     OBJECT  object;
     if( MAP_walkAbleFromPoint( fl,x,y, FALSE ) == FALSE )
@@ -377,7 +377,7 @@ int PET_createPetFromCharaIndex( int charaindex, int enemyindex)
     return newindex;
 
 }
-BOOL PET_SelectBattleEntryPet( int charaindex, int petarray)
+int PET_SelectBattleEntryPet( int charaindex, int petarray)
 {
 	int		pindex;
 	/* 爵    反轮仁   仿弘匹仇木卞娄匀井井月第  岭丐曰  */
@@ -500,7 +500,7 @@ int PET_dropPetFollow( int charaindex, int havepetindex, int tofl, int tox, int 
 }
 #endif
 
-BOOL PET_getBaseForAllocpoint( int toindex, int *work)
+int PET_getBaseForAllocpoint( int toindex, int *work)
 {
 	int LevelUpPoint=0;
 	if( CHAR_getInt( toindex, CHAR_WHICHTYPE) != CHAR_TYPEPET)
@@ -552,7 +552,7 @@ void PET_showEditBaseMsg( int charaindex, int toindex, int itemindex, int *work)
 	}
 }
 
-BOOL CHAR_DelPetForIndex( int charaindex, int petindex)
+int CHAR_DelPetForIndex( int charaindex, int petindex)
 {
 	int i;
 	for( i=0; i<CHAR_MAXPETHAVE; i++)	{

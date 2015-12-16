@@ -1,7 +1,7 @@
 #ifndef __NPC_MANORSMAN_H__
 #define __NPC_MANORSMAN_H__
 #include <time.h>
-BOOL NPC_ManorSmanInit(int meindex);
+int NPC_ManorSmanInit(int meindex);
 void NPC_ManorSmanTalked(int meindex, int talkerindex, char *msg, int color);
 void NPC_ManorSmanWindowTalked(int meindex, int talkerindex,
 				 int seqno, int select, char *data);

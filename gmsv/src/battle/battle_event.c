@@ -180,7 +180,7 @@ int BATTLE_getRidePet( int charaindex )
 float BATTLE_adjustRidePet3A( int charaindex, int petindex, int workindex, int action )
 {
 	float	ret = CHAR_getWorkInt( charaindex, workindex );
-	BOOL	throwweapon = BATTLE_IsThrowWepon(CHAR_getItemIndex( charaindex, CHAR_ARM ) );
+	int	throwweapon = BATTLE_IsThrowWepon(CHAR_getItemIndex( charaindex, CHAR_ARM ) );
 	
 	switch( workindex )	{
 	case CHAR_WORKATTACKPOWER : // 攻击力
@@ -664,7 +664,7 @@ static int BATTLE_ItemCrushSeq( int charaindex )
 #endif
 
 //回避判定
-static BOOL BATTLE_DuckCheck(
+static int BATTLE_DuckCheck(
 	int attackindex,
 	int defindex
 )
@@ -1487,7 +1487,7 @@ static int BATTLE_AttackSeq( int attackindex, int defindex, int *pDamage, int *p
 }
 
 #ifdef _PETSKILL_SETDUCK
-BOOL BATTLE_CheckMySkillDuck( int charaindex )
+int BATTLE_CheckMySkillDuck( int charaindex )
 {
 	int SDuck=0,rad=0;
 	if( !CHAR_CHECKINDEX( charaindex) )
@@ -2228,7 +2228,7 @@ int BATTLE_Attack( int battleindex, int attackNo, int defNo )
 	int damage = 0, petdamage = 0, attackindex, toindex, ultimate = 0,
 		defindex, react = 0, statusDefNo, opt = 0;
 	int flg = 0, iWork, par, perStatus, i, DefSide = 0, Guardian = -1;
-	BOOL iRet = TRUE;
+	int iRet = TRUE;
 	int suitpoison=30;//基本中毒%
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
@@ -2495,7 +2495,7 @@ int BATTLE_Attack_FIREKILL( int battleindex, int attackNo, int defNo )
 	int damage = 0, petdamage = 0, attackindex, toindex, ultimate = 0,
 		defindex, react = 0, statusDefNo, opt = 0;
 	int flg = 0, iWork, par, perStatus, i, DefSide = 0, Guardian = -1;
-	BOOL iRet = TRUE;
+	int iRet = TRUE;
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
 	defindex = toindex = BATTLE_No2Index( battleindex, defNo );
@@ -2775,7 +2775,7 @@ static int BATTLE_ItemType2ItemMap( int type ){
 	return iRet;
 }
 
-static BOOL BATTLE_CounterCheckPlayer( int attackindex, int defindex, int *pPar )
+static int BATTLE_CounterCheckPlayer( int attackindex, int defindex, int *pPar )
 {
 	int
 		At_SoubiIndex, At_SoubiType,
@@ -2847,7 +2847,7 @@ static BOOL BATTLE_CounterCheckPlayer( int attackindex, int defindex, int *pPar 
 }
 
 
-static BOOL BATTLE_CounterCheckPet( int attackindex, int defindex, int *pPer )
+static int BATTLE_CounterCheckPet( int attackindex, int defindex, int *pPer )
 {
 	int	At_SoubiIndex;
 	int flg = FALSE, Df_SoubiIndex, iWork;
@@ -2895,7 +2895,7 @@ static BOOL BATTLE_CounterCheckPet( int attackindex, int defindex, int *pPer )
 	return flg;
 }
 
-static BOOL BATTLE_CounterCheck( int attackindex, int defindex, int *pPar )
+static int BATTLE_CounterCheck( int attackindex, int defindex, int *pPar )
 {
 	if( CHAR_getInt( attackindex, CHAR_WHICHTYPE ) == CHAR_TYPEPLAYER ){
 		return BATTLE_CounterCheckPlayer( attackindex, defindex, pPar );
@@ -2907,14 +2907,14 @@ static BOOL BATTLE_CounterCheck( int attackindex, int defindex, int *pPar )
 
 
 //反击判定
-BOOL BATTLE_Counter( int battleindex, int attackNo, int defNo )
+int BATTLE_Counter( int battleindex, int attackNo, int defNo )
 {
 
 	char szBuffer[512]="";
 	char szCommand[1024];
 	int damage = 0, petdamage = 0, attackindex, defindex, Guardian = -2, react = 0, ultimate = 0;
 	int flg = 0, iWork, par, DefSide = 0, i, per = 0;
-	BOOL	iRet = TRUE;
+	int	iRet = TRUE;
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
 	defindex = BATTLE_No2Index( battleindex, defNo );
@@ -3088,7 +3088,7 @@ BOOL BATTLE_Counter( int battleindex, int attackNo, int defNo )
 }
 
 
-static BOOL BATTLE_CaptureCheck(
+static int BATTLE_CaptureCheck(
 	int attackindex, 
 	int defindex, 
 	float *pPer
@@ -3248,7 +3248,7 @@ static int IsNeedCaptureItem( int charaindex )
 	return -1;
 }
 
-BOOL BATTLE_CaptureItemCheck( int attackindex, int defindex )
+int BATTLE_CaptureItemCheck( int attackindex, int defindex )
 {
 #ifdef _CAPTURE_FREES
 	int i;
@@ -3285,7 +3285,7 @@ BOOL BATTLE_CaptureItemCheck( int attackindex, int defindex )
 }
 
 #ifdef _CAPTURE_FREES
-BOOL BATTLE_CaptureItemDelAll( int attackindex, int defindex )
+int BATTLE_CaptureItemDelAll( int attackindex, int defindex )
 {
 	int i, j, itemindex=-1,ti;
 
@@ -3333,7 +3333,7 @@ BOOL BATTLE_CaptureItemDelAll( int attackindex, int defindex )
 
 #endif
 
-BOOL BATTLE_Capture(
+int BATTLE_Capture(
 	int battleindex,
 	int attackNo,
 	int defNo
@@ -3477,7 +3477,7 @@ void BATTLE_Guard(
 
 }
 
-BOOL BATTLE_EscapeCheck( int attackindex, int attackNo, int *pPar )
+int BATTLE_EscapeCheck( int attackindex, int attackNo, int *pPar )
 {
 	int Esc = 100;
 
@@ -3566,7 +3566,7 @@ BOOL BATTLE_EscapeCheck( int attackindex, int attackNo, int *pPar )
 }
 
 
-BOOL BATTLE_Escape( int battleindex, int attackNo, int flag)
+int BATTLE_Escape( int battleindex, int attackNo, int flag)
 {
 	//char szBuffer[512]="";
 	char szCommand[1024];
@@ -3823,7 +3823,7 @@ int BATTLE_S_GBreak( int battleindex, int attackNo, int defNo )
 	int flg = 0, iWork, par, i, DefSide = 0,
 		react = 0,
 		Guardian = -1;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
 	defindex = BATTLE_No2Index( battleindex, defNo );
@@ -3993,7 +3993,7 @@ int BATTLE_S_Sacrifice( int battleindex, int attackNo, int defNo )
 {
 	int attackindex, defindex = 0;
 	int DefSide ,Damage= 0;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	char szCommand[256];
 	int ToList[SIDE_OFFSET*2+1];
 
@@ -4024,7 +4024,7 @@ int BATTLE_S_Sacrifice( int battleindex, int attackNo, int defNo )
 #ifdef _SKILL_REFRESH   
 int BATTLE_S_Refresh( int battleindex, int attackNo, int defNo, int marray )
 {
-    BOOL iRet = FALSE;
+    int iRet = FALSE;
 	char *magicarg;
 	int status = -1, i,charaindex;
 	int  ReceveEffect= 0;
@@ -4061,11 +4061,11 @@ int BATTLE_S_Refresh( int battleindex, int attackNo, int defNo, int marray )
 int BATTLE_S_Roar( int battleindex, int attackNo, int defNo, int marray )
 {
 	int  masteridx=-1, index2, charaindex;
-    BOOL iRet = FALSE;
+    int iRet = FALSE;
 	char buf1[256];
 	char szWork[128];
 	int petid=-1, i=1;
-	BOOL FINDPET=FALSE;
+	int FINDPET=FALSE;
 
 	char *magicarg;
 	int flg=0;
@@ -4134,7 +4134,7 @@ int BATTLE_S_GBreak2( int battleindex, int attackNo, int defNo )
 	int flg = 0, iWork, par, i, DefSide = 0,
 		react = 0,
 		Guardian = -1;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
 	defindex = BATTLE_No2Index( battleindex, defNo );
@@ -4455,7 +4455,7 @@ int BATTLE_Combo( int battleindex, int *pAttackList, int defNo )
 		attackNo;
 	int flg = 0, iWork, par, i, DefSide = 0,
 		Guardian = -2;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 
 	defindex = toindex = BATTLE_No2Index( battleindex, defNo );
 
@@ -4700,7 +4700,7 @@ int BATTLE_EarthRoundHide( int battleindex, int attackNo )
 
 
 
-BOOL BATTLE_LostEscape( int battleindex, int attackNo )
+int BATTLE_LostEscape( int battleindex, int attackNo )
 {
 	char szBuffer[512]="";
 	char szCommand[1024];
@@ -4764,7 +4764,7 @@ BOOL BATTLE_LostEscape( int battleindex, int attackNo )
 
 }
 
-BOOL BATTLE_Abduct(
+int BATTLE_Abduct(
 	int battleindex,
 	int attackNo,
 	int defNo,
@@ -4779,7 +4779,7 @@ BOOL BATTLE_Abduct(
 	int attackindex, defindex, per, flg, attackoyaindex, defoyaindex = -1;
 	int attacklevel, deflevel;
 	int Attacktype, Deftype;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 
 	attackindex = BATTLE_No2Index( battleindex, attackNo );
 	defindex = BATTLE_No2Index( battleindex, defNo );
@@ -5129,7 +5129,7 @@ int BATTLE_S_FallGround( int battleindex, int attackNo, int defNo, int skill_typ
 	int attackindex, defindex;
 	int damage=0, petdamage=0, i=0, iWork, Guardian=-1;
 	int flg = 0, DefSide=0,par,ultimate=0, react=0;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	attackindex = BATTLE_No2Index( battleindex, attackNo );	//攻方index
 	defindex = BATTLE_No2Index( battleindex, defNo ); //守方index
 
@@ -5298,7 +5298,7 @@ int BATTLE_S_FallGround( int battleindex, int attackNo, int defNo, int skill_typ
 int BATTLE_E_ENEMYREFILE( int battleindex, int attackNo, int defNo, int skill_type )
 {
 	int ReceveEffect;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	int attackindex, defindex, pow, toNo;
 
 	toNo=-1;
@@ -5342,7 +5342,7 @@ int BATTLE_E_ENEMYREFILE( int battleindex, int attackNo, int defNo, int skill_ty
 
 int BATTLE_E_ENEMYREHP( int battleindex, int attackNo, int defNo, int skill_type)
 {
-	BOOL iRet=FALSE;
+	int iRet=FALSE;
 	int attackindex, defindex;
 	int power = 0, per = 0, HealedEffect, toNo=-1;
 	int kind;
@@ -5391,7 +5391,7 @@ int BATTLE_E_ENEMYREHP( int battleindex, int attackNo, int defNo, int skill_type
 
 int BATTLE_E_ENEMYHELP( int battleindex, int attackNo, int defNo, int skill_type )
 {
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	int attackindex, enindex, array;
 	int Side=-1, LV, i, enemynum, PetID;
 	//char szBuffer[256]="";
@@ -5761,7 +5761,7 @@ void BATTLE_S_Modifyattack( int battleindex, int attackindex, int defindex, int 
 int BATTLE_S_PetSkillProperty( int battleindex, int attackNo, int skill_type, int skill)
 {
 	int attackindex;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	char *pszP=NULL;
 
 	pszP = PETSKILL_getChar( skill, PETSKILL_OPTION );
@@ -5795,7 +5795,7 @@ int BATTLE_S_AttackDamage( int battleindex, int attackNo, int defNo, int skill_t
 	int damage=0, petdamage=0, i=0, iWork, Guardian=-1,react;
 	int flg = 0, DefSide=0,ultimate=0;
 	int otherdamage=0;
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	int ReactType = 0;
 
 	char *pszP=NULL;
@@ -6342,7 +6342,7 @@ int BATTLE_S_Weaken(
 	int marray
 )
 { 
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	char *magicarg;
 	int status = -1, i,  turn = 3;
 	int  ReceveEffect, Success = 0;
@@ -6391,9 +6391,9 @@ int BATTLE_S_Weaken(
 #endif
 
 #ifdef _PETSKILL_TEMPTATION
-BOOL BATTLE_S_Temptation(	int battleindex,int attackNo,int defNo,	int skill )
+int BATTLE_S_Temptation(	int battleindex,int attackNo,int defNo,	int skill )
 {
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	char *magicarg;
 	char szWork[256];
 	int  attackindex,defindex,defside,flg=0,img2,img1;
@@ -6439,7 +6439,7 @@ BOOL BATTLE_S_Temptation(	int battleindex,int attackNo,int defNo,	int skill )
 #ifdef _SKILL_DEEPPOISON  //vincent宠技:剧毒  
 int BATTLE_S_Deeppoison( int battleindex, int attackNo, int defNo, int marray )
 {   
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	char *magicarg;
 	int status = -1, i,  turn = 3;
 	int  ReceveEffect, Success = 0;
@@ -6496,7 +6496,7 @@ int BATTLE_S_Barrier(
 	int marray
 )
 {   
-	BOOL iRet = FALSE;
+	int iRet = FALSE;
 	int battlemode;
 	int i,turn,perStatus,charaindex,toindex;
 	int ToList[SIDE_OFFSET*2+1];

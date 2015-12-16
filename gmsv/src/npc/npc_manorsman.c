@@ -56,7 +56,7 @@ int NPC_getManorsmanListIndex( int ID)
 	}
 	return -1;
 }
-BOOL NPC_ManorSmanInit( int meindex )
+int NPC_ManorSmanInit( int meindex )
 {
   char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
   int meid;

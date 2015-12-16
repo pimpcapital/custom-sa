@@ -940,7 +940,7 @@ void BATTLE_MultiAttMagic( int battleindex, int attackNo, int toNo , int attIdx,
 	char msgbuf[64];
 	char kind[4][3] = {"地","水","火","风"};
 #else
-	BOOL TrueMagic=FALSE;
+	int TrueMagic=FALSE;
 #endif
 
     // terry 
@@ -3294,7 +3294,7 @@ void BATTLE_MultiAttMagic_Fire( int battleindex, int attackNo, int defNo,
 	char msgbuf[64];
 	char kind[4][3] = {"地","水","火","风"};
 #else
-	BOOL TrueMagic=FALSE;
+	int TrueMagic=FALSE;
 #endif
 	int f_num=0;
 	int MagicLv=4;

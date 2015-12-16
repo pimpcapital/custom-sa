@@ -811,7 +811,7 @@ void Load_PetSkillCodes( void)
 #endif
 
 #ifdef _GMRELOAD
-BOOL LoadGMSet( char* filename )
+int LoadGMSet( char* filename )
 {
 	FILE* fp;
 	int i = 0, gm_num = 0;
@@ -1864,7 +1864,7 @@ void substitutePointerFromType( void* to , CTYPE type ,double value)
  *      TRUE(1)     岳  
  *      FALSE(0)    撩      -> 白央奶伙及左□皿件卞撩  仄凶
  ------------------------------------------------------------*/
-BOOL readconfigfile( char* filename )
+int readconfigfile( char* filename )
 {
     FILE* f=NULL;
     char linebuf[256];                  /* 域垫  心  戈田永白央 */

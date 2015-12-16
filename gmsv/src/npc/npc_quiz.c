@@ -44,23 +44,23 @@ static int quizcnt = 0;
 
 static void NPC_Quiz_selectWindow( int meindex, int talker, int num);
 int *NPC_GetQuestion(int meindex);
-BOOL NPC_QuizItemFullCheck(int meindex, int talker);
-BOOL NPC_PlayerCheck(int meindex,int talker);
+int NPC_QuizItemFullCheck(int meindex, int talker);
+int NPC_PlayerCheck(int meindex,int talker);
 int NPC_RealyCheack(int meindex,int talker);
 int NPC_QuizRandAnswer(int p_no,int q_no, int mode,
 						char *work1,char *work2,char *work3);
 int NPC_QuizBorderLine(int ans, char *buf);
 int NPC_QuizWarpBorderLine(int ans, char *buf);
 
-BOOL NPC_QuizAddItem(int talker,char *buf);
+int NPC_QuizAddItem(int talker,char *buf);
 
-BOOL NPC_EntryItemDel(int talker,char *buf);
-BOOL NPC_EntryItemCheck(int talker,char *buf);
-BOOL NPC_EntryStoneDel(int talker,char *buf);
-BOOL NPC_EntryStoneCheck(int talker,char *buf);
-BOOL NPC_QUIZPARTY_CHAECK(int meindex,int talker);
+int NPC_EntryItemDel(int talker,char *buf);
+int NPC_EntryItemCheck(int talker,char *buf);
+int NPC_EntryStoneDel(int talker,char *buf);
+int NPC_EntryStoneCheck(int talker,char *buf);
+int NPC_QUIZPARTY_CHAECK(int meindex,int talker);
 
-BOOL NPC_QuizInit( int meindex )
+int NPC_QuizInit( int meindex )
 {
 
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -140,7 +140,7 @@ static void NPC_Quiz_selectWindow( int meindex, int talker, int num)
 	int p_old;
 	int loop=0;
 	int ans;
-	BOOL entryflg = TRUE;
+	int entryflg = TRUE;
 	switch( num) {
 	  case 0:
 		if(NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr)) == NULL){
@@ -595,7 +595,7 @@ int NPC_QuizWarpBorderLine(int ans ,char *buf)
 
 /*
  */
-BOOL NPC_QuizAddItem(int talker,char *buf)
+int NPC_QuizAddItem(int talker,char *buf)
 {
 	int i=1;
 	int ret;
@@ -786,7 +786,7 @@ int  NPC_QuizRandAnswer(int p_no,int q_no, int mode,
 }
 
 
-BOOL NPC_PlayerCheck(int meindex,int talker)
+int NPC_PlayerCheck(int meindex,int talker)
 	{
 	int i;
 	int k=0;
@@ -850,7 +850,7 @@ int NPC_RealyCheack(int meindex,int talker)
 	
 	OBJECT object;
 	int talkerindex;
-	BOOL okflg = FALSE;
+	int okflg = FALSE;
 	struct pl PLAYER;
 	int *pl_ptr;
 	int point;
@@ -904,7 +904,7 @@ int NPC_RealyCheack(int meindex,int talker)
 	return -1;
 }
 
-BOOL QUIZ_initQuiz( char *filename)
+int QUIZ_initQuiz( char *filename)
 {
 
     FILE*	f;
@@ -1074,7 +1074,7 @@ int *NPC_GetQuestion(int meindex)
 	}
 }
 
-BOOL NPC_QuizItemFullCheck(int meindex,int talker)
+int NPC_QuizItemFullCheck(int meindex,int talker)
 {
 	int i;
 	int itemindex;
@@ -1114,7 +1114,7 @@ BOOL NPC_QuizItemFullCheck(int meindex,int talker)
 /*
  *云嗯及民尼永弁
  */
-BOOL NPC_EntryStoneCheck(int talker,char *buf)
+int NPC_EntryStoneCheck(int talker,char *buf)
 {
 	int stone;
 	int cost;
@@ -1132,7 +1132,7 @@ BOOL NPC_EntryStoneCheck(int talker,char *buf)
 /*
  *云嗯及绰轮
  */
-BOOL NPC_EntryStoneDel(int talker,char *buf)
+int NPC_EntryStoneDel(int talker,char *buf)
 {
 	int stone;
 	int cost;
@@ -1157,7 +1157,7 @@ BOOL NPC_EntryStoneDel(int talker,char *buf)
 
 /*
  */
-BOOL NPC_EntryItemDel(int talker,char *buf)
+int NPC_EntryItemDel(int talker,char *buf)
 {
 
 	int i = 1, j = 1,k = 1;
@@ -1241,13 +1241,13 @@ BOOL NPC_EntryItemDel(int talker,char *buf)
 
 /*
  */
-BOOL NPC_EntryItemCheck(int talker,char *buf)
+int NPC_EntryItemCheck(int talker,char *buf)
 {
 
 	char buf2[512];
 	char buf3[256];
 	int id=0;
-	BOOL flg = FALSE;
+	int flg = FALSE;
 	int i;
 	int itemindex;
 	int itemno;
@@ -1312,7 +1312,7 @@ BOOL NPC_EntryItemCheck(int talker,char *buf)
 
 /*
  */
-BOOL NPC_QUIZPARTY_CHAECK(int meindex,int talker)
+int NPC_QUIZPARTY_CHAECK(int meindex,int talker)
 {
 
 	if(CHAR_getWorkInt(talker,CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE){

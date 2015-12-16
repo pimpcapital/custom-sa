@@ -27,7 +27,7 @@
 #include "family.h" // CoolFish: Family 2001/5/24
 #include "item_event.h" // shan: blackmarket
 
-BOOL checkStringErr( char * );
+int checkStringErr( char * );
 
 // shan add
 extern struct FM_PKFLOOR fmpkflnum[FAMILY_FMPKFLOOR];
@@ -200,7 +200,7 @@ void lssproto_CharLogin_recv( int fd,char* charname )
 }
 
 #ifdef _ITEM_CHECKDROPATLOGOUT
-BOOL CheckDropatLogout(int charaindex )
+int CheckDropatLogout(int charaindex )
 {
 	int i;
 	for( i=0 ; i<CHAR_MAXITEMHAVE ; i++ ){
@@ -878,7 +878,7 @@ void lssproto_DU_recv( int fd , int x,int y )
 		int		ret = FALSE, charaindex = -1, enemyindex;
 		int		frontx,fronty;
     int		cnt = 0;
-    BOOL	found = FALSE;
+    int	found = FALSE;
     CHECKFDANDTIME;
     fd_charaindex = CONNECT_getCharaindex( fd );
     {//ttom avoid warp at will
@@ -1608,7 +1608,7 @@ void lssproto_PS_recv( int fd, int havepetindex, int havepetskill, int toindex, 
     int to_charaindex = Callfromcli_Util_getTargetCharaindex( fd, toindex);
 	int charaindex = CONNECT_getCharaindex( fd );
 	int	petindex;
-	BOOL	ret;
+	int	ret;
 	petindex = CHAR_getCharPet( charaindex, havepetindex);
 	if( !CHAR_CHECKINDEX( petindex)) return;
 	
@@ -1731,7 +1731,7 @@ void lssproto_MA_recv(int fd, int x, int y, int nMind)
 	return;
 }
 #endif
-BOOL checkStringErr( char *checkstring )
+int checkStringErr( char *checkstring )
 {
         int i,ach;
         for (i=0,ach=0;i<strlen(checkstring);i++) {

@@ -11,7 +11,7 @@
 
 /* hoge */
 
-BOOL NPC_OldmanInit( int meindex )
+int NPC_OldmanInit( int meindex )
 {
 	return FALSE;
 

@@ -17,7 +17,7 @@
 
 static void NPC_GambleBank_selectWindow( int meindex, int toindex, int num, int flg);
 int NPC_GambleBank_DoGold( int meindex, int toindex, int Gold, int flg);
-BOOL NPC_GambleBank_AddItem( int meindex, int toindex, int itemId, int count);
+int NPC_GambleBank_AddItem( int meindex, int toindex, int itemId, int count);
 
 enum	{
 	GAMBLE_START = 0,
@@ -53,7 +53,7 @@ enum {
 #define GAMBLEBANK_GETMAX	1000000
 #define GAMBLEBANK_GETMIN	100
 #define LIST_PAGE 7
-BOOL NPC_GambleBankInit( int meindex )
+int NPC_GambleBankInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf1[256];
@@ -453,7 +453,7 @@ int NPC_GambleBank_DoGold( int meindex, int toindex, int Gold, int flg)
 	return 0;
 }
 
-BOOL NPC_GambleBank_AddItem( int meindex, int toindex, int itemId, int count)
+int NPC_GambleBank_AddItem( int meindex, int toindex, int itemId, int count)
 {
 	int i=-1,itemindex=-1;
 	int ret=-1;

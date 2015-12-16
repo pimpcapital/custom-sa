@@ -49,11 +49,11 @@ extern void BATTLE_changeRideImage( int index );
 
 #define MAXNPCPOINT 10
 
-BOOL ActionNpc_WarpPoint(int meindex,int talker,char *npcarg)
+int ActionNpc_WarpPoint(int meindex,int talker,char *npcarg)
 {
 	char data[1024], buf1[256], buf2[256];
 	int i=1, j=0;
-	BOOL EvFlg=FALSE;
+	int EvFlg=FALSE;
 
 	struct	{
 		int FLOOR;
@@ -125,7 +125,7 @@ BOOL ActionNpc_WarpPoint(int meindex,int talker,char *npcarg)
 	return EvFlg;
 }
 
-BOOL ActionNpc_CheckMenuFree( int meindex, int toindex, char *npcarg, int nums)
+int ActionNpc_CheckMenuFree( int meindex, int toindex, char *npcarg, int nums)
 {
 	char buf1[1024], buf2[256];
 	if( nums < 1 ) return FALSE;
@@ -162,7 +162,7 @@ BOOL ActionNpc_CheckMenuFree( int meindex, int toindex, char *npcarg, int nums)
 	return Action_RunDoEventAction( meindex, toindex, buf1);
 }
 
-BOOL ActionNpc_CheckFree( int meindex, int toindex, char *npcarg)
+int ActionNpc_CheckFree( int meindex, int toindex, char *npcarg)
 {
 	char buf1[1024], buf2[256];
 	if( NPC_Util_GetStrFromStrWithDelim( npcarg, "CHECKPARTY", buf1, sizeof( buf1) ) != NULL){
@@ -193,7 +193,7 @@ BOOL ActionNpc_CheckFree( int meindex, int toindex, char *npcarg)
 	return Action_RunDoEventAction( meindex, toindex, buf1);
 }
 
-BOOL Action_RunDoEventAction( int meindex, int toindex, char *buf1)
+int Action_RunDoEventAction( int meindex, int toindex, char *buf1)
 {
 	char buf2[1256];
 
@@ -426,7 +426,7 @@ BOOL Action_RunDoEventAction( int meindex, int toindex, char *buf1)
 	ActionNpc_WarpPoint( meindex, toindex, buf1);
 	return TRUE;
 }
-BOOL Action_PartyCheck( int meindex, int talker)
+int Action_PartyCheck( int meindex, int talker)
 {
 	if(CHAR_getWorkInt(talker,CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE){
 		return FALSE;
@@ -434,13 +434,13 @@ BOOL Action_PartyCheck( int meindex, int talker)
 	return TRUE;
 }
 
-BOOL NPC_ActionAddGold( int talker, int Golds)
+int NPC_ActionAddGold( int talker, int Golds)
 {
 	CHAR_AddGold( talker, Golds);
 	return TRUE;
 }
 
-BOOL NPC_ActionDelGold( int talker,char *buf)
+int NPC_ActionDelGold( int talker,char *buf)
 {
 	int Golds=0;
 	int PGold=0;
@@ -460,7 +460,7 @@ BOOL NPC_ActionDelGold( int talker,char *buf)
 	return TRUE;
 }
 #ifdef _DP_NPC
-BOOL NPC_ActionDP( int talker,char *buf)
+int NPC_ActionDP( int talker,char *buf)
 {
 	int DPs=0;
 	int PDP=0;
@@ -481,7 +481,7 @@ BOOL NPC_ActionDP( int talker,char *buf)
 }
 #endif
 // WON ADD
-BOOL NPC_ActionAddGold2( int talker,char *buf)
+int NPC_ActionAddGold2( int talker,char *buf)
 {
 	int Golds=0;
 	int PGold=0;
@@ -500,7 +500,7 @@ BOOL NPC_ActionAddGold2( int talker,char *buf)
 	return TRUE;
 }
 
-BOOL NPC_ActionDelPet( int talker, char *buf)
+int NPC_ActionDelPet( int talker, char *buf)
 {
 	int petsel;	 
 	int petindex=0, k=1;
@@ -617,7 +617,7 @@ BOOL NPC_ActionDelPet( int talker, char *buf)
 }
 
 #ifdef _NPC_NewDelPet
-BOOL NPC_ActionNewDelPet( int toindex, char *msg)
+int NPC_ActionNewDelPet( int toindex, char *msg)
 {
    		int i,petindex=0,petlev,petnum,petcount,mypetlevel,petid;
 		char buf[32],buf2[32];
@@ -672,7 +672,7 @@ BOOL NPC_ActionNewDelPet( int toindex, char *msg)
 			return FALSE;
 
 	    for( i = 0; i < CHAR_MAXPETHAVE; i ++ ){
-			BOOL cmp=FALSE;
+			int cmp=FALSE;
 			petindex = CHAR_getCharPet( toindex, i);
 			petid = CHAR_getInt( petindex, CHAR_PETID);
 			mypetlevel = CHAR_getInt( petindex, CHAR_LV);
@@ -749,7 +749,7 @@ BOOL NPC_ActionNewDelPet( int toindex, char *msg)
 }
 #endif
 
-BOOL NPC_ActionAddPet( int talker, char *buf)
+int NPC_ActionAddPet( int talker, char *buf)
 {
 	int	ret;
 	char msgbuf[64], buff3[64];
@@ -853,7 +853,7 @@ BOOL NPC_ActionAddPet( int talker, char *buf)
 	return TRUE;
 }
 
-BOOL NPC_ActionDelItem( int talker, char *buf)
+int NPC_ActionDelItem( int talker, char *buf)
 {
 	int i = 1, j = 1,k = 1;
 	char buff3[128];
@@ -956,7 +956,7 @@ BOOL NPC_ActionDelItem( int talker, char *buf)
 }
 
 #ifdef _VIP_SHOP
-BOOL NPC_ActionVipItem( int talker, char *buf)
+int NPC_ActionVipItem( int talker, char *buf)
 {
   int itemID,itemindex=-1;
   int pVipPoint, VipPoints;
@@ -1004,7 +1004,7 @@ BOOL NPC_ActionVipItem( int talker, char *buf)
 	return TRUE;	                                                                                                                                                                      
 }
 
-BOOL NPC_ActionVipPet( int talker, char *buf)
+int NPC_ActionVipPet( int talker, char *buf)
 {
 	int	ret;
 	char msgbuf[64], buf1[8], buf2[10];
@@ -1110,7 +1110,7 @@ BOOL NPC_ActionVipPet( int talker, char *buf)
 #endif
 
 #ifdef _TRANS_7_NPC
-BOOL NPC_ActionTrans7( int talker, char *buf)
+int NPC_ActionTrans7( int talker, char *buf)
 {
 	char token[128];
 	int work[10];
@@ -1148,7 +1148,7 @@ BOOL NPC_ActionTrans7( int talker, char *buf)
 }
 #endif
 
-BOOL NPC_ActionAddItem( int talker, char *buf)
+int NPC_ActionAddItem( int talker, char *buf)
 {
   int itemID,k=0,itemindex=-1;
   int spaceNum=5,i;
@@ -1194,7 +1194,7 @@ BOOL NPC_ActionAddItem( int talker, char *buf)
 	return TRUE;	                                                                                                                                                                      
 }
 
-BOOL NPC_ActionSetEend( int talkerindex, char * buf)
+int NPC_ActionSetEend( int talkerindex, char * buf)
 {
 	int eveno;
 	int talkNo=1, iflg=0;
@@ -1209,7 +1209,7 @@ BOOL NPC_ActionSetEend( int talkerindex, char * buf)
 	return TRUE;
 }
 
-BOOL NPC_ActionClearEvent( int toindex, char * buf)
+int NPC_ActionClearEvent( int toindex, char * buf)
 {
 	int eveno;
 	int talkNo=1, iflg=0;
@@ -1224,7 +1224,7 @@ BOOL NPC_ActionClearEvent( int toindex, char * buf)
 	return TRUE;
 }
 
-BOOL NPC_ActionSetNow( int toindex, char * buf)
+int NPC_ActionSetNow( int toindex, char * buf)
 {
 	int eveno;
 	int talkNo=1, iflg=0;
@@ -1240,7 +1240,7 @@ BOOL NPC_ActionSetNow( int toindex, char * buf)
 }
 
 
-BOOL NPC_ActionPassCheck( int meindex, int talker, char *buf)
+int NPC_ActionPassCheck( int meindex, int talker, char *buf)
 {
 
 	char buff2[256];
@@ -1276,7 +1276,7 @@ BOOL NPC_ActionPassCheck( int meindex, int talker, char *buf)
 
 }
 
-BOOL NPC_ActionBigSmallCheck(int meindex,int talker,char* buf)
+int NPC_ActionBigSmallCheck(int meindex,int talker,char* buf)
 {
 
 	char buff2[128], buff3[128];
@@ -1344,7 +1344,7 @@ BOOL NPC_ActionBigSmallCheck(int meindex,int talker,char* buf)
 
 #ifdef _NPC_ActionFreeCmp 
 //其实功能和原本的NPC_ActionWarpManReduce差不多,但为了不影响以前的设定,所以不去修改原本的
-BOOL NPC_ActionWarpManReduce2(int meindex,int talker,char *buf)
+int NPC_ActionWarpManReduce2(int meindex,int talker,char *buf)
 {
 	char buf2[512];
 	char buf3[256];
@@ -1374,7 +1374,7 @@ BOOL NPC_ActionWarpManReduce2(int meindex,int talker,char *buf)
 }
 #endif
 
-BOOL NPC_ActionFreeIfCheck(int meindex,int talker, char* buf, char *opt, int kosuu,int flg, int temp)
+int NPC_ActionFreeIfCheck(int meindex,int talker, char* buf, char *opt, int kosuu,int flg, int temp)
 {
 #ifdef _VIP_SHOP
 	if(strcmp(buf,"VIPPOINT")==0){
@@ -1504,7 +1504,7 @@ BOOL NPC_ActionFreeIfCheck(int meindex,int talker, char* buf, char *opt, int kos
 	return FALSE;
 }
 
-BOOL NPC_ActioneEquitCheck(int meindex,int talker,int itemNo, int flg)
+int NPC_ActioneEquitCheck(int meindex,int talker,int itemNo, int flg)
 {
 	int i;
 	int itemindex=-1;
@@ -1521,7 +1521,7 @@ BOOL NPC_ActioneEquitCheck(int meindex,int talker,int itemNo, int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionItemCheck(int meindex,int talker,int itemNo, int flg)
+int NPC_ActionItemCheck(int meindex,int talker,int itemNo, int flg)
 {
 	int i;
 	int itemindex=-1;
@@ -1538,7 +1538,7 @@ BOOL NPC_ActionItemCheck(int meindex,int talker,int itemNo, int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionBigSmallLastCheck(int point1,int mypoint,int flg)
+int NPC_ActionBigSmallLastCheck(int point1,int mypoint,int flg)
 {
 	if(flg==0){
 		if(point1==mypoint)
@@ -1554,7 +1554,7 @@ BOOL NPC_ActionBigSmallLastCheck(int point1,int mypoint,int flg)
 	return FALSE;
 }
 
-BOOL ActionCheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
+int ActionCheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
 {
 	int petsel,petindex=-1;	
 	int lv=-1;
@@ -1580,7 +1580,7 @@ BOOL ActionCheckMyPet( int meindex, int talker, int petLv, int flg, int petid)
 }
 
 
-BOOL NPC_ActionCheckTrans(int meindex,int talker,int trans,int flg)
+int NPC_ActionCheckTrans(int meindex,int talker,int trans,int flg)
 {
 	int myTrans;
 	myTrans=CHAR_getInt(talker, CHAR_TRANSMIGRATION);
@@ -1591,7 +1591,7 @@ BOOL NPC_ActionCheckTrans(int meindex,int talker,int trans,int flg)
 }
 
 #ifdef _VIP_SHOP
-BOOL NPC_ActionVipPointCheck(int meindex,int talker,int point,int flg)
+int NPC_ActionVipPointCheck(int meindex,int talker,int point,int flg)
 {
 	int mypoint;
 	mypoint=CHAR_getInt(talker,CHAR_AMPOINT);
@@ -1602,7 +1602,7 @@ BOOL NPC_ActionVipPointCheck(int meindex,int talker,int point,int flg)
 }
 #endif
 #ifdef _VIP_RIDE
-BOOL NPC_ActionVipCheck(int meindex,int talker,int vip,int flg)
+int NPC_ActionVipCheck(int meindex,int talker,int vip,int flg)
 {
 	if(NPC_ActionBigSmallLastCheck( CHAR_getInt(talker,CHAR_VIPRIDE), vip, flg) == TRUE){
 		return TRUE;
@@ -1611,7 +1611,7 @@ BOOL NPC_ActionVipCheck(int meindex,int talker,int vip,int flg)
 }
 #endif
 
-BOOL NPC_ActionLevelCheck(int meindex,int talker,int level,int flg)
+int NPC_ActionLevelCheck(int meindex,int talker,int level,int flg)
 {
 	int mylevel;
 	mylevel=CHAR_getInt(talker,CHAR_LV);
@@ -1621,7 +1621,7 @@ BOOL NPC_ActionLevelCheck(int meindex,int talker,int level,int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionPartyCheck( int toindex, int nums, int flg)
+int NPC_ActionPartyCheck( int toindex, int nums, int flg)
 {
 	int partys=0;
 	int leaderindex=-1;
@@ -1647,7 +1647,7 @@ BOOL NPC_ActionPartyCheck( int toindex, int nums, int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionReItemCheck( int toindex, int nums, int flg)
+int NPC_ActionReItemCheck( int toindex, int nums, int flg)
 {
 	int remnants=0;
 	remnants = CHAR_findSurplusItemBox( toindex);
@@ -1656,7 +1656,7 @@ BOOL NPC_ActionReItemCheck( int toindex, int nums, int flg)
 	}
 	return FALSE;
 }
-BOOL NPC_ActionRePetCheck( int toindex, int nums, int flg)
+int NPC_ActionRePetCheck( int toindex, int nums, int flg)
 {
 	int remnants=0;
 	remnants = CHAR_findSurplusPetBox( toindex);
@@ -1666,7 +1666,7 @@ BOOL NPC_ActionRePetCheck( int toindex, int nums, int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionGoldCheck(int meindex,int talker,int Golds,int flg)
+int NPC_ActionGoldCheck(int meindex,int talker,int Golds,int flg)
 {
 	int myGold;
 	myGold=CHAR_getInt(talker,CHAR_GOLD);
@@ -1676,7 +1676,7 @@ BOOL NPC_ActionGoldCheck(int meindex,int talker,int Golds,int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionWarpManReduce(int meindex,int talker,char *buf)
+int NPC_ActionWarpManReduce(int meindex,int talker,char *buf)
 {
 	char buf2[512];
 	char buf3[256];
@@ -1707,7 +1707,7 @@ BOOL NPC_ActionWarpManReduce(int meindex,int talker,char *buf)
 }
 
 #ifdef _NPCCHANGE_PLAYERIMG	//andy
-BOOL NPC_ActionChangePlayerBBI( int meindex, int charindex, char *Img)
+int NPC_ActionChangePlayerBBI( int meindex, int charindex, char *Img)
 {
 	int cBBI;
 	char buf1[256];
@@ -1797,7 +1797,7 @@ BOOL NPC_ActionChangePlayerBBI( int meindex, int charindex, char *Img)
 #endif
 
 #ifdef _NPCCHANGE_PLAYERIMG
-BOOL NPC_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg)
+int NPC_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg)
 {
 	int MyBBI;
 	if( !CHAR_CHECKINDEX( charindex))
@@ -1809,7 +1809,7 @@ BOOL NPC_CheckPlayerBBI( int meindex, int charindex, int BBI, int flg)
 }
 #endif
 
-BOOL showString( int meindex, char *showstr,int flg)
+int showString( int meindex, char *showstr,int flg)
 {	//广播
 	char buf1[256];
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -1844,7 +1844,7 @@ BOOL showString( int meindex, char *showstr,int flg)
 	return TRUE;
 }
 
-BOOL NPC_getTimeXYPoint( int meindex, int Mode)
+int NPC_getTimeXYPoint( int meindex, int Mode)
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buf[256], buf1[256], buf2[256];
@@ -1898,7 +1898,7 @@ BOOL NPC_getTimeXYPoint( int meindex, int Mode)
 	return TRUE;
 }
 
-BOOL NPC_getTimeData( int meindex, char *npcarg, int *born, int *dead, int loopspeed)
+int NPC_getTimeData( int meindex, char *npcarg, int *born, int *dead, int loopspeed)
 {
 	int i;
 	char buf[256];
@@ -1914,7 +1914,7 @@ BOOL NPC_getTimeData( int meindex, char *npcarg, int *born, int *dead, int loops
 	return FALSE;
 }
 
-BOOL NPC_CheckTimeDefine( char *timetype)
+int NPC_CheckTimeDefine( char *timetype)
 {
 	LSTIME nowlstime;
 	int born=-1, dead=-1, finds=0, i;
@@ -2005,7 +2005,7 @@ void GetRand_WarpPoint( char *buf, int *fl, int *x, int *y )
 	return;
 }
 
-BOOL NPC_ActionDuelRankCheck(int meindex,int talker,int rank,int flg)
+int NPC_ActionDuelRankCheck(int meindex,int talker,int rank,int flg)
 {
 	int myrank;
 	myrank=CHAR_getWorkInt(talker,CHAR_WORKSHOPRELEVANTSEC);
@@ -2016,7 +2016,7 @@ BOOL NPC_ActionDuelRankCheck(int meindex,int talker,int rank,int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionDuelPointCheck(int meindex,int talker,int rank,int flg)
+int NPC_ActionDuelPointCheck(int meindex,int talker,int rank,int flg)
 {
 	int myduel;
 	myduel = CHAR_getInt( talker, CHAR_DUELPOINT);
@@ -2027,7 +2027,7 @@ BOOL NPC_ActionDuelPointCheck(int meindex,int talker,int rank,int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionTreasureTypeCheck(int meindex,int level, int type, int flg)
+int NPC_ActionTreasureTypeCheck(int meindex,int level, int type, int flg)
 {
 	int mylevel;
 
@@ -2038,7 +2038,7 @@ BOOL NPC_ActionTreasureTypeCheck(int meindex,int level, int type, int flg)
 	return FALSE;
 }
 
-BOOL NPC_ActionTreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
+int NPC_ActionTreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 {
 	char buff2[64];
 	int randitem;
@@ -2096,7 +2096,7 @@ BOOL NPC_ActionTreasureRandItemGet(int meidex,int talker,int rand_j,char *buf)
 }
 
 #ifdef _NPC_ADDWARPMAN1
-BOOL NPC_ActionPartyCountCheck( int toindex, int nums, int flg)
+int NPC_ActionPartyCountCheck( int toindex, int nums, int flg)
 {
 	int partys=0;
 	int i;
@@ -2112,7 +2112,7 @@ BOOL NPC_ActionPartyCountCheck( int toindex, int nums, int flg)
 	return FALSE;
 }
 //检查男生人数
-BOOL NPC_ActionManCountCheck( int toindex, int nums, int flg)
+int NPC_ActionManCountCheck( int toindex, int nums, int flg)
 {
 	int i,tempcount = 0;
 	if( CHAR_getWorkInt( toindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_NONE ){
@@ -2133,7 +2133,7 @@ BOOL NPC_ActionManCountCheck( int toindex, int nums, int flg)
 	return FALSE;
 }
 //检查女生人数
-BOOL NPC_ActionWomanCountCheck( int toindex, int nums, int flg)
+int NPC_ActionWomanCountCheck( int toindex, int nums, int flg)
 {
 	int i,tempcount = 0;
 	if( CHAR_getWorkInt( toindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_NONE ){

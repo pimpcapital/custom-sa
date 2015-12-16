@@ -5,7 +5,7 @@
 void NPC_SavePointTalked( int meindex , int talkerindex , char *msg ,
                      int color );
 
-BOOL NPC_SavePointInit( int meindex );
+int NPC_SavePointInit( int meindex );
 void NPC_SavePointWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 
 

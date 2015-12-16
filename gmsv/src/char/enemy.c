@@ -39,35 +39,35 @@ int                     ENEMY_indextable[ENEMY_INDEXTABLEMAXSIZE];
 extern	tagRidePetTable ridePetTable[296];
 #endif
 
-INLINE BOOL ENEMY_CHECKINDEX( int index)
+int ENEMY_CHECKINDEX( int index)
 {
     if( index < 0 || index >= ENEMY_enemynum) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL ENEMY_CHECKINTDATAINDEX( int index)
+static int ENEMY_CHECKINTDATAINDEX( int index)
 {
     if( index< 0 || index >= ENEMY_DATAINTNUM) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL ENEMY_CHECKCHARDATAINDEX( int index)
+static int ENEMY_CHECKCHARDATAINDEX( int index)
 {
     if( index< 0 || index >= ENEMY_DATACHARNUM) return FALSE;
     return TRUE;
 }
 
-INLINE int ENEMY_getInt( int index, ENEMY_DATAINT element)
+int ENEMY_getInt( int index, ENEMY_DATAINT element)
 {
     return ENEMY_enemy[index].intdata[element];
 }
 
-INLINE int *ENEMY_getIntdata( int index)
+int *ENEMY_getIntdata( int index)
 {
 	return ENEMY_enemy[index].intdata;
 }
 
-INLINE int ENEMY_setInt( int index, ENEMY_DATAINT element, int data)
+int ENEMY_setInt( int index, ENEMY_DATAINT element, int data)
 {
     int buf;
     buf = ENEMY_enemy[index].intdata[element];
@@ -75,7 +75,7 @@ INLINE int ENEMY_setInt( int index, ENEMY_DATAINT element, int data)
     return buf;
 }
 
-INLINE char *ENEMY_getChar( int index, ENEMY_DATACHAR element)
+char *ENEMY_getChar( int index, ENEMY_DATACHAR element)
 {
     if(!ENEMY_CHECKINDEX(index))return "\0";
     if(!ENEMY_CHECKCHARDATAINDEX(element))return "\0";
@@ -83,7 +83,7 @@ INLINE char *ENEMY_getChar( int index, ENEMY_DATACHAR element)
     return ENEMY_enemy[index].chardata[element].string;
 }
 
-INLINE BOOL ENEMY_setChar( int index ,ENEMY_DATACHAR element, char* new )
+int ENEMY_setChar( int index ,ENEMY_DATACHAR element, char* new )
 {
     if(!ENEMY_CHECKINDEX(index))return FALSE;
     if(!ENEMY_CHECKCHARDATAINDEX(element))return FALSE;
@@ -98,30 +98,30 @@ int ENEMY_getEnemyNum( void)
     return ENEMY_enemynum;
 }
 
-INLINE BOOL ENEMYTEMP_CHECKINDEX( int index)
+int ENEMYTEMP_CHECKINDEX( int index)
 {
     if( index < 0 || index >= ENEMYTEMP_enemynum) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL ENEMYTEMP_CHECKINTDATAINDEX( int index)
+static int ENEMYTEMP_CHECKINTDATAINDEX( int index)
 {
     if( index< 0 || index >= E_T_DATAINTNUM) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL ENEMYTEMP_CHECKCHARDATAINDEX( int index)
+static int ENEMYTEMP_CHECKCHARDATAINDEX( int index)
 {
     if( index< 0 || index >= E_T_DATACHARNUM) return FALSE;
     return TRUE;
 }
 
-INLINE int ENEMYTEMP_getInt( int index, ENEMYTEMP_DATAINT element)
+int ENEMYTEMP_getInt( int index, ENEMYTEMP_DATAINT element)
 {
     return ENEMYTEMP_enemy[index].intdata[element];
 }
 
-INLINE int ENEMYTEMP_setInt( int index, ENEMYTEMP_DATAINT element, int data)
+int ENEMYTEMP_setInt( int index, ENEMYTEMP_DATAINT element, int data)
 {
     int buf;
     buf = ENEMYTEMP_enemy[index].intdata[element];
@@ -129,7 +129,7 @@ INLINE int ENEMYTEMP_setInt( int index, ENEMYTEMP_DATAINT element, int data)
     return buf;
 }
 
-INLINE char *ENEMYTEMP_getChar( int index, ENEMYTEMP_DATACHAR element)
+char *ENEMYTEMP_getChar( int index, ENEMYTEMP_DATACHAR element)
 {
     if(!ENEMYTEMP_CHECKINDEX(index))return "\0";
     if(!ENEMYTEMP_CHECKCHARDATAINDEX(element))return "\0";
@@ -137,7 +137,7 @@ INLINE char *ENEMYTEMP_getChar( int index, ENEMYTEMP_DATACHAR element)
     return ENEMYTEMP_enemy[index].chardata[element].string;
 }
 
-INLINE BOOL ENEMYTEMP_setChar( int index ,ENEMYTEMP_DATACHAR element, char* new )
+int ENEMYTEMP_setChar( int index ,ENEMYTEMP_DATACHAR element, char* new )
 {
     if(!ENEMYTEMP_CHECKINDEX(index))return FALSE;
     if(!ENEMYTEMP_CHECKCHARDATAINDEX(element))return FALSE;
@@ -152,30 +152,30 @@ int ENEMYTEMP_getEnemyNum( void)
     return ENEMYTEMP_enemynum;
 }
 
-INLINE BOOL GROUP_CHECKINDEX( int index)
+int GROUP_CHECKINDEX( int index)
 {
     if( index < 0 || index >= GROUP_groupnum) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL GROUP_CHECKINTDATAINDEX( int index)
+static int GROUP_CHECKINTDATAINDEX( int index)
 {
     if( index< 0 || index >= GROUP_DATAINTNUM) return FALSE;
     return TRUE;
 }
 
-static INLINE BOOL GROUP_CHECKCHARDATAINDEX( int index)
+static int GROUP_CHECKCHARDATAINDEX( int index)
 {
     if( index< 0 || index >= GROUP_DATACHARNUM) return FALSE;
     return TRUE;
 }
 
-INLINE int GROUP_getInt( int index, GROUP_DATAINT element)
+int GROUP_getInt( int index, GROUP_DATAINT element)
 {
     return GROUP_group[index].intdata[element];
 }
 
-INLINE int GROUP_setInt( int index, GROUP_DATAINT element, int data)
+int GROUP_setInt( int index, GROUP_DATAINT element, int data)
 {
     int buf;
     buf = GROUP_group[index].intdata[element];
@@ -183,7 +183,7 @@ INLINE int GROUP_setInt( int index, GROUP_DATAINT element, int data)
     return buf;
 }
 
-INLINE char *GROUP_getChar( int index, GROUP_DATACHAR element)
+char *GROUP_getChar( int index, GROUP_DATACHAR element)
 {
     if(!GROUP_CHECKINDEX(index))return "\0";
     if(!GROUP_CHECKCHARDATAINDEX(element))return "\0";
@@ -191,7 +191,7 @@ INLINE char *GROUP_getChar( int index, GROUP_DATACHAR element)
     return GROUP_group[index].chardata[element].string;
 }
 
-INLINE BOOL GROUP_setChar( int index ,GROUP_DATACHAR element, char* new )
+int GROUP_setChar( int index ,GROUP_DATACHAR element, char* new )
 {
     if(!GROUP_CHECKINDEX(index))return FALSE;
     if(!GROUP_CHECKCHARDATAINDEX(element))return FALSE;
@@ -206,7 +206,7 @@ int GROUP_getEnemyNum( void)
     return GROUP_groupnum;
 }
 
-BOOL ENEMYTEMP_initEnemy( char* filename )
+int ENEMYTEMP_initEnemy( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -310,7 +310,7 @@ BOOL ENEMYTEMP_initEnemy( char* filename )
     return TRUE;
 }
 
-BOOL ENEMYTEMP_reinitEnemy( void )
+int ENEMYTEMP_reinitEnemy( void )
 {
 	freeMemory( ENEMYTEMP_enemy);
 	return( ENEMYTEMP_initEnemy( getEnemyBasefile()));
@@ -344,7 +344,7 @@ int ENEMYTEMP_getEnemyTempArrayFromInitnum( int EnemyTempNo)
 	return -1;
 }
 
-BOOL ENEMY_initEnemy( char* filename )
+int ENEMY_initEnemy( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -477,7 +477,7 @@ BOOL ENEMY_initEnemy( char* filename )
 /*------------------------------------------------------------------------
  * ENEMY_enemy及涩烂白央奶伙  心  仄
  *-----------------------------------------------------------------------*/
-BOOL ENEMY_reinitEnemy( void )
+int ENEMY_reinitEnemy( void )
 {
 	freeMemory( ENEMY_enemy);
 	return( ENEMY_initEnemy( getEnemyfile()));
@@ -542,7 +542,7 @@ int ENEMY_getEnemyTempNoFromId( int EnemyId)
 /*------------------------------------------------------------------------
  * 弘伙□皿涩烂白央奶伙毛  戈
  *-----------------------------------------------------------------------*/
-BOOL GROUP_initGroup( char* filename )
+int GROUP_initGroup( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -702,7 +702,7 @@ BOOL GROUP_initGroup( char* filename )
 /*------------------------------------------------------------------------
  * 弘伙□皿及涩烂白央奶伙  心  仄
  *-----------------------------------------------------------------------*/
-BOOL GROUP_reinitGroup( void )
+int GROUP_reinitGroup( void )
 {
 	freeMemory( GROUP_group);
 	return( GROUP_initGroup( getGroupfile()));

@@ -80,16 +80,16 @@ EXTERN int      ConnectLen;   /*票及袄及赢今*/
 #define CONNECT_WINDOWBUFSIZE 7
 
 /* 湘  凶切 */
-BOOL initConnect( int size );
+int initConnect( int size );
 void endConnect( void );
 #define		CONNECT_endOne( sockfd, lin) \
 	_CONNECT_endOne( __FILE__, __LINE__, sockfd, lin)
-BOOL _CONNECT_endOne( char *file, int fromline, int sockfd , int lin);
-BOOL netloop( void );
-BOOL netloop_faster( void );
+int _CONNECT_endOne( char *file, int fromline, int sockfd , int lin);
+int netloop( void );
+int netloop_faster( void );
 int lsrpcClientWriteFunc( int fd , char* buf , int size );
 char* GetOneLine( int fd );
-BOOL initConnectOne( int sockfd, struct sockaddr_in* sin ,int len );
+int initConnectOne( int sockfd, struct sockaddr_in* sin ,int len );
     
 
 
@@ -100,8 +100,8 @@ void CAsend( int fd );
 void CDcheck( void );
 void CDflush( int charaindex );
 void CDsend( int fd );
-BOOL CONNECT_appendCAbuf( int fd , char* data, int size );
-BOOL CONNECT_appendCDbuf( int fd , char* data, int size );
+int CONNECT_appendCAbuf( int fd , char* data, int size );
+int CONNECT_appendCDbuf( int fd , char* data, int size );
 
 /* Serverstate */
 void SERVSTATE_decrementCloseallsocketnum(void);
@@ -119,7 +119,7 @@ void SERVSTATE_setLimittime(int a);
 void outputNetProcLog( int fd, int mode);
 void chardatasavecheck( void );
 void closeAllConnectionandSaveData( void );
-BOOL SetShutdown( BOOL nvalue );
+int SetShutdown( int nvalue );
 int GetShutdown( void );
 
 /* 伙□皿仄化腹绸楮醒 */
@@ -133,14 +133,14 @@ int getfdFromCdkeyWithLogin( char* cd );
 
 
 /* 仄日屯 */        
-INLINE int CONNECT_checkfd( int fd );
-BOOL CONNECT_isCLI( int fd );
-BOOL CONNECT_isAC( int fd );
-BOOL CONNECT_isUnderLogin( int fd );
-BOOL CONNECT_isWhileLogout( int fd );
-BOOL CONNECT_isWhileLogin( int fd );
-BOOL CONNECT_isNOTLOGIN( int fd );
-BOOL CONNECT_isLOGIN( int fd );
+int CONNECT_checkfd( int fd );
+int CONNECT_isCLI( int fd );
+int CONNECT_isAC( int fd );
+int CONNECT_isUnderLogin( int fd );
+int CONNECT_isWhileLogout( int fd );
+int CONNECT_isWhileLogin( int fd );
+int CONNECT_isNOTLOGIN( int fd );
+int CONNECT_isLOGIN( int fd );
 
 int CONNECT_getUse( int fd );
 int CONNECT_getUse_debug( int fd, int i );
@@ -175,8 +175,8 @@ int CONNECT_getState( int fd );
 void CONNECT_checkStatecount( int a );
 int CONNECT_checkStateSomeOne( int a, int maxcount);
 
-BOOL CONNECT_acfdInitRB( int fd );
-BOOL CONNECT_acfdInitWB( int fd );
+int CONNECT_acfdInitRB( int fd );
+int CONNECT_acfdInitWB( int fd );
 
 // Nuke +3
 int checkWalkTime(int fd);
@@ -185,7 +185,7 @@ int setBtime(int fd);
 #ifdef _BATTLE_TIMESPEED
 //void setDefBTime( int fd, unsigned int times);
 //unsigned int getDefBTime( int fd);
-BOOL CheckDefBTime( int charaindex, int fd, unsigned int lowTime, unsigned int battletime, unsigned int addTime);
+int CheckDefBTime( int charaindex, int fd, unsigned int lowTime, unsigned int battletime, unsigned int addTime);
 #endif
 
 #ifdef _TYPE_TOXICATION
@@ -196,21 +196,21 @@ int checkBEOTime(int fd);
 void sigusr1(int i);
 void sigusr2(int i);	// Arminius 6.26 signal
 //ttom start
-void CONNECT_set_watchmode(int fd, BOOL B_Watch);
-BOOL CONNECT_get_watchmode(int fd);
-void CONNECT_set_shutup(int fd,BOOL b_shut);//the avoid the user wash the screen
-BOOL CONNECT_get_shutup(int fd);
+void CONNECT_set_watchmode(int fd, int B_Watch);
+int CONNECT_get_watchmode(int fd);
+void CONNECT_set_shutup(int fd,int b_shut);//the avoid the user wash the screen
+int CONNECT_get_shutup(int fd);
 unsigned long CONNECT_get_userip(int fd);
-void CONNECT_set_pass(int fd,BOOL b_ps);
-BOOL CONNECT_get_pass(int fd);
+void CONNECT_set_pass(int fd,int b_ps);
+int CONNECT_get_pass(int fd);
 void CONNECT_set_state_trans(int fd,int a);
 int CONNECT_get_state_trans(int fd);
 //ttom end
 
 // CoolFish: +9 2001/4/18
 void CONNECT_setCloseRequest( int fd, int count);
-void CONNECT_set_first_warp(int fd, BOOL b_ps);
-BOOL CONNECT_get_first_warp(int fd);
+void CONNECT_set_first_warp(int fd, int b_ps);
+int CONNECT_get_first_warp(int fd);
 int isDie(int fd);
 void setDie(int fd);
 
@@ -224,7 +224,7 @@ void CONNECT_set_announced(int fd, int a);
 
 // shan trade(DoubleCheck) begin
 int  CONNECT_get_confirm(int fd);
-void CONNECT_set_confirm(int fd, BOOL b);
+void CONNECT_set_confirm(int fd, int b);
 // end
 
 void CONNECT_setTradecharaindex( int fd, int i , int a);
@@ -271,7 +271,7 @@ void CONNECT_setUse( int fd , int a);
 #define QUEUE_LENGTH1 6
 #define QUEUE_LENGTH2 7
 
-BOOL MSBUF_CHECKbuflen( int size, float defp);
+int MSBUF_CHECKbuflen( int size, float defp);
 
 void SetTcpBuf( int sockfd);
 #endif 

@@ -51,7 +51,7 @@
 
 static void NPC_DoormanOpenDoor( char *nm  );
 
-BOOL NPC_DoormanInit( int meindex )
+int NPC_DoormanInit( int meindex )
 {
 	char	arg[NPC_UTIL_GETARGSTR_BUFSIZE];
     char dname[1024];

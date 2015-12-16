@@ -19,13 +19,13 @@ enum {
 
 static void NPC_FMPKMan_selectWindow(int meindex, int toindex, int num, int select);
 // shan add
-BOOL NPC_PARTY_CHAECK1(int meindex,int talker);
+int NPC_PARTY_CHAECK1(int meindex,int talker);
 void NPC_ERR_DiSP1(int meindex,int talker,int errNO);
 
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_FMPKManInit( int meindex )
+int NPC_FMPKManInit( int meindex )
 {
 
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -251,7 +251,7 @@ void NPC_FMPKManWindowTalked( int meindex, int talkerindex,
 }
 
 // shan add
-BOOL NPC_PARTY_CHAECK1(int meindex,int talker)
+int NPC_PARTY_CHAECK1(int meindex,int talker)
 {
     if(CHAR_getWorkInt(talker,CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE){
          return FALSE;

@@ -13,7 +13,7 @@
   init , looked 及心卞  杀
 
   */  
-BOOL NPC_MsgInit( int meindex )
+int NPC_MsgInit( int meindex )
 {
     //CHAR_setInt( meindex , CHAR_HP , 0 );
 

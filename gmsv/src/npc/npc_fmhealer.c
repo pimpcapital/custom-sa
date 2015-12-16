@@ -20,12 +20,12 @@
 #define RANGE 2
 void NPC_FmHealerSpeak( int index, int talker);
 void NPC_FmHealerAllHeal( int talker );
-BOOL NPC_FmMoneyCheck(int meindex,int talker);
+int NPC_FmMoneyCheck(int meindex,int talker);
 int  NPC_FmCostCheck(int talker);
 void NPC_FmCharCheckPoint(int meindex,int talker);
 int  NPC_FmWorkInput(int meindex,int talker);
 
-BOOL NPC_FmHealerInit( int meindex )
+int NPC_FmHealerInit( int meindex )
 {
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEHEALER );
     CHAR_setFlg( meindex , CHAR_ISATTACKED , 0 );

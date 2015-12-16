@@ -14,19 +14,19 @@
 #include "handletime.h"
 #include "configfile.h"
 
-INLINE int NPC_CHECKCREATEINDEX(int index)
+int NPC_CHECKCREATEINDEX(int index)
 {
     if(  NPC_createnum <= index || index < 0 )return FALSE;
     return TRUE;
 }
 
-INLINE int NPC_CHECKCREATEINTINDEX( int index)
+int NPC_CHECKCREATEINTINDEX( int index)
 {
     if(  NPC_CREATEINTNUM <= index || index < 0 )return FALSE;
     return TRUE;
 }
 
-INLINE int NPC_setCreateInt( int index , NPC_CREATEINT element, int data )
+int NPC_setCreateInt( int index , NPC_CREATEINT element, int data )
 {
     int buf;
     buf = NPC_create[index].intdata[element];
@@ -34,13 +34,13 @@ INLINE int NPC_setCreateInt( int index , NPC_CREATEINT element, int data )
     return buf;
 }
 
-INLINE int NPC_getCreateInt( int index , NPC_CREATEINT element )
+int NPC_getCreateInt( int index , NPC_CREATEINT element )
 {
     return NPC_create[index].intdata[element];
 }
 
 
-BOOL NPC_initCreateArray( int createnum )
+int NPC_initCreateArray( int createnum )
 {
     NPC_createnum = createnum;
     NPC_create  = (NPC_Create*)allocateMemory( sizeof( NPC_Create ) * NPC_createnum );
@@ -100,7 +100,7 @@ void NPC_setDefaultNPCCreate( NPC_Create*  cr )
     }
 }
 
-BOOL NPC_IsNPCCreateFile( char* filename )
+int NPC_IsNPCCreateFile( char* filename )
 {
     FILE*   f;
     char    line1[128];
@@ -431,7 +431,7 @@ FCLOSERETURNFALSE:
     return FALSE;
 }
 
-BOOL NPC_readNPCCreateFiles( char* topdirectory ,int createsize)
+int NPC_readNPCCreateFiles( char* topdirectory ,int createsize)
 {
     STRING64    *filenames;
     int         filenum;
@@ -498,7 +498,7 @@ BOOL NPC_readNPCCreateFiles( char* topdirectory ,int createsize)
  *  涩烂今木化中月          TRUE(1)
  *  涩烂今木化中卅中        FALSE(0)
  ------------------------------------------------------------*/
-BOOL NPC_isBoundarySet( int createindex )
+int NPC_isBoundarySet( int createindex )
 {
     if( NPC_CHECKCREATEINDEX(createindex) == FALSE )return FALSE;
     return NPC_create[createindex].intdata[NPC_CREATEBOUNDARY];
@@ -508,7 +508,7 @@ BOOL NPC_isBoundarySet( int createindex )
  *  r                   RECT*       袄毛熬仃午月RECT 及禾奶件正
  * 忒曰袄
  ------------------------------------------------------------*/
-BOOL NPC_createGetRECT( int createindex,RECT*   r )
+int NPC_createGetRECT( int createindex,RECT*   r )
 {
     if( NPC_CHECKCREATEINDEX(createindex) == FALSE )return FALSE;
 
@@ -529,10 +529,10 @@ BOOL NPC_createGetRECT( int createindex,RECT*   r )
  * 娄醒
  *  cindex      int     奶件犯永弁旦
  * 忒曰袄
- *  BOOL    综匀化中中桦宁  TRUE(1)
- *  BOOL    综匀化中仃卅中桦宁  FALSE(0)
+ *  int    综匀化中中桦宁  TRUE(1)
+ *  int    综匀化中仃卅中桦宁  FALSE(0)
  ------------------------------------------------------------*/
-BOOL NPC_createCheckGenerateFromTime( int cindex )
+int NPC_createCheckGenerateFromTime( int cindex )
 {
     struct timeval  old;
     if( !NPC_CHECKCREATEINDEX(cindex) )
@@ -602,7 +602,7 @@ void NPC_createDecreaseEnemynum( int index )
  * 忒曰袄
  *  TRUE:MAX  FALSE:啜丹
  ------------------------------------------------------------*/
-BOOL NPC_createCheckMaxEnemynum( int index )
+int NPC_createCheckMaxEnemynum( int index )
 {
 
     if( NPC_create[index].intdata[NPC_CREATEBORNNUM]

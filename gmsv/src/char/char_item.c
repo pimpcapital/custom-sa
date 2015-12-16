@@ -147,14 +147,14 @@ CasinoMapTable casinomap[MAXCASINOMAPNUM] =
 
 
 static char CHAR_sendItemBuffer[STRINGBUFSIZ];
-BOOL CHAR_sendItemDataOne( int charaindex, int haveitemindex)
+int CHAR_sendItemDataOne( int charaindex, int haveitemindex)
 {
 	int		itemgrp[1];
 	itemgrp[0] = haveitemindex;
 	return CHAR_sendItemData( charaindex, itemgrp, 1);
 }
 
-BOOL CHAR_sendItemData( int charaindex, int *itemgroup, int num)
+int CHAR_sendItemData( int charaindex, int *itemgroup, int num)
 {
 	int		i;
 	int		strlength = 0;
@@ -317,7 +317,7 @@ int CHAR_findEmptyItemBox( int index )
 #define CANNOTEXCHANGE {CHAR_talkToCli(index,-1,"无法交换此两项物品。",CHAR_COLORWHITE);}
 #define CANNOTMOVE  {CHAR_talkToCli(index,-1,"无法移动该项物品。",CHAR_COLORWHITE);}
 
-static BOOL CHAR_sendSIToCli( int charindex , int from , int to )
+static int CHAR_sendSIToCli( int charindex , int from , int to )
 {
 	int fd = getfdFromCharaIndex( charindex );
 	if( fd != -1 ){
@@ -327,12 +327,12 @@ static BOOL CHAR_sendSIToCli( int charindex , int from , int to )
 	return FALSE;
 }
 
-static BOOL CHAR_moveItemFromItemBoxToEquip( int index, int fromindex,
+static int CHAR_moveItemFromItemBoxToEquip( int index, int fromindex,
 											int toindex )
 {
 	int     fromid,toid;
 	int     fromeqplace;
-	BOOL	flg = FALSE;
+	int	flg = FALSE;
 
 	if( !CHAR_CHECKINDEX( index ) )return FALSE;
 
@@ -415,7 +415,7 @@ static BOOL CHAR_moveItemFromItemBoxToEquip( int index, int fromindex,
 	return TRUE;
 }
 
-static BOOL CHAR_moveItemFromEquipToItemBox(int index, int fromindex,
+static int CHAR_moveItemFromEquipToItemBox(int index, int fromindex,
 										  int toindex)
 {
 	int fromid,toid;
@@ -437,7 +437,7 @@ static BOOL CHAR_moveItemFromEquipToItemBox(int index, int fromindex,
 	return CHAR_moveItemFromItemBoxToEquip(index, toindex,fromindex);
 }
 
-static BOOL CHAR_moveItemFromItemBoxToItemBox( int index, int fromindex, int toindex)
+static int CHAR_moveItemFromItemBoxToItemBox( int index, int fromindex, int toindex)
 {
 	int     fromid, toid;
 
@@ -659,7 +659,7 @@ void CHAR_ItemUse( int charaindex, int to_charaindex, int haveitemindex )
 	}
 }
 
-BOOL CHAR_DropItemFXY( int charaindex, int itemcharaindex, int fl,
+int CHAR_DropItemFXY( int charaindex, int itemcharaindex, int fl,
 							  int x, int y, int* objindex )
 {
 	int itemindex;
@@ -710,7 +710,7 @@ BOOL CHAR_DropItemFXY( int charaindex, int itemcharaindex, int fl,
 				}
 			case OBJTYPE_CHARA:
 			{
-				typedef BOOL (*ITEMPUTFUNC)(int,int);
+				typedef int (*ITEMPUTFUNC)(int,int);
 				ITEMPUTFUNC ipfunc;
 				ipfunc = (ITEMPUTFUNC)CHAR_getFunctionPointer(
 					OBJECT_getIndex(objindex),CHAR_ITEMPUTFUNC) ;
@@ -993,7 +993,7 @@ END:
 }
 
 int CHAR_DropItemAbsolute( int itemindex, int floor, int x, int y,
-						   BOOL net)
+						   int net)
 {
 	Object object;
 	int objindex;
@@ -1470,7 +1470,7 @@ void CHAR_PickUpItem( int charaindex, int dir )
  *  fl          int     白夫失
  *  x           int     x
  *  y           int     y
- *  force       BOOL    仇及袄互恳分午    泫    允
+ *  force       int    仇及袄互恳分午    泫    允
  *  objindex    int*      中凶失奶  丞及 Object 匹及奶件犯弁永旦
  * 忒曰袄
  *  撩  (公氏卅卞云嗯毛  匀化中卅中)    -1
@@ -1481,8 +1481,8 @@ void CHAR_PickUpItem( int charaindex, int dir )
  *  汹互  匹  ［ -6
  *  岳      0
  ------------------------------------------------------------*/
-static BOOL CHAR_DropMoneyFXY( int charaindex, int amount, int fl , int x,
-							   int y, BOOL force, int* objindex )
+static int CHAR_DropMoneyFXY( int charaindex, int amount, int fl , int x,
+							   int y, int force, int* objindex )
 {
 	OBJECT  object;
 	int MaxGold;

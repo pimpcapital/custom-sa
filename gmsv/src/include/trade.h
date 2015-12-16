@@ -5,7 +5,7 @@
 #include "util.h"
 #include "net.h"
  
-BOOL TRADE_Search(int fd, int meindex, char* message);
+int TRADE_Search(int fd, int meindex, char* message);
     
 void CHAR_Trade(int fd, int index, char* message);
 

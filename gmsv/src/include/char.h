@@ -35,22 +35,22 @@ void CHAR_createNewChar( int clifd, int dataplacenum,char* charname ,
 void CHAR_login( int clifd, char* data, int saveindex );
 
 #define		CHAR_warpToSpecificPoint( cindex, fl, x, y)	_CHAR_warpToSpecificPoint( __FILE__, __LINE__, cindex, fl, x, y)
-BOOL _CHAR_warpToSpecificPoint( char *file, int line, 
+int _CHAR_warpToSpecificPoint( char *file, int line, 
 							int charaindex, int fl, int x, int y);
 
 
 /*====================平乓仿及本□皮====================*/
 /*====================平乓仿及夫弘失它玄====================*/
-BOOL CHAR_charSaveFromConnectAndChar( int fd,Char* ch, int unlock );
-BOOL CHAR_charSaveFromConnect( int fd,int unlock );
+int CHAR_charSaveFromConnectAndChar( int fd,Char* ch, int unlock );
+int CHAR_charSaveFromConnect( int fd,int unlock );
 #define	CHAR_logout( clifd, save)	_CHAR_logout( __FILE__, __LINE__, clifd, save)
-BOOL _CHAR_logout( char *file, int line, int clifd, BOOL save);
+int _CHAR_logout( char *file, int line, int clifd, int save);
 
 /*====================watch event    ====================*/
-void CHAR_sendWatchEvent( int objindex, int chac, int* opt,int optlen,BOOL myflg );
+void CHAR_sendWatchEvent( int objindex, int chac, int* opt,int optlen,int myflg );
 
 /*====================旦平伙====================*/
-BOOL CHAR_Skillupsend(int charaindex );
+int CHAR_Skillupsend(int charaindex );
 void CHAR_SkillUp(  int charaindex, int skillid );
 void CHAR_useSkill( int charaindex, int dir ,int skindex );
 
@@ -68,13 +68,13 @@ typedef enum
 
 /*====================平乓仿及啖  卞楮允月楮醒====================*/
 void CHAR_ctodirmode(char moji , int* dir , int* mode);
-INLINE void CHAR_getDXDY( int dir , int* dx, int* dy );
-INLINE int CHAR_getDX( int dir );
-INLINE int CHAR_getDY( int dir );
+void CHAR_getDXDY( int dir , int* dx, int* dy );
+int CHAR_getDX( int dir );
+int CHAR_getDY( int dir );
 int CHAR_getSameCoordinateObjects(int* objbuf, int siz,int ff, int fx, int fy);
 void CHAR_walkcall( int index );
-void CHAR_walk_start(int index, int x, int y, char* dir, BOOL mapsendmode);
-void CHAR_walk_init( int fd, int x, int y, char *direction, BOOL mapsendmode);
+void CHAR_walk_start(int index, int x, int y, char* dir, int mapsendmode);
+void CHAR_walk_init( int fd, int x, int y, char *direction, int mapsendmode);
 
 CHAR_WALKRET CHAR_walk(int index, int dir, int mode);
 
@@ -82,16 +82,16 @@ char* CHAR_makeOptionString( Char* ch );
 char* CHAR_makeStatusString( int index, char* category );
 
 #define CHAR_makeObjectCString( objindex, buf, buflen) _CHAR_makeObjectCString( __FILE__, __LINE__, objindex, buf, buflen)
-BOOL _CHAR_makeObjectCString( char *file, int line, int objindex, char* buf, int buflen );
+int _CHAR_makeObjectCString( char *file, int line, int objindex, char* buf, int buflen );
 
-//BOOL CHAR_sendStatusString( int charaindex, char* category );
+//int CHAR_sendStatusString( int charaindex, char* category );
 #define CHAR_sendStatusString( A, B) _CHAR_sendStatusString( A, B, __FILE__, __LINE__ )
-BOOL _CHAR_sendStatusString( int charaindex, char* category, char* file, int line );
-BOOL CHAR_sendItemData( int charaindex, int *itemgroup, int num);
-BOOL CHAR_sendItemDataOne( int charaindex, int haveitemindex);
-BOOL CHAR_send_P_StatusString( int charaindex, unsigned int indextable );
-BOOL CHAR_send_N_StatusString( int charaindex, int num, unsigned int indextable );
-BOOL CHAR_send_K_StatusString( int charaindex, int num, unsigned int indextable );
+int _CHAR_sendStatusString( int charaindex, char* category, char* file, int line );
+int CHAR_sendItemData( int charaindex, int *itemgroup, int num);
+int CHAR_sendItemDataOne( int charaindex, int haveitemindex);
+int CHAR_send_P_StatusString( int charaindex, unsigned int indextable );
+int CHAR_send_N_StatusString( int charaindex, int num, unsigned int indextable );
+int CHAR_send_K_StatusString( int charaindex, int num, unsigned int indextable );
 
 void CHAR_inputOwnTitle( int index ,char* name );
 
@@ -109,8 +109,8 @@ int CHAR_findEmptyItemBoxNo( int index );
 void CHAR_moveEquipItem( int index, int fromindex, int toindex );
 void CHAR_ItemUse( int charaindex, int to_charaindex, int haveitemindex );
 void CHAR_DropItem( int charaindex,  int itemindex );
-int CHAR_DropItemAbsolute( int itemindex, int floor, int x, int y,BOOL net);
-BOOL CHAR_DropItemFXY( int charaindex, int itemcharaindex, int fl,
+int CHAR_DropItemAbsolute( int itemindex, int floor, int x, int y,int net);
+int CHAR_DropItemFXY( int charaindex, int itemcharaindex, int fl,
 							  int x, int y, int* objindex );
 int  CHAR_addItemSpecificItemIndex( int charaindex, int itemindex );
 
@@ -141,7 +141,7 @@ void CHAR_sendCToArroundCharacter( int charaindex );
 void CHAR_sendArroundCharaData( int charaindex );
 
 void CHAR_sendCDArroundChar( int fl, int x, int y, int objindex );
-void CHAR_sendCDArroundChar_Main( int fl, int x, int y, int objindex, BOOL mode );
+void CHAR_sendCDArroundChar_Main( int fl, int x, int y, int objindex, int mode );
 
 
 void CHAR_Look( int charaindex, int dir );
@@ -455,24 +455,24 @@ typedef struct tagGMInfo
 }GMInfo;
 #endif
 
-BOOL CHAR_talkToCli( int talkedcharaindex,int talkcharaindex, char* message, CHAR_COLOR color );
+int CHAR_talkToCli( int talkedcharaindex,int talkcharaindex, char* message, CHAR_COLOR color );
 void CHAR_talkToCliAndParty( int talkedcharaindex,int talkcharaindex,char* message, CHAR_COLOR color );
 
-BOOL CHAR_talkToCharacter( int talkedcharaindex,int talkcharaindex, char* message );
+int CHAR_talkToCharacter( int talkedcharaindex,int talkcharaindex, char* message );
 void CHAR_getCoordinationDir( int dir , int x, int y ,int c,
                               int *xout , int *yout );
-BOOL CHAR_createCharacter( int type, int floor, int x, int y, int dir,
-                           int* charaindex, int* objindex, BOOL seemap );
+int CHAR_createCharacter( int type, int floor, int x, int y, int dir,
+                           int* charaindex, int* objindex, int seemap );
 void CHAR_CharaDelete( int charaindex );
 void CHAR_ObjectDelete( int objindex );
 int CHAR_makeDBKey( int charaindex, char *pszBuffer, int size );
 int CHAR_getEmptyPartyArray( int charaindex);
-BOOL CHAR_JoinParty( int charaindex );
+int CHAR_JoinParty( int charaindex );
 void CHAR_JoinParty_Main( int charaindex, int targetindex);
-BOOL CHAR_DischargeParty( int charaindex, int flg);
-BOOL CHAR_DischargePartyNoMsg( int charaindex);
-BOOL CHAR_setMyPosition_main( int index, int x, int y, int setdir, BOOL CAFlg);
-BOOL CHAR_setMyPosition( int index, int x, int y, BOOL CAFlg);
+int CHAR_DischargeParty( int charaindex, int flg);
+int CHAR_DischargePartyNoMsg( int charaindex);
+int CHAR_setMyPosition_main( int index, int x, int y, int setdir, int CAFlg);
+int CHAR_setMyPosition( int index, int x, int y, int CAFlg);
 
 void CHAR_CharaDeleteHavePet( int charaindex);
 int CHAR_sendAction( int charaindex, int action, int mode);
@@ -503,8 +503,8 @@ EXTERN int EnemyMoveNum;	/*   凛卞  嫖  仃月衬及醒 */
 #define DB_DUELPOINT	"db_duel"			// 犯亘巨伙禾奶件玄犯□正矛□旦
 #define DB_ADDRESSBOOK	"db_addressbook"	// 失玉伊旦皮永弁犯□正矛□旦
 
-BOOL CHAR_send_DpDBUpdate( int charaindex );
-BOOL CHAR_send_DpDBUpdate_AddressBook( int charaindex, int mode );
+int CHAR_send_DpDBUpdate( int charaindex );
+int CHAR_send_DpDBUpdate_AddressBook( int charaindex, int mode );
 
 
 void CHAR_sendPMEToArroundCharacter( int charaindex, int petindex, int flg, int no );
@@ -513,7 +513,7 @@ void CHAR_sendPMEToArroundCharacterFLXY( int petindex,
 
 void CHAR_sendSEoArroundCharacter( int fl, int x, int y, int senumber, int sw );
 
-BOOL CHAR_initEffectSetting( char* filename );
+int CHAR_initEffectSetting( char* filename );
 void CHAR_checkEffect( int charaindex);
 void CHAR_checkEffectLoop( void);
 void CHAR_initDebugChatCdkey( void);
@@ -554,14 +554,14 @@ int                    CHAR_effectnum;
 #endif
 
 #ifdef _PET_LOSTPET
-BOOL CHAR_CharSaveLostPet( int petindex, int type);
+int CHAR_CharSaveLostPet( int petindex, int type);
 #endif
 #ifdef _ALLDOMAN
 void InitHeroList( void);
 #endif
 #endif
 
-BOOL checkUnlawWarpFloor( int floor);
+int checkUnlawWarpFloor( int floor);
 
 #ifdef _HELP_NEWHAND
 void CHAR_loginAddItemForNew( int charaindex );

@@ -10,9 +10,9 @@ void BattleEncountOut(
 	int charaindex
 );
 
-BOOL BATTLE_CommandSend( int charaindex, char *pszCommand );
+int BATTLE_CommandSend( int charaindex, char *pszCommand );
 
-BOOL BATTLE_MakeCharaString(
+int BATTLE_MakeCharaString(
 	int battleindex,
 	char *pszCommand,	// 平乓仿弁正□树  请  燮
 	int	size 			// 扔奶术
@@ -20,7 +20,7 @@ BOOL BATTLE_MakeCharaString(
 
 void BATTLE_CharSendAll( int battleindex );
 
-BOOL	BATTLE_PetDefaultCommand( int petindex );
+int	BATTLE_PetDefaultCommand( int petindex );
 
 void BATTLE_ActSettingSend( int battleindex );
 

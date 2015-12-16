@@ -15,47 +15,47 @@
 #include "npc_warp.h"
 
 #ifdef _TRANS_7_NPC
-BOOL NPC_EventTRANS(int meindex, int talker, char *buff2,int mode);
+int NPC_EventTRANS(int meindex, int talker, char *buff2,int mode);
 #endif
 static void NPC_ExChangeMan_selectWindow( int meindex, int talker,int num);
-BOOL NPC_TypeCheck(int meindex,int talker,char *szMes);
+int NPC_TypeCheck(int meindex,int talker,char *szMes);
 int NPC_ExChangeManEventCheck( int meindex, int talker, char *buff1);
-BOOL NPC_EventItemCheck(int meindex,int talker,int itemNo,int flg);
-BOOL NPC_EventLevelCheck(int meindex,int talker,int level,int flg);
+int NPC_EventItemCheck(int meindex,int talker,int itemNo,int flg);
+int NPC_EventLevelCheck(int meindex,int talker,int level,int flg);
 // Arminius 8.14 move to .h (for pet talk)
-//BOOL NPC_EventBigSmallCheck(int meindex,int talker,char* buf);
-BOOL NPC_EventFreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg);
-BOOL NPC_EventBigSmallLastCheck(int point1,int mypoint,int flg);
-BOOL NPC_ENDEventNoCheck(int meindex,int talker,int shiftbit,int flg);
-BOOL NPC_NOWEventNoCheck(int meindex,int talker,int shiftbit,int flg);
-BOOL NPC_TiemCheck(int meindex,int talker,int time,int flg);
-BOOL NPC_EventAddPet(int meindex, int talker, char *buff2,int mode);
-BOOL NPC_RandItemGet(int meindex, int talker,int rand_j,char *buf);
+//int NPC_EventBigSmallCheck(int meindex,int talker,char* buf);
+int NPC_EventFreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg);
+int NPC_EventBigSmallLastCheck(int point1,int mypoint,int flg);
+int NPC_ENDEventNoCheck(int meindex,int talker,int shiftbit,int flg);
+int NPC_NOWEventNoCheck(int meindex,int talker,int shiftbit,int flg);
+int NPC_TiemCheck(int meindex,int talker,int time,int flg);
+int NPC_EventAddPet(int meindex, int talker, char *buff2,int mode);
+int NPC_RandItemGet(int meindex, int talker,int rand_j,char *buf);
 
-BOOL NPC_PetLvCheckType2(int petindex,int meindex,int talker,char *buf,int mode);
-BOOL NPC_PetLvCheck(int meindex,int talker,char *buf,int mode);
+int NPC_PetLvCheckType2(int petindex,int meindex,int talker,char *buf,int mode);
+int NPC_PetLvCheck(int meindex,int talker,char *buf,int mode);
 void NPC_RequestMain(int meindex,int talker,char *buf);
 void NPC_AcceptMain(int meindex,int  talker ,char*buf);
 void NPC_MsgDisp(int meindex,int talker,int num);
-BOOL NPC_EventAdd(int meindex,int talker,int mode);
-BOOL NPC_AcceptDel(int meindex,int talker,int mode);
-BOOL NPC_SavePointCheck(int meindex,int talker,int shiftbit,int flg);
+int NPC_EventAdd(int meindex,int talker,int mode);
+int NPC_AcceptDel(int meindex,int talker,int mode);
+int NPC_SavePointCheck(int meindex,int talker,int shiftbit,int flg);
 
-BOOL NPC_EventReduce(int meindex,int talker,char *buf);
-BOOL NPC_EventDelItem(int meindex,int talker,char *buf,int breakflg);
-BOOL NPC_EventDelItemEVDEL(int meindex,int talker,char *buf,char *nbuf,int breakflg);
-BOOL NPC_EventAddItem(int meindex,int talker,char *buf);
+int NPC_EventReduce(int meindex,int talker,char *buf);
+int NPC_EventDelItem(int meindex,int talker,char *buf,int breakflg);
+int NPC_EventDelItemEVDEL(int meindex,int talker,char *buf,char *nbuf,int breakflg);
+int NPC_EventAddItem(int meindex,int talker,char *buf);
 int NPC_EventFile(int meindex,int talker,char *buf);
-BOOL NPC_EventDelPet(int  meindex,int  talker, int petsel);
+int NPC_EventDelPet(int  meindex,int  talker, int petsel);
 void NPC_PetSkillMakeStr(int meindex,int toindex,int select);
 void NPC_CleanMain(int meindex,int talker,char *buf);	
 void NPC_EventPetSkill( int meindex, int talker, char *data);
-BOOL NPC_ItemFullCheck(int meindex,int talker,char *buf,int mode,int evcnt);
+int NPC_ItemFullCheck(int meindex,int talker,char *buf,int mode,int evcnt);
 void NPC_CharmStatus(int meindex,int talker);
-BOOL NPC_ImageCheck(int meindex,int talker,int kosuu,int flg);
+int NPC_ImageCheck(int meindex,int talker,int kosuu,int flg);
 int NPC_EventGetCost(int meindex,int talker,char *arg);
 
-BOOL NPC_EventWarpNpc(int meindex,char *buf);
+int NPC_EventWarpNpc(int meindex,char *buf);
 
 
 enum {
@@ -66,7 +66,7 @@ enum {
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_ExChangeManInit( int meindex )
+int NPC_ExChangeManInit( int meindex )
 {
 
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -148,7 +148,7 @@ BOOL NPC_ExChangeManInit( int meindex )
 }
 
 /*--      及啖  --*/
-BOOL NPC_EventWarpNpc(int meindex,char *buf)
+int NPC_EventWarpNpc(int meindex,char *buf)
 {
 	char token[32];
 	char buf2[32];
@@ -227,7 +227,7 @@ void NPC_ExChangeManTalked( int meindex , int talkerindex , char *szMes ,int col
 /*------------------------------------------------------------
  *涩烂白央奶伙毛  心  心｝椭瘀互丐匀凶正奶皿及质  毛允月
  *-------------------------------------------------------------*/
-BOOL NPC_TypeCheck(int meindex,int talker,char *szMes)
+int NPC_TypeCheck(int meindex,int talker,char *szMes)
 {
 
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -671,7 +671,7 @@ int NPC_ExChangeManEventCheck( int meindex, int talker, char *buff1)
 /*---------------------------------
  *   凝筏寞民尼永弁
  --------------------------------*/
-BOOL NPC_EventBigSmallCheck(int meindex,int talker, char* buf)
+int NPC_EventBigSmallCheck(int meindex,int talker, char* buf)
 {
 
 	char buff2[128];
@@ -738,7 +738,7 @@ BOOL NPC_EventBigSmallCheck(int meindex,int talker, char* buf)
 /*-----------------------------------
  * 嫩  毛  凶仄化中月井及民尼永弁
  *-----------------------------------*/
-BOOL NPC_EventFreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg)
+int NPC_EventFreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg)
 {
 
 	/*--伊矛伙民尼永弁--*/
@@ -806,7 +806,7 @@ BOOL NPC_EventFreeIfCheck(int meindex,int talker,char* buf,int kosuu,int flg)
 /*--------------------------------
  *  矢永玄及伊矛伙毛民尼永弁允月
  ---------------------------------*/
-BOOL NPC_PetLvCheck(int meindex,int talker,char *buf,int mode)
+int NPC_PetLvCheck(int meindex,int talker,char *buf,int mode)
 {
 	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char buff2[16];
@@ -989,7 +989,7 @@ int NPC_PetLvCheckType2(int petindex,int meindex,int talker,char *buf,int mode)
 /*------------------------
  *请  鳔及民尼永弁
  --------------------------*/
-BOOL NPC_SavePointCheck(int meindex,int talker,int shiftbit,int flg)
+int NPC_SavePointCheck(int meindex,int talker,int shiftbit,int flg)
 {
 	int point;
 
@@ -1007,7 +1007,7 @@ BOOL NPC_SavePointCheck(int meindex,int talker,int shiftbit,int flg)
 /*------------------------
  *奶丢□斥及民尼永弁
  --------------------------*/
-BOOL NPC_ImageCheck(int meindex,int talker,int kosuu,int flg)
+int NPC_ImageCheck(int meindex,int talker,int kosuu,int flg)
 {
 	int image;
 
@@ -1024,7 +1024,7 @@ BOOL NPC_ImageCheck(int meindex,int talker,int kosuu,int flg)
 /*-----------------------------------------
  * 凛棉及民尼永弁毛垫丹(丐中引中凛棉)
  ------------------------------------------*/
-BOOL NPC_TiemCheck(int meindex,int talker,int time,int flg)
+int NPC_TiemCheck(int meindex,int talker,int time,int flg)
 {
 	LSTIME		nowlstime;
 	int now;
@@ -1042,7 +1042,7 @@ BOOL NPC_TiemCheck(int meindex,int talker,int time,int flg)
 /*------------------------------
  *--Item毛民尼永弁				
  -------------------------------*/
-BOOL NPC_EventItemCheck(int meindex,int talker,int itemNo,int flg)
+int NPC_EventItemCheck(int meindex,int talker,int itemNo,int flg)
 {
 	int i;
 	int itemindex = -1;
@@ -1075,7 +1075,7 @@ BOOL NPC_EventItemCheck(int meindex,int talker,int itemNo,int flg)
 /*------------------------------
  * level毛民尼永弁				
  -------------------------------*/
-BOOL NPC_EventLevelCheck(int meindex,int talker,int level,int flg)
+int NPC_EventLevelCheck(int meindex,int talker,int level,int flg)
 {
 
 	int mylevel;
@@ -1097,7 +1097,7 @@ BOOL NPC_EventLevelCheck(int meindex,int talker,int level,int flg)
 /*------------------------------
  * ENDEventNo毛民尼永弁
  -------------------------------*/
-BOOL NPC_ENDEventNoCheck(int meindex,int talker,int shiftbit,int flg)
+int NPC_ENDEventNoCheck(int meindex,int talker,int shiftbit,int flg)
 {
 
 	if(NPC_EventCheckFlg( talker, shiftbit) == TRUE) {
@@ -1113,7 +1113,7 @@ BOOL NPC_ENDEventNoCheck(int meindex,int talker,int shiftbit,int flg)
 /*------------------------------
  * NOWEventNo毛民尼永弁
  -------------------------------*/
-BOOL NPC_NOWEventNoCheck(int meindex,int talker,int shiftbit,int flg)
+int NPC_NOWEventNoCheck(int meindex,int talker,int shiftbit,int flg)
 {
 	if(NPC_NowEventCheckFlg( talker, shiftbit) == TRUE) {
 		if(flg == 3) return TRUE;
@@ -1127,7 +1127,7 @@ BOOL NPC_NOWEventNoCheck(int meindex,int talker,int shiftbit,int flg)
 /*---------------------------------------
  *    蔽民尼永弁
  --------------------------------------*/
-BOOL NPC_EventBigSmallLastCheck(int point1,int mypoint,int flg)
+int NPC_EventBigSmallLastCheck(int point1,int mypoint,int flg)
 {
 
 	if(flg == 0) {
@@ -2116,7 +2116,7 @@ void NPC_MsgDisp(int meindex,int talker,int num)
 /*--------------------------------------
  *奶矛件玄迕及失奶  丞毛馨笛允月
  ---------------------------------------*/
-BOOL NPC_EventAdd(int meindex,int talker,int mode)
+int NPC_EventAdd(int meindex,int talker,int mode)
 {
 
 	char buf[64];
@@ -2484,7 +2484,7 @@ BOOL NPC_EventAdd(int meindex,int talker,int mode)
 /*--------------------------------------
  *仿件母丞匹失奶  丞毛必永玄今六月
  ------------------------------------ */
-BOOL NPC_RandItemGet(int meidex,int talker,int rand_j,char *buf)
+int NPC_RandItemGet(int meidex,int talker,int rand_j,char *buf)
 {
 	char buff2[64];
 	int randitem;
@@ -2545,7 +2545,7 @@ BOOL NPC_RandItemGet(int meidex,int talker,int rand_j,char *buf)
 /*----------------------------------------------------
  * 奶矛件玄
  ----------------------------------------------------*/
-BOOL NPC_AcceptDel(int meindex,int talker,int mode )
+int NPC_AcceptDel(int meindex,int talker,int mode )
 {
 
 	char buf[1024*2];
@@ -2923,7 +2923,7 @@ BOOL NPC_AcceptDel(int meindex,int talker,int mode )
 /*--------------------------
  * 奶矛件玄矢永玄毛绰轮
  ---------------------------*/
-BOOL NPC_EventDelPet(int  meindex,int  talker, int petsel)
+int NPC_EventDelPet(int  meindex,int  talker, int petsel)
 {
 
 	int petindex;
@@ -2995,7 +2995,7 @@ BOOL NPC_EventDelPet(int  meindex,int  talker, int petsel)
 /*----------------------------
  *  矢永玄毛馨笛允月
  ------------------------------*/
-BOOL NPC_EventAddPet(int meindex, int talker, char *buff2,int mode)
+int NPC_EventAddPet(int meindex, int talker, char *buff2,int mode)
 {
 	int	ret;
 	char msgbuf[64];
@@ -3085,7 +3085,7 @@ BOOL NPC_EventAddPet(int meindex, int talker, char *buff2,int mode)
 }
 
 #ifdef _TRANS_7_NPC
-BOOL NPC_EventTRANS(int meindex, int talker, char *buff2,int mode)
+int NPC_EventTRANS(int meindex, int talker, char *buff2,int mode)
 {
 	char token[128];
 	int work[10];
@@ -3126,7 +3126,7 @@ BOOL NPC_EventTRANS(int meindex, int talker, char *buff2,int mode)
 
 
 // Robin add NPC给宠物蛋
-BOOL NPC_EventAddEgg(int meindex, int talker, char *buff2,int mode)
+int NPC_EventAddEgg(int meindex, int talker, char *buff2,int mode)
 {
 	int	ret;
 	char msgbuf[64];
@@ -3254,7 +3254,7 @@ BOOL NPC_EventAddEgg(int meindex, int talker, char *buff2,int mode)
 /*---------------------------
  *  奶矛件玄  毛绰轮允月
  -----------------------------**/
-BOOL NPC_EventDelItem(int meindex,int talker,char *buf,int breakflg)
+int NPC_EventDelItem(int meindex,int talker,char *buf,int breakflg)
 {
 
 	int i = 1, j = 1, k = 1 ;
@@ -3368,7 +3368,7 @@ BOOL NPC_EventDelItem(int meindex,int talker,char *buf,int breakflg)
 	return TRUE;
 }
 
-BOOL NPC_EventDelItemEVDEL(int meindex,int talker,char *buf,char *nbuf,int breakflg)
+int NPC_EventDelItemEVDEL(int meindex,int talker,char *buf,char *nbuf,int breakflg)
 {
 
 	int k = 1, l = 1;
@@ -3501,7 +3501,7 @@ BOOL NPC_EventDelItemEVDEL(int meindex,int talker,char *buf,char *nbuf,int break
 /*----------------------
  * 奶矛件玄  毛馨笛]
  -----------------------*/
-BOOL NPC_EventAddItem(int meindex,int talker,char *buf)
+int NPC_EventAddItem(int meindex,int talker,char *buf)
 {
 
 	char buff3[128];
@@ -3668,7 +3668,7 @@ int NPC_EventFile(int meindex,int talker,char *arg)
 /*---------------------------------
  * 失奶  丞及民尼永弁分仃毛垫丹
  -----------------------------------*/
-BOOL NPC_EventReduce(int meindex,int talker,char *buf)
+int NPC_EventReduce(int meindex,int talker,char *buf)
 {
 
 	char buf2[512];
@@ -3794,7 +3794,7 @@ void NPC_EventPetSkill( int meindex, int talker, char *data)
 /*----------------------------------------
  *  失奶  丞互中匀天中井升丹井及民尼永弁
 ----------- ------------------------------*/
-BOOL NPC_ItemFullCheck(int meindex,int talker,char *buf,int mode,int evcnt)
+int NPC_ItemFullCheck(int meindex,int talker,char *buf,int mode,int evcnt)
 {
 
 	char buff2[256];

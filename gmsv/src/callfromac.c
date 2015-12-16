@@ -25,7 +25,7 @@
 
 time_t initTime =0;
 
-extern BOOL bNewServer;
+extern int bNewServer;
 extern int i_shutdown_time;//ttom
 
 void saacproto_ACGmsvDownRequest_recv( int fd, int min)
@@ -420,7 +420,7 @@ void saacproto_Message_recv( int fd,char* id_from,char* charname_from,
 							char* id_to,char* charname_to,
 							char* message,int option,int mesgid )
 {
-	BOOL	ret;
+	int	ret;
 	ret = ADDRESSBOOK_sendMessage_FromOther( id_from, charname_from, 
 										id_to, charname_to,
 										message, option
@@ -911,7 +911,7 @@ void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
 			char cdkey[64];
 			char szName[64];
 			int i, MAX_USER=0;
-			BOOL find=FALSE;
+			int find=FALSE;
 			
 			print("跨服踢人:%s", data);
 

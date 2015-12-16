@@ -29,7 +29,7 @@ enum{
 	NPC_WORK_BATTLELOOP = CHAR_NPCWORKINT2,
 };
 
-BOOL NPC_DuelrankingInit( int meindex )
+int NPC_DuelrankingInit( int meindex )
 {
 	CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPEDUELRANKING );
 	return TRUE;

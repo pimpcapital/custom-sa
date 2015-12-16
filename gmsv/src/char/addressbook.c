@@ -76,7 +76,7 @@ char ADDRESSBOOK_returnstring[25*128];
 
 
 static int ADDRESSBOOK_findBlankEntry( int cindex );
-static BOOL ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
+static int ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
 												 ADDRESSBOOK_entry* ae);
 
 /*------------------------------------------------------------
@@ -95,7 +95,7 @@ static BOOL ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
  * 左件仿奶件及平乓仿卞丢永本□斥毛霜耨仄凶日TRUE ,
  * 左白仿奶件卞瓒  仄凶日FALSE毛井尹允
  ------------------------------------------------------------*/
-BOOL ADDRESSBOOK_sendMessage( int cindex, int aindex, char* text , int color )
+int ADDRESSBOOK_sendMessage( int cindex, int aindex, char* text , int color )
 {
 	int 	i ;
 	char 	tmpmsg[256];
@@ -205,7 +205,7 @@ BOOL ADDRESSBOOK_sendMessage( int cindex, int aindex, char* text , int color )
  *
  * 忒曰袄
  ------------------------------------------------------------*/
-BOOL ADDRESSBOOK_sendMessage_FromOther( char *fromcdkey, char *fromcharaname, 
+int ADDRESSBOOK_sendMessage_FromOther( char *fromcdkey, char *fromcharaname, 
 										char *tocdkey, char *tocharaname,
 										char* text , int color )
 {
@@ -286,10 +286,10 @@ int ADDRESSBOOK_getIndexInAddressbook(int cindex , char *cdkey,
 	return -1;
 }
 
-BOOL ADDRESSBOOK_deleteEntry( int meindex ,int index )
+int ADDRESSBOOK_deleteEntry( int meindex ,int index )
 {
 	ADDRESSBOOK_entry ent;
-	BOOL ret;
+	int ret;
 	if( !CHAR_CHECKINDEX( meindex ) ) return FALSE;
 
 	memset( &ent ,0, sizeof( ADDRESSBOOK_entry ));
@@ -301,7 +301,7 @@ BOOL ADDRESSBOOK_deleteEntry( int meindex ,int index )
 	return FALSE;
 }
 
-BOOL ADDRESSBOOK_addEntry( int meindex )
+int ADDRESSBOOK_addEntry( int meindex )
 {
 	int objbuf[20];
 	int found_count;
@@ -310,7 +310,7 @@ BOOL ADDRESSBOOK_addEntry( int meindex )
 	int	cnt = 0;
 	int	fd;
     char *mycd , *tocd;
-	BOOL found = FALSE;
+	int found = FALSE;
 
 	if( !CHAR_CHECKINDEX( meindex ) )return FALSE;
 	
@@ -435,7 +435,7 @@ static int ADDRESSBOOK_findBlankEntry( int cindex )
 	return -1;
 }
 
-static BOOL ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
+static int ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
 												 ADDRESSBOOK_entry* ae)
 {
 	char *cdkey;
@@ -535,7 +535,7 @@ void ADDRESSBOOK_notifyLoginLogout( int cindex , int flg )
 	}
 }
 
-BOOL ADDRESSBOOK_sendAddressbookTable( int cindex )
+int ADDRESSBOOK_sendAddressbookTable( int cindex )
 {
 	int stringlen=0;
 	int i;
@@ -589,7 +589,7 @@ BOOL ADDRESSBOOK_sendAddressbookTable( int cindex )
 	return TRUE;
 }
 
-BOOL ADDRESSBOOK_sendAddressbookTableOne( int cindex, int num )
+int ADDRESSBOOK_sendAddressbookTableOne( int cindex, int num )
 {
 	int stringlen=0;
 	ADDRESSBOOK_entry *ae;
@@ -677,7 +677,7 @@ char *ADDRESSBOOK_makeAddressbookString( ADDRESSBOOK_entry *a )
  * 忒曰袄
  * 勾友卞TRUE
  ------------------------------------------------------------*/
-BOOL ADDRESSBOOK_makeAddressbookEntry( char *in , ADDRESSBOOK_entry *a )
+int ADDRESSBOOK_makeAddressbookEntry( char *in , ADDRESSBOOK_entry *a )
 {
 	char work1[256], work2[256] , work3[256] , work4[256],work5[256],work6[256];
 	int ret;

@@ -18,7 +18,7 @@ struct	{
 }w;
 
 struct	{
-	BOOL	use;
+	int	use;
 	int		checkhaveitem;
 	int		checkhaveitemgotowin;
 	int		checkdonthaveitem;
@@ -36,12 +36,12 @@ enum {
 	CHAR_WORK_MSGCOLOR	= CHAR_NPCWORKINT1,
 };
 //static void NPC_Windowman_selectWindow( int meindex, int toindex, int num);
-//static BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg);
+//static int NPC_Windowman_readData( int meindex, int windowno, int chkflg);
 //static int NPC_Windowman_restoreButtontype( char *data );
 
 /*********************************
 *********************************/
-BOOL NPC_WindowmanInit( int meindex )
+int NPC_WindowmanInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buf[1024];
@@ -196,7 +196,7 @@ void NPC_WindowmanWindowTalked( int meindex, int talkerindex,
 	}
 }
 
-BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
+int NPC_Windowman_readData( int meindex, int windowno, int chkflg)
 {
 	
 	int		i;
@@ -208,8 +208,8 @@ BOOL NPC_Windowman_readData( int meindex, int windowno, BOOL chkflg)
 	int		b_mode;
 	int		selectnum ;
 	int		messagepos;
-	BOOL	errflg = FALSE;
-	BOOL	readflg = TRUE;
+	int	errflg = FALSE;
+	int	readflg = TRUE;
 	FILE	*fp;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	filename[64];

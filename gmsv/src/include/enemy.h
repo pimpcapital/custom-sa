@@ -182,17 +182,17 @@ typedef struct tagGROUP_Table
 
 
 
-INLINE BOOL ENEMY_CHECKINDEX( int index);
-INLINE int ENEMY_setInt( int index, ENEMY_DATAINT element, int data);
-INLINE int ENEMY_getInt( int index, ENEMY_DATAINT element);
+int ENEMY_CHECKINDEX( int index);
+int ENEMY_setInt( int index, ENEMY_DATAINT element, int data);
+int ENEMY_getInt( int index, ENEMY_DATAINT element);
 
-INLINE int *ENEMY_getIntdata( int index);
+int *ENEMY_getIntdata( int index);
 
-INLINE BOOL ENEMY_setChar( int index ,ENEMY_DATACHAR element, char* new );
-INLINE char *ENEMY_getChar( int index, ENEMY_DATACHAR element);
+int ENEMY_setChar( int index ,ENEMY_DATACHAR element, char* new );
+char *ENEMY_getChar( int index, ENEMY_DATACHAR element);
 int ENEMY_getEnemyNum( void);
-BOOL ENEMY_initEnemy( char* filename );
-BOOL ENEMY_reinitEnemy( void );
+int ENEMY_initEnemy( char* filename );
+int ENEMY_reinitEnemy( void );
 int ENEMY_createEnemy( int array, int baselevel );
 int *ENEMY_getEnemy( int charaindex, int x, int y);
 int ENEMY_createPetFromEnemyIndex( int charaindex, int array);
@@ -207,32 +207,32 @@ int ENEMY_TEST_createPetIndex( int array);
 #endif
 
 int ENEMYTEMP_getEnemyNum( void);//krynn 2001/12/13
-INLINE BOOL ENEMYTEMP_CHECKINDEX( int index);
-INLINE int ENEMYTEMP_setInt( int index, ENEMYTEMP_DATAINT element, int data);
-INLINE int ENEMYTEMP_getInt( int index, ENEMYTEMP_DATAINT element);
-INLINE char *ENEMYTEMP_getChar( int index, ENEMYTEMP_DATACHAR element);
-INLINE BOOL ENEMYTEMP_getInt_setChar( int index ,ENEMYTEMP_DATACHAR element, char* new );
-INLINE char *ENEMYTEMP_getInt_getChar( int index, ENEMYTEMP_DATACHAR element);
+int ENEMYTEMP_CHECKINDEX( int index);
+int ENEMYTEMP_setInt( int index, ENEMYTEMP_DATAINT element, int data);
+int ENEMYTEMP_getInt( int index, ENEMYTEMP_DATAINT element);
+char *ENEMYTEMP_getChar( int index, ENEMYTEMP_DATACHAR element);
+int ENEMYTEMP_getInt_setChar( int index ,ENEMYTEMP_DATACHAR element, char* new );
+char *ENEMYTEMP_getInt_getChar( int index, ENEMYTEMP_DATACHAR element);
 int ENEMYTEMP_getInt_getEnemyNum( void);
-BOOL ENEMYTEMP_getInt_initEnemy( char* filename );
-BOOL ENEMYTEMP_getInt_reinitEnemy( void );
+int ENEMYTEMP_getInt_initEnemy( char* filename );
+int ENEMYTEMP_getInt_reinitEnemy( void );
 int ENEMYTEMP_getEnemyTempArray( int enemyindex);
 int ENEMYTEMP_getEnemyTempArrayFromTempNo( int EnemyTempNo);
 int ENEMYTEMP_getEnemyTempArrayFromInitnum( int EnemyTempNo);
 
-INLINE int GROUP_setInt( int index, GROUP_DATAINT element, int data);
-INLINE int GROUP_getInt( int index, GROUP_DATAINT element);
-INLINE BOOL GROUP_setChar( int index ,GROUP_DATACHAR element, char* new );
-INLINE char *GROUP_getChar( int index, GROUP_DATACHAR element);
+int GROUP_setInt( int index, GROUP_DATAINT element, int data);
+int GROUP_getInt( int index, GROUP_DATAINT element);
+int GROUP_setChar( int index ,GROUP_DATACHAR element, char* new );
+char *GROUP_getChar( int index, GROUP_DATACHAR element);
 int GROUP_getEnemyNum( void);
 
-BOOL ENEMYTEMP_initEnemy( char* filename );
-BOOL ENEMYTEMP_reinitEnemy( void );
-BOOL GROUP_initGroup( char* filename );
-BOOL GROUP_reinitGroup( void );
+int ENEMYTEMP_initEnemy( char* filename );
+int ENEMYTEMP_reinitEnemy( void );
+int GROUP_initGroup( char* filename );
+int GROUP_reinitGroup( void );
 
 int PETFUSION_SetNewEgg( int toindex , int petindex, int array, int *work, int *skill1, int *skill2);
-BOOL PETFUSION_AddEgg(int toindex, int petID, int PetCode);
+int PETFUSION_AddEgg(int toindex, int petID, int PetCode);
 
 #ifdef _PET_TRANS
 int GetNewPet( int toindex , int petindex, int array, int *work);

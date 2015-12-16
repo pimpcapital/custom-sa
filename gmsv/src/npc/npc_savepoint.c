@@ -16,15 +16,15 @@
 
 
 void NPC_SetFlg(int talker,int shiftbit);
-BOOL NPC_CheckFlg(int point,int shiftbit);
-BOOL NPC_SavePointItemCheck(int meindex,int talker,int itemno,int kosuu);
+int NPC_CheckFlg(int point,int shiftbit);
+int NPC_SavePointItemCheck(int meindex,int talker,int itemno,int kosuu);
 void NPC_MessageDisp(int meindex,int talker,int MseNo);
-BOOL NPC_UsedCheck(int meindex,int talker,int flg);
-BOOL NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu);
+int NPC_UsedCheck(int meindex,int talker,int flg);
+int NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu);
 
 extern time_t initTime;
 
-BOOL NPC_SavePointInit( int meindex )
+int NPC_SavePointInit( int meindex )
 {
     int     oldmanid=0, bornfl=0, bornx=0 ,borny=0;
     char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -215,7 +215,7 @@ void NPC_SavePointWindowTalked( int meindex, int talkerindex,
 
 /*
  */
-BOOL NPC_AndReduce(int meindex,int talker,char *buf,int flg)
+int NPC_AndReduce(int meindex,int talker,char *buf,int flg)
 {
 
 	char buf2[512];
@@ -279,7 +279,7 @@ BOOL NPC_AndReduce(int meindex,int talker,char *buf,int flg)
 } 
 
 
-BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
+int NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 {
 
 	char buf2[512];
@@ -346,7 +346,7 @@ BOOL NPC_AndReduceDelete(int meindex,int talker,char *buf,int flg)
 /*
  * 椭瘀毛苇凶仄凶井及民尼永弁
  */
-BOOL NPC_UsedCheck(int meindex,int talker,int flg)
+int NPC_UsedCheck(int meindex,int talker,int flg)
 {
 
    	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
@@ -464,7 +464,7 @@ void NPC_MessageDisp(int meindex,int talker,int MesNo)
 
 }
 
-BOOL NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu)
+int NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu)
 {
 	int i;
 	int itemindex;
@@ -512,7 +512,7 @@ BOOL NPC_SavePointItemDelete(int meindex,int talker,int itemNo,int kosuu)
 }
 
 
-BOOL NPC_SavePointItemCheck(int meindex,int talker,int itemno,int kosuu)
+int NPC_SavePointItemCheck(int meindex,int talker,int itemno,int kosuu)
 {
 	int i;
 	int itemindex;
@@ -553,7 +553,7 @@ void  NPC_SetFlg(int talker,int shiftbit)
 
 /*
  */
-BOOL NPC_CheckFlg(int point,int shiftbit)
+int NPC_CheckFlg(int point,int shiftbit)
 {
 //	int anser;
 

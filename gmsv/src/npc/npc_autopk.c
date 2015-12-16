@@ -96,12 +96,12 @@ enum {
 #define STANDBYTIME 50
 
 static void NPC_AutoPk_selectWindow( int meindex, int toindex, int num,int select);
-BOOL AutoPk_GetHistoryStr( char *token, int page );
+int AutoPk_GetHistoryStr( char *token, int page );
 void AutoPk_PKNum( char *token );
-BOOL AutoPk_AddItem( int charindex, int index );
-BOOL AutoPk_AddPet( int charindex, int index );
+int AutoPk_AddItem( int charindex, int index );
+int AutoPk_AddPet( int charindex, int index );
 
-BOOL NPC_AutoPkInit( int meindex )
+int NPC_AutoPkInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 		
@@ -402,7 +402,7 @@ void NPC_AutoPkLoop( void )
 {
 }
 
-BOOL AutoPk_GetHistoryStr( char *token, int page )
+int AutoPk_GetHistoryStr( char *token, int page )
 {
 	FILE* fp;
 	fp = fopen("./data/autopk/autopkhistory.txt", "r");
@@ -690,7 +690,7 @@ void AutoPk_GetChampionShip( void )
 	baward = TRUE;
 }
 
-BOOL AutoPk_AddItem( int charindex, int index )
+int AutoPk_AddItem( int charindex, int index )
 {
 	char msgbuf[64];
 	int	ret;
@@ -716,7 +716,7 @@ BOOL AutoPk_AddItem( int charindex, int index )
 	return TRUE;
 }
 
-BOOL AutoPk_AddPet( int charindex, int index)
+int AutoPk_AddPet( int charindex, int index)
 {
 	int	ret;
 	char msgbuf[64];
@@ -797,7 +797,7 @@ void NPC_AUTOPKHealerTalked( int meindex )
 	}
 }
 
-BOOL AutoPk_GetAwardStr( void )
+int AutoPk_GetAwardStr( void )
 {
 	FILE* fp;
 	int i=0;

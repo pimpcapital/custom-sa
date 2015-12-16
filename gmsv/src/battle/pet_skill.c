@@ -221,30 +221,30 @@ static PETSKILL_PetskillFunctionTable PETSKILL_functbl[] = {
 
 /* 湘  民尼永弁］失弁本旦楮溢 */
 /*----------------------------------------------------------------------*/
-INLINE BOOL PETSKILL_CHECKINDEX( int index )
+int PETSKILL_CHECKINDEX( int index )
 {
     if( PETSKILL_petskillnum<=index || index<0 )return FALSE;
     return TRUE;
 }
 /*----------------------------------------------------------------------*/
-static INLINE BOOL PETSKILL_CHECKINTDATAINDEX( int index)
+static int PETSKILL_CHECKINTDATAINDEX( int index)
 {
 	if( PETSKILL_DATAINTNUM <= index || index < 0 ) return FALSE;
 	return TRUE;
 }
 /*----------------------------------------------------------------------*/
-static INLINE BOOL PETSKILL_CHECKCHARDATAINDEX( int index)
+static int PETSKILL_CHECKCHARDATAINDEX( int index)
 {
 	if( PETSKILL_DATACHARNUM <= index || index < 0 ) return FALSE;
 	return TRUE;
 }
 /*----------------------------------------------------------------------*/
-INLINE int PETSKILL_getInt( int index, PETSKILL_DATAINT element)
+int PETSKILL_getInt( int index, PETSKILL_DATAINT element)
 {
 	return PETSKILL_petskill[index].data[element];
 }
 /*----------------------------------------------------------------------*/
-INLINE int PETSKILL_setInt( int index, PETSKILL_DATAINT element, int data)
+int PETSKILL_setInt( int index, PETSKILL_DATAINT element, int data)
 {
 	int buf;
 	buf = PETSKILL_petskill[index].data[element];
@@ -252,7 +252,7 @@ INLINE int PETSKILL_setInt( int index, PETSKILL_DATAINT element, int data)
 	return buf;
 }
 /*----------------------------------------------------------------------*/
-INLINE char* PETSKILL_getChar( int index, PETSKILL_DATACHAR element)
+char* PETSKILL_getChar( int index, PETSKILL_DATACHAR element)
 {
 	if( !PETSKILL_CHECKINDEX( index)) return "\0";
 	if( !PETSKILL_CHECKCHARDATAINDEX( element)) return "\0";
@@ -260,7 +260,7 @@ INLINE char* PETSKILL_getChar( int index, PETSKILL_DATACHAR element)
 }
 
 /*----------------------------------------------------------------------*/
-INLINE BOOL PETSKILL_setChar( int index ,PETSKILL_DATACHAR element, char* new )
+int PETSKILL_setChar( int index ,PETSKILL_DATACHAR element, char* new )
 {
     if(!PETSKILL_CHECKINDEX(index))return FALSE;
     if(!PETSKILL_CHECKCHARDATAINDEX(element))return FALSE;
@@ -286,7 +286,7 @@ int PETSKILL_getPetskillNum( void)
 /*----------------------------------------------------------------------
  * 矢永玄  及涩烂白央奶伙毛  戈//初始宠技
  *---------------------------------------------------------------------*/
-BOOL PETSKILL_initPetskill( char *filename)
+int PETSKILL_initPetskill( char *filename)
 {
     FILE*   f;
     char    line[256];
@@ -455,7 +455,7 @@ BOOL PETSKILL_initPetskill( char *filename)
 /*------------------------------------------------------------------------
  * Petskill及涩烂白央奶伙  心  仄
  *-----------------------------------------------------------------------*/
-BOOL PETSKILL_reinitPetskill( void )
+int PETSKILL_reinitPetskill( void )
 {
 	freeMemory( PETSKILL_petskill);
 	return( PETSKILL_initPetskill( getPetskillfile()));
@@ -507,7 +507,7 @@ int PETSKILL_Use(
 	int havepetskill,
 	int toindex,
 	char *data
-	//BOOL isCLI	// Robin 2001/02/26 if owner is player
+	//int isCLI	// Robin 2001/02/26 if owner is player
 )
 {
 	int		array, petskillid;

@@ -4,21 +4,21 @@
 #include "version.h"
 #ifdef _SASQL
 
-#define BOOL int
+#define int int
 #define FALSE 0
 #define TRUE 1
 
 void sasql_close( void );
-BOOL sasql_init( void );
+int sasql_init( void );
 int sasql_query(char *nm, char *pas);
-BOOL sasql_update(char *nm, char *path);
-BOOL sasql_logindate(char *nm);
-BOOL sasql_register(char *id, char *ps);
-BOOL sasql_craete_userinfo( void );
-BOOL sasql_craete_lock( void );
-BOOL sasql_chehk_lock( char *idip );
-BOOL sasql_add_lock( char *idip );
-BOOL sasql_del_lock( char *idip );
+int sasql_update(char *nm, char *path);
+int sasql_logindate(char *nm);
+int sasql_register(char *id, char *ps);
+int sasql_craete_userinfo( void );
+int sasql_craete_lock( void );
+int sasql_chehk_lock( char *idip );
+int sasql_add_lock( char *idip );
+int sasql_del_lock( char *idip );
 #endif
 
 #endif

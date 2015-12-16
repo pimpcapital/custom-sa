@@ -2,7 +2,7 @@
 #define __ITEM_EVENT_H__
 #include "item.h"
 int ITEM_eventDrop( int itemindex, int charaindex, int itemcharaindex );
-BOOL ITEM_MedicineInit( ITEM_Item* itm );
+int ITEM_MedicineInit( ITEM_Item* itm );
 void ITEM_MedicineUsed( int charaindex, int to_charaindex, int itemindex );
 void ITEM_SandClockDetach( int charindex , int itemindex );
 void ITEM_SandClockLogin( int charaindex );
@@ -34,12 +34,12 @@ void ITEM_pickupDice( int charaindex, int itemindex);
 void ITEM_useLottery( int charaindex, int toindex, int haveitemindex);
 void ITEM_useWarp( int charaindex, int toindex, int haveitemindex );
 void ITEM_petFollow( int charaindex, int toindex, int haveitemindex );
-BOOL ITEM_initLottery(ITEM_Item* itm);
+int ITEM_initLottery(ITEM_Item* itm);
 void ITEM_useSkup( int charaindex, int toindex, int haveitemindex ); // Nuke 0624
 void ITEM_useNoenemy( int charaindex, int toindex, int haveitemindex ); // Nuke 0626
 void ITEM_equipNoenemy( int charaindex, int itemindex ); // Arminius 7.2: Ra's amulet
 void ITEM_remNoenemy( int charaindex, int itemindex ); // Arminius 7.2: Ra's amulet
-BOOL ITEM_getArgument( char* argument , char* entryname , char* buf , int buflen );	// Arminius 7.2: Ra's amulet
+int ITEM_getArgument( char* argument , char* entryname , char* buf , int buflen );	// Arminius 7.2: Ra's amulet
 void ITEM_useEncounter( int charaindex, int toindex, int haveitemindex); // Arminius 7.31 cursed stone
 #ifdef _ITEM_METAMO
 void ITEM_metamo( int charaindex, int toindex, int haveitemindex );

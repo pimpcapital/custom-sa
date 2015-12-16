@@ -37,7 +37,7 @@ ENCOUNT_Table           *ENCOUNT_table;
 int                     ENCOUNT_encountnum;
 #define     ENCOUNT_ENEMYMAXCREATENUM   10
 
-static INLINE BOOL ENCOUNT_CHECKENCOUNTTABLEARRAY( int array)
+static int ENCOUNT_CHECKENCOUNTTABLEARRAY( int array)
 {
     if( array < 0 || array > ENCOUNT_encountnum-1) return FALSE;
     return TRUE;
@@ -51,7 +51,7 @@ static INLINE BOOL ENCOUNT_CHECKENCOUNTTABLEARRAY( int array)
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL ENCOUNT_initEncount( char* filename )
+int ENCOUNT_initEncount( char* filename )
 {
     FILE*   f;
     char    line[256];
@@ -358,7 +358,7 @@ BOOL ENCOUNT_initEncount( char* filename )
 /*------------------------------------------------------------------------
  * 巨件市它件玄涩烂白央奶伙  心  仄
  *-----------------------------------------------------------------------*/
-BOOL ENCOUNT_reinitEncount( void )
+int ENCOUNT_reinitEncount( void )
 {
 	freeMemory( ENCOUNT_table);
 	return( ENCOUNT_initEncount( getEncountfile()));

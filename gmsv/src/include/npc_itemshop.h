@@ -3,7 +3,7 @@
 
 void NPC_ItemShopTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_ItemShopInit( int meindex );
+int NPC_ItemShopInit( int meindex );
 void NPC_ItemShopWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 void NPC_ItemShopLooked( int meindex , int lookedindex);
 

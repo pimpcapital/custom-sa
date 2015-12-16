@@ -40,9 +40,9 @@ enum {
 #define STANDBYTIME 50
 
 static void NPC_TranserMan_selectWindow( int meindex, int toindex, int num,int select);
-BOOL TranserMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token);
+int TranserMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token);
 
-BOOL NPC_TranserManInit( int meindex )
+int NPC_TranserManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 		
@@ -169,10 +169,10 @@ void NPC_TranserManLoop( int meindex)
 
 }
 
-BOOL TranserMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token)
+int TranserMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token)
 {
 	char buf1[1024], buf2[256], buf3[256];
-	BOOL FINDS=FALSE;
+	int FINDS=FALSE;
 	int talkNo=1;
 	if( npcarg == NULL ) return FALSE;
 	

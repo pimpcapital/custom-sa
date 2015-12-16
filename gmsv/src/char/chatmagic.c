@@ -1702,8 +1702,8 @@ void CHAR_CHAT_DEBUG_eventclean( int charaindex, char* message )
 	int shift;
 	char token_cdkey[256]="", token_name[256]="", cdkey[CDKEYLEN], token_flag[256]="";
 	unsigned int max_user = 0;
-	BOOL find = FALSE;
-	BOOL ret1, ret2;
+	int find = FALSE;
+	int ret1, ret2;
 	int  charaindex_tmp = 0;
 	int i;
      
@@ -1807,8 +1807,8 @@ void CHAR_CHAT_DEBUG_eventsetnow( int charaindex, char* message )
 	int shift;
 	char token_cdkey[256]="", token_name[256]="", cdkey[CDKEYLEN];
 	unsigned int max_user = 0;
-	BOOL find = FALSE;
-	BOOL ret1, ret2;
+	int find = FALSE;
+	int ret1, ret2;
 	int  charaindex_tmp = 0;
 	int i;
      
@@ -1925,8 +1925,8 @@ void CHAR_CHAT_DEBUG_eventsetend( int charaindex, char* message )
 	int shift;
 	char token_cdkey[256]="", token_name[256]="", cdkey[CDKEYLEN];
 	unsigned int max_user = 0;
-	BOOL find = FALSE;
-	BOOL ret1, ret2;
+	int find = FALSE;
+	int ret1, ret2;
 	int  charaindex_tmp = 0;
 	int i;
 	
@@ -2008,7 +2008,7 @@ void CHAR_CHAT_DEBUG_eventsetend( int charaindex, char* message )
 void CHAR_CHAT_DEBUG_debug( int charaindex, char* message )
 {
 	char	msgbuf[256];
-	BOOL	flg = isstring1or0( message);
+	int	flg = isstring1or0( message);
 	if( flg == TRUE ){
 		CHAR_setWorkInt( charaindex, CHAR_WORKFLG,
 			CHAR_getWorkInt( charaindex, CHAR_WORKFLG ) | WORKFLG_DEBUGMODE );
@@ -2101,7 +2101,7 @@ void CHAR_CHAT_DEBUG_effect( int charaindex, char* message )
 	char	buf[ 256]; 
 	int		i;
     int     playernum = CHAR_getPlayerMaxNum();
-	BOOL	flg = FALSE;
+	int	flg = FALSE;
 	
 	getStringFromIndexWithDelim( message, " ", 1, buf, sizeof( buf));
 	if( strcmp( buf, "alloff" ) == 0 ) {
@@ -2193,7 +2193,7 @@ void CHAR_CHAT_DEBUG_shutup(int charindex ,char *message)
      char buf[256];
      char line[256];
      unsigned int MAX_USER=0,i;
-     BOOL flg;
+     int flg;
      easyGetTokenFromString( message , 1 , token, sizeof(token));
      easyGetTokenFromString( message , 2 , token1, sizeof(token1));
      if( strlen(message)==0){
@@ -2243,8 +2243,8 @@ void CHAR_CHAT_DEBUG_getuser(int charindex ,char *message) //ttom 14/11/2000
 	int i, k, MyFloor=-1, colors = CHAR_COLORWHITE;
 	int user[50];
 	int MAXCHARA=0;
-	BOOL FINDNPC = FALSE;
-	BOOL MOREs = FALSE;
+	int FINDNPC = FALSE;
+	int MOREs = FALSE;
 
 	memset( name, 0, sizeof( name) );
 	MAXCHARA = CHAR_getPlayerMaxNum();
@@ -2317,7 +2317,7 @@ void CHAR_CHAT_DEBUG_waeikick( int charindex, char* message )
     char kcmsg[256],kctalk[256];
     char szName[CHARNAMELEN];
     char buf[256];
-    BOOL find=FALSE;
+    int find=FALSE;
     int i=0;
     unsigned int MAX_USER=0;
     int fd_charaindex;
@@ -2390,7 +2390,7 @@ void CHAR_CHAT_DEBUG_jail( int charindex, char* message )
      char kcmsg[256],kctalk[256];
      char szName[256];
      char buf[256];
-     BOOL find=FALSE;
+     int find=FALSE;
      int i=0;
      unsigned int MAX_USER=0;
      int fd_charaindex;
@@ -2545,7 +2545,7 @@ void CHAR_CHAT_DEBUG_send(int charindex ,char *message)
 void CHAR_CHAT_DEBUG_noenemy( int charaindex, char* message )
 {
 	char	msgbuf[256];
-	BOOL	flg = isstring1or0( message);
+	int	flg = isstring1or0( message);
 	if( flg == TRUE ){
 	  int fd=CHAR_getWorkInt( charaindex, CHAR_WORKFD);
 	  setEqNoenemy(fd, 200);
@@ -2888,7 +2888,7 @@ void CHAR_CHAT_DEBUG_watchevent( int charaindex, char* message )
 	int  count = 0, point, ckpoint, i, j;
 	char token_cdkey[256], token_name[256], cdkey[CDKEYLEN];
 	char buf[1024], buf1[64];
-	BOOL find = FALSE;
+	int find = FALSE;
 	
 	if( strlen(message)==0 ){
 		charaindex_tmp = charaindex;
@@ -3443,8 +3443,8 @@ void CHAR_CHAT_DEBUG_sendeffect( int charaindex, char *message)
 	struct {
 		int floor;
 		int effect;
-		BOOL on;
-		BOOL off;
+		int on;
+		int off;
 	} ef[2048];
 
 
@@ -3628,7 +3628,7 @@ void CHAR_CHAT_DEBUG_samecode( int charaindex, char *message)
 		"pet", "item", "set"
 	};
 	int type=-1, j, total = 0;
-	BOOL checkn = FALSE;
+	int checkn = FALSE;
 	int MAXPLAYER = CHAR_getPlayerMaxNum();
 	int MAXITEM = ITEM_getITEM_itemnum();
 	int MAXPET = CHAR_getPetMaxNum();
@@ -3705,7 +3705,7 @@ void CHAR_CHAT_DEBUG_silent(int charindex ,char *message)
      char buf[256];
      char line[256];
      unsigned int MAX_USER=0,i;
-     //BOOL flg;
+     //int flg;
      int minu;
      easyGetTokenFromString( message , 1 , token, sizeof(token));
      easyGetTokenFromString( message , 2 , token1, sizeof(token1));

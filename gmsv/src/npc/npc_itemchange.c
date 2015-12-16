@@ -39,10 +39,10 @@ enum {
 };
 
 static void NPC_ItemchangeMan_selectWindow( int meindex, int toindex, int num,int select);
-BOOL ItemchangeMan_GetNeedStr( int meindex, int toindex, char *npcarg, char *token, int num );
-BOOL ItemchangeMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token);
+int ItemchangeMan_GetNeedStr( int meindex, int toindex, char *npcarg, char *token, int num );
+int ItemchangeMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token);
 
-BOOL NPC_ItemchangeManInit( int meindex )
+int NPC_ItemchangeManInit( int meindex )
 {
 	char npcarg[NPC_UTIL_GETARGSTR_BUFSIZE];
 		
@@ -160,11 +160,11 @@ void NPC_ItemchangeManLoop( int meindex)
 	
 }
 
-BOOL ItemchangeMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token)
+int ItemchangeMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *token)
 {
 	char buf1[1024], buf2[256], buf3[256];
 	char NullName[256] = {"未知的物品"};
-	BOOL FINDS=FALSE;
+	int FINDS=FALSE;
 	int talkNo=1;
 	int addID;
 	if( npcarg == NULL ) return FALSE;
@@ -201,12 +201,12 @@ BOOL ItemchangeMan_GetMenuStr( int meindex, int toindex, char *npcarg, char *tok
 	return FINDS;
 }
 
-BOOL ItemchangeMan_GetNeedStr( int meindex, int toindex, char *npcarg, char *token, int num )
+int ItemchangeMan_GetNeedStr( int meindex, int toindex, char *npcarg, char *token, int num )
 {
 	char buf1[1024], buf2[256], buf3[256];
 	char NullName[256] = {"未知的物品"};
 	int talkNo=1, addID, i=0;
-	BOOL FINDS = FALSE;
+	int FINDS = FALSE;
 	if( npcarg == NULL ) return FALSE;
 	if( NPC_Util_GetStrFromStrWithDelim( npcarg, "NeedHead", buf1, sizeof( buf1) ) == NULL){
 		print("ItemchangeMan Get NeedHead ERROR!\n%s", npcarg);

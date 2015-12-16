@@ -24,7 +24,7 @@ enum {
 };
 
 
-BOOL NPC_MicInit( int meindex )
+int NPC_MicInit( int meindex )
 {
 	int		i;
 	int	 	arg_param[8];
@@ -124,7 +124,7 @@ void NPC_MicTalked( int meindex , int talkerindex , char *msg ,int color )
 	playernum = CHAR_getPlayerMaxNum();
 
 	for( i = 0; i < playernum; i ++ ) {
-		BOOL flg = FALSE;
+		int flg = FALSE;
 	        if( CHAR_getCharUse(i) == FALSE ) continue;
             	if( CHAR_getInt( i, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER ) continue;
 		if( CHAR_getInt( i, CHAR_FLOOR) != CHAR_getWorkInt( meindex, CHAR_WORK_FLOOR) ){

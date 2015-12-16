@@ -1,7 +1,7 @@
 #ifndef __NPC_MIC_H__
 #define __NPC_MIC_H__
 
-BOOL NPC_MicInit(int meindex );
+int NPC_MicInit(int meindex );
 void NPC_MicTalked( int meindex , int talkerindex , char *msg , int color );
 
 #endif

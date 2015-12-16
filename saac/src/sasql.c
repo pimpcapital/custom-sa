@@ -112,7 +112,7 @@ static int readConfig(char *path)
 	}
 }
 
-BOOL sasql_init(void)
+int sasql_init(void)
 {
 	if (mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
 		printf("\nmysql_init=fail 数据库初始化失败！");
@@ -178,7 +178,7 @@ int sasql_query(char *nm, char *pas)
 }
 
 #ifdef _SQL_REGISTER
-BOOL sasql_register(char *id, char *ps)
+int sasql_register(char *id, char *ps)
 {
 	char sqlstr[256];
 //      if(AutoReg!=1)return FALSE;
@@ -196,7 +196,7 @@ BOOL sasql_register(char *id, char *ps)
 }
 #endif
 
-BOOL sasql_chehk_lock(char *idip)
+int sasql_chehk_lock(char *idip)
 {
 	char sqlstr[256];
 	sprintf(sqlstr, "select * from %s where %s=BINARY'%s'", config.sql_LOCK,
@@ -218,7 +218,7 @@ BOOL sasql_chehk_lock(char *idip)
 	return FALSE;
 }
 
-BOOL sasql_add_lock(char *idip)
+int sasql_add_lock(char *idip)
 {
 	char sqlstr[256];
 	sprintf(sqlstr, "INSERT INTO %s (%s) VALUES (BINARY'%s')",
@@ -231,7 +231,7 @@ BOOL sasql_add_lock(char *idip)
 	return FALSE;
 }
 
-BOOL sasql_del_lock(char *idip)
+int sasql_del_lock(char *idip)
 {
 	char sqlstr[256];
 	sprintf(sqlstr, "delete from config.SQL_LOCK where %s=BINARY'%s'",
@@ -244,12 +244,12 @@ BOOL sasql_del_lock(char *idip)
 	return FALSE;
 }
 
-BOOL sasql_craete_lock(void)
+int sasql_craete_lock(void)
 {
 
 }
 
-BOOL sasql_craete_userinfo(void)
+int sasql_craete_userinfo(void)
 {
 
 }

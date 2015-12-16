@@ -53,8 +53,8 @@ NPC_POOLITEMSHOP_MSG		poolshopmsg[] = {
 	{ "itemfull_msg",	"项目有很多"}
 };
 
-static BOOL NPC_PoolItemShop_DrawItem( int meindex, int talkerindex, int num);
-static BOOL NPC_PoolItemShop_PoolItem( int meindex, int talkerindex, int num);
+static int NPC_PoolItemShop_DrawItem( int meindex, int talkerindex, int num);
+static int NPC_PoolItemShop_PoolItem( int meindex, int talkerindex, int num);
 static void NPC_PoolItemShop_MakeItemString_Draw( int meindex, int talkerindex, 
 								char *retstring,int retstringlen);
 static void NPC_PoolItemShop_MakeItemString_Pool( int meindex, int talkerindex, 
@@ -71,13 +71,13 @@ static void NPC_PoolItemShop_printWindow_HaveItemFull( int meindex, int talkerin
 void NPC_PoolItemShop_DepotItem_Menu( int meindex, int talkerindex);
 void NPC_DepotItem_Item_printWindow( int meindex, int talkerindex);
 void NPC_DepotItem_Depot_printWindow( int meindex, int talkerindex);
-BOOL NPC_DepotItem_InsertItem( int meindex, int talkerindex, int num);
-BOOL NPC_DepotItem_gettItem( int meindex, int talkerindex, int num);
+int NPC_DepotItem_InsertItem( int meindex, int talkerindex, int num);
+int NPC_DepotItem_gettItem( int meindex, int talkerindex, int num);
 #endif
 
 #define NPCPOOLITEMLOOP 1000*20
 int othertime=0;
-BOOL NPC_PoolItemShopInit( int meindex)
+int NPC_PoolItemShopInit( int meindex)
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 	int cost;
@@ -456,7 +456,7 @@ void NPC_DepotItem_CheckRepeat( int talkerindex)
 	}
 }
 
-BOOL NPC_DepotItem_InsertItem( int meindex, int talkerindex, int num)
+int NPC_DepotItem_InsertItem( int meindex, int talkerindex, int num)
 {
 	int emptyindex;
 	int itemindex;
@@ -504,7 +504,7 @@ BOOL NPC_DepotItem_InsertItem( int meindex, int talkerindex, int num)
 	return TRUE;
 }
 
-BOOL NPC_DepotItem_gettItem( int meindex, int talkerindex, int num)
+int NPC_DepotItem_gettItem( int meindex, int talkerindex, int num)
 {
 	int emptyindex;
 	int itemindex;
@@ -757,7 +757,7 @@ static void NPC_PoolItemShop_MakeItemString_Draw( int meindex, int talkerindex,
 	}
 }
 
-static BOOL NPC_PoolItemShop_PoolItem( int meindex, int talkerindex, int num)
+static int NPC_PoolItemShop_PoolItem( int meindex, int talkerindex, int num)
 {
 	int emptyindex;
 	int itemindex;
@@ -801,7 +801,7 @@ static BOOL NPC_PoolItemShop_PoolItem( int meindex, int talkerindex, int num)
 	return TRUE;
 }
 
-static BOOL NPC_PoolItemShop_DrawItem( int meindex, int talkerindex, int num)
+static int NPC_PoolItemShop_DrawItem( int meindex, int talkerindex, int num)
 {
 	int emptyindex;
 	int itemindex;

@@ -12,7 +12,7 @@
 
 //#define _RECORD_NPCMAN_ //纪录
 
-BOOL NPC_TimeWarpCheck(int meindex,char *buf,int mode);
+int NPC_TimeWarpCheck(int meindex,char *buf,int mode);
 
 static void NPC_WarpsetNeverMake( int charaindex )
 {
@@ -22,7 +22,7 @@ static void NPC_WarpsetNeverMake( int charaindex )
         NPC_create[cindex].workdata[NPC_CREATEWORKNEVERMAKE] = 1;
 }
 
-BOOL NPC_WarpInit( int charaindex )
+int NPC_WarpInit( int charaindex )
 {
 	char arg[NPC_UTIL_GETARGSTR_BUFSIZE];
     int ret;
@@ -139,7 +139,7 @@ void NPC_WarpWarpCharacter( int warpnpcindex, int charaindex )
 	int i=0;
 #ifdef _NEW_WARPPOINT
 	char buf1[256], buf2[256], buf3[256], freemsg[256];
-	BOOL nBefind = FALSE;
+	int nBefind = FALSE;
 	struct wapepoints	{
 		int m_floor;
 		int m_x;

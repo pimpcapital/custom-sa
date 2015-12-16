@@ -4,7 +4,7 @@
 void NPC_RidermanTalked( int meindex , int talkerindex , char *msg ,
                      int color );
 
-BOOL NPC_RidermanInit( int meindex );
+int NPC_RidermanInit( int meindex );
 void NPC_RidermanLooked( int meindex, int lookedindex );
 void NPC_RidermanWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 

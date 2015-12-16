@@ -525,7 +525,7 @@ void BATTLE_ActSettingSend( int battleindex )
 
 
 
-BOOL BATTLE_IsHide( int charaindex ){
+int BATTLE_IsHide( int charaindex ){
 	if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLECOM1 ) == BATTLE_COM_S_EARTHROUND0 
 		){
 		return TRUE;
@@ -541,7 +541,7 @@ BOOL BATTLE_IsHide( int charaindex ){
 //
 //  田玄伙及戊穴件玉毛弁仿奶失件玄卞霜月
 //
-BOOL BATTLE_CommandSend( int charaindex, char *pszCommand )
+int BATTLE_CommandSend( int charaindex, char *pszCommand )
 //
 //********************************************************
 {
@@ -552,7 +552,7 @@ BOOL BATTLE_CommandSend( int charaindex, char *pszCommand )
 }
 
 
-BOOL BATTLE_MakeCharaString(
+int BATTLE_MakeCharaString(
 	int battleindex,
 	char *pszCommand,
 	int	size
@@ -903,7 +903,7 @@ void BattleEncountOut( int charaindex)
 //
 // 犯白巧伙玄及戊穴件玉毛  木月矢永玄迕
 //
-BOOL	BATTLE_PetDefaultCommand( int petindex )
+int	BATTLE_PetDefaultCommand( int petindex )
 //
 //**************************************************
 {

@@ -1,7 +1,7 @@
 #include "version.h"
 #include "char.h"
 
-BOOL NPC_StoryTellerInit( int meindex )
+int NPC_StoryTellerInit( int meindex )
 {
     CHAR_setInt( meindex , CHAR_WHICHTYPE , CHAR_TYPESTORYTELLER );
     CHAR_setFlg( meindex , CHAR_ISATTACKED , 0 );

@@ -76,18 +76,18 @@ EXTERN NPC_Create*     NPC_create;
 EXTERN int             NPC_createnum;
 EXTERN int             NPC_create_readindex;
 
-INLINE int NPC_CHECKCREATEINDEX(int index);
+int NPC_CHECKCREATEINDEX(int index);
 
-BOOL NPC_isBoundarySet( int createindex );
-BOOL NPC_createGetRECT( int createindex,RECT*   r );
-BOOL NPC_readNPCCreateFiles( char* topdirectory ,int createsize);
+int NPC_isBoundarySet( int createindex );
+int NPC_createGetRECT( int createindex,RECT*   r );
+int NPC_readNPCCreateFiles( char* topdirectory ,int createsize);
 int NPC_getCreateInt( int index , NPC_CREATEINT element );
 
-BOOL NPC_createCheckGenerateFromTime( int tindex );
+int NPC_createCheckGenerateFromTime( int tindex );
 void NPC_createInitTime( int index );
 void NPC_createIncreaseEnemynum( int index );
 void NPC_createDecreaseEnemynum( int index );
-BOOL NPC_createCheckMaxEnemynum( int index );
+int NPC_createCheckMaxEnemynum( int index );
 
 #endif 
 /*__READNPCCREATE_H__*/

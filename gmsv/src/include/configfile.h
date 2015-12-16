@@ -72,7 +72,7 @@ struct GMINFO
 extern struct GMINFO gminfo[GMMAXNUM];
 #endif
 
-BOOL readconfigfile( char* filename );
+int readconfigfile( char* filename );
 
 void  defaultConfig( char* argv0 );
 char* getProgname( void );
@@ -200,7 +200,7 @@ int getEnableService(void);
 
 #ifdef _GMRELOAD
 char* getGMSetfile(void);
-BOOL LoadGMSet(char *filename);
+int LoadGMSet(char *filename);
 #endif
 
 #ifdef _ITEM_QUITPARTY

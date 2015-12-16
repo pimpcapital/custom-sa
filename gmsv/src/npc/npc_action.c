@@ -35,7 +35,7 @@ enum {
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_ActionInit( int meindex )
+int NPC_ActionInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	int		tmp;

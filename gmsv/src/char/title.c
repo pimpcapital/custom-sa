@@ -93,7 +93,7 @@ typedef struct tagTITLE_configTable
 	int     param[20][TITLE_PARAMSIZE];              /*   笠袄 */
 	int     compareflg[20];         /* ><=羁升丹允月井 */
 	int     title;
-	BOOL    equipcheckflg;          /* 
+	int    equipcheckflg;          /* 
 									 *  失奶  丞啖  奶矛件玄匹反仇及白仿弘及  匀化中月
 									 *  手及仄井腹绸仄卅中［
 									 */
@@ -200,7 +200,7 @@ char* TITLE_makeSkillFalseString( void )
  *  馨笛仄凶index       
  *  馨笛仄卅井匀凶      FALSE(0)
  ------------------------------------------------------------*/
-BOOL TITLE_addtitle( int charaindex, int titleindex )
+int TITLE_addtitle( int charaindex, int titleindex )
 {
 	int i;
 	int firstfindempty=-1;
@@ -232,10 +232,10 @@ BOOL TITLE_addtitle( int charaindex, int titleindex )
  *  绰轮仄凶            TRUE(1)
  *  绰轮仄卅井匀凶      FALSE(0)
  ------------------------------------------------------------*/
-BOOL TITLE_deltitle( int charaindex, int titleindex )
+int TITLE_deltitle( int charaindex, int titleindex )
 {
 	int i;
-	BOOL    del=FALSE;
+	int    del=FALSE;
 	int     index;
 	if( CHAR_CHECKINDEX(charaindex)  == FALSE )return FALSE;
 	/*if( TITLE_CHECKTABLEINDEX(titleindex) == FALSE )return FALSE;*/
@@ -264,7 +264,7 @@ BOOL TITLE_deltitle( int charaindex, int titleindex )
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL TITLE_initTitleName( char* filename )
+int TITLE_initTitleName( char* filename )
 {
 	FILE*   f;
 	char    line[256];
@@ -397,7 +397,7 @@ BOOL TITLE_initTitleName( char* filename )
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL TITLE_reinitTitleName( void)
+int TITLE_reinitTitleName( void)
 {
 	freeMemory( TITLE_table);
 	return(TITLE_initTitleName( getTitleNamefile()));
@@ -513,7 +513,7 @@ static int TITLE_getParamData( int readarray, int array,char *src)
  *  岳      TRUE(1)
  *  撩      FALSE(0)
  *------------------------------------------------------------*/
-BOOL TITLE_initTitleConfig( char* filename )
+int TITLE_initTitleConfig( char* filename )
 {
 	FILE*   f;
 	char    line[1024];
@@ -584,7 +584,7 @@ BOOL TITLE_initTitleConfig( char* filename )
 		int     ret;
 		int     i , j ;
 		int     comppos;
-		BOOL    errflg =FALSE;
+		int    errflg =FALSE;
 		for( i = 1; ; i ++ ){
 			/*  玄□弁件毛苇月    */
 			ret = getStringFromIndexWithDelim( line,",",i,token,
@@ -711,12 +711,12 @@ BOOL TITLE_initTitleConfig( char* filename )
  * 惫寞涩烂卞宁丹井譬屯化惫寞毛芨尹月［
  * 娄醒
  *  charaindex        int   平乓仿奶件犯永弁旦
- *  mode              BOOL  TRUE:item=及手及及心譬屯月 FALSE:蝈  
+ *  mode              int  TRUE:item=及手及及心譬屯月 FALSE:蝈  
  * 忒曰袄
  *  TRUE: 惫寞卞  祭  曰［
  *  FALSE:窒手  井匀凶［
  *------------------------------------------------------------*/
-static BOOL TITLE_TitleCheck_Main( int charaindex, BOOL mode, int *addcnt, int *delcnt)
+static int TITLE_TitleCheck_Main( int charaindex, int mode, int *addcnt, int *delcnt)
 {
 	int     i, j,k, ret;
 	
@@ -791,17 +791,17 @@ static BOOL TITLE_TitleCheck_Main( int charaindex, BOOL mode, int *addcnt, int *
  * 惫寞涩烂卞宁丹井譬屯化惫寞毛芨尹月［
  * 娄醒
  *  charaindex        int   平乓仿奶件犯永弁旦
- *  mode              BOOL  TRUE:item=及手及及心譬屯月 FALSE:蝈  
+ *  mode              int  TRUE:item=及手及及心譬屯月 FALSE:蝈  
  * 忒曰袄
  *  TRUE: 惫寞卞  祭  曰［
  *  FALSE:窒手  井匀凶［
  *------------------------------------------------------------*/
-BOOL TITLE_TitleCheck( int charaindex, BOOL mode)
+int TITLE_TitleCheck( int charaindex, int mode)
 {
 #define     TITLE_MSGUNIT1      "TSU"
 #define     TITLE_MSGUNIT2      "KO"
 	int     addcnt,delcnt;
-	BOOL    rc;
+	int    rc;
 	char    msgbuf[64];
 	rc = TITLE_TitleCheck_Main( charaindex, mode, &addcnt,&delcnt);
 	if( rc ) {
@@ -824,12 +824,12 @@ BOOL TITLE_TitleCheck( int charaindex, BOOL mode)
  * 惫寞涩烂卞宁丹井譬屯化惫寞毛芨尹月［
  * 娄醒
  *  charaindex        int   平乓仿奶件犯永弁旦
- *  mode              BOOL  TRUE:item=及手及及心譬屯月 FALSE:蝈  
+ *  mode              int  TRUE:item=及手及及心譬屯月 FALSE:蝈  
  * 忒曰袄
  *  TRUE: 惫寞卞  祭  曰［
  *  FALSE:窒手  井匀凶［
  *------------------------------------------------------------*/
-BOOL TITLE_TitleCheck_Nomsg( int charaindex, BOOL mode, int *addcnt, int *delcnt)
+int TITLE_TitleCheck_Nomsg( int charaindex, int mode, int *addcnt, int *delcnt)
 {
 	return( TITLE_TitleCheck_Main( charaindex, mode, addcnt,delcnt));
 }

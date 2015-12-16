@@ -58,7 +58,7 @@ void printUsage( void )
  *      TRUE(1)     恳橘卅戊穴件玉仿奶件娄醒分匀凶日
  *      FALSE(0)    唱橘卅戊穴件玉仿奶件娄醒分匀凶日
  */
-BOOL parseCommandLine( int argc , char** argv )
+int parseCommandLine( int argc , char** argv )
 {
     int c;                          /* getopt 匹银丹 */
     extern char* optarg;            /* getopt 匹银丹 */
@@ -101,7 +101,7 @@ BOOL parseCommandLine( int argc , char** argv )
  *
  * 漆及赭窒手仄卅中
  */
-BOOL parseEnvironment( char** env )
+int parseEnvironment( char** env )
 {
     if( getDebuglevel() >= 3 ){
         int index=0;
@@ -126,7 +126,7 @@ BOOL parseEnvironment( char** env )
  *      argv    戊穴件玉仿奶件娄醒
  * 忒曰袄
  */
-BOOL init(int argc , char** argv , char** env )
+int init(int argc , char** argv , char** env )
 {
 #ifdef _ITEM_QUITPARTY
     FILE *f;

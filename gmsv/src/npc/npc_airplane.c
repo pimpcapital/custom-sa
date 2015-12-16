@@ -59,8 +59,8 @@ NPC_AIR_MSG		airmsg[] = {
 
 static int NPC_AirSetPoint( int meindex, char *argstr);
 static void NPC_AirSetDestPoint( int meindex, char *argstr);
-static BOOL NPC_AirCheckDeniedItem( int meindex, int charaindex, char *argstr);
-static BOOL NPC_AirCheckLevel( int meindex, int charaindex, char *argstr);
+static int NPC_AirCheckDeniedItem( int meindex, int charaindex, char *argstr);
+static int NPC_AirCheckLevel( int meindex, int charaindex, char *argstr);
 static int NPC_AirCheckStone( int meindex, int charaindex, char *argstr);
 static void NPC_AirSendMsg( int meindex, int talkerindex, int tablenum);
 static int NPC_AirGetRoutePointNum( int meindex, char *argstr );
@@ -73,7 +73,7 @@ static void NPC_Air_walk( int meindex);
 /*********************************
 * 赓渝质  
 *********************************/
-BOOL NPC_AirInit( int meindex )
+int NPC_AirInit( int meindex )
 {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 	int	i;
@@ -507,10 +507,10 @@ static void NPC_AirSetDestPoint( int meindex, char *argstr)
  * 隙烂今木凶失奶  丞毛  匀化中月井民尼永弁允月
  *   匀化中凶日分户
  **************************************/
-static BOOL NPC_AirCheckDeniedItem( int meindex, int charaindex, char *argstr)
+static int NPC_AirCheckDeniedItem( int meindex, int charaindex, char *argstr)
 {
 	char	buf[1024];
-	BOOL	found = TRUE;
+	int	found = TRUE;
 
 	if( NPC_Util_GetStrFromStrWithDelim( argstr, "denieditem", buf, sizeof( buf))
 		!= NULL ) 
@@ -541,11 +541,11 @@ static BOOL NPC_AirCheckDeniedItem( int meindex, int charaindex, char *argstr)
  * 隙烂今木凶失奶  丞毛  匀化中月井民尼永弁允月
  *   匀化中卅中午分户
  **************************************/
-BOOL NPC_AirCheckAllowItem( int meindex, int charaindex, BOOL pickupmode)
+int NPC_AirCheckAllowItem( int meindex, int charaindex, int pickupmode)
 {
 	char	buf[1024];
-	BOOL	found = TRUE;
-	BOOL	pickup = FALSE;
+	int	found = TRUE;
+	int	pickup = FALSE;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];
 	
 	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
@@ -564,7 +564,7 @@ BOOL NPC_AirCheckAllowItem( int meindex, int charaindex, BOOL pickupmode)
 			int itemid;
 			char buf2[64];
 			int j;
-			BOOL	getflg;
+			int	getflg;
 			ret = getStringFromIndexWithDelim( buf, ",", i, buf2, sizeof(buf2));
 			if( ret == FALSE ) break;
 			itemid = atoi( buf2);
@@ -594,7 +594,7 @@ BOOL NPC_AirCheckAllowItem( int meindex, int charaindex, BOOL pickupmode)
 /**************************************
  * 隙烂今木凶伊矛伙动晓井民尼永弁允月
  **************************************/
-static BOOL NPC_AirCheckLevel( int meindex, int charaindex, char *argstr)
+static int NPC_AirCheckLevel( int meindex, int charaindex, char *argstr)
 {
 	int		level;
 	
@@ -674,7 +674,7 @@ static int NPC_AirGetRoutePointNum( int meindex, char *argstr )
 	}
 	return( i -1);
 }
-BOOL NPC_AirCheckJoinParty( int meindex, int charaindex, BOOL msgflg)
+int NPC_AirCheckJoinParty( int meindex, int charaindex, int msgflg)
 {
     //int		fd;
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE - 1024 * 20];

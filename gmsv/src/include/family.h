@@ -130,7 +130,7 @@ struct FMMEMBER_LIST
 //  int  fmindex;
     int  fmnum; 
     int  fmjoinnum;
-//  BOOL use;                                       // 0->没使用   1->使用
+//  int use;                                       // 0->没使用   1->使用
     int  memberindex[FAMILY_MAXMEMBER];             
     char numberlistarray[FAMILY_MAXMEMBER][64];
     char memo[35][220];                             // family dengon

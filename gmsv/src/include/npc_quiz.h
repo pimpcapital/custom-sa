@@ -18,10 +18,10 @@ typedef struct NPC_Quiz{
 
 void NPC_QuizTalked( int meindex , int talkerindex , char *msg ,
                      int color );
-BOOL NPC_QuizInit( int meindex );
+int NPC_QuizInit( int meindex );
 void NPC_QuizWindowTalked( int meindex, int talkerindex, int seqno, int select, char *data);
 
-BOOL QUIZ_initQuiz( char *filename);
+int QUIZ_initQuiz( char *filename);
 
 
 #endif 

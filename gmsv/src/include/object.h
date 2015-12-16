@@ -34,31 +34,31 @@ typedef struct tagObject
 #endif
 }Object;
 
-BOOL CHECKOBJECT( int index );
-BOOL CHECKOBJECTUSE( int index );
-BOOL initObjectArray( int num );
-BOOL endObjectArray( void );
+int CHECKOBJECT( int index );
+int CHECKOBJECTUSE( int index );
+int initObjectArray( int num );
+int endObjectArray( void );
 
-INLINE int _initObjectOne( char *file, int line, Object* ob );
+int _initObjectOne( char *file, int line, Object* ob );
 #define initObjectOne( ob ) _initObjectOne( __FILE__, __LINE__, ob)
 
 void endObjectOne( int index );
 int initObjectFromObjectMember(OBJTYPE type, int index, int x, int y , int floor );
 
-INLINE int OBJECT_getType( int index );
-INLINE int OBJECT_setType( int index, int newvalue );
-INLINE int OBJECT_getFloor( int index );
-INLINE int OBJECT_setFloor( int index, int newvalue );
-INLINE int OBJECT_getX( int index );
-INLINE int OBJECT_setX( int index, int newvalue );
-INLINE int OBJECT_getY( int index );
-INLINE int OBJECT_setY( int index, int newvalue );
-INLINE int OBJECT_getIndex( int index );
-INLINE int OBJECT_setIndex( int index, int newvalue );
-INLINE int OBJECT_getNum( void );
+int OBJECT_getType( int index );
+int OBJECT_setType( int index, int newvalue );
+int OBJECT_getFloor( int index );
+int OBJECT_setFloor( int index, int newvalue );
+int OBJECT_getX( int index );
+int OBJECT_setX( int index, int newvalue );
+int OBJECT_getY( int index );
+int OBJECT_setY( int index, int newvalue );
+int OBJECT_getIndex( int index );
+int OBJECT_setIndex( int index, int newvalue );
+int OBJECT_getNum( void );
 
-INLINE int OBJECT_getchartype( int index );
-INLINE void OBJECT_setchartype( int index, int flg);
+int OBJECT_getchartype( int index );
+void OBJECT_setchartype( int index, int flg);
 
 int searchObjectFromCharaIndex( int index );
 

@@ -78,42 +78,42 @@ typedef enum
 }MAP_kind;
 
 
-INLINE int MAP_getfloorIndex( int floorid );
+int MAP_getfloorIndex( int floorid );
 int MAP_getfloorX( int floorid );
 int MAP_getfloorY( int floorid );
 
-BOOL MAP_initReadMap( char* maptilefile , char* mapdir );
-BOOL MAP_initMapArray( int   num );
+int MAP_initReadMap( char* maptilefile , char* mapdir );
+int MAP_initMapArray( int   num );
 void    MAP_endMapArray( void );
 
 char* MAP_getdataFromRECT( int floor, RECT* seekr, RECT* realr );
 char *MAP_getChecksumFromRECT( int floor, RECT* seekr, RECT* realr,
 								int *tilesum, int *objsum, int *eventsum );
 
-BOOL MAP_checkCoordinates( int mapid, int x, int y );
+int MAP_checkCoordinates( int mapid, int x, int y );
 
-BOOL MAP_setTileAndObjData( int ff ,int fx, int fy, int tile, int obj);
-BOOL MAP_getTileAndObjData( int ff ,int fx, int fy, int* tile, int* obj);
+int MAP_setTileAndObjData( int ff ,int fx, int fy, int tile, int obj);
+int MAP_getTileAndObjData( int ff ,int fx, int fy, int* tile, int* obj);
 void MAP_sendAroundMapdata( int fl, int x, int y);
 int MAP_getImageInt( int imagenumber, int element );
-BOOL MAP_setImageInt( int imagenumber, int element, int value );
-BOOL IsValidImagenumber( int imagenumber );
+int MAP_setImageInt( int imagenumber, int element, int value );
+int IsValidImagenumber( int imagenumber );
 
 char* MAP_getfloorShowstring( int floorid );
-BOOL MAP_makeVariousMap(char* atile, char* aobj, int floor, int startx, int starty, int xsiz, int ysiz, MAP_kind   kind );
-BOOL MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,int xsiz, int ysiz );
-BOOL MAP_IsThereSpecificFloorid( int floorid );
-BOOL MAP_IsValidCoordinate( int floorid, int x, int y );
+int MAP_makeVariousMap(char* atile, char* aobj, int floor, int startx, int starty, int xsiz, int ysiz, MAP_kind   kind );
+int MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,int xsiz, int ysiz );
+int MAP_IsThereSpecificFloorid( int floorid );
+int MAP_IsValidCoordinate( int floorid, int x, int y );
 
-BOOL MAP_addNewObj( int floor, int x, int y, int objindex );
-BOOL MAP_removeObj( int floor, int x, int y, int objindex );
+int MAP_addNewObj( int floor, int x, int y, int objindex );
+int MAP_removeObj( int floor, int x, int y, int objindex );
 #define		MAP_getTopObj( fl, x, y)	_MAP_getTopObj( __FILE__, __LINE__, fl, x, y)
 MAP_Objlink* _MAP_getTopObj( char *file, int line, int floor, int x, int y );
 #define		MAP_objmove( objindex, of, ox, oy, nfl, nx, ny) _MAP_objmove( __FILE__, __LINE__, objindex, of, ox, oy, nfl, nx, ny)
-BOOL _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
+int _MAP_objmove( char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
                   int nx, int ny );
 char *MAP_getFloorName( int floor);
-BOOL MAP_setObjData( int ff ,int fx, int fy, int obj, int objhp );
+int MAP_setObjData( int ff ,int fx, int fy, int obj, int objhp );
 
 #ifdef _MAKE_MAP
 int MAP_getFloorXY( int floor, int *x, int *y);
@@ -121,7 +121,7 @@ int MAP_getFloorXY( int floor, int *x, int *y);
 
 #ifdef _MAP_NOEXIT
 unsigned int MAP_getExFloor_XY( int floor , int *map_type);
-BOOL CHECKFLOORID( int id);
+int CHECKFLOORID( int id);
 #endif
 
 #endif 
