@@ -1,12 +1,3 @@
-/* output by ../../bin/lsgen.perl 0.41 ( 1998 May)
- * made Thu Feb 17 17:30:27 2000
- * user ringo
- * host indy
- * file /opt/ringo/chsa/src/saac/./saacproto_serv.c
- * util ./saacproto_util.c , ./saacproto_util.h
- * src  /opt/ringo/chsa/src/saac/../../doc/saacproto.html
- */
-#define _SAACPROTOSERV_C_
 #include "version.h"
 #include "saacproto_serv.h"
 #include "main.h"

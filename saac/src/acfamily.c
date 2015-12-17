@@ -1,15 +1,9 @@
-#define _FAMILY_C_
-
 #include "version.h"
 #include "main.h"
 #include "acfamily.h"
 #include "util.h"
 #include "saacproto_serv.h"
 
-#include <malloc.h>
-#include <stdio.h>
-#include <time.h>
-#include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
 

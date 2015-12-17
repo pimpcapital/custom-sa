@@ -1,13 +1,3 @@
-/*
-  仿件平件弘窗  勾五犯□正矛□旦及  隶［
-
-  1999 Aug 14 Created by ringo
-
-  犯□正矛□旦反1  及伉件弁及溥匹忡绣今木月［
-  
-  
- */
-#define _DB_C_
 #include "db.h"
 #include "main.h"
 #include "util.h"

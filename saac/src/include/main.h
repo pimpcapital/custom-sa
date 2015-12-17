@@ -16,12 +16,7 @@
 #include <string.h>
 #include "version.h"
 
-#ifdef _MAIN_C_
 #define EXT
-#else
-#define EXT extern
-#endif
-
 #define SA_NODEFER	0x40000000
 #define SA_NOMASK	SA_NODEFER
 

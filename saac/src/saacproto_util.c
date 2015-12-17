@@ -1,12 +1,7 @@
 #define _SAACPROTOUTIL_C_
-#include "version.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef WIN32
-#include <unistd.h>
-#include <strings.h>
-#endif
 #include "main.h"
 #include "saacproto_util.h"
 #ifdef saacproto__ENCRYPT

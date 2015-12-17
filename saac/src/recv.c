@@ -1,5 +1,3 @@
-#define _RECV_C_
-
 #include "version.h"
 #include "main.h"
 #include "saacproto_util.h"
@@ -12,13 +10,6 @@
 #include "util.h"
 
 #include "sasql.h"
-
-// CoolFish: Family 2001/5/9
-#include "acfamily.h"
-#include "version.h"
-
-#include <stdlib.h>
-#include <stdio.h>
 
 char retdata[CHARDATASIZE];     
 char result[CHARDATASIZE];        

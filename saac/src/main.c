@@ -1,5 +1,3 @@
-#define _MAIN_C_
-
 #include "main.h"
 #include "util.h"
 #include "mail.h"
@@ -8,8 +6,7 @@
 #include "saacproto_serv.h"
 // CoolFish: Family 2001/5/9
 #include "acfamily.h"
-#include "version.h"
-#ifdef _SEND_EFFECT				  // WON ADD 送下雪、下雨等特效 
+#ifdef _SEND_EFFECT				  // WON ADD 送下雪、下雨等特效
 #include "recv.h"
 #endif
 
@@ -17,28 +14,9 @@
 
 #include "sasql.h"
 
-#include <stdio.h> 
-#include <time.h> 
 
 #include <signal.h>
-#include <sys/types.h>
-#include <time.h>
-#include <sys/time.h>
-#include <errno.h>
-#include <sys/wait.h>
 #include <getopt.h>
-#include <stdio.h>
-#include <malloc.h>
-#include <strings.h>
-#include <string.h>
-#include <unistd.h>
-#include <netdb.h>
-#include <errno.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <time.h>
-#include <fcntl.h>
 #include <netinet/tcp.h>
 
 #include "lock.h"

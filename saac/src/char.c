@@ -1,25 +1,14 @@
-#define _CHAR_C_
-
-// Spock +1 2000/12/6
 #include <time.h>
 #include <stdio.h>
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
 
 #include "main.h"
 #include "char.h"
 #include "saacproto_serv.h"
 #include "util.h"
-
-// CoolFish: Family 2001/6/12
 #include "acfamily.h"
-#include "version.h"
-
-// Arminius 7.17 memory lock
 #include "lock.h"
-#include "recv.h"
 
 static void getCharNameFromString(char *str ,char *out );
 static void getCharOptionFromString( char *str , char *out );

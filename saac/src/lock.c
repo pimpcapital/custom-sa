@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "lock.h"
 #include "main.h"
-#include "char.h"
 
 LockNode **userlock;
 

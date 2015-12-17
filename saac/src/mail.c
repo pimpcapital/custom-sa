@@ -1,14 +1,8 @@
-#define _MAIL_C_
-
 #include "main.h"
 #include "mail.h"
 #include "util.h"
 #include "saacproto_serv.h"
 
-#include <malloc.h>
-#include <stdio.h>
-#include <time.h>
-#include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
 
