@@ -62,7 +62,6 @@
 
 //--------------------------------------------------------
 //by longzoro
-#define _SASQL              // 石器资料库
 #define _SQL_REGISTER     //自动注册功能   需同时开放_SASQL1
 
 #define _VIP              //会员版本认证

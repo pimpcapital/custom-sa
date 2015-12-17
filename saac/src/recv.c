@@ -11,9 +11,7 @@
 #include "lock.h"
 #include "util.h"
 
-#ifdef _SASQL
 #include "sasql.h"
-#endif
 
 // CoolFish: Family 2001/5/9
 #include "acfamily.h"
@@ -1406,7 +1404,6 @@ void saacproto_ACCharLogin_recv( int fd, int clifd, char* id, char* pas, char* i
 {
 	int res;
 	
-#ifdef _SASQL
 	if (strlen(id)==0 || strlen(pas)==0 || strlen(ip)==0){
 	  printf("登陆信息有错误！\n");
 	  saacproto_ACCharLogin_send( fd, clifd, 0);
@@ -1436,11 +1433,9 @@ void saacproto_ACCharLogin_recv( int fd, int clifd, char* id, char* pas, char* i
 		saacproto_ACCharLogin_send( fd, clifd, 0);
 	  return;
 	}
-#endif
 	saacproto_ACCharLogin_send( fd , clifd, 1);
 }
 
-#ifdef _SASQL
 void saacproto_LockLogin_recv( int fd, char* id, char* ip, int flag )
 {
 	switch (flag){
@@ -1466,5 +1461,4 @@ void saacproto_LockLogin_recv( int fd, char* id, char* ip, int flag )
 			break;
 	}
 }
-#endif
 

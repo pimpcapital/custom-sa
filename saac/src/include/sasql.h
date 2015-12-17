@@ -2,9 +2,6 @@
 #define _SASQL_H_
 
 #include "version.h"
-#ifdef _SASQL
-
-#define int int
 #define FALSE 0
 #define TRUE 1
 
@@ -19,6 +16,5 @@ int sasql_craete_lock( void );
 int sasql_chehk_lock( char *idip );
 int sasql_add_lock( char *idip );
 int sasql_del_lock( char *idip );
-#endif
 
 #endif

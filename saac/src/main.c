@@ -15,9 +15,7 @@
 
 #include "char.h"
 
-#ifdef _SASQL
 #include "sasql.h"
-#endif
 
 #include <stdio.h> 
 #include <time.h> 
@@ -384,19 +382,15 @@ static void parseOpts( int argc, char **argv )
             exit(0);
             break;
         case 'i':
-#ifdef _SASQL
         		sasql_init();
         		sasql_craete_userinfo();
         		sasql_close();
-#endif
 						exit(0);
             break;
         case 'l':
-#ifdef _SASQL
         		sasql_init();
         		sasql_craete_lock();
         		sasql_close();
-#endif
         		exit(0);
             break;
         case 'n':
@@ -437,9 +431,7 @@ int main( int argc , char **argv )
         exit(1);
     }
 
-#ifdef _SASQL
     sasql_init();
-#endif	
     log( "读取数据目录\n" );
     dbRead( dbdir );
 #ifdef	_FAMILY

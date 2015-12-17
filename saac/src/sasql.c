@@ -1,11 +1,8 @@
-#define _SASQL_C_
-
 #include "version.h"
-
-#ifdef _SASQL			//新添加
 
 #include "main.h"
 #include "sasql.h"
+#include "util.h"
 
 #include <mysql/mysql.h>
 
@@ -16,7 +13,7 @@ MYSQL_ROW mysql_row;
 typedef struct tagConfig {
 	char sql_IP[16];
 
-	int sql_Port;
+	unsigned int sql_Port;
 
 	char sql_Port1[16];
 
@@ -62,7 +59,7 @@ static int readConfig(char *path)
 			snprintf(config.sql_IP, sizeof(config.sql_IP), param);
 			printf("\n数据库地址：  %s", config.sql_IP);
 		} else if (strcmp(command, "sql_Port") == 0) {
-			config.sql_Port = atoi(param);
+			config.sql_Port = (unsigned) atoi(param);
 			snprintf(config.sql_Port1, sizeof(config.sql_Port1),
 				 param);
 			printf("\n数据库端口：  %d", config.sql_Port);
@@ -107,31 +104,28 @@ static int readConfig(char *path)
 				printf("\n开放自动注册：NO");
 			}
 			fclose(fp);
-			return 0;
 		}
 	}
+	return 0;
 }
 
 int sasql_init(void)
 {
 	if (mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
-		printf("\nmysql_init=fail 数据库初始化失败！");
+		printf("\n数据库初始化失败！");
 		exit(1);
 		return FALSE;
 	}
-	printf("ip=%s id=%s ps=%s database=%s port=%d",
-	       config.sql_IP, config.sql_ID, config.sql_PS, config.sql_DataBase,
-	       config.sql_Port);
 
-	if (!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID,	//帐号
-				config.sql_PS,	//密码
-				config.sql_DataBase,	//选择的资料库
+	if (!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID,
+				config.sql_PS,
+				config.sql_DataBase,
 				config.sql_Port, NULL, 0)) {
-		printf("\nmysql_real_connect=fail 数据库连接失败！\n");
+		printf("\n数据库连接失败！\n");
 		return FALSE;
 	}
 
-	printf("\nmysql_real_connect=ok 数据库连接成功！\n");
+	printf("\n数据库连接成功！\n");
 	return TRUE;
 }
 
@@ -147,10 +141,8 @@ int sasql_query(char *nm, char *pas)
 		config.sql_Table, config.sql_NAME, nm);
 	printf("\nquery_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
-		int num_row = 0;
 		mysql_result = mysql_store_result(&mysql);
-		num_row = mysql_num_rows(mysql_result);
-		if (num_row > 0) {
+		if (mysql_num_rows(mysql_result) > 0) {
 			mysql_row = mysql_fetch_row(mysql_result);
 			if (strcmp(pas, mysql_row[1]) == 0) {
 		        mysql_free_result(mysql_result);
@@ -206,11 +198,9 @@ int sasql_chehk_lock(char *idip)
 	/* TODO: check the lock according to result's rows */
 
 	if (!mysql_query(&mysql, sqlstr)) {
-		int num_row = 0;
 		mysql_result = mysql_store_result(&mysql);
-		num_row = mysql_num_rows(mysql_result);
 		mysql_free_result(mysql_result);
-		if (num_row > 0) {
+		if (mysql_num_rows(mysql_result) > 0) {
 			return TRUE;	/* account is locked */
 		}
 	}
@@ -235,7 +225,7 @@ int sasql_del_lock(char *idip)
 {
 	char sqlstr[256];
 	sprintf(sqlstr, "delete from config.SQL_LOCK where %s=BINARY'%s'",
-		config.sql_LOCK, config.sql_NAME, idip);
+		config.sql_LOCK, config.sql_NAME);
 	printf("\ndel_lock_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
 		printf("\n解除锁定%s成功！\n", idip);
@@ -246,12 +236,10 @@ int sasql_del_lock(char *idip)
 
 int sasql_craete_lock(void)
 {
-
+	return 0;
 }
 
 int sasql_craete_userinfo(void)
 {
-
+	return 0;
 }
-
-#endif
