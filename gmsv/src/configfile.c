@@ -6,17 +6,12 @@
 #include <unistd.h>
 
 #include "util.h"
-//#include "configfile.h"
-//ttom
 #include "lssproto_util.h"
 #include "configfile.h"
 #include "net.h"
-//ttom end
 #include "npcutil.h"
-// Arminius 7.12 login announce
 #include "char.h"
 #include "char_data.h"
-// CoolFish: add 
 #include "lssproto_serv.h"
 
 #ifdef _ANGEL_SUMMON
