@@ -1213,8 +1213,8 @@ void LOAD_herolist()
 	
 	char filename[256], token[512];
 
-	snprintf( filename , sizeof( filename ) ,"%s/%s" ,	"db/herolist","db_herolist.txt");
-	if( !( fdb = fopen ( filename , "r+" ) ) ) {
+	snprintf(filename, sizeof(filename) ,"%s/%s" , "db/herolist", "db_herolist.txt");
+	if(!(fdb = fopen ( filename , "ab+" ))) {
 		log("\nSyu log open db_herolist.txt error!!");
 		return ; 
 	}else {

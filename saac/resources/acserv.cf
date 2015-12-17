@@ -20,6 +20,9 @@ pass test
 # rotale_internal
 rotale_internal 1000
 
+# 数据目录
+dbdir db
+
 # LOG文件目录
 logdir log
 
