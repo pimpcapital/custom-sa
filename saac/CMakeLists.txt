@@ -9,6 +9,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/char_sleep)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data)
 
 include_directories(src/include)
+file(GLOB_RECURSE HEADER_FILES src/include/*.h)
 file(GLOB_RECURSE MAIN_FILES src/*.c)
-add_executable(saac ${MAIN_FILES})
+add_executable(saac ${MAIN_FILES} ${HEADER_FILES})
 target_link_libraries(saac mysqlclient)
