@@ -1,0 +1,6 @@
+####　呼拔拔　####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>0
+NomalWindowMsg:猜猜我是什么生物…看来像是狗对吧？呵呵呵…偏不告诉你。
+EventEnd

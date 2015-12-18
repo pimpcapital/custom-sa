@@ -1,0 +1,17 @@
+NEWNPCENEMY
+
+entype:2
+startmsg:你竟然能到这里来？那本事一定不小吧！让我见识见识你的实力！
+dieact:1
+warpfl:0
+warpx:0
+warpy:0
+enemyno:10000
+onebattle:0
+OVER
+
+NEWEVENT1:
+FREE:LV>0
+WARP:8211,9,78
+endmsg:竟然能打倒我。。下一关可不是闹着玩的！自己当心吧！
+OVER

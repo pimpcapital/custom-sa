@@ -1,0 +1,40 @@
+NomalMainMsg:你是谁！滚出去。
+
+####189完成####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>79&TRANS>1&ENDEV=31&ENDEV=189
+NomalWindowMsg:作为醒龙家族的一员！我要永远在这里守护着醒龙的灵魂！
+EventEnd
+
+
+
+###189中　手下５色７７级人龙###
+EventNo:189
+TYPE:ACCEPT
+EVENT:LV>79&TRANS>1&ENDEV=31&NOWEV=189&ITEM=19427&PET=77-91&PET=77-92&PET=77-93&PET=77-94&PET=77-95
+AcceptMsg:。。让我看看！确实都是77级的！呵呵
+ThanksMsg:喏～拿去吧！醒龙家族的秘密希望你能保守噢！？
+GetPet:5156,5157,5158,5159,5160
+DelPet:PET=77-91*1,PET=77-92*1,PET=77-93*1,PET=77-94*1,PET=77-95*1
+DelItem:19427
+PetFullMsg:你身上宠物太多了！
+EndSetFlg:189
+EventEnd
+
+
+###189中　有醒龙奥义的研究报告###
+EventNo:-1
+TYPE:ACCEPT
+EVENT:LV>79&TRANS>1&ENDEV=31&NOWEV=189&ITEM=19427
+AcceptMsg:你有醒龙奥义的研究报告！！？？你也是研究醒龙的成员之一么？呵呵
+ThanksMsg:帮我找５色人龙来吧！不过等级不能超过７７级噢！！
+EventEnd
+
+###189中　有醒龙奥义的研究报告###
+EventNo:-1
+TYPE:ACCEPT
+EVENT:LV>79&TRANS>4&ENDEV=184&NOWEV=189
+AcceptMsg:你也是研究醒龙的成员之一么？呵呵！不过你没有研究报告噢？是不是丢了呢！？
+ThanksMsg:帮我找５色人龙来吧！不过等级不能超过７７级噢！！
+EventEnd

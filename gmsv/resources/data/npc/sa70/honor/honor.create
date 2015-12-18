@@ -1,0 +1,13 @@
+NPCCREATE
+####ÕæÊµµÄÈÙÒ«###
+########Æ¤¶û#########
+{
+name=Æ¤¶û
+floorid=5100
+borncenter=36,29
+dir=4
+ignoreinvincible=1
+createnum=1
+graphicname=16057
+enemy=changeevent|file:sa70/honor/honor1.arg
+}

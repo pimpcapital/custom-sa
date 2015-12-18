@@ -1,0 +1,6 @@
+####　园长　####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>0
+NomalWindowMsg:欢迎光临我们的动物园，这个动物园是全部免费的喔…请随便看看，而且我们的动物不光是可爱，还可以跟它们说话喔…。
+EventEnd

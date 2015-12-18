@@ -1,0 +1,6 @@
+####　奇宝　####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>0
+NomalWindowMsg:我们鸟类可是世界上速度最快的生物喔，尤其我们又专擅长使敌人跌下他所骑乘的宠物而失去战斗力。
+EventEnd

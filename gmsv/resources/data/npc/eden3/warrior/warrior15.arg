@@ -1,0 +1,9 @@
+entype:2
+dieact:1
+warpfl:60332
+warpx:10
+warpy:13
+gym:0
+startmsg:我们是第十五队挑战者，小心了。
+endmsg:输了，祝福你顺利挑战成功。
+enemyno:1860,1865,1864,1863,1867

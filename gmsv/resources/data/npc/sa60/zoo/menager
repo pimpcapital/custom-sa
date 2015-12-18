@@ -1,0 +1,6 @@
+####　动物园管理员　####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>0
+NomalWindowMsg:嗨～你好…
+EventEnd

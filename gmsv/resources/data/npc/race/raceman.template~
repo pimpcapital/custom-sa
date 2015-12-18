@@ -1,0 +1,10 @@
+NPCTEMPLATE
+#¡‘≥Ë¥Ûª·npc
+{
+templatename=npc_raceman
+makeatnobody=1
+name=
+makeatnosee=1
+graphicname=100444
+functionset=Raceman
+}

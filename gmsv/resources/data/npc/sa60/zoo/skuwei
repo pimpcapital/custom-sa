@@ -1,0 +1,6 @@
+####　石龟　####
+EventNo:-1
+TYPE:MESSAGE
+EVENT:LV>0
+NomalWindowMsg:我是石龟，我的攻击不高，敏又慢，防也还好，没人要我…不过…大家倒是蛮喜欢打我同类来练功的…。
+EventEnd

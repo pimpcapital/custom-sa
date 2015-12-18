@@ -1,0 +1,35 @@
+NEWWARPMAN
+
+####地牢老鼠 ####
+####沒標不給####
+NOFREE
+FREE:LV>0
+NomalMsg:吱！吱！吱！
+PartyMsg:吱！吱！吱！
+OVER
+
+####　有標有加料的大福給鑰匙　####
+TALKEVENT1
+WARP:0,0,0
+FREE:LV>90&ENDEV=4&ENDEV=81&ENDEV=174&ENDEV=116&ENDEV=111&ENDEV=115&NOWEV=175&NOWEV=176&ITEM=20611
+AddItem:20609
+DelItem:20611
+FreeMsg:吱！吱！吱！
+NPCPOINT:8505,11,8;8513,24,12
+OVER
+
+####　趕老鼠　####
+TALKEVENT2
+WARP:0,0,0
+FREE:LV>90&ENDEV=4&ENDEV=81&ITEM=2414&ITEM!=20610
+FreeMsg:我想要吃大福～你身上有大福嗎？沒大福的話，去看看我其它的同伴有沒有大福，反正我想吃大福啦！不然我就懶著不走～哼！
+OVER
+
+####　趕老鼠　####
+TALKEVENT3
+WARP:0,0,0
+FREE:LV>90&ENDEV=4&ENDEV=81&ITEM=20610&ITEM=2414
+FreeMsg:吱！吱！吱！
+NPCPOINT:8505,11,8;8513,24,12
+DelItem:20610*1
+OVER
