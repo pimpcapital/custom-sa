@@ -1,7 +1,6 @@
-#include "version.h"
 #include <time.h>
+#include <configfile.h>
 #include "char.h"
-#include "object.h"
 #include "lssproto_serv.h"
 #include "npcutil.h"
 #include "handletime.h"
@@ -9,7 +8,7 @@
 static int NPC_DengonReadString( int meindex, int id, char *str );
 static void NPC_DengonWriteString( int meindex, int talkerindex, int id, char *str );
 
-#define DENGONFILEDIR "./Dengon/"
+#define DENGONFILEDIR "dengon"
 #define DENGONFILELINENUM 1000
 #define DENGONFILESTRINGSIZE 256
 #define DENGONFILECOUNTERSIZE 11
@@ -20,17 +19,16 @@ char NPC_sendbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];
 
 int NPC_DengonInit( int meindex )
 {
-    char filename[256], tmp[256];
+    char filename[256];
+    snprintf(filename, sizeof(filename), "%s/%s/%d_%d_%d", getDataDir(), DENGONFILEDIR, CHAR_getInt( meindex, CHAR_FLOOR ), CHAR_getInt( meindex, CHAR_X ), CHAR_getInt( meindex, CHAR_Y ));
+
+    char tmp[256];
     FILE *f;
     int i,j;
     int id, maxid;
 
     CHAR_setInt( meindex, CHAR_WHICHTYPE, CHAR_TYPEDENGON );
 
-    snprintf( filename,sizeof(filename), "%s%d_%d_%d",
-              DENGONFILEDIR, CHAR_getInt( meindex, CHAR_FLOOR ),
-              CHAR_getInt( meindex, CHAR_X ),
-              CHAR_getInt( meindex, CHAR_Y ) );
 
     if( ! (f=fopen( filename, "r" )) ){
         f = fopen( filename, "w" );
@@ -166,6 +164,7 @@ void NPC_DengonLooked( int meindex, int lookedindex )
 static int NPC_DengonReadString( int meindex, int id, char *str )
 {
     char filename[256];
+    snprintf(filename, sizeof(filename), "%s/%s/%d_%d_%d", getDataDir(), DENGONFILEDIR, CHAR_getInt(meindex, CHAR_FLOOR), CHAR_getInt(meindex, CHAR_X), CHAR_getInt(meindex, CHAR_Y));
     char readbuf[DENGONFILEENTRYSIZE*MESSAGEINONEWINDOW];
 
     FILE *f;
@@ -182,11 +181,6 @@ static int NPC_DengonReadString( int meindex, int id, char *str )
     }
 
     if( sendid < 1 ) sendid = 1;
-
-    snprintf( filename,sizeof(filename), "%s%d_%d_%d",
-              DENGONFILEDIR, CHAR_getInt( meindex, CHAR_FLOOR ),
-              CHAR_getInt( meindex, CHAR_X ),
-              CHAR_getInt( meindex, CHAR_Y ) );
 
     writeptr = str;
 	strcpy( writeptr, "                         传言板\n");
@@ -221,17 +215,15 @@ static int NPC_DengonReadString( int meindex, int id, char *str )
 
 static void NPC_DengonWriteString( int meindex, int talker, int id, char *str )
 {
-    char buf[256];
+    char filename[256];
+    snprintf(filename, sizeof(filename), "%s/%s/%d_%d_%d", getDataDir(), DENGONFILEDIR, CHAR_getInt(meindex, CHAR_FLOOR), CHAR_getInt(meindex, CHAR_X), CHAR_getInt(meindex, CHAR_Y));
+
     FILE *f;
     int line;
 	struct  tm tm1;
 
-    snprintf( buf,sizeof(buf), "%s%d_%d_%d",
-              DENGONFILEDIR, CHAR_getInt( meindex, CHAR_FLOOR ),
-              CHAR_getInt( meindex, CHAR_X ),
-              CHAR_getInt( meindex, CHAR_Y ) );
     
-    f = fopen( buf, "r+" );
+    f = fopen(filename, "r+");
     if( !f ) return;
 
     line = id%DENGONFILELINENUM;

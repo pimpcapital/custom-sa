@@ -40,9 +40,9 @@ Game Server 游戏环境:
 
 #define _FAMILY_MANORNUM_CHANGE	 // CoolFish 用来修改装园数量(4.0)
 #ifdef _FAMILY_MANORNUM_CHANGE
-#define FAMILY_MAXHOME 4        // (4.0) 家族据点
-#define MANORNUM       4        // (4.0) 庄园数量
-#define FMPOINTNUM     4        // (4.0) 有据点家族的最大数量
+#define FAMILY_MAXHOME 9        // (4.0) 家族据点
+#define MANORNUM       9        // (4.0) 庄园数量
+#define FMPOINTNUM     9        // (4.0) 有据点家族的最大数量
 #endif
 #define _FMVER21                 // (可开放) 家族职掌功能  
 #define _PERSONAL_FAME           // (可开放) Arminius 8.30 家族个人声望  

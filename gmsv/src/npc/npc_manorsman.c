@@ -636,14 +636,15 @@ void NPC_ManorLoadPKSchedule(int meindex)
 #ifdef _ACFMPK_LIST
 void NPC_ManorSavePKSchedule(int meindex, int toindex, int flg)
 {
-	int fmpks_pos, manorid, dueltime;
+	int fmpks_pos, manorid;
+	__time_t dueltime;
 	char msg[1024], n1[256], n2[256], n3[256];
 	char token[256], hadfmname[256];
 	int hadfmindex=0, hadfmpopular=0, tkfmindex=0;
 	int PkFlg=0;
 	if( toindex == -1 ){
 		dueltime = CHAR_getWorkInt(meindex, NPC_WORK_PEACEWAIT) + NowTime.tv_sec;
-		sprintf(msg, "%d|%d|%s|%d|%s|%d|%d|%d|%s",
+		sprintf(msg, "%li|%d|%s|%d|%s|%d|%d|%d|%s",
 			dueltime, 0, "", 0, "", 0, 0, flg, "");
 		PkFlg = 0;
 	}else{

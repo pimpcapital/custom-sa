@@ -1044,17 +1044,13 @@ char *NPC_Util_GetArgStr(int index, char *argstr, int len)
 
 int NPC_Util_GetNumFromStrWithDelim(char *srcstr, char *in)
 {
-	int rc;
-	int i;
 	char outstr[32];
 	int out = -1;
-
-	for (i = 1;; i++) {
-		rc = getStringFromIndexWithDelim(srcstr, "|", i, outstr,
-						 sizeof(outstr));
-		if (rc == FALSE)
+	for(int i = 1;; i++) {
+		int rc = getStringFromIndexWithDelim(srcstr, "|", i, outstr, sizeof(outstr));
+		if(rc == FALSE)
 			break;
-		if (strstr(outstr, in) != NULL) {
+		if(strstr(outstr, in) != NULL) {
 			out = textToInt(outstr);
 			break;
 		}
@@ -1063,9 +1059,7 @@ int NPC_Util_GetNumFromStrWithDelim(char *srcstr, char *in)
 	return out;
 }
 
-char *NPC_Util_GetStrFromStrWithDelim(char *srcstr, char *srhstr,
-				      char *buf, int buflen)
-{
+char *NPC_Util_GetStrFromStrWithDelim(char *srcstr, char *srhstr, char *buf, int buflen) {
 	int rc;
 	char *cret = NULL;
 	int i;
@@ -1081,9 +1075,7 @@ char *NPC_Util_GetStrFromStrWithDelim(char *srcstr, char *srhstr,
 		if (rc == FALSE)
 			break;
 		if (strstr(outstr, srhstr) != NULL) {
-			rc = getStringFromIndexWithDelim(outstr, ":", 2,
-							 outstr2,
-							 sizeof(outstr2));
+			rc = getStringFromIndexWithDelim(outstr, ":", 2, outstr2, sizeof(outstr2));
 			if (rc != FALSE) {
 				strcpysafe(buf, buflen, outstr2);
 				cret = buf;
@@ -1113,11 +1105,8 @@ int NPC_Util_IsVisiblePlayer(int meindex)
 	chr_x = CHAR_getInt(meindex, CHAR_X);
 	chr_y = CHAR_getInt(meindex, CHAR_Y);
 
-	for (i = chr_x - CHAR_DEFAULTSEESIZ / 2;
-	     i <= chr_x + CHAR_DEFAULTSEESIZ / 2 && found == FALSE; i++) {
-		for (j = chr_y - CHAR_DEFAULTSEESIZ / 2;
-		     j <= chr_y + CHAR_DEFAULTSEESIZ / 2 && found == FALSE;
-		     j++) {
+	for (i = chr_x - CHAR_DEFAULTSEESIZ / 2; i <= chr_x + CHAR_DEFAULTSEESIZ / 2 && found == FALSE; i++) {
+		for (j = chr_y - CHAR_DEFAULTSEESIZ / 2; j <= chr_y + CHAR_DEFAULTSEESIZ / 2 && found == FALSE; j++) {
 			OBJECT object;
 			for (object = MAP_getTopObj(chr_fl, i, j);
 			     object; object = NEXT_OBJECT(object)) {

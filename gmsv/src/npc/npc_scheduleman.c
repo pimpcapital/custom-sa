@@ -1,5 +1,6 @@
 #include "version.h"
 #include <time.h>
+#include <configfile.h>
 #include "char.h"
 #include "object.h"
 #include "lssproto_serv.h"
@@ -44,7 +45,7 @@ enum {
 	CHAR_WORK_DUELTIME = CHAR_WORKSHOPRELEVANTSEC,	// 所选择的 pk 时间
 };
 
-#define SCHEDULEFILEDIR		"./Schedule/"
+#define SCHEDULEFILEDIR		"schedule"
 
 void NPC_LoadPKSchedule(int meindex);	// Load schedule from disk
 void NPC_SavePKSchedule(int meindex);	// save schedule to disk
@@ -570,18 +571,17 @@ int NPC_AlreadyScheduled(int meindex, int talkerindex)
   return FALSE;
 }
 
-// 读取 schedule 档案
 void NPC_LoadPKSchedule(int meindex)
 {
-  char filename[256],tmp[4096],token[256];
+  char filename[256];
+  snprintf(filename,sizeof(filename), "%s/%s/%d_%d_%d", getDataDir(), SCHEDULEFILEDIR, CHAR_getInt(meindex, CHAR_FLOOR), CHAR_getInt(meindex, CHAR_X), CHAR_getInt(meindex, CHAR_Y));
+
+  char tmp[4096],token[256];
   FILE *f;
   int i;
   int fmpks_pos = CHAR_getWorkInt(meindex, NPC_WORK_ID)*MAX_SCHEDULE;
 
-  snprintf(filename,sizeof(filename), "%s%d_%d_%d",
-           SCHEDULEFILEDIR, CHAR_getInt(meindex, CHAR_FLOOR),
-           CHAR_getInt(meindex, CHAR_X),
-           CHAR_getInt(meindex, CHAR_Y) );
+
 
   if( ! (f=fopen( filename, "r" )) ){	// create new schedule file
     f = fopen( filename, "w" );
