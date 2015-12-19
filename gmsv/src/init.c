@@ -157,7 +157,7 @@ int init(int argc , char** argv , char** env )
         debug( sizeof( aho.workchar ),d);
     }
 
-    print( "配置文件: %s\n" , getConfigfilename() );
+    print("配置文件: %s\n", getConfigfilename());
 		
     GOTORETURNFALSEIFFALSE(readconfigfile( getConfigfilename() ) );
     
@@ -671,10 +671,7 @@ int init(int argc , char** argv , char** env )
 
 	print( "开始记始日志\n" );
     {
-        char    logconffile[512];
-        snprintf( logconffile, sizeof( logconffile), "%s/%s" ,
-                  getLogdir(), getLogconffile() );
-        if( !initLog( logconffile ) )
+        if(!initLog(getLogconffile()))
             goto CLOSEAC;
     }
 #ifdef _ITEM_QUITPARTY

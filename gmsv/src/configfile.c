@@ -252,24 +252,13 @@ int point;
 
 Config config;
 
-/*
- *  戊件白奴弘白央奶伙毛  戈凛卞银丹厌瞻  
- *  xxxx=yyyy 心凶中卅及毛  戈
- */
 
 typedef struct tagReadConf
 {
-    char    name[32];       /*xxxx卞丐凶月袄*/
-
-    /*戚及2勾反NULL毛  木月午窒手质  仄卅中*/
-    char  *charvalue;      /*yyyy毛公及引引医  允月凛及医  燮*/
-    size_t  charsize;       /*charvalue及扔奶术*/
-
-    /*
-     *     酷  午仄化=及  互 "ON"分匀凶日 intvalue 卞反1毛医  允月
-     * 公木动陆反 atoi 及瑛绊
-     */
-    void*    value;       /*yyyy毛  晶允月医  允月凛及医  燮*/
+    char    name[32];
+    char  *charvalue;
+    size_t  charsize;
+    void*    value;
     CTYPE    valuetype;
 }ReadConf;
 
@@ -792,8 +781,6 @@ void Load_PetSkillCodes( void)
 			Code_skill[i].TempNo = num;
 			Code_skill[i].PetId = ID;
 			strcpy( Code_skill[i].Code, type);
-			//print("\n %s|%d|%d|%s|", Code_skill[i].name, Code_skill[i].TempNo, 
-			//	Code_skill[i].PetId, Code_skill[i].Code);
 			i++;
 			if( i >= PETSKILL_CODE ) break;
 		}
@@ -843,66 +830,33 @@ int LoadGMSet( char* filename )
 		easyGetTokenFromString(line, 2, level, sizeof(level));
 		if (strcmp(level, "") == 0)	break;
 		gminfo[gm_num].level = atoi(level);
-//		print("\ncdkey:%s, level:%d", gminfo[gm_num].cdkey, gminfo[gm_num].level);
 	}
 	fclose(fp);
 	return TRUE;
 }
 #endif
 
-/*------------------------------------------------------------
- * 皿夫弘仿丞  毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  cahr*
- ------------------------------------------------------------*/
 char* getProgname( void )
 {
     return config.progname;
 }
-/*------------------------------------------------------------
- * configfilename 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getConfigfilename( void )
 {
     return config.configfilename;
 }
-/*------------------------------------------------------------
- * configfilename 毛涩烂允月［
- * 娄醒
- *  newv    char*   蕙仄中袄
- * 忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
+
 void setConfigfilename( char* newv )
 {
     strcpysafe( config.configfilename, sizeof( config.configfilename ),
                 newv );
 }
 
-/*------------------------------------------------------------
- * 犯田永弘伊矛伙毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getDebuglevel( void )
 {
     return config.debuglevel;
 }
-/*------------------------------------------------------------
- * 犯田永弘伊矛伙毛涩烂允月
- * 娄醒
- *  newv    int     蕙仄中袄
- * 忒曰袄
- *  unsigned int    樯及袄
- ------------------------------------------------------------*/
+
 unsigned int setDebuglevel( unsigned int newv )
 {
     int old;
@@ -910,69 +864,32 @@ unsigned int setDebuglevel( unsigned int newv )
     config.debuglevel = newv;
     return old;
 }
-/*------------------------------------------------------------
- * memoryunit 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getMemoryunit( void )
 {
     return config.usememoryunit;
 }
-/*------------------------------------------------------------
- * memoryunitnum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getMemoryunitnum( void )
 {
     return config.usememoryunitnum;
 }
 
-/*------------------------------------------------------------
- * 失市它件玄扔□田及失玉伊旦毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
 char*   getAccountservername( void )
 {
     return config.asname;
 }
-/*------------------------------------------------------------
- * 失市它件玄扔□田及禾□玄毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned short
- ------------------------------------------------------------*/
+
 unsigned short   getAccountserverport( void )
 {
     return config.acservport;
 }
-/*------------------------------------------------------------
- * 失市它件玄扔□田尺及由旦伐□玉毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned short
- ------------------------------------------------------------*/
+
 char*   getAccountserverpasswd( void )
 {
     return config.acpasswd;
 }
-/*------------------------------------------------------------
- * 失市它件玄扔□田井日苇尹月必□丞扔□田午仄化及  蟆毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned short
- ------------------------------------------------------------*/
+
 char*   getGameservername( void )
 {
     return config.gsnamefromas;
@@ -996,24 +913,12 @@ unsigned short getPortnumber( void )
 {
     return config.port;
 }
-/*------------------------------------------------------------
- * 必□丞扔□田及  寞   寞毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned short
- ------------------------------------------------------------*/
+
 int getServernumber( void )
 {
     return config.servernumber;
 }
-/*------------------------------------------------------------
- * reuseaddr 及袄毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned short
- ------------------------------------------------------------*/
+
 int getReuseaddr( void )
 {
     return config.reuseaddr;
@@ -1040,118 +945,51 @@ int getLogNetloopFaster(void)
     return config.log_netloop_faster;
 }
 
-/*------------------------------------------------------------
- * saacwritenum 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *   int
- ------------------------------------------------------------*/
 int getSaacwritenum( void )
 {
     return config.saacwritenum;
 }
-/*------------------------------------------------------------
- * saacwritenum 毛涩烂允月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *   int
- ------------------------------------------------------------*/
+
 void setSaacwritenum( int num )
 {
     config.saacwritenum = num;
 }
-/*------------------------------------------------------------
- * saacreadnum 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *   int
- ------------------------------------------------------------*/
+
 int getSaacreadnum( void )
 {
     return config.saacreadnum;
 }
-/*------------------------------------------------------------
- * saacreadnum 毛涩烂允月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *   int
- ------------------------------------------------------------*/
+
 void setSaacreadnum( int num )
 {
     config.saacreadnum = num;
 }
-/*------------------------------------------------------------
- * fdnum 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getFdnum( void )
 {
     return config.fdnum;
 }
-/*------------------------------------------------------------
- * petcharanum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getPetcharnum( void )
 {
     return config.petcharnum;
 }
 
-
-/*------------------------------------------------------------
- * othercharnum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getOtherscharnum( void )
 {
     return config.othercharnum;
 }
 
-/*------------------------------------------------------------
- * objnum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getObjnum( void )
 {
     return config.objnum;
 }
 
-/*------------------------------------------------------------
- * itemnum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getItemnum( void )
 {
     return config.itemnum;
 }
 
-
-/*------------------------------------------------------------
- * battlenum 毛  月
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getBattlenum( void )
 {
     return config.battlenum;
@@ -1163,167 +1001,77 @@ unsigned int getBattleexp( void )
     return config.battleexp;
 }
 #endif
-/*------------------------------------------------------------
- * topdir 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getTopdir( void )
 {
     return config.topdir;
 }
-/*------------------------------------------------------------
- * mapdir 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getMapdir( void )
 {
     return config.mapdir;
 }
-/*------------------------------------------------------------
- * maptilefile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getMaptilefile( void )
 {
     return config.maptilefile;
 }
-/*------------------------------------------------------------
- * battlemapfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getBattleMapfile( void )
 {
     return config.battlemapfile;
 }
-/*------------------------------------------------------------
- * itemfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getItemfile( void )
 {
     return config.itemfile;
 }
-/*------------------------------------------------------------
- * invfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getInvfile( void )
 {
     return config.invfile;
 }
-/*------------------------------------------------------------
- * appearfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getAppearfile( void )
 {
     return config.appearfile;
 }
-/*------------------------------------------------------------
- * effectfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getEffectfile( void )
 {
     return config.effectfile;
 }
-/*------------------------------------------------------------
- * titlenamefile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getTitleNamefile( void )
 {
     return config.titlenamefile;
 }
-/*------------------------------------------------------------
- * titleconfigfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getTitleConfigfile( void )
 {
     return config.titleconfigfile;
 }
-/*------------------------------------------------------------
- * encountfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getEncountfile( void )
 {
     return config.encountfile;
 }
-/*------------------------------------------------------------
- * enemyfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getEnemyfile( void )
 {
     return config.enemyfile;
 }
-/*------------------------------------------------------------
- * enemybasefile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getEnemyBasefile( void )
 {
     return config.enemybasefile;
 }
-/*------------------------------------------------------------
- * groupfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getGroupfile( void )
 {
     return config.groupfile;
 }
-/*------------------------------------------------------------
- * magicfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getMagicfile( void )
 {
     return config.magicfile;
@@ -1331,13 +1079,6 @@ char* getMagicfile( void )
 
 #ifdef _ATTACK_MAGIC
 
-/*------------------------------------------------------------
- * 取得攻击性的咒术
- * 参数
- * None
- * 返回值
- * char*
- ------------------------------------------------------------*/
 char* getAttMagicfileName( void )
 {
     return config.attmagicfile;
@@ -1370,13 +1111,6 @@ char* getQuizfile( void )
     return config.quizfile;
 }
 
-/*------------------------------------------------------------
- * lsgenlogfile 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
 char* getLsgenlogfilename( void )
 {
     return config.lsgenlog;
@@ -1389,338 +1123,152 @@ char* getGMSetfile( void )
 }
 #endif
 
-/*------------------------------------------------------------
- * storedir 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
 char* getStoredir( void )
 {
     return config.storedir;
 }
 #ifdef _STORECHAR
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 char* getStorechar( void )
 {
     return config.storechar;
 }
 #endif
 
-/*------------------------------------------------------------
- * NPC 迕及犯奴伊弁玄伉毛  化仁月楮醒
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
 char* getNpcdir( void )
 {
     return config.npcdir;
 }
-/*------------------------------------------------------------
- * 夫弘犯奴伊弁玄伉毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getLogdir( void )
 {
     return config.logdir;
 }
 
-/*------------------------------------------------------------
- * 夫弘涩烂白央奶伙  毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
 char* getLogconffile( void )
 {
     return config.logconfname;
 }
-/*------------------------------------------------------------
- * 民乓永玄  芊由旦伐□玉 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 char* getChatMagicPasswd( void )
 {
     return config.chatmagicpasswd;
 }
-/*------------------------------------------------------------
- * 犯田永弘民乓永玄  芊匹及CDKEY民尼永弁毛允月井升丹井毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
+
 unsigned getChatMagicCDKeyCheck( void )
 {
     return config.chatmagiccdkeycheck;
 }
 
-/*------------------------------------------------------------
- * filesearchnum毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getFilesearchnum( void )
 {
     return config.filesearchnum;
 }
-/*------------------------------------------------------------
- * npctemplatenum毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getNpctemplatenum( void )
 {
     return config.npctemplatenum;
 }
-/*------------------------------------------------------------
- * npccreatenum毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getNpccreatenum( void )
 {
     return config.npccreatenum;
 }
 
-/*------------------------------------------------------------
- * walksendinterval毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getWalksendinterval( void )
 {
     return config.walksendinterval;
 }
-/*------------------------------------------------------------
- * walksendinterval毛本永玄允月［
- * 娄醒
- *  unsigned int 	interval	凛棉  立伉    
- * 忒曰袄
- *  void
- ------------------------------------------------------------*/
+
 void setWalksendinterval( unsigned int interval )
 {
     config.walksendinterval = interval;
 }
-/*------------------------------------------------------------
- * CAsendinterval毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getCAsendinterval_ms( void )
 {
     return config.CAsendinterval_ms;
 }
-/*------------------------------------------------------------
- * CAsendinterval毛本永玄允月［
- * 娄醒
- *  unsigned int interval
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 void setCAsendinterval_ms( unsigned int interval_ms )
 {
     config.CAsendinterval_ms = interval_ms;
 }
-/*------------------------------------------------------------
- * CDsendinterval毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getCDsendinterval_ms( void )
 {
     return config.CDsendinterval_ms;
 }
-/*------------------------------------------------------------
- * CDsendinterval毛本永玄允月［
- * 娄醒
- *  interval		unsigned int
- * 忒曰袄
- * void
- ------------------------------------------------------------*/
+
 void setCDsendinterval_ms( unsigned int interval_ms )
 {
 	config.CDsendinterval_ms = interval_ms;
 }
-/*------------------------------------------------------------
- * Onelooptime毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getOnelooptime_ms( void )
 {
     return config.Onelooptime_ms;
 }
-/*------------------------------------------------------------
- * Onelooptime毛本永玄允月［
- * 娄醒
- *  interval		unsigned int
- * 忒曰袄
- * void
- ------------------------------------------------------------*/
+
 void setOnelooptime_ms( unsigned int interval_ms )
 {
 	config.Onelooptime_ms = interval_ms;
 }
-/*------------------------------------------------------------
- * Petdeletetime毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getPetdeletetime( void )
 {
     return config.Petdeletetime;
 }
-/*------------------------------------------------------------
- * Petdeletetime毛本永玄允月［
- * 娄醒
- *  interval		unsigned int
- * 忒曰袄
- * void
- ------------------------------------------------------------*/
+
 void setPetdeletetime( unsigned int interval )
 {
 	config.Petdeletetime = interval;
 }
-/*------------------------------------------------------------
- * Itemdeletetime毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getItemdeletetime( void )
 {
     return config.Itemdeletetime;
 }
-/*------------------------------------------------------------
- * Itemdeletetime毛本永玄允月［
- * 娄醒
- *  interval		unsigned int
- * 忒曰袄
- * void
- ------------------------------------------------------------*/
+
 void setItemdeletetime( unsigned int interval )
 {
 	config.Itemdeletetime = interval;
 }
 
-/*------------------------------------------------------------
- * CharSavesendinterval毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getCharSavesendinterval( void )
 {
     return config.CharSavesendinterval;
 }
-/*------------------------------------------------------------
- * CharSavesendinterval毛本永玄允月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 void setCharSavesendinterval( unsigned int interval)
 {
 	config.CharSavesendinterval = interval;
 }
 
-/*------------------------------------------------------------
- * Addressbookoffmsgnum 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getAddressbookoffmsgnum( void )
 {
     return config.addressbookoffmsgnum;
 }
-/*------------------------------------------------------------
- * Protocolreadfrequency 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
+
 unsigned int getProtocolreadfrequency( void )
 {
     return config.protocolreadfrequency;
 }
 
-/*------------------------------------------------------------
- * Allowerrornum 毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getAllowerrornum( void )
 {
     return config.allowerrornum;
 }
 
-/*------------------------------------------------------------
- * 夫弘毛潸  允月凛对毛  月［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int
- ------------------------------------------------------------*/
 unsigned int getLogHour( void )
 {
     return config.loghour;
 }
 
-/*------------------------------------------------------------
- * 田玄伙  及犯田永弘丢永本□斥毛请允井［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int 1卅日请允
- ------------------------------------------------------------*/
 unsigned int getBattleDebugMsg( void )
 {
     return config.battledebugmsg;
 }
-/*------------------------------------------------------------
- * 田玄伙  及犯田永弘丢永本□斥毛请允井［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  unsigned int 1卅日请允
- ------------------------------------------------------------*/
+
 void setBattleDebugMsg( unsigned int num )
 {
     config.battledebugmsg = num;
@@ -1733,24 +1281,15 @@ void setBattleDebugMsg( unsigned int num )
  * 娄醒
  *  argv0   char*   戊穴件玉仿奶件娄醒及  赓
  */
-void  defaultConfig( char* argv0 )
+void defaultConfig( char* argv0 )
 {
-    char* program;                  /* program  毛菲户月及卞银丹 */
-
-    /* 犯白巧伙玄袄毛  木月 */
-
-    /*皿夫弘仿丞  */
-    program = rindex(argv0, '/');
-    if (program == NULL)
+    char* program = rindex(argv0, '/');
+    if(program == NULL)
         program = argv0;
     else
-        program++;   /* "/"及戚井日卞仄凶中及匹++允月*/
-    strcpysafe( config.progname , sizeof( config.progname ) ,program );
-
-    /*涩烂白央奶伙  */
-    strcpysafe( config.configfilename,
-                sizeof( config.configfilename ),"setup.cf" );
-
+        program++;
+    strcpysafe(config.progname, sizeof(config.progname), program);
+    strcpysafe(config.configfilename, sizeof(config.configfilename), "config/setup.cf");
 }
 
 /*
@@ -1850,52 +1389,16 @@ void substitutePointerFromType( void* to , CTYPE type ,double value)
     }
 }
 
-
-/*------------------------------------------------------------
- * 涩烂白央奶伙毛  戈
- * 娄醒
- *      filename            白央奶伙  
- * 忒曰袄
- *      TRUE(1)     岳  
- *      FALSE(0)    撩      -> 白央奶伙及左□皿件卞撩  仄凶
- ------------------------------------------------------------*/
 int readconfigfile( char* filename )
 {
-    FILE* f=NULL;
-    char linebuf[256];                  /* 域垫  心  戈田永白央 */
-    int linenum=0;                      /* 垫醒毛醒尹月 */
-    char    realopenfilename[256];      /*    端卞open 允月白央奶伙  */
-
-    char    hostname[128];
-
-    /*  石旦玄  毛菲户月    */
-    if( gethostname( hostname, sizeof(hostname) ) != -1 ){
-        char*   initdot;
-        initdot = index( hostname, '.' );
-        if( initdot != NULL )
-            *initdot = '\0';
-        snprintf( realopenfilename, sizeof(realopenfilename),
-                  "%s.%s" , filename, hostname);
-
-        /* 白央奶伙及左□皿件 */
-        f=fopen( realopenfilename, "r" );
-        if( f == NULL )
-            print( "Can't open %s.  use %s instead\n", realopenfilename,
-                   filename );
-    }
-    if( f == NULL ){
-        f=fopen( filename , "r" );          /* 白央奶伙及左□皿件 */
-        if( f == NULL ){
-            print( "Can't open %s\n", filename );
-            return FALSE;
-        }
-    }
-
-    /* 域垫勿勾  心  戈 */
-    while( fgets( linebuf , sizeof( linebuf ), f ) ){
-        char firstToken[256];       /*1    及  侬  */
-        int i;                      /*伙□皿  醒*/
-        int ret;                    /*伉正□件戊□玉*/
+    FILE* f = fopen(filename, "r");
+    char linebuf[256];
+    int linenum = 0;
+    while(fgets(linebuf, sizeof(linebuf), f))
+	{
+        char firstToken[256];
+        int i;
+        int ret;
 
         linenum ++;
 
@@ -1905,27 +1408,19 @@ int readconfigfile( char* filename )
         if( linebuf[0] == '\n' )continue;       /* none    */
 
         chomp( linebuf );                    /* remove tail newline  */
-
-        /* delim "=" 匹  赓(1)及玄□弁件毛  月*/
-        ret = getStringFromIndexWithDelim( linebuf , "=",  1, firstToken,
-                                           sizeof(firstToken) );
+        ret = getStringFromIndexWithDelim( linebuf, "=", 1, firstToken, sizeof(firstToken) );
         if( ret == FALSE ){
-            print( "Find error at %s in line %d. Ignore\n",
-                     filename , linenum);
+            print( "Find error at %s in line %d. Ignore\n", filename , linenum);
             continue;
         }
 
-        /* readconf 及扔奶术匹伙□皿 */
         for( i = 0 ; i < arraysizeof( readconf ) ; i ++ ){
             if( strcmp( readconf[i].name ,firstToken ) == 0 ){
                 /* match */
                 char secondToken[256];      /*2    及  侬  */
                 /* delim "=" 匹2    及玄□弁件毛  月*/
-                ret = getStringFromIndexWithDelim( linebuf , "=" , 2
-                                                   , secondToken ,
-                                                   sizeof(secondToken) );
+                ret = getStringFromIndexWithDelim(linebuf, "=", 2, secondToken, sizeof(secondToken) );
 
-                /* NULL  侬井升丹井毛譬屯月 */
                 if( ret == FALSE ){
                     print( "Find error at %s in line %d. Ignore",
                            filename , linenum);

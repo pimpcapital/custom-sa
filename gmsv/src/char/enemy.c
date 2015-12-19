@@ -373,12 +373,10 @@ int ENEMY_initEnemy( char* filename )
         return FALSE;
     }
 
-    ENEMY_enemy = allocateMemory( sizeof(struct tagENEMY_EnemyTable)
-                                   * ENEMY_enemynum );
-    if( ENEMY_enemy == NULL ){
-        fprint( "无法分配内存 %d\n" ,
-                sizeof(struct tagENEMY_EnemyTable)*ENEMY_enemynum);
-        fclose( f );
+    ENEMY_enemy = allocateMemory(sizeof(struct tagENEMY_EnemyTable) * ENEMY_enemynum);
+    if(ENEMY_enemy == NULL){
+        fprint( "无法分配内存 %d\n", sizeof(struct tagENEMY_EnemyTable)*ENEMY_enemynum);
+        fclose(f);
         return FALSE;
     }
     for( i = 0; i < ENEMY_enemynum; i ++ ) {
@@ -387,7 +385,8 @@ int ENEMY_initEnemy( char* filename )
     	}
     }
     linenum = 0;
-    while( fgets( line, sizeof( line ), f ) ){
+    while(fgets(line, sizeof(line), f))
+    {
         linenum ++;
         if( line[0] == '#' )continue;        /* comment */
         if( line[0] == '\n' )continue;       /* none    */

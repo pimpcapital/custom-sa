@@ -1,14 +1,6 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
-configure_file(resources/acserv.cf ${CMAKE_CURRENT_BINARY_DIR}/acserv.cf COPYONLY)
-configure_file(resources/badpetstring.txt ${CMAKE_CURRENT_BINARY_DIR}/badpetstring.txt COPYONLY)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/db)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/char)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/log)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/mail)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/char_sleep)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data)
-
+file(COPY resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src/include)
 file(GLOB_RECURSE HEADER_FILES src/include/*.h)
 file(GLOB_RECURSE SOURCE_FILES src/*.c)

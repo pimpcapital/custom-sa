@@ -153,10 +153,10 @@ NAME1=极度无聊
 NAME2=
 NAME3=
 NAME4=
-NAME5= 
+NAME5=
 
 #自定义升级经验等级
-USEREXP=data/exp.txt
+USEREXP=config/data/exp.txt
 
 #多少转可超越一般等级达到最高级(目前版本开放最高160级)
 #人物转数
@@ -321,20 +321,20 @@ itemnum=10000
 battlenum=100
 
 # Top directory(顶层文件夹?)
-topdir=. 
+topdir=.
 # Map file directory(地图文件夹)
-mapdir=data/map
+mapdir=config/data/map
 # Map tile file directory(地图设置文件)
-maptilefile=data/map/mapset.txt
+maptilefile=config/data/map/mapset.txt
 
 # Battle map file(战斗地图文件)
-battlemapfile=data/map/battlemap.txt
+battlemapfile=config/data/map/battlemap.txt
 
 #ifdef _ITEMSET6_TXT(道具文件)
-itemset6file=data/itemset.txt
-itemset5file=data/itemset.txt
-itemset4file=data/itemset.txt
-itemset3file=data/itemset.txt
+itemset6file=config/data/itemset.txt
+itemset5file=config/data/itemset.txt
+itemset4file=config/data/itemset.txt
+itemset3file=config/data/itemset.txt
 
 ========================================================
 以下作废 可有可无
@@ -353,52 +353,52 @@ itemset3file=data/itemset.txt
 #endif
 ========================================================
 # ?(无敌NPC或不可战斗NPC???)
-invinciblefile=data/inv.txt
+invinciblefile=config/data/inv.txt
 
 # ?(显示位置文件)
-appearpositionfile=data/appear.txt
+appearpositionfile=config/data/appear.txt
 
 # ?(所有名称文件?)
-titlenamefile=data/titlename.txt
+titlenamefile=config/data/titlename.txt
 
 # ?(所有设置文件?)
-titleconfigfile=./data/titleconfig.txt
+titleconfigfile=config/data/titleconfig.txt
 
 # ?(遇到怪的文件?)
-encountfile=./data/encount.txt
+encountfile=config/data/encount.txt
 
 # ?(宠物文件?)
-enemyfile=./data/enemy.txt
+enemyfile=config/data/enemy.txt
 
 # ?(宠物基础设置文件?)
-enemybasefile=./data/enemybase.txt
+enemybasefile=config/data/enemybase.txt
 
 # ?(遇敌组文件?)
-groupfile=./data/group1.txt
+groupfile=config/data/group1.txt
 
 # ?(精灵和魔法文件?)
-magicfile=./data/magic.txt
+magicfile=config/data/magic.txt
 
 #ifdef __ATTACK_MAGIC(攻击魔法文件?)
-attmagicfile=./data/attmagic.bin
+attmagicfile=config/data/attmagic.bin
 #endif
 
 #ifdef _PETSKILL2_TXT(宠物技能文件)
-petskillfile2=./data/petskill.txt
+petskillfile2=config/data/petskill.txt
 #else
-petskillfile1=./data/petskill.txt
+petskillfile1=config/data/petskill.txt
 #endif
 
 # ?(物品组成文件?还是素材文件?)
-itematomfile=./data/itematom.txt
+itematomfile=config/data/itematom.txt
 # ?(遇敌?)
-effectfile=data/effect.txt
+effectfile=config/data/effect.txt
 # 猜迷的文件
-quizfile=data/question.txt
+quizfile=config/data/question.txt
 # ?
 #lsgenlogfilename=log/genlog
 #ifdef _GMRELOAD(GM帐号文件)
-gmsetfile=./data/gmset.txt
+gmsetfile=config/data/gmset.txt
 #endif
 
 # Store DB?
@@ -406,13 +406,13 @@ gmsetfile=./data/gmset.txt
 storedir=../saac/char
 # Npc dir
 # NPC 目录
-npcdir=data/npc
+npcdir=config/data/npc
 # Log dir
 # 日志目录
-logdir=./log
+logdir=log
 # Log configuration file
 # 日志配置文件
-logconfname=log.cf
+logconfname=config/log.cf
 # ?GM PASSWORD(GM密码)
 chatmagicpasswd=gm
 #ifdef _STORECHAR
@@ -507,11 +507,11 @@ erruser_down=1
 ====================================================================
 
 #人物职业技能
-profession=./data/profession.txt
+profession=config/data/profession.txt
 #endif
 
 #退出团队的道具
-itemquitparty=./data/itemquitparty.txt
+itemquitparty=config/data/itemquitparty.txt
 #endif
 
 #ifdef _MUSEUM

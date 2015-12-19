@@ -410,7 +410,6 @@ int main( int argc , char **argv )
     }
 
     sasql_init();
-    log( "读取数据目录\n" );
     dbRead( dbdir );
 #ifdef	_FAMILY
     log("读取 家族庄园\n");

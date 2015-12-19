@@ -62,26 +62,19 @@ struct tagLogconf{
 tagWarplog warplog[MAXMAPNUM];
 tagWarpCount warpCount[MAXMAPLINK];
 
-/*------------------------------------------------------------
- * 娄醒
- * 忒曰袄
- ------------------------------------------------------------*/
-static int readLogConfFile( char* filename )
+static int readLogConfFile(char* filename)
 {
     FILE*   f;
     char    line[256];
     char    basedir[256];
     int     linenum=0;
 
-    {
-        char*   r;
-        r = rindex( filename, '/' );
-        if( r  == NULL )snprintf(basedir,sizeof(basedir),"." );
-        else{
-            memcpy( basedir,filename,r-filename );
-            basedir[r-filename] = '\0';
-        }
-    }
+	char* r = rindex(filename, '/');
+	if(r == NULL) snprintf(basedir, sizeof(basedir), ".");
+	else{
+		memcpy( basedir,filename,r-filename );
+		basedir[r-filename] = '\0';
+	}
 
     f = fopen( filename , "r");
     if( f == NULL ){
@@ -125,7 +118,7 @@ static int readLogConfFile( char* filename )
     return TRUE;
 }
 
-int openAllLogFile( void )
+int openAllLogFile()
 {
     int     i;
     int     opencount=0;
@@ -183,7 +176,7 @@ void printl( LOG_TYPE logtype, char* format , ... )
 
 int initLog( char* filename )
 {
-    if( readLogConfFile( filename ) == FALSE )return FALSE;
+    if(readLogConfFile(filename) == FALSE) return FALSE;
     openAllLogFile();
     return TRUE;
 }
