@@ -1,3 +1,5 @@
+datadir=config/data
+
 #ChangeRunLevel
 #运行等级 范围是-20~19 其中-20的运行级别最高
 runlevel=0
@@ -336,22 +338,6 @@ itemset5file=config/data/itemset.txt
 itemset4file=config/data/itemset.txt
 itemset3file=config/data/itemset.txt
 
-========================================================
-以下作废 可有可无
-#else(如果没有itemset6.txt的话选择下面的文件,应该是这样)
-#ifdef _ITEMSET5_TXT
-#      { "itemset5file",      config.itemfile,      sizeof(config.invfile),      NULL,      0},
-#else
-#ifdef _ITEMSET4_TXT
-#      { "itemset4file" , config.itemfile,sizeof(config.invfile),NULL,0},
-#else
-#ifdef _ITEMSET3_ITEM
-#      { "itemset3file" , config.itemfile,sizeof(config.invfile),NULL,0},
-#endif
-#endif
-#endif
-#endif
-========================================================
 # ?(无敌NPC或不可战斗NPC???)
 invinciblefile=config/data/inv.txt
 

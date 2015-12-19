@@ -3185,12 +3185,11 @@ NEEDITEMENEMY	NeedEnemy[128] = {
 #ifdef _NEED_ITEM_ENEMY
 int need_item_eneny_init()
 {
-	FILE* fp;
-	int i;
+	char filename[256];
+	snprintf(filename, sizeof filename, "%s/%s", getDataDir(), "needitemeneny.txt");
+	FILE* fp = fopen(filename, "r");
 	int num=0;
-	fp = fopen("data/needitemeneny.txt", "r");
-	if (fp == NULL)
-	{
+	if (fp == NULL) {
 		print("无法打开文件\n");
 		return FALSE;
 	}
@@ -3202,7 +3201,7 @@ int need_item_eneny_init()
 			
 		getStringFromIndexWithDelim(line,"|", 1, buf, sizeof(buf));
 		NeedEnemy[num].EnemyId=atoi(buf);
-		for(i=0;i<MAXCAPTRUEFREE;i++){
+		for(int i = 0; i< MAXCAPTRUEFREE; i++) {
 			getStringFromIndexWithDelim(line,"|", i+1, buf, sizeof(buf));
 			NeedEnemy[num].ItemId[i]=atoi(buf);
 		}

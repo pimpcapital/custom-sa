@@ -19,10 +19,10 @@ extern struct MissionInfo missionlist[MAXMISSION];
 extern struct MissionTable missiontable[MAXMISSIONTABLE];
 #endif
 
-/* 涩烂毛忡  允月厌瞻   */
+
 typedef struct tagConfig
 {
-    /*皿夫弘仿丞  (愤  读卞菲户凶中仃升引分蛲  */
+	char datadir[128];
   char    progname[8];
   char    configfilename[32]; /* config白央奶伙   */
     unsigned int debuglevel;   /* 犯田永弘伊矛伙 */
@@ -264,19 +264,19 @@ typedef struct tagReadConf
 
 ReadConf readconf[]=
 {
-    { "debuglevel"      , NULL ,0 , (void*)&config.debuglevel      ,CHAR},
+		{ "datadir", config.datadir, sizeof(config.datadir), NULL, CHAR},
+		{ "debuglevel"      , NULL ,0 , (void*)&config.debuglevel      ,CHAR},
 
     { "usememoryunit"   , NULL ,0 , (void*)&config.usememoryunit   ,INT},
     { "usememoryunitnum", NULL ,0 , (void*)&config.usememoryunitnum,INT},
 
-    { "acserv",			config.asname,sizeof(config.asname) ,NULL , 0},
+    { "acserv",			config.asname,sizeof(config.asname) ,NULL , CHAR},
     { "acservport",		NULL ,0 , (void*)&config.acservport     ,SHORT},
-    { "acpasswd",		config.acpasswd,sizeof( config.acpasswd),NULL,0},
-    { "gameservname",	config.gsnamefromas,sizeof(config.gsnamefromas),
-     NULL,0},
+    { "acpasswd",		config.acpasswd,sizeof( config.acpasswd),NULL,CHAR},
+    { "gameservname",	config.gsnamefromas,sizeof(config.gsnamefromas), NULL,CHAR},
 
     // Arminius 7.24 manor pk
-    { "gameservid", config.gsid, sizeof(config.gsid), NULL, 0}, 
+    { "gameservid", config.gsid, sizeof(config.gsid), NULL, CHAR},
     { "allowmanorpk", NULL, 0, (void*)&config.allowmanorpk, SHORT},
 
     { "port",			NULL ,0 , (void*)&config.port           ,SHORT},
@@ -298,61 +298,51 @@ ReadConf readconf[]=
     { "itemnum",		NULL ,0 , (void*)&config.itemnum,				INT},
     { "battlenum",		NULL ,0 , (void*)&config.battlenum,				INT},
     { "battleexp",		NULL ,0 , (void*)&config.battleexp,				INT},
-    { "topdir"          , config.topdir,sizeof(config.topdir),NULL,0},
-    { "mapdir"          , config.mapdir,sizeof(config.mapdir),NULL,0},
-    { "maptilefile"     , config.maptilefile,sizeof(config.maptilefile),NULL,0},
-    { "battlemapfile"   , config.battlemapfile,sizeof(config.battlemapfile),NULL,0},
+    { "topdir"          , config.topdir,sizeof(config.topdir),NULL,CHAR},
+    { "mapdir"          , config.mapdir,sizeof(config.mapdir),NULL,CHAR},
+    { "maptilefile"     , config.maptilefile,sizeof(config.maptilefile),NULL,CHAR},
+    { "battlemapfile"   , config.battlemapfile,sizeof(config.battlemapfile),NULL,CHAR},
 
 #ifdef _ITEMSET6_TXT
-	{ "itemset6file",	config.itemfile,	sizeof(config.invfile),	NULL,	0},
+	{ "itemset6file",	config.itemfile,	sizeof(config.invfile),	NULL,	CHAR},
 #else
-#ifdef _ITEMSET5_TXT
-	{ "itemset5file",	config.itemfile,	sizeof(config.invfile),	NULL,	0},
-#else
-#ifdef _ITEMSET4_TXT
-	{ "itemset4file"  , config.itemfile,sizeof(config.invfile),NULL,0},
-#else
-#ifdef _ITEMSET3_ITEM
-	{ "itemset3file"  , config.itemfile,sizeof(config.invfile),NULL,0},
+
 #endif
-#endif
-#endif
-#endif
-  { "invinciblefile"  , config.invfile,sizeof(config.invfile),NULL,0},
-  { "appearpositionfile"  , config.appearfile,sizeof(config.appearfile),NULL,0},
-	{ "titlenamefile", config.titlenamefile, sizeof( config.titlenamefile),NULL,0},
-	{ "titleconfigfile", config.titleconfigfile, sizeof( config.titleconfigfile),NULL,0},
-	{ "encountfile", config.encountfile, sizeof( config.encountfile),NULL,0},
-	{ "enemyfile", config.enemyfile, sizeof( config.enemyfile),NULL,0},
-	{ "enemybasefile", config.enemybasefile, sizeof( config.enemybasefile),NULL,0},
-	{ "groupfile", config.groupfile, sizeof( config.groupfile),NULL,0},
-	{ "magicfile", config.magicfile, sizeof( config.magicfile),NULL,0},
+  { "invinciblefile"  , config.invfile,sizeof(config.invfile),NULL,CHAR},
+  { "appearpositionfile"  , config.appearfile,sizeof(config.appearfile),NULL,CHAR},
+	{ "titlenamefile", config.titlenamefile, sizeof( config.titlenamefile),NULL,CHAR},
+	{ "titleconfigfile", config.titleconfigfile, sizeof( config.titleconfigfile),NULL,CHAR},
+	{ "encountfile", config.encountfile, sizeof( config.encountfile),NULL,CHAR},
+	{ "enemyfile", config.enemyfile, sizeof( config.enemyfile),NULL,CHAR},
+	{ "enemybasefile", config.enemybasefile, sizeof( config.enemybasefile),NULL,CHAR},
+	{ "groupfile", config.groupfile, sizeof( config.groupfile),NULL,CHAR},
+	{ "magicfile", config.magicfile, sizeof( config.magicfile),NULL,CHAR},
 #ifdef _ATTACK_MAGIC
-	{ "attmagicfile" , config.attmagicfile , sizeof( config.attmagicfile )  , NULL , 0 },
+	{ "attmagicfile" , config.attmagicfile , sizeof( config.attmagicfile )  , NULL , CHAR },
 #endif
 
 #ifdef _PETSKILL2_TXT
-	{ "petskillfile2", config.petskillfile, sizeof( config.petskillfile),NULL,0},
+	{ "petskillfile2", config.petskillfile, sizeof( config.petskillfile),NULL,CHAR},
 #else
 	{ "petskillfile1", config.petskillfile, sizeof( config.petskillfile),NULL,0},
 #endif
 
-    { "itematomfile" , config.itematomfile, sizeof( config.itematomfile),NULL,0},
-    { "effectfile"  , config.effectfile,sizeof(config.effectfile),NULL,0},
-    { "quizfile"  , config.quizfile,sizeof(config.quizfile),NULL,0},
+    { "itematomfile" , config.itematomfile, sizeof( config.itematomfile),NULL,CHAR},
+    { "effectfile"  , config.effectfile,sizeof(config.effectfile),NULL,CHAR},
+    { "quizfile"  , config.quizfile,sizeof(config.quizfile),NULL,CHAR},
 
-    { "lsgenlogfilename", config.lsgenlog,sizeof(config.lsgenlog),NULL,0},
+    { "lsgenlogfilename", config.lsgenlog,sizeof(config.lsgenlog),NULL,CHAR},
 #ifdef _GMRELOAD
-	{ "gmsetfile", config.gmsetfile, sizeof( config.gmsetfile),NULL,0},
+	{ "gmsetfile", config.gmsetfile, sizeof( config.gmsetfile),NULL,CHAR},
 #endif
 
-    { "storedir"        ,config.storedir,sizeof(config.storedir),NULL,0},
-    { "npcdir"          ,config.npcdir,sizeof(config.npcdir),NULL,0},
-    { "logdir"          ,config.logdir,sizeof(config.logdir),NULL,0},
-    { "logconfname"     ,config.logconfname,sizeof(config.logconfname),NULL,0},
-    { "chatmagicpasswd", config.chatmagicpasswd, sizeof( config.chatmagicpasswd),NULL,0},
+    { "storedir"        ,config.storedir,sizeof(config.storedir),NULL,CHAR},
+    { "npcdir"          ,config.npcdir,sizeof(config.npcdir),NULL,CHAR},
+    { "logdir"          ,config.logdir,sizeof(config.logdir),NULL,CHAR},
+    { "logconfname"     ,config.logconfname,sizeof(config.logconfname),NULL,CHAR},
+    { "chatmagicpasswd", config.chatmagicpasswd, sizeof( config.chatmagicpasswd),NULL,CHAR},
 #ifdef _STORECHAR
-    { "storechar", config.storechar, sizeof( config.storechar),NULL,0},
+    { "storechar", config.storechar, sizeof( config.storechar),NULL,CHAR},
 #endif
     { "chatmagiccdkeycheck",  NULL,0, &config.chatmagiccdkeycheck,INT},
     { "filesearchnum",  NULL,0, &config.filesearchnum,INT},
@@ -374,14 +364,13 @@ ReadConf readconf[]=
     { "allowerrornum" ,NULL,0,(void*)&config.allowerrornum,INT},
     { "loghour" ,NULL,0,(void*)&config.loghour,INT},
     { "battledebugmsg" ,NULL,0,(void*)&config.battledebugmsg,INT},
-    //ttom add because the second had
     { "encodekey" ,NULL,0,(void*)&config.encodekey,INT},
     { "acwritesize" ,NULL,0,(void*)&config.acwritesize,INT},
     { "acwbsize" ,NULL,0,(void*)&config.acwbsize,INT},
     { "erruser_down" ,NULL,0,(void*)&config.ErrUserDownFlg,INT},    
 
 #ifdef _ITEM_QUITPARTY
-    { "itemquitparty",	config.itemquitparty, sizeof(config.itemquitparty) ,NULL , 0},
+    { "itemquitparty",	config.itemquitparty, sizeof(config.itemquitparty) ,NULL , CHAR},
 #endif
 
 #ifdef _DEL_DROP_GOLD
@@ -454,11 +443,11 @@ ReadConf readconf[]=
 #endif
 
 #ifdef _UNREG_NEMA
-	{ "NAME1" ,config.unregname[0], sizeof( config.unregname[0]),NULL,0},
-	{ "NAME2" ,config.unregname[1], sizeof( config.unregname[1]),NULL,0},
-	{ "NAME3" ,config.unregname[2], sizeof( config.unregname[2]),NULL,0},
-	{ "NAME4" ,config.unregname[3], sizeof( config.unregname[3]),NULL,0},
-	{ "NAME5" ,config.unregname[4], sizeof( config.unregname[4]),NULL,0},
+	{ "NAME1" ,config.unregname[0], sizeof( config.unregname[0]),NULL,CHAR},
+	{ "NAME2" ,config.unregname[1], sizeof( config.unregname[1]),NULL,CHAR},
+	{ "NAME3" ,config.unregname[2], sizeof( config.unregname[2]),NULL,CHAR},
+	{ "NAME4" ,config.unregname[3], sizeof( config.unregname[3]),NULL,CHAR},
+	{ "NAME5" ,config.unregname[4], sizeof( config.unregname[4]),NULL,CHAR},
 #endif
 #ifdef _TRANS_LEVEL_CF
 	{ "CHARTRANS" ,NULL,0,(void*)&config.chartrans,	INT},
@@ -728,7 +717,7 @@ void LoadPetTalk(void)
 #ifdef _GAMBLE_BANK
 GAMBLEBANK_ITEMS GB_ITEMS[GAMBLEBANK_ITEMSMAX];
 
-void Load_GambleBankItems( void)
+void Load_GambleBankItems(void)
 {
 
 	FILE *fp;
@@ -737,7 +726,7 @@ void Load_GambleBankItems( void)
 	char name[128];
 	int num,ID,type;
 	int i=0;
-	sprintf(filename, "./data/gambleitems.txt" );
+	snprintf(filename, sizeof filename, "%s/%s", getDataDir(), "gambleitems.txt");
 	print("\n加载赌博物品文件 %s ...", filename);
 	fp = fopen( filename, "r");
     if( fp != NULL ) {
@@ -771,7 +760,7 @@ void Load_PetSkillCodes( void)
 	char type[256];
 	int num,ID;
 	int i=0;
-	sprintf(filename, "./data/skillcode.txt" );
+	snprintf(filename, sizeof filename, "%s/%s", getDataDir(), "skillcode.txt");
 	print("\n加载宠物技能编码文件:%s...", filename);
 	fp = fopen( filename, "r");
     if( fp != NULL ) {
@@ -835,6 +824,10 @@ int LoadGMSet( char* filename )
 	return TRUE;
 }
 #endif
+
+char* getDataDir() {
+	return config.datadir;
+}
 
 char* getProgname( void )
 {

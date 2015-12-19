@@ -75,6 +75,7 @@ extern struct GMINFO gminfo[GMMAXNUM];
 int readconfigfile( char* filename );
 
 void  defaultConfig( char* argv0 );
+char* getDataDir();
 char* getProgname( void );
 char* getConfigfilename( void );
 void setConfigfilename( char* newv );

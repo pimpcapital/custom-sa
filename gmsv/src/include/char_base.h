@@ -4,7 +4,6 @@
 #include "version.h"
 #include "skill.h"
 #include "title.h"
-/*#include "magicinfo.h"*/
 #include "addressbook.h"
 
 #define CHAR_DELIMITER "\n"
@@ -1335,6 +1334,8 @@ void CHAR_getDefaultCharTempNum( Char* ch );
 #ifdef _RIDE_CF
 int CHAR_Ride_CF_init();
 #endif
+
+int CHAR_FmLeaderRide_init();
 
 void LodBadPetString( char *data, char *err, int ti);
 

@@ -32,7 +32,7 @@ typedef struct tagConfig {
 	char sql_PASS[16];
 } Config;
 
-Config config;
+const Config config;
 
 int AutoReg;
 

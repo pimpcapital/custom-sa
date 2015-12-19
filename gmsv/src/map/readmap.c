@@ -605,10 +605,9 @@ int CHECKFLOORID(int id)
 }
 #endif
 
-#define MAX_MAP_FILES 1300 // 地图目录最大档案数
-//#define MAX_MAP_FILES 2000 // 地图目录最大档案数
+#define MAX_MAP_FILES 5000 // 地图目录最大档案数
 
-int MAP_readMapDir( char*  dirname )
+int MAP_readMapDir(char*  dirname)
 {
     int     mapfilenum=0;
     STRING64    filenames[MAX_MAP_FILES];
@@ -616,15 +615,15 @@ int MAP_readMapDir( char*  dirname )
     int     i;
 
 
-    filenum = rgetFileName( dirname, filenames, arraysizeof(filenames) );
+    filenum = rgetFileName(dirname, filenames, arraysizeof(filenames));
     if( filenum == -1 ){
         fprint( "无法在目录下获取文件 %s \n" , dirname );
         return FALSE;
     }
 
 
-    for( i = 0 ; i < filenum ; i ++ )
-        if( MAP_IsMapFile( filenames[i].string ) )
+    for(i = 0; i < filenum; i++)
+        if(MAP_IsMapFile(filenames[i].string))
             mapfilenum++;
 
     print( "找到 %d 地图\n" , mapfilenum );
@@ -636,11 +635,11 @@ int MAP_readMapDir( char*  dirname )
 
     char no_exit[64];
     snprintf(no_exit, sizeof no_exit, "%s/%s", dirname, "map_noexit.txt");
-    for( i = 0 ; i < filenum ; i ++ )
+    for(i = 0; i < filenum; i++)
         if(MAP_IsMapFile(filenames[i].string)) {
             MAP_readMapOne(filenames[i].string, no_exit);
         }
-    print( "正确地图文件 %d...",MAP_mapnum_index );
+    print( "正确地图文件 %d...", MAP_mapnum_index);
     if( MAP_mapnum_index == 0 ){
         MAP_endMapArray();
         return FALSE;

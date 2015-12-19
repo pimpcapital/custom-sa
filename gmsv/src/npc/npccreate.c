@@ -147,15 +147,15 @@ static int NPC_readCreateFile( char* filename )
     {
         int w,h;
     }REC;
-    POINT   center[2]={{0,0},{0,0}};     /*  born 互 0 匹 move 互 1 */
-    REC     wh[2]    ={{0,0},{0,0}};      /*  born 互 0 匹 move 互 1 */
+    POINT   center[2]={{0,0},{0,0}};
+    REC     wh[2]    ={{0,0},{0,0}};
 
-    POINT   lu[2]    ={{0,0},{0,0}};     /*  born 互 0 匹 move 互 1 */
-    POINT   rd[2]    ={{0,0},{0,0}};     /*  born 互 0 匹 move 互 1 */
+    POINT   lu[2]    ={{0,0},{0,0}};
+    POINT   rd[2]    ={{0,0},{0,0}};
 
-    int     defborn=FALSE;              /*  born 毛涩烂仄凶井升丹井 */
-    int     defmove=FALSE;              /*  move 毛涩烂仄凶井升丹井 */
-    int     deflurd[2]={FALSE,FALSE};   /*  lu,rd 匹涩烂仄凶井升丹井 */
+    int     defborn=FALSE;
+    int     defmove=FALSE;
+    int     deflurd[2]={FALSE,FALSE};
     char*   ret;
 
 

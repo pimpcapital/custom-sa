@@ -2741,9 +2741,10 @@ int _CHAR_DelGold( char *file, int line, int charaindex, int gold)
 #ifdef _RIDE_CF
 int CHAR_Ride_CF_init()
 {
-	FILE* fp;
-	int i=0;
-	fp = fopen("data/ride.txt", "r");
+	char filename[256];
+	snprintf(filename, sizeof filename, "%s/%s", getDataDir(), "ride.txt");
+	FILE* fp = fopen(filename, "r");
+	int i = 0;
 	if (fp == NULL)
 	{
 		print("无法打开文件\n");
@@ -2835,15 +2836,14 @@ int CHAR_Ride_CF_init()
 #ifdef _FM_LEADER_RIDE
 int CHAR_FmLeaderRide_init()
 {
-	FILE* fp;
-	int i;
-	fp = fopen("data/leaderride.txt", "r");
-	if (fp == NULL)
-	{
+    char filename[256];
+    snprintf(filename, sizeof filename, "%s/%s", getDataDir(), "leaderride.txt");
+	FILE* fp = fopen(filename, "r");
+	if(fp == NULL) {
 		print("无法打开文件\n");
 		return FALSE;
 	}
-	for(i=0;i<FMPOINTNUM;i++){
+	for(int i = 0; i < FMPOINTNUM; i++) {
 		char line[64], buf[16];
 		if (fgets(line, sizeof(line), fp) == NULL)	break;
 		chop(line);

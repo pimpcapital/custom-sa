@@ -302,7 +302,6 @@ Game Server 游戏环境:
 // Terry define start -------------------------------------------------------------------
 #define _MAP_TIME                // 特殊地图,会倒数(开放)
 
-// Terry define end   -------------------------------------------------------------------
 #define _ITEM_ADDPETEXP          // (可开) Change 增加宠物经验值道具(可吃此道具宠物,平常不可获得经验值)
 #define _TRANS_6                 // (可开) Change 人物6转
 #define _PET_2TRANS              // (可开) Change 宠物2转
@@ -310,7 +309,7 @@ Game Server 游戏环境:
 #define _MAGICSTAUTS_RESIST      // (可开) Change (火电冰)抗性精灵
 #define _SUIT_TWFWENDUM          // (可开) Change 四属性套装功能 (_SUIT_ITEM要开)
 #define _EXCHANGEMAN_REQUEST_DELPET   // (可开) Change 替exchangeman的TYPE:REQUEST增加删除宠物
-//--------------------------------------------------------------------------
+
 #define _DEL_DROP_GOLD           // 删除地上过时的石币  Robin
 #define _ITEM_STONE              // cyg 奇怪的石头
 #define _HELP_NEWHAND            // cyg 新创角色给予新手道具)
@@ -326,9 +325,9 @@ Game Server 游戏环境:
 #define _PETSKILL_BATTLE_MODEL   // 宠物技能战斗模组
 #define _PETSKILL_ANTINTER       // (可开) Change 宠技:蚁之葬 参考_PETSKILL_2TIMID
 #define _PETSKILL_REGRET         // (可开) Change 宠技:憾甲一击 参考_SONIC_ATTACK
-//----------xfei--------------------------
+
 #define  _NEW_RIDEPETS
-#define _RIDE_CF 
+#define _RIDE_CF
 #define _FM_LEADER_RIDE          // 族长专用骑宠
 #define _RIDEMODE_20             // 2.0骑宠模式
 #define _ITEM_SETLOVER           // 结婚功能

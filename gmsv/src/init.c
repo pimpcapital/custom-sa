@@ -1,8 +1,8 @@
 #include "version.h"
+#include "char_base.h"
 #include <unistd.h>
 #include <stdio.h>
-#include <strings.h>
-#include <unistd.h>
+#include <battle_event.h>
 
 
 #include "configfile.h"
@@ -12,8 +12,6 @@
 #include "buf.h"
 #include "object.h"
 #include "char.h"
-#include "char_data.h"
-#include "item.h"
 #include "readmap.h"
 #include "function.h"
 #include "saacproto_cli.h"
@@ -21,7 +19,6 @@
 #include "readnpc.h"
 #include "log.h"
 #include "handletime.h"
-#include "title.h"
 #include "encount.h"
 #include "enemy.h"
 #include "battle.h"
@@ -33,11 +30,7 @@
 
 #ifdef _ITEM_QUITPARTY
 #include "init.h"
-//int itemquitparty_num = 0;
-//static DisappearItem *Disappear_Item;
 #endif
-
-#define MESSAGEFILE "hoge.txt"
 
 #define OPTIONSTRING "d:f:h"
 #define usage() print( "Usage: %s ["OPTIONSTRING"]\n", getProgname() );
