@@ -59,9 +59,7 @@ void deleteCharFromStringNoEscape( char* src , char* dels );
 char*   replaceString( char* src, char oldc ,char newc );
 
 char*   escapeStrStr( char* src, char* needle );
-int getStringFromIndexWithDelim_body( char* src ,char* delim ,int index, char* buf , int buflen, char *file, int line );
-#define getStringFromIndexWithDelim( src, delim, index, buf, buflen ) getStringFromIndexWithDelim_body( src, delim, index, buf, buflen, __FILE__, __LINE__ )
-
+int getStringFromIndexWithDelim(char* src, char* delim, int index, char* buf, size_t buflen);
 void getFourIntsFromString(char* src,int* int1,int* int2,int* int3,
                            int* int4);
 void deleteSequentChar( char* src , char* dels );

@@ -93,24 +93,18 @@ static int readLogConfFile(char* filename)
         chomp( line );                    /* remove tail newline  */
         ret = getStringFromIndexWithDelim( line , "=",  1, firstToken, sizeof(firstToken) );
         if( ret == FALSE ){
-            print( "Find error at %s in line %d. Ignore\n",
-                   filename , linenum);
+            print( "Find error at %s in line %d. Ignore\n", filename , linenum);
             continue;
         }
         for( i=0 ; i<arraysizeof(LogConf) ; i++ ){
             if( strcmp( LogConf[i].entry, firstToken )== 0 ){
                 char    secondToken[256];
-                ret = getStringFromIndexWithDelim( line, "=", 2,
-                                                   secondToken,
-                                                   sizeof(secondToken) );
-                if( ret == FALSE ){
-                    print( "Find error at %s in line %d. Ignore\n",
-                           filename , linenum);
+                ret = getStringFromIndexWithDelim(line, "=", 2, secondToken, sizeof(secondToken));
+                if(ret == FALSE) {
+                    print("Find error at %s in line %d. Ignore\n", filename , linenum);
                     continue;
                 }
-                snprintf( LogConf[i].filename,
-                          sizeof( LogConf[i].filename ),
-                          "%s/%s",basedir,secondToken);
+                snprintf(LogConf[i].filename, sizeof( LogConf[i].filename ), "%s/%s",basedir,secondToken);
             }
         }
     }

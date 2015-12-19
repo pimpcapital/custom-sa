@@ -201,21 +201,17 @@ static int NPC_readCreateFile( char* filename )
             }
             break;
         case '}':
-            if( start == ON ){
-                int     err = FALSE;
-                if( enemyreadindex == 0 ){
+            if(start == ON) {
+                int err = FALSE;
+                if(enemyreadindex == 0) {
                     err = TRUE;
-                    print( "这不是遇敌数据  %s:%d\n",
-                           filename,linenum);
-                }else if( MAP_IsThereSpecificFloorid(
-                    cr.intdata[NPC_CREATEFLOORID]) == FALSE ){
+                    print("这不是遇敌数据  %s:%d\n", filename,linenum);
+                } else if(MAP_IsThereSpecificFloorid(cr.intdata[NPC_CREATEFLOORID]) == FALSE) {
                     err = TRUE;
-                    print( "地图ID号有毛病 %s:%d-floor:%d\n",
-                           filename,linenum, cr.intdata[NPC_CREATEFLOORID]);
-                }else if( defborn == FALSE ){
+                    print( "地图ID号有毛病 %s:%d-floor:%d\n", filename, linenum, cr.intdata[NPC_CREATEFLOORID]);
+                } else if( defborn == FALSE ){
                     err = TRUE;
-                    print( "这些不是 born 安装 %s:%d\n",
-                           filename,linenum);
+                    print( "这些不是 born 安装 %s:%d\n", filename,linenum);
                 }
 
                 if( err == FALSE ){

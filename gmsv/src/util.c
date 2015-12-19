@@ -919,98 +919,34 @@ char * ScanOneByte( char *src, char delim ){
         // 伙□皿  仃凶日苇勾井日卅井匀凶［
         return NULL;
 }
-                                                                                                                                                                                                                                                                                                                
 
+int getStringFromIndexWithDelim(char* src, char* delim, int index, char* buf, size_t buflen)
+{
+    int length = 0;
+    int addlen = 0;
+    int oneByteMode = 0;
 
-/*----------------------------------------
- * delim 匹隙烂今木凶  侬  毛嗉濠曰  侬午仄化
- * index     及  毛  月［index反1匹反元引月［
- *   侬  酷  ［
- * 娄醒
- *  src     葭及  侬  
- *  delim   犯伉立正午卅月  侬  ［    反NULL  侬匹蔽匀化中月仪
- *  index   窒    及  毛潸月井
- *  buf     瑛绊  侬  毛伞  允月桦赭尺及禾奶件正□
- *  buflen  瑛绊  侬  毛伞  允月桦赭及扔奶术
- * 忒曰袄
- *  丐匀凶日 TRUE(1);
- *  卅井匀凶日 FALSE(0);
- *  ex
- *      getStringFromIndexWithDelim( "aho=hoge","=",1,buf,sizeof(buf) );
- *      buf ... aho
- *
- *      getStringFromIndexWithDelim( "aho=hoge","=",2,buf,sizeof(buf) );
- *      buf ... hoge
- *      仇木手  户日木月［
- *
- *      getStringFromIndexWithDelim( "aho=hoge","=",3,buf,sizeof(buf) );
- *      忒曰袄 FALSE
- ----------------------------------------*/
-int getStringFromIndexWithDelim_body( char* src ,char* delim ,int index,
-                                 char* buf , int buflen ,
-                                       char *file, int line )
-{//ttom this function all change,copy from the second
-    int i;          /* 伙□皿  醒 */
-    int length =0;  /* 潸曰请仄凶  侬  及赢今 */
-    int addlen=0;   /* 箫今木月赢今 */
-    int oneByteMode = 0; /* ㄠ田奶玄乒□玉井＂ */
-
-    if( strlen( delim ) == 1 ){ // 腹绸互ㄠ田奶玄卅日ㄠ田奶玄乒□玉卞允月
-        oneByteMode = 1;// 公及端ㄡ田奶玄  侬反民尼永弁仄卅中
-    }
-    for( i =  0 ; i < index ; i ++ ){
+    if(strlen(delim) == 1) oneByteMode = 1;
+    for(int i = 0 ; i < index; i++)
+    {
          char* last;
-         src += addlen;/* 心勾井匀凶赢今毛箫允 */
+         src += addlen;
       
-         if( oneByteMode ){
-             // ㄠ田奶玄乒□玉分匀凶日仇切日匹腹绸
-             last = ScanOneByte( src, delim[0] );
-         }else{
-                 last  = strstr( src , delim );  /* 苇尥仃月 */
+         if(oneByteMode) last = ScanOneByte(src, delim[0]);
+         else last = strstr(src, delim);
+         if(last == NULL)
+         {
+            strcpysafe(buf, buflen, src);
+            if(i == index - 1) return TRUE;
+            return FALSE;
          }
-         if( last == NULL ){
-            /*
-             * 心勾井日卅井匀凶及匹允屯化戊疋□仄化 return［
-            */
-            strcpysafe( buf , buflen, src );
-
-            if( i == index - 1 )
-                /*切斤丹升心勾井匀凶*/
-                return TRUE;
-                                                                                                           
-                /*心勾井日卅井匀凶*/
-             return FALSE;
-          }
-          
-          /*
-           * 心勾井匀凶赭午  赓及匏  及犒毛菲户月
-           * 勾引曰嗉濠日木化中月  侬  及赢今
-          */
-          length = last - src;
-                                           
-          /*
-           * 戚及伙□皿及啃卞心勾井匀凶赢今午 delim 及赢今毛箫仄化云仁
-          */
-          addlen= length + strlen( delim );
-       }
-       strncpysafe( buf, buflen , src,length );
-
-       return TRUE;
+         length = (int) (last - src);
+         addlen = (int) (length + strlen(delim));
+    }
+    strncpysafe(buf, buflen, src, length);
+    return TRUE;
 }
 
-
-/*------------------------------------------------------------
- *   侬   "a,b,c,d" 毛娄醒卞医  允月［犯白巧伙玄反 0 卞允月［
- * 井卅曰及  溃楮醒［蜇箕反切斤匀午赞中［
- * 娄醒
- *  src         char*   葭及  侬  
- *  int1        int*    int及禾奶件正［(a毛医  允月)
- *  int2        int*    int及禾奶件正［(b毛医  允月)
- *  int3        int*    int及禾奶件正［(c毛医  允月)
- *  int4        int*    int及禾奶件正［(d毛医  允月)
- * 忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
 void getFourIntsFromString(char* src,int* int1,int* int2,int* int3,
                            int* int4)
 {

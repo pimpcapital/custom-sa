@@ -121,7 +121,7 @@ int MAP_getFloorXY( int floor, int *x, int *y);
 
 #ifdef _MAP_NOEXIT
 unsigned int MAP_getExFloor_XY( int floor , int *map_type);
-int CHECKFLOORID( int id);
+int CHECKFLOORID(int id);
 #endif
 
 #endif 

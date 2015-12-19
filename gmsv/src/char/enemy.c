@@ -19,7 +19,6 @@
 #include "log.h"
 
 #ifdef _ADD_ENCOUNT           // WON ADD 增加敌遭遇触发修件
-#include "encount.h"
 #include "npcutil.h"
 #endif
 
@@ -213,39 +212,36 @@ int ENEMYTEMP_initEnemy( char* filename )
     int     linenum=0;
     int     enemytemp_readlen=0;
 	int		i,j;
-    f = fopen(filename,"r");
+    f = fopen(filename, "r");
     if( f == NULL ){
         print( "文件打开失败\n");
         return FALSE;
     }
 
-    ENEMYTEMP_enemynum=0;
+    ENEMYTEMP_enemynum = 0;
 
-    /*  引内  躲卅垫互窒垫丐月井升丹井譬屯月    */
     while( fgets( line, sizeof( line ), f ) ){
         linenum ++;
-        if( line[0] == '#' )continue;        /* comment */
-        if( line[0] == '\n' )continue;       /* none    */
+        if( line[0] == '#' )continue;
+        if( line[0] == '\n' )continue;
         chomp( line );
 
         ENEMYTEMP_enemynum++;
     }
 
-    if( fseek( f, 0, SEEK_SET ) == -1 ){
+    if(fseek( f, 0, SEEK_SET ) == -1)
+    {
         fprint( "Seek Error\n" );
         fclose(f);
         return FALSE;
     }
-    ENEMYTEMP_enemy = allocateMemory( sizeof(struct tagENEMYTEMP_Table)
-                                   * ENEMYTEMP_enemynum );
-    if( ENEMYTEMP_enemy == NULL ){
-        fprint( "无法分配内存 %d\n" ,
-                sizeof(struct tagENEMYTEMP_Table)*ENEMYTEMP_enemynum);
+    ENEMYTEMP_enemy = allocateMemory( sizeof(struct tagENEMYTEMP_Table) * ENEMYTEMP_enemynum );
+    if(ENEMYTEMP_enemy == NULL) {
+        fprint("无法分配内存 %d\n", sizeof(struct tagENEMYTEMP_Table)*ENEMYTEMP_enemynum);
         fclose( f );
         return FALSE;
     }
 
-	/* 赓渝祭 */
     for( i = 0; i < ENEMYTEMP_enemynum; i ++ ) {
     	for( j = 0; j < E_T_DATAINTNUM; j ++ ) {
     		ENEMYTEMP_setInt( i,j,-1);
@@ -357,31 +353,32 @@ int ENEMY_initEnemy( char* filename )
         return FALSE;
     }
 
-    ENEMY_enemynum=0;
-    while( fgets( line, sizeof( line ), f ) ){
+    ENEMY_enemynum = 0;
+    while(fgets(line, sizeof(line), f))
+    {
         linenum ++;
-        if( line[0] == '#' )continue;        /* comment */
-        if( line[0] == '\n' )continue;       /* none    */
-        chomp( line );
-
+        if(line[0] == '#') continue;
+        if(line[0] == '\n') continue;
+        chomp(line);
         ENEMY_enemynum++;
     }
 
-    if( fseek( f, 0, SEEK_SET ) == -1 ){
+    if(fseek(f, 0, SEEK_SET) == -1)
+    {
         fprint( "寻找失败\n" );
         fclose(f);
         return FALSE;
     }
 
-    ENEMY_enemy = allocateMemory(sizeof(struct tagENEMY_EnemyTable) * ENEMY_enemynum);
+    ENEMY_enemy = allocateMemory((const unsigned int) sizeof(struct tagENEMY_EnemyTable) * ENEMY_enemynum);
     if(ENEMY_enemy == NULL){
         fprint( "无法分配内存 %d\n", sizeof(struct tagENEMY_EnemyTable)*ENEMY_enemynum);
         fclose(f);
         return FALSE;
     }
-    for( i = 0; i < ENEMY_enemynum; i ++ ) {
-    	for( j = 0; j < ENEMY_DATAINTNUM; j ++ ) {
-    		ENEMY_setInt( i,j,-1);
+    for(i = 0; i < ENEMY_enemynum; i ++ ) {
+    	for(j = 0; j < ENEMY_DATAINTNUM; j ++ ) {
+    		ENEMY_setInt(i, j, -1);
     	}
     }
     linenum = 0;
@@ -408,22 +405,22 @@ int ENEMY_initEnemy( char* filename )
         char    token[256];
         int     ret;
 
-        ret = getStringFromIndexWithDelim( line,",",1,token,sizeof(token));
+        ret = getStringFromIndexWithDelim(line, ",", 1, token, sizeof(token));
         if( ret==FALSE ){
-            fprint("文件语法错误:%s 第%d行\n",filename,linenum);
+            fprint("文件语法错误:%s 第%d行\n", filename, linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_NAME, token);
         ret = getStringFromIndexWithDelim( line,",",2,token,sizeof(token));
         if( ret==FALSE ){
-            fprint("文件语法错误:%s 第%d行\n",filename,linenum);
+            fprint("文件语法错误:%s 第%d行\n", filename, linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_TACTICSOPTION, token);
 #ifdef _BATTLENPC_WARP_PLAYER
 	    ret = getStringFromIndexWithDelim( line, ",", 3, token, sizeof(token));
         if(ret==FALSE){
-            fprint("文件语法错误:%s 第%d行\n",filename,linenum);
+            fprint("文件语法错误:%s 第%d行\n", filename, linenum);
             continue;
         }
         ENEMY_setChar( enemy_readlen, ENEMY_ACT_CONDITION, token);
@@ -435,21 +432,21 @@ int ENEMY_initEnemy( char* filename )
 #define	ENEMY_STARTINTNUM		3
 #endif
 
-        for( i = ENEMY_STARTINTNUM; i < ENEMY_DATAINTNUM+ENEMY_STARTINTNUM; i ++ ) {
-            ret = getStringFromIndexWithDelim( line,",",i,token,sizeof(token));
-            if( ret==FALSE ){
-                fprint("文件语法错误:%s 第%d行\n",filename,linenum);
+        for(i = ENEMY_STARTINTNUM; i < ENEMY_DATAINTNUM + ENEMY_STARTINTNUM; i++) {
+            ret = getStringFromIndexWithDelim(line, ",", i, token, sizeof(token));
+            if(ret == FALSE ){
+                fprint("文件语法错误:%s 第%d行\n", filename, linenum);
                 break;
             }
             ENEMY_setInt( enemy_readlen, i - ENEMY_STARTINTNUM, atoi( token));
         }
-        if( i < ENEMY_DATAINTNUM+ENEMY_STARTINTNUM ) continue;
-		for( i = 0; i < ENEMYTEMP_enemynum; i ++ ) {
+        if(i < ENEMY_DATAINTNUM + ENEMY_STARTINTNUM ) continue;
+		for(i = 0; i < ENEMYTEMP_enemynum; i++) {
 			if( ENEMYTEMP_getInt( i, E_T_TEMPNO)== ENEMY_getInt( enemy_readlen, ENEMY_TEMPNO)){
 				break;
 			}
 		}
-		if( i == ENEMYTEMP_enemynum) {
+		if(i == ENEMYTEMP_enemynum) {
             fprint("文件语法错误:%s 第%d行\n",filename,linenum);
 			continue;
 		}
@@ -473,9 +470,7 @@ int ENEMY_initEnemy( char* filename )
 
     return TRUE;
 }
-/*------------------------------------------------------------------------
- * ENEMY_enemy及涩烂白央奶伙  心  仄
- *-----------------------------------------------------------------------*/
+
 int ENEMY_reinitEnemy( void )
 {
 	freeMemory( ENEMY_enemy);

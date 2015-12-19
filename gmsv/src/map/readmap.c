@@ -339,8 +339,8 @@ static unsigned int     MAP_mapnum;
 static unsigned int     MAP_mapnum_index;
 
 
-static int*             MAP_idjumptbl;
-static int              MAP_idtblsize;
+static int* MAP_idjumptbl;
+static int MAP_idtblsize;
 
 int MAP_initMapArray( int num )
 {
@@ -401,22 +401,22 @@ FCLOSERETURNTRUE:
     return TRUE;
 }
 
-static int MAP_readMapOne( char*   filename )
+static int MAP_readMapOne(char* filename, char* no_exit)
 {
-    FILE*   f;					/*  白央奶伙    */
-    char    buf[16];            /*  穴斥永弁瓜件田□  心迕  */
-    short   data[1024];         /*  扑亦□玄  心迕田永白央  */
-    int     ret;                /*  忒曰袄熬仃潸曰迕        */
-    int     i;                  /*  伙□皿  醒  */
+    FILE*   f;
+    char    buf[16];
+    short   data[1024];
+    int     ret;
+    int     i;
     int     mapindex;
 
-    int     id=0,xsiz=0,ysiz=0;     /*  穴永皿犯□正及域凛伞  桦赭  */
+    int     id=0,xsiz=0,ysiz=0;
 
     short   *tile=NULL;
     short   *obj=NULL;
     MAP_Objlink**   olink=NULL;
-    char    showstring[32];         /*  穴永皿犯□正及域凛伞  桦赭  */
-    struct  stat    filestat;       /*  民尼永弁迕卞银丹    */
+    char    showstring[32];
+    struct  stat    filestat;
     int    invaliddata=FALSE;
     if( MAP_mapnum_index >= MAP_mapnum ){
         fprint( "这里没有足够空间装载地图数组.\n" );
@@ -516,18 +516,7 @@ static int MAP_readMapOne( char*   filename )
             invaliddata = TRUE;
         }
     }
-    if( invaliddata )goto FREELINK;
-/*    if( ftell(f) != filestat.st_size)
-        fprintf(stderr,"文件大小不正确(%s). 目标文件大小:%"
-#ifdef linux
-                "l"
-#elif __FreeBSD__
-                "ll"
-#endif
-                "d 实际大小:%ld\n",
-                filename, filestat.st_size,ftell(f));
-*/
-
+    if( invaliddata ) goto FREELINK;
     for( i=0 ; i< xsiz*ysiz ; i ++ )
         olink[i] = NULL;
 
@@ -547,20 +536,19 @@ static int MAP_readMapOne( char*   filename )
 		int floorID=0,exfloor=0,ex_X=0,ex_Y=0;
 		int map_type=0;
 		MAP_map[mapindex].startpoint = 0;
-		fp = fopen( "./data/map/map_noexit.txt","r");
-		if( fp != NULL ){
-			while(	fgets(mpexit, 128, fp) != NULL )	{
-				sscanf( mpexit,"%d %d %d %d %d", &floorID, &exfloor, &ex_X, &ex_Y, &map_type);
-				if( strstr( mpexit, "#" ) != NULL)
+		fp = fopen(no_exit, "r");
+		if(fp != NULL) {
+			while(fgets(mpexit, 128, fp) != NULL)	{
+				sscanf(mpexit,"%d %d %d %d %d", &floorID, &exfloor, &ex_X, &ex_Y, &map_type);
+				if(strstr( mpexit, "#" ) != NULL)
 					continue;
-				if( floorID == id)	{
+				if(floorID == id)	{
 					MAP_map[mapindex].startpoint = (exfloor<<16)+(ex_X << 8)+(ex_Y<<0);
 					MAP_map[mapindex].MapType = map_type;
 				}
 			}
-			// Nuke 1204: Bug fix
 			fclose(fp);
-		}else	{
+		} else {
 			print("\n **错误** 找不到 map_noexit.txt 文件!!!");
 		}
 	}
@@ -601,7 +589,7 @@ unsigned int MAP_getExFloor_XY( int floor, int *map_type)
 	}
 	return 0;
 }
-int CHECKFLOORID( id)
+int CHECKFLOORID(int id)
 {
 	int i;
 
@@ -646,10 +634,11 @@ int MAP_readMapDir( char*  dirname )
         return FALSE;
     }
 
+    char no_exit[64];
+    snprintf(no_exit, sizeof no_exit, "%s/%s", dirname, "map_noexit.txt");
     for( i = 0 ; i < filenum ; i ++ )
-        if( MAP_IsMapFile( filenames[i].string ) ){
-            MAP_readMapOne( filenames[i].string );
-//            print(".");
+        if(MAP_IsMapFile(filenames[i].string)) {
+            MAP_readMapOne(filenames[i].string, no_exit);
         }
     print( "正确地图文件 %d...",MAP_mapnum_index );
     if( MAP_mapnum_index == 0 ){
@@ -678,11 +667,9 @@ int MAP_readMapDir( char*  dirname )
 
 }
 
-#define CHECKFLOORID(id)	if( MAP_mapnum<=(id) || (id)<0 )return (-1);
-
-int MAP_getfloorIndex( int floorid )
+int MAP_getfloorIndex(int floorid)
 {
-    if( 0 <= floorid && floorid <= MAP_idtblsize  )
+    if(0 <= floorid && floorid <= MAP_idtblsize)
         return MAP_idjumptbl[floorid];
 
 	print( "readmap.c:[%d] err floorid[%d]\n", __LINE__, floorid);
@@ -1051,24 +1038,13 @@ int MAP_makeWalkableMap( char* data,  int floor, int startx, int starty,
         for( j = 0 ; j < xsiz ; j ++ )
             data[j+i*ysiz] = data[j+i*ysiz] & obj[j+i*ysiz];
 
-#ifdef DEBUG
-    for( i = 0 ; i < ysiz ; i ++ ){
-        for( j = 0 ; j < xsiz ; j ++ )
-            if( data[j+i*ysiz] ){
-                print(" ");
-            }else
-                print("O");
-        print("\n");
-    }
-#endif  /*DEBUG*/
-
     return TRUE;
 }
 
-int MAP_IsThereSpecificFloorid( int floorid )
+int MAP_IsThereSpecificFloorid(int floorid)
 {
-    if( MAP_getfloorIndex(floorid)== -1)return FALSE;
-    else                                return TRUE;
+    if(MAP_getfloorIndex(floorid) == -1) return FALSE;
+    else return TRUE;
 }
 
 int MAP_IsValidCoordinate( int floor, int x, int y )
