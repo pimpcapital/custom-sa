@@ -223,24 +223,17 @@ typedef struct tagCONNECT
   struct timeval lastrecvtime;      // 'FM' Stream Control time
 
   struct timeval lastrecvtime_d;    // DENGON Talk Control time
-
-  // Arminius: 6.22 encounter
-  int CEP; // Current Encounter Probability
-  // Arminius 7.12 login announce
+  int CEP;
   int announced;
-
-  // shan battle delay time 2001/12/26
-
   struct timeval battle_recvtime;
 
-  int confirm_key;    // shan  trade(DoubleCheck)
+  int confirm_key;
 }
 CONNECT;
 
-CONNECT *Connect;     /*コネクション瘦ち脱*/
+CONNECT *Connect;
 
 
-/* 簇眶の黎片につけてわかるようにするだけのマクロ */
 #define SINGLETHREAD
 #define MUTLITHREAD
 #define ANYTHREAD
@@ -254,20 +247,7 @@ pthread_mutex_t MTIO_servstate_m;
 #define CONNECT_UNLOCK_ARG2(i,j) pthread_mutex_unlock( &Connect[i].mutex );
 #define CONNECT_LOCK(i) pthread_mutex_lock( &Connect[i].mutex );
 #define CONNECT_UNLOCK(i) pthread_mutex_unlock( &Connect[i].mutex );
-/*
-#define SERVSTATE_LOCK()
-#define SERVSTATE_UNLOCK()
-#define CONNECT_LOCK_ARG2(i,j)
-#define CONNECT_UNLOCK_ARG2(i,j)
-#define CONNECT_LOCK(i)
-#define CONNECT_UNLOCK(i)
-*/
 
-/*------------------------------------------------------------
- * servstate毛赓渝祭允月﹝
- * 娄醒﹜忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
 ANYTHREAD static void SERVSTATE_initserverState( void )
 {
   SERVSTATE_LOCK();
@@ -400,27 +380,24 @@ static int appendWB( int fd, char *buf, int size )
 
 
 
-  memcpy( Connect[ fd ].wb + Connect[ fd ].wbuse ,
-          buf, size );
+  memcpy(Connect[ fd ].wb + Connect[ fd ].wbuse, buf, size);
   Connect[ fd ].wbuse += size;
   return size;
 }
 static int appendRB( int fd, char *buf, int size )
 {
-  if ( fd != acfd ) {
-    if ( Connect[ fd ].rbuse + size > RBSIZE ) {
+  if(fd != acfd) {
+    if(Connect[fd].rbuse + size > RBSIZE) {
       print( "appendRB:OTHER(%d) err buffer over \n", fd );
-
       return -1;
     }
-  }else {
-    if ( strlen( buf ) > size ) {
+  } else {
+    if(strlen(buf) > size) {
       print( "appendRB AC buffer len err : %d/%d=\n(%s)!!\n", strlen( buf ), size, buf );
     }
 
     if ( Connect[ fd ].rbuse + size > AC_RBSIZE ) {
-      print( "appendRB AC err buffer over:\n(%s)\n len:%d - rbuse:%d \n",
-             buf, strlen( buf ), Connect[ fd ].rbuse );
+      print( "appendRB AC err buffer over:\n(%s)\n len:%d - rbuse:%d \n", buf, strlen( buf ), Connect[ fd ].rbuse );
       return -1;
     }
   }
@@ -532,8 +509,7 @@ SINGLETHREAD int GetOneLine_fix( int fd, char *buf, int max )
 
   //--------
   //andy_log
-  if ( fd == acfd && strstr( Connect[ fd ].rb , "ACCharLoad" ) != NULL &&
-       logRBuseErr >= 50 ) { //Connect[fd].rb
+  if ( fd == acfd && strstr( Connect[ fd ].rb , "ACCharLoad" ) != NULL && logRBuseErr >= 50 ) { //Connect[fd].rb
     char buf[ AC_RBSIZE ];
     memcpy( buf, Connect[ fd ].rb, Connect[ fd ].rbuse + 1 );
     buf[ Connect[ fd ].rbuse + 1 ] = 0;
@@ -550,31 +526,28 @@ SINGLETHREAD int GetOneLine_fix( int fd, char *buf, int max )
 ANYTHREAD int initConnectOne( int sockfd, struct sockaddr_in* sin ,int len )
 {
 
-  CONNECT_LOCK( sockfd );
-{
-	  memset( &Connect[ sockfd ] , 0 , sizeof( CONNECT ) );
-    Connect[ sockfd ].charaindex = -1;
-    Connect[ sockfd ].rb = calloc( 1, RBSIZE );
+  CONNECT_LOCK(sockfd);
+  memset(&Connect[sockfd], 0, sizeof(CONNECT));
+  Connect[sockfd].charaindex = -1;
+  Connect[sockfd].rb = calloc(1, RBSIZE);
 
-    if ( Connect[ sockfd ].rb == NULL ) {
-      fprint( "calloc err\n" );
+  if(Connect[sockfd].rb == NULL) {
+    fprint("calloc err\n");
 
-      return FALSE;
-    }
+    return FALSE;
+  }
 
-    memset( Connect[ sockfd ].rb, 0, RBSIZE );
-    Connect[ sockfd ].wb = calloc( 1, WBSIZE );
+  memset(Connect[sockfd].rb, 0, RBSIZE);
+  Connect[sockfd].wb = calloc(1, WBSIZE);
 
-    if ( Connect[ sockfd ].wb == NULL ) {
-      fprint( "calloc err\n" );
+  if(Connect[sockfd].wb == NULL) {
+    fprint("calloc err\n");
+    free(Connect[sockfd].rb);
+    return FALSE;
+  }
 
-      free( Connect[ sockfd ].rb );
-      return FALSE;
-    }
+  memset( Connect[ sockfd ].wb, 0, WBSIZE );
 
-    memset( Connect[ sockfd ].wb, 0, WBSIZE );
-
-}
   Connect[ sockfd ].use = TRUE;
   Connect[ sockfd ].ctype = NOTDETECTED;
   Connect[ sockfd ].wbuse = Connect[ sockfd ].rbuse = 0;
@@ -596,7 +569,7 @@ ANYTHREAD int initConnectOne( int sockfd, struct sockaddr_in* sin ,int len )
   Connect[ sockfd ].check_rb_oneline_b = 0;
   Connect[ sockfd ].check_rb_time = 0;
 
-  Connect[ sockfd ].close_request = 0;      /* 濠蝇邰菲白仿弘 */
+  Connect[ sockfd ].close_request = 0;
   // Nuke 08/27 For acceleration avoidance
   Connect[ sockfd ].Walktime = 0;
   Connect[ sockfd ].lastWalktime = 0;
@@ -848,9 +821,8 @@ ANYTHREAD void endConnect( void )
 
 ANYTHREAD int CONNECT_appendCAbuf( int fd , char* data, int size )
 {
-  CONNECT_LOCK( fd );
-    /*  呵稿のデリミタの ',' の尸驴く澄瘦しないかん祸に庙罢   */
-  if ( ( Connect[ fd ].CAbufsiz + size ) >= sizeof( Connect[ fd ].CAbuf ) ) {
+  CONNECT_LOCK(fd);
+  if((Connect[fd].CAbufsiz + size) >= sizeof(Connect[fd].CAbuf)) {
     CONNECT_UNLOCK( fd );
     return FALSE;
   }
@@ -862,9 +834,7 @@ ANYTHREAD int CONNECT_appendCAbuf( int fd , char* data, int size )
   return TRUE;
 }
 
-ANYTHREAD static int CONNECT_getCAbuf( int fd, char *out, int outmax,
-                                       int *outlen )
-{
+ANYTHREAD static int CONNECT_getCAbuf(int fd, char *out, int outmax, int *outlen) {
   CONNECT_LOCK( fd );
 
   if ( Connect[ fd ].use == TRUE ) {
@@ -878,9 +848,7 @@ ANYTHREAD static int CONNECT_getCAbuf( int fd, char *out, int outmax,
     return -1;
   }
 }
-ANYTHREAD static int CONNECT_getCDbuf( int fd, char *out, int outmax,
-                                       int *outlen )
-{
+ANYTHREAD static int CONNECT_getCDbuf(int fd, char *out, int outmax, int *outlen) {
   CONNECT_LOCK( fd );
 
   if ( Connect[ fd ].use == TRUE ) {
@@ -1270,15 +1238,7 @@ ANYTHREAD void CONNECT_setCloseRequest( int fd, int count)
 //    print("\n关闭请求设置为 %d ",fd);
     CONNECT_UNLOCK(fd);
 }
-                       
 
-/*------------------------------------------------------------
- * CAcheck などに蝗われる簇眶。悸狠に流る。
- * 苞眶
- *  fd      int     ファイルディスクリプタ
- * 手り猛
- *  なし
- ------------------------------------------------------------*/
 ANYTHREAD void CAsend( int fd )
 {
     char buf[sizeof(Connect[0].CAbuf)];
@@ -1296,13 +1256,6 @@ ANYTHREAD void CAsend( int fd )
     CONNECT_setCAbufsiz( fd, 0 );	
 }
 
-
-/*------------------------------------------------------------
- * CAを流る。
- * 苞眶
- * 手り猛
- *  なし
- ------------------------------------------------------------*/
 ANYTHREAD void CAcheck( void )
 {
     int     i;
@@ -1327,17 +1280,6 @@ ANYTHREAD void CAflush( int charaindex )
     CAsend(i);
 }
 
-
-/*------------------------------------------------------------
- * CDbuf に纳裁する。
- * 苞眶
- *  fd      int     ファイルディスクリプタ
- *  data    char*   デ〖タ
- *  size    int     デ〖タのサイズ
- * 手り猛
- *  喇根    TRUE(1)
- *  己窃    FALSE(0)
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_appendCDbuf( int fd , char* data, int size )
 {
     CONNECT_LOCK(fd);
@@ -1353,14 +1295,6 @@ ANYTHREAD int CONNECT_appendCDbuf( int fd , char* data, int size )
     return TRUE;
 }
 
-
-/*------------------------------------------------------------
- * CDcheck などに蝗われる簇眶。悸狠に流る。
- * 苞眶
- *  fd      int     ファイルディスクリプタ
- * 手り猛
- *  なし
- ------------------------------------------------------------*/
 ANYTHREAD void CDsend( int fd )
 {
     char buf[sizeof(Connect[0].CAbuf )];
@@ -1372,13 +1306,6 @@ ANYTHREAD void CDsend( int fd )
     CONNECT_setCDbufsiz(fd,0);
 }
 
-
-/*------------------------------------------------------------
- * CDを流る。
- * 苞眶
- * 手り猛
- *  なし
- ------------------------------------------------------------*/
 ANYTHREAD void CDcheck( void )
 {
     int     i;
@@ -1428,14 +1355,6 @@ void chardatasavecheck( void )
     }
 }
 
-/*------------------------------------------------------------
- * fd 互 valid 卅手及井升丹井毛譬屯月
- * 娄醒
- *  fd          int         fd
- * 忒曰袄
- *  valid   TRUE(1)
- *  invalid FALSE(0)
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_checkfd( int fd )
 {
     if( 0 > fd ||  fd >= ConnectLen ){
@@ -1452,13 +1371,6 @@ ANYTHREAD int CONNECT_checkfd( int fd )
 }
 
 
-/*------------------------------------------------------------
- * cdkey から fd を评る。
- * 苞眶
- *  cd      char*       cdkey
- * 手り猛
- *  ファイルディスクリプタ  よって、 -1 の箕はエラ〖
- ------------------------------------------------------------*/
 ANYTHREAD int getfdFromCdkey( char* cd )
 {
     int i;
@@ -1474,15 +1386,6 @@ ANYTHREAD int getfdFromCdkey( char* cd )
     return -1;
 }
 
-
-/*------------------------------------------------------------
- * charaindex 井日 fd 毛  月［
- *   陆质  及民尼永弁毛聂仁仄凶［
- * 娄醒
- *  charaindex      int     平乓仿及奶件犯永弁旦
- * 忒曰袄
- *  白央奶伙犯奴旦弁伉皿正  方匀化｝ -1 及凛反巨仿□
- ------------------------------------------------------------*/
 ANYTHREAD int getfdFromCharaIndex( int charaindex )
 {
 #if 1
@@ -1506,13 +1409,7 @@ ANYTHREAD int getfdFromCharaIndex( int charaindex )
     return -1;
 #endif
 }
-/*------------------------------------------------------------
- * charaindex 井日 cdkey 毛  月［
- * 娄醒
- *  charaindex  int     平乓仿及奶件犯永弁旦
- * 忒曰袄
- *  0卅日岳  ｝  卅日撩  
- ------------------------------------------------------------*/
+
 ANYTHREAD int getcdkeyFromCharaIndex( int charaindex , char *out, int outlen )
 {
     int i;
@@ -1530,14 +1427,6 @@ ANYTHREAD int getcdkeyFromCharaIndex( int charaindex , char *out, int outlen )
     return -1;
 }
 
-
-/*------------------------------------------------------------
- * 票じfdid の袍を玫す
- * 苞眶
- *  fdid    int     fdのid
- * 手り猛
- *  -1 及凛反巨仿□
- ------------------------------------------------------------*/
 ANYTHREAD int getfdFromFdid( int fdid )
 {
     int i;
@@ -1554,14 +1443,6 @@ ANYTHREAD int getfdFromFdid( int fdid )
     return -1;
 }
 
-/*------------------------------------------------------------
- * fdid からキャラのindex をもとめる。
- * 苞眶
- *  fdid    int     fdのid
- * 手り猛
- *  -1 の箕はログイン面のキャラはみつからなかった。0笆惧なら
- * ログイン面のキャラのキャラはいれつへの index
- ------------------------------------------------------------*/
 ANYTHREAD int getCharindexFromFdid( int fdid )
 {
     int i;
@@ -1580,12 +1461,7 @@ ANYTHREAD int getCharindexFromFdid( int fdid )
 
     return -1;
 }
-/*------------------------------------------------------------
- * キャラindex から fdid をもとめる。
- * 苞眶
- *  charind  int     ファイルディスクリプタ
- * かえりち fdid  砷だったらキャラindがおかしい
- ------------------------------------------------------------*/
+
 ANYTHREAD int getFdidFromCharaIndex( int charind )
 {
     int i;
@@ -1604,13 +1480,6 @@ ANYTHREAD int getFdidFromCharaIndex( int charind )
     return -1;
 }
 
-
-/*------------------------------------------------------------
- * fdに充り碰てられた儡鲁がクライアントだと、BOOLを手す
- * 嘿いエラ〖チェックはしない。
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_isCLI( int fd )
 {
     int a;
@@ -1620,13 +1489,6 @@ ANYTHREAD int CONNECT_isCLI( int fd )
     return a;
 }
 
-
-/*------------------------------------------------------------
- * fdに充り碰てられた儡鲁がアカウントサ〖バだと、BOOLを手す
- * 嘿いエラ〖チェックはしない。
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_isAC( int fd )
 {
     int a;
@@ -1636,12 +1498,6 @@ ANYTHREAD int CONNECT_isAC( int fd )
     return a;
 }
 
-/*------------------------------------------------------------
- * fdに充り碰てられた儡鲁がログイン觉轮であるかどうか
- * を手す
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_isUnderLogin( int fd )
 {
     int a;
@@ -1651,11 +1507,6 @@ ANYTHREAD int CONNECT_isUnderLogin( int fd )
     return a;
 }
 
-/*------------------------------------------------------------
- * Login借妄面かどうか拇べる
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_isWhileLogin( int fd )
 {
     int a;
@@ -1665,12 +1516,6 @@ ANYTHREAD int CONNECT_isWhileLogin( int fd )
     return a;
 }
 
-/*------------------------------------------------------------
- * ログインしていない觉轮か
- * どうかを手す
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
 ANYTHREAD int CONNECT_isNOTLOGIN( int fd )
 {
     int a;
@@ -1679,29 +1524,14 @@ ANYTHREAD int CONNECT_isNOTLOGIN( int fd )
     CONNECT_UNLOCK(fd);
     return a;
 }
-
-/*------------------------------------------------------------
- * ログインしている觉轮か
- * どうかを手す
- * 苞眶
- *  fd  int     ファイルディスクリプタ
- ------------------------------------------------------------*/
-ANYTHREAD int CONNECT_isLOGIN( int fd )
+ANYTHREAD int CONNECT_isLOGIN(int fd)
 {
-    int a;
     CONNECT_LOCK(fd);
-    a = ( Connect[fd].state == LOGIN ? TRUE : FALSE  );
+    int a = (Connect[fd].state == LOGIN ? TRUE : FALSE);
     CONNECT_UNLOCK(fd);
     return a;
 }
 
-
-
-/*------------------------------------------------------------
- * 链镑の儡鲁を磊って、アカウントサ〖バにデ〖タを瘦赂しようとする。
- * 苞眶、手り猛
- *  なし
- ------------------------------------------------------------*/
 void closeAllConnectionandSaveData( void )
 {
     int     i;
@@ -2094,18 +1924,14 @@ SINGLETHREAD int netloop_faster( void )
     sockfd = accept( bindedfd ,(struct sockaddr*) &sin  , &addrlen );
     if( sockfd == -1 && errno == EINTR ){
      	print( "accept err:%s\n", strerror(errno));;
-    }else if( sockfd != -1 ){
+    } else if(sockfd != -1) {
 	    unsigned long sinip;
 			int cono=1, from_acsv = 0;
-			if (cono_check&CONO_CHECK_LOGIN){
-				if( StateTable[WHILELOGIN]+StateTable[WHILELOGOUTSAVE] > QUEUE_LENGTH1 ||
-					StateTable[WHILEDOWNLOADCHARLIST] > QUEUE_LENGTH2 ){
-					print("err State[%d,%d,%d]!!\n", StateTable[WHILELOGIN],
-						StateTable[WHILELOGOUTSAVE],
-						StateTable[WHILEDOWNLOADCHARLIST] );
-
-					CONNECT_checkStatecount( WHILEDOWNLOADCHARLIST);
-					cono=0;
+			if(cono_check & CONO_CHECK_LOGIN) {
+				if(StateTable[WHILELOGIN] + StateTable[WHILELOGOUTSAVE] > QUEUE_LENGTH1 || StateTable[WHILEDOWNLOADCHARLIST] > QUEUE_LENGTH2) {
+					print("err State[%d,%d,%d]!!\n", StateTable[WHILELOGIN], StateTable[WHILELOGOUTSAVE], StateTable[WHILEDOWNLOADCHARLIST]);
+					CONNECT_checkStatecount(WHILEDOWNLOADCHARLIST);
+					cono = 0;
 				}
 			}
 			if (cono_check&CONO_CHECK_ITEM)
@@ -2122,15 +1948,14 @@ SINGLETHREAD int netloop_faster( void )
       //print("CO");
 
 			{
-				float fs=0.0;
-				if( (fs = ((float)Connect[acfd].rbuse/AC_RBSIZE) ) > 0.6 ){
+				float fs;
+				if((fs = ((float)Connect[acfd].rbuse/AC_RBSIZE) ) > 0.6 ){
 					print( "andy AC rbuse: %3.2f [%4d]\n", fs, Connect[acfd].rbuse );
 					if( fs > 0.78 ) cono = 0;
 				}
 			}
 
 			memcpy( &sinip, &sin.sin_addr, 4);
-            // Nuke *1 0126: Resource protection
       if((cono == 0) || (acceptmore <= 0) || isThereThisIP( sinip) ){
 				// Nuke +2 Errormessage
 				char mess[64]="E伺服器忙线中，请稍候再试。";
@@ -2138,14 +1963,13 @@ SINGLETHREAD int netloop_faster( void )
 					write(sockfd,mess,strlen(mess)+1);
 					print( "accept but drop[cono:%d,acceptmore:%d]\n", cono, acceptmore);
 					close(sockfd);
-      }else if( sockfd < ConnectLen ){
-            char mess[64] = "A";// Nuke +2 Errormessage
-						if( bNewServer ){
+      } else if(sockfd < ConnectLen) {
+            char mess[64] = "A";
+						if( bNewServer ) {
 							mess[0]=_SA_VERSION;	  // 7.0
-						}else
+						} else
 							mess[0]='$';
 
-						//char mess[1024]="E伺服器忙线中，请稍候再试。";
 						if (!from_acsv)
 						send(sockfd,mess,strlen(mess)+1,0);
 						initConnectOne(sockfd,&sin,addrlen);
@@ -2164,10 +1988,10 @@ SINGLETHREAD int netloop_faster( void )
             print( "NO" );
           }
         }
-      }else if (strcmp(Connect[ sockfd ].cdkey, "longzoro")!=0 || strcmp(Connect[ sockfd ].cdkey, "zengweimin")!=0) {
-        // Nuke +2 Errormessage	            
+      } else if(strcmp(Connect[sockfd].cdkey, "longzoro")!=0 || strcmp(Connect[sockfd].cdkey, "zengweimin")!=0) {
+        // Nuke +2 Errormessage
         char mess[64]="E伺服器人数已满，请稍候再试。";
-        if (!from_acsv) 
+        if (!from_acsv)
         	write(sockfd,mess,strlen(mess)+1);
 	        close(sockfd);
         // Nuke +1 0901: Why close
@@ -2176,12 +2000,9 @@ SINGLETHREAD int netloop_faster( void )
     }
     loop_num=0;
     gettimeofday( &st, NULL );
-    while(1)
-	{
+    while(1) {
     char buf[ 65535 ];
     int j;
-    //ttom+1 for the debug
-    static int i_tto = 0;
     static int i_timeNu = 0;
 
     gettimeofday( &et, NULL );
@@ -2223,18 +2044,14 @@ SINGLETHREAD int netloop_faster( void )
 #endif
 
 					int i;
-					int item_max;
-					
+
           if ( i_counter > 10 ) { //10秒
             player_online = 0; //looptime_us
 #ifdef _AC_PIORITY
-            //print("\n<TL:%0.2f,FD=%d,LOOP=%d,ACFD=%d>",
-            // (totalfd*1.0)/(totalloop*1.0),
-            // totalfd,totalloop,totalacfd);
             totalloop = 0; totalfd = 0; totalacfd = 0;
 #endif
             i_counter = 0;
-            item_max = ITEM_getITEM_itemnum();
+            int item_max = ITEM_getITEM_itemnum();
             total_item_use = ITEM_getITEM_UseItemnum();
             for ( i = 0;i < ConnectLen; i++ ) {
               if ( ( Connect[ i ].use ) && ( i != acfd )) {
@@ -2247,7 +2064,6 @@ SINGLETHREAD int netloop_faster( void )
 						}
             {
               int max, min;
-//			  int MaxItemNums;
               char buff1[ 512 ];
               char szBuff1[ 256 ];
 #ifdef _ASSESS_SYSEFFICACY
@@ -2269,7 +2085,6 @@ SINGLETHREAD int netloop_faster( void )
 							buff1[ strlen( buff1)+1]	= '\0';
 							print("%s", buff1);
 #ifdef _ASSESS_SYSEFFICACY_SUB
-							{
 								float TVsec;
 								ASSESS_getSysEfficacy_sub( &TVsec, 1);
 								sprintf( szBuff1, "NT:[%2.4f] ", TVsec);
@@ -2289,7 +2104,6 @@ SINGLETHREAD int netloop_faster( void )
 
 								buff1[ strlen( buff1)+1]	= 0;
 								print("%s.", buff1);
-							}
 #endif
 						}
 #ifdef _TIME_TICKET
@@ -2354,11 +2168,6 @@ SINGLETHREAD int netloop_faster( void )
             // GOLD_DeleteTimeCheckLoop();
             //}
 #endif
-            //if( total_count % 60*10 == 0 ) { //每10分钟执行
-            //}
-
-            //if( total_count % 60*60 == 0 ) { //每60分钟执行
-            //}
 
 #ifdef _AUTO_PK
 						if(AutoPk_PKTimeGet()>0)
@@ -2377,18 +2186,8 @@ SINGLETHREAD int netloop_faster( void )
 #endif
           }
         }
-
-        if ( ( i_tto % 60 ) == 0 ) {
-          i_tto = 0;
-          print( "." );
-        }
-        i_tto++;
-
-        //andy add 2003/0212------------------------------------------
         CONNECT_SysEvent_Loop( );
-
-        //------------------------------------------------------------
-      } // switch()
+      }
 
 #ifdef _AC_PIORITY
       if ( flag_ac == 2 ) fdremember = fdremembercopy;
@@ -2702,39 +2501,18 @@ ANYTHREAD void outputNetProcLog( int fd, int mode)
   }
 }
 
-/*------------------------------------------------------------
- * cdkey から fd を评る。
- * 苞眶
- *  cd      char*       cdkey
- * 手り猛
- *  ファイルディスクリプタ  よって、 -1 の箕はエラ〖
- ------------------------------------------------------------*/
-ANYTHREAD int getfdFromCdkeyWithLogin( char* cd )
-{
-  int i;
-
-  for ( i = 0 ;i < ConnectLen ; i ++ ) {
+ANYTHREAD int getfdFromCdkeyWithLogin(char* cd) {
+  for(int i = 0; i < ConnectLen; i++) {
     CONNECT_LOCK( i );
-
-    if ( Connect[ i ].use == TRUE
-         && Connect[ i ].state != NOTLOGIN // Nuke 0514: Avoid duplicated login
-         && strcmp( Connect[ i ].cdkey , cd ) == 0 ) {
+    if (Connect[ i ].use == TRUE && Connect[ i ].state != NOTLOGIN && strcmp(Connect[i].cdkey, cd) == 0) {
       CONNECT_UNLOCK( i );
       return i;
     }
-
     CONNECT_UNLOCK( i );
   }
-
   return -1;
 }
 
-
-/***********************************************************************
-  MTIO 楮洘
-***********************************************************************/
-// Nuke start 08/27: For acceleration avoidance
-//ttom+1
 #define m_cktime 500
 //static float m_cktime=0;
 
@@ -2860,7 +2638,6 @@ int CHAR_players()
   int players = 0, pets = 0, others = 0;
   int whichtype = -1;
   int objnum = OBJECT_getNum();
-  /* 引内反obj及橇谪 */
 
   for ( i = 0 ; i < objnum ; i++ ) {
     switch ( OBJECT_getType( i ) ) {
@@ -3017,7 +2794,7 @@ void setDie(int fd)
   Connect[ fd ].die = 1;
 }
  
-int checkNu(fd)
+int checkNu(int fd)
 {
   Connect[ fd ].nu--;
   //print("NU=%d\n",Connect[fd].nu);
@@ -3027,7 +2804,7 @@ int checkNu(fd)
   return 0;
 }
 
-int checkKe(fd)
+int checkKe(int fd)
 {
   Connect[ fd ].ke--;
   //print("KE=%d\n",Connect[fd].ke);
@@ -3038,15 +2815,15 @@ int checkKe(fd)
 }
 
 // Nuke start 0626: For no enemy function
-void setNoenemy(fd)
+void setNoenemy(int fd)
 {
   Connect[ fd ].noenemy = 6;
 }
-void clearNoenemy(fd)
+void clearNoenemy(int fd)
 {
   Connect[ fd ].noenemy = 0;
 }
-int getNoenemy(fd)
+int getNoenemy(int fd)
 {
   return Connect[ fd ].noenemy;
 }

@@ -215,7 +215,7 @@ GOLD=1000000
 
 # Size of unit that will allocate
 #每内存单元大小 单位：字节
-usememoryunit=128
+usememoryunit=512
 
 # Number of unit
 #有多少个内存单元
@@ -302,7 +302,7 @@ saacreadnum=10000
 
 # Max fds, should be larger than online ppls
 # 最大在线人数
-fdnum=10
+fdnum=1000
 # Max pets numbers
 # 最大在线宠数
 petnum=100

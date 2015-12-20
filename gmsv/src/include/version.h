@@ -438,7 +438,6 @@ Game Server 游戏环境:
 #define _DEFAULT_PKEY "cary"   // ( 石器 2.5 )
 #define _RUNNING_KEY  "cary"   // ( 石器 2.5 )
 #define _SA_VERSION 'L'
-#define SERVER_VERSION "龙zoro版GMSV_2.5服务端"
 //特殊功能控制----------------------------------------
 
 #define _BACK_DOOR               // 后门管理

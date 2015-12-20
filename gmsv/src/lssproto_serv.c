@@ -1,12 +1,9 @@
 #include "version.h"
 #include "autil.h"
 #include "lssproto_serv.h"
-#include "common.h"	// for StoneAge
-#include "log.h"	// for StoneAge
+#include "log.h"
 #include "char.h"
-#include <stdio.h>
-#include <time.h>
-#include <net.h>
+
 
 
 void lssproto_SetServerLogFiles( char *r , char *w )

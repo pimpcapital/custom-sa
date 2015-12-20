@@ -32,7 +32,7 @@ typedef struct tagConfig {
 	char sql_PASS[16];
 } Config;
 
-const Config config;
+Config config;
 
 int AutoReg;
 
@@ -111,16 +111,13 @@ static int readConfig(char *path)
 
 int sasql_init(void)
 {
-	if (mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
+	if(mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
 		printf("\n数据库初始化失败！");
 		exit(1);
 		return FALSE;
 	}
 
-	if (!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID,
-				config.sql_PS,
-				config.sql_DataBase,
-				config.sql_Port, NULL, 0)) {
+	if(!mysql_real_connect(&mysql, config.sql_IP, config.sql_ID, config.sql_PS, config.sql_DataBase, config.sql_Port, NULL, 0)) {
 		printf("\n数据库连接失败！\n");
 		return FALSE;
 	}
@@ -174,10 +171,7 @@ int sasql_register(char *id, char *ps)
 {
 	char sqlstr[256];
 //      if(AutoReg!=1)return FALSE;
-	sprintf(sqlstr,
-		"INSERT INTO %s (%s,%s,RegTime,Path) VALUES (BINARY'%s','%s',NOW(),'char/0x%x')",
-		config.sql_Table, config.sql_NAME, config.sql_PASS, id, ps,
-		getHash(id) & 0xff);
+	sprintf(sqlstr, "INSERT INTO %s (%s,%s,RegTime,Path) VALUES (BINARY'%s','%s',NOW(),'char/0x%x')", config.sql_Table, config.sql_NAME, config.sql_PASS, id, ps, getHash(id) & 0xff);
 	printf("\nregister_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
 		printf("\nnew_user_register=ok 新用户注册成功！\n");
@@ -211,10 +205,9 @@ int sasql_chehk_lock(char *idip)
 int sasql_add_lock(char *idip)
 {
 	char sqlstr[256];
-	sprintf(sqlstr, "INSERT INTO %s (%s) VALUES (BINARY'%s')",
-		config.sql_LOCK, config.sql_NAME, idip);
+	sprintf(sqlstr, "INSERT INTO %s (%s) VALUES (BINARY'%s')", config.sql_LOCK, config.sql_NAME, idip);
 	printf("\nadd_lock_sql=%s\n", sqlstr);
-	if (!mysql_query(&mysql, sqlstr)) {
+	if(!mysql_query(&mysql, sqlstr)) {
 		printf("\n添加锁定%s成功！\n", idip);
 		return TRUE;
 	}
@@ -224,22 +217,19 @@ int sasql_add_lock(char *idip)
 int sasql_del_lock(char *idip)
 {
 	char sqlstr[256];
-	sprintf(sqlstr, "delete from config.SQL_LOCK where %s=BINARY'%s'",
-		config.sql_LOCK, config.sql_NAME);
+	sprintf(sqlstr, "delete from config.SQL_LOCK where %s=BINARY'%s'", config.sql_LOCK, config.sql_NAME);
 	printf("\ndel_lock_sql=%s\n", sqlstr);
-	if (!mysql_query(&mysql, sqlstr)) {
+	if(!mysql_query(&mysql, sqlstr)) {
 		printf("\n解除锁定%s成功！\n", idip);
 		return TRUE;
 	}
 	return FALSE;
 }
 
-int sasql_craete_lock(void)
-{
+int sasql_craete_lock(void) {
 	return 0;
 }
 
-int sasql_craete_userinfo(void)
-{
+int sasql_craete_userinfo(void) {
 	return 0;
 }

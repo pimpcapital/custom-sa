@@ -49,31 +49,14 @@ void saacproto_ACGmsvDownRequest_recv( int fd, int min)
 void saacproto_ACServerLogin_recv (int fd, char* result,char* data)
 {
     if( strcmp( result , SUCCESSFUL ) != 0 ){
-        print( "与AC服务器连接失败!退出运行...[%s][%s]\n",
-              result,data );
+        print( "与AC服务器连接失败!退出运行...[%s][%s]\n", result,data );
         shutdownProgram( );
         exit(1);
     }
     print("与AC服务器连接成功！\n");
 	time(&initTime);
-/*
-		print("服务器类型：");
-    if( bNewServer )
-    	print("新服务器! \n");
-    else
-    	print("旧服务器! \n");
-*/
 #ifdef _SERVER_NUMS
 		print(" 正常服务器!\n");
-#endif
-#ifdef _VIP_ALL
-		print( "服务端版本: <%s %s>\n" , SERVER_VERSION, "会员版");
-#else
-#ifdef _PUB_ALL
-		print( "服务端版本: <%s %s>\n" , SERVER_VERSION, "普通版");
-#else
-		print( "服务端版本: <%s %s>\n" , SERVER_VERSION, "原始版");
-#endif
 #endif
 
     print("初始化家族...");

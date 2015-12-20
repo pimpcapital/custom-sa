@@ -127,8 +127,7 @@ void* allocateMemory( const unsigned int nbyte )
 				break;
 			 }
 		}
-		if( ( i >= readblock || i > UNITNUMBER - arrayAllocSize )
-            && flg == TRUE ) {
+		if( ( i >= readblock || i > UNITNUMBER - arrayAllocSize ) && flg == TRUE ) {
 			ret = NULL;
 			break;
 		}
