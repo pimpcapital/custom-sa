@@ -3,15 +3,9 @@
 #include "util.h"
 #include "version.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <dirent.h>
-#include <errno.h>
-#include <string.h>
 #include <sys/stat.h>
 
-/*   侬  巨件玄伉及    length */
 //#define CHARVALUE_MAX 1024
 #define MAXTABLE 16
 // Spock 2000/10/12
@@ -643,9 +637,7 @@ dbAppendNode( int topind , int ins )
   云卅元卅引尹及  反｝帮醒午  侬  及    卞绣箕允月仇午互匹五月［
   
  */
-static int
-dbGetTableIndex( char *tname , DBTYPE type )
-{
+static int dbGetTableIndex(char *tname, DBTYPE type) {
     int i;
 
     for(i=0;i<MAXTABLE;i++){
@@ -895,9 +887,7 @@ dbDeleteEntryInt( char *table, char *key )
     return 0;
 }
 
-static void
-dbShowAllTable(void)
-{
+static void dbShowAllTable(void) {
     int i;
 
     for(i=0;i<MAXTABLE;i++){
@@ -909,8 +899,6 @@ dbShowAllTable(void)
     
 }
 
-/* 犯□正毛1蜊潸曰分允［
- */
 int
 dbGetEntryInt( char *table, char *key, int *output )
 {
@@ -944,16 +932,6 @@ dbGetEntryInt( char *table, char *key, int *output )
 
     return 0;
 }
-
-/*
-  巨仿□及桦宁反  ［0分匀凶日岳  ［
-
-  int *rank_out : 仿件弁及请  
-  int *count_out : 晓井日窒蜊  井及请  
-
-  int 犯□正矛□旦毁迕友
-  
- */
 
 int
 dbGetEntryRank( char *table, char *key , int *rank_out, int *count_out)
@@ -1010,15 +988,9 @@ dbGetEntryRank( char *table, char *key , int *rank_out, int *count_out)
     return 0;
 }
 
-/*
-  int 毁迕友
- */
-int
-dbGetEntryRankRange( char *table,
-                     int start, int end, char *output, int outlen )
-{
-#define MAXHITS 1024        /* 赝癫支卅丐［匹手仇木匹蜗坌日仄中冗 ringo */
-    struct hitent{          /* 仇及厌瞻  卞甲永玄仄凶支勾毛凶户化中仁 */
+int dbGetEntryRankRange( char *table, int start, int end, char *output, int outlen ) {
+#define MAXHITS 1024
+    struct hitent{
         int entind;
         int rank;
     };
@@ -1140,8 +1112,7 @@ int dbFlush( char *dir )
 }
 
 
-int dbRead( char *dir )
-{
+int dbRead(char *dir) {
     char dirname[1024];
     DIR *d;
     struct dirent *de;
@@ -1307,10 +1278,6 @@ int dbGetEntryCountRange( char *table, int count_start, int  num,
     return 0;
 }
 
-
-/*
-    侬  犯□正矛□旦及质  
- */
 /* Spock deleted 2000/10/19
 int
 dbUpdateEntryString( char *table, char *key, char *value )
@@ -1349,9 +1316,8 @@ dbUpdateEntryString( char *table, char *key, char *value )
     return 0;
 }
 */
-// Spock 2000/10/19
-int dbUpdateEntryString( char *table, char *key, char *value )
-{
+
+int dbUpdateEntryString( char *table, char *key, char *value ) {
     int dbi = dbGetTableIndex( table , DB_STRING );
     int dbind, hashind;
 
@@ -1405,9 +1371,7 @@ int dbUpdateEntryString( char *table, char *key, char *value )
 }
 // Spock end
 
-int
-dbGetEntryString( char *table, char *key, char *output, int outlen )
-{
+int dbGetEntryString( char *table, char *key, char *output, int outlen ) {
     int dbi = dbGetTableIndex( table, DB_STRING );
     int entind;
     // Spock +1 2000/10/19
@@ -1440,12 +1404,8 @@ dbGetEntryString( char *table, char *key, char *output, int outlen )
     return 0;
 }
 
-int
-dbDeleteEntryString( char *table, char *key )
-{
+int dbDeleteEntryString( char *table, char *key ) {
     int dbi = dbGetTableIndex( table, DB_STRING );
-    int r;
-
     // Spock 2000/10/23
     //if( strlen(key) >= sizeof( master_buf[entind].key) ) return -1;
     if ( strlen(key) >= KEY_MAX ) {
@@ -1459,10 +1419,9 @@ dbDeleteEntryString( char *table, char *key )
     // Spock end
     //r = dbExtractNodeByKey( dbt[dbi].toplinkindex, key );
     // Spock fixed 2000/10/19
-    r = dbExtractNodeByKey( dbi , key );
+    int r = dbExtractNodeByKey( dbi , key );
     if( r < 0 ){
-        log( "dbDeleteEntryString: dbExtractNodeByKey failed for %s in %s\n",
-             key,table );
+        log( "dbDeleteEntryString: dbExtractNodeByKey failed for %s in %s\n", key,table );
         return -1;
     }
     dbt[dbi].updated = 1;

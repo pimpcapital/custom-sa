@@ -27,8 +27,6 @@ typedef struct tagConfig {
 
 	char sql_LOCK[16];
 
-	char sql_NAME[16];
-
 	char sql_PASS[16];
 } Config;
 
@@ -86,11 +84,6 @@ static int readConfig(char *path)
 			snprintf(config.sql_LOCK, sizeof(config.sql_LOCK),
 				 param);
 			printf("\n用户锁定表名：  %s", config.sql_LOCK);
-		} else if (strcmp(command, "sql_NAME") == 0) {
-			strcmp(config.sql_NAME, param);
-			snprintf(config.sql_NAME, sizeof(config.sql_NAME),
-				 param);
-			printf("\n账号字段名称：  %s", config.sql_NAME);
 		} else if (strcmp(command, "sql_PASS") == 0) {
 			strcmp(config.sql_PASS, param);
 			snprintf(config.sql_PASS, sizeof(config.sql_PASS),
@@ -109,8 +102,7 @@ static int readConfig(char *path)
 	return 0;
 }
 
-int sasql_init(void)
-{
+int sasql_init(void) {
 	if(mysql_init(&mysql) == NULL & readConfig("acserv.cf")) {
 		printf("\n数据库初始化失败！");
 		exit(1);
@@ -122,33 +114,37 @@ int sasql_init(void)
 		return FALSE;
 	}
 
+	mysql_query(&mysql, ""
+      "create table if not exists USERS ("
+      "  USERNAME varchar(16) character set utf8 collate utf8_bin NOT NULL,"
+      "  PASSWORD varchar(16) character set utf8 collate utf8_bin NOT NULL,"
+      "  REGISTER datetime NOT NULL default '0000-00-00 00:00:00',"
+      "  PATH varchar(10) default '',"
+      "  PRIMARY KEY (USERNAME)"
+      ")");
 	printf("\n数据库连接成功！\n");
+
 	return TRUE;
 }
 
-void sasql_close(void)
-{
+void sasql_close(void) {
 	mysql_close(&mysql);
 }
 
-int sasql_query(char *nm, char *pas)
-{
+int sasql_query(char *nm, char *pas) {
 	char sqlstr[256];
-	sprintf(sqlstr, "select * from %s where %s=BINARY'%s'",
-		config.sql_Table, config.sql_NAME, nm);
+	sprintf(sqlstr, "select * from USERS where USERNAME=BINARY'%s'", nm);
 	printf("\nquery_sql=%s\n", sqlstr);
-	if (!mysql_query(&mysql, sqlstr)) {
+	if(!mysql_query(&mysql, sqlstr)) {
 		mysql_result = mysql_store_result(&mysql);
-		if (mysql_num_rows(mysql_result) > 0) {
+		if(mysql_num_rows(mysql_result) > 0) {
 			mysql_row = mysql_fetch_row(mysql_result);
-			if (strcmp(pas, mysql_row[1]) == 0) {
-		        mysql_free_result(mysql_result);
+			if(strcmp(pas, mysql_row[1]) == 0) {
+		    mysql_free_result(mysql_result);
 				return 1;
 			} else {
-				printf
-				    ("password=not_correct 用户%s密码错误！\n",
-				     nm);
-		        mysql_free_result(mysql_result);
+				printf("password=not_correct 用户%s密码错误！\n", nm);
+				mysql_free_result(mysql_result);
 				return 2;
 			}
 		} 
@@ -167,11 +163,10 @@ int sasql_query(char *nm, char *pas)
 }
 
 #ifdef _SQL_REGISTER
-int sasql_register(char *id, char *ps)
-{
+int sasql_register(char *id, char *ps) {
 	char sqlstr[256];
 //      if(AutoReg!=1)return FALSE;
-	sprintf(sqlstr, "INSERT INTO %s (%s,%s,RegTime,Path) VALUES (BINARY'%s','%s',NOW(),'char/0x%x')", config.sql_Table, config.sql_NAME, config.sql_PASS, id, ps, getHash(id) & 0xff);
+	sprintf(sqlstr, "insert into USERS (USERNAME,PASSWORD,REGISTER,PATH) VALUES (BINARY'%s','%s',NOW(),'char/0x%x')", id, ps, getHash(id) & 0xff);
 	printf("\nregister_sql=%s\n", sqlstr);
 	if (!mysql_query(&mysql, sqlstr)) {
 		printf("\nnew_user_register=ok 新用户注册成功！\n");
@@ -185,8 +180,7 @@ int sasql_register(char *id, char *ps)
 int sasql_chehk_lock(char *idip)
 {
 	char sqlstr[256];
-	sprintf(sqlstr, "select * from %s where %s=BINARY'%s'", config.sql_LOCK,
-		config.sql_NAME, idip);
+	sprintf(sqlstr, "select * from %s where USERNAME=BINARY'%s'", config.sql_LOCK, idip);
 	printf("\ncheck_lock_sql=%s\n", sqlstr);
 
 	/* TODO: check the lock according to result's rows */
@@ -202,10 +196,9 @@ int sasql_chehk_lock(char *idip)
 	return FALSE;
 }
 
-int sasql_add_lock(char *idip)
-{
+int sasql_add_lock(char *idip) {
 	char sqlstr[256];
-	sprintf(sqlstr, "INSERT INTO %s (%s) VALUES (BINARY'%s')", config.sql_LOCK, config.sql_NAME, idip);
+	sprintf(sqlstr, "INSERT INTO %s (USERNAME) VALUES (BINARY'%s')", config.sql_LOCK, idip);
 	printf("\nadd_lock_sql=%s\n", sqlstr);
 	if(!mysql_query(&mysql, sqlstr)) {
 		printf("\n添加锁定%s成功！\n", idip);
@@ -217,7 +210,7 @@ int sasql_add_lock(char *idip)
 int sasql_del_lock(char *idip)
 {
 	char sqlstr[256];
-	sprintf(sqlstr, "delete from config.SQL_LOCK where %s=BINARY'%s'", config.sql_LOCK, config.sql_NAME);
+	sprintf(sqlstr, "delete from %s where USERNAME=BINARY'%s'", config.sql_LOCK, idip);
 	printf("\ndel_lock_sql=%s\n", sqlstr);
 	if(!mysql_query(&mysql, sqlstr)) {
 		printf("\n解除锁定%s成功！\n", idip);
