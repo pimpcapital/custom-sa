@@ -16,33 +16,13 @@ char result[CHARDATASIZE];
 
 // Spock +1 2000/11/1
 #define MAX_PROCESS 16777216
-#ifdef _VIP
-void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas, int checkvip )
-{
-    login_game_server( ti , servername , serverpas, checkvip,
-												             result , sizeof( result ) ,
-												             retdata , sizeof( retdata ));
 
+void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas ) {
+    login_game_server(ti, servername, serverpas, result, sizeof( result ), retdata, sizeof(retdata));
     saacproto_ACServerLogin_send( ti ,result ,retdata );
 }
-#else
-void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas )
-{
-    login_game_server( ti , servername , serverpas,
-												             result , sizeof( result ) ,
-												             retdata , sizeof( retdata ));
 
-    saacproto_ACServerLogin_send( ti ,result ,retdata );
-}
-#endif
-/*
-   必□丞扔□田□互失市它件玄扔□田□井日夫弘失它玄允月［
-   int fd : 覆擂socket
-
-*/
-void  saacproto_ACServerLogout_recv( int ti  )
-{
-
+void  saacproto_ACServerLogout_recv(int ti) {
     logout_game_server( ti );
 }
 

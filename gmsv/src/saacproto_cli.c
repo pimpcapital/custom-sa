@@ -43,18 +43,11 @@ void saacproto_UpdataStele_send( int fd , char *cdkey , char *name , char *title
 }
 #endif
 
-#ifdef _VIP_ALL
-void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas,int checkvip )
-#else
 void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas )
-#endif
 {
 	saacproto_CreateHeader( saacproto.work , "ACServerLogin" );
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( servername ) ,saacproto.workbufsize );
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( serverpas ) ,saacproto.workbufsize );
-#ifdef _VIP_ALL
-	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_int( checkvip ) ,saacproto.workbufsize );
-#endif
 	saacproto_Send( fd , saacproto.work );
 }
 /*

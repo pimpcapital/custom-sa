@@ -26,11 +26,7 @@ void saacproto_S_UpdataStele_send( int fd , char *ocdkey , char *oname , char *n
 					  char *nname , char *title , int level , int trns , int floor ) ;
 
 #endif
-#ifdef _VIP
-void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas, int checkvip );
-#else
-void saacproto_ACServerLogin_recv( int fd,char* servername,char* serverpas ) ;
-#endif
+void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas);
 void saacproto_ACServerLogin_send( int fd,char* result,char* data ) ;
 void saacproto_ACServerLogout_recv( int fd ) ;
 

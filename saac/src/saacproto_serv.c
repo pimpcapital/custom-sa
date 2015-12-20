@@ -13,17 +13,9 @@ int saacproto_ServerDispatchMessage( int fd , char *encoded, char *debugfun)
 	if( strcmp( funcname , "ACServerLogin" ) == 0 ){
 		char* servername;
 		char* serverpas;
-#ifdef _VIP
-		int checkvip;
-#endif
 		servername = saacproto_wrapStringAddr( saacproto_stringwrapper[1] , saacproto.workbufsize , saacproto_demkstr_string( saacproto.token_list[2] ));
 		serverpas = saacproto_wrapStringAddr( saacproto_stringwrapper[2] , saacproto.workbufsize , saacproto_demkstr_string( saacproto.token_list[3] ));
-#ifdef _VIP
-		checkvip = saacproto_demkstr_int( saacproto.token_list[4] );
-		saacproto_ACServerLogin_recv( fd,servername,serverpas,checkvip);
-#else
-	saacproto_ACServerLogin_recv( fd,servername,serverpas);
-#endif
+		saacproto_ACServerLogin_recv( fd,servername,serverpas);
 		return 0;
 	}
 

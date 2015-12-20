@@ -1339,42 +1339,6 @@ void CHAR_login( int clifd, char* data, int saveindex )
 		}
 	}
 #endif
-//VIP上线通知
-#ifdef _VIP_ALL
-	{
-			int i;
-			int playernum = CHAR_getPlayerMaxNum();
-			char *MyServerName = getGameserverID();
-			char *MyGameservername = getGameservername();
-			char VipMsg1[256];
-			char VipMsg2[256];
-			char VipMsg3[256];
-			char VipMsg4[256];
-			char VipMsg5[256];
-			char *MyName = CHAR_getChar( charaindex,CHAR_NAME );
-			char buf[80];
-			time_t t;
-			t=time(0);
-			strcpy(buf,ctime(&t));
-			buf[strlen(buf)-1]=0;
-
-			for( i = 0 ; i < playernum ; i++) 
-			{
-				sprintf( VipMsg1, "全国上下,热烈欢呼尊贵的%s会员( %s )登陆%s." , MyGameservername , MyName , MyServerName );
-				CHAR_talkToCli( i, -1, VipMsg1, CHAR_COLORRED );
-				sprintf( VipMsg2, "%s精确报时: %s." , MyServerName , buf );
-				CHAR_talkToCli( i, -1, VipMsg2, CHAR_COLORRED );
-				sprintf( VipMsg3, "\%s提醒您警惕网络骗子,妥善保管游戏帐号!!" , MyGameservername );
-				CHAR_talkToCli( i, -1, VipMsg3, CHAR_COLORRED );
-				CHAR_talkToCli( i, -1,"您现在使用的Server是XFei开发的Windows平台版.", CHAR_COLORYELLOW );
-				CHAR_talkToCli( i, -1,"提供更好的版本请联系262301417,销售6.0新功能端&8.0新功能端需要联系!!", CHAR_COLORYELLOW );
-				CHAR_talkToCli( i, -1,"提供更多私服开机信息请登陆http://www.sq25.cn!!", CHAR_COLORYELLOW );
-				
-			}
-		}
-
-#endif 
-
 	return;
 
 DELETECHARDATA:

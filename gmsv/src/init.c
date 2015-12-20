@@ -642,13 +642,9 @@ int init(int argc , char** argv , char** env )
 	print( "向账号服务器发送登陆请求... " );
     /*  夫弘奶件邰菲毛请允  */
    	{
-#ifdef _VIP_ALL
-    	saacproto_ACServerLogin_send(acfd, getGameservername(), getAccountserverpasswd(), getCheckVip()*2);
-#else
 			char buff[50];
 			sprintf(buff,"longzoro-%s-%d",getAccountserverpasswd(),123);
 			saacproto_ACServerLogin_send(acfd, getGameservername(), buff);
-#endif
     }
 	print( "完成\n" );
 

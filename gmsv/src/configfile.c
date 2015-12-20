@@ -242,9 +242,6 @@ int point;
 	int	CheckRepeat;
 #endif
 	int	cpuuse;
-#ifdef _VIP_ALL
-	int	checkvip;
-#endif
 #ifdef _FM_JOINLIMIT
 	int	joinfamilytime;
 #endif
@@ -542,9 +539,6 @@ ReadConf readconf[]=
 	{ "CHECKPEPEAT" ,NULL,0,(void*)&config.CheckRepeat,	INT},
 #endif
 	{ "CPUUSE" ,NULL,0,(void*)&config.cpuuse,	INT},
-#ifdef _VIP_ALL
-	{ "QQ" ,NULL,0,(void*)&config.checkvip,	INT},
-#endif
 #ifdef _FM_JOINLIMIT
 	{ "JOINFAMILYTIME" ,NULL,0,(void*)&config.joinfamilytime,	INT},
 #endif
@@ -1907,13 +1901,6 @@ int getCpuUse( void )
 int getCheckRepeat( void )
 {
 		return (config.CheckRepeat>0)?1:0;
-}
-#endif
-
-#ifdef _VIP_ALL
-int getCheckVip( void )
-{
-		return config.checkvip;
 }
 #endif
 

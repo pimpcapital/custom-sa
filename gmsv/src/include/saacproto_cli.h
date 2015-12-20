@@ -28,11 +28,7 @@ void saacproto_S_UpdataStele_recv( int i , char *ocdkey , char *oname , char *nc
 #endif
 
 void saacproto_ACGmsvDownRequest_recv( int fd,int min ) ; /* ../../doc/saacproto.html line 80 */
-#ifdef _VIP_ALL
-void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas,int checkvip ) ; /* ../../doc/saacproto.html line 90 */
-#else
 void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas ) ; /* ../../doc/saacproto.html line 90 */
-#endif
 void saacproto_ACServerLogin_recv( int fd,char* result,char* data ) ; /* ../../doc/saacproto.html line 101 */
 void saacproto_ACServerLogout_send( int fd ) ; /* ../../doc/saacproto.html line 114 */
 

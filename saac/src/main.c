@@ -191,23 +191,8 @@ static int netWrite( int ti , char *buf , int len)
 }
 
 gmsv gs[MAXCONNECTION];
-#ifdef _VIP
-int login_game_server( int ti , char *svname , char *svpas , int checkvip,
-               char *result , int resultlen ,
-               char *retdata , int retdatalen )
-#else
-int login_game_server( int ti , char *svname , char *svpas ,
-               char *result , int resultlen ,
-               char *retdata , int retdatalen )
-#endif
-{
-#ifndef _VIP
-		char buff[50];
-		sprintf(buff,"longzoro-%s-%d",svpass,123);
-    if( strcmp( svpas , buff ) == 0 ){
-#else
+int login_game_server(int ti, char *svname, char *svpas, char *result, int resultlen, char *retdata, int retdatalen) {
 		if( strcmp( svpas , svpass ) == 0 ){
-#endif
         log( "服务器密码正确 %s\n" , svname );
     } else {
         log( "服务器密码错误 %s\n" , svname );
@@ -215,14 +200,6 @@ int login_game_server( int ti , char *svname , char *svpas ,
         snprintf( retdata , retdatalen , "密码错误" );
         return 0;
     }
-#ifdef _VIP
-    if(0)//checkvip==0 || checkvip!=123456 * 2)
-    {
-    	snprintf( result , resultlen , "failed" );
-      snprintf( retdata , retdatalen , "duplicate login" );
-      return 0;
-    }
-#endif
     {
         int i;
         for(i=0;i<MAXCONNECTION;i++){

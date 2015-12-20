@@ -325,9 +325,6 @@ int getCpuUse( void );
 int getCheckRepeat( void );
 #endif
 
-#ifdef _VIP_ALL
-int getCheckVip( void );
-#endif
 #ifdef _FM_JOINLIMIT
 int getJoinFamilyTime( void );
 #endif

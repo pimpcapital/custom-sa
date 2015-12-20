@@ -82,15 +82,7 @@ int is_game_server_login( int ti );
 char * getGSName( int i );
 
 void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag );
-#ifdef _VIP
-int login_game_server( int ti , char *svname , char *svpas , int checkvip,
-               char *result , int resultlen ,
-               char *retdata , int retdatalen );
-#else
-int login_game_server( int ti , char *svname , char *svpas ,
-               char *result , int resultlen ,
-               char *retdata , int retdatalen );
-#endif
+int login_game_server(int ti ,char *svname, char *svpas, char *result, int resultlen, char *retdata, int retdatalen);
 
 #undef EXT
 #endif
