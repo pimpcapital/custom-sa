@@ -1988,7 +1988,7 @@ SINGLETHREAD int netloop_faster( void )
             print( "NO" );
           }
         }
-      } else if(strcmp(Connect[sockfd].cdkey, "longzoro")!=0 || strcmp(Connect[sockfd].cdkey, "zengweimin")!=0) {
+      } else {
         // Nuke +2 Errormessage
         char mess[64]="E伺服器人数已满，请稍候再试。";
         if (!from_acsv)

@@ -984,42 +984,28 @@ int _CHAR_setInt( char *file, int line, int index ,CHAR_DATAINT element, int dat
     return buf;
 }
 
-#ifdef _FIX_SETWORKINT
-int _CHAR_getWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element)
-#else
-int CHAR_getWorkInt( int index ,CHAR_WORKDATAINT element)
-#endif
-{
-	if( CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM )	{
-		print("err Get WorkInt element=%d :: file:%s %d!\n", element, file, line);
+int CHAR_getWorkInt(int index, CHAR_WORKDATAINT element) {
+	if(CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM) {
+		print("err Get WorkInt element=%d\n", element);
 		return -1;
 	}
-    return CHAR_chara[index].workint[element];
+	return CHAR_chara[index].workint[element];
 }
 
-#ifdef _FIX_SETWORKINT
-int _CHAR_setWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element, int data)
-#else
-int CHAR_setWorkInt( int index ,CHAR_WORKDATAINT element, int data)
-#endif
-{
-    int buf;
-	if( !CHAR_CHECKINDEX( index) )	{
-		print( "err Set WorkInt index:%d:%s[%d].\n", index, file, line);
+int CHAR_setWorkInt(int index, CHAR_WORKDATAINT element, int data) {
+	int buf;
+	if(!CHAR_CHECKINDEX(index)) {
+		print("err Set WorkInt index:%d.\n", index);
 		return -1;
 	}
-	if( CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM )	{
-#ifdef _FIX_SETWORKINT
-		print("err Set WorkInt element=%d.%s:%s[%d]!\n", element, CHAR_getChar( index, CHAR_CDKEY), file, line);
-#else
-		print("err Set WorkInt element=%d.%s!\n", element, CHAR_getChar( index, CHAR_CDKEY) );
-#endif
+	if(CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM) {
+		print("err Set WorkInt element=%d.%s!\n", element, CHAR_getChar(index, CHAR_CDKEY));
 		return -1;
 	}
 
-    buf = CHAR_chara[index].workint[element];
-    CHAR_chara[index].workint[element] = data;
-    return buf;
+	buf = CHAR_chara[index].workint[element];
+	CHAR_chara[index].workint[element] = data;
+	return buf;
 }
 
 char* _CHAR_getChar( char *file, int line, int index ,CHAR_DATACHAR element )

@@ -43,27 +43,14 @@ void saacproto_UpdataStele_send( int fd , char *cdkey , char *name , char *title
 }
 #endif
 
-void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas )
-{
+void saacproto_ACServerLogin_send( int fd,char* servername,char* serverpas ) {
 	saacproto_CreateHeader( saacproto.work , "ACServerLogin" );
-	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( servername ) ,saacproto.workbufsize );
-	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( serverpas ) ,saacproto.workbufsize );
-	saacproto_Send( fd , saacproto.work );
+	saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string( servername ), saacproto.workbufsize);
+	saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string( serverpas ), saacproto.workbufsize);
+	saacproto_Send(fd , saacproto.work);
 }
-/*
-114 : <LI><a name="ACServerLogoutC"><font color=red>clienttoserver ACServerLogout(void);<br></font></a>
-115 :      扔□田□互失市它件玄扔□田□井日夫弘失它玄允月午五卞银丹［
-116 :      涛粮反扔□田卞方匀化  澎卞濠日木月［仄凶互匀化仇木卞覆允月失市它件玄扔□田
-117 :      及忒蚕反戊生弁扑亦件毛濠月仪匹丐月［
-118 :      <br>
-119 :      <br>
-120 :      <br>
-121 : 
-122 : 
-*/
 
-void saacproto_ACServerLogout_send( int fd )
-{
+void saacproto_ACServerLogout_send(int fd) {
 	saacproto_CreateHeader( saacproto.work , "ACServerLogout" );
 	saacproto_strcatsafe( saacproto.work , "" ,saacproto.workbufsize );
 	saacproto_Send( fd , saacproto.work );

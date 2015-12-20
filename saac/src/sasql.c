@@ -23,8 +23,6 @@ typedef struct tagConfig {
 
 	char sql_DataBase[16];
 
-	char sql_Table[16];
-
 	char sql_LOCK[16];
 
 	char sql_PASS[16];
@@ -74,11 +72,6 @@ static int readConfig(char *path)
 			snprintf(config.sql_DataBase,
 				 sizeof(config.sql_DataBase), param);
 			printf("\n登陆数据库名：%s", config.sql_DataBase);
-		} else if (strcmp(command, "sql_Table") == 0) {
-			strcmp(config.sql_Table, param);
-			snprintf(config.sql_Table, sizeof(config.sql_Table),
-				 param);
-			printf("\n用户信息表名：  %s", config.sql_Table);
 		} else if (strcmp(command, "sql_LOCK") == 0) {
 			strcmp(config.sql_LOCK, param);
 			snprintf(config.sql_LOCK, sizeof(config.sql_LOCK),

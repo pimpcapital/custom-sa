@@ -331,9 +331,7 @@ static void parseOpts( int argc, char **argv )
             fprintf( stderr ,
                      "使用方法: saac [-h] [-w port] [-w port] ... \n"
                      "-h : 显示saac的帮助\n"
-                     "-w port : 添加一个工作站进程端口\n"
-                     "Copyright 2006 龙zoro工作室 "
-                     "( Longzoro System Supply )\n");
+                     "-w port : 添加一个工作站进程端口\n");
             exit(0);
             break;
         case 'i':

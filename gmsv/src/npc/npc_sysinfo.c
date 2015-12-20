@@ -43,6 +43,7 @@ enum {
 enum {
 	CHAR_WORKCHAR_PASSWD = CHAR_NPCWORKCHAR1,
 };
+
 typedef struct {
 	char	msg[16];
 }CMD_MSG;
@@ -181,7 +182,6 @@ static FUNC		functbl[] = {
     NPC_Sysinfo_Msg_allowAccept,
     NPC_Sysinfo_Msg_denyAccept,
     NPC_Sysinfo_Msg_closeallsockets,
-	/* 错痊馨笛 */
     NPC_Sysinfo_All_NoSee,
     NPC_Sysinfo_All_NoBody,
     NPC_Sysinfo_Move_Num,
@@ -197,22 +197,16 @@ static FUNC		functbl[] = {
     
 };
 
-/*********************************
-*********************************/
-int NPC_SysinfoInit( int meindex )
-{
+int NPC_SysinfoInit(int meindex) {
 	int tmp;
-	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
-    char	buff[128];
-
-    NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
+	char argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
+	char buff[128];
+	NPC_Util_GetArgStr( meindex, argstr, sizeof( argstr));
 
 
 	CHAR_setWorkInt( meindex, CHAR_WORK_MODE, 0);
 
-	/* 由旦伐□玉本永玄 */
-	if( NPC_Util_GetStrFromStrWithDelim( argstr, "passwd", buff, sizeof( buff))	== NULL)
-	{
+	if(NPC_Util_GetStrFromStrWithDelim(argstr, "passwd", buff, sizeof(buff))	== NULL) {
 		strcpy( buff, NPC_SYSINFO_PASSWD_DEFAULT);
 	}
 	CHAR_setWorkChar( meindex, CHAR_WORKCHAR_PASSWD, buff);
@@ -236,11 +230,8 @@ int NPC_SysinfoInit( int meindex )
 	return TRUE;
 }
 
-/*********************************
-**********************************/
-void NPC_SysinfoLoop( int meindex )
-{
-	int		shuttime;
+void NPC_SysinfoLoop(int meindex) {
+	int shuttime;
 	if( CHAR_getWorkInt( meindex, CHAR_WORK_MODE) == 1) {
 		int		oldtime;
 		/* 凛棉毛褡户月 */
@@ -280,8 +271,7 @@ void NPC_SysinfoLoop( int meindex )
 		}
 	}
 }
-/*********************************
-**********************************/
+
 void NPC_SysinfoTalked( int meindex, int tindex, char *msg, int color)
 {
 	char	*msgwk;
@@ -342,21 +332,15 @@ void NPC_SysinfoTalked( int meindex, int tindex, char *msg, int color)
 	free( msgwk);
 	free( buff);
 }
-/*------------------------------------------------------------------------
- * 骚橘乒□玉尺
- *----------------------------------------------------------------------*/
+
 static void NPC_Sysinfo_Msg_EndInfo( int meindex, int tindex, char *msg)
 {
 	CHAR_setWorkInt( meindex, CHAR_WORK_MODE, 0);
 	CHAR_setWorkInt( meindex, CHAR_WORK_PLAYER, -1);
-	CHAR_talkToCli( tindex, meindex,
-					"已移到一般模式",
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+	CHAR_talkToCli( tindex, meindex, "已移到一般模式", CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 
 }
-/*------------------------------------------------------------------------
- * HELP丢永本□斥
- *----------------------------------------------------------------------*/
+
 static void NPC_Sysinfo_Msg_Help( int meindex, int tindex, char *msg)
 {
 	int		i;
@@ -388,9 +372,7 @@ static void NPC_Sysinfo_Msg_Help( int meindex, int tindex, char *msg)
 						CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 	}
 }
-/*------------------------------------------------------------------------
- * 皿伊奶乩□及醒毛譬屯月
- *----------------------------------------------------------------------*/
+
 static void NPC_Sysinfo_Msg_Player( int meindex, int tindex, char *msg)
 {
     int     i, cnt = 0;
@@ -404,8 +386,7 @@ static void NPC_Sysinfo_Msg_Player( int meindex, int tindex, char *msg)
         }
 	}
 	snprintf( buff, sizeof( buff), "玩家有%d人。", cnt);
-	CHAR_talkToCli( tindex, meindex, buff,
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+	CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 
 }
 /*------------------------------------------------------------------------
@@ -414,22 +395,17 @@ static void NPC_Sysinfo_Msg_List( int meindex, int tindex, char *msg)
 {
 	char	buff[512];
 	char	buff2[512];
-	int		i;
 
-	for( i = 1; i < NPC_SYSINFO_MSGMAX; i ++ ) {
-		if( NPC_Sysinfo_GetMsg( meindex, "sendno", buff, sizeof( buff), i)!= NULL )
-		{
+	for(int i = 1; i < NPC_SYSINFO_MSGMAX; i++) {
+		if(NPC_Sysinfo_GetMsg(meindex, "sendno", buff, sizeof(buff), i) != NULL) {
 			snprintf( buff2, sizeof(buff2), "No.%d:%s", i, buff);
-			CHAR_talkToCli( tindex, meindex, buff2,
-							CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
-
+			CHAR_talkToCli( tindex, meindex, buff2, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 		}
 	}
 }
 /*------------------------------------------------------------------------
  *----------------------------------------------------------------------*/
-static void NPC_Sysinfo_Msg_SendNo( int meindex, int tindex, char *msg)
-{
+static void NPC_Sysinfo_Msg_SendNo(int meindex, int tindex, char *msg) {
 	char	buff[32];
 	char	msgbuf[512];
 
@@ -446,10 +422,8 @@ static void NPC_Sysinfo_Msg_SendNo( int meindex, int tindex, char *msg)
 		}
 	}
 }
-/*------------------------------------------------------------------------
- *----------------------------------------------------------------------*/
-static void NPC_Sysinfo_Msg_SendMsg( int meindex, int tindex, char *msg)
-{
+
+static void NPC_Sysinfo_Msg_SendMsg( int meindex, int tindex, char *msg) {
 	char	buff[512];
 
 	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
@@ -476,14 +450,11 @@ static void NPC_Sysinfo_Msg_Msgcol( int meindex, int tindex, char *msg)
 		{ 255, "white"},
 	};
 
-	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
-	{
-		int		i;
-		for( i = 0; i < 7; i ++ ) {
+	if(getStringFromIndexWithDelim(msg, " ", 2, buff, sizeof(buff)) == TRUE) {
+		for(int i = 0; i < 7; i ++ ) {
 			if( strstr( buff, colset[i].str) != NULL ) {
 				CHAR_setWorkInt( meindex, CHAR_WORK_MSGCOLOR, colset[i].color);
-				CHAR_talkToCli( tindex, meindex, "已改变讯息的颜色。",
-								CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+				CHAR_talkToCli( tindex, meindex, "已改变讯息的颜色。", CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 				break;
 			}
 		}
@@ -491,9 +462,7 @@ static void NPC_Sysinfo_Msg_Msgcol( int meindex, int tindex, char *msg)
 }
 /*------------------------------------------------------------------------
  *----------------------------------------------------------------------*/
-static char *NPC_Sysinfo_GetMsg( int meindex, char *msgindexstr,
-								char *out,int outlen, int num )
-{
+static char *NPC_Sysinfo_GetMsg( int meindex, char *msgindexstr, char *out,int outlen, int num ) {
 
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	*work;
@@ -520,17 +489,14 @@ static char *NPC_Sysinfo_GetMsg( int meindex, char *msgindexstr,
 }
 /*------------------------------------------------------------------------
  *----------------------------------------------------------------------*/
-static void NPC_Sysinfo_Msg_Shutdown( int meindex, int tindex, char *msg)
-{
+static void NPC_Sysinfo_Msg_Shutdown(int meindex, int tindex, char *msg) {
 	char	buff[10];
 	int		hun;
 
 	NPC_Sysinfo_SendMsg( meindex, tindex, NPC_SYSINFO_ARG_SHUTDOWN_MSG);
-	/* 凛棉本永玄 */
 	CHAR_setWorkInt( meindex, CHAR_WORK_SHUTDOWNTIME, NowTime.tv_sec);
-	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
-	{
-		hun = atoi( buff);
+	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof(buff)) == TRUE ) {
+		hun = atoi(buff);
 		if( hun <= 0 ) {
 			hun = NPC_SYSINFO_SHUTDOWNLIMIT_DEFAULT;
 		}
@@ -539,14 +505,12 @@ static void NPC_Sysinfo_Msg_Shutdown( int meindex, int tindex, char *msg)
 		hun = NPC_SYSINFO_SHUTDOWNLIMIT_DEFAULT;
 	}
 
-	CHAR_setWorkInt( meindex, CHAR_WORK_SHUTDOWNLIMIT, hun);
-
-	CHAR_setWorkInt( meindex, CHAR_WORK_SHUTDOWNDSPTIME,0);
+	CHAR_setWorkInt(meindex, CHAR_WORK_SHUTDOWNLIMIT, hun);
+	CHAR_setWorkInt(meindex, CHAR_WORK_SHUTDOWNDSPTIME, 0);
 }
 /*------------------------------------------------------------------------
  *----------------------------------------------------------------------*/
-static void NPC_Sysinfo_SendMsg( int meindex, int pindex, int tblnum)
-{
+static void NPC_Sysinfo_SendMsg( int meindex, int pindex, int tblnum) {
 	char	argstr[NPC_UTIL_GETARGSTR_BUFSIZE];
 	char	buff[128];
 
@@ -556,8 +520,7 @@ static void NPC_Sysinfo_SendMsg( int meindex, int pindex, int tblnum)
 		strcpy( buff, msgtable[tblnum].defMsg);
 	}
 	if( buff[0] != '\0' ) {
-		CHAR_talkToCli( pindex, meindex, buff,
-						CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+		CHAR_talkToCli( pindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 	}
 }
 /*------------------------------------------------------------------------
@@ -575,15 +538,11 @@ static void NPC_Sysinfo_SendMsgToAll( int meindex, char *msg)
 	}
 }
 
-
-
-/* 蝈衬平乓仿毛 NO_SEE 卞允月井升丹井 */
-static void NPC_Sysinfo_All_NoSee( int meindex, int tindex, char *msg ){
+static void NPC_Sysinfo_All_NoSee(int meindex, int tindex, char *msg) {
 	char	buff[256];
 
 	buff[0] = buff[1] = 0;
-	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
-	{
+	if(getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE) {
 		if( strncmp( buff, "on", strlen( buff ) ) == 0 ){
 			all_nosee = 1;
 			snprintf( buff, sizeof( buff), "已开启all_nosee 。" );
@@ -608,34 +567,28 @@ static void NPC_Sysinfo_All_NoSee( int meindex, int tindex, char *msg ){
 	}
 }
 
-/* 蝈衬平乓仿毛 NO_BODY 卞允月井升丹井 */
-static void NPC_Sysinfo_All_NoBody( int meindex, int tindex, char *msg ){
+static void NPC_Sysinfo_All_NoBody(int meindex, int tindex, char *msg) {
 	char	buff[256];
 
 	buff[0] = buff[1] = 0;
-	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
-	{
-		if( strncmp( buff, "on", strlen( buff ) ) == 0 ){
+	if(getStringFromIndexWithDelim(msg, " ", 2, buff, sizeof(buff)) == TRUE) {
+		if(strncmp(buff, "on", strlen( buff ) ) == 0) {
 			all_nobody = 1;
-			snprintf( buff, sizeof( buff), "已开启all_nobody 。" );
-			CHAR_talkToCli( tindex, meindex, buff,
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
-		}else
-		if( strncmp( buff, "off", strlen( buff ) ) == 0 ){
+			snprintf(buff, sizeof( buff), "已开启all_nobody 。");
+			CHAR_talkToCli(tindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+		} else
+		if(strncmp( buff, "off", strlen( buff ) ) == 0 ) {
 			all_nobody = 0;
 			snprintf( buff, sizeof( buff), "已关闭all_nobody 。" );
-			CHAR_talkToCli( tindex, meindex, buff,
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+			CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 		}
-	}else
-	if( all_nobody == 0 ){
+	} else
+	if(all_nobody == 0 ) {
 		snprintf( buff, sizeof( buff), "all_nobody 关闭着。" );
-		CHAR_talkToCli( tindex, meindex, buff,
-				CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
-	}else{
+		CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+	} else{
 		snprintf( buff, sizeof( buff), "all_nobody 开启着。" );
-		CHAR_talkToCli( tindex, meindex, buff,
-				CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+		CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
 	}
 }
 
@@ -645,28 +598,23 @@ static void NPC_Sysinfo_Move_Num( int meindex, int tindex, char *msg ){
 	int		work;
 	buff[0] = buff[1] = 0;
 
-	if( getStringFromIndexWithDelim( msg, " ", 2, buff, sizeof( buff)) == TRUE )
-	{
-		work = atoi( buff );
-		if( work <= 0 ) {
-			work = 1000; /* 赝癫 */
+	if(getStringFromIndexWithDelim(msg, " ", 2, buff, sizeof(buff)) == TRUE) {
+		work = atoi(buff);
+		if(work <= 0) {
+			work = 1000;
 		}
 		EnemyMoveNum = work;
-		snprintf( buff, sizeof( buff), "让敌人同时%d动作。",
-			EnemyMoveNum );
-		CHAR_talkToCli( tindex, meindex, buff,
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
-	}else{
-		snprintf( buff, sizeof( buff), "现在敌人同时在进行%d动作。",
-			EnemyMoveNum );
-		CHAR_talkToCli( tindex, meindex, buff,
-					CHAR_getWorkInt( meindex, CHAR_WORK_MSGCOLOR));
+		snprintf( buff, sizeof( buff), "让敌人同时%d动作。", EnemyMoveNum );
+		CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt(meindex, CHAR_WORK_MSGCOLOR));
+	} else{
+		snprintf(buff, sizeof( buff), "现在敌人同时在进行%d动作。", EnemyMoveNum );
+		CHAR_talkToCli( tindex, meindex, buff, CHAR_getWorkInt(meindex, CHAR_WORK_MSGCOLOR));
 	}
 }
 
 
 
-static void NPC_Sysinfo_Born_Num( int meindex, int tindex, char *msg ){
+static void NPC_Sysinfo_Born_Num(int meindex, int tindex, char *msg) {
 	char	buff[256];
 	int		work;
 	buff[0] = buff[1] = 0;

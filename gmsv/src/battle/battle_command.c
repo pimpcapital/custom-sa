@@ -534,17 +534,7 @@ int BATTLE_IsHide( int charaindex ){
 }
 
 
-
-
-
-//*******************************************************
-//
-//  田玄伙及戊穴件玉毛弁仿奶失件玄卞霜月
-//
-int BATTLE_CommandSend( int charaindex, char *pszCommand )
-//
-//********************************************************
-{
+int BATTLE_CommandSend( int charaindex, char *pszCommand ) {
 	if( CHAR_CHECKINDEX( charaindex ) == FALSE )return FALSE;
 	if(	getfdFromCharaIndex( charaindex ) < 0 )return FALSE;
 	lssproto_B_send( getfdFromCharaIndex( charaindex ), pszCommand );	
@@ -770,9 +760,8 @@ void BATTLE_CharSendAll( int battleindex )
 				if( BattleArray[battleindex].Side[1-j].flg & BSIDE_FLG_SURPRISE ){
 					flg |= BP_FLG_PLAYER_SURPRISAL;
 				}
-				if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE )
-					== BATTLE_CHARMODE_RESCUE){
-					flg |= BP_FLG_JOIN;		// 辅爵
+				if( CHAR_getWorkInt( charaindex, CHAR_WORKBATTLEMODE ) == BATTLE_CHARMODE_RESCUE) {
+					flg |= BP_FLG_JOIN;	
 				}
 			At_SoubiIndex = CHAR_getItemIndex( charaindex, CHAR_ARM );
 			if( ITEM_CHECKINDEX( At_SoubiIndex ) == FALSE ){
@@ -791,12 +780,6 @@ void BATTLE_CharSendAll( int battleindex )
 
 #ifdef _PETSKILL_DAMAGETOHP
 	{
-/*
-		让开,让开~~~~~~~
-             ╭══╮
-           ╭╯ΘΘ║
-           ╰⊙═⊙╯我来给你送月饼了
-*/
 		char msg[32]={0};
 		//print("\n宠物id:%d",CHAR_getInt( pindex, CHAR_PETID)); 
 		//print("\n宠物名:%s",CHAR_getChar( pindex, CHAR_NAME)); 

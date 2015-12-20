@@ -17,9 +17,9 @@ char result[CHARDATASIZE];
 // Spock +1 2000/11/1
 #define MAX_PROCESS 16777216
 
-void saacproto_ACServerLogin_recv( int ti,char* servername , char* serverpas ) {
+void saacproto_ACServerLogin_recv(int ti, char* servername, char* serverpas) {
     login_game_server(ti, servername, serverpas, result, sizeof( result ), retdata, sizeof(retdata));
-    saacproto_ACServerLogin_send( ti ,result ,retdata );
+    saacproto_ACServerLogin_send(ti, result, retdata);
 }
 
 void  saacproto_ACServerLogout_recv(int ti) {

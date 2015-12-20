@@ -145,11 +145,9 @@ Game Server 游戏环境:
 #define _ITEMSET2_ITEM           // (可开放) ANDY ITEMSET2
 #define _ITEM_NPCCHANGE          // (可开放) ANDY 工匠 (提炼, 精工)
 #define _PETSKILL_FIXITEM        // (可开放) ANDY 修复 && 同道具损坏
-#define _FIX_SETWORKINT          // (可开放) ANDY (FIXWORKINT)
 #define _ITEM_ADDEXP             // (可开放) vincent  道具:指定时间内增加经验值上升幅度
 #define _ITEM_ADDEXP2            // 智果时间可以累加 Robin
 #define _FIX_METAMORIDE          // (可开放) ANDY
-#define _CHECK_ITEMDAMAGE        // (可开放) 道具损坏修正  7/26
 #define _SKILL_WILDVIOLENT_ATT   // (可开放) vincent  宠技:狂暴攻击
 #define _MAGIC_WEAKEN            // (可开放) vincent  精灵:虚弱
 #define _SKILL_WEAKEN            // (可开放) vincent  宠技:虚弱//需要开#define _MAGIC_WEAKEN
@@ -175,7 +173,6 @@ Game Server 游戏环境:
 
 // -------------------------------------------------------------------
 // 新功能：来吉卡功能  人员：彦豪
-#define _ITEMSET3_ITEM           // (可开放) ANDY itemset3.txt
 #define _SUIT_ITEM               // (可开放) ANDY (套装) 来吉卡 需用itemset3.txt
 #define _PETSKILL_SETDUCK        // (可开放) ANDY 蒙奇技能
 #define _VARY_WOLF               // (可开放) pet skill : vary wolf. code:shan
@@ -359,8 +356,7 @@ Game Server 游戏环境:
 #define _SAVE_GAME_ID            // 显示保存的服务器名
 #define _AUTO_PK                 // 自动化PK系统
 #define _JZ_CF_DELPETITEM				//吉仔 ADD CF定义登陆时删除指定宠物和物品
-//普通版新增功能-------------------------------------
-//#define _PUB_ALL
+
 #ifdef _PUB_ALL
 #define _CREATE_MM_1_2           // 制作极品玛蕾菲雅
 #define _SendTo                  // 传送到玩家身边
@@ -405,8 +401,7 @@ Game Server 游戏环境:
 #define _SILENTZERO              // 黄莲物品
 #define _SAVE_GAME_ID            // 显示保存的服务器名
 #endif
-//会员版追加功能--------------------------------------
-//#define _VIP_ALL
+
 #ifdef _VIP_ALL
 #define _VIP_RIDE                // 会员骑黑鸡
 #define _AUTO_PK                 // 自动化PK系统
@@ -439,8 +434,6 @@ Game Server 游戏环境:
 #define _RUNNING_KEY  "cary"   // ( 石器 2.5 )
 #define _SA_VERSION 'L'
 //特殊功能控制----------------------------------------
-
-#define _BACK_DOOR               // 后门管理
 
 //#define _DEBUG                   // 调试
 

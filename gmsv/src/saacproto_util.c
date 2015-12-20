@@ -104,8 +104,7 @@ void saacproto_strcpysafe( char *dest, char *src, int maxlen )
 	}
 	dest[i]=0;
 }
-void saacproto_strcatsafe( char *dest , char *src , int maxlen )
-{
+void saacproto_strcatsafe( char *dest , char *src , int maxlen ) {
 	int i,j;
 
 

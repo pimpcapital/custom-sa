@@ -25,9 +25,7 @@ void TalkAction(int charaindex, char *message);
 #ifdef _GM_ITEM
 static int player_useChatMagic( int charaindex, char* data, int isDebug);
 #endif
-/*------------------------------------------------------------
- * 民乓永玄楮  及末□旦
- ------------------------------------------------------------*/
+
 #define DEBUGCDKEYNUM 100
 struct tagDebugCDKey {
 	int use;
@@ -35,7 +33,6 @@ struct tagDebugCDKey {
 };
 static struct tagDebugCDKey DebugCDKey[DEBUGCDKEYNUM];
 
-/*====================民乓永玄  芊====================*/
 typedef void (*CHATMAGICFUNC)(int,char*);
 typedef struct tagCHAR_ChatMagicTable
 {
@@ -404,11 +401,7 @@ void CHAR_initDebugChatCdkey( void)
 		DebugCDKey[i].cdkey[0] = '\0';
 	}
 }
-/*------------------------------------------------------------
- * 民乓永玄  芊及甩永扑亘袄毛综月［
- * 娄醒｝忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
+
 void CHAR_initChatMagic(void)
 {
 	int i;
@@ -452,8 +445,7 @@ int CHAR_setChatMagicCDKey( int mode, char *cdkey)
 	return i;
 }
 
-static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, int isDebug)
-{
+static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, int isDebug) {
 	int i;
 	int hash = hashpjw( name );
 	for( i=0 ; i<arraysizeof(CHAR_cmtbl) ; i++ )
@@ -464,8 +456,7 @@ static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char* name, int isDebug)
 	return NULL;
 }
 
-int CHAR_getChatMagicFuncLevel(char* name,int isDebug)
-{
+int CHAR_getChatMagicFuncLevel(char* name,int isDebug) {
 	int i;
 	int hash = hashpjw( name );
 	for( i=0 ; i<arraysizeof(CHAR_cmtbl) ; i++ )
@@ -476,8 +467,7 @@ int CHAR_getChatMagicFuncLevel(char* name,int isDebug)
 	return -1;
 }
 
-int CHAR_getChatMagicFuncNameAndString( int ti, char* name, char *usestring, int level, int isDebug)
-{
+int CHAR_getChatMagicFuncNameAndString( int ti, char* name, char *usestring, int level, int isDebug) {
 	if( name == NULL || usestring == NULL ) return -1;
 	if( ti < 0 || ti >= arraysizeof( CHAR_cmtbl) ) return -1;
 	if( CHAR_cmtbl[ ti].isdebug == isDebug &&
@@ -489,22 +479,11 @@ int CHAR_getChatMagicFuncNameAndString( int ti, char* name, char *usestring, int
 	return 0;
 }
 
-int CHAR_getChatMagicFuncMaxNum( void)
-{
+int CHAR_getChatMagicFuncMaxNum() {
 	return arraysizeof( CHAR_cmtbl);
 }
 
-/*------------------------------------------------------------
- * 民乓永玄  芊
- * 娄醒
- *  charaindex      int     平乓仿奶件犯永弁旦
- *  message         char*   丢永本□斥
- *  isDebug         int    犯田永弘民乓永玄  芊井升丹井
- * 忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
-static int CHAR_useChatMagic( int charaindex, char* data, int isDebug)
-{
+static int CHAR_useChatMagic(int charaindex, char* data, int isDebug) {
 	char    magicname[256];
 	int     ret;
 	int	i;

@@ -193,8 +193,7 @@ int init(int argc , char** argv , char** env )
 
         print("账号服务器地址: %s\n", getAccountservername() );
         print("账号服务器端口: %d\n", getAccountserverport() );
-        print("登陆服务器名称: %s\n",
-              getGameservername());
+        print("登陆服务器名称: %s\n", getGameservername());
         print("登陆服务器密码: %s\n", getAccountserverpasswd());
 
         print("等待连接端口: %d\n", getPortnumber() );
@@ -634,25 +633,18 @@ int init(int argc , char** argv , char** env )
     CONNECT_setCtype( acfd, AC );
 	
 	print( "初始化 NPC 客户端 ... " );
-    /*  rpc(client)及赓渝祭 */
     if( saacproto_InitClient( lsrpcClientWriteFunc,LSGENWORKINGBUFFER, acfd) < 0 )
         goto CLOSEAC;
 	print( "完成\n" );
 
 	print( "向账号服务器发送登陆请求... " );
-    /*  夫弘奶件邰菲毛请允  */
-   	{
-			char buff[50];
-			sprintf(buff,"longzoro-%s-%d",getAccountserverpasswd(),123);
-			saacproto_ACServerLogin_send(acfd, getGameservername(), buff);
-    }
+    saacproto_ACServerLogin_send(acfd, getGameservername(), getAccountserverpasswd());
+
 	print( "完成\n" );
 
-    if( isExistFile( getLsgenlogfilename() ) ){
-        lssproto_SetServerLogFiles( getLsgenlogfilename(),
-                                    getLsgenlogfilename() );
-        saacproto_SetClientLogFiles( getLsgenlogfilename(),
-                                     getLsgenlogfilename() );
+    if(isExistFile(getLsgenlogfilename())) {
+        lssproto_SetServerLogFiles(getLsgenlogfilename(), getLsgenlogfilename());
+        saacproto_SetClientLogFiles(getLsgenlogfilename(), getLsgenlogfilename());
     }
 
 

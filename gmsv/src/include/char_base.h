@@ -1076,14 +1076,8 @@ int _CHAR_CHECKPETSKILLINDEX( char *file, int line, int havepetskillindex );
 int CHAR_getInt( int index , CHAR_DATAINT element);
 #define CHAR_setInt( index , element, data) _CHAR_setInt( __FILE__, __LINE__, index , element, data)
 int _CHAR_setInt( char *file, int line, int index ,CHAR_DATAINT element, int data);
-#ifdef _FIX_SETWORKINT
-#define CHAR_getWorkInt( index , element) _CHAR_getWorkInt( __FILE__, __LINE__, index , element)
-int _CHAR_getWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element);
-#define CHAR_setWorkInt( index, element, data) _CHAR_setWorkInt( __FILE__, __LINE__, index , element, data)
-int _CHAR_setWorkInt( char *file, int line, int index ,CHAR_WORKDATAINT element, int data);
-#else
-int CHAR_setWorkInt( int index ,CHAR_WORKDATAINT element, int data);
-#endif
+int CHAR_getWorkInt(int index , CHAR_WORKDATAINT element);
+int CHAR_setWorkInt(int index , CHAR_WORKDATAINT element, int data);
 #define		CHAR_getChar( index, elem) _CHAR_getChar( __FILE__, __LINE__, index, elem)
 char* _CHAR_getChar( char *file, int line, int index ,CHAR_DATACHAR element );
 #define		CHAR_setChar( index, elem, n) _CHAR_setChar( __FILE__, __LINE__, index, elem, n)
