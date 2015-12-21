@@ -78,7 +78,7 @@ int NPC_ManorSmanInit( int meindex )
   CHAR_setInt(meindex, CHAR_LOOPINTERVAL, a);
 
   a = NPC_Util_GetNumFromStrWithDelim(argstr, "manorid" );
-  if ((a<1) || (a>/*4*/MANORNUM)) {// CoolFish 2002/2/25
+  if ((a < 1) || (a > MANORNUM)) {
     print("MANORSMAN init error: invalid manor id(%d).", a);
     a=1;
   }
