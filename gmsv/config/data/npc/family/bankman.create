@@ -117,6 +117,19 @@ name=家族银行
 enemy=bankman|conff:family/bankman.conf
 }
 
+#瑞尔亚斯(庄园)
+{
+floorid=7531
+borncenter=11,5,1,1
+movecenter=11,5,11,5
+createnum=1
+time=0
+dir=4
+graphicname=17051
+name=家族银行
+enemy=bankman|conff:family/bankman.conf
+}
+
 # 萨姆吉尔的银行管理员
 {
 floorid=1006
@@ -230,6 +243,19 @@ createnum=1
 time=0
 dir=6
 graphicname=16017
+name=家族银行
+enemy=bankman|conff:family/bankman.conf
+}
+
+#瑞尔亚斯
+{
+floorid=7506
+borncenter=19,17,1,1
+movecenter=19,17,19,17
+createnum=1
+time=0
+dir=6
+graphicname=16970
 name=家族银行
 enemy=bankman|conff:family/bankman.conf
 }

@@ -6,8 +6,8 @@ borncenter=627,485,1,1
 movecenter=627,485,627,485
 createnum=1
 dir=4
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus.arg
 }
 #######マンモスバス、サムギルˇクオ俐##########
@@ -17,8 +17,8 @@ borncenter=631,485,1,1
 movecenter=631,485,631,485
 createnum=1
 dir=4
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus3.arg
 }
 
@@ -29,8 +29,8 @@ borncenter=120,654,1,1
 movecenter=120,654,120,654
 createnum=1
 dir=4
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus4.arg
 }
 
@@ -41,8 +41,8 @@ borncenter=566,386,1,1
 movecenter=566,386,566,386
 createnum=1
 dir=6
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus2.arg
 }
 
@@ -53,8 +53,8 @@ borncenter=566,389,1,1
 movecenter=566,389,566,389
 createnum=1
 dir=6
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus5.arg
 }
 
@@ -65,8 +65,8 @@ borncenter=311,602,1,1
 movecenter=311,602,311,602
 createnum=1
 dir=4
-graphicname=100355
-name=を禜そó
+graphicname=100896
+name=尸魂大象公车
 enemy=bus|file:chatroom/bus6.arg
 }
 

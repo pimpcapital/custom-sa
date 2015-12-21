@@ -1,5 +1,22 @@
+ExChangeMan
+
+NomalMainMsg:准备好材料来找我吧，我会帮你制做训兽戒指。基本材料为牙10.线10 。工本费为150000元哟…。
+
 EventNo:-1
 TYPE:MESSAGE
-EVENT:LV>0
-NomalWindowMsg:很抱歉，此NPC修正中....
+EVENT:LV>0&ITEM!=11839&ITEM!=11889
+NomalWindowMsg:你问我是谁？我是伊甸大陆的发明家，最近发明了一种戒脂，可以宠物多强大都可以驯服,如果你需要就来找我，由于我欠缺旅费，所以会跟你收一定的费用。
+NomalWindowMsg1:准备好150000万石币以及牙10、线10,我就帮你制作！
+EventEnd
+
+EventNo:-1
+TYPE:ACCEPT
+EVENT:LV>0&ITEM=11839&ITEM=11889
+AcceptMsg:唔～？你带来了啊，那等我一下。
+ThanksMsg:这一个戒指的特性就是能驯服凶猛的宠物，所以会让有无比的成就感！\n不跟你说这么多了，有需要再来找我吧，我要继续我的研究。
+ItemFullMsg:虽然想交给你但你已经无法再收下。
+StoneLessMsg:喂，你没给钱，东西不能给你！
+DelItem:11839*1,11889*1
+DelStone:150000
+GetItem:20130*1
 EventEnd

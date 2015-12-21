@@ -2,15 +2,15 @@ NPCCREATE
 
 ###### 伊甸封闭商人 ######
 {
-name=商人
+name=伊甸的发明家
 floorid=5036
-borncenter=7,4
+borncenter=10,8
 time=0
 dir=4
 createnum=1
 ignoreinvincible=1
 enemy=changeevent|file:eden3/familyshop/edenshop.arg
-graphicname=16310
+graphicname=16111
 }
 
 ###### 地城封闭商人 ######

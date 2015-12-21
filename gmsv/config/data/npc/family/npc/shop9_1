@@ -14,9 +14,9 @@ level_msg:你目前的等级还不能使用它。
 realy_msg:就那个了吧？！
 itemfull_msg:啊！道具已经满了。
 LimitItemNo:
-ItemList:20172,20130,1627,1628,18548,20128,20580,20132,19013,20577
-CostFame:1000,200,200,200,60000,40000,100,100,1000,0
-ChangeItemCost:60000,100000,20000,20000,500000,500000,5000,10000,200000,100
+ItemList:1627,1628,20577
+CostFame:200,200,0
+ChangeItemCost:20000,20000,100
 special_rate:
 special_item:
 

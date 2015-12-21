@@ -53,14 +53,14 @@ enemy=transman|file:eden3/transfer3.arg
 }
 
 #伊甸园
-{
-floorid=7000
-borncenter=35,127
-time=0
-createnum=1
-graphicname=16131
-name=天才传送师
-dir=6
-ignoreinvincible=1
-enemy=transman|file:eden3/transfer4.arg
-}
+#{
+#floorid=7000
+#borncenter=35,127
+#time=0
+#createnum=1
+#graphicname=16131
+#name=天才传送师
+#dir=6
+#ignoreinvincible=1
+#enemy=transman|file:eden3/transfer4.arg
+#}

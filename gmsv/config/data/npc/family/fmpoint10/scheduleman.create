@@ -13,7 +13,7 @@ name=家族对战服务员
 enemy=npcgen_fmpkman|file:family/fmpoint10/wpm_7532_18_23
 }
 
-#瑞尔亚斯家族对战向导
+#瑞尔亚斯家族对战
 {
 floorid=7530
 borncorner=55,51,55,51
@@ -22,7 +22,7 @@ createnum=1
 dir=4
 ignoreinvincible=1
 graphicname=16981
-name=家族对战向导
+name=家族对战
 enemy=npcgen_fmwarpman|file:family/fmpoint10/wpm_7530_55_51
 }
 

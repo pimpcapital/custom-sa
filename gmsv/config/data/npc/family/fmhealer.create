@@ -116,3 +116,16 @@ graphicname=16023
 name=家族小护士
 enemy=npcgen_fmhealer|1
 }
+
+# 瑞尔亚斯家族小护士
+{
+floorid=7531
+borncorner=13,8,13,8
+time=0
+createnum=1
+dir=6
+ignoreinvincible=1
+graphicname=17038
+name=家族小护士
+enemy=npcgen_fmhealer|1
+}

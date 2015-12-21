@@ -6,7 +6,7 @@ borncenter=105,87,1,1
 movecenter=105,87,105,87
 createnum=1
 dir=4
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane.arg
 }
@@ -17,7 +17,7 @@ borncenter=20,24,1,1
 movecenter=20,24,20,24
 createnum=1
 dir=2
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane1.arg
 }
@@ -28,7 +28,7 @@ borncenter=92,72,1,1
 movecenter=92,72,92,72
 createnum=1
 dir=4
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane2.arg
 }
@@ -39,7 +39,7 @@ borncenter=43,37,1,1
 movecenter=43,37,43,37
 createnum=1
 dir=2
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane3.arg
 }
@@ -51,7 +51,7 @@ borncenter=43,59,1,1
 movecenter=43,59,43,59
 createnum=1
 dir=4
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane5.arg
 }
@@ -63,8 +63,18 @@ borncenter=45,60,1,1
 movecenter=45,60,45,60
 createnum=1
 dir=4
-graphicname=100259
+graphicname=100828
 name=加美航空
 enemy=airplane|file:chatroom/airplane4.arg
 }
 
+#{
+#floorid=2000
+#borncenter=73,116,1,1
+#movecenter=73,116,73,116
+#createnum=1
+#dir=4
+#graphicname=102048
+#name=时空穿梭船
+#enemy=airplane|file:chatroom/airplane6.arg
+#}

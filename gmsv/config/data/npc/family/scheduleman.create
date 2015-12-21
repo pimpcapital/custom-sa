@@ -117,6 +117,19 @@ name=踢馆登记人
 enemy=manorsman|file:family/manorsman.arg9
 }
 
+#瑞尔亚斯
+{
+floorid=7530
+borncenter=45,43,1,1
+movecenter=45,43,45,43
+createnum=1
+time=0
+dir=6
+graphicname=16994
+name=踢馆登记人
+enemy=manorsman|file:family/manorsman.arg10
+}
+
 # 家族竞技场登记员
 {
 floorid=141
@@ -129,6 +142,7 @@ graphicname=16063
 name=场地预约人
 enemy=scheduleman|file:family/scheduleman.arg1
 }
+
 {
 floorid=141
 borncenter=46,34,1,1

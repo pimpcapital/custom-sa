@@ -99,7 +99,7 @@ createnum=1
 dir=6
 ignoreinvincible=1
 graphicname=16065
-name=矿石贩卖者
+name=矿石者
 enemy=changeevent|file:giiru/event/garunaev7
 }
 
@@ -113,7 +113,7 @@ createnum=1
 dir=6
 ignoreinvincible=1
 graphicname=16050
-name=矿石贩卖者
+name=矿石者
 enemy=changeevent|file:giiru/event/garunaev8
 }
 

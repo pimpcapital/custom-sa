@@ -13,10 +13,10 @@ stone_msg:你的金钱限额已满了唷！
 level_msg:你目前的等级还不能使用它。
 realy_msg:就那个了吧？！
 itemfull_msg:啊！道具已经满了。
-ItemList:1727
+ItemList:1727,3058,3059
 LimitItemNo:
-CostFame:6000
-ChangeItemCost:400000
+CostFame:6000,200000,500000
+ChangeItemCost:400000,100000,100000
 special_rate:
 special_item:
 

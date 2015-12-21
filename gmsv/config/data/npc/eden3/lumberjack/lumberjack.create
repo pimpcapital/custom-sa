@@ -101,7 +101,7 @@ enemy=npcgen_warp|file:eden3/lumberjack/warppoint4.arg
 ###### 风精灵弗斯温蒂 ######
 {
 name=弗斯温蒂
-floorid=7449
+floorid=7450
 borncenter=62,27
 dir=4
 ignoreinvincible=1

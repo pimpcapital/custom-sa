@@ -3290,7 +3290,7 @@ enemy=npcgen_warp|703|334|183
 }
 #line 501
 {
-floorid=7449
+floorid=7450
 borncorner=23,58,23,58
 time=0
 ignoreinvincible=1
@@ -3299,7 +3299,7 @@ enemy=npcgen_warp|703|147|146
 }
 #line 502
 {
-floorid=7449
+floorid=7450
 borncorner=23,59,23,59
 time=0
 ignoreinvincible=1
@@ -3533,7 +3533,7 @@ enemy=npcgen_warp|7217|16|13
 }
 #line 549
 {
-floorid=7449
+floorid=7451
 borncorner=23,58,23,58
 time=0
 ignoreinvincible=1
@@ -3542,7 +3542,7 @@ enemy=npcgen_warp|703|147|146
 }
 #line 550
 {
-floorid=7449
+floorid=7451
 borncorner=23,59,23,59
 time=0
 ignoreinvincible=1

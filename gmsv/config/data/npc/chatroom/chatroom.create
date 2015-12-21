@@ -151,7 +151,7 @@ name=门票贩卖员
 enemy=changeevent|file:chatroom/ticket2000
 }
 
-#ジャジャチケット卿り
+#マリナスチケット卿り
 
 {
 floorid=3000
@@ -175,7 +175,7 @@ createnum=1
 dir=2
 ignoreinvincible=1
 graphicname=16026
-name=门票贩卖员
+name=卡村卖票员
 enemy=changeevent|file:chatroom/ticket4000
 }
 

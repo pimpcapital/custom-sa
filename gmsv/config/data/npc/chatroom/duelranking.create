@@ -50,12 +50,12 @@ enemy=duelranking|
 #マリナス∈苹眷涟∷
 {
 floorid=2000
-borncenter=63,55,1,1
-movecenter=63,55,1,1
+borncenter=65,63,1,1
+movecenter=65,63,1,1
 createnum=1
 time=200000
 dir=6
-graphicname=10069
+graphicname=10070
 name=强者表
 enemy=duelranking|
 }
@@ -88,13 +88,13 @@ enemy=duelranking|
 #カルタ〖ナ∈飘祷眷涟∷
 {
 floorid=4000
-borncenter=83,59,1,1
-movecenter=102,85,1,1
+borncenter=41,27,1,1
+movecenter=41,27,1,1
 createnum=1
 time=200000
 dir=6
-graphicname=10069
-name=强者表
+graphicname=10070
+name=卡村强者表
 enemy=duelranking|
 }
 
