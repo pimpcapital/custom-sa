@@ -1046,7 +1046,7 @@ ANYTHREAD int CONNECT_getCharaindex( int fd )
 ANYTHREAD void CONNECT_getCdkey( int fd , char *out, int outlen )
 {
   CONNECT_LOCK( fd );
-  strcpysafe( out, outlen, Connect[ fd ].cdkey );
+  strcpysafe( out, outlen, Connect[fd].cdkey );
   CONNECT_UNLOCK( fd );
 }
 
@@ -2293,30 +2293,27 @@ SINGLETHREAD int netloop_faster( void )
 	      continue;
 	    }
     }
-    
-    for ( j = 0; j < 3; j ++ ) {
-      char rbmess[ 65535 * 2 ];
-      memset( rbmess, 0, sizeof( rbmess ) );
 
-      if ( GetOneLine_fix( fdremember, rbmess, sizeof( rbmess ) ) == FALSE ) continue;
+      for(j = 0; j < 3; j++) {
+        char rbmess[65535 * 2];
+        memset(rbmess, 0, sizeof(rbmess));
 
-      if ( !( ( rbmess[ 0 ] == '\r' && rbmess[ 1 ] == '\n' ) || rbmess[ 0 ] == '\n' ) ) {
-        if ( fdremember == acfd ) {
-#ifdef _DEBUG
-					printf("读取SAAC数据:%s\n",rbmess);
-#endif
-          if ( saacproto_ClientDispatchMessage( fdremember, rbmess ) < 0 ) {
-          	print("\nSAAC:DispatchMsg_Error!!!\n");
-          }
-        }else {
-          if ( lssproto_ServerDispatchMessage( fdremember, rbmess ) < 0 ) {
-            print("\nLSSP:DispatchMsg_Error!!! \n");
-            if(++Connect[ fdremember ].errornum > allowerrornum )
-            	break;
+        if(GetOneLine_fix(fdremember, rbmess, sizeof(rbmess)) == FALSE) continue;
+
+        if(!((rbmess[0] == '\r' && rbmess[1] == '\n') || rbmess[0] == '\n')) {
+          if(fdremember == acfd) {
+            if(saacproto_ClientDispatchMessage(fdremember, rbmess) < 0) {
+              print("\nSAAC:DispatchMsg_Error!!!\n");
+            }
+          } else {
+            if(lssproto_ServerDispatchMessage(fdremember, rbmess) < 0) {
+              print("\nLSSP:DispatchMsg_Error!!! \n");
+              if(++Connect[fdremember].errornum > allowerrornum)
+                break;
+            }
           }
         }
       }
-    }
 		if ( Connect[ fdremember ].errornum > allowerrornum ) {
 			print( "用户:%s发生太多错误了，所以强制关闭\n",inet_ntoa(Connect[fdremember].sin.sin_addr ));
 		  CONNECT_endOne_debug( fdremember );

@@ -595,8 +595,7 @@ void LogGM(
   struct  tm tm1;
                                                           
   memcpy(&tm1,localtime((time_t *)&NowTime.tv_sec),sizeof(tm1));
-  printl(LOG_GM,"%s\t%s\t%s\t(%d,%d,%d)\t(%d:%d)",
-         CharName,CharID,Message,floor,x,y,tm1.tm_hour,tm1.tm_min);    
+  printl(LOG_GM,"%s\t%s\t%s\t(%d,%d,%d)\t(%d:%d)", CharName,CharID,Message,floor,x,y,tm1.tm_hour,tm1.tm_min);
 }
 
 // Robin 10/02
@@ -635,11 +634,9 @@ void LogGamble(
   memcpy(&tm1,localtime((time_t *)&NowTime.tv_sec),sizeof(tm1));
 
   if( flg == 1 )	{
-	printl(LOG_GAMBLE,"%s\t%s\t TYPE:%s  <<P_STONE:%9d,G_STONE:%9d,GET:%9d >>\t(%d,%d,%d)-(%d:%d) GAMBLENUM=%d",
-         CharName,CharID,Key, player_stone, Gamble_stone, get_stone, floor,x,y,tm1.tm_hour,tm1.tm_min, Gamble_num);
+	  printl(LOG_GAMBLE,"%s\t%s\t TYPE:%s  <<P_STONE:%9d,G_STONE:%9d,GET:%9d >>\t(%d,%d,%d)-(%d:%d) GAMBLENUM=%d", CharName,CharID,Key, player_stone, Gamble_stone, get_stone, floor,x,y,tm1.tm_hour,tm1.tm_min, Gamble_num);
   }else	if( flg == 2 )	{
-	printl(LOG_GAMBLE,"%s\tROULETTE MASTER\t TYPE:%s  <<MASTER_STONE:%24d >>\t(%d,%d,%d)-(%d:%d)",
-         CharName,Key, player_stone, floor,x,y,tm1.tm_hour,tm1.tm_min);
+	  printl(LOG_GAMBLE,"%s\tROULETTE MASTER\t TYPE:%s  <<MASTER_STONE:%24d >>\t(%d,%d,%d)-(%d:%d)", CharName,Key, player_stone, floor,x,y,tm1.tm_hour,tm1.tm_min);
   }
 }
 
@@ -654,7 +651,7 @@ void LogLogin(
 {
 	struct  tm tm1;
                                                           
-	memcpy(&tm1,localtime((time_t *)&NowTime.tv_sec),sizeof(tm1));
+	memcpy(&tm1,localtime(&NowTime.tv_sec), sizeof(tm1));
 
 	printl(LOG_LOGIN,"%s\t%s\ti=%d\t%s\t(%d:%d)",
 			CharID,CharName,saveIndex,ipadress,tm1.tm_hour,tm1.tm_min);

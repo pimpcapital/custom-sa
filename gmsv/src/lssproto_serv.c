@@ -55,32 +55,20 @@ void lssproto_CleanupServer( void )
     free( lssproto.ret_work );
 }
 
-#define DME() print("<DME(%d)%d:%d>",fd,__LINE__,func)
-
-int lssproto_ServerDispatchMessage(int fd, char *encoded)
-{
-	int func,fieldcount;
+int lssproto_ServerDispatchMessage(int fd, char *encoded) {
+	int func, fieldcount;
 	char raw[1024 * 64];
-
-	CONNECT_getCdkey( fd, PersonalKey, 4096);
-	strcat(PersonalKey, _RUNNING_KEY);
-
-	util_DecodeMessage(raw,encoded);
-#ifdef _DEBUG_RET	
-	print("\nraw=%s\n",raw);
-#endif
-	if( !util_SplitMessage(raw,SEPARATOR) ){
+	util_DecodeMessage(raw, encoded);
+	if(!util_SplitMessage(raw, SEPARATOR) ){
 		print("\nDME1:package=%s\n",raw);
-		DME(); return -1;
+		return -1;
 	}
 
 	if (!util_GetFunctionFromSlice(&func, &fieldcount)) {
 		logHack(fd,HACK_GETFUNCFAIL);
-		DME(); return -1;
+		return -1;
 	}
-#ifdef _DEBUG_RET	
-	printf("\n客户端接口=%d\n",func);
-#endif
+	
 	if (func==LSSPROTO_W_RECV) {
 		int checksum=0, checksumrecv;
 		int x;
@@ -94,11 +82,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_W_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
-#endif
 		lssproto_W_recv(fd, x, y, direction);
 		util_DiscardMessage();
 		return 0;
@@ -117,11 +102,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_W2_RECV-x:%d,y:%d,direction:%s\n", x, y, direction);
-#endif
 		lssproto_W2_recv(fd, x, y, direction);
 		util_DiscardMessage();
 		return 0;
@@ -144,11 +126,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_EV_RECV-event:%d,seqno:%d,x:%d,y:%d,dir:%d\n", event, seqno, x, y, dir);
-#endif
 		lssproto_EV_recv(fd, event, seqno, x, y, dir);
 		util_DiscardMessage();
 		return 0;
@@ -165,11 +144,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DU_RECV-x:%d,y:%d\n", x, y);
-#endif
 		lssproto_DU_recv(fd, x, y);
 		util_DiscardMessage();
 		return 0;
@@ -184,11 +160,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_EO_RECV-dummy:%d\n", dummy);
-#endif
 		lssproto_EO_recv(fd, dummy);
 		util_DiscardMessage();
 		return 0;
@@ -203,11 +176,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_BU_RECV-dummy:%d\n", dummy);
-#endif
 		lssproto_BU_recv(fd, dummy);
 		util_DiscardMessage();
 		return 0;
@@ -224,11 +194,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_JB_RECV-x:%d,y:%d\n", x, y);
-#endif
 		lssproto_JB_recv(fd, x, y);
 		util_DiscardMessage();
 		return 0;
@@ -245,11 +212,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_LB_RECV-x:%d,y:%d\n", x, y);
-#endif
 		lssproto_LB_recv(fd, x, y);
 		util_DiscardMessage();
 		return 0;
@@ -264,11 +228,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
-		}		
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_B_RECV-command:%d\n", command);
-#endif
+			return -1;
+		}
 		lssproto_B_recv(fd, command);
 		util_DiscardMessage();
 		return 0;
@@ -285,11 +246,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_SKD_RECV-dir:%d,index:%d\n", dir, index);
-#endif
 		lssproto_SKD_recv(fd, dir, index);
 		util_DiscardMessage();
 		return 0;
@@ -310,11 +268,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_ID_RECV-x:%d,y:%d,haveitemindex:%d,toindex:%d\n", x, y, haveitemindex, toindex);
-#endif
 		lssproto_ID_recv(fd, x, y, haveitemindex, toindex);
 		util_DiscardMessage();
 		return 0;
@@ -333,11 +288,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PI_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
-#endif
 		lssproto_PI_recv(fd, x, y, dir);
 		util_DiscardMessage();
 		return 0;
@@ -356,11 +308,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DI_RECV-x:%d,y:%d,itemindex:%d\n", x, y, itemindex);
-#endif
 		lssproto_DI_recv(fd, x, y, itemindex);
 		util_DiscardMessage();
 		return 0;
@@ -379,11 +328,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DG_RECV-x:%d,y:%d,amount:%d\n", x, y, amount);
-#endif
 		lssproto_DG_recv(fd, x, y, amount);
 		util_DiscardMessage();
 		return 0;
@@ -402,11 +348,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DP_RECV-x:%d,y:%d,petindex:%d\n", x, y, petindex);
-#endif
 		lssproto_DP_recv(fd, x, y, petindex);
 		util_DiscardMessage();
 		return 0;
@@ -423,11 +366,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_MI_RECV-fromindex:%d,toindex:%d\n", fromindex, toindex);
-#endif
 		lssproto_MI_recv(fd, fromindex, toindex);
 		util_DiscardMessage();
 		return 0;
@@ -446,11 +386,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_MSG_RECV-index:%d,message:%s,color:%d\n", index, message, color);
-#endif
+
 		lssproto_MSG_recv(fd, index, message, color);
 		util_DiscardMessage();
 		return 0;
@@ -473,11 +411,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PMSG_RECV-index:%d,petindex:%d,itemindex:%d,message:%s,color:%d\n", index, petindex, itemindex, message, color);
-#endif
+
 		lssproto_PMSG_recv(fd, index, petindex, itemindex, message, color);
 		util_DiscardMessage();
 		return 0;
@@ -489,11 +425,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_AB_RECV\n");
-#endif
+
 		lssproto_AB_recv(fd);
 		util_DiscardMessage();
 		return 0;
@@ -508,11 +442,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DAB_RECV-index:%d\n", index);
-#endif
+
 		lssproto_DAB_recv(fd, index);
 		util_DiscardMessage();
 		return 0;
@@ -529,11 +461,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_AAB_RECV-x:%d,y:%d\n", x, y);
-#endif
+
 		lssproto_AAB_recv(fd, x, y);
 		util_DiscardMessage();
 		return 0;
@@ -548,11 +478,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_L_RECV-dir:%d\n", dir);
-#endif
+
 		lssproto_L_recv(fd, dir);
 		util_DiscardMessage();
 		return 0;
@@ -575,11 +503,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_TK_RECV-x:%d,y:%d,message:%s,color:%d,area:%d\n", x, y, message, color, area);
-#endif
+
 		lssproto_TK_recv(fd, x, y, message, color, area);
 		util_DiscardMessage();
 		return 0;
@@ -602,11 +528,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_M_RECV-fl:%d,x1:%d,y1:%d,x2:%d,y2:%d\n", fl, x1, y1, x2, y2);
-#endif
+
 		lssproto_M_recv(fd, fl, x1, y1, x2, y2);
 		util_DiscardMessage();
 		return 0;
@@ -621,11 +545,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_C_RECV-index:%d\n", index);
-#endif
+
 		lssproto_C_recv(fd, index);
 		util_DiscardMessage();
 		return 0;
@@ -640,11 +562,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_S_RECV-category:%s\n", category);
-#endif
+
 		lssproto_S_recv(fd, category);
 		util_DiscardMessage();
 		return 0;
@@ -659,11 +579,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_FS_RECV-flg:%d\n", flg);
-#endif
+
 		lssproto_FS_recv(fd, flg);
 		util_DiscardMessage();
 		return 0;
@@ -678,11 +596,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_HL_RECV-flg:%d\n", flg);
-#endif
+
 		lssproto_HL_recv(fd, flg);
 		util_DiscardMessage();
 		return 0;
@@ -701,11 +617,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PR_RECV-x:%d,y:%d,request:%d\n", x, y, request);
-#endif
+
 		lssproto_PR_recv(fd, x, y, request);
 		util_DiscardMessage();
 		return 0;
@@ -719,11 +633,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_KS_RECV-petarray:%d\n", petarray);
-#endif
+
 		lssproto_KS_recv(fd, petarray);
 		util_DiscardMessage();
 		return 0;
@@ -738,11 +650,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_SPET_RECV-standbypet:%d\n", standbypet);
-#endif
+
 		lssproto_SPET_recv(fd, standbypet);
 		util_DiscardMessage();
 		return 0;
@@ -762,11 +672,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_AC_RECV-x:%d,y:%d,actionno:%d\n", x, y, actionno);
-#endif
+
 		lssproto_AC_recv(fd, x, y, actionno);
 		util_DiscardMessage();
 		return 0;
@@ -787,11 +695,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_MU_RECV-x:%d,y:%d,array:%d,toindex:%d\n", x, y, array, toindex);
-#endif
+
 		lssproto_MU_recv(fd, x, y, array, toindex);
 		util_DiscardMessage();
 		return 0;
@@ -813,11 +719,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
 
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PS_RECV-havepetindex:%d,havepetskill:%d,toindex:%d,data:%s\n", havepetindex, havepetskill, toindex, data);
-#endif
+
 		lssproto_PS_recv(fd, havepetindex, havepetskill, toindex, data);
 		
 		util_DiscardMessage();
@@ -833,11 +737,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_ST_RECV-titleindex:%d\n", titleindex);
-#endif
+
 		lssproto_ST_recv(fd, titleindex);
 		util_DiscardMessage();
 		return 0;
@@ -852,11 +754,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_DT_RECV-titleindex:%d\n", titleindex);
-#endif
+
 		lssproto_DT_recv(fd, titleindex);
 		util_DiscardMessage();
 		return 0;
@@ -871,11 +771,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_FT_RECV-data:%s\n", data);
-#endif
+
 		lssproto_FT_recv(fd, data);
 		util_DiscardMessage();
 		return 0;
@@ -890,11 +788,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_SKUP_RECV-skillid:%d\n", skillid);
-#endif
+
 		lssproto_SKUP_recv(fd, skillid);
 		util_DiscardMessage();
 		return 0;
@@ -911,11 +807,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_KN_RECV-havepetindex:%d,data:%s\n", havepetindex, data);
-#endif
+
 		lssproto_KN_recv(fd, havepetindex, data);
 		util_DiscardMessage();
 		return 0;
@@ -941,11 +835,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_WN_RECV-x:%d,y:%d,seqno:%d,objindex:%d,select:%d,data:%s\n", x, y, seqno, objindex, select, data);
-#endif
+
 		lssproto_WN_recv(fd, x, y, seqno, objindex, select, data);
 		util_DiscardMessage();
 		return 0;
@@ -964,11 +856,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_SP_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
-#endif
+		// printf("[接收]LSSPROTO_SP_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
 		lssproto_SP_recv(fd, x, y, dir);
 		util_DiscardMessage();
 		return 0;
@@ -989,11 +879,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 			util_DiscardMessage();
 			
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CLIENTLOGIN_RECV-cdkey:%s,passwd:%s\n", cdkey, passwd);
-#endif
+		// printf("[接收]LSSPROTO_CLIENTLOGIN_RECV-cdkey:%s,passwd:%s\n", cdkey, passwd);
 		lssproto_ClientLogin_recv(fd, cdkey, passwd);
 		util_DiscardMessage();
 		return 0;
@@ -1032,13 +920,11 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CREATENEWCHAR_RECV-dataplacenum:%d,charname:%s,imgno:%d,faceimgno:%d,vital:%d,str:%d,"
-						"tgh:%d,dex:%d,earth:%d,water:%d,fire:%d,wind:%d,hometown:%d\n",
-						dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
-#endif
+		//printf("[接收]LSSPROTO_CREATENEWCHAR_RECV-dataplacenum:%d,charname:%s,imgno:%d,faceimgno:%d,vital:%d,str:%d,"
+		//				"tgh:%d,dex:%d,earth:%d,water:%d,fire:%d,wind:%d,hometown:%d\n",
+		//				dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
 		lssproto_CreateNewChar_recv(fd, dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
 		util_DiscardMessage();
 		return 0;
@@ -1053,11 +939,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CHARDELETE_RECV-charname:%s\n", charname);
-#endif
+		// printf("[接收]LSSPROTO_CHARDELETE_RECV-charname:%s\n", charname);
 		lssproto_CharDelete_recv(fd, charname);
 		util_DiscardMessage();
 		return 0;
@@ -1072,11 +956,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CHARLOGIN_RECV-charname:%s\n", charname);
-#endif
+		// printf("[接收]LSSPROTO_CHARLOGIN_RECV-charname:%s\n", charname);
 		lssproto_CharLogin_recv(fd, charname);
 		util_DiscardMessage();
 		return 0;
@@ -1088,11 +970,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CHARLIST_RECV\n");
-#endif
+		// printf("[接收]LSSPROTO_CHARLIST_RECV\n");
 		lssproto_CharList_recv( fd);
 
 		util_DiscardMessage();
@@ -1106,11 +986,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CHARLOGOUT_RECV-Flg:%d\n", Flg);
-#endif
+		// printf("[接收]LSSPROTO_CHARLOGOUT_RECV-Flg:%d\n", Flg);
 		lssproto_CharLogout_recv(fd, Flg);
 		util_DiscardMessage();
 		return 0;
@@ -1125,11 +1003,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PROCGET_RECV\n");
-#endif
+		// printf("[接收]LSSPROTO_PROCGET_RECV\n");
 		lssproto_ProcGet_recv(fd);
 		util_DiscardMessage();
 		return 0;
@@ -1141,11 +1017,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PLAYERNUMGET_RECV\n");
-#endif
+		// printf("[接收]LSSPROTO_PLAYERNUMGET_RECV\n");
 		lssproto_PlayerNumGet_recv(fd);
 		util_DiscardMessage();
 		return 0;
@@ -1160,11 +1034,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_ECHO_RECV-fd:%d,test:%s\n", fd, test);
-#endif
+		// printf("[接收]LSSPROTO_ECHO_RECV-fd:%d,test:%s\n", fd, test);
 		lssproto_Echo_recv(fd, test);
 		util_DiscardMessage();
 		return 0;
@@ -1181,11 +1053,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_SHUTDOWN_RECV-passwd:%s,min:%d\n", passwd,min);
-#endif
+		// printf("[接收]LSSPROTO_SHUTDOWN_RECV-passwd:%s,min:%d\n", passwd,min);
 		lssproto_Shutdown_recv(fd, passwd, min);
 		util_DiscardMessage();
 		return 0;
@@ -1200,17 +1070,15 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_TD_RECV-message:%s\n", message);
-#endif
+		// printf("[接收]LSSPROTO_TD_RECV-message:%s\n", message);
 		lssproto_TD_recv(fd, message);
 		util_DiscardMessage();
 		return 0;
 	}
 
-	if (func==LSSPROTO_FM_RECV) {
+	if (func == LSSPROTO_FM_RECV) {
 		int checksum=0, checksumrecv;
 		char message[1024 * 64];
 
@@ -1219,17 +1087,15 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_FM_RECV-message:%s\n", message);
-#endif
+		// printf("[接收]LSSPROTO_FM_RECV-message:%s\n", message);
 		lssproto_FM_recv(fd, message);
 		util_DiscardMessage();
 		return 0;
 	}
     
-	if (func==LSSPROTO_PETST_RECV) {
+	if (func == LSSPROTO_PETST_RECV) {
 		int checksum=0, checksumrecv;
 		int nPet;
 		int sPet;		
@@ -1240,11 +1106,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if (checksum!=checksumrecv) {
 			util_DiscardMessage();
 			logHack(fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}	
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_PETST_RECV-nPet:%d,sPet:%d\n", nPet, sPet);
-#endif
+
 		lssproto_PETST_recv(fd, nPet, sPet);		
 		util_DiscardMessage();
 		return 0;
@@ -1254,9 +1118,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 	if (func==LSSPROTO_CS_RECV) {
 	    char buffer[2];
 	    buffer[0] = '\0';
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_CS_RECV\n");
-#endif
+
 		lssproto_CS_recv( fd );
 		util_DiscardMessage();
 		return 0;
@@ -1264,7 +1126,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 #endif
 
 #ifdef _MIND_ICON
-	if(func==LSSPROTO_MA_RECV){
+	if(func == LSSPROTO_MA_RECV){
 		int checksum = 0, checksumrecv;
 		int nMind;
 		int x, y;
@@ -1276,11 +1138,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 		if(checksum!=checksumrecv){
 			util_DiscardMessage();
 			logHack( fd, HACK_CHECKSUMERROR);
-			DME(); return -1;
+			return -1;
 		}		
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_MA_RECV-x:%d,y:%d,nMind:%d\n", x, y, nMind);
-#endif
+
 		lssproto_MA_recv(fd, x, y, nMind);
 		util_DiscardMessage();
 		return 0;
@@ -1297,11 +1157,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 				if(checksum!=checksumrecv){
 					util_DiscardMessage();
 					logHack( fd, HACK_CHECKSUMERROR);
-					DME(); return -1;
+					return -1;
 				}		
-#ifdef _DEBUG_RET_CLI
-		printf("[接收]LSSPROTO_BATTLESKILL_RECV-iNum:%d\n", iNum);
-#endif
+
 				lssproto_BATTLESKILL_recv(fd, iNum);
 				util_DiscardMessage();
 				return 0;
@@ -1312,7 +1170,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded)
 
 	util_DiscardMessage();
 	logHack(fd,HACK_NOTDISPATCHED);
-	DME(); return -1;
+	return -1;
 }
 
 /*

@@ -429,10 +429,13 @@ Game Server 游戏环境:
 #define _NEED_ITEM_ENEMY         // 抓宠所需物品自定义
 #define _GET_MULTI_ITEM          // 一次给多件物品
 #endif
-//私服版本控制----------------------------------------
+
+//版本控制----------------------------------------
 #define _DEFAULT_PKEY "cary"   // ( 石器 2.5 )
 #define _RUNNING_KEY  "cary"   // ( 石器 2.5 )
 #define _SA_VERSION 'L'
+
+
 //特殊功能控制----------------------------------------
 
 //#define _DEBUG                   // 调试
@@ -443,3 +446,4 @@ Game Server 游戏环境:
 //#define _GMSV_DEBUG              // GMSV调试信息
 #endif
 
+#define _DEBUG_RET_CLI
