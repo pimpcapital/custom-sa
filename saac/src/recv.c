@@ -33,16 +33,10 @@ void saacproto_ACCharLoad_recv( int ti,char* id,char* pas,char* charname ,
     static int process = 0;
     char buf[16];
     // Spock end
-#ifdef _NewSave
     int charindex = -1;
-#endif
- 
+
     if( !is_game_server_login( ti ) ){
-#ifdef _NewSave
         saacproto_ACCharLoad_send( ti , FAILED , "not login" , mesgid, charindex );
-#else
-        saacproto_ACCharLoad_send( ti , FAILED , "not login" , mesgid );
-#endif
         return;
     }
     process++;
@@ -65,15 +59,9 @@ void saacproto_ACCharLoad_recv( int ti,char* id,char* pas,char* charname ,
    char *charinfo : 白央奶伙卞忡绣允月平乓仿弁正及旦  □正旦树  ［
    int id : 丢永本□斥id
 */
-#ifdef _NewSave
 void saacproto_ACCharSave_recv( int ti, char* id,
                                 char *charname,char* opt ,
                                 char* charinfo , int unlock , int mesgid , int charindex )
-#else
-void saacproto_ACCharSave_recv( int ti, char* id,
-                                char *charname,char* opt ,
-                                char* charinfo , int unlock , int mesgid )
-#endif
 {
     char process[16];
     int ret;
@@ -81,18 +69,8 @@ void saacproto_ACCharSave_recv( int ti, char* id,
         saacproto_ACCharSave_send( ti , FAILED , "not login" , mesgid );
         return;
     }
-#ifdef _NewSave
-    ret = charSave( ti, id, charname, opt, charinfo,
-                      unlock,mesgid, charindex );
-#else
-    ret = charSave( ti, id, charname, opt, charinfo,
-                      unlock,mesgid );
-#endif
+    ret = charSave( ti, id, charname, opt, charinfo, unlock,mesgid, charindex );
     snprintf( process , sizeof(process) , "%d" , ret );
-//	log( "unlock:%d, process:%s\n", unlock, process);
-    if( unlock) {
-			dummyCallback(ti,0,id,"dummy",charname,process,"",mesgid,0);
-    }
     log("玩家已保存保存\n");
 }
 
@@ -1112,7 +1090,6 @@ void saacproto_ACKick_recv( int ti ,char* id, int lock,int mesgid )
 			}
 
 			snprintf( process , sizeof(process) , "%d" , ret );
-			dummyCallback(ti,0,id,"dummy",charname,process,"",mesgid,0);
 		}
 		break;
 		case 10:	//跨星球踢人不含load该星球
@@ -1292,7 +1269,7 @@ void Send_S_herolist( char *ocdkey , char *oname , char *ncdkey , char *nname ,
 #define delaytime (60*3)
 UNLockMenus UNlockM[MAXUNlockM];
 
-int UNlockM_Init( void)
+int UNlockM_Init()
 {
 	int i;
 	for( i=0; i<MAXUNlockM; i++)	{
@@ -1310,43 +1287,8 @@ void reset_UNlockMPlayer( int ti)
 	UNlockM[ti].time = 0;
 }
 
-int UNlockM_isBe( char *id)
-{
-	int i;
-	for( i=0; i<MAXUNlockM; i++)	{
-		if( UNlockM[i].use == 0 )continue;
-		if( !strcmp( UNlockM[i].PlayerId, id ) ) return 1;
-	}
-	return 0;
-}
-
 //andy add 2002/06/20
-int UNlockM_addPlayer( char *id)
-{
-	int i, post=-1;
-	
-	for( i=0; i<MAXUNlockM; i++)	{
-		if( UNlockM[i].use == 0 ){
-			post = i;
-			continue;
-		}
-		if( !strcmp( UNlockM[i].PlayerId, id ) ){
-			reset_UNlockMPlayer( i);
-			return -1;
-		}
-	}
-	if( post == -1 )return -1;
-
-	memset( UNlockM[post].PlayerId, 0, sizeof( UNlockM[post].PlayerId));
-	sprintf( UNlockM[post].PlayerId, "%s", id);
-	UNlockM[post].use = 1;
-	UNlockM[post].time = time(NULL)+delaytime;
-
-	return post;
-}
-
-//andy add 2002/06/20
-int UNlockM_UnlockPlayer( void)
+int UNlockM_UnlockPlayer()
 {
 	int i, nums=0;
 	static int UnlockClock = 0;

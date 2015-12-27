@@ -16,7 +16,6 @@
 #include <string.h>
 #include "version.h"
 
-#define EXT
 #define SA_NODEFER	0x40000000
 #define SA_NOMASK	SA_NODEFER
 
@@ -46,25 +45,25 @@ char *chartime();
 #define USERID_MAX 32
 #define CHARNAME_MAX 32
 
-EXT char svpass[64];
-EXT char chardir[64];
-EXT char logdir[64];
-EXT char dbdir[64];
-EXT char maildir[64];
+char svpass[64];
+char chardir[64];
+char logdir[64];
+char dbdir[64];
+char maildir[64];
 
 // CoolFish: Family 2001/5/9
-EXT char familydir[64];
-EXT char fmpointdir[64];
-EXT char fmsmemodir[64];
+char familydir[64];
+char fmpointdir[64];
+char fmsmemodir[64];
 
-EXT int sameipmun;
+int sameipmun;
 
-EXT int log_rotate_interval;
-EXT int total_ok_charlist, total_ng_charlist;
+int log_rotate_interval;
+int total_ok_charlist, total_ng_charlist;
 
 
 #ifdef _SLEEP_CHAR
-EXT char sleepchardir[64];
+char sleepchardir[64];
 #endif
 
 
@@ -84,7 +83,6 @@ char * getGSName( int i );
 void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag );
 int login_game_server(int ti ,char *svname, char *svpas, char *result, int resultlen, char *retdata, int retdatalen);
 
-#undef EXT
 #endif
 
 

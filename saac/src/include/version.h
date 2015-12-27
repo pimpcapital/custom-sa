@@ -1,11 +1,6 @@
 #ifndef __VERSION_H__
 #define __VERSION_H__
 
-/* -------------------------------------------------------------------
- * 专案：族人职务与家族功能补充
- * 人员：小瑜、彦勋、志伟、小民
- * 说明：
- */
 #define _LEADERFLAG_VER		// 嗯、ㄟ、这个.... (可开放)
 #define _FAMILY			//  (可开放)
 #define _PERSONAL_FAME		// Arminius 8.30 家族个人声望  (可开放)

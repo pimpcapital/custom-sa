@@ -35,13 +35,8 @@ void saacproto_ACCharList_recv( int ti,char* id,char* pas , int mesgid);
 void saacproto_ACCharList_send( int fd,char* result,char* output,int id ) ; /* ../../doc/saacproto.html line 124 */
 void saacproto_ACCharLoad_recv( int fd,char* id,char* pas,char* charname,int lock,char* opt,int mesgid ) ; /* ../../doc/saacproto.html line 148 */
 // CoolFish: 2001/10/16
-#ifdef _NewSave
 void saacproto_ACCharLoad_send( int fd,char* result,char* data,int id,int charindex ) ; /* ../../doc/saacproto.html line 175 */
 void saacproto_ACCharSave_recv( int fd,char* id,char* charname,char* opt,char* charinfo,int unlock,int mesgid,int charindex ) ; /* ../../doc/saacproto.html line 191 */
-#else
-void saacproto_ACCharLoad_send( int fd,char* result,char* data,int id ) ; /* ../../doc/saacproto.html line 175 */
-void saacproto_ACCharSave_recv( int fd,char* id,char* charname,char* opt,char* charinfo,int unlock,int mesgid ) ; /* ../../doc/saacproto.html line 191 */
-#endif
 void saacproto_ACCharSave_send( int fd,char* result,char* data,int id ) ; /* ../../doc/saacproto.html line 214 */
 
 void saacproto_ACCharDelete_recv( int fd,char* id,char* passwd,char* charname,char* option,int mesgid ) ; /* ../../doc/saacproto.html line 231 */

@@ -1,3 +1,4 @@
+#include <recv.h>
 #include "version.h"
 #include "saacproto_serv.h"
 #include "main.h"
@@ -61,9 +62,7 @@ int saacproto_ServerDispatchMessage( int fd , char *encoded, char *debugfun)
 		char* charinfo;
 		int unlock;
 		int mesgid;
-#ifdef _NewSave
 		int charindex;
-#endif		
 		id = saacproto_wrapStringAddr( saacproto_stringwrapper[1] , saacproto.workbufsize , saacproto_demkstr_string( saacproto.token_list[2] ));
 		charname = saacproto_wrapStringAddr( saacproto_stringwrapper[2] , saacproto.workbufsize , saacproto_demkstr_string( saacproto.token_list[3] ));
 		opt = saacproto_wrapStringAddr( saacproto_stringwrapper[3] , saacproto.workbufsize , saacproto_demkstr_string( saacproto.token_list[4] ));
@@ -71,12 +70,9 @@ int saacproto_ServerDispatchMessage( int fd , char *encoded, char *debugfun)
 		unlock = saacproto_demkstr_int( saacproto.token_list[6] );
 		mesgid = saacproto_demkstr_int( saacproto.token_list[7] );
 
-#ifdef _NewSave
 		charindex = saacproto_demkstr_int( saacproto.token_list[8] );
 		saacproto_ACCharSave_recv( fd,id,charname,opt,charinfo,unlock,mesgid,charindex);
-#else
-		saacproto_ACCharSave_recv( fd,id,charname,opt,charinfo,unlock,mesgid);
-#endif
+
 		return 0;
 	}
 
@@ -764,11 +760,7 @@ void saacproto_ACCharList_send( int fd,char* result,char* output,int id )
 	saacproto_Send( fd , saacproto.work );
 }
 static int CharDataLens = 0;
-#ifdef _NewSave
 void saacproto_ACCharLoad_send( int fd,char* result,char* data,int id,int charindex )
-#else
-void saacproto_ACCharLoad_send( int fd,char* result,char* data,int id )
-#endif
 {
 	if( strstr( result, "successful") != NULL && strlen( data) > CharDataLens ){
 		CharDataLens = strlen( data);
@@ -780,9 +772,7 @@ void saacproto_ACCharLoad_send( int fd,char* result,char* data,int id )
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( result ) ,saacproto.workbufsize );
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_string( data ) ,saacproto.workbufsize );
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_int( id ) ,saacproto.workbufsize );
-#ifdef _NewSave
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_int( charindex ) ,saacproto.workbufsize );
-#endif
 	saacproto_Send( fd , saacproto.work );
 }
 
