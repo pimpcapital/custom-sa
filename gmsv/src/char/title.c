@@ -177,29 +177,6 @@ char* TITLE_makeTitleStatusString( int charaindex,int havetitleindex )
 	return TITLE_statusStringBuffer;
 }
 
-/*------------------------------------------------------------
- * 卅中惫寞及  侬  犯□正毛忒允
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  char*
- ------------------------------------------------------------*/
-char* TITLE_makeSkillFalseString( void )
-{
-	TITLE_statusStringBuffer[0]= '\0';
-	return TITLE_statusStringBuffer;
-}
-
-
-/*------------------------------------------------------------
- * 隙烂今木凶  寞及惫寞毛馨笛允月［褐今卅匀化中凶日｝馨笛仄卅中
- * 娄醒
- *  charaindex      int     平乓仿奶件犯永弁旦
- *  titleindex      int     惫寞奶件犯永弁旦
- * 忒曰袄
- *  馨笛仄凶index       
- *  馨笛仄卅井匀凶      FALSE(0)
- ------------------------------------------------------------*/
 int TITLE_addtitle( int charaindex, int titleindex )
 {
 	int i;
@@ -273,7 +250,6 @@ int TITLE_initTitleName( char* filename )
 
 	f = fopen(filename,"r");
 	if( f == NULL ){
-		errorprint;
 		return FALSE;
 	}
 
@@ -522,7 +498,6 @@ int TITLE_initTitleConfig( char* filename )
 
 	f = fopen(filename,"r");
 	if( f == NULL ){
-		errorprint;
 		return FALSE;
 	}
 
@@ -787,48 +762,7 @@ static int TITLE_TitleCheck_Main( int charaindex, int mode, int *addcnt, int *de
 	return ret;
 	
 }
-/*------------------------------------------------------------
- * 惫寞涩烂卞宁丹井譬屯化惫寞毛芨尹月［
- * 娄醒
- *  charaindex        int   平乓仿奶件犯永弁旦
- *  mode              int  TRUE:item=及手及及心譬屯月 FALSE:蝈  
- * 忒曰袄
- *  TRUE: 惫寞卞  祭  曰［
- *  FALSE:窒手  井匀凶［
- *------------------------------------------------------------*/
-int TITLE_TitleCheck( int charaindex, int mode)
-{
-#define     TITLE_MSGUNIT1      "TSU"
-#define     TITLE_MSGUNIT2      "KO"
-	int     addcnt,delcnt;
-	int    rc;
-	char    msgbuf[64];
-	rc = TITLE_TitleCheck_Main( charaindex, mode, &addcnt,&delcnt);
-	if( rc ) {
-		if( delcnt > 0 ) {
-			snprintf( msgbuf, sizeof( msgbuf), 
-						"失去%d%s 称号！", delcnt,
-						delcnt < 10 ?  TITLE_MSGUNIT1:TITLE_MSGUNIT2);
-			CHAR_talkToCli( charaindex, -1, msgbuf,  CHAR_COLORYELLOW);
-		}
-		if( addcnt > 0 ) {
-			snprintf( msgbuf, sizeof( msgbuf), 
-						"获得%d%s 称号！", addcnt,
-						addcnt < 10 ?  TITLE_MSGUNIT1:TITLE_MSGUNIT2);
-			CHAR_talkToCli( charaindex, -1, msgbuf,  CHAR_COLORYELLOW);
-		}
-	}
-	return rc;
-}
-/*------------------------------------------------------------
- * 惫寞涩烂卞宁丹井譬屯化惫寞毛芨尹月［
- * 娄醒
- *  charaindex        int   平乓仿奶件犯永弁旦
- *  mode              int  TRUE:item=及手及及心譬屯月 FALSE:蝈  
- * 忒曰袄
- *  TRUE: 惫寞卞  祭  曰［
- *  FALSE:窒手  井匀凶［
- *------------------------------------------------------------*/
+
 int TITLE_TitleCheck_Nomsg( int charaindex, int mode, int *addcnt, int *delcnt)
 {
 	return( TITLE_TitleCheck_Main( charaindex, mode, addcnt,delcnt));

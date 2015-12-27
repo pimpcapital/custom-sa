@@ -5519,7 +5519,6 @@ int CHAR_initEffectSetting( char* filename )
 
     f = fopen(filename,"r");
     if( f == NULL ){
-        errorprint;
         return FALSE;
     }
 

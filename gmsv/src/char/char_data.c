@@ -372,7 +372,6 @@ int CHAR_initInvinciblePlace( char* filename )
 
     f = fopen(filename,"r");
     if( f == NULL ){
-        errorprint;
         return FALSE;
     }
 
@@ -555,7 +554,6 @@ int CHAR_initAppearPosition( char* filename )
 
     f = fopen(filename,"r");
     if( f == NULL ){
-        errorprint;
         return FALSE;
     }
 

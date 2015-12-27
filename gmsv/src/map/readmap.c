@@ -379,7 +379,6 @@ static int MAP_IsMapFile( char*    filename )
 
     f  = fopen(filename, "r");
     if( f == NULL ){
-        errorprint;
         return FALSE;
     }
 
@@ -425,17 +424,14 @@ static int MAP_readMapOne(char* filename, char* no_exit)
     mapindex=MAP_mapnum_index;
     f  = fopen(filename, "r");
     if( f == NULL ){
-        errorprint;
         return FALSE;
     }
     if( fstat( fileno(f) , &filestat ) != 0 ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
 
     ret = fread( buf , sizeof( char ) , 6 , f);
     if( ret != 6 ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
     buf[ret] = '\0';
@@ -444,26 +440,22 @@ static int MAP_readMapOne(char* filename, char* no_exit)
         goto FCLOSERETURNFALSE;
     ret = fread( data , sizeof( short ) , 1 , f);
     if( ret != 1 ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
     id = ntohs( data[0] );
 
     ret = fread( showstring , sizeof(char), arraysizeof(showstring), f);
     if( ret != arraysizeof(showstring) ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
     showstring[arraysizeof(showstring)-1] = '\0';
     ret = fread( data, sizeof( short ) , 1 , f);
     if( ret != 1 ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
     xsiz = ntohs( data[0] );
     ret = fread( data, sizeof( short ) , 1 , f);
     if( ret != 1 ){
-        errorprint;
         goto FCLOSERETURNFALSE;
     }
     ysiz = ntohs( data[0] );
@@ -487,7 +479,6 @@ static int MAP_readMapOne(char* filename, char* no_exit)
 
     ret = fread( tile , sizeof( short )*xsiz*ysiz,1,f );
     if( ret != 1 ){
-        errorprint;
         goto FREELINK;
     }
 //    for( i  = 0 ; i < xsiz * ysiz ; i ++ )
@@ -502,7 +493,6 @@ static int MAP_readMapOne(char* filename, char* no_exit)
     }
     ret = fread( obj , sizeof( short )*xsiz*ysiz,1,f );
     if( ret != 1 ){
-        errorprint;
         goto FREELINK;
     }
 //    for( i  = 0 ; i < xsiz * ysiz ; i ++ )

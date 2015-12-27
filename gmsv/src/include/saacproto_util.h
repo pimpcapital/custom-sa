@@ -2,12 +2,6 @@
 #define _SAACPROTOUTIL_H_
 #include <stdlib.h>
 #include <string.h>
-#ifndef WIN32
-#include <strings.h>
-#include <unistd.h>
-#endif
-#define saacproto__NOENCRYPT
-#define saacproto__NODEBUG
 struct saacproto_ {
 	int (*write_func)(int,char*,int) ;    /* write function */
 	size_t workbufsize;                   /* size of work area */

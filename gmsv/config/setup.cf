@@ -462,9 +462,6 @@ loghour=24
 # ?(战斗错误消息?)
 battledebugmsg=0
 
-#   //ttom add because the second had
-# 客户端验证码 大陆无效
-encodekey=1
 # 往writebuffer缓冲区写数据大小 单位字节
 acwritesize=1048576
 # 缓冲区大小

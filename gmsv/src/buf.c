@@ -1,5 +1,4 @@
 #define __BUF_C__
-#include "version.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

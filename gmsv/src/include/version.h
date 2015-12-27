@@ -96,19 +96,15 @@ Game Server 游戏环境:
 #define _BATTLE_NEWPOWER         // (可开放)
 #define _Item_MoonAct            // (可开放) 月神的守护
 #define _Item_DeathAct           // (可开放) 恶魔的首饰
-#define _Item_PetAct             // (可开放) 驯兽戒指
 #define _Item_ReLifeAct          // (可开放) 需要itemset1.txt 才能开) 替身娃娃
 #define _BATTLESTEAL_FIX         // (可开放) 修正偷窃
 #define _CFREE_petskill          // (可开放) 需要petskill1.txt 才能开) 新学习宠物技能技能
-#define _data_newreadfile        // (可开放) 新的server setup.cf 档案 包含 itemset1.txt petskill1.txt 两个新档
 #define _ITEM_MAXUSERNUM         // (可开放) 新 itemset1.txt ITEM 使用次数
 // -------------------------------------------------------------------
 //新功能：伊甸二期    人员：彦豪
 #define _PET_TALKPRO             // (可开放) 宠物对话加强  & 改 END
-#define _PRO_NPCFIX              // (可开放) NPC功能加强
 #define _PRO_BATTLEENEMYSKILL    // (可开放) 战斗加强  提升NPC的AI技能
 #define _NEW_WARPPOINT           // (可开放) 传送点多重条件判断WARP
-#define _FIX_CHECKITEM           // (可开放) 道具不做非法检查
 // -------------------------------------------------------------------
 //新功能：伊甸二  人员：小民,WON
 #define _ADD_ENCOUNT             // (可开放) WON 增加敌遭遇触发修件 
@@ -214,14 +210,12 @@ Game Server 游戏环境:
 #define _TEST_DROPITEMS          // (可开放) ANDY 测试丢宠
 #define _MAP_WARPPOINT           // (可开放) ANDY Map WarpPoint
 #define _TREASURE_BOX            // (可开放) ANDY 宝箱
-#define _BENEMY_EVENTRUN         // (可开放) ANDY 战斗npc给道具
 #define _BATTLE_ABDUCTII         // (可开放) ANDY 旅途夥伴2
 #define _BATTLE_LIGHTTAKE        // (可开放) ANDY 采光术
 #define _BATTLE_ATTCRAZED        // (可开放) ANDY 疯狂暴走
 #define _CAPTURE_FREES           // (可开放) ANDY 补抓条件
 #define _THROWITEM_ITEMS         // (可开放) 丢掷後有奖品
 //--------------------------------------------------------------------------
-//专案 7.0  职业系统  人员：彦豪 志旺 旭诚 奇铨
 #define _ACFMPK_LIST             // (可开放) ANDY 家族对战列表修正
 #define _NPC_NOSAVEPOINT         // (可开放) ANDY 纪录点不存人物资料
 #define _PETSKILL2_TXT           // (可开放) ANDY petskill2.txt
@@ -242,7 +236,6 @@ Game Server 游戏环境:
 #define _ALLDOMAN                // (可开放) Syu ADD 排行榜NPC
 #define _LOCKHELP_OK             // (可开放) Syu ADD 锁定不可加入战斗
 
-//系统改良
 #define _SIMPLIFY_ITEMSTRING     // (可开放) ANDY 简化道具字串
 
 #define _SIMPLIFY_PETSTRING      // (可开放) ANDY 简化宠物存档字串
@@ -250,42 +243,32 @@ Game Server 游戏环境:
 #define _WOLF_TAKE_AXE           // (可开放) WON ADD 抓双头狼的限制
 #define _FIX_UNNECESSARY         // (可开放) ANDY 修正不必要的判断
 #define _ITEM_MAGICRECOVERY      // (可开放) ANDY 新光镜守
-//9/17更新
 #define _PETSKILL_GYRATE         // (可开放) Change 宠技:回旋攻击
 #define _PETSKILL_RETRACE        // (可开放) Change 宠技:追迹攻击
 #define _PETSKILL_HECTOR         // (可开放) Change 宠技:威吓
-//10/13更新
 #define _PETSKILL_FIREKILL       // (可开放) Change 宠技:火线猎杀
 #define _PETSKILL_DAMAGETOHP     // (可开放) Change 宠技:暗月狂狼(嗜血技的变体) 
 #define _PETSKILL_BECOMEFOX      // (可开放) Change 宠技:媚惑术
 
-//11/12更新
 #define _PETSKILL_SHOWMERCY      // (可开) Change 宠技:手下留情
 #define _NPC_ActionFreeCmp       // (可开) Change 替NPC参数加入新的比较方式
 //--------------------------------------------------------------------------
 
 
-//11/26
 #define _NPC_NewDelPet           // (可开) Change 替NPC加入删除宠物(原本就有了,只是用warpman使用时不成功,所以先做一个顶一下)
 #define _ALLDOMAN_DEBUG          // (可开) Change 修正重启server後排行榜消失bug
-//20031217
 #define _CHRISTMAS_REDSOCKS_NEW  // (可开) Change 新圣诞红袜
 #define _PETSKILL_COMBINED       // (可开) Change 宠技:难得糊涂 [综合魔法(依参数乱数取出魔法)]
-//情人节活动
 #define _NPC_ADDWARPMAN1         // (可开放) Change npcgen_warpman增加功能(设定组队人数、设定组队男女人数)
 #define _ITEM_QUITPARTY          // (可开放) Change 队伍解散时特定道具即会消失
 #define _ITEM_ADDEQUIPEXP        // (可开) Change 装备後经验值增加
-//2004/2/18
 #define _ITEM_LVUPUP             // (可开) Change 突破宠物等级限制的药(玄武专用)
-//2004/02/25
 #define _PETSKILL_BECOMEPIG      // (可开) Change 宠技:乌力化
 #define _ITEM_UNBECOMEPIG        // (可开) Change 乌力化的解药
 #define _PET_TALKBBI             // (可开) Change 增加判断bbi
 #define _ITEM_USEMAGIC           // (可开) Change 由道具使用魔法
-//2004/04/07
 #define _ITEM_PROPERTY           // (可开) Change 改变四属性道具
 #define _SUIT_ADDENDUM           // (可开) Change 替套装增加功能 (_SUIT_ITEM要开)
-//2004/05/05
 #define _ITEM_CHECKDROPATLOGOUT  // (可开) Change 检查回纪录点时身上有无登出後消失道具,若有,不可回纪录点
 #define _FM_MODIFY               // 家族功能修改(开放)
 #define _STANDBYPET              // Robin 待机宠封包
@@ -350,7 +333,6 @@ Game Server 游戏环境:
 #define _TALK_ACTION             // 说话动作
 #define _ENEMY_ACTION            // 玩家步行遇敌机率
 #define _CHAR_CDKEY              // 防止串号问题
-#define _CHECK_PEPEAT            // 非法宠物检查
 #define _SILENTZERO              // 黄莲物品
 #define _SAVE_GAME_ID            // 显示保存的服务器名
 #define _AUTO_PK                 // 自动化PK系统
@@ -396,7 +378,6 @@ Game Server 游戏环境:
 #define _TALK_ACTION             // 说话动作
 #define _ENEMY_ACTION            // 玩家步行遇敌机率
 #define _CHAR_CDKEY              // 防止串号问题
-#define _CHECK_PEPEAT            // 非法宠物检查
 #define _SILENTZERO              // 黄莲物品
 #define _SAVE_GAME_ID            // 显示保存的服务器名
 #endif
@@ -444,5 +425,3 @@ Game Server 游戏环境:
 //#define _DEBUG_SEND_CLI          // 发送客户端数据调试
 //#define _GMSV_DEBUG              // GMSV调试信息
 #endif
-
-#define _DEBUG_RET_CLI

@@ -212,6 +212,7 @@ char* getitemquitparty( void );
 int getNewplayertrans( void );
 int getNewplayerlv( void );
 int getNewplayergivepet( unsigned int index );
+int getNewplayergiveitem(unsigned int index);
 void setNewplayergivepet( unsigned int index ,unsigned int interval);
 int getNewplayerpetlv( void );
 int getNewplayergivegold( void );
@@ -220,6 +221,7 @@ int getRidePetLevel( void );
 int getNewplayergivevip( void );
 #endif
 #endif
+int getUnlawwarpfloor(unsigned int index);
 
 #ifdef _USER_EXP_CF
 char* getEXPfile( void );
@@ -320,10 +322,6 @@ int getEnemyAction( void );
 
 char *getMacCheck( void );
 int getCpuUse( void );
-
-#ifdef _CHECK_PEPEAT
-int getCheckRepeat( void );
-#endif
 
 #ifdef _FM_JOINLIMIT
 int getJoinFamilyTime( void );
