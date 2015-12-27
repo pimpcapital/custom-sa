@@ -158,9 +158,7 @@ void saacproto_ACUCheck_recv( int ti , char *id , int status )
        saacproto_ACKick_recv( ti, id, 6, -1);
     } else {
         log( "用户 %s 在 %s 已锁定！\n", id , getGSName( ti ) );
-#ifdef _WAEI_KICK
 				saacproto_ACKick_recv( ti, id, 1, -1);
-#endif
     }
 }
 
@@ -471,7 +469,6 @@ void saacproto_ACAddFM_recv( int fd, char *fmname, char *fmleadername,
 	char *fmrule, int fmsprite, int fmleadergrano, int charfdid)
 #endif
 {
-#ifdef _FAMILY
 	int r = 0, index = 0;
 #ifdef _PERSONAL_FAME
 	r = ACAddFM(fd, &index, fmname, fmleadername, fmleaderid, fmleaderlv,
@@ -485,7 +482,6 @@ void saacproto_ACAddFM_recv( int fd, char *fmname, char *fmleadername,
 	}else{
 		saacproto_ACAddFM_send(fd, SUCCESSFUL, r, index, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACJoinFM_recv(int fd, char *fmname, int fmindex,
@@ -495,7 +491,6 @@ void saacproto_ACJoinFM_recv(int fd, char *fmname, int fmindex,
 	char *charname, char *charid, int charlv, int index, int charfdid)
 #endif
 {
-#ifdef _FAMILY
 	int r = 0;
 #ifdef _PERSONAL_FAME	// Arminius: 家族个人声望
 	r =  ACJoinFM(fd, index, fmname, fmindex, charname, charid, charlv, fame, charfdid);
@@ -507,13 +502,11 @@ void saacproto_ACJoinFM_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACJoinFM_send(fd, SUCCESSFUL, r, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACLeaveFM_recv(int fd, char *fmname, int fmindex,
 	char *charname, char *charid, int index, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACLeaveFM(index, fmname, fmindex, charname, charid);
 	if (r < 0){
@@ -521,7 +514,6 @@ void saacproto_ACLeaveFM_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACLeaveFM_send(fd, SUCCESSFUL, r, charfdid);
 	}
-#endif
 }
 
 #ifdef _LEADERFUNCHECK
@@ -557,7 +549,6 @@ void saacproto_ACDelFM_recv(int fd, char *fmname, int fmindex,
 void saacproto_ACDelFM_recv(int fd, char *fmname, int fmindex,
 	int index, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 #ifdef _FMVER21
 	if (ChangeFMLeader(index, fmname, fmindex) >= 0)
@@ -576,13 +567,11 @@ void saacproto_ACDelFM_recv(int fd, char *fmname, int fmindex,
 	else{
 		saacproto_ACDelFM_send(fd, SUCCESSFUL, charfdid);
 	}
-#endif
 }
 #endif
 
 void saacproto_ACShowFMList_recv(int fd)
 {
-#ifdef _FAMILY
 	int r = 0;
 	char data[150 * MAX_FAMILY];
 	r =  ACShowFMList(data);
@@ -591,12 +580,10 @@ void saacproto_ACShowFMList_recv(int fd)
 	}else{
 		saacproto_ACShowFMList_send(fd, SUCCESSFUL, r, data);
 	}
-#endif
 }
 
 void saacproto_ACShowMemberList_recv(int fd, int index)
 {
-#ifdef _FAMILY
 	int r = 0, fmacceptflag = 0, fmjoinnum = 0;
 	char data[150 * MAX_MEMBERNUM];
 	r =  ACShowFMMemberList(index, &fmacceptflag, &fmjoinnum, data);
@@ -607,13 +594,11 @@ void saacproto_ACShowMemberList_recv(int fd, int index)
 		saacproto_ACShowMemberList_send(fd, SUCCESSFUL, index, r,
 			fmacceptflag, fmjoinnum, data);
 	}
-#endif
 }
 
 void saacproto_ACFMDetail_recv(int fd, char *fmname,
 	int fmindex, int index, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	char data[15000];
 	r =  ACFMDetail(index, fmname, fmindex, data);
@@ -622,7 +607,6 @@ void saacproto_ACFMDetail_recv(int fd, char *fmname,
 	}else{
 		saacproto_ACFMDetail_send(fd, SUCCESSFUL, data, charfdid);
 	}
-#endif
 }
 
 #ifdef _FMVER21
@@ -655,7 +639,6 @@ void saacproto_ACMemberLeaveFM_recv(int fd, char *fmname, int fmindex,
 	char *charname, int charindex, int index, int charfdid)
 #endif
 {
-#ifdef _FAMILY
 	int r = 0;
 	int flag = 1; // 主动离开家族
 #ifdef _FMVER21
@@ -669,7 +652,6 @@ void saacproto_ACMemberLeaveFM_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACMemberLeaveFM_send(fd, SUCCESSFUL, charfdid);
 	}
-#endif
 }
 
 #ifdef _FMVER21
@@ -680,7 +662,6 @@ void saacproto_ACFMCharLogin_recv(int fd, char *fmname, int fmindex,
 	char *charname, char *charid, int charlv, int charfdid)
 #endif
 {
-#ifdef _FAMILY
 	int r = 0, floor = 0, fmpopular = 0, joinflag = 0, fmsetupflag = 0;
 	int flag = 0, charindex = 0;
 #ifdef _PERSONAL_FAME   // Arminius: 家族个人声望
@@ -693,7 +674,6 @@ void saacproto_ACFMCharLogin_recv(int fd, char *fmname, int fmindex,
 #else
 	r =  ACFMCharLogin(fd, -1, fmname, fmindex, charname, charid, charlv,
 			&floor, &fmpopular, &joinflag, &fmsetupflag, &charindex, charfdid);
-#endif
 #endif
 
 #ifdef _PERSONAL_FAME   // Arminius: 家族个人声望
@@ -720,7 +700,6 @@ void saacproto_ACFMCharLogin_recv(int fd, char *fmname, int fmindex,
 void saacproto_ACFMCharLogout_recv(int fd, char *fmname, int fmindex,
 	char *charname, char *charid, int charlv, int index,int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACFMCharLogout(index, fmname, fmindex, charname, charid, charlv,
 		charfdid);
@@ -729,13 +708,11 @@ void saacproto_ACFMCharLogout_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACFMCharLogout_send(fd, SUCCESSFUL, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACFMReadMemo_recv(int fd, int index)
 {
 
-#ifdef _FAMILY
 	int r = 0, dataindex;
 	char data[15000];
 	r =  ACFMReadMemo(index, &dataindex, data);
@@ -744,14 +721,12 @@ void saacproto_ACFMReadMemo_recv(int fd, int index)
 	}else{
 		saacproto_ACFMReadMemo_send(fd, SUCCESSFUL, index, r, dataindex, data);
 	}
-#endif
 
 }
                 
 void saacproto_ACFMWriteMemo_recv(int fd, char *fmname, int fmindex,
 	char *data, int index)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACFMWriteMemo(index, fmname, fmindex, data);
 	if (r < 0){
@@ -759,12 +734,10 @@ void saacproto_ACFMWriteMemo_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACFMWriteMemo_send(fd, SUCCESSFUL, index);
 	}
-#endif
 }
 
 void saacproto_ACFMPointList_recv(int fd)
 {
-#ifdef _FAMILY
         int r = 0;
         char data[15000];
         r =  ACFMPointList(data);
@@ -774,13 +747,11 @@ void saacproto_ACFMPointList_recv(int fd)
         }else{
         	saacproto_ACFMPointList_send(fd, SUCCESSFUL, data);
         }
-#endif
 }
 
 void saacproto_ACSetFMPoint_recv(int fd, char *fmname, int fmindex, 
 	int index, int fmpointindex, int fl, int x, int y, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACSetFMPoint(index, fmname, fmindex, fmpointindex, fl, x, y);
 	if (r < 0){
@@ -788,13 +759,11 @@ void saacproto_ACSetFMPoint_recv(int fd, char *fmname, int fmindex,
 	}else{
 		saacproto_ACSetFMPoint_send(fd, SUCCESSFUL, r, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACFixFMPoint_recv(int fd, char *winfmname, int winfmindex, int winindex,
 	char *losefmname, int losefmindex, int loseindex, int village)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACFixFMPoint(winindex, winfmname, winfmindex,
 		loseindex, losefmname, losefmindex, village);
@@ -803,13 +772,11 @@ void saacproto_ACFixFMPoint_recv(int fd, char *winfmname, int winfmindex, int wi
 	}else{
 		saacproto_ACFixFMPoint_send(fd, SUCCESSFUL, r);
 	}
-#endif
 }
 
 void saacproto_ACFMAnnounce_recv(int fd, char *fmname, int fmindex, int index,
         char *data, int color)
 {
-#ifdef _FAMILY
 	int r = 0, i = 0;
 	r = ACFMAnnounce(fmname, fmindex, index, data, color);
 	if (r < 0){
@@ -826,12 +793,10 @@ void saacproto_ACFMAnnounce_recv(int fd, char *fmname, int fmindex, int index,
 		   }
 		}
 	}	
-#endif
 }
 
 void saacproto_ACShowTopFMList_recv(int fd, int kindflag)
 {
-#ifdef _FAMILY
 	int r = 0;
 	char data[150 * MAX_FAMILY];
 	strcpy(data, "");
@@ -841,13 +806,11 @@ void saacproto_ACShowTopFMList_recv(int fd, int kindflag)
 	}else	{
 		saacproto_ACShowTopFMList_send(fd, SUCCESSFUL, kindflag, r, data);
 	}
-#endif
 }
 
 void saacproto_ACFixFMData_recv(int fd, char *fmname, int fmindex, int index,
 	int kindflag, char *data1, char *data2, int charindex, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACFixFMData(index, fmname, fmindex, kindflag, charindex, data1, data2);
 	if (r < 0){
@@ -855,13 +818,11 @@ void saacproto_ACFixFMData_recv(int fd, char *fmname, int fmindex, int index,
 	}else{
 		saacproto_ACFixFMData_send(fd, SUCCESSFUL, kindflag, data1, data2, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACFixFMPK_recv(int fd, char *winfmname, int winfmindex, int winindex,
 	char *losefmname, int losefmindex, int loseindex)
 {
-#ifdef _FAMILY
 	int r = 0;
 	r =  ACFixFMPK(winindex, winfmname, winfmindex,
 		loseindex, losefmname, losefmindex);
@@ -872,13 +833,11 @@ void saacproto_ACFixFMPK_recv(int fd, char *winfmname, int winfmindex, int winin
 		saacproto_ACFixFMPK_send(fd, SUCCESSFUL, r, winindex,
 			loseindex);
 	}
-#endif
 }
 
 void saacproto_ACGMFixFMData_recv(int fd, int index, char *charid, char *cmd,
 	char *data, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0;
 	char fmname[256];
 	r =  ACGMFixFMData(index, fmname, charid, cmd, data);
@@ -888,13 +847,11 @@ void saacproto_ACGMFixFMData_recv(int fd, int index, char *charid, char *cmd,
 	else{
 		saacproto_ACGMFixFMData_send(fd, SUCCESSFUL, fmname, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACGetFMData_recv(int fd, char *fmname, int fmindex, int index,
 	int kindflag, int charfdid)
 {
-#ifdef _FAMILY
 	int r = 0, data = 0;
 	r =  ACGetFMData(index, fmname, fmindex, kindflag, &data);
 	if (r < 0){
@@ -902,7 +859,6 @@ void saacproto_ACGetFMData_recv(int fd, char *fmname, int fmindex, int index,
 	}else{
 		saacproto_ACGetFMData_send(fd, SUCCESSFUL, kindflag, data, charfdid);
 	}
-#endif
 }
 
 void saacproto_ACreLoadFmData_recv(int fd, int type, int data)
@@ -1006,7 +962,6 @@ void saacproto_ACSendFmPk_recv(int fd, int fmpks_pos, char *data)
 
 void saacproto_ACManorPKAck_recv(int fd, char *data)
 {
-#ifdef _FAMILY
 
 #ifdef _AC_SEND_FM_PK		 // WON ADD 庄园对战列表储存在AC
 	// 不处理
@@ -1023,10 +978,8 @@ void saacproto_ACManorPKAck_recv(int fd, char *data)
 	}
 #endif
 
-#endif
 }
 
-#ifdef _WAEI_KICK
 void saacproto_ACKick_recv( int ti ,char* id, int lock,int mesgid )
 {
 	if( ti != -1 )	{
@@ -1104,8 +1057,6 @@ void saacproto_ACKick_recv( int ti ,char* id, int lock,int mesgid )
 	}
     saacproto_ACKick_send( ti, 0, retdata, mesgid );
 }
-
-#endif
 
 #ifdef _SEND_EFFECT		   // WON ADD 送下雪、下雨等特效
 void SendEffect(char *effect)

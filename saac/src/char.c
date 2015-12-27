@@ -126,9 +126,7 @@ void charLoadCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
   makeStringFromEscaped(infobuf);
   saacproto_ACCharLoad_send(ti, SUCCESSFUL, infobuf, mesgid, charindex);
 
-#ifdef _WAEI_KICK
   saacproto_ACKick_recv(ti, id, 10, -1);  //踢其他星系
-#endif
 }
 
 int charSave(int ti, char *id, char *charname, char *opt, char *charinfo, int unlock, int mesgid, int charindex) {
@@ -269,8 +267,6 @@ void charDeleteCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3
     saacproto_ACCharDelete_send(ti, FAILED, "fileI/O", mesgid);
     return;
   }
-#ifdef  _FAMILY
-  // CoolFish: Family 2001/6/12
   {
     int index = 0, fmindex = 0, fmcharindex = 0;
     char fmname[32];
@@ -302,12 +298,10 @@ void charDeleteCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3
       }
     }
   }
-#endif
   // Spock 2000/12/6
   time(&timenow);
   now = localtime(&timenow);
-  sprintf(logfile, "log/chardel/%04d%02d%02d.log",
-          now->tm_year + 1900, now->tm_mon + 1, now->tm_mday);
+  sprintf(logfile, "log/chardel/%04d%02d%02d.log", now->tm_year + 1900, now->tm_mon + 1, now->tm_mday);
   LOGBASE(logfile, "%04d/%02d/%02d %02d:%02d:%02d id:[%s] char:[%s] index:[%d]\n",
           now->tm_year + 1900, now->tm_mon + 1, now->tm_mday,
           now->tm_hour, now->tm_min, now->tm_sec,
@@ -562,13 +556,6 @@ static int makeSaveCharString(char *out, int outlen,
 
   strncpy(infowork, info, sizeof(infowork));
   infowork[strlen(info)] = 0;
-
-  /* 巨旦弗□皿仄 */
-  /*    if ( esc ) {
-  nmwork_p = makeEscapeString1( nm , nmwork ,sizeof( nmwork ));
-  optwork_p = makeEscapeString1( opt , optwork , sizeof( optwork ));
-  infowork_p = makeEscapeString1( info , infowork , sizeof( infowork ));
-} else {*/
 
   nmwork_p = makeEscapeString(nm, nmwork, sizeof(nmwork));
   optwork_p = makeEscapeString(opt, optwork, sizeof(optwork));

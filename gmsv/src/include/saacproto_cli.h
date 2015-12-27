@@ -241,10 +241,8 @@ void saacproto_ACSendFmPk_send(int fd, int toindex, int PkFlg, int fmpks_pos, ch
 void saacproto_ACAuctionSold_send(int fd, char *data);
 void saacproto_ACAuctionSold_recv(int fd, char *data);
 
-#ifdef _WAEI_KICK	//跨星球踢人
 void saacproto_ACKick_send( int fd, char* kickid,int kickfd, int flg);
 void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd);
-#endif
 void saacproto_ACCharLogin_send( int fd, int clifd, char* id,char* pas,char* ip );
 void saacproto_ACCharLogin_recv(int fd , int clifd, int flag); 
 

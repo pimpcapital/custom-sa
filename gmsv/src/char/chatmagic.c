@@ -2632,20 +2632,14 @@ void CHAR_CHAT_DEBUG_checklock( int charaindex, char* message )
 void CHAR_CHAT_DEBUG_unlock( int charaindex, char* message )
 {
 	char cmd[256];
-#ifdef _WAEI_KICK
 	int act=1;
-#endif
 
   if( strlen(message)==0){
     CHAR_talkToCli(charaindex, -1, "参数不正确", CHAR_COLORWHITE);
     return;
   }
   easyGetTokenFromString(message, 1, cmd, sizeof(cmd));
-#ifdef _WAEI_KICK
   saacproto_ACKick_send( acfd, cmd, getFdidFromCharaIndex( charaindex), act);
-#else
-  saacproto_ACLock_send( acfd, cmd, 3, getFdidFromCharaIndex( charaindex));
-#endif
 }
 
 void CHAR_CHAT_DEBUG_unlockserver( int charaindex, char* message )
@@ -3330,7 +3324,6 @@ void CHAR_CHAT_DEBUG_engineer( int charindex, char *message)
 		}
 	}
 }
-#ifdef _WAEI_KICK
 void CHAR_CHAT_DEBUG_gmkick( int charindex, char* message)
 {
 	char cdkey[32];
@@ -3363,7 +3356,6 @@ void CHAR_CHAT_DEBUG_gmkick( int charindex, char* message)
 	}
 	saacproto_ACKick_send( acfd, cdkey, getFdidFromCharaIndex( charindex), act);
 }
-#endif
 // WON ADD 当机指令
 void CHAR_CHAT_DEBUG_crash(int charaindex , char *message)
 {

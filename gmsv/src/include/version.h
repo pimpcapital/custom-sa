@@ -126,7 +126,6 @@ Game Server 游戏环境:
 #define _ITEM_WARP_FIX_BI        // (可开放) shan fix bbi to bi. code:shan
 #define _SKILL_DAMAGETOHP        // (可开放) ANDY 嗜血技 
 #define _Skill_MPDAMAGE          // (可开放) ANDY MP伤害
-#define _WAEI_KICK               // (可开放) ANDY 跨星球踢人
 #define _BATTLE_TIMESPEED        // (可开放) ANDY 战斗时间 测试(北京不必开，挡加速功能)
 #define _FIXBUG_ATTACKBOW        // (可开放) ANDY 修正骑宠使用投掷武器bug
 #define _NPCCHANGE_PLAYERIMG     // (可开放) ANDY NPC改变玩家图号, 强制落马,认玩家图号 (测完)

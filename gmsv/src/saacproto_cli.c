@@ -734,7 +734,6 @@ int saacproto_ClientDispatchMessage(int fd ,char*line)
 		return 0;
 	}
 
-#ifdef _WAEI_KICK
 	if( strcmp( funcname , "ACKick" ) == 0 ){
 		int act;
 		char* data;
@@ -745,7 +744,6 @@ int saacproto_ClientDispatchMessage(int fd ,char*line)
 		saacproto_ACKick_recv( fd, act, data, id);
 		return 0;
 	}
-#endif
 
 	if( strcmp( funcname , "ACUCheck" ) == 0 ){
 		char* mem_id;
@@ -1473,7 +1471,6 @@ void saacproto_CleanupClient( void )
 }
 /* end of the generated client code */
 
-#ifdef _WAEI_KICK
 void saacproto_ACKick_send( int fd, char* kickid,int kickfd, int flg)
 {
 	saacproto_CreateHeader( saacproto.work , "ACKick");
@@ -1482,7 +1479,6 @@ void saacproto_ACKick_send( int fd, char* kickid,int kickfd, int flg)
 	saacproto_strcatsafe( saacproto.work, saacproto_mkstr_int( flg) , saacproto.workbufsize );
 	saacproto_Send( fd , saacproto.work );
 }
-#endif
 
 void saacproto_ACCharLogin_send( int fd, int clifd, char* id,char* pas,char* ip )
 {

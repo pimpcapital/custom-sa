@@ -102,7 +102,6 @@ int saacproto_ServerDispatchMessage( int fd , char *encoded, char *debugfun)
 		return 0;
 	}
 
-#ifdef _WAEI_KICK
 	if( strcmp( funcname , "ACKick" ) == 0 ){
 		char* id;	//欲踢的帐号
 		int flg;	//事件flg
@@ -113,7 +112,6 @@ int saacproto_ServerDispatchMessage( int fd , char *encoded, char *debugfun)
 		saacproto_ACKick_recv( fd, id, flg, clifd);
 		return 0;
 	}
-#endif
 
 	if( strcmp( funcname , "ACUCheck" ) == 0 ){
 		char* mem_id;
@@ -1533,7 +1531,6 @@ void saacproto_ACSendFmPk_send( int fd, int userindex, int flg)
 
 #endif
 
-#ifdef _WAEI_KICK
 void saacproto_ACKick_send( int fd, int act, char* data,int id )
 {
 	saacproto_CreateHeader( saacproto.work , "ACKick" );
@@ -1542,7 +1539,6 @@ void saacproto_ACKick_send( int fd, int act, char* data,int id )
 	saacproto_strcatsafe( saacproto.work , saacproto_mkstr_int( id ) ,saacproto.workbufsize );
 	saacproto_Send( fd , saacproto.work );
 }
-#endif
 
 #ifdef _SEND_EFFECT		   // WON ADD 送下雪、下雨等特效
 void saacproto_SendEffect_send(int fd, char *effect)

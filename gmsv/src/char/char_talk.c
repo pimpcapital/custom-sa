@@ -93,9 +93,7 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 	{ "metamo",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "变身图号 (账号)"},
 	{ "checklock",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "帐号"},
 	{ "shutup",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "帐号 ON/OFF"},
-#ifdef _WAEI_KICK
 	{ "gmkick",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "帐号 LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
-#endif
   { "battlein",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "无"},
   { "battleout",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "无"},
 	{ "battlewatch",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "无"},
@@ -277,9 +275,7 @@ static CHAR_ChatMagicTable CHAR_cmtbl[]={
 	{ "造型",			CHAR_CHAT_DEBUG_metamo,			TRUE,	0,	1, "变身图号 (账号)"},
 	{ "锁定帐号",		CHAR_CHAT_DEBUG_checklock,		TRUE,	0,	1, "帐号"},
 	{ "封嘴",			CHAR_CHAT_DEBUG_shutup,			TRUE,	0,	1, "帐号 ON/OFF"},
-#ifdef _WAEI_KICK
 	{ "gm踢人",			CHAR_CHAT_DEBUG_gmkick,			TRUE,	0,	1, "帐号 LSLOCK/KICK/DEUNLOCK/UNLOCKALL/LOCK/TYPE/UNLOCK"},
-#endif
   { "加入战斗",		CHAR_CHAT_DEBUG_battlein,		TRUE,	0,	1, "无"},
   { "结束战斗",		CHAR_CHAT_DEBUG_battleout,		TRUE,	0,	1, "无"},
 	{ "观战",	CHAR_CHAT_DEBUG_battlewatch,	TRUE,	0,	1, "无"},

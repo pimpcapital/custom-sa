@@ -875,7 +875,6 @@ void saacproto_ACManorPKAck_recv(int fd, char *data)
   }
 }
 
-#ifdef _WAEI_KICK
 void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
 {
   int clifd = getfdFromFdid(retfd);
@@ -940,8 +939,6 @@ void saacproto_ACKick_recv(int fd , int act, char* data ,int retfd)
 		break;
 	}
 }
-
-#endif
 
 void saacproto_ACCharLogin_recv(int fd , int clifd, int flag)
 {

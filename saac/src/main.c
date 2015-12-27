@@ -274,7 +274,6 @@ static int readConfig( char *path )
         } else if( strcmp( command, "maildir" ) == 0 ){
             snprintf( maildir, sizeof( maildir ), param );
             log( "邮件目录:%s\n",maildir );
-#ifdef	_FAMILY
         // CoolFish: Family 2001/5/9
         } else if( strcmp( command, "familydir" ) == 0 ){
             snprintf( familydir, sizeof( familydir ), param );
@@ -285,7 +284,6 @@ static int readConfig( char *path )
         } else if( strcmp( command, "fmsmemodir" ) == 0 ){
             snprintf( fmsmemodir, sizeof( fmsmemodir ), param );
             log( "家族备份:%s\n",fmsmemodir );
-#endif
 			  } else if( strcmp( command , "Total_Charlist" ) == 0 ){
         	Total_Charlist = atoi( param );
         	log( "更新人物点数间隔:%d秒\n",Total_Charlist );
@@ -386,14 +384,12 @@ int main( int argc , char **argv )
 
     sasql_init();
     dbRead( dbdir );
-#ifdef	_FAMILY
     log("读取 家族庄园\n");
     readFMSMemo(fmsmemodir);
     log("读取 家族留言\n");
     readFMPoint(fmpointdir);
     log("读取 家族目录\n");
     readFamily(familydir);
-#endif
     log( "准备 档案目录\n" );
     prepareDirectories( chardir );
     log( "准备 日志目录\n" );
@@ -503,7 +499,6 @@ int main( int argc , char **argv )
                 gettimeofday( &et,NULL);
                 log( "过期邮件(%fsec)\n", time_diff(et,st) );
             }
-#ifdef	_FAMILY
             //if ((counter % 300) == 0) // 300( -> 60)
       if( counter4 > Write_Family ) // 300( -> 60)
       {
@@ -516,7 +511,6 @@ int main( int argc , char **argv )
          	gettimeofday(&et, NULL);
          	log("记录家族(%fsec)\n", time_diff(et, st));
       }
-#endif
         }
     newti = tcpstruct_accept1();
     if( newti >= 0 ){

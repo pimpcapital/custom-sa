@@ -86,9 +86,7 @@ void CHAR_CHAT_DEBUG_cleanfloor( int charaindex, char *message);
 #ifdef _GAMBLE_BANK
 void CHAR_CHAT_DEBUG_setgamblenum( int charaindex, char *message );
 #endif
-#ifdef _WAEI_KICK
 void CHAR_CHAT_DEBUG_gmkick( int charindex, char* message);
-#endif
 // WON ADD 修正族长问题
 void CHAR_CHAT_DEBUG_fixfmleader(int charaindex, char *message);
 
