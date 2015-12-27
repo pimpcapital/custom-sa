@@ -16,13 +16,14 @@
 #include <string.h>
 #include "version.h"
 
-#define SA_NODEFER	0x40000000
-#define SA_NOMASK	SA_NODEFER
+#define SA_NODEFER  0x40000000
+#define SA_NOMASK  SA_NODEFER
 
 #define CHARDATASIZE ( 1024 * 64 )
 
 char *chartime();
-#define LOGBASE( filename , format , args...)\
+
+#define LOGBASE(filename, format, args...)\
 {\
     FILE *f;\
     f = fopen( filename , "a" );\
@@ -37,7 +38,6 @@ char *chartime();
 {\
     fprintf( stderr, format , ## args );\
 }
-// Spock end
 #define SUCCESSFUL "successful"
 #define FAILED "failed"
 
@@ -51,7 +51,6 @@ char logdir[64];
 char dbdir[64];
 char maildir[64];
 
-// CoolFish: Family 2001/5/9
 char familydir[64];
 char fmpointdir[64];
 char fmsmemodir[64];
@@ -67,21 +66,25 @@ char sleepchardir[64];
 #endif
 
 
-typedef struct _gmsv
-{
-    int use;
-	  int fd;
-    char name[128];
+typedef struct _gmsv {
+  int use;
+  int fd;
+  char name[128];
 } gmsv;
 
-int get_rotate_count(void );
-void checkGSUCheck( char *id );
-int logout_game_server( int ti );
-int is_game_server_login( int ti );
-char * getGSName( int i );
+int get_rotate_count();
 
-void gmsvBroadcast( int fd, char *p1, char *p2, char *p3 , int flag );
-int login_game_server(int ti ,char *svname, char *svpas, char *result, int resultlen, char *retdata, int retdatalen);
+void checkGSUCheck(char *id);
+
+int logout_game_server(int ti);
+
+int is_game_server_login(int ti);
+
+char *getGSName(int i);
+
+void gmsvBroadcast(int fd, char *p1, char *p2, char *p3, int flag);
+
+int login_game_server(int ti, char *svname, char *svpas, char *result, int resultlen, char *retdata, int retdatalen);
 
 #endif
 

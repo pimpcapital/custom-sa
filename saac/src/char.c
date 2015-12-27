@@ -191,8 +191,6 @@ void charListCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
   char *id = c0;
   int mesgid = i0;
 
-  //log(" 档案列表回溯:%s:%d \n", id, auth);
-
   if(auth != 0) {
     char data[100];
     snprintf(data, sizeof(data), "%d", auth);
@@ -223,7 +221,6 @@ void charListCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
         if(fp_old != NULL) {
           fclose(fp_old);
           rename(fn_old, fn_new); // 搬移
-          //filecopy( fn_old, fn_new); // 复制
           log(" 移档_%s ", fn_new);
         }
       }
@@ -354,18 +351,15 @@ static void getCharOptionFromString(char *str, char *out) {
           break;
         }
 
-        // 仇仇手ㄡ田奶玄  侬及ㄠ田奶玄  卅日手丹域田奶玄戊疋□允月
-        //----   For 2Byte Code ----
         if(IS_2BYTEWORD(str[c])) {
-          out[outc++] = str[c++];    // ㄠ田奶玄  戊疋□
-          out[outc++] = str[c];    // ㄡ田奶玄  戊疋□
-          if(str[c] == '\0')break;  // 公及  侬互允匹卞NULL卅日蔽
+          out[outc++] = str[c++];
+          out[outc++] = str[c];
+          if(str[c] == '\0') break;
           continue;
         }
 
-        // 骚橘  侬反ㄠ田奶玄戊疋□
-        out[outc] = str[c];      // 引内戊疋□
-        if(str[c] == '\0')break;  // 蔽  分匀凶日蔽歹月
+        out[outc] = str[c];
+        if(str[c] == '\0') break;
 
         if(str[c] == SPACE) {
           out[outc] = '\0';
@@ -635,7 +629,6 @@ static int unlinkCharFile(char *id, int num) {
 int lockUser(char *gmsvname, char *id, char *passwd, int lock,
              char *result, int resultlen,
              char *retdata, int retdatalen, char *process, char *deadline) {
-  char fname[1024];
 
   int ret = -1;
 
@@ -681,29 +674,4 @@ int lockUser(char *gmsvname, char *id, char *passwd, int lock,
 int isLocked(char *id) {
   if(!id[0]) return 1;  // invalid id: lock it
   return isMemLocked(getHash(id) & 0xff, id);
-}
-
-int filecopy(char *oldfilename, char *newfilename) {
-  FILE *oldfile;
-  FILE *newfile;
-  char c_temp;
-
-  if((oldfile = fopen(oldfilename, "r")) == NULL) {
-    return -1;
-  }
-  if((newfile = fopen(newfilename, "w")) == NULL) {
-    return -1;
-  }
-
-  while(1) {
-    c_temp = fgetc(oldfile);
-    if(c_temp == EOF)
-      break;
-    fputc(c_temp, newfile);
-  };
-
-  fclose(oldfile);
-  fclose(newfile);
-
-  return 0;
 }
