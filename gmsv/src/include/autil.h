@@ -15,7 +15,6 @@ extern char PersonalKey[4096];
 
 #define DEFAULTTABLE	\
 	"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}"
-#define DEFAULTFUNCBEGIN	"&"
 #define DEFAULTFUNCEND		"#"
 
 int util_Init(void);

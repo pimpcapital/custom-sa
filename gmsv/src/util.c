@@ -184,12 +184,10 @@ static int findNumberString(char *in, char *out, int outsiz) {
   for(i = 0, j = 0; in[i] != '\0' && j < outsiz - 2; i++) {
     findflag = 0;
     if(in[i] & 0x80) {
-      /* EUC及桦宁 */
       tmp[0] = in[i];
       tmp[1] = in[i + 1];
       tmp[2] = '\0';
     } else {
-      /* ASCII及桦宁 */
       tmp[0] = in[i];
       tmp[1] = '\0';
     }

@@ -183,7 +183,6 @@ void lssproto_CD_send(int fd,char* data);
 void lssproto_R_send(int fd,char* data);
 void lssproto_S_recv(int fd,char* category);
 void lssproto_S_send(int fd,char* data);
-void lssproto_D_send(int fd,int category,int dx,int dy,char* data);
 void lssproto_FS_recv(int fd,int flg);
 void lssproto_FS_send(int fd,int flg);
 void lssproto_HL_recv(int fd,int flg);
@@ -239,17 +238,14 @@ void lssproto_Echo_recv(int fd,char* test);
 void lssproto_Echo_send(int fd,char* test);
 void lssproto_Shutdown_recv(int fd,char* passwd,int min);
 
-void lssproto_TD_send(int fd, int index, char* message);
+void lssproto_TD_send(int fd, char* message);
 void lssproto_TD_recv(int fd, char* message);
-
-void lssproto_NU_send(int fd, int nu);
 
 void lssproto_FM_send(int fd, char* message);
 void lssproto_FM_recv(int fd, char* message);
 
 void lssproto_WO_send(int fd,int effect);
 void lssproto_PETST_recv( int fd,  int nPet, int sPet);
-void lssproto_BM_recv(int fd, int iindex);
 
 #ifdef _MIND_ICON
 void lssproto_MA_recv(int fd, int x, int y, int nMind);

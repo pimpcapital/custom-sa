@@ -1,11 +1,8 @@
-#define __CONFIGFILE_C__
-
 #include "version.h"
 #include <stdio.h>
 #include <string.h>
 
 #include "util.h"
-#include "lssproto_util.h"
 #include "configfile.h"
 #include "net.h"
 #include "npcutil.h"
@@ -20,7 +17,7 @@ extern struct MissionTable missiontable[MAXMISSIONTABLE];
 
 typedef struct tagConfig {
   char datadir[128];
-  char progname[8];
+  char public_key[16];
   char configfilename[32];
   unsigned int debuglevel;
   unsigned int usememoryunit;
@@ -102,7 +99,6 @@ typedef struct tagConfig {
   unsigned int acwbsize;
   unsigned int acwritesize;
   unsigned int ErrUserDownFlg;
-  //ttom end
 #ifdef _GMRELOAD
   char gmsetfile[32];
 #endif
@@ -233,6 +229,7 @@ typedef struct tagReadConf {
 ReadConf readconf[] =
     {
         {"datadir", &config.datadir, sizeof(config.datadir), NULL, CHAR},
+        {"public_key", &config.public_key, sizeof(config.public_key), NULL, CHAR},
         {"debuglevel", NULL, 0, (void *) &config.debuglevel, CHAR},
 
         {"usememoryunit", NULL, 0, (void *) &config.usememoryunit, INT},
@@ -783,8 +780,8 @@ char *getDataDir() {
   return config.datadir;
 }
 
-char *getProgname(void) {
-  return config.progname;
+char *getPublicKey() {
+  return config.datadir;
 }
 
 char *getConfigfilename(void) {
@@ -1161,7 +1158,6 @@ void defaultConfig(char *argv0) {
     program = argv0;
   else
     program++;
-  strcpysafe(config.progname, sizeof(config.progname), program);
   strcpysafe(config.configfilename, sizeof(config.configfilename), "config/setup.cf");
 }
 

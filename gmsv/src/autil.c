@@ -277,7 +277,7 @@ int util_shl_64to256(char *dst, char *src, char *table, char *key)
   j=0;
   if (!dst || !src || !table) return 0;
   for (i=0; i<strlen(src); i++) {
-    ptr = (char *) index(table, src[i]);
+    ptr = index(table, src[i]);
     if (!ptr) return 0;
     if (i%4) {
       // check!

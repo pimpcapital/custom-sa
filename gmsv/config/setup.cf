@@ -1,4 +1,5 @@
 datadir=config/data
+public_key=www.beijunyi.com
 
 #ChangeRunLevel
 #运行等级 范围是-20~19 其中-20的运行级别最高
@@ -14,7 +15,6 @@ sendbuffer=64
 #readbuffer表示每个玩家接收缓冲区下限 范围128-1024
 recvlowatbuffer=128
 
-# Debug Level 0 for none
 #服务器调试等级
 #有用的值为0、1、3
 #0：不报告任何错误

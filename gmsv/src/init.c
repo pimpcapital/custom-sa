@@ -1,13 +1,10 @@
 #include "version.h"
 #include "char_base.h"
 #include <unistd.h>
-#include <stdio.h>
 #include <battle_event.h>
 
 
 #include "configfile.h"
-#include "util.h"
-#include "net.h"
 #include "msignal.h"
 #include "buf.h"
 #include "object.h"
@@ -35,26 +32,16 @@
 #endif
 
 #define OPTIONSTRING "d:f:h"
-#define usage() print( "Usage: %s ["OPTIONSTRING"]\n", getProgname() );
 
 void printUsage(void) {
-  usage();
-  /*print( "Usage: %s ["OPTIONSTRING"]\n", progname );*/
   print("          [-d debuglevel]        default value is 0\n");
   print("          [-f configfilename]    default value is setup.cf\n"
   );
 }
 
-/*
- *
- * 娄醒
- * 忒曰袄
- *      TRUE(1)     恳橘卅戊穴件玉仿奶件娄醒分匀凶日
- *      FALSE(0)    唱橘卅戊穴件玉仿奶件娄醒分匀凶日
- */
 int parseCommandLine(int argc, char **argv) {
-  int c;                          /* getopt 匹银丹 */
-  extern char *optarg;            /* getopt 匹银丹 */
+  int c;
+  extern char *optarg;
 
 
   while((c = getopt(argc, argv, OPTIONSTRING)) != -1) {
@@ -75,24 +62,16 @@ int parseCommandLine(int argc, char **argv) {
       case 'h':
         printUsage();
         return FALSE;
-        break;
 
       default:
         printUsage();
         return FALSE;
-        break;
 
     }
   }
   return TRUE;
 }
 
-
-/*
- * 娄醒
- *
- * 漆及赭窒手仄卅中
- */
 int parseEnvironment(char **env) {
   if(getDebuglevel() >= 3) {
     int index = 0;
@@ -108,13 +87,6 @@ int parseEnvironment(char **env) {
 
 #define GOTORETURNFALSEIFFALSE(x) if(!(x))goto RETURNFALSE
 
-/*
- * 赓渝祭伙□民件
- * 娄醒
- *      argc    argv及醒
- *      argv    戊穴件玉仿奶件娄醒
- * 忒曰袄
- */
 int init(int argc, char **argv, char **env) {
 #ifdef _ITEM_QUITPARTY
   FILE *f;

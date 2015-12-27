@@ -3,13 +3,6 @@
 
 #include "common.h"
 
-#undef EXTERN
-#ifdef __CONFIGFILE_C__
-#define EXTERN
-#else  /*  __CONFIGFILE_C__  */
-#define EXTERN extern
-#endif /*  __CONFIGFILE_C__  */
-
 // Arminius 7.12 login announce
 extern char announcetext[8192];
 void AnnounceToPlayer(int charaindex);
@@ -76,7 +69,7 @@ int readconfigfile( char* filename );
 
 void  defaultConfig( char* argv0 );
 char* getDataDir();
-char* getProgname( void );
+char* getPublicKey();
 char* getConfigfilename( void );
 void setConfigfilename( char* newv );
 

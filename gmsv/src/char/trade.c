@@ -190,9 +190,9 @@ int TRADE_Search(int fd, int meindex, char* message)
    		CHAR_talkToCli(meindex, -1, msgbuf, CHAR_COLORYELLOW);
 
    		sprintf(msgbuf, "C|%d|%s|1", fd, mycharaname);
-   		lssproto_TD_send( tofd, -1, msgbuf);
+   		lssproto_TD_send( tofd, msgbuf);
    		sprintf(msgbuf, "C|%d|%s|1", tofd, tocharaname);
-   		lssproto_TD_send(fd, -1, msgbuf);
+   		lssproto_TD_send(fd, msgbuf);
 
    		CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_TRADING);
    		CHAR_setWorkInt(toindex, CHAR_WORKTRADEMODE, CHAR_TRADE_TRADING);
@@ -234,7 +234,7 @@ void TRADE_Close(int fd, int meindex, char* message)
    snprintf(msg, sizeof(msg), TRADE_CANCEL, mycharaname);
    CHAR_talkToCli(toindex, -1, msg, CHAR_COLORYELLOW);
    snprintf( msg, sizeof(msg), "W|%d|%s", fd, mycharaname);
-   lssproto_TD_send( tofd, -1, msg);
+   lssproto_TD_send( tofd, msg);
 
    CHAR_setWorkInt(toindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
    CONNECT_setTradeTmp(tofd, "");
@@ -255,7 +255,7 @@ void TRADE_Close(int fd, int meindex, char* message)
 	snprintf( msg, sizeof(msg), TRADE_RDCANCEL);
 	CHAR_talkToCli(meindex, -1, msg, CHAR_COLORYELLOW);
 	snprintf( msg, sizeof(msg), "W|%d|%s", tofd, CHAR_getChar( toindex, CHAR_NAME) );
-	lssproto_TD_send( fd, -1, msg);
+	lssproto_TD_send( fd, msg);
 
 	CHAR_setWorkInt( meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
 	CONNECT_setTradeTmp(fd, "");
@@ -319,7 +319,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 				return;
 			}else{
 				snprintf(msg, sizeof(msg), "T|%d|%s|I|%d|%s", fd, mycharaname, showindex, buf1 );
-				lssproto_TD_send(tofd, -1, msg);
+				lssproto_TD_send(tofd, msg);
 			}
 		}
 		break;
@@ -332,7 +332,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 				return;
 			}else{// 将欲交易之金钱传给对方
 				snprintf(msg, sizeof(msg), "T|%d|%s|G|%d|%s", fd, mycharaname, showindex, buf1);
-				lssproto_TD_send( tofd, -1, msg);
+				lssproto_TD_send( tofd, msg);
 			}
 		}
 		break;
@@ -346,7 +346,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 			}else{
 				snprintf(msg, sizeof(msg), "T|%d|%s|P|%d|%s",
 					fd, mycharaname, showindex, buf1);
-				lssproto_TD_send(tofd, -1, msg);
+				lssproto_TD_send(tofd, msg);
 			}
 		}
 		break;
@@ -364,13 +364,13 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 //				if( CHAR_getWorkInt( toindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_LOCK )return;
 			
 				snprintf(msg, sizeof(msg), "T|%d|%s|A", fd, mycharaname);
-				lssproto_TD_send( tofd, -1, msg);
+				lssproto_TD_send( tofd, msg);
 				TRADE_SwapItem(meindex, toindex, message, fd, mycharaname, tofd, tocharaname);
 			}else{
 				if( CONNECT_get_confirm( fd) == TRUE ) return;
 				CONNECT_set_confirm(fd, TRUE);
 				snprintf( msg, sizeof(msg), "T|%d|%s|C", fd, mycharaname);
-				lssproto_TD_send( tofd, -1, msg);
+				lssproto_TD_send( tofd, msg);
 			}
 		}
    	break;
@@ -379,7 +379,7 @@ void TRADE_ShowItem(int fd, int meindex, char* message)
 	    if( CONNECT_get_confirm( fd) == TRUE ) return;
 			CONNECT_set_confirm(fd, TRUE);
 			snprintf( msg, sizeof(msg), "T|%d|%s|C", fd, mycharaname);
-			lssproto_TD_send( tofd, -1, msg);
+			lssproto_TD_send( tofd, msg);
 		}
 		break;
   }
@@ -433,9 +433,9 @@ void TRADE_SwapItem( int meindex, int toindex, char* message, int fd, char* mych
 
    if (result != 2){
    	snprintf(tmpmsg, sizeof(tmpmsg), "W|%d|%s", fd, mycharaname);
-   	lssproto_TD_send(tofd, -1, tmpmsg);
+   	lssproto_TD_send(tofd, tmpmsg);
    	snprintf(tmpmsg, sizeof(tmpmsg), "W|%d|%s", tofd, tocharaname);
-   	lssproto_TD_send(fd, -1, tmpmsg);
+   	lssproto_TD_send(fd, tmpmsg);
    	
 	CHAR_setWorkInt(meindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
 	CHAR_setWorkInt(toindex, CHAR_WORKTRADEMODE, CHAR_TRADE_FREE);
