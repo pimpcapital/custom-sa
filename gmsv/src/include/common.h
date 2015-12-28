@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <errno.h>
 
-/* MACROS */
 #define EXITWITHEXITCODEIFFALSE(x,code) if(!x)exit(code);
 #ifdef __GNUC__
 #define print(format,arg...) fprintf( stderr, format ,##arg)

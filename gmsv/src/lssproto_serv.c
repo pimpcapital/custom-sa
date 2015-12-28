@@ -66,6 +66,8 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
     return -1;
   }
 
+  print("\n%d\n", func);
+
   if(func == LSSPROTO_W_RECV) {
     int checksum = 0, checksumrecv;
     int x;
@@ -1033,7 +1035,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_ECHO_RECV-fd:%d,test:%s\n", fd, test);
     lssproto_Echo_recv(fd, test);
     util_DiscardMessage();
     return 0;

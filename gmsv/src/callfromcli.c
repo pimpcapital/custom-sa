@@ -55,15 +55,10 @@ static int Callfromcli_Util_getTargetCharaindex(int fd, int toindex) {
  * 弁仿奶失件玄互夫弘奶件允月 匹手丢乒伉卞卺户月分仃卅及匹民尼永弁反卅中
  ----------------------------------------*/
 void lssproto_ClientLogin_recv(int fd, char *cdkey, char *passwd) {
-  /*  2褐卞仇木互裟壬木月及反中中    */
-  {//ttom avoid the restore 2001/01/09
-    if(CONNECT_isNOTLOGIN(fd) == FALSE) {
-      print("\n the Client had  Logined fd=%d", fd);
-      return;
-    }
+  if(CONNECT_isNOTLOGIN(fd) == FALSE) {
+    print("\n the Client had  Logined fd=%d", fd);
+    return;
   }
-  //print( "CliLogin cdkey=%s\n" , cdkey );
-  /* connect卞戊疋□允月 */
   CONNECT_setCdkey(fd, cdkey);
   CONNECT_setPasswd(fd, passwd);
   CONNECT_setCtype(fd, CLI);
@@ -82,7 +77,6 @@ void lssproto_ClientLogin_recv(int fd, char *cdkey, char *passwd) {
   sprintf(ip, "%d.%d.%d.%d", a, b, c, d);
   print("\n登陆账号=%s 密码=%s 来自=%s\n", cdkey, passwd, ip);
 
-  /* 忒蚕 */
   saacproto_ACCharLogin_send(acfd, fd, cdkey, passwd, ip);
 }
 
