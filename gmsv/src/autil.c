@@ -82,8 +82,8 @@ int util_SplitMessage(char *source, char *separator) {
 // arg: dst=output  src=input
 // ret: (none)
 void util_EncodeMessage(char *dst, char *src) {
-  strcpy(dst, src);
-  util_xorstring(dst, src);
+//  strcpy(dst, src);
+//  util_xorstring(dst, src);
 
   int rn = rand() % 99;
   int t1, t2;
@@ -156,7 +156,7 @@ void _util_SendMesg(char *file, int line, int fd, int func, char *buffer) {
     print("\n SendMesg fd err %s:%d!! ==> func(%d)\n", file, line, func);
     return;
   }
-  sprintf(t1, "&;%d%s;#;", func, buffer);
+  sprintf(t1, "&;%d%s;#;", func+23, buffer);
   util_EncodeMessage(t2, t1);
   lssproto_Send(fd, t2);
 }
