@@ -76,11 +76,6 @@ int util_SplitMessage(char *source, char *separator) {
   return TRUE;
 }
 
-// -------------------------------------------------------------------
-// Encode the message
-//
-// arg: dst=output  src=input
-// ret: (none)
 void util_EncodeMessage(char *dst, char *src) {
 //  strcpy(dst, src);
 //  util_xorstring(dst, src);
@@ -129,12 +124,9 @@ void util_DecodeMessage(char *dst, char *src) {
 // ret: 1=success  0=failed (function not complete)
 int util_GetFunctionFromSlice(int *func, int *fieldcount) {
   char t1[1024 * 16];
-  int i;
   strcpy(t1, MesgSlice[1]);
-  // Robin adjust
-//  *func=atoi(t1);
-  *func = atoi(t1) - 13;
-  for(i = 0; i < SLICE_MAX; i++)
+  *func = atoi(t1);
+  for(int i = 0; i < SLICE_MAX; i++)
     if(strcmp(MesgSlice[i], DEFAULTFUNCEND) == 0) {
       *fieldcount = i - 2;  // - "&" - "#" - "func" 3 fields
       return 1;
@@ -147,16 +139,15 @@ void util_DiscardMessage(void) {
   SliceCount = 0;
 }
 
-void _util_SendMesg(char *file, int line, int fd, int func, char *buffer) {
-//  char t1[16384], t2[16384];
+void util_SendMesg(int fd, int func, char *buffer) {
   char t1[1024 * 32], t2[1024 * 32];
 
   // WON ADD
   if(fd < 0) {
-    print("\n SendMesg fd err %s:%d!! ==> func(%d)\n", file, line, func);
+    print("\n SendMesg fd err ==> func(%d)\n", func);
     return;
   }
-  sprintf(t1, "&;%d%s;#;", func+23, buffer);
+  sprintf(t1, "&;%d%s;#;", func, buffer);
   util_EncodeMessage(t2, t1);
   lssproto_Send(fd, t2);
 }
@@ -363,7 +354,9 @@ void util_swapint(int *dst, int *src, char *rule) {
 
   ptr = (char *) src;
   qtr = (char *) dst;
-  for(i = 0; i < 4; i++) qtr[rule[i] - '1'] = ptr[i];
+  for(i = 0; i < 4; i++) {
+    qtr[rule[i] - '1'] = ptr[i];
+  }
 }
 
 // -------------------------------------------------------------------
@@ -371,9 +364,9 @@ void util_swapint(int *dst, int *src, char *rule) {
 // data may lose.
 //
 void util_xorstring(char *dst, char *src) {
-  int i;
   if(strlen(src) > 1024 * 64) return;
 
+  int i = 0;
   for(i = 0; i < strlen(src); i++) {
     dst[i] = src[i] ^ 255;
   }

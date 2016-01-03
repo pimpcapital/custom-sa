@@ -278,7 +278,6 @@ Game Server 游戏环境:
 // -------------------------------------------------------------------
 
 //专案 7.5  精灵的招唤  人员：彦勋 奇铨 小威
-// Terry define start -------------------------------------------------------------------
 #define _MAP_TIME                // 特殊地图,会倒数(开放)
 
 #define _ITEM_ADDPETEXP          // (可开) Change 增加宠物经验值道具(可吃此道具宠物,平常不可获得经验值)
@@ -411,8 +410,8 @@ Game Server 游戏环境:
 #endif
 
 //版本控制----------------------------------------
-#define _DEFAULT_PKEY "www.beijunyi.com"   // ( 石器 2.5 )
-#define _RUNNING_KEY  "www.beijunyi.com"   // ( 石器 2.5 )
+#define _DEFAULT_PKEY "www.longzoro.com"   // ( 石器 2.5 )
+#define _RUNNING_KEY  "www.longzoro.com"   // ( 石器 2.5 )
 #define _SA_VERSION 'L'
 
 

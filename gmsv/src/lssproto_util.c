@@ -81,9 +81,12 @@ int lssproto_default_write_wrap(int fd, char *buf, int size) {
 void lssproto_Send(int fd, char *msg) {
   if(lssproto_writelogfilename[0] != '\0') {
     FILE *wfp = fopen(lssproto_writelogfilename, "a+");
-    if(wfp)fprintf(wfp, "%s\n", msg);
-    if(wfp)fclose(wfp);
-
+    if(wfp) {
+      fprintf(wfp, "%s\n", msg);
+    }
+    if(wfp) {
+      fclose(wfp);
+    }
   }
   /* add a newline character*/
   unsigned int l = strlen(msg);

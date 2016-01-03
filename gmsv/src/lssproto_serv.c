@@ -1379,8 +1379,7 @@ void lssproto_TK_send(int fd, int index, char *message, int color) {
   util_SendMesg(fd, LSSPROTO_TK_SEND, buffer);
 }
 
-void lssproto_MC_send(int fd, int fl, int x1, int y1, int x2, int y2, int tilesum, int objsum, int eventsum,
-                      char *data) {
+void lssproto_MC_send(int fd, int fl, int x1, int y1, int x2, int y2, int tilesum, int objsum, int eventsum, char *data) {
   char buffer[1024 * 64];
   int checksum = 0;
 

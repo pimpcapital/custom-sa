@@ -282,11 +282,6 @@ int numstrIsKanji(char *str) {
 
 }
 
-/*
- * 蜗褡芊匹醒袄毛  仄凶  侬  毛int卞  晶
- * char *str   侬  
- * 忒曰袄   侬  互  允醒袄
- */
 int decimalstrToInt(char *str) {
 
   double val;

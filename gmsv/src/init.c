@@ -135,7 +135,6 @@ int init(int argc, char **argv, char **env) {
   }
 
   if(getDebuglevel() >= 1) {
-//		print("ServerType: %d\n", getServerType() );
     print("调试等级: %d\n", getDebuglevel());
     print("运行等级: %d\n", getrunlevel());
     print("接收缓冲: %d\n", getrecvbuffer() * 1024);
@@ -471,7 +470,6 @@ int init(int argc, char **argv, char **env) {
     goto CLOSEBIND;
   print("完成\n");
 
-  /* 失奶  丞及笺    毛  戈 */
   print("读取物品成份文件...");
   if(!ITEM_initItemAtom(getItematomfile()))
     goto CLOSEBIND;
