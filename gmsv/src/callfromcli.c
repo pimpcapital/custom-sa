@@ -657,10 +657,6 @@ void lssproto_L_recv(int fd, int dir) {
   CHAR_Look(fd_charaindex, dir);
 }
 
-
-/*------------------------------------------------------------
- * 民乓永玄迕丢永本□斥及霜耨
- ------------------------------------------------------------*/
 void lssproto_TK_recv(int fd, int x, int y, char *message, int color, int area) {
   int fd_charaindex, ix, iy;//ttom+2
   int fmindex, channel;
@@ -669,56 +665,52 @@ void lssproto_TK_recv(int fd, int x, int y, char *message, int color, int area) 
   fd_charaindex = CONNECT_getCharaindex(fd);
   fmindex = CHAR_getInt(fd_charaindex, CHAR_FMINDEX);
   channel = CHAR_getWorkInt(fd_charaindex, CHAR_WORKFMCHANNEL);
-  {// Robin 0629 silent
-    int silentSec, talkCount;
-    silentSec = CHAR_getInt(fd_charaindex, CHAR_SILENT);
-    if(silentSec > 0) {
-      int loginTime;
-      char buf[256];
-      int leftSec;
-      loginTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKLOGINTIME);
-      // 防止时间修正回朔後　异常禁言  Robin 20040817
-      if((int) NowTime.tv_sec < loginTime) {
-        CHAR_setInt(fd_charaindex, CHAR_SILENT, 0);
-        return;
-      }
-      if(((int) NowTime.tv_sec - loginTime) > silentSec) {
-        CHAR_setInt(fd_charaindex, CHAR_SILENT, 0);
-        return;
-      }
-      silentSec += 10;  //多禁10秒
-
-      leftSec = silentSec - ((int) NowTime.tv_sec - loginTime);
-      sprintf(buf, "禁言中!!还有%d秒，再讲多禁10秒钟。", leftSec);
-      CHAR_talkToCli(fd_charaindex, -1, buf, color);
-      CHAR_setInt(fd_charaindex, CHAR_SILENT, silentSec);
+  int silentSec = CHAR_getInt(fd_charaindex, CHAR_SILENT);
+  if(silentSec > 0) {
+    int loginTime;
+    char buf[256];
+    int leftSec;
+    loginTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKLOGINTIME);
+    // 防止时间修正回朔後　异常禁言  Robin 20040817
+    if((int) NowTime.tv_sec < loginTime) {
+      CHAR_setInt(fd_charaindex, CHAR_SILENT, 0);
       return;
     }
-
-    talkCount = CHAR_getWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT);
-    talkCount++;
-    CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, talkCount);
-    if(talkCount > 8) {
-      int lastTalkTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKTALKTIME);
-      if((int) NowTime.tv_sec - lastTalkTime < 10) {
-        CHAR_setInt(fd_charaindex, CHAR_SILENT, 60);
-        CHAR_setWorkInt(fd_charaindex, CHAR_WORKLOGINTIME, (int) NowTime.tv_sec);
-        CHAR_talkToCli(fd_charaindex, -1, "你太多话了唷，请你的嘴巴先休息个一分钟吧！", color);
-        CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0);
-        return;
-      } else {
-        CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKTIME, (int) NowTime.tv_sec);
-        CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0);
-      }
+    if(((int) NowTime.tv_sec - loginTime) > silentSec) {
+      CHAR_setInt(fd_charaindex, CHAR_SILENT, 0);
+      return;
     }
+    silentSec += 10;  //多禁10秒
 
+    leftSec = silentSec - ((int) NowTime.tv_sec - loginTime);
+    sprintf(buf, "禁言中!!还有%d秒，再讲多禁10秒钟。", leftSec);
+    CHAR_talkToCli(fd_charaindex, -1, buf, color);
+    CHAR_setInt(fd_charaindex, CHAR_SILENT, silentSec);
+    return;
+  }
+
+  int talkCount = CHAR_getWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT);
+  talkCount++;
+  CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, talkCount);
+  if(talkCount > 8) {
+    int lastTalkTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKTALKTIME);
+    if((int) NowTime.tv_sec - lastTalkTime < 10) {
+      CHAR_setInt(fd_charaindex, CHAR_SILENT, 60);
+      CHAR_setWorkInt(fd_charaindex, CHAR_WORKLOGINTIME, (int) NowTime.tv_sec);
+      CHAR_talkToCli(fd_charaindex, -1, "你太多话了唷，请你的嘴巴先休息个一分钟吧！", color);
+      CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0);
+      return;
+    } else {
+      CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKTIME, (int) NowTime.tv_sec);
+      CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0);
+    }
   }
   ix = CHAR_getInt(fd_charaindex, CHAR_X);
   iy = CHAR_getInt(fd_charaindex, CHAR_Y);
   x = ix;
   y = iy;
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
-  if(!CONNECT_get_shutup(fd)) { //ttom add the shut up function
+  if(!CONNECT_get_shutup(fd)) {
     CHAR_Talk(fd, fd_charaindex, message, color, area);
   }
 }
@@ -730,15 +722,11 @@ void lssproto_M_recv(int fd, int fl, int x1, int y1, int x2, int y2) {
 
   mapdata = MAP_getdataFromRECT(fl, &seek, &ret);
   if(mapdata != NULL) {
-    lssproto_M_send(fd, fl, ret.x, ret.y,
-                    ret.x + ret.width, ret.y + ret.height, mapdata);
+    lssproto_M_send(fd, fl, ret.x, ret.y, ret.x + ret.width, ret.y + ret.height, mapdata);
   }
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_C_recv(int fd, int index) {
-  /*  仇木分仃凛棉及涩烂毛苇卅中仪卞允月  */
   CHECKFD;
   CHAR_sendCSpecifiedObjindex(fd, index);
 }
@@ -835,8 +823,6 @@ void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
   lssproto_EV_send(fd, seqno, rc);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_EN_recv(int fd, int x, int y) {
   int ret = FALSE, err = 0;
   int fd_charaindex;
@@ -857,8 +843,6 @@ void lssproto_EN_recv(int fd, int x, int y) {
   }
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_DU_recv(int fd, int x, int y) {
   OBJECT object;
   int fd_charaindex;
@@ -868,65 +852,39 @@ void lssproto_DU_recv(int fd, int x, int y) {
   int found = FALSE;
   CHECKFDANDTIME;
   fd_charaindex = CONNECT_getCharaindex(fd);
-  {//ttom avoid warp at will
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    if((ix != x) || (iy != y)) {
-      //print("\n<DU>--Error!!!!");
-      //print("\n<DU>origion x=%d,y=%d",ix,iy);
-      //print("\n<DU>modify  X=%d,Y=%d",x,y);
-      x = ix;
-      y = iy;
-    }
+  int ix, iy;
+  ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  if((ix != x) || (iy != y)) {
+    x = ix;
+    y = iy;
   }
 
 
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKPARTYMODE)
      != CHAR_PARTY_CLIENT) {
-    int i;
-    // 愤坌及奶件犯永弁旦
     charaindex = fd_charaindex;
     CHAR_setMyPosition(charaindex, x, y, TRUE);
-    /* WALKARRAY毛弁伉失允月 */
     CHAR_setWorkChar(charaindex, CHAR_WORKWALKARRAY, "");
 
 
-    /* 赓渝祭允月 */
-    for(i = 0; i < CONNECT_WINDOWBUFSIZE; i++) {
+    for(int i = 0; i < CONNECT_WINDOWBUFSIZE; i++) {
       CONNECT_setDuelcharaindex(fd, i, -1);
     }
 
-    CHAR_getCoordinationDir(CHAR_getInt(charaindex, CHAR_DIR),
-                            CHAR_getInt(charaindex, CHAR_X),
-                            CHAR_getInt(charaindex, CHAR_Y),
-                            1, &frontx, &fronty);
+    CHAR_getCoordinationDir(CHAR_getInt(charaindex, CHAR_DIR), CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y), 1, &frontx, &fronty);
 
-    for(object = MAP_getTopObj(CHAR_getInt(charaindex, CHAR_FLOOR),
-                               frontx, fronty);
-        object;
-        object = NEXT_OBJECT(object)) {
+    for(object = MAP_getTopObj(CHAR_getInt(charaindex, CHAR_FLOOR), frontx, fronty); object; object = NEXT_OBJECT(object)) {
       int toindex;
       int objindex = GET_OBJINDEX(object);
-      /* 平乓仿弁正□元扎卅中 */
       if(OBJECT_getType(objindex) != OBJTYPE_CHARA) continue;
       toindex = OBJECT_getIndex(objindex);
-      /* 皿伊奶乩□元扎卅中 */
       if(CHAR_getInt(toindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER) continue;
       found = TRUE;
       if(CHAR_getWorkInt(toindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)continue;
       int floor = CHAR_getInt(charaindex, CHAR_FLOOR);
 
-      if(!CHAR_getFlg(toindex, CHAR_ISDUEL)
-#ifdef _BATTLE_FLOOR
-                                                                                                                                && (!strcmp(getBattleFloorCF(),"是")
-					&& floor!=getBattleFloor(1)
-					&& floor!=getBattleFloor(2)
-					&& floor!=getBattleFloor(3)
-					&& floor!=getBattleFloor(4)
-					&& floor!=getBattleFloor(5))
-#endif
-          )
+      if(!CHAR_getFlg(toindex, CHAR_ISDUEL))
         continue;
 #ifdef _AUTO_PK
       if(!CHAR_getFlg(toindex, CHAR_ISDUEL)) {
@@ -936,29 +894,22 @@ void lssproto_DU_recv(int fd, int x, int y) {
         if(CHAR_getInt(toindex, CHAR_AUTOPK) == -1)continue;
       }
 #endif
-      // shan begin
-      {
-        int i;
-        for(i = 0; i < FAMILY_FMPKFLOOR; i++) {
-          if(fmpkflnum[i].fl == CHAR_getInt(charaindex, CHAR_FLOOR)) {
-            if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEFLAG) == -1) {
-              lssproto_EN_send(fd, FALSE, 0);
-              return;
-            }
-            if(CHAR_getInt(charaindex, CHAR_FMINDEX) == CHAR_getInt(toindex, CHAR_FMINDEX)) {
-              lssproto_EN_send(fd, FALSE, 0);
-              return;
-            }
+      for(int i = 0; i < FAMILY_FMPKFLOOR; i++) {
+        if(fmpkflnum[i].fl == CHAR_getInt(charaindex, CHAR_FLOOR)) {
+          if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEFLAG) == -1) {
+            lssproto_EN_send(fd, FALSE, 0);
+            return;
+          }
+          if(CHAR_getInt(charaindex, CHAR_FMINDEX) == CHAR_getInt(toindex, CHAR_FMINDEX)) {
+            lssproto_EN_send(fd, FALSE, 0);
+            return;
           }
         }
       }
-      // shan end
 
-      // 阂间卅日褪毛裟氏匹仁月
       if(CHAR_getWorkInt(toindex, CHAR_WORKPARTYMODE)
          == CHAR_PARTY_CLIENT) {
         int tmpindex = CHAR_getWorkInt(toindex, CHAR_WORKPARTYINDEX1);
-        /* 锹澎互皿伊奶乩□匹卅中仪手丐月 */
         if(CHAR_CHECKINDEX(tmpindex)) {
           if(CHAR_getWorkInt(tmpindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER) {
             continue;
@@ -970,19 +921,14 @@ void lssproto_DU_recv(int fd, int x, int y) {
       cnt++;
       if(cnt == CONNECT_WINDOWBUFSIZE) break;
     }
-    /* 中卅井匀凶 */
     if(cnt == 0) {
       goto lssproto_DU_recv_Err;
     }
-      /* ㄠ谛分仃分匀凶日穑巨件玄伉□ */
     else if(cnt == 1) {
       enemyindex = CONNECT_getDuelcharaindex(fd, 0);
-      // 锹澎互褪卅日公及引引巨件市它件玄今六月互
-      // 阂间卅日褪毛裟氏匹仁月
       if(CHAR_getWorkInt(enemyindex, CHAR_WORKPARTYMODE)
          == CHAR_PARTY_CLIENT) {
         enemyindex = CHAR_getWorkInt(enemyindex, CHAR_WORKPARTYINDEX1);
-        // 卅兮井褪互中卅中
         if(enemyindex < 0)goto lssproto_DU_recv_Err;
       }
       ret = BATTLE_CreateVsPlayer(charaindex, enemyindex);
@@ -998,32 +944,19 @@ void lssproto_DU_recv(int fd, int x, int y) {
       char escapebuf[2048];
       strcpy(msgbuf, "1\n要和谁战斗？\n");
       strlength = strlen(msgbuf);
-      for(i = 0;
-          CONNECT_getDuelcharaindex(fd, i) != -1
-          && i < CONNECT_WINDOWBUFSIZE;
-          i++) {
-        char *a = CHAR_getChar(
-            CONNECT_getDuelcharaindex(fd, i), CHAR_NAME);
+      for(int i = 0; CONNECT_getDuelcharaindex(fd, i) != -1 && i < CONNECT_WINDOWBUFSIZE; i++) {
+        char *a = CHAR_getChar(CONNECT_getDuelcharaindex(fd, i), CHAR_NAME);
         char buf[256];
-        snprintf(buf, sizeof(buf), "%s [%s]\n", a,
-                 CHAR_getWorkInt(
-                     CONNECT_getDuelcharaindex(fd, i),
-                     CHAR_WORKPARTYMODE)
-                 != CHAR_PARTY_NONE ? "团体" : "单独");
+        snprintf(buf, sizeof(buf), "%s [%s]\n", a, CHAR_getWorkInt(CONNECT_getDuelcharaindex(fd, i), CHAR_WORKPARTYMODE) != CHAR_PARTY_NONE ? "团体" : "单独");
         if(strlength + strlen(buf) > arraysizeof(msgbuf)) {
-          print("%s:%d视窗讯息buffer不足。\n",
-                __FILE__, __LINE__);
+          print("%s:%d视窗讯息buffer不足。\n", __FILE__, __LINE__);
           break;
         }
         strcpy(&msgbuf[strlength], buf);
         strlength += strlen(buf);
       }
 
-      lssproto_WN_send(fd, WINDOW_MESSAGETYPE_SELECT,
-                       WINDOW_BUTTONTYPE_CANCEL,
-                       CHAR_WINDOWTYPE_SELECTDUEL,
-                       -1,
-                       makeEscapeString(msgbuf, escapebuf, sizeof(escapebuf)));
+      lssproto_WN_send(fd, WINDOW_MESSAGETYPE_SELECT, WINDOW_BUTTONTYPE_CANCEL, CHAR_WINDOWTYPE_SELECTDUEL, -1, makeEscapeString(msgbuf, escapebuf, sizeof(escapebuf)));
       ret = TRUE;
     }
   }
@@ -1031,7 +964,6 @@ void lssproto_DU_recv(int fd, int x, int y) {
 
   lssproto_DU_recv_Err:;
   if(ret == FALSE) {
-    /* 瑛绊霜耨 */
     lssproto_EN_send(fd, FALSE, 0);
     if(cnt > 0) CHAR_talkToCli(charaindex, -1, "遭遇失败！", CHAR_COLORYELLOW);
     else if(found) CHAR_talkToCli(charaindex, -1, "无人可以对战。", CHAR_COLORYELLOW);
@@ -1101,7 +1033,6 @@ void lssproto_FS_recv(int fd, int flg) {
   CHECKFDANDTIME;
 
   fd_charaindex = CONNECT_getCharaindex(fd);
-  /* 椭瘀反竣卞六内卞公及引引白仿弘凳蕙 */
   CHAR_setFlg(fd_charaindex, CHAR_ISPARTY,
               (flg & CHAR_FS_PARTY) ? TRUE : FALSE);
   //CHAR_setFlg( fd_charaindex, CHAR_ISBATTLE,
@@ -1172,7 +1103,6 @@ void lssproto_PR_recv(int fd, int x, int y, int request) {
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
 
   if(request == 0) {
-    /* 轮迩允月 */
     result = CHAR_DischargeParty(fd_charaindex, 0);
   }
   else if(request == 1) {
@@ -1236,8 +1166,6 @@ void lssproto_SPET_recv(int fd, int standbypet) {
 
 #endif
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_AC_recv(int fd, int x, int y, int actionno) {
   int fd_charaindex;
   CHECKFDANDTIME;
@@ -1307,14 +1235,6 @@ void lssproto_JB_recv(int fd, int x, int y) {
      #ifdef _AUTO_PK
      || (floor == 20000 && CHAR_getInt(charaindex, CHAR_AUTOPK) == -1)
 #endif
-#ifdef _WATCH_FLOOR
-                                                                                                                            || floor == getWatchFloor(1)
-		|| floor == getWatchFloor(2)
-		|| floor == getWatchFloor(3)
-		|| floor == getWatchFloor(4)
-		|| floor == getWatchFloor(5)
-		|| !strcmp(getWatchFloorCF(),"是")
-#endif
       ) {
     BATTLE_WatchTry(charaindex);
   } else {
@@ -1340,10 +1260,7 @@ void lssproto_KN_recv(int fd, int havepetindex, char *data) {
 
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
-void lssproto_WN_recv(int fd, int x, int y, int seqno,
-                      int objindex, int select, char *data) {
+void lssproto_WN_recv(int fd, int x, int y, int seqno, int objindex, int select, char *data) {
   int fd_charaindex;
 
   CHECKFDANDTIME;
@@ -1384,8 +1301,7 @@ void lssproto_WN_recv(int fd, int x, int y, int seqno,
       ifloor = ch->data[CHAR_FLOOR];
       for(i = iy - 1; i <= iy + 1; i++) {
         for(j = ix - 1; j <= ix + 1; j++) {
-          for(object = MAP_getTopObj(ifloor, j, i); object;
-              object = NEXT_OBJECT(object)) {
+          for(object = MAP_getTopObj(ifloor, j, i); object; object = NEXT_OBJECT(object)) {
             int objindex = GET_OBJINDEX(object);
             switch(OBJECT_getType(objindex)) {
               case OBJTYPE_CHARA:
@@ -1420,7 +1336,6 @@ void lssproto_WN_recv(int fd, int x, int y, int seqno,
       }
     }
   }
-  //ttom end
   START_WN:
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) {
@@ -1432,14 +1347,11 @@ void lssproto_WN_recv(int fd, int x, int y, int seqno,
     CHAR_processWindow(fd_charaindex, seqno,
                        select, objindex, makeStringFromEscaped(data));
   }
-//ttom+1
   END_WN:
   return;
   //CONNECT_set_pass(fd,TRUE);//ttom
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_HL_recv(int fd, int flg) {
   char msgbuf[128];
   int i, fd_charaindex;
@@ -1459,8 +1371,7 @@ void lssproto_HL_recv(int fd, int flg) {
   }
 #endif
   if(flg == TRUE) {
-    BattleArray[CHAR_getWorkInt(fd_charaindex,
-                                CHAR_WORKBATTLEINDEX)].Side[
+    BattleArray[CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEINDEX)].Side[
         CHAR_getWorkInt(fd_charaindex,
                         CHAR_WORKBATTLESIDE)].flg |= BSIDE_FLG_HELP_OK;
 
@@ -1474,9 +1385,7 @@ void lssproto_HL_recv(int fd, int flg) {
         CHAR_getWorkInt(fd_charaindex,
                         CHAR_WORKBATTLESIDE)].flg &= ~BSIDE_FLG_HELP_OK;
 
-    snprintf(msgbuf, sizeof(msgbuf),
-             "%s 决定拒绝帮助。",
-             CHAR_getChar(fd_charaindex, CHAR_NAME));
+    snprintf(msgbuf, sizeof(msgbuf), "%s 决定拒绝帮助。", CHAR_getChar(fd_charaindex, CHAR_NAME));
   }
 
   for(i = 0; i < 5; i++) {
@@ -1489,21 +1398,16 @@ void lssproto_HL_recv(int fd, int flg) {
       if(tofd != -1) {
         lssproto_HL_send(tofd, flg);
       }
-      /* 丢永本□斥霜耨 */
       CHAR_talkToCli(toindex, -1, msgbuf, CHAR_COLORYELLOW);
       CHAR_sendBattleEffect(toindex, ON);
     }
   }
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_ProcGet_recv(int fd) {
   outputNetProcLog(fd, 1);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_PlayerNumGet_recv(int fd) {
   int i;
   int clicnt = 0;
@@ -1519,33 +1423,24 @@ void lssproto_PlayerNumGet_recv(int fd) {
   lssproto_PlayerNumGet_send(fd, clicnt, playercnt);
 }
 
-
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_LB_recv(int fd, int x, int y) {
   int fd_charaindex;
 
   CHECKFDANDTIME;
   fd_charaindex = CONNECT_getCharaindex(fd);
-  {//ttom avoid warp at will
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    if((ix != x) || (iy != y)) {
-      //print("\n<LB>--Error!!!!");
-      //print("\n<LB>origion x=%d,y=%d",ix,iy);
-      //print("\n<LB>modify  X=%d,Y=%d",x,y);
-      x = ix;
-      y = iy;
-    }
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  if((ix != x) || (iy != y)) {
+    //print("\n<LB>--Error!!!!");
+    //print("\n<LB>origion x=%d,y=%d",ix,iy);
+    //print("\n<LB>modify  X=%d,Y=%d",x,y);
+    x = ix;
+    y = iy;
   }
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
-  /* 杀梁匹五月井民尼永弁仄化杀梁允月 */
   BATTLE_WatchTry(fd_charaindex);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_Shutdown_recv(int fd, char *passwd, int min) {
   char buff[32];
   if(strcmp(passwd, "hogehoge") == 0) {
@@ -1563,21 +1458,17 @@ void lssproto_Shutdown_recv(int fd, char *passwd, int min) {
   }
 }
 
-void lssproto_PMSG_recv(int fd, int index, int petindex, int itemindex,
-                        char *message, int color) {
+void lssproto_PMSG_recv(int fd, int index, int petindex, int itemindex, char *message, int color) {
 
   // CoolFish: Prevent Trade Cheat 2001/4/18
   int fd_charaindex;
   fd_charaindex = CONNECT_getCharaindex(fd);
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_FREE)
     return;
-  PETMAIL_sendPetMail(CONNECT_getCharaindex(fd),
-                      index, petindex, itemindex, message, color);
+  PETMAIL_sendPetMail(CONNECT_getCharaindex(fd), index, petindex, itemindex, message, color);
 
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_PS_recv(int fd, int havepetindex, int havepetskill, int toindex, char *data) {
   int to_charaindex = Callfromcli_Util_getTargetCharaindex(fd, toindex);
   int charaindex = CONNECT_getCharaindex(fd);
@@ -1590,23 +1481,17 @@ void lssproto_PS_recv(int fd, int havepetindex, int havepetskill, int toindex, c
   lssproto_PS_send(fd, ret, havepetindex, havepetskill, toindex);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_SP_recv(int fd, int x, int y, int dir) {
   int fd_charaindex;
 
   fd_charaindex = CONNECT_getCharaindex(fd);
-  {//ttom avoid the warp at will
-    int i_x, i_y;
-    i_x = CHAR_getInt(fd_charaindex, CHAR_X);
-    i_y = CHAR_getInt(fd_charaindex, CHAR_Y);
+  int i_x = CHAR_getInt(fd_charaindex, CHAR_X);
+  int i_y = CHAR_getInt(fd_charaindex, CHAR_Y);
 
-    if((i_x != x) || (i_y != y)) {
-      x = i_x;
-      y = i_y;
-    }
-  }//ttom
-
+  if((i_x != x) || (i_y != y)) {
+    x = i_x;
+    y = i_y;
+  }
   CHAR_setMyPosition_main(fd_charaindex, x, y, dir, TRUE);
 
 }

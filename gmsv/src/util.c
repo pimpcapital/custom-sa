@@ -505,14 +505,13 @@ char *makeStringFromEscaped(char *src) {
 }
 
 char *makeEscapeString(char *src, char *dest, int sizeofdest) { //ttom this function all change, copy from the second
-  int i;
   int srclen = 0;
   int destindex = 0;
 
   if(!src) return NULL;
   srclen = strlen(src);
 
-  for(i = 0; i < srclen; i++) {
+  for(int i = 0; i < srclen; i++) {
     int dirty = FALSE;
     int j;
     char escapechar = '\0';
