@@ -57,21 +57,10 @@ extern void GOLD_DeleteTimeCheckOne(int objindex);
 void fix_item_bug(int charaindex, int i);
 
 
-/*====================平乓仿及综岳卞楮允月楮醒====================*/
-/*------------------------------------------------------------
- * 综岳允月凛及左皿扑亦件及袄毛涩烂仄方丹午允月［
- * 娄醒
- *  ch      Char*       涩烂燮及平乓仿及犯□正
- *  option  char*       弁仿奶失件玄井日仁月犯□正
- * 忒曰袄
- *  岳      TRUE
- *  撩      FALSE
- ------------------------------------------------------------*/
 static int CHAR_makeCharFromOptionAtCreate(Char *ch,
                                            int vital, int str, int tgh, int dex,
                                            int earth, int water, int fire, int wind) {
 
-  /*    躲岭及腹据毛垫丹  */
   int para[4];
   int attr[4];
   int i;
@@ -91,10 +80,6 @@ static int CHAR_makeCharFromOptionAtCreate(Char *ch,
 #define MAXPARAMETER 20
 #define PKMAXPARAMETER 300
   parasum = 0;
-  /*
-	 * 允屯化及犯□正及  卞 - 反丐匀化反卅日卅中仄
-	 * 瑕丐孔木及仪毛哔尹化云中化    及袄手译尹卅中
-	 */
 
   for(i = 0; i < arraysizeof(para); i++) {
     if(para[i] < 0 || para[i] > MAXPARAMETER)return FALSE;
@@ -112,25 +97,20 @@ static int CHAR_makeCharFromOptionAtCreate(Char *ch,
 #define MAXATTRIBUTE 10
   cnt = 0;
   attrsum = 0;
-  /* 箪岭及民尼永弁毛允月 */
   for(i = 0; i < arraysizeof(para); i++) {
     if(attr[i] < 0 || attr[i] > MAXATTRIBUTE)return FALSE;
     attrsum += attr[i];
     if(attr[i] > 0) cnt++;
   }
-  /* 宁煌袄反10 */
   if(attrsum != MAXATTRIBUTE) return FALSE;
 
-  /* 2勾方曰聂仁喃曰癫化日木化中凶日蛲   */
   if(cnt > 2) return FALSE;
 
-  /* 菅箪岭反喃曰癫化日木卅中 */
   if(attr[0] > 0 && attr[2] > 0) return FALSE;
   if(attr[1] > 0 && attr[3] > 0) return FALSE;
 
 #undef MAXATTRIBUTE
 
-  /*  戊疋□  */
   ch->data[CHAR_VITAL] = vital * 100;
   ch->data[CHAR_STR] = str * 100;
   ch->data[CHAR_TOUGH] = tgh * 100;
@@ -2654,8 +2634,7 @@ char *CHAR_makeStatusString(int index, char *category) {
   return CHAR_statusSendBuffer;
 }
 
-//int CHAR_sendStatusString( int charaindex, char* category )
-int _CHAR_sendStatusString(int charaindex, char *category, char *file, int line) {
+int CHAR_sendStatusString(int charaindex, char *category) {
   char *string;
 
   //print("\nsend_S:%s:%d ", file, line);
@@ -3058,7 +3037,7 @@ void CHAR_Look(int charaindex, int dir) {
   }
 }
 
-int _CHAR_makeObjectCString(char *file, int line, int objindex, char *buf, int buflen) {
+int CHAR_makeObjectCString(int objindex, char *buf, int buflen) {
   char objindexbuf[64];
   if(CHECKOBJECT(objindex) == FALSE) return FALSE;
 
@@ -3079,7 +3058,7 @@ int _CHAR_makeObjectCString(char *file, int line, int objindex, char *buf, int b
 					CHAR_COLORCYAN, CHAR_COLORRED, CHAR_COLORPURPLE, CHAR_COLORBLUE2,CHAR_COLORGREEN2};//转生後的颜色
 #else
       int namecolortbl[] = {CHAR_COLORWHITE, CHAR_COLORYELLOW, CHAR_COLORGREEN,
-                            CHAR_COLORCYAN, CHAR_COLORRED, CHAR_COLORPURPLE, CHAR_COLORBLUE2};//转生後的颜色
+                            CHAR_COLORCYAN, CHAR_COLORRED, CHAR_COLORPURPLE, CHAR_COLORBLUE2};
 #endif
 #else
                                                                                                                               int namecolortbl[] = { CHAR_COLORWHITE, CHAR_COLORYELLOW, CHAR_COLORGREEN,
@@ -3703,9 +3682,6 @@ int CHAR_createCharacter(int type, int floor, int x, int y, int dir,
     return FALSE;
   }
   CHAR_setWorkInt(*charaindex, CHAR_WORKOBJINDEX, *objindex);
-
-  /*  生永玄伐□弁毛垫丹  */
-
   CHAR_sendWatchEvent(*objindex, CHAR_ACTSTAND, NULL, 0, TRUE);
 
   return TRUE;
@@ -3726,24 +3702,11 @@ void CHAR_ObjectDelete(int objindex) {
   endObjectOne(objindex);
 }
 
-/*------------------------------------------------------------
- * 平乓仿毛绰轮允月［左皮斥尼弁玄手绰轮允月［
- * 生永玄伐□弁及支曰酸仄毛卅仁允凶户及手及
- * 娄醒
- *  charaindex      int     平乓仿奶件犯永永弁旦
- * 忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
 void CHAR_CharaDelete(int charaindex) {
-  /*  左皮斥尼弁玄毛绰轮  */
   CHAR_ObjectDelete(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX));
-  /*  平乓仿及绰轮    */
   CHAR_endCharOneArray(charaindex);
 }
 
-/*------------------------------------------------------------
- * 皿伊奶乩□及  匀化中月矢永玄毛壅允
- ------------------------------------------------------------*/
 void CHAR_CharaDeleteHavePet(int charaindex) {
   int i;
   int pindex;
@@ -3762,13 +3725,7 @@ void CHAR_CharaDeleteHavePet(int charaindex) {
   }
 }
 
-/*------------------------------------------------------------
- * 减变升啼卅升毛  蜇允月［
- * mode		int			0: 愤坌卞反CA霜日卅中
- *						1: 愤坌卞手CA霜月
- ------------------------------------------------------------*/
 int CHAR_sendAction(int charaindex, int action, int mode) {
-  /* 霜日木化  凶失弁扑亦件午CA毛域谯今六月  □皮伙 */
   static int table[] = {
       CHAR_ACTATTACK, CHAR_ACTDAMAGE, CHAR_ACTDOWN, CHAR_ACTACTIONSTAND,
       CHAR_ACTACTIONWALK, CHAR_ACTSIT, CHAR_ACTHAND, CHAR_ACTPLEASURE,
@@ -3776,21 +3733,16 @@ int CHAR_sendAction(int charaindex, int action, int mode) {
   };
   if(action < 0 || action >= arraysizeof(table)) return FALSE;
 
-  /* 璃曰卞失弁扑亦件毛霜耨允月 */
   CHAR_sendWatchEvent(
       CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX),
       table[action],
       NULL, 0, mode);
 
-  /* 失弁扑亦件及瓒   */
   CHAR_setWorkInt(charaindex, CHAR_WORKACTION, table[action]);
 
   return TRUE;
 }
 
-/*------------------------------------------------------------
- * 愤坌互爵    匹丐月午中丹仪毛霜耨允月［
- ------------------------------------------------------------*/
 void CHAR_sendBattleEffect(int charaindex, int onoff) {
   int opt[3];
 
@@ -3916,7 +3868,6 @@ static void CHAR_setLuck(int charaindex) {
   RealTimeToLSTime(NowTime.tv_sec, &nowlstime);
   RealTimeToLSTime(CHAR_getInt(charaindex, CHAR_LASTTIMESETLUCK), &mylstime);
 
-  /* LS凛棉匹ㄠ  动晓烦匀化中木壬CHAR_LUCK毛凳蕙允月 */
   if(nowlstime.day != mylstime.day || nowlstime.year != mylstime.year) {
     int i, r;
     r = RAND(0, 99);
@@ -3996,55 +3947,39 @@ void CHAR_JoinBattle_WindowResult(int charaindex, int select, char *data) {
 void CHAR_JoinDuel_WindowResult(int charaindex, int select, char *data) {
   int ret = FALSE;
   int fd = getfdFromCharaIndex(charaindex);
-  /* 手丹域蘸民尼永弁允月 */
   if(select != WINDOW_BUTTONTYPE_CANCEL &&
      CHAR_getWorkInt(charaindex, CHAR_WORKPARTYMODE) != CHAR_PARTY_CLIENT) {
-    /* 生旦玄互丹匀午云仄中及匹ㄠ蘸分仃伙□皿毛银丹 */
     while(1) {
       int selected;
       int enemyindex;
 
       if(fd == -1) break;
       selected = atoi(data) - 1;
-      /*   躲卅index井 */
       if(!CHAR_CHECKINDEX(CONNECT_getDuelcharaindex(fd, selected))) {
         break;
       }
-      /* 爵    井升丹井 */
-      if(CHAR_getWorkInt(CONNECT_getDuelcharaindex(fd, selected),
-                         CHAR_WORKBATTLEMODE)
-         != BATTLE_CHARMODE_NONE) {
+      if(CHAR_getWorkInt(CONNECT_getDuelcharaindex(fd, selected), CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE) {
         break;
       }
-      /* duel第井 */
-      if(!CHAR_getFlg(CONNECT_getDuelcharaindex(fd, selected),
-                      CHAR_ISDUEL)) {
+      if(!CHAR_getFlg(CONNECT_getDuelcharaindex(fd, selected), CHAR_ISDUEL)) {
         break;
       }
-      /* ㄠ汹动  卞中月井(它奴件玉它匹  中宁歹六仄化月棉卞  仃月啃) */
       if(NPC_Util_CharDistance(charaindex,
                                CONNECT_getDuelcharaindex(fd, selected))
          > 1) {
         break;
       }
-      //   及蟆及平乓仿及奶件犯永弁旦
       enemyindex = CONNECT_getDuelcharaindex(fd, selected);
-      // 锹澎互褪卅日公及引引巨件市它件玄今六月互
-      // 阂间卅日褪毛裟氏匹仁月
-      if(CHAR_getWorkInt(enemyindex, CHAR_WORKPARTYMODE)
-         == CHAR_PARTY_CLIENT) {
+      if(CHAR_getWorkInt(enemyindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_CLIENT) {
         enemyindex = CHAR_getWorkInt(enemyindex, CHAR_WORKPARTYINDEX1);
-        // 卅兮井褪互中卅中
         if(enemyindex < 0) break;
       }
-      /* 锹澎互皿伊奶乩□匹卅中仪手丐月 */
       if(CHAR_getWorkInt(enemyindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER) {
         break;
       }
       ret = BATTLE_CreateVsPlayer(charaindex, enemyindex);
       if(ret != 0) {
-        CHAR_talkToCli(charaindex, -1,
-                       "遭遇失败！", CHAR_COLORYELLOW);
+        CHAR_talkToCli(charaindex, -1, "遭遇失败！", CHAR_COLORYELLOW);
         ret = FALSE;
       }
       else {
@@ -4054,7 +3989,6 @@ void CHAR_JoinDuel_WindowResult(int charaindex, int select, char *data) {
     }
   }
   if(ret == FALSE) {
-    /* 瑛绊霜耨 */
     if(fd != -1) {
       lssproto_EN_send(fd, FALSE, 0);
     }
@@ -4097,11 +4031,8 @@ void CHAR_SelectCard_WindowResult(int charaindex, int select, char *data) {
 void CHAR_JoinParty_WindowResult(int charaindex, int select, char *data) {
   int ret = FALSE;
   int fd = getfdFromCharaIndex(charaindex);
-  /* 手丹域蘸民尼永弁允月 */
   if(select != WINDOW_BUTTONTYPE_CANCEL &&
-     /* 愤坌互由□  奴赚氏匹凶日蛲   */
      CHAR_getWorkInt(charaindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_NONE) {
-    /* 生旦玄互丹匀午云仄中及匹ㄠ蘸分仃伙□皿毛银丹 */
     while(1) {
       int parray;
       int selected;
@@ -4109,56 +4040,40 @@ void CHAR_JoinParty_WindowResult(int charaindex, int select, char *data) {
       if(fd == -1) break;
       selected = atoi(data) - 1;
 
-      /*   躲卅index井
-			 * (褐邰“它奴件玉它匹  中宁歹六仄化月棉卞
-			 *    躲卅index卞卅月第  岭互丐月)
-			 */
-      if(!CHAR_CHECKINDEX(
-          CONNECT_getJoinpartycharaindex(fd, selected))) {
+      if(!CHAR_CHECKINDEX(CONNECT_getJoinpartycharaindex(fd, selected))) {
         break;
       }
-      /* 褪互中凶日娄匀舰曰请允 */
-      if(CHAR_getWorkInt(CONNECT_getJoinpartycharaindex(
-          fd, selected), CHAR_WORKPARTYMODE)
-         == CHAR_PARTY_NONE) {
+      if(CHAR_getWorkInt(CONNECT_getJoinpartycharaindex(fd, selected), CHAR_WORKPARTYMODE) == CHAR_PARTY_NONE) {
         toindex = CONNECT_getJoinpartycharaindex(fd, selected);
       }
       else {
-        toindex = CHAR_getPartyIndex(
-            CONNECT_getJoinpartycharaindex(fd, selected), 0);
+        toindex = CHAR_getPartyIndex(CONNECT_getJoinpartycharaindex(fd, selected), 0);
         if(!CHAR_CHECKINDEX(toindex)) {
           print(" %s:%d err\n", __FILE__, __LINE__);
           break;
         }
       }
-      /* ㄠ汹动  卞中月井(它奴件玉它匹  中宁歹六仄化月棉卞  仃月啃) */
       if(NPC_Util_CharDistance(charaindex, toindex) > 1) {
         break;
       }
-      /* 爵    反分户 */
       if(CHAR_getWorkInt(toindex, CHAR_WORKBATTLEMODE)
          != BATTLE_CHARMODE_NONE) {
         break;
       }
-      /* 醮棉袱第乒□玉井 */
       if(!CHAR_getFlg(toindex, CHAR_ISPARTY)) {
         break;
       }
 
-      /* 锹澎由□  奴及谛醒反    井＂ */
       parray = CHAR_getEmptyPartyArray(toindex);
       if(parray == -1) break;
-      /* 由□  奴卞  日六月 */
       CHAR_JoinParty_Main(charaindex, toindex);
       ret = TRUE;
       break;
     }
   }
   if(ret == FALSE) {
-    CHAR_talkToCli(charaindex, -1, "无法加入团队。",
-                   CHAR_COLORYELLOW);
+    CHAR_talkToCli(charaindex, -1, "无法加入团队。", CHAR_COLORYELLOW);
   }
-  /* 瑛绊霜耨 */
   if(fd != -1) {
     lssproto_PR_send(fd, 1, ret);
   }
@@ -4167,40 +4082,22 @@ void CHAR_JoinParty_WindowResult(int charaindex, int select, char *data) {
 void CHAR_JoinBattleWatch_WindowResult(int charaindex, int select, char *data) {
   int ret = FALSE;
   int fd = getfdFromCharaIndex(charaindex);
-  /* 手丹域蘸民尼永弁允月 */
   if(select != WINDOW_BUTTONTYPE_CANCEL) {
-    /* 生旦玄互丹匀午云仄中及匹ㄠ蘸分仃伙□皿毛银丹 */
     while(1) {
       int selected;
       if(fd == -1) break;
       selected = atoi(data) - 1;
-
-      /*   躲卅index井
-			 * (褐邰“它奴件玉它匹  中宁歹六仄化月棉卞
-			 *    躲卅index卞卅月第  岭互丐月)
-			 */
       if(!CHAR_CHECKINDEX(CONNECT_getBattlecharaindex(fd, selected))) {
         break;
       }
-      /* 爵    井升丹井 */
-      if(CHAR_getWorkInt(CONNECT_getBattlecharaindex(fd, selected),
-                         CHAR_WORKBATTLEMODE)
-         == BATTLE_CHARMODE_NONE) {
+      if(CHAR_getWorkInt(CONNECT_getBattlecharaindex(fd, selected), CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) {
         break;
       }
-      /* ㄠ汹动  卞中月井(它奴件玉它匹  中宁歹六仄化月棉卞  仃月啃) */
-      if(NPC_Util_CharDistance(charaindex,
-                               CONNECT_getBattlecharaindex(
-                                   fd, selected))
-         > 1) {
+      if(NPC_Util_CharDistance(charaindex, CONNECT_getBattlecharaindex(fd, selected)) > 1) {
         break;
       }
-      /* 巨件玄伉□今六月 */
-      if(BATTLE_WatchEntry(charaindex,
-                           CONNECT_getBattlecharaindex(fd, selected)
-      )) {
-        CHAR_talkToCli(charaindex, -1, "无法观战。",
-                       CHAR_COLORYELLOW);
+      if(BATTLE_WatchEntry(charaindex, CONNECT_getBattlecharaindex(fd, selected))) {
+        CHAR_talkToCli(charaindex, -1, "无法观战。", CHAR_COLORYELLOW);
       }
       else {
         ret = TRUE;
@@ -4210,7 +4107,6 @@ void CHAR_JoinBattleWatch_WindowResult(int charaindex, int select, char *data) {
     }
   }
   if(ret == FALSE) {
-    /* 瑛绊霜耨 */
     if(fd != -1) {
       lssproto_EN_send(fd, FALSE, 0);
     }

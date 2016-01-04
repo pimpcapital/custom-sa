@@ -419,11 +419,5 @@ Game Server 游戏环境:
 
 
 //特殊功能控制----------------------------------------
-
-//#define _DEBUG                   // 调试
-
-//#define _DEBUG_RET               // 接收客户端数据调试
-//#define _DEBUG_RET_CLI           // 接收客户端数据调试
-//#define _DEBUG_SEND_CLI          // 发送客户端数据调试
 //#define _GMSV_DEBUG              // GMSV调试信息
 #endif

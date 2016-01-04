@@ -28,14 +28,10 @@ int checkStringErr(char *);
 // shan add
 extern struct FM_PKFLOOR fmpkflnum[FAMILY_FMPKFLOOR];
 
-
-/* -----------------------------------------------------------------------
- * ----------------------------------------------------------------------*/
 static int Callfromcli_Util_getTargetCharaindex(int fd, int toindex) {
   int to_charaindex = -1;
   int fd_charaindex = CONNECT_getCharaindex(fd);
 
-  /* 愤坌愤褥 */
   if(toindex == 0) {
     to_charaindex = fd_charaindex;
   }
@@ -1463,26 +1459,24 @@ void lssproto_FM_recv(int fd, char *message) {
 
 }
 
-// shan 2002/01/10
 void lssproto_PETST_recv(int fd, int nPet, int sPet) {
-  int charaindex;
-  int i, nums = 0;
   CHECKFD;
 
-  charaindex = CONNECT_getCharaindex(fd);
+  int charaindex = CONNECT_getCharaindex(fd);
   if(!CHAR_CHECKINDEX(charaindex)) return;
 
   if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE)
      != BATTLE_CHARMODE_NONE)
     return;
 
-  for(i = 0; i < 5; i++) {
-    if(CHAR_getWorkInt(charaindex, CHAR_WORK_PET0_STAT + i) == TRUE)
+  int nums = 0;
+  for(int i = 0; i < 5; i++) {
+    if(CHAR_getWorkInt(charaindex, CHAR_WORK_PET0_STAT + i) == TRUE) {
       nums++;
+    }
   }
   if(nums <= 3)
     CHAR_setWorkInt(charaindex, CHAR_WORK_PET0_STAT + nPet, sPet);
-
 }
 
 #ifdef _MIND_ICON
