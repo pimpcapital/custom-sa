@@ -1460,33 +1460,15 @@ ANYTHREAD int getFdidFromCharaIndex(int charind) {
 }
 
 ANYTHREAD int CONNECT_isCLI(int fd) {
-  int a;
   CONNECT_LOCK(fd);
-  a = (Connect[fd].ctype == CLI ? TRUE : FALSE);
+  int a = (Connect[fd].ctype == CLI ? TRUE : FALSE);
   CONNECT_UNLOCK(fd);
   return a;
 }
 
 ANYTHREAD int CONNECT_isAC(int fd) {
-  int a;
   CONNECT_LOCK(fd);
-  a = (Connect[fd].ctype == AC ? TRUE : FALSE);
-  CONNECT_UNLOCK(fd);
-  return a;
-}
-
-ANYTHREAD int CONNECT_isUnderLogin(int fd) {
-  int a;
-  CONNECT_LOCK(fd);
-  a = (Connect[fd].state == LOGIN ? TRUE : FALSE);
-  CONNECT_UNLOCK(fd);
-  return a;
-}
-
-ANYTHREAD int CONNECT_isWhileLogin(int fd) {
-  int a;
-  CONNECT_LOCK(fd);
-  a = (Connect[fd].state == WHILELOGIN ? TRUE : FALSE);
+  int a = (Connect[fd].ctype == AC ? TRUE : FALSE);
   CONNECT_UNLOCK(fd);
   return a;
 }
@@ -2679,14 +2661,6 @@ void CONNECT_set_pass(int fd, int b_ps) {
   Connect[me].b_pass = b_ps;
 }
 
-int CONNECT_get_pass(int fd) {
-  int me;
-  int B_ret;
-  me = CONNECT_getCharaindex(fd);
-  B_ret = Connect[me].b_pass;
-  return B_ret;
-}
-
 void CONNECT_set_first_warp(int fd, int b_ps) {
   int me;
   me = CONNECT_getCharaindex(fd);
@@ -2902,7 +2876,3 @@ int CheckDefBTime(int charaindex, int fd, unsigned int lowTime, unsigned int bat
 }
 
 #endif
-
-int MSBUF_CHECKbuflen(int size, float defp) {
-  return TRUE;
-}

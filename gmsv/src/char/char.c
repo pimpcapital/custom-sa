@@ -3246,9 +3246,7 @@ int _CHAR_makeObjectCString(char *file, int line, int objindex, char *buf, int b
 
 void CHAR_sendCSpecifiedObjindex(int fd, int index) {
   char introduction[512];
-  if(CHECKOBJECTUSE(index)
-     && CHAR_makeObjectCString(index, introduction,
-                               sizeof(introduction))) {
+  if(CHECKOBJECTUSE(index) && CHAR_makeObjectCString(index, introduction, sizeof(introduction))) {
     lssproto_C_send(fd, introduction);
   } else {
     char mesg[32];

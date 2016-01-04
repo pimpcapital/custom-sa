@@ -114,21 +114,13 @@ void util_DecodeMessage(char *dst, char *src) {
   util_shrstring(dst, tz + INTCODESIZE, rn);
 }
 
-// -------------------------------------------------------------------
-// Get a function information from MesgSlice.  A function is a complete
-// and identifiable message received, beginned at DEFAULTFUNCBEGIN and
-// ended at DEFAULTFUNCEND.  This routine will return the function ID
-// (Action ID) and how many fields this function have.
-//
-// arg: func=return function ID    fieldcount=return fields of the function
-// ret: 1=success  0=failed (function not complete)
 int util_GetFunctionFromSlice(int *func, int *fieldcount) {
   char t1[1024 * 16];
   strcpy(t1, MesgSlice[1]);
-  *func = atoi(t1);
+  *func = atoi(t1) + RECEIVE_ADJUST;
   for(int i = 0; i < SLICE_MAX; i++)
     if(strcmp(MesgSlice[i], DEFAULTFUNCEND) == 0) {
-      *fieldcount = i - 2;  // - "&" - "#" - "func" 3 fields
+      *fieldcount = i - 2;
       return 1;
     }
 
@@ -141,13 +133,11 @@ void util_DiscardMessage(void) {
 
 void util_SendMesg(int fd, int func, char *buffer) {
   char t1[1024 * 32], t2[1024 * 32];
-
-  // WON ADD
   if(fd < 0) {
     print("\n SendMesg fd err ==> func(%d)\n", func);
     return;
   }
-  sprintf(t1, "&;%d%s;#;", func, buffer);
+  sprintf(t1, "&;%d%s;#;", func + SEND_ADJUST, buffer);
   util_EncodeMessage(t2, t1);
   lssproto_Send(fd, t2);
 }

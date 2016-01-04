@@ -89,12 +89,12 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_W2_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
     int x;
     int y;
     char direction[1024 * 64];
 
-    checksum += util_deint(2, &x);
+    int checksum = util_deint(2, &x);
     checksum += util_deint(3, &y);
     checksum += util_destring(4, direction);
     util_deint(5, &checksumrecv);
@@ -536,10 +536,10 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_C_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
     int index;
 
-    checksum += util_deint(2, &index);
+    int checksum = util_deint(2, &index);
     util_deint(3, &checksumrecv);
     if(checksum != checksumrecv) {
       util_DiscardMessage();

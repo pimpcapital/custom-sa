@@ -410,9 +410,12 @@ Game Server 游戏环境:
 #endif
 
 //版本控制----------------------------------------
-#define _DEFAULT_PKEY "www.longzoro.com"   // ( 石器 2.5 )
-#define _RUNNING_KEY  "www.longzoro.com"   // ( 石器 2.5 )
+#define _DEFAULT_PKEY "www.longzoro.com"
+#define _RUNNING_KEY  "www.longzoro.com"
 #define _SA_VERSION 'L'
+
+#define RECEIVE_ADJUST -13
+#define SEND_ADJUST +23
 
 
 //特殊功能控制----------------------------------------
