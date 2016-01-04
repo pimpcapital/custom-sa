@@ -542,15 +542,6 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
   return retvalue;
 }
 
-/*------------------------------------------------------------
- * 平乓仿互汹仁［
- * 娄醒
- *  index   int     Char匹及index
- *  dir     int       轾
- *  mode    int     0卅日汹仁［1卅日  轾鳖晶［
- * 忒曰袄
- *  CHAR_WALKRET
- ------------------------------------------------------------*/
 CHAR_WALKRET CHAR_walk(int index, int dir, int mode) {
   CHAR_WALKRET ret;
   int (*prewalk)(int, int *, int *);
@@ -580,14 +571,6 @@ CHAR_WALKRET CHAR_walk(int index, int dir, int mode) {
   return ret;
 }
 
-
-/*------------------------------------------------------------
- * 汹井六月蟆赏  ［
- * 娄醒
- *  index       int         平乓仿奶件犯永弁旦
- * 忒曰袄
- *  卅仄
- ------------------------------------------------------------*/
 void CHAR_walkcall(int index) {
   char tmp[128];
   int dir, mode;

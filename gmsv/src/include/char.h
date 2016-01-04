@@ -27,9 +27,7 @@ void CHAR_createNewChar(int clifd, int dataplacenum, char *charname,
 
 void CHAR_login(int clifd, char *data, int saveindex);
 
-#define    CHAR_warpToSpecificPoint(cindex, fl, x, y)  _CHAR_warpToSpecificPoint( __FILE__, __LINE__, cindex, fl, x, y)
-
-int _CHAR_warpToSpecificPoint(char *file, int line, int charaindex, int fl, int x, int y);
+int CHAR_warpToSpecificPoint(int charaindex, int fl, int x, int y);
 
 int CHAR_charSaveFromConnectAndChar(int fd, Char *ch, int unlock);
 
@@ -45,20 +43,16 @@ int CHAR_Skillupsend(int charaindex);
 
 void CHAR_SkillUp(int charaindex, int skillid);
 
-void CHAR_useSkill(int charaindex, int dir, int skindex);
-
 typedef enum {
-  CHAR_WALKSUCCESSED, /* 岳      */
-      CHAR_WALKSYSTEMERROR, /* 扑旦  丞巨仿□    及index民尼永弁卞
-                             * 夫匀井井匀凶午井 */
-      CHAR_WALKEXTEND, /*    区左□田□仄化汹仇丹午仄凶［NPC卞及心*/
-      CHAR_WALKHITOBJECT, /*  窒井  卞癫匀化｝汹仃卅井匀凶    */
-      CHAR_WALKPREWALK, /*  prewalk奶矛件玄匹汹仃卅井匀凶( 檗祭 ) */
-      CHAR_WALKDIE, /*  韶氏匹中化汹仃卅中  */
-      CHAR_WALK1357,          /*  标户  轾卞汹仇丹午仄化汹仃卅井匀凶  */
+  CHAR_WALKSUCCESSED,
+  CHAR_WALKSYSTEMERROR,
+  CHAR_WALKEXTEND,
+  CHAR_WALKHITOBJECT,
+  CHAR_WALKPREWALK,
+  CHAR_WALKDIE,
+  CHAR_WALK1357,
 } CHAR_WALKRET;
 
-/*====================平乓仿及啖  卞楮允月楮醒====================*/
 void CHAR_ctodirmode(char moji, int *dir, int *mode);
 
 void CHAR_getDXDY(int dir, int *dx, int *dy);
@@ -101,17 +95,11 @@ void CHAR_selectTitle(int index, int titleindex);
 
 void CHAR_deleteTitle(int index, int titleindex);
 
-#define CHAR_complianceParameter(index) _CHAR_complianceParameter( index, __FILE__, __LINE__)
-
-int _CHAR_complianceParameter(int index, char *FILE, int LINE);
+int CHAR_complianceParameter(int index);
 
 int CHAR_findSurplusItemBox(int index);
 
 int CHAR_findEmptyItemBox(int index);
-
-int CHAR_findEmptyPoolItemBox(int index);
-
-int CHAR_findEmptyItemBoxNo(int index);
 
 void CHAR_moveEquipItem(int index, int fromindex, int toindex);
 
@@ -121,16 +109,13 @@ void CHAR_DropItem(int charaindex, int itemindex);
 
 int CHAR_DropItemAbsolute(int itemindex, int floor, int x, int y, int net);
 
-int CHAR_DropItemFXY(int charaindex, int itemcharaindex, int fl,
-                     int x, int y, int *objindex);
+int CHAR_DropItemFXY(int charaindex, int itemcharaindex, int fl, int x, int y, int *objindex);
 
 int CHAR_addItemSpecificItemIndex(int charaindex, int itemindex);
 
 void CHAR_PickUpItem(int charaindex, int dir);
 
 void CHAR_DropMoney(int charaindex, int amount);
-
-int CHAR_addItem(int charaindex, int itemid);
 
 int CHAR_addItemToChar(Char *ch, int itemid);
 
@@ -470,24 +455,13 @@ typedef enum {
 
 } CHAR_WINDOWTYPE;
 
-#ifdef _GMRELOAD
-typedef struct tagGMInfo {
-  char cdkey[24];
-  int level;
-} GMInfo;
-#endif
-
 int CHAR_talkToCli(int talkedcharaindex, int talkcharaindex, char *message, CHAR_COLOR color);
 
 void CHAR_talkToCliAndParty(int talkedcharaindex, int talkcharaindex, char *message, CHAR_COLOR color);
 
-int CHAR_talkToCharacter(int talkedcharaindex, int talkcharaindex, char *message);
+void CHAR_getCoordinationDir(int dir, int x, int y, int c, int *xout, int *yout);
 
-void CHAR_getCoordinationDir(int dir, int x, int y, int c,
-                             int *xout, int *yout);
-
-int CHAR_createCharacter(int type, int floor, int x, int y, int dir,
-                         int *charaindex, int *objindex, int seemap);
+int CHAR_createCharacter(int type, int floor, int x, int y, int dir, int *charaindex, int *objindex, int seemap);
 
 void CHAR_CharaDelete(int charaindex);
 
@@ -519,7 +493,6 @@ void CHAR_sendBattleWatch(int objindex, int onoff);
 
 void CHAR_sendBattleEffect(int charaindex, int onoff);
 
-// shan
 void CHAR_sendTradeEffect(int charaindex, int onoff);
 
 #ifdef _MIND_ICON
@@ -537,8 +510,7 @@ void CHAR_inputUserPetName(int index, int havepetindex, char *name);
 
 int CHAR_getPartyIndex(int index, int num);
 
-void CHAR_processWindow(int charaindex, int seqno, int select,
-                        int objindex, char *data);
+void CHAR_processWindow(int charaindex, int seqno, int select, int objindex, char *data);
 
 void CHAR_AddCharm(int charaindex, int iValue);
 
@@ -550,10 +522,10 @@ char *CHAR_getUseName(int charaindex);
 
 char *CHAR_getUseID(int charaindex);
 
-EXTERN int EnemyMoveNum;  /*   凛卞  嫖  仃月衬及醒 */
+EXTERN int EnemyMoveNum;
 
-#define DB_DUELPOINT  "db_duel"      // 犯亘巨伙禾奶件玄犯□正矛□旦
-#define DB_ADDRESSBOOK  "db_addressbook"  // 失玉伊旦皮永弁犯□正矛□旦
+#define DB_DUELPOINT  "db_duel"
+#define DB_ADDRESSBOOK  "db_addressbook"
 
 int CHAR_send_DpDBUpdate(int charaindex);
 
@@ -562,8 +534,7 @@ int CHAR_send_DpDBUpdate_AddressBook(int charaindex, int mode);
 
 void CHAR_sendPMEToArroundCharacter(int charaindex, int petindex, int flg, int no);
 
-void CHAR_sendPMEToArroundCharacterFLXY(int petindex,
-                                        int fl, int x, int y, int dir, int flg, int no);
+void CHAR_sendPMEToArroundCharacterFLXY(int petindex, int fl, int x, int y, int dir, int flg, int no);
 
 void CHAR_sendSEoArroundCharacter(int fl, int x, int y, int senumber, int sw);
 
@@ -572,11 +543,6 @@ int CHAR_initEffectSetting(char *filename);
 void CHAR_checkEffect(int charaindex);
 
 void CHAR_checkEffectLoop(void);
-
-void CHAR_initDebugChatCdkey(void);
-
-int CHAR_setChatMagicCDKey(int mode, char *cdkey);
-
 
 float GetRecoveryRate(int charaindex);
 
@@ -587,8 +553,6 @@ int storeCharaData(void);
 int Magic_RideGetHP(int toindex, int petindex, int flg);
 
 #endif
-
-// CoolFish: Trade 2001/4/18
 int CHAR_findTotalEmptyItem(int index);
 
 
@@ -601,15 +565,15 @@ int CHAR_CHECKJOINENEMY(int index);
 #ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
 #define    CHAR_EFFECT_SETTINGBUFFER  256
 typedef struct tagCHAR_effectsetting {
-  int floor;                //	白夫失
-  int effect;                //	梢请  寞
-  int level;                //	梢请及伊矛伙［  蜇及雄今［
-  int sendflg;              //	  憎巨白尼弁玄毛霜匀凶井升丹井［
-  char month[CHAR_EFFECT_SETTINGBUFFER];  //	  垫允月畸
-  char day[CHAR_EFFECT_SETTINGBUFFER];    //	  垫允月
-  char hour[CHAR_EFFECT_SETTINGBUFFER];  //	  垫允月凛棉
-  char min[CHAR_EFFECT_SETTINGBUFFER];    //	  垫允月坌
-  char expire[CHAR_EFFECT_SETTINGBUFFER];  //	  垫仄化中月赢今［(
+  int floor;
+  int effect;
+  int level;
+  int sendflg;
+  char month[CHAR_EFFECT_SETTINGBUFFER];
+  char day[CHAR_EFFECT_SETTINGBUFFER];
+  char hour[CHAR_EFFECT_SETTINGBUFFER];
+  char min[CHAR_EFFECT_SETTINGBUFFER];
+  char expire[CHAR_EFFECT_SETTINGBUFFER];
 
 } CHAR_effectsetting;
 
@@ -622,11 +586,7 @@ int CHAR_effectnum;
 int CHAR_CharSaveLostPet(int petindex, int type);
 
 #endif
-#ifdef _ALLDOMAN
 
-void InitHeroList(void);
-
-#endif
 #endif
 
 int checkUnlawWarpFloor(int floor);

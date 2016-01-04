@@ -7,6 +7,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <errno.h>
+#include <npc_autopk.h>
 #include "net.h"
 #include "common.h"
 #include "char_base.h"
@@ -425,46 +426,6 @@ static void CHAR_setCharFuncTable(Char *ch) {
                sizeof(ch->charfunctable[i]),
                tmp[i]);
   }
-}
-
-void CHAR_loginAddItem(int charaindex) {
-/*
-	int emptyindex, itemindex, id;
-	int itemID[10]={	20128, 20130, 20171, 20176, 20296,
-					20287, 20288, 20289, 20290, 20291};
-
-	{
-		int trn_num=0;
-		trn_num=CHAR_getInt(charaindex,CHAR_TRANSMIGRATION);
-		CHAR_setInt( charaindex, CHAR_MAXPOOLITEMHAVELIMIT, 10 + (trn_num * 4) )	;
-		CHAR_setInt( charaindex, CHAR_MAXPOOLPETHAVELIMIT , 5 + (trn_num * 2) );
-	}
-	while( 1){
-		emptyindex = CHAR_findEmptyItemBox( charaindex );
-		if( emptyindex == -1 ) break;
-		id = rand()%10;
-		itemindex = ITEM_makeItemAndRegist( itemID[id] );
-		if( !ITEM_CHECKINDEX( itemindex) ) break;
-		CHAR_setItemIndex( charaindex, emptyindex, itemindex);
-		ITEM_setWorkInt( itemindex, ITEM_WORKCHARAINDEX, charaindex);
-		ITEM_setWorkInt( itemindex, ITEM_WORKOBJINDEX, -1);
-		//andy_log
-		print("@:%d.", emptyindex);
-	}
-	while( 1){
-		emptyindex = CHAR_findEmptyPoolItemBox( charaindex );
-		if( emptyindex == -1 ) break;
-		id = rand()%10;
-		itemindex = ITEM_makeItemAndRegist( itemID[id] );
-		if( !ITEM_CHECKINDEX( itemindex) ) break;
-
-		CHAR_setPoolItemIndex( charaindex, emptyindex, itemindex);
-		ITEM_setWorkInt( itemindex, ITEM_WORKCHARAINDEX, charaindex);
-		ITEM_setWorkInt( itemindex, ITEM_WORKOBJINDEX, -1);
-		//andy_log
-		print("&:%d.", emptyindex);
-	}
-*/
 }
 
 void CHAR_loginCheckUserItem(int charaindex) {
@@ -1554,60 +1515,35 @@ int _CHAR_logout(char *file, int line, int clifd, int save) {
   return ret;
 }
 
-/*------------------------------------------------------------
- * watch奶矛件玄毛霜月井升丹井民尼永弁允月
- * 娄醒
- *  objindex    int             奶矛件玄毛云仇仄凶平乓仿及左皮斥尼弁玄
- *                                  奶件犯永弁旦
- *	index		int				奶矛件玄毛云仇仄凶平乓仿及奶件犯永弁旦
- *  recvindex   int				奶矛件玄毛熬仃午月平乓仿及index
- *	chac		int				失弁扑亦件及潘
- * 忒曰袄 		TRUE:	霜匀化中中方
- *				FALSE: 	蛲
- ------------------------------------------------------------*/
-static int CHAR_sendWatchEvent_sendCheck(int objindex, int index,
-                                         int recvindex, int chac) {
-  /* 愤坌互NPC匹锹澎手NPC及凛  仃月 */
+static int CHAR_sendWatchEvent_sendCheck(int objindex, int index, int recvindex, int chac) {
   if(OBJECT_getType(objindex) == OBJTYPE_CHARA &&
      CHAR_getInt(index, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER &&
      CHAR_getInt(recvindex, CHAR_WHICHTYPE)
      != CHAR_TYPEPLAYER) {
     return FALSE;
   }
-  /* 平乓仿动陆及watch 反民尼永弁  仄卞蕞 */
   if(OBJECT_getType(objindex) != OBJTYPE_CHARA) {
     return TRUE;
   }
-  /*
-	 * 愤坌尺及汹五及    反  仄卞允月
-	 */
   if(index == recvindex && chac == CHAR_ACTWALK) {
     return FALSE;
   }
 
   if(CHAR_getInt(recvindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
-    /* 爵    及谛卞反  蛲分井日霜耨仄卅中 */
     if(CHAR_getWorkInt(recvindex, CHAR_WORKBATTLEMODE)
        != BATTLE_CHARMODE_NONE) {
       return FALSE;
     }
-    /* 失弁扑亦件元扎  中凛 */
     if(CHAR_getWorkInt(index, CHAR_WORKACTION) == -1) {
       if(OBJECT_getType(objindex) == OBJTYPE_CHARA) {
-        /*   元由□  奴分匀凶日
-				 * 褪动陆反职及丢件田□卞汹五毛霜耨仄卅中
-				 */
         if(CHAR_getWorkInt(index, CHAR_WORKPARTYMODE)
            == CHAR_PARTY_CLIENT &&
            CHAR_getWorkInt(recvindex, CHAR_WORKPARTYMODE)
            != CHAR_PARTY_NONE &&
            chac == CHAR_ACTWALK) {
           int found = FALSE;
-          int loop;
-          /* 阂毛譬屯月 */
-          for(loop = 1; loop < CHAR_PARTYMAX; loop++) {
+          for(int loop = 1; loop < CHAR_PARTYMAX; loop++) {
             int partycharaindex = CHAR_getPartyIndex(recvindex, loop);
-            /*   中凶平乓仿互愤坌及由□  奴及阂分匀凶 */
             if(partycharaindex == index) {
               found = TRUE;
               break;
@@ -1615,20 +1551,14 @@ static int CHAR_sendWatchEvent_sendCheck(int objindex, int index,
           }
           if(found) return FALSE;
         }
-        /* 褪反阂及STAND毛霜耨仄卅中 */
         if(CHAR_getWorkInt(index, CHAR_WORKPARTYMODE)
            == CHAR_PARTY_CLIENT &&
            CHAR_getWorkInt(recvindex, CHAR_WORKPARTYMODE)
            == CHAR_PARTY_LEADER &&
            chac == CHAR_ACTSTAND) {
           int found = FALSE;
-          int loop;
-          /* 阂毛譬屯月 */
-          for(loop = 1; loop < CHAR_PARTYMAX; loop++) {
-            int partycharaindex
-                = CHAR_getWorkInt(recvindex,
-                                  CHAR_WORKPARTYINDEX1 + loop);
-            /* STAND仄凶平乓仿互愤坌及由□  奴及阂分匀凶 */
+          for(int loop = 1; loop < CHAR_PARTYMAX; loop++) {
+            int partycharaindex = CHAR_getWorkInt(recvindex, CHAR_WORKPARTYINDEX1 + loop);
             if(partycharaindex == index) {
               found = TRUE;
               break;
@@ -1642,8 +1572,7 @@ static int CHAR_sendWatchEvent_sendCheck(int objindex, int index,
   return TRUE;
 }
 
-void CHAR_sendWatchEvent(int objindex, int chac, int *opt,
-                         int optlen, int myflg) {
+void CHAR_sendWatchEvent(int objindex, int chac, int *opt, int optlen, int myflg) {
   int i;
   int j;
   int x = 0, y = 0, dir = 0;
@@ -2696,7 +2625,6 @@ void CHAR_deleteTitle(int index, int titleindex) {
   int title;
 
   if(!CHAR_CHECKINDEX(index))return;
-  /* 韶氏匹中月凛反分户 */
   if(CHAR_getFlg(index, CHAR_ISDIE))return;
 
   if(titleindex < 0 || titleindex >= CHAR_TITLEMAXHAVE)return;
@@ -2707,18 +2635,14 @@ void CHAR_deleteTitle(int index, int titleindex) {
   }
   CHAR_setCharHaveTitle(index, titleindex, -1);
 
-  /*  愤坌互银匀化中凶支勾卅日壬｝公木手卅仄卞允月    */
   if(CHAR_getInt(index, CHAR_INDEXOFEQTITLE) == titleindex)
     CHAR_setInt(index, CHAR_INDEXOFEQTITLE, -1);
 
-  /*
-	 * 旦  □正旦树  毛霜月［
-	 */
   CHAR_sendStatusString(index, "T");
   CHAR_send_P_StatusString(index, CHAR_P_STRING_TITLE);
 }
 
-static void CHAR_initcharWorkInt(index) {
+void CHAR_initcharWorkInt(int index) {
   float hp;
   static struct substitutionTable {
     CHAR_WORKDATAINT workindex;
@@ -2739,26 +2663,24 @@ static void CHAR_initcharWorkInt(index) {
       {CHAR_WORKMODDRUNK,     CHAR_DRUNK},
       {CHAR_WORKMODCONFUSION, CHAR_CONFUSION}
   };
-  int i;
-  for(i = 0; i < arraysizeof(subtbl); i++)
+  for(int i = 0; i < arraysizeof(subtbl); i++) {
     CHAR_setWorkInt(index, subtbl[i].workindex, CHAR_getInt(index, subtbl[i].intindex));
+  }
 
   CHAR_setWorkInt(index, CHAR_WORKMODWEAKEN, 0);
   CHAR_setWorkInt(index, CHAR_WORKMODDEEPPOISON, 0);
   CHAR_setWorkInt(index, CHAR_WORKMODBARRIER, 0);
   CHAR_setWorkInt(index, CHAR_WORKMODNOCAST, 0);
 
-  for(i = 0; i < 4; i++) {
+  for(int i = 0; i < 4; i++) {
     int attr = CHAR_getWorkInt(index, CHAR_WORKFIXEARTHAT + i);
     if(attr > 0) {
       CHAR_setWorkInt(index, CHAR_WORKFIXEARTHAT + (i + 2) % 4, attr * -1);
     }
   }
 
-  CHAR_setWorkInt(index, CHAR_WORKFIXDEX,
-                  CHAR_getInt(index, CHAR_DEX) * 0.01);
-  CHAR_setWorkInt(index, CHAR_WORKFIXVITAL,
-                  CHAR_getInt(index, CHAR_VITAL) * 0.01);
+  CHAR_setWorkInt(index, CHAR_WORKFIXDEX, CHAR_getInt(index, CHAR_DEX) * 0.01);
+  CHAR_setWorkInt(index, CHAR_WORKFIXVITAL, CHAR_getInt(index, CHAR_VITAL) * 0.01);
 
   CHAR_setWorkInt(index, CHAR_WORKFIXSTR,
                   CHAR_getInt(index, CHAR_STR) * 0.01 * 1.0
@@ -2769,7 +2691,6 @@ static void CHAR_initcharWorkInt(index) {
                   + CHAR_getInt(index, CHAR_TOUGH) * 0.01 * 0.1
                   + CHAR_getInt(index, CHAR_VITAL) * 0.01 * 0.1
                   + CHAR_getInt(index, CHAR_DEX) * 0.01 * 0.05);
-//#endif
   CHAR_setWorkInt(index, CHAR_WORKFIXTOUGH,
                   CHAR_getInt(index, CHAR_TOUGH) * 0.01 * 1.0
                   //#ifdef _BATTLE_NEWPOWER
@@ -2779,7 +2700,6 @@ static void CHAR_initcharWorkInt(index) {
                   + CHAR_getInt(index, CHAR_STR) * 0.01 * 0.1
                   + CHAR_getInt(index, CHAR_VITAL) * 0.01 * 0.1
                   + CHAR_getInt(index, CHAR_DEX) * 0.01 * 0.05);
-//#endif
 
 #ifdef _ITEMSET5_TXT
   {
@@ -2846,9 +2766,7 @@ static void CHAR_initcharWorkInt(index) {
   }
 }
 
-int _CHAR_complianceParameter(int index, char *FILE, int LINE) {
-  //print("\ncompPara:%s:%d", FILE, LINE);
-
+int CHAR_complianceParameter(int index) {
   if(!CHAR_CHECKINDEX(index)) return 0;
 
   CHAR_initcharWorkInt(index);
@@ -3449,7 +3367,7 @@ void CHAR_sendArroundCharaData(int charaindex) {
   lssproto_C_send(fd, c_msg);
 }
 
-int _CHAR_warpToSpecificPoint(char *file, int line, int charaindex, int floor, int x, int y) {
+int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
   int objindex;
   int per;
   objindex = CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX);
@@ -3639,7 +3557,8 @@ char *CHAR_appendNameAndTitle(int charaindex, char *src, char *buf,
       if(titleindex == -1)
         snprintf(buf, buflen, "%s：%s", CHAR_getChar(charaindex, CHAR_NAME), src);
       else
-        snprintf(buf, buflen, "%s(%s)：%s", CHAR_getChar(charaindex, CHAR_NAME), TITLE_makeTitleStatusString(charaindex, titleindex), src);
+        snprintf(buf, buflen, "%s(%s)：%s", CHAR_getChar(charaindex, CHAR_NAME),
+                 TITLE_makeTitleStatusString(charaindex, titleindex), src);
     }
   }
   return buf;
@@ -6072,13 +5991,6 @@ int CHAR_CharSaveLostPet(int petindex, int type)//地上0 溜宠 1 宠邮 2
 
 #endif
 
-#ifdef _ALLDOMAN
-
-void InitHeroList(void) {
-  saacproto_UpdataStele_send(acfd, "FirstLoad", "LoadHerolist", "华义", 0, 0, 0, 999);
-}
-
-#endif
 
 int checkUnlawWarpFloor(int floor) // 检查禁止玩家互相传送地区
 {
