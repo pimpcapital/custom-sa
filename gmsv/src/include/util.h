@@ -112,7 +112,6 @@ int checkRedundancy(int *src, int srclen);
 
 unsigned short CheckCRC(unsigned char *p, int size);
 
-// Shan Add
 double time_diff(struct timeval subtrahend, struct timeval subtractor);
 
 

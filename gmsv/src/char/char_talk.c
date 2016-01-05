@@ -391,14 +391,6 @@ static CHAR_ChatMagicTable CHAR_cmtbl[] = {
 #endif
 };
 
-void CHAR_initDebugChatCdkey(void) {
-  int i;
-  for(i = 0; i < DEBUGCDKEYNUM; i++) {
-    DebugCDKey[i].use = FALSE;
-    DebugCDKey[i].cdkey[0] = '\0';
-  }
-}
-
 void CHAR_initChatMagic(void) {
   int i;
   for(i = 0; i < arraysizeof(CHAR_cmtbl); i++)
@@ -407,37 +399,6 @@ void CHAR_initChatMagic(void) {
     DebugCDKey[i].use = FALSE;
     DebugCDKey[i].cdkey[0] = '\0';
   }
-}
-
-int CHAR_setChatMagicCDKey(int mode, char *cdkey) {
-
-  int i;
-  int found = FALSE;
-  if(strlen(cdkey) > 8) {
-    return -1;
-  }
-  for(i = 0; i < DEBUGCDKEYNUM; i++) {
-    if(DebugCDKey[i].use == FALSE) {
-      if(mode == 0) {
-        DebugCDKey[i].use = TRUE;
-        strcpysafe(DebugCDKey[i].cdkey, sizeof(DebugCDKey[i].cdkey), cdkey);
-        found = TRUE;
-        break;
-      }
-    }
-    else {
-      if(mode == 1) {
-        if(strcmp(DebugCDKey[i].cdkey, cdkey) == 0) {
-          DebugCDKey[i].use = FALSE;
-          DebugCDKey[i].cdkey[0] = '\0';
-          found = TRUE;
-        }
-      }
-    }
-
-  }
-  if(!found) return -1;
-  return i;
 }
 
 static CHATMAGICFUNC CHAR_getChatMagicFuncPointer(char *name, int isDebug) {

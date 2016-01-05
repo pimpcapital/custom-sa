@@ -10,4 +10,3 @@ EXTERN int one_loop_born;	/* ㄠ伙□皿匹  嫖戏心请允醒 oneloop_born */
 
 
 #endif  
-/*__NPCGEN_H__*/

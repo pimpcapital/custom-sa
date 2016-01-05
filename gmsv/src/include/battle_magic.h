@@ -8,12 +8,6 @@
 #define SPR_tyusya	100604
 #define SPR_hoshi	100605
 
-
-#define MAGIC_ID_RECOVERY	 		1
-#define MAGIC_ID_STATUS_RECOVERY	3
-#define MAGIC_ID_FIELD_CHANGE 		4
-#define MAGIC_ID_BADSTATUS	 		5
-
 enum{
 	BFUKI_CAPTUREUP,
 	BFUKI_END

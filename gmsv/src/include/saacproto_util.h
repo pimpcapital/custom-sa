@@ -152,7 +152,6 @@ int saacproto_StringRest();
 // WON ADD
 unsigned long saacproto_GetNewMessageID(void);
 
-
 void saacproto_CreateHeader(char *out, char *fname);
 
 void saacproto_CreateHeaderID(char *out, unsigned long msgid, char *fname);
@@ -169,11 +168,9 @@ char *saacproto_Ultoa(unsigned long v);
 
 void saacproto_DebugSend(int fd, char *msg);
 
-/* Modified by ringo to fasten int type transfer */
 char *saacproto_cnv10to62(int a, char *out, int outlen);
 
 int saacproto_a62toi(char *a);
 
-extern int JENCODE_KEY;
 #endif
 
