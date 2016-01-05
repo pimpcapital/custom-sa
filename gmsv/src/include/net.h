@@ -252,7 +252,7 @@ void CONNECT_set_shutup(int fd, int b_shut);
 //the avoid the user wash the screen
 int CONNECT_get_shutup(int fd);
 
-unsigned long CONNECT_get_userip(int fd);
+char* CONNECT_get_userip(int fd);
 
 void CONNECT_set_pass(int fd, int b_ps);
 

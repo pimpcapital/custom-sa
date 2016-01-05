@@ -2649,10 +2649,8 @@ void CONNECT_set_shutup(int fd, int b_shut) {
   Connect[me].b_shut_up = b_shut;
 }
 
-unsigned long CONNECT_get_userip(int fd) {
-  unsigned long ip;
-  memcpy(&ip, &Connect[fd].sin.sin_addr, sizeof(long));
-  return ip;
+char* CONNECT_get_userip(int fd) {
+  return inet_ntoa(Connect[fd].sin.sin_addr);
 }
 
 void CONNECT_set_pass(int fd, int b_ps) {

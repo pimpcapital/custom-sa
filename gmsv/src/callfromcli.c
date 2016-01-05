@@ -25,7 +25,6 @@
 
 int checkStringErr(char *);
 
-// shan add
 extern struct FM_PKFLOOR fmpkflnum[FAMILY_FMPKFLOOR];
 
 static int Callfromcli_Util_getTargetCharaindex(int fd, int toindex) {
@@ -56,19 +55,8 @@ void lssproto_ClientLogin_recv(int fd, char *cdkey, char *passwd) {
   CONNECT_setPasswd(fd, passwd);
   CONNECT_setCtype(fd, CLI);
 
-  unsigned long tmpip;
-  int a, b, c, d;
-  char ip[32];
-  tmpip = CONNECT_get_userip(fd);
-  a = (tmpip % 0x100);
-  tmpip = tmpip / 0x100;
-  b = (tmpip % 0x100);
-  tmpip = tmpip / 0x100;
-  c = (tmpip % 0x100);
-  tmpip = tmpip / 0x100;
-  d = (tmpip % 0x100);
-  sprintf(ip, "%d.%d.%d.%d", a, b, c, d);
-  print("\n登陆账号=%s 密码=%s 来自=%s\n", cdkey, passwd, ip);
+  char* ip = CONNECT_get_userip(fd);
+  print("\n登陆账号=%s 来自=%s\n", cdkey, ip);
 
   saacproto_ACCharLogin_send(acfd, fd, cdkey, passwd, ip);
 }
@@ -190,23 +178,6 @@ void lssproto_CharLogin_recv(int fd, char *charname) {
   CONNECT_setState(fd, WHILELOGIN);
 }
 
-#ifdef _ITEM_CHECKDROPATLOGOUT
-
-int CheckDropatLogout(int charaindex) {
-  int i;
-  for(i = 0; i < CHAR_MAXITEMHAVE; i++) {
-    int itemindex;
-    itemindex = CHAR_getItemIndex(charaindex, i);
-    if(ITEM_CHECKINDEX(itemindex) == FALSE)continue;
-    if(ITEM_getInt(itemindex, ITEM_DROPATLOGOUT) == TRUE) {
-      return TRUE;
-    }
-  }
-  return FALSE;
-}
-
-#endif
-
 void lssproto_CharLogout_recv(int fd, int flg) {
   char cdkey[CDKEYLEN], charname[CHARNAMELEN];
 
@@ -216,26 +187,24 @@ void lssproto_CharLogout_recv(int fd, int flg) {
     return;
   }
 
-  {
-    int charaindex = CONNECT_getCharaindex(fd);
-    int fl, x, y;
-    if(!CHAR_CHECKINDEX(charaindex)) return;
-    if(CHAR_getInt(charaindex, CHAR_LASTTALKELDER) >= 0) {
-      CHAR_getElderPosition(CHAR_getInt(charaindex, CHAR_LASTTALKELDER), &fl, &x, &y);
+  int charaindex = CONNECT_getCharaindex(fd);
+  int fl, x, y;
+  if(!CHAR_CHECKINDEX(charaindex)) return;
+  if(CHAR_getInt(charaindex, CHAR_LASTTALKELDER) >= 0) {
+    CHAR_getElderPosition(CHAR_getInt(charaindex, CHAR_LASTTALKELDER), &fl, &x, &y);
 
-      if(CHAR_getInt(charaindex, CHAR_FLOOR) == 117) {
-        CHAR_setInt(charaindex, CHAR_X, 225);
-        CHAR_setInt(charaindex, CHAR_Y, 13);
-      } else {
-        CHAR_setInt(charaindex, CHAR_FLOOR, fl);
-        CHAR_setInt(charaindex, CHAR_X, x);
-        CHAR_setInt(charaindex, CHAR_Y, y);
-      }
+    if(CHAR_getInt(charaindex, CHAR_FLOOR) == 117) {
+      CHAR_setInt(charaindex, CHAR_X, 225);
+      CHAR_setInt(charaindex, CHAR_Y, 13);
+    } else {
+      CHAR_setInt(charaindex, CHAR_FLOOR, fl);
+      CHAR_setInt(charaindex, CHAR_X, x);
+      CHAR_setInt(charaindex, CHAR_Y, y);
     }
-
-    // Robin add
-    //CHAR_setInt( charaindex, CHAR_LASTLEAVETIME, (int)time(NULL));
   }
+
+  // Robin add
+  //CHAR_setInt( charaindex, CHAR_LASTLEAVETIME, (int)time(NULL));
 
   CHAR_logout(fd, TRUE);
   CONNECT_setState(fd, WHILELOGOUTSAVE);
@@ -434,69 +403,52 @@ void lssproto_FT_recv(int fd, char *data) {
 }
 
 void lssproto_PI_recv(int fd, int x, int y, int dir) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
-  {//ttom avoid warp at will
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    if((ix != x) || (iy != y)) {
-      //print("\n<PI>--Error!!!!");
-      //print("\n<PI>origion x=%d,y=%d",ix,iy);
-      //print("\n<PI>modify  X=%d,Y=%d",x,y);
-      x = ix;
-      y = iy;
-    }
-  }//ttom end
+  int fd_charaindex = CONNECT_getCharaindex(fd);
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  if((ix != x) || (iy != y)) {
+    x = ix;
+    y = iy;
+  }
 
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
-  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE)
-     != BATTLE_CHARMODE_NONE)
+  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
   CHAR_PickUpItem(fd_charaindex, dir);
 }
 
 void lssproto_DI_recv(int fd, int x, int y, int itemindex) {
-  int charaindex;
   CHECKFD;
-  charaindex = CONNECT_getCharaindex(fd);
+  int charaindex = CONNECT_getCharaindex(fd);
 
   if(CHAR_getWorkInt(charaindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_FREE) return;
   if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE) return;
 
-  CHAR_setMyPosition(charaindex,
-                     CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y), TRUE);
+  CHAR_setMyPosition(charaindex, CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y), TRUE);
 
   CHAR_DropItem(charaindex, itemindex);
 }
 
 void lssproto_DP_recv(int fd, int x, int y, int petindex) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_FREE)
     return;
-  {
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    x = ix;
-    y = iy;
-  }
+
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  x = ix;
+  y = iy;
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
-  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE)
-     != BATTLE_CHARMODE_NONE)
+  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
   PET_dropPet(fd_charaindex, petindex);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_DG_recv(int fd, int x, int y, int amount) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   //ttom avoid the warp at will 12/15
   {
     int ix, iy;
@@ -519,61 +471,49 @@ void lssproto_DG_recv(int fd, int x, int y, int amount) {
   CHAR_DropMoney(fd_charaindex, amount);
 }
 
-/*------------------------------------------------------------
- ------------------------------------------------------------*/
 void lssproto_MI_recv(int fd, int fromindex, int toindex) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
 
-  // CoolFish: Prevent Trade Cheat 2001/4/18
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKTRADEMODE) != CHAR_TRADE_FREE)
     return;
 
-  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE)
-     != BATTLE_CHARMODE_NONE)
+  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
   CHAR_moveEquipItem(fd_charaindex, fromindex, toindex);
-
 }
 
 void lssproto_SKUP_recv(int fd, int skillid) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
 
-  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE)
-     != BATTLE_CHARMODE_NONE)
+  if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
   CHAR_SkillUp(fd_charaindex, skillid);
 }
 
 void lssproto_MSG_recv(int fd, int index, char *message, int color) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   ADDRESSBOOK_sendMessage(fd_charaindex, index, message, color);
 
 }
 
 void lssproto_AB_recv(int fd) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   ADDRESSBOOK_sendAddressbookTable(fd_charaindex);
 }
 
 void lssproto_DAB_recv(int fd, int index) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   ADDRESSBOOK_deleteEntry(fd_charaindex, index);
 }
 
 void lssproto_AAB_recv(int fd, int x, int y) {
-  int fd_charaindex;
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   {
     int ix, iy;
     ix = CHAR_getInt(fd_charaindex, CHAR_X);
@@ -595,20 +535,13 @@ void lssproto_L_recv(int fd, int dir) {
 }
 
 void lssproto_TK_recv(int fd, int x, int y, char *message, int color, int area) {
-  int fd_charaindex, ix, iy;//ttom+2
-  int fmindex, channel;
-
   CHECKFD;
-  fd_charaindex = CONNECT_getCharaindex(fd);
-  fmindex = CHAR_getInt(fd_charaindex, CHAR_FMINDEX);
-  channel = CHAR_getWorkInt(fd_charaindex, CHAR_WORKFMCHANNEL);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
   int silentSec = CHAR_getInt(fd_charaindex, CHAR_SILENT);
   if(silentSec > 0) {
-    int loginTime;
     char buf[256];
     int leftSec;
-    loginTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKLOGINTIME);
-    // 防止时间修正回朔後　异常禁言  Robin 20040817
+    int loginTime = CHAR_getWorkInt(fd_charaindex, CHAR_WORKLOGINTIME);
     if((int) NowTime.tv_sec < loginTime) {
       CHAR_setInt(fd_charaindex, CHAR_SILENT, 0);
       return;
@@ -642,8 +575,8 @@ void lssproto_TK_recv(int fd, int x, int y, char *message, int color, int area) 
       CHAR_setWorkInt(fd_charaindex, CHAR_WORKTALKCOUNT, 0);
     }
   }
-  ix = CHAR_getInt(fd_charaindex, CHAR_X);
-  iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
   x = ix;
   y = iy;
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
@@ -653,11 +586,9 @@ void lssproto_TK_recv(int fd, int x, int y, char *message, int color, int area) 
 }
 
 void lssproto_M_recv(int fd, int fl, int x1, int y1, int x2, int y2) {
-  char *mapdata;
-  RECT seek = {x1, y1, x2 - x1, y2 - y1}, ret;
   CHECKFD;
-
-  mapdata = MAP_getdataFromRECT(fl, &seek, &ret);
+  RECT seek = {x1, y1, x2 - x1, y2 - y1}, ret;
+  char *mapdata = MAP_getdataFromRECT(fl, &seek, &ret);
   if(mapdata != NULL) {
     lssproto_M_send(fd, fl, ret.x, ret.y, ret.x + ret.width, ret.y + ret.height, mapdata);
   }
@@ -669,11 +600,8 @@ void lssproto_C_recv(int fd, int index) {
 }
 
 void lssproto_S_recv(int fd, char *category) {
-  char *string;
-  int fd_charaindex;
-
-  fd_charaindex = CONNECT_getCharaindex(fd);
-  string = CHAR_makeStatusString(fd_charaindex, category);
+  int fd_charaindex = CONNECT_getCharaindex(fd);
+  char *string = CHAR_makeStatusString(fd_charaindex, category);
   if(string != NULL)
     lssproto_S_send(fd, string);
 
@@ -682,27 +610,23 @@ void lssproto_S_recv(int fd, char *category) {
 void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
   CHECKFD;
   int fd_charaindex = CONNECT_getCharaindex(fd);
-  {
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    if((ix != x) || (iy != y)) {
-      goto CK1;
-    }
-    goto OK;
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  if((ix != x) || (iy != y)) {
+    goto CK1;
   }
+  goto OK;
   CK1:
   {
     OBJECT object;
-    int ix, iy, ifloor, i, j;
     int warp_point_x[9];
     int warp_point_y[9];
     int warp_point = 0;
     ix = CHAR_getInt(fd_charaindex, CHAR_X);
     iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    ifloor = CHAR_getInt(fd_charaindex, CHAR_FLOOR);
-    for(i = iy - 1; i <= iy + 1; i++) {
-      for(j = ix - 1; j <= ix + 1; j++) {
+    int ifloor = CHAR_getInt(fd_charaindex, CHAR_FLOOR);
+    for(int i = iy - 1; i <= iy + 1; i++) {
+      for(int j = ix - 1; j <= ix + 1; j++) {
         for(object = MAP_getTopObj(ifloor, j, i); object; object = NEXT_OBJECT(object)) {
           int o = GET_OBJINDEX(object);
           if(OBJECT_getType(o) == OBJTYPE_CHARA) {
@@ -733,7 +657,7 @@ void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
       }
     }
 
-    for(i = 0; i < warp_point; i++) {
+    for(int i = 0; i < warp_point; i++) {
       if((x == warp_point_x[i]) && (y == warp_point_y[i]))
         goto OK;
     }
@@ -761,9 +685,7 @@ void lssproto_EN_recv(int fd, int x, int y) {
   int fd_charaindex;
   CHECKFD;
   fd_charaindex = CONNECT_getCharaindex(fd);
-
-  //print(" EN_recv ");
-
+  
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKPARTYMODE) != CHAR_PARTY_CLIENT) {
     CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
     CHAR_setWorkChar(fd_charaindex, CHAR_WORKWALKARRAY, "");
@@ -1500,7 +1422,6 @@ void lssproto_MA_recv(int fd, int x, int y, int nMind) {
     }
   }
 
-  //print("\nshan------------------>mind action->%d x->%d y->%d", nMind, x, y);
   CHAR_setMyPosition(charaindex, x, y, TRUE);
   CHAR_setWorkInt(charaindex, CHAR_MIND_NUM, nMind);
   CHAR_sendMindEffect(charaindex, CHAR_getWorkInt(charaindex, CHAR_MIND_NUM));
@@ -1508,8 +1429,6 @@ void lssproto_MA_recv(int fd, int x, int y, int nMind) {
      CHAR_getWorkInt(charaindex, CHAR_MIND_NUM) != 101294 &&
      CHAR_getWorkInt(charaindex, CHAR_MIND_NUM) != 101288)
     CHAR_setWorkInt(charaindex, CHAR_MIND_NUM, 0);
-  //print("\nshan------------------>end");
-
   return;
 }
 
