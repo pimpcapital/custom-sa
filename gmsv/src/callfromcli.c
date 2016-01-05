@@ -685,7 +685,7 @@ void lssproto_EN_recv(int fd, int x, int y) {
   int fd_charaindex;
   CHECKFD;
   fd_charaindex = CONNECT_getCharaindex(fd);
-  
+
   if(CHAR_getWorkInt(fd_charaindex, CHAR_WORKPARTYMODE) != CHAR_PARTY_CLIENT) {
     CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
     CHAR_setWorkChar(fd_charaindex, CHAR_WORKWALKARRAY, "");
@@ -1383,12 +1383,9 @@ void lssproto_FM_recv(int fd, char *message) {
 
 void lssproto_PETST_recv(int fd, int nPet, int sPet) {
   CHECKFD;
-
   int charaindex = CONNECT_getCharaindex(fd);
   if(!CHAR_CHECKINDEX(charaindex)) return;
-
-  if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE)
-     != BATTLE_CHARMODE_NONE)
+  if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
 
   int nums = 0;

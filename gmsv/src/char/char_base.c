@@ -891,7 +891,7 @@ static char *CHAR_setchardata[CHAR_DATACHARNUM] = {
     "newname",
 };
 
-int _CHAR_CHECKINDEX(char *file, int line, int index) {
+int CHAR_CHECKINDEX(int index) {
   if(CHAR_charanum <= index || index < 0) {
     return FALSE;
   }
@@ -926,7 +926,7 @@ int CHAR_CHECKCHARFUNCTABLEINDEX(int index) {
   return TRUE;
 }
 
-int _CHAR_CHECKITEMINDEX(char *file, int line, int charaindex, int ti) {
+int CHAR_CHECKITEMINDEX(int charaindex, int ti) {
   if(0 <= ti && ti < CHAR_MAXITEMHAVE) return TRUE;
   return FALSE;
 }
