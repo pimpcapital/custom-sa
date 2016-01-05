@@ -1041,14 +1041,9 @@ typedef struct tagChar {
   void *functable[CHAR_FUNCTABLENUM];
 } Char;
 
+int CHAR_CHECKINDEX(int index);
 
-#define    CHAR_CHECKINDEX(index)  _CHAR_CHECKINDEX( __FILE__, __LINE__, index)
-
-int _CHAR_CHECKINDEX(char *file, int line, int index);
-
-#define    CHAR_CHECKITEMINDEX(charaindex, iindex) _CHAR_CHECKITEMINDEX( __FILE__, __LINE__, charaindex, iindex)
-
-int _CHAR_CHECKITEMINDEX(char *file, int line, int charaindex, int iindex);
+int CHAR_CHECKITEMINDEX(int charaindex, int iindex);
 
 #define    CHAR_CHECKPETINDEX(petindex) _CHAR_CHECKPETINDEX( __FILE__, __LINE__, petindex )
 
