@@ -473,19 +473,8 @@ void saacproto_copyLine(char *src, char *out, int outlen) {
 }
 
 // WON ADD
-unsigned long saacproto_GetNewMessageID(void)
-
-//unsigned int saacproto_GetNewMessageID(void)
-{
+unsigned long saacproto_GetNewMessageID(void) {
   return saacproto.message_id++;
-}
-
-/*****************
-  WRITE
-   int flg : if 1, actually write. Otherwise no Network access
-*****************/
-void saacproto_DebugSend(int fd, char *msg) {
-  saacproto_Send(fd, msg);
 }
 
 void saacproto_Send(int fd, char *msg) {

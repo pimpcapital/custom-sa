@@ -48,9 +48,6 @@ static void makeSleepCharFileName(char *id, char *output, int outlen, int num);
 }
 
 void charLoadCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, char *c4, int i0, int i1) {
-  // Spock deleted 2000/11/2
-  //static int process_id = 0;
-  // CoolFish: Init charindex 2001/10/16
   int charindex = -1;
   char loadbuf[CHARDATASIZE];
   char infobuf[CHARDATASIZE];
@@ -62,9 +59,6 @@ void charLoadCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
   int mesgid = i1;
 
   char *deadline = c4;
-
-  // Spock deleted 2000/11/2
-  //process_id++;
 
   if(auth != 0) {
     char data[100];
@@ -95,28 +89,23 @@ void charLoadCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
     saacproto_ACCharLoad_send(ti, FAILED, "cannot load ( disk i/o error?)", mesgid, charindex);
     return;
   }
-  {//ttom
-    char *c_ptr;
-    c_ptr = loadbuf;
-    while(*c_ptr != '\0') {
-      if(IS_2BYTEWORD(*c_ptr)) {
-        if(*(c_ptr + 1) == ' ') {
-          *(c_ptr + 1) = 0x41;
-        }
-        c_ptr++;
-        if(*c_ptr == '\0') break;
+  char *c_ptr = loadbuf;
+  while(*c_ptr != '\0') {
+    if(IS_2BYTEWORD(*c_ptr)) {
+      if(*(c_ptr + 1) == ' ') {
+        *(c_ptr + 1) = 0x41;
       }
       c_ptr++;
+      if(*c_ptr == '\0') break;
     }
-  }//ttom
+    c_ptr++;
+  }
 
   if(lock) {
     char result[100];
     char retdata[100];
 
-    // Spock 2000/11/2
-    if(lockUser(getGSName(ti), id, passwd, 1, result, sizeof(result),
-                retdata, sizeof(retdata), process, deadline) < 0) {
+    if(lockUser(getGSName(ti), id, passwd, 1, result, sizeof(result), retdata, sizeof(retdata), process, deadline) < 0) {
       saacproto_ACCharLoad_send(ti, FAILED, "lock FAIL!!", mesgid, charindex);
       return;
     }
@@ -125,14 +114,12 @@ void charLoadCallback(int ti, int auth, char *c0, char *c1, char *c2, char *c3, 
   getCharInfoFromString(loadbuf, infobuf);
   makeStringFromEscaped(infobuf);
   saacproto_ACCharLoad_send(ti, SUCCESSFUL, infobuf, mesgid, charindex);
-
   saacproto_ACKick_recv(ti, id, 10, -1);  //踢其他星系
 }
 
 int charSave(int ti, char *id, char *charname, char *opt, char *charinfo, int unlock, int mesgid, int charindex) {
   char savebuf[CHARDATASIZE];
   int ret = -1;
-
 
   memset(savebuf, 0, sizeof(savebuf));
 

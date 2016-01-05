@@ -166,8 +166,6 @@ char *saacproto_Ltoa(long v);
 
 char *saacproto_Ultoa(unsigned long v);
 
-void saacproto_DebugSend(int fd, char *msg);
-
 char *saacproto_cnv10to62(int a, char *out, int outlen);
 
 int saacproto_a62toi(char *a);

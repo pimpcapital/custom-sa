@@ -1006,7 +1006,6 @@ int CHAR_getWorkInt(int index, CHAR_WORKDATAINT element) {
 }
 
 int CHAR_setWorkInt(int index, CHAR_WORKDATAINT element, int data) {
-  int buf;
   if(!CHAR_CHECKINDEX(index)) {
     print("err Set WorkInt index:%d.\n", index);
     return -1;
@@ -1016,7 +1015,7 @@ int CHAR_setWorkInt(int index, CHAR_WORKDATAINT element, int data) {
     return -1;
   }
 
-  buf = CHAR_chara[index].workint[element];
+  int buf = CHAR_chara[index].workint[element];
   CHAR_chara[index].workint[element] = data;
   return buf;
 }

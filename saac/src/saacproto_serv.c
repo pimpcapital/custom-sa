@@ -42,46 +42,25 @@ int saacproto_ServerDispatchMessage(int fd, char *encoded, char *debugfun) {
   }
 
   if(strcmp(funcname, "ACCharLoad") == 0) {
-    char *id;
-    char *pas;
-    char *charname;
-    int lock;
-    char *opt;
-    int mesgid;
-    id = saacproto_wrapStringAddr(saacproto_stringwrapper[1], saacproto.workbufsize,
-                                  saacproto_demkstr_string(saacproto.token_list[2]));
-    pas = saacproto_wrapStringAddr(saacproto_stringwrapper[2], saacproto.workbufsize,
-                                   saacproto_demkstr_string(saacproto.token_list[3]));
-    charname = saacproto_wrapStringAddr(saacproto_stringwrapper[3], saacproto.workbufsize,
-                                        saacproto_demkstr_string(saacproto.token_list[4]));
-    lock = saacproto_demkstr_int(saacproto.token_list[5]);
-    opt = saacproto_wrapStringAddr(saacproto_stringwrapper[5], saacproto.workbufsize,
-                                   saacproto_demkstr_string(saacproto.token_list[6]));
-    mesgid = saacproto_demkstr_int(saacproto.token_list[7]);
+    char *id = saacproto_wrapStringAddr(saacproto_stringwrapper[1], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[2]));
+    char *pas = saacproto_wrapStringAddr(saacproto_stringwrapper[2], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[3]));
+    char *charname = saacproto_wrapStringAddr(saacproto_stringwrapper[3], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[4]));
+    int lock = saacproto_demkstr_int(saacproto.token_list[5]);
+    char *opt = saacproto_wrapStringAddr(saacproto_stringwrapper[5], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[6]));
+    int mesgid = saacproto_demkstr_int(saacproto.token_list[7]);
     saacproto_ACCharLoad_recv(fd, id, pas, charname, lock, opt, mesgid);
     return 0;
   }
 
   if(strcmp(funcname, "ACCharSave") == 0) {
-    char *id;
-    char *charname;
-    char *opt;
-    char *charinfo;
-    int unlock;
-    int mesgid;
-    int charindex;
-    id = saacproto_wrapStringAddr(saacproto_stringwrapper[1], saacproto.workbufsize,
-                                  saacproto_demkstr_string(saacproto.token_list[2]));
-    charname = saacproto_wrapStringAddr(saacproto_stringwrapper[2], saacproto.workbufsize,
-                                        saacproto_demkstr_string(saacproto.token_list[3]));
-    opt = saacproto_wrapStringAddr(saacproto_stringwrapper[3], saacproto.workbufsize,
-                                   saacproto_demkstr_string(saacproto.token_list[4]));
-    charinfo = saacproto_wrapStringAddr(saacproto_stringwrapper[4], saacproto.workbufsize,
-                                        saacproto_demkstr_string(saacproto.token_list[5]));
-    unlock = saacproto_demkstr_int(saacproto.token_list[6]);
-    mesgid = saacproto_demkstr_int(saacproto.token_list[7]);
+    char *id = saacproto_wrapStringAddr(saacproto_stringwrapper[1], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[2]));
+    char *charname = saacproto_wrapStringAddr(saacproto_stringwrapper[2], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[3]));
+    char *opt = saacproto_wrapStringAddr(saacproto_stringwrapper[3], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[4]));
+    char *charinfo = saacproto_wrapStringAddr(saacproto_stringwrapper[4], saacproto.workbufsize, saacproto_demkstr_string(saacproto.token_list[5]));
+    int unlock = saacproto_demkstr_int(saacproto.token_list[6]);
+    int mesgid = saacproto_demkstr_int(saacproto.token_list[7]);
 
-    charindex = saacproto_demkstr_int(saacproto.token_list[8]);
+    int charindex = saacproto_demkstr_int(saacproto.token_list[8]);
     saacproto_ACCharSave_recv(fd, id, charname, opt, charinfo, unlock, mesgid, charindex);
 
     return 0;
@@ -865,7 +844,6 @@ static int CharDataLens = 0;
 void saacproto_ACCharLoad_send(int fd, char *result, char *data, int id, int charindex) {
   if(strstr(result, "successful") != NULL && strlen(data) > CharDataLens) {
     CharDataLens = strlen(data);
-    //andy_log
     log("最大数据长度:%d\n", CharDataLens);
   }
 
@@ -877,26 +855,6 @@ void saacproto_ACCharLoad_send(int fd, char *result, char *data, int id, int cha
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-214 :  <li><a name="ACCharSaveS"><font color=blue>servertoclient ACCharSave( string result , string data,int id);<br></font></a>
-215 :      ACCharSave卞覆允月忒蚕［
-216 :      <br><br>
-217 :      <dl>
-218 :        <dt> string result
-219 :        <dd>"successful" , "failed" 及中勿木井［
-220 :        <dt> string data
-221 :        <dd>"failed"及凛反    毛憎允谛棉及苇化坌月  侬  匹丐月［
-222 :        <dt> int id
-223 :        <dd> 娄醒及id毛公及引引戊疋□仄化忒允
-224 :      </dl>
-225 :      <br>
-226 :      <br>
-227 :
-228 :
-229 :
-230 :
-*/
-
 void saacproto_ACCharSave_send(int fd, char *result, char *data, int id) {
   saacproto_CreateHeader(saacproto.work, "ACCharSave");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(result), saacproto.workbufsize);
@@ -904,24 +862,6 @@ void saacproto_ACCharSave_send(int fd, char *result, char *data, int id) {
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(id), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-256 :  <li><a name="ACCharDeleteS"><font color=blue>servertoclient ACCharDelete(string result, string data,int id);<br></font></a>
-257 :      ACCharDelete卞覆允月忒蚕［
-258 :      <br><br>
-259 :      <dl>
-260 :        <dt> string result
-261 :        <dd>"successful" , "failed" 及中勿木井［
-262 :        <dt> string data
-263 :        <dd>"failed"及凛反    毛憎允谛棉及苇化坌月  侬  匹丐月［
-264 :        <dt> int id
-265 :        <dd> 娄醒及id及公及引引及戊疋□
-266 :
-267 :      </dl>
-268 :      <br>
-269 :      <br>
-270 :
-*/
 
 void saacproto_ACCharDelete_send(int fd, char *result, char *data, int id) {
   saacproto_CreateHeader(saacproto.work, "ACCharDelete");
@@ -931,23 +871,6 @@ void saacproto_ACCharDelete_send(int fd, char *result, char *data, int id) {
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-290 :  <LI>    <a name="ACLockS"><font color=blue>servertoclient ACLock( string result, string data ,int id);<br></font></a>
-291 :      ACLock卞覆允月忒蚕［
-292 :      <br><br>
-293 :      <dl>
-294 :        <dt>string result
-295 :        <dd>"successful" , "failed" 及中勿木井［
-296 :        <dt>string data
-297 :        <dd>"failed"及凛反    毛憎允谛棉及苇化坌月  侬  匹丐月［
-298 :        <dt>int id
-299 :        <dd>娄醒及id及公及引引戊疋□
-300 :      </dl>
-301 :      <br>
-302 :      <br>
-303 :
-*/
-
 void saacproto_ACLock_send(int fd, char *result, char *data, int id) {
   saacproto_CreateHeader(saacproto.work, "ACLock");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(result), saacproto.workbufsize);
@@ -956,41 +879,11 @@ void saacproto_ACLock_send(int fd, char *result, char *data, int id) {
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-318 :  <LI><a name="ACUCheckS"><font color=blue>servertoclient ACUCheck( string mem_id );</font></a><BR>
-319 : 	 失市它件玄扔□田□井日必□丞扔□田□卞覆仄化｝丐月交□扒□互蜇箕夫弘奶件
-320 : 	 仄化中月井升丹井毛民尼永弁允月［
-321 : 	 <BR><BR>
-322 : 	 <dl>
-323 : 	   <dt>string mem_id
-324 : 	   <dd>譬屯月覆擂及交□扒□及gamersDream member id
-325 : 	 </dl>
-326 : 	 <BR><BR>
-327 :
-328 :
-*/
-
 void saacproto_ACUCheck_send(int fd, char *mem_id) {
   saacproto_CreateHeader(saacproto.work, "ACUCheck");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(mem_id), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-344 :  <LI><a name="DBUpdateEntryStringS"><font color=blue>servertoclient DBUpdateEntryString( string result, string table, string key, int msgid, int msgid2 );</font></a><BR>
-345 : 	 晓及戊穴件玉及瑛绊［撩  仄化手荚汊尕第  卅及匹  骰仄化方中冗
-346 : 	 <dl>
-347 : 	   <dt>string result
-348 : 	   <dD>successful 井failed
-349 : 	   <dt>string table
-350 : 	   <dD>
-351 : 	   <dt>int msgid
-352 : 	   <dD>
-353 : 	   <dt>int msgid2
-354 : 	   <dD>
-355 : 	 </dL>
-356 :
-*/
 
 void saacproto_DBUpdateEntryString_send(int fd, char *result, char *table, char *key, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBUpdateEntryString");
@@ -1002,24 +895,6 @@ void saacproto_DBUpdateEntryString_send(int fd, char *result, char *table, char 
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-369 :  <LI><a name="DBDeleteEntryStringS"><font color=blue>servertoclient DBDeleteEntryString( string result, string table, string key , int msgid , int msgid2 );</font></a><BR>
-370 : 	   侬  巨件玄伉及绰轮及瑛绊
-371 : 	 <dl>
-372 : 	   <dt>string result
-373 : 	   <dd>successful / failed
-374 : 	   <dt>string table
-375 : 	   <dd>
-376 : 	   <dt>string key
-377 : 	   <dd>
-378 : 	   <dt>int msgid
-379 : 	   <dd>
-380 : 	   <dt>int msgid2
-381 : 	   <dd>
-382 : 	 </dl>
-383 :
-*/
-
 void saacproto_DBDeleteEntryString_send(int fd, char *result, char *table, char *key, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBDeleteEntryString");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(result), saacproto.workbufsize);
@@ -1029,26 +904,6 @@ void saacproto_DBDeleteEntryString_send(int fd, char *result, char *table, char 
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(msgid2), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-396 :  <Li><a name="DBGetEntryStringS"><font color=blue>servertoclient DBGetEntryString( string result, string value, string table, string key, int msgid, int msgid2 );</font></a><BR>
-397 : 	 潸曰分仄及忒曰袄
-398 : 	 <dl>
-399 : 	   <dt>string result
-400 : 	   <dd>successful / failed
-401 : 	   <dt>string value
-402 : 	   <dd>袄
-403 : 	   <dt>string table
-404 : 	   <dd>
-405 : 	   <dt>string key
-406 : 	   <dd>
-407 : 	   <dt>int msgid
-408 : 	   <dd>
-409 : 	   <dt>int msgid2
-410 : 	   <dd>
-411 : 	 </dl>
-412 :
-*/
 
 void saacproto_DBGetEntryString_send(int fd, char *result, char *value, char *table, char *key, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBGetEntryString");
@@ -1060,22 +915,7 @@ void saacproto_DBGetEntryString_send(int fd, char *result, char *value, char *ta
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(msgid2), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-/*
-435 :  <LI><a name="DBUpdateEntryIntS"><font color=blue>servertoclient DBUpdateEntryInt( string result , string table, string key, int msgid, int msgid2 );</font></a><BR>
-436 : 	 DBUpdateEntry及瑛绊［
-437 : 	 <dl>
-438 : 	   <dt>string result
-439 : 	   <dd>succesful/failed
-440 : 	   <dt>string table
-441 : 	   <dd>  □皮伙  毛公及引引井尹允
-442 : 	   <dt>string key
-443 : 	   <dd>平□毛公及引引井尹允
-444 : 	   <dt>int msgid, int msgid2
-445 : 	   <dd>msgid 毛公及引引忒允［
-446 : 	 </dl>
-447 : 	 <BR><BR>
-448 :
-*/
+
 #ifdef _ALLDOMAN // Syu ADD 排行榜NPC
 
 void saacproto_UpdataStele_send(int fd, char *data) {
@@ -1111,28 +951,6 @@ void saacproto_DBUpdateEntryInt_send(int fd, char *result, char *table, char *ke
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-463 :  <LI><a name="DBGetEntryRankS"><font color=blue>servertoclient DBGetEntryRank( string result , int rank , int count, string table, string key, int msgid, int msgid2 );</font></a><BR>
-464 : 	 赐匏毛忒允［
-465 : 	 <dl>
-466 : 	   <dt>string result
-467 : 	   <dd>successful/failed
-468 : 	   <dt>int rank
-469 : 	   <dd>赐匏［1动晓及袄毛潸月［
-470 : 	   <dt>int count
-471 : 	   <dd>晓井日中仁勾户井［  赓及巨件玄伉反0井日反元引月［
-472 : 	   <dt>string table
-473 : 	   <dd>  □皮伙  毛公及引引井尹允
-474 : 	   <dt>string key
-475 : 	   <dd>平□毛公及引引井尹允
-476 : 	   <dt>int msgid, int msgid2
-477 : 	   <dd>msgid 毛公及引引忒允
-478 : 	 </dl>
-479 : 	 <BR><BR>
-480 :
-481 :
-*/
-
 void saacproto_DBGetEntryRank_send(int fd, char *result, int rank, int count, char *table, char *key, int msgid,
                                    int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBGetEntryRank");
@@ -1146,23 +964,6 @@ void saacproto_DBGetEntryRank_send(int fd, char *result, int rank, int count, ch
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-494 :  <LI><a name="DBDeleteEntryIntS"><font color=blue>servertoclient DBDeleteEntryInt( string result , string table, string key, int msgid, int msgid2 );</font></a><BR>
-495 : 	 绰轮及瑛绊
-496 : 	 <dl>
-497 : 	   <dt>string result
-498 : 	   <dd>successful/failed
-499 : 	   <dt>string table
-500 : 	   <dd>  □皮伙  毛公及引引井尹允
-501 : 	   <dt>string key
-502 : 	   <dd>平□毛公及引引井尹允
-503 : 	   <dt>int msgid, int msgid2
-504 : 	   <dd>msgid 毛公及引引忒允
-505 : 	 </dl>
-506 : 	 <BR><BR>
-507 :
-*/
-
 void saacproto_DBDeleteEntryInt_send(int fd, char *result, char *table, char *key, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBDeleteEntryInt");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(result), saacproto.workbufsize);
@@ -1172,26 +973,6 @@ void saacproto_DBDeleteEntryInt_send(int fd, char *result, char *table, char *ke
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(msgid2), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-520 :  <LI><a name="DBGetEntryIntS"><font color=blue>servertoclient DBGetEntryInt( string result , int value , string table, string key, int msgid, int msgid2 );</font></a><BR>
-521 : 	 巨件玄伉及袄毛井尹允
-522 : 	 <dl>
-523 : 	   <dt>string result
-524 : 	   <dd>successful/failed
-525 : 	   <dt>int value
-526 : 	   <dd>袄公及手及
-527 : 	   <dt>string table
-528 : 	   <dd>  □皮伙  毛公及引引井尹允
-529 : 	   <dt>string key
-530 : 	   <dd>平□毛公及引引井尹允
-531 : 	   <dt>int msgid, int msgid2
-532 : 	   <dd>msgid 毛公及引引忒允
-533 : 	 </dl>
-534 :
-535 :
-536 :
-*/
 
 void saacproto_DBGetEntryInt_send(int fd, char *result, int value, char *table, char *key, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBGetEntryInt");
@@ -1204,28 +985,6 @@ void saacproto_DBGetEntryInt_send(int fd, char *result, int value, char *table, 
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-552 :  <LI><a name="DBGetEntryByRankS"><font color=blue>servertoclient DBGetEntryByRank( string result , string list , string table, int msgid, int msgid2 );</font></a><BR>
-553 : 	 DBGetEntryByRank及瑛绊［
-554 : 	 <dl>
-555 : 	   <dt>string result
-556 : 	   <dd>
-557 : 	   <dt>string list
-558 : 	   <dd>"RANK,KEY,SCORE,INFO|RANK,KEY,SCORE,INFO|...."<BR>
-559 : 		   RANK反赐匏匹丐月［KEY反公及赐匏卞卅匀化中月旦戊失毛手匀化中月
-560 : 		   平□［SCORE反帮醒袄匹旦戊失匹丐月［
-561 : 		     ［<br>
-562 : 		   "1,RINGO,123465,data1|2,HOGE,4567,data2|2,FUCK,4567,data3"<BR>
-563 : 		   仇及  分午｝2匏反2谛中月仇午卞卅月［
-564 : 	   <dt>string table
-565 : 	   <dd>  □皮伙
-566 : 	   <dt>int msgid, int msgid2
-567 : 	   <dd>
-568 : 	 </dl>
-569 :
-570 :
-*/
-
 void saacproto_DBGetEntryByRank_send(int fd, char *result, char *list, char *table, int msgid, int msgid2) {
   saacproto_CreateHeader(saacproto.work, "DBGetEntryByRank");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(result), saacproto.workbufsize);
@@ -1235,24 +994,6 @@ void saacproto_DBGetEntryByRank_send(int fd, char *result, char *list, char *tab
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(msgid2), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-583 :  <LI><a name="DBGetEntryByCountS"><font color=blue>servertoclient DBGetEntryByCount( string result , string list , string table, int count_start, int msgid, int msgid2 );</font></a><BR>
-584 : 	 DBGetEntryByCount 及瑛绊［
-585 : 	 <dl>
-586 : 	   <dt>string result
-587 : 	   <dd>SUCCESSFUL/FAILED
-588 : 	   <dt>string list
-589 : 	   <dd>请  伉旦玄［1巨件玄伉丐凶曰 "INDEX,RANK,KEY,SCORE,INFO" 及4蜊及树
-590 : 		   及赚匹丐曰｝公木互蜊醒坌 "|" 匹勾卅互月［蜊醒互0及桦宁反
-591 : 		   坞  侬  ［
-592 : 	   <dt>int num
-593 : 	   <dd>中仁勾午曰分允井［1卅日1蜊［2卅日2蜊［
-594 : 	   <dt>int msgid ,msgid2
-595 : 	   <dd>丢永本□斥ID.
-596 : 	 </dL>
-597 :
-*/
 
 void saacproto_DBGetEntryByCount_send(int fd, char *result, char *list, char *table, int count_start, int msgid,
                                       int msgid2) {
@@ -1266,22 +1007,6 @@ void saacproto_DBGetEntryByCount_send(int fd, char *result, char *list, char *ta
   saacproto_Send(fd, saacproto.work);
 }
 
-/*
-611 :  <LI><a name="Broadcast"><font color=blue>servertoclient Broadcast( string id, string charname, string message );</font></a><BR>
-612 : 	 Broadcast及失市它件玄扔□田□井日必□丞扔□田□尺及霜耨迕
-613 : 	 <dl>
-614 : 	   <dt>string id
-615 : 	   <dd>user ID
-616 : 	   <dt>string charname
-617 : 	   <dd>character name
-618 : 	   <dt>string message
-619 : 	   <dd>丢永本□斥
-620 : 	   <dt>int flag
-621 : 	   <dd>1卞允月午｝愤坌卞卞反  霜今木卅中［
-622 : 	 </dl>
-623 :
-*/
-
 void saacproto_Broadcast_send(int fd, char *id, char *charname, char *message) {
   saacproto_CreateHeader(saacproto.work, "Broadcast");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(id), saacproto.workbufsize);
@@ -1289,28 +1014,6 @@ void saacproto_Broadcast_send(int fd, char *id, char *charname, char *message) {
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(message), saacproto.workbufsize);
   saacproto_Send(fd, saacproto.work);
 }
-
-/*
-642 :  <LI><a name="Message"><font color=blue>servertoclient Message( string id_from, string charname_from, string id_to, string charname_to, string message , int option , int mesgid );</font></a><BR>
-643 : 	 失市它件玄扔□田□井日必□丞扔□田□卞丢永本□斥毛霜耨允月［
-644 : 	 <dl>
-645 : 	   <dt>string id_from
-646 : 	   <dd>from ID
-647 : 	   <dt>string charname_from
-648 : 	   <dd>from character name
-649 : 	   <dt>string id_to
-650 : 	   <dd>to ID
-651 : 	   <dt>string charname_to
-652 : 	   <dd>to character name
-653 : 	   <dt>string message
-654 : 	   <dd>丢永本□斥及
-655 : 	   <dt>int option
-656 : 	   <dd>左皿扑亦件(晓及楮醒毛辅寰)
-657 : 	   <dt>int mesgid
-658 : 	   <dd>丢永本□斥ID 失市它件玄扔□田□及栋  迕
-659 : 	 </dl>
-660 :
-*/
 
 void saacproto_Message_send(int fd, char *id_from, char *charname_from, char *id_to, char *charname_to, char *message,
                             int option, int mesgid) {
@@ -1364,9 +1067,6 @@ void saacproto_CleanupServer(void) {
   free(saacproto.ret_work);
 }
 
-/************************************************************
- * CoolFish: Family 2001/5/18
- ***********************************************************/
 // 成立家族
 void saacproto_ACAddFM_send(int fd, char *result, int fmindex, int index,
                             int charfdid) {

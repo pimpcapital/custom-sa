@@ -940,7 +940,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_CHARDELETE_RECV-charname:%s\n", charname);
     lssproto_CharDelete_recv(fd, charname);
     util_DiscardMessage();
     return 0;
@@ -948,7 +947,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
 
   if(func == LSSPROTO_CHARLOGIN_RECV) {
     int checksum = 0, checksumrecv;
-    char charname[CHARNAMELEN];;
+    char charname[CHARNAMELEN];
 
     checksum += util_destring(2, charname);
     util_deint(3, &checksumrecv);
@@ -957,7 +956,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_CHARLOGIN_RECV-charname:%s\n", charname);
     lssproto_CharLogin_recv(fd, charname);
     util_DiscardMessage();
     return 0;
