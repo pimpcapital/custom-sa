@@ -484,14 +484,11 @@ void lssproto_DAB_recv(int fd, int index) {
 void lssproto_AAB_recv(int fd, int x, int y) {
   CHECKFD;
   int fd_charaindex = CONNECT_getCharaindex(fd);
-  {
-    int ix, iy;
-    ix = CHAR_getInt(fd_charaindex, CHAR_X);
-    iy = CHAR_getInt(fd_charaindex, CHAR_Y);
-    if((ix != x) || (iy != y)) {
-      x = ix;
-      y = iy;
-    }
+  int ix = CHAR_getInt(fd_charaindex, CHAR_X);
+  int iy = CHAR_getInt(fd_charaindex, CHAR_Y);
+  if((ix != x) || (iy != y)) {
+    x = ix;
+    y = iy;
   }
   CHAR_setMyPosition(fd_charaindex, x, y, TRUE);
   ADDRESSBOOK_addEntry(fd_charaindex);
@@ -574,7 +571,6 @@ void lssproto_S_recv(int fd, char *category) {
   char *string = CHAR_makeStatusString(fd_charaindex, category);
   if(string != NULL)
     lssproto_S_send(fd, string);
-
 }
 
 void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {

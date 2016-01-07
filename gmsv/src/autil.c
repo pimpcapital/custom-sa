@@ -136,6 +136,8 @@ void util_SendMesg(int fd, int func, char *buffer) {
     print("\n SendMesg fd err ==> func(%d)\n", func);
     return;
   }
+
+  print("\n%d %s\n", func, buffer);
   sprintf(t1, "&;%d%s;#;", func + SEND_ADJUST, buffer);
   util_EncodeMessage(t2, t1);
   lssproto_Send(fd, t2);
