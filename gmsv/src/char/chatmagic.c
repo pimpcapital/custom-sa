@@ -3274,21 +3274,9 @@ void CHAR_CHAT_DEBUG_gmkick(int charindex, char *message) {
   saacproto_ACKick_send(acfd, cdkey, getFdidFromCharaIndex(charindex), act);
 }
 
-// WON ADD 当机指令
 void CHAR_CHAT_DEBUG_crash(int charaindex, char *message) {
-  int fd;
-
-
-  fd = CHAR_getWorkInt(charaindex, CHAR_WORKFD);
-
+  int fd = CHAR_getWorkInt(charaindex, CHAR_WORKFD);
   CHAR_Talk(fd, charaindex, message, 1, 3);
-
-/*
-	char msg[1];
-	printf("\n carsh GMSV !! \n");
-	//sprintf( msg, "%s", CHAR_getChar( charaindex, CHAR_NAME ) );
-	sprintf( msg, "12345" );
-*/
 }
 
 
@@ -3503,7 +3491,6 @@ void CHAR_CHAT_DEBUG_samecode(int charaindex, char *message) {
 
 }
 
-// Robin 2001/04/30
 void CHAR_CHAT_DEBUG_silent(int charindex, char *message) {
   char token[100];
   char token1[100];

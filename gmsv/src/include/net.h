@@ -196,15 +196,14 @@ int CONNECT_getJoinpartycharaindex(int fd, int i);
 void CONNECT_setTradecardcharaindex(int fd, int i, int a);
 
 int CONNECT_getTradecardcharaindex(int fd, int i);
-/* MT犯田永弘迕穴弁夫 */
+
 #define CONNECT_endOne_debug(a) CONNECT_endOne( (a) , __LINE__ )
 
-/* 犯□正丑综楮醒(引月切允木匀升覆杀迕) */
 void CONNECT_setCDKEY(int sockfd, char *cd);
 
 void CONNECT_getCDKEY(int sockfd, char *out, int outlen);
 
-void CONNECT_setState(int fd, int s);
+void CONNECT_setState(int fd, LoginType s);
 
 int CONNECT_getState(int fd);
 

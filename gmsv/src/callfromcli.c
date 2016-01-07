@@ -228,18 +228,15 @@ void lssproto_CharList_recv(int fd) {
   CONNECT_getCdkey(fd, cdkey, sizeof(cdkey));
   CONNECT_getPasswd(fd, passwd, sizeof(passwd));
   fdid = CONNECT_getFdid(fd);
-  {
-    int i;
-    int playernum = CHAR_getPlayerMaxNum();
-    for(i = 0; i < playernum; i++) {
-      if(!CHAR_CHECKINDEX(i))continue;
-      if(!strcmp(CHAR_getChar(i, CHAR_CDKEY), cdkey)) {
-        CHAR_talkToCli(i, -1, "因重复登陆而掉线!", CHAR_COLORYELLOW);
-        CONNECT_setCloseRequest(getfdFromCharaIndex(i), 1);
+  int playernum = CHAR_getPlayerMaxNum();
+  for(int i = 0; i < playernum; i++) {
+    if(!CHAR_CHECKINDEX(i))continue;
+    if(!strcmp(CHAR_getChar(i, CHAR_CDKEY), cdkey)) {
+      CHAR_talkToCli(i, -1, "因重复登陆而掉线!", CHAR_COLORYELLOW);
+      CONNECT_setCloseRequest(getfdFromCharaIndex(i), 1);
 //				lssproto_CharList_send( fd, FAILED, "-1" );
 //				CONNECT_setState( fd, NOTLOGIN );
 //				return;
-      }
     }
   }
 //#ifdef _PKSEVER_VER

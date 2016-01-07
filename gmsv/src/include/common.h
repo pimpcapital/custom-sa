@@ -6,7 +6,7 @@
 
 #define EXITWITHEXITCODEIFFALSE(x,code) if(!x)exit(code);
 #ifdef __GNUC__
-#define print(format,arg...) fprintf( stderr, format ,##arg)
+#define print(format,arg...) fprintf(stderr, format ,##arg)
 #define fprint(format,arg...) fprintf( stderr, "%s:%d " format , __FILE__ , __LINE__ , ##arg)
 #endif
 #define debug(x,y) fprintf( stderr, #x " = %" #y "\n" , x)

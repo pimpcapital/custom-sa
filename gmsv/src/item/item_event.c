@@ -2796,10 +2796,8 @@ void ITEM_Refresh(int charaindex, int toindex, int haveitemindex) {
   }
   else CHAR_talkToCli(charaindex, -1, "什麽也没发生。", CHAR_COLORWHITE);
 
-  /* 平乓仿弁正□及赭    伉旦玄井日壅蛔 */
   CHAR_setItemIndex(charaindex, haveitemindex, -1);
   CHAR_sendItemDataOne(charaindex, haveitemindex);/* 失奶  丞凳蕙 */
-  /* 壅允 */
   ITEM_endExistItemsOne(itemindex);
 }
 

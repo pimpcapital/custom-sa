@@ -992,32 +992,24 @@ ANYTHREAD int CONNECT_checkStateSomeOne(int a, int maxcount) {
   return ret;
 }
 
-ANYTHREAD void CONNECT_setState(int fd, int a) {
+ANYTHREAD void CONNECT_setState(int fd, LoginType a) {
   CONNECT_LOCK(fd);
   Connect[fd].state = a;
   Connect[fd].nstatecount = 0;
 
-  // Nuke start 0829: For debugging
-  {
-    char temp[80], buffer[128];
-    int i;
-    memset(StateTable, 0, sizeof(StateTable));
+  char temp[80], buffer[128];
+  memset(StateTable, 0, sizeof(StateTable));
 
-    for(i = 0; i < ConnectLen; i++)
-      if(Connect[i].use == TRUE)
-        StateTable[Connect[i].state]++;
+  for(int i = 0; i < ConnectLen; i++)
+    if(Connect[i].use == TRUE)
+      StateTable[Connect[i].state]++;
 
-    buffer[0] = 0;
+  buffer[0] = 0;
 
-    for(i = 0; i <= WHILESAVEWAIT; i++) {
-      sprintf(temp, "%4d", StateTable[i]);
-      strcat(buffer, temp);
-    }
-//		print( "\nFILE:%s,LINE:%d", file,fromline );
-    print("\n{{%s}}", buffer);
+  for(int i = 0; i <= WHILESAVEWAIT; i++) {
+    sprintf(temp, "%4d", StateTable[i]);
+    strcat(buffer, temp);
   }
-  // Nuke end
-
   CONNECT_UNLOCK(fd);
 }
 
@@ -1057,8 +1049,7 @@ ANYTHREAD void CONNECT_getCdkey(int fd, char *out, int outlen) {
 
 ANYTHREAD void CONNECT_setCdkey(int sockfd, char *cd) {
   CONNECT_LOCK(sockfd);
-  snprintf(Connect[sockfd].cdkey, sizeof(Connect[sockfd].cdkey), "%s",
-           cd);
+  snprintf(Connect[sockfd].cdkey, sizeof(Connect[sockfd].cdkey), "%s", cd);
   CONNECT_UNLOCK(sockfd);
 }
 

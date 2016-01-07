@@ -1,8 +1,6 @@
 #include "version.h"
 #include <stdio.h>
 #include <ctype.h>
-#include <time.h>
-//???
 #include "common.h"
 #include "handletime.h"
 #include "object.h"
@@ -16,9 +14,7 @@
 #include "encount.h"
 #include "npcutil.h"
 #include "battle.h"
-#include "net.h"
 #include "configfile.h"
-#include "npc_npcenemy.h"
 
 static void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int yflg);
 
@@ -36,22 +32,17 @@ static CHAR_WALKRET CHAR_walk_turn(int index, int dir) {
   CHAR_sendWatchEvent(CHAR_getWorkInt(index, CHAR_WORKOBJINDEX),
                       CHAR_ACTTURN, NULL, 0, FALSE);
   CHAR_setWorkInt(index, CHAR_WORKACTION, CHAR_ACTTURN);
-  for(object = MAP_getTopObj(ff, fx, fy); object;
-      object = NEXT_OBJECT(object)) {
+  for(object = MAP_getTopObj(ff, fx, fy); object; object = NEXT_OBJECT(object)) {
     typedef void (*POSTOFUNC)(int, int);
     POSTOFUNC pfunc = NULL;
     int objindex = GET_OBJINDEX(object);
 
     switch(OBJECT_getType(objindex)) {
       case OBJTYPE_CHARA:
-        pfunc = (POSTOFUNC) CHAR_getFunctionPointer(
-            OBJECT_getIndex(objindex),
-            CHAR_POSTOVERFUNC);
+        pfunc = (POSTOFUNC) CHAR_getFunctionPointer(OBJECT_getIndex(objindex), CHAR_POSTOVERFUNC);
         break;
       case OBJTYPE_ITEM:
-        pfunc = (POSTOFUNC) ITEM_getFunctionPointer(
-            OBJECT_getIndex(objindex),
-            ITEM_POSTOVERFUNC);
+        pfunc = (POSTOFUNC) ITEM_getFunctionPointer(OBJECT_getIndex(objindex), ITEM_POSTOVERFUNC);
         break;
       case OBJTYPE_GOLD:
         break;
@@ -72,15 +63,13 @@ static void CHAR_sendMapAtWalk(int index, int fl, int ox, int oy, int fx, int fy
   vx = fx - ox;
   vy = fy - oy;
 
-  if(ABS(vx) >= seesiz / 2 ||       /*  犒互  五中  */
-     ABS(vy) >= seesiz / 2) {       /*  犒互  五中  */
+  if(ABS(vx) >= seesiz / 2 || ABS(vy) >= seesiz / 2) {
     return;
-
   } else {
     RECT send, get;
     char *mapdata;
-    int oldlux = ox - (int) (seesiz / 2);
-    int oldluy = oy - (int) (seesiz / 2);
+    int oldlux = ox - (seesiz / 2);
+    int oldluy = oy - (seesiz / 2);
     int absx = ABS(vx);
     int absy = ABS(vy);
     if(vx != 0) {
@@ -143,7 +132,6 @@ static void CHAR_sendMapAtWalk(int index, int fl, int ox, int oy, int fx, int fy
 }
 
 static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
-  int i;
   int fx, fy, ff;
   int ox, oy, of;
   int objbuf[128];
@@ -190,8 +178,7 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
         {1,  0},
         {0,  1},
     };
-    int k;
-    for(k = 0; k < 5; k++) {
+    for(int k = 0; k < 5; k++) {
       if(!MAP_walkAble(charaindex, ff, fx + offset[k].x,
                        fy + offset[k].y)) {
         CHAR_setInt(charaindex, CHAR_DIR, dir);
@@ -226,7 +213,7 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
     }
   }
   objbufindex = CHAR_getSameCoordinateObjects(objbuf, arraysizeof(objbuf), ff, fx, fy);
-  for(i = 0; i < objbufindex; i++) {
+  for(int i = 0; i < objbufindex; i++) {
     int objindex = objbuf[i];
     switch(OBJECT_getType(objindex)) {
       case OBJTYPE_CHARA:
@@ -253,7 +240,7 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
     CHAR_setInt(charaindex, CHAR_DIR, dir);
     retvalue = CHAR_WALKHITOBJECT;
   } else {
-    for(i = 0; i < objbufindex; i++) {
+    for(int i = 0; i < objbufindex; i++) {
       typedef void (*PREOFUNC)(int, int);
       PREOFUNC pfunc = NULL;
       int objindex = objbuf[i];
@@ -290,17 +277,13 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
       ox = OBJECT_setX(objindex, CHAR_getInt(charaindex, CHAR_X));
       oy = OBJECT_setY(objindex, CHAR_getInt(charaindex, CHAR_Y));
       if(!MAP_objmove(objindex, of, ox, oy, ff, fx, fy)) {
-        /*  仇氏卅氏升丹仄方丹手卅中    */
-        fprint("ERROR MAP_OBJMOVE objindex=%d(%s)\n", objindex,
-               CHAR_getUseName(charaindex));
+        fprint("ERROR MAP_OBJMOVE objindex=%d(%s)\n", objindex, CHAR_getUseName(charaindex));
       }
     }
 
-    CHAR_setInt(charaindex, CHAR_WALKCOUNT,
-                CHAR_getInt(charaindex, CHAR_WALKCOUNT) + 1);
+    CHAR_setInt(charaindex, CHAR_WALKCOUNT, CHAR_getInt(charaindex, CHAR_WALKCOUNT) + 1);
 
-
-    for(i = 0; i < objbufindex; i++) {
+    for(int i = 0; i < objbufindex; i++) {
       typedef void (*POSTOFUNC)(int, int);
       POSTOFUNC pfunc = NULL;
       int objindex = objbuf[i];
@@ -322,7 +305,7 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
       if(pfunc)pfunc(OBJECT_getIndex(objindex), charaindex);
     }
     objbufindex = CHAR_getSameCoordinateObjects(objbuf, arraysizeof(objbuf), of, ox, oy);
-    for(i = 0; i < objbufindex; i++) {
+    for(int i = 0; i < objbufindex; i++) {
       typedef void (*OFFFUNC)(int, int);
       OFFFUNC ofunc = NULL;
       int objindex = objbuf[i];
@@ -332,10 +315,8 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
           ofunc = (OFFFUNC) CHAR_getFunctionPointer(OBJECT_getIndex(objindex), CHAR_OFFFUNC);
           break;
         case OBJTYPE_ITEM:
-          /*    卞窒手仄卅中  */
           break;
         case OBJTYPE_GOLD:
-          /*    卞窒手仄卅中  */
           break;
         default:
           break;
@@ -346,20 +327,13 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
   }
   CHAR_AFTERWALK:
   if(retvalue == CHAR_WALK1357 || retvalue == CHAR_WALKHITOBJECT) {
-    {
-      int opt[2] = {ox, oy};
-      CHAR_sendWatchEvent(CHAR_getWorkInt(charaindex,
-                                          CHAR_WORKOBJINDEX),
-                          CHAR_ACTWALK, opt, 2, TRUE);
-    }
+    int opt[2] = {ox, oy};
+    CHAR_sendWatchEvent(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX), CHAR_ACTWALK, opt, 2, TRUE);
     CHAR_setWorkChar(charaindex, CHAR_WORKWALKARRAY, "");
     if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
-      CHAR_sendWatchEvent(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX),
-                          CHAR_ACTWARP, NULL, 0, TRUE);
+      CHAR_sendWatchEvent(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX), CHAR_ACTWARP, NULL, 0, TRUE);
     }
   } else if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
-
-    int flg = FALSE;
     int par;
     int count;
     CHAR_setWorkInt(charaindex, CHAR_WORKACTION, -1);
@@ -389,7 +363,6 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
     par = ENCOUNT_getEncountPercentMin(charaindex, of, ox, oy);
     if(par != -1) {
       if(CHAR_getWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN) != par) {
-        flg = TRUE;
         CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN, par);
       }
     }
@@ -397,7 +370,6 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
     par = ENCOUNT_getEncountPercentMax(charaindex, of, ox, oy);
     if(par != -1) {
       if(CHAR_getWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MAX) != par) {
-        flg = TRUE;
         CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MAX, par);
       }
     }
@@ -438,7 +410,6 @@ static CHAR_WALKRET CHAR_walk_move(int charaindex, int dir) {
       }
 
 
-      //print("\n noen=%d", noen);
       if(noen == 0) {
         int maxep = CHAR_getWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MAX);
         int minep = CHAR_getWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN);
@@ -583,9 +554,6 @@ void CHAR_walkcall(int index) {
              CHAR_getWorkChar(index, CHAR_WORKWALKARRAY));
 
   CHAR_ctodirmode(tmp[0], &dir, &mode);
-  /* 褪卅日仪蟆卞桦赭毛筏盛仄化云仁
-   * 褪及  仁蟆及桦赭毛    卞阂互啖  允月啃
-   */
   if(CHAR_getInt(index, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
     if(CHAR_getWorkInt(index, CHAR_WORKPARTYMODE) == CHAR_PARTY_LEADER) {
       end.x = CHAR_getInt(index, CHAR_X);
@@ -593,11 +561,9 @@ void CHAR_walkcall(int index) {
     }
   }
 
-  /* 汹仁 */
   ret = CHAR_walk(index, dir, mode);
 
   if(mode == 0 && ret == CHAR_WALKSUCCESSED) {
-    /* 愤坌互褪卅日醮棉毛汹井六月 */
     if(CHAR_getInt(index, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
 
 
@@ -607,14 +573,9 @@ void CHAR_walkcall(int index) {
           int toindex = CHAR_getWorkInt(index, i + CHAR_WORKPARTYINDEX1);
           if(CHAR_CHECKINDEX(toindex)) {
             int parent_dir;
-            /* 阂及匏  午］褪及汹五蟆及匏  井日  轾毛菲户月 */
-            /* 汹仁 */
             start.x = CHAR_getInt(toindex, CHAR_X);
             start.y = CHAR_getInt(toindex, CHAR_Y);
             parent_dir = NPC_Util_getDirFromTwoPoint(&start, &end);
-            /* 弘仿犯奴它旦左皿扑亦件汹五毛  蜇允月啃卞］
-             * 戚及阂反蟆及阂及  毛馨丹方丹卞允月
-             */
             end = start;
             if(parent_dir != -1) {
               CHAR_walk(toindex, parent_dir, 0);
@@ -625,8 +586,6 @@ void CHAR_walkcall(int index) {
                 int petindex = CHAR_getWorkInt(toindex, CHAR_WORKPETFOLLOW);
                 if(CHAR_CHECKINDEX(petindex)) {
                   int parent_dir;
-                  /* 阂及匏  午］褪及汹五蟆及匏  井日  轾毛菲户月 */
-                  /* 汹仁 */
                   end.x = CHAR_getInt(toindex, CHAR_X);
                   end.y = CHAR_getInt(toindex, CHAR_Y);
                   start.x = CHAR_getInt(petindex, CHAR_X);
@@ -660,7 +619,6 @@ void CHAR_walkcall(int index) {
             }
           }
           else {
-            /* 赓渝祭仄卅云允 */
             CHAR_setWorkInt(index, i + CHAR_WORKPARTYINDEX1, -1);
           }
         }
@@ -670,8 +628,6 @@ void CHAR_walkcall(int index) {
         int petindex = CHAR_getWorkInt(index, CHAR_WORKPETFOLLOW);
         if(CHAR_CHECKINDEX(petindex)) {
           int parent_dir;
-          /* 阂及匏  午］褪及汹五蟆及匏  井日  轾毛菲户月 */
-          /* 汹仁 */
           end.x = CHAR_getInt(index, CHAR_X);
           end.y = CHAR_getInt(index, CHAR_Y);
           start.x = CHAR_getInt(petindex, CHAR_X);
@@ -687,9 +643,6 @@ void CHAR_walkcall(int index) {
           //if( (end.x == start.x) && (end.x == start.y) )
           //	parent_dir = -1;
 
-          /* 弘仿犯奴它旦左皿扑亦件汹五毛  蜇允月啃卞］
-           * 戚及阂反蟆及阂及  毛馨丹方丹卞允月
-           */
           //print(" pdir:%d sx:%d sy:%d ex:%d ey:%d ",
           //	parent_dir, start.x, start.y, end.x, end.y );
           //end = start;
@@ -710,15 +663,13 @@ void CHAR_walkcall(int index) {
           }
         }
         else {
-          /* 赓渝祭仄卅云允 */
           CHAR_setWorkInt(index, CHAR_WORKPETFOLLOW, -1);
         }
 
       }
     }
   }
-  strcpysafe(tmp, sizeof(tmp),
-             CHAR_getWorkChar(index, CHAR_WORKWALKARRAY));
+  strcpysafe(tmp, sizeof(tmp), CHAR_getWorkChar(index, CHAR_WORKWALKARRAY));
   if(strlen(tmp) > 0) {
     CHAR_setWorkChar(index, CHAR_WORKWALKARRAY, &tmp[1]);
   }
@@ -866,7 +817,6 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
           }
         }
         if(whichtype == CHAR_TYPEPLAYER) {
-          /* Make C*/
           if(CHAR_makeObjectCString(objindex, introduction, sizeof(introduction))) {
             introlen = strlen(introduction);
             introduction[introlen] = ',';
@@ -886,8 +836,7 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
                CHAR_getWorkInt(c_index, CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) {
               int tofd = getfdFromCharaIndex(c_index);
               if(tofd != -1) {
-                if(CHAR_makeCAOPT1String(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX),
-                                         cabuf, sizeof(cabuf), CHAR_ACTLEADER, 1)) {
+                if(CHAR_makeCAOPT1String(CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX), cabuf, sizeof(cabuf), CHAR_ACTLEADER, 1)) {
                   CONNECT_appendCAbuf(tofd, cabuf, strlen(cabuf));
                 }
               }
@@ -895,8 +844,7 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
             if(CHAR_getInt(c_index, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER &&
                CHAR_getWorkInt(c_index, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE) {
               if(CHAR_getWorkInt(c_index, CHAR_WORKBATTLEWATCH) == TRUE) {
-                if(CHAR_makeCAOPT1String(objindex, cabuf, sizeof(cabuf),
-                                         CHAR_ACTBATTLEWATCH, 1)) {
+                if(CHAR_makeCAOPT1String(objindex, cabuf, sizeof(cabuf), CHAR_ACTBATTLEWATCH, 1)) {
                   CONNECT_appendCAbuf(fd, cabuf, strlen(cabuf));
                 }
               } else {
@@ -974,8 +922,7 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
           if(OBJECT_getType(objindex) == OBJTYPE_CHARA) {
             if(CHAR_getInt(c_index, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER &&
                CHAR_getWorkInt(c_index, CHAR_WORKPARTYMODE) == CHAR_PARTY_LEADER) {
-              if(CHAR_makeCAOPT1String(objindex, cabuf, sizeof(cabuf),
-                                       CHAR_ACTLEADER, 1)) {
+              if(CHAR_makeCAOPT1String(objindex, cabuf, sizeof(cabuf), CHAR_ACTLEADER, 1)) {
                 CONNECT_appendCAbuf(fd, cabuf, strlen(cabuf));
               }
             }
@@ -1000,10 +947,8 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
               } else {
                 int battleno = CHAR_getWorkInt(c_index, CHAR_WORKBATTLEINDEX);
                 int sideno = CHAR_getWorkInt(c_index, CHAR_WORKBATTLESIDE);
-                int helpno = (BattleArray[CHAR_getWorkInt(c_index,
-                                                          CHAR_WORKBATTLEINDEX)].Side[
-                                  CHAR_getWorkInt(c_index,
-                                                  CHAR_WORKBATTLESIDE)].flg & BSIDE_FLG_HELP_OK) ? TRUE : FALSE;
+                int helpno = (BattleArray[CHAR_getWorkInt(c_index, CHAR_WORKBATTLEINDEX)].Side[
+                                  CHAR_getWorkInt(c_index, CHAR_WORKBATTLESIDE)].flg & BSIDE_FLG_HELP_OK) ? TRUE : FALSE;
 
                 if(CHAR_makeCAOPT3String(objindex, cabuf, sizeof(cabuf),
                                          CHAR_ACTBATTLE, battleno, sideno, helpno)) {
@@ -1055,9 +1000,7 @@ static void CHAR_sendCDCharaAtWalk(int charaindex, int of, int ox, int oy, int x
   x = CHAR_getInt(charaindex, CHAR_X);
   y = CHAR_getInt(charaindex, CHAR_Y);
 
-  if(of != fl ||  /*  白夫失互啜丹    */
-     ABS(x - ox) > seesiz / 2 ||       /*  犒互  五中  */
-     ABS(y - oy) > seesiz / 2)        /*  犒互  五中  */
+  if(of != fl || ABS(x - ox) > seesiz / 2 || ABS(y - oy) > seesiz / 2)
     return;
 
   fd = getfdFromCharaIndex(charaindex);

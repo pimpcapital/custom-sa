@@ -100,14 +100,12 @@ void saacproto_strcpysafe(char *dest, char *src, int maxlen) {
 }
 
 void saacproto_strcatsafe(char *dest, char *src, int maxlen) {
-  int i, j;
-
-
-  for(i = 0; i < maxlen - 1; i++) {
+  for(int i = 0; i < maxlen - 1; i++) {
     if(dest[i] == 0) {
-      for(j = i; j < maxlen - 1; j++) {
+      int j = i;
+      for(; j < maxlen - 1; j++) {
         dest[j] = src[j - i];
-        if(src[j - i] == 0)break;
+        if(src[j - i] == 0) break;
       }
       dest[j] = 0;
       break;
@@ -480,8 +478,10 @@ unsigned long saacproto_GetNewMessageID(void) {
 void saacproto_Send(int fd, char *msg) {
   if(saacproto_writelogfilename[0] != '\0') {
     FILE *wfp = fopen(saacproto_writelogfilename, "a+");
-    if(wfp)fprintf(wfp, "%s\n", msg);
-    if(wfp)fclose(wfp);
+    if(wfp)
+      fprintf(wfp, "%s\n", msg);
+    if(wfp)
+      fclose(wfp);
   }
   /* add a newline character*/
   unsigned int l = strlen(msg);

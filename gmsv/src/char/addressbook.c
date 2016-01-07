@@ -445,9 +445,7 @@ static int ADDRESSBOOK_makeEntryFromCharaindex( int charaindex,
 	memset( ae,0,sizeof(ADDRESSBOOK_entry) );
 	cdkey = CHAR_getChar( charaindex, CHAR_CDKEY);
 	if( cdkey == "\0" ){
-		print( "ADDRESSBOOK_makeEntryFromCharaindex:"
-			   " strange! getcdkeyFromCharaIndex returns NULL!"
-			   " charaindex: %d\n" , charaindex );
+		print( "ADDRESSBOOK_makeEntryFromCharaindex: strange! getcdkeyFromCharaIndex returns NULL! charaindex: %d\n" , charaindex );
 		return FALSE;
 	}
 	strcpysafe( ae->cdkey , sizeof( ae->cdkey ),cdkey);
