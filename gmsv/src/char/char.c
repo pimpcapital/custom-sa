@@ -939,24 +939,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   CHAR_loginCheckUserItem(charaindex);
   CHAR_complianceParameter(charaindex);
 
-#ifdef _PROFESSION_FIX_LEVEL    // WON ADD 修正职业经验值
-                                                                                                                          {
-		int i=0;
-		for( i = 0 ; i < CHAR_SKILLMAXHAVE ; i ++ ){
-			CHAR_HaveSkill* hskill;
-
-			hskill = CHAR_getCharHaveSkill( charaindex, i );
-
-			if( hskill != NULL && hskill->use == TRUE ){
-				int skill_level = SKILL_getInt( &hskill->skill, SKILL_LEVEL);
-				if( skill_level < 10 ){
-					SKILL_setInt( &hskill->skill, SKILL_LEVEL, 10* 100 );
-				}
-			}
-		}
-	}
-#endif
-
 #ifdef _PETSKILL_BECOMEPIG
   if(CHAR_getInt(charaindex, CHAR_BECOMEPIG) > -1) {
     CHAR_setInt(charaindex, CHAR_BASEIMAGENUMBER, CHAR_getInt(charaindex, CHAR_BECOMEPIG_BBI));

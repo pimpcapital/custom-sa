@@ -1228,12 +1228,11 @@ ANYTHREAD void CAsend(int fd) {
   char buf[sizeof(Connect[0].CAbuf)];
   int bufuse = 0;
 
-  if(CONNECT_getCAbuf(fd, buf, sizeof(buf), &bufuse) < 0)return;
-  if(bufuse == 0)return;
+  if(CONNECT_getCAbuf(fd, buf, sizeof(buf), &bufuse) < 0)
+    return;
+  if(bufuse == 0)
+    return;
 
-  //print("\nshan--->(CAsend)->%s fd->%d", buf, fd);
-
-  /*呵稿のデリミタ ',' を'\0' とかえる*/
   buf[bufuse - 1] = '\0';
   lssproto_CA_send(fd, buf);
 
@@ -1243,8 +1242,6 @@ ANYTHREAD void CAsend(int fd) {
 ANYTHREAD void CAcheck(void) {
   int i;
   unsigned int interval_us = getCAsendinterval_ms() * 1000;
-
-  /* Connect及蜊醒坌分仃支月井日褐中氏分卅［ */
   for(i = 0; i < ConnectLen; i++) {
     struct timeval t;
     if(!CONNECT_getUse_debug(i, 1008))continue;
