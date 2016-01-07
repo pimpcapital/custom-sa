@@ -73,7 +73,9 @@ void saacproto_ACCharList_recv(int fd, char *result, char *data, int retfd) {
 
 void saacproto_ACCharLoad_recv(int fd, char *result, char *data, int retfd, int saveindex) {
   int clifd = getfdFromFdid(retfd);
-  if(CONNECT_checkfd(clifd) == FALSE)return;
+  if(CONNECT_checkfd(clifd) == FALSE)
+    return;
+
   if((strcmp(result, SUCCESSFUL) == 0) && (data[0])) {
     CHAR_login(clifd, data, saveindex);
   } else {

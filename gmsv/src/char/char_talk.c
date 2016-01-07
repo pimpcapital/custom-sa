@@ -771,34 +771,19 @@ void CHAR_Talk(int fd, int index, char *message, int color, int area) {
     char gm[128];
     char *pass = strstr(messageeraseescape + 1, getChatMagicPasswd());
     // Arminius: limit ip +2
-    unsigned long ip;
-    int a, b, c, d, ck;
+    char* ip = CONNECT_get_userip(fd);
     messageeraseescape[stringlen - 1] = '\0';
     // Arminius: limit ip
-    ip = CONNECT_get_userip(fd);
-
-    a = (ip % 0x100);
-    ip = ip / 0x100;
-    b = (ip % 0x100);
-    ip = ip / 0x100;
-    c = (ip % 0x100);
-    ip = ip / 0x100;
-    d = (ip % 0x100);
-
     if(pass == messageeraseescape + 1) {
-
-      if(CHAR_useChatMagic(index, messageeraseescape + 1
-                                  + strlen(getChatMagicPasswd()) + 1, TRUE)) {
-        print("\n账号:%s 名字:%s\n来自ip:%d.%d.%d.%d\n使用GM命令%s]\n", CHAR_getChar(index, CHAR_CDKEY),
-              CHAR_getChar(index, CHAR_NAME), a, b, c, d, messageeraseescape);
+      if(CHAR_useChatMagic(index, messageeraseescape + 1 + strlen(getChatMagicPasswd()) + 1, TRUE)) {
+        print("\n账号:%s 名字:%s\n来自ip:%s\n使用GM命令%s]\n", CHAR_getChar(index, CHAR_CDKEY), CHAR_getChar(index, CHAR_NAME), ip, messageeraseescape);
         sprintf(gm, "您使用GM命令%s]已成功", messageeraseescape);
         CHAR_talkToCli(index, -1, gm, CHAR_COLORYELLOW);
       }
     } else {
       if(CHAR_getWorkInt(index, CHAR_WORKFLG) & WORKFLG_DEBUGMODE) {
         if(CHAR_useChatMagic(index, messageeraseescape + 1, TRUE)) {
-          print("\n账号:%s 名字:%s\n来自ip:%d.%d.%d.%d\n使用GM命令%s]\n", CHAR_getChar(index, CHAR_CDKEY),
-                CHAR_getChar(index, CHAR_NAME), a, b, c, d, messageeraseescape);
+          print("\n账号:%s 名字:%s\n来自ip:%s\n使用GM命令%s]\n", CHAR_getChar(index, CHAR_CDKEY), CHAR_getChar(index, CHAR_NAME), ip, messageeraseescape);
           sprintf(gm, "您使用GM命令%s]已成功", messageeraseescape);
           CHAR_talkToCli(index, -1, gm, CHAR_COLORYELLOW);
         }

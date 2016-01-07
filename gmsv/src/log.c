@@ -542,47 +542,15 @@ void logHack(int fd, int errcode)
 	struct tm tm1;
 	char cdkey[4096];
 	char charname[4096];
-	unsigned long ip;
-	char ipstr[4096];
-	
-	memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
+
+	memcpy( &tm1, localtime(&NowTime.tv_sec), sizeof( tm1));
 	CONNECT_getCdkey( fd, cdkey, 4096);
 	CONNECT_getCharname( fd, charname, 4096);
-	ip=CONNECT_get_userip(fd);
-	sprintf(ipstr,"%d.%d.%d.%d",
-        	((unsigned char *)&ip)[0],
-        	((unsigned char *)&ip)[1],
-        	((unsigned char *)&ip)[2],
-        	((unsigned char *)&ip)[3]);
         if ((errcode<0) || (errcode>=HACK_TYPE_NUM)) errcode=HACK_NOTHING;
 
-        printl( LOG_HACK, "(%d:%d) %s ip=%s cdkey=%s charname=%s",
-        	tm1.tm_hour, tm1.tm_min, hackmsg[errcode], ipstr, cdkey, charname);
+        printl( LOG_HACK, "(%d:%d) %s ip=%s cdkey=%s charname=%s", tm1.tm_hour, tm1.tm_min, hackmsg[errcode], CONNECT_get_userip(fd), cdkey, charname);
 }
 
-// Nuke 0626
-void logSpeed(int fd)
-{
-	struct tm tm1;
-	char cdkey[4096];
-	char charname[4096];
-	unsigned long ip;
-	char ipstr[4096];
-	
-	memcpy( &tm1, localtime( (time_t *)&NowTime.tv_sec), sizeof( tm1));
-	CONNECT_getCdkey( fd, cdkey, 4096);
-	CONNECT_getCharname( fd, charname, 4096);
-	ip=CONNECT_get_userip(fd);
-	sprintf(ipstr,"%d.%d.%d.%d",
-        	((unsigned char *)&ip)[0],
-        	((unsigned char *)&ip)[1],
-        	((unsigned char *)&ip)[2],
-        	((unsigned char *)&ip)[3]);
-	printl( LOG_SPEED, "(%d:%d) ip=%s cdkey=%s charname=%s",
-        	tm1.tm_hour, tm1.tm_min, ipstr, cdkey, charname);
-}
-
-// Shan 
 void LogGM(
         char *CharName,    //角色名称
         char *CharID,      //玩家ID
@@ -594,7 +562,7 @@ void LogGM(
 {
   struct  tm tm1;
                                                           
-  memcpy(&tm1,localtime((time_t *)&NowTime.tv_sec),sizeof(tm1));
+  memcpy(&tm1,localtime(&NowTime.tv_sec),sizeof(tm1));
   printl(LOG_GM,"%s\t%s\t%s\t(%d,%d,%d)\t(%d:%d)", CharName,CharID,Message,floor,x,y,tm1.tm_hour,tm1.tm_min);
 }
 

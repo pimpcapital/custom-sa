@@ -150,7 +150,6 @@ enum
 }HACK_TYPE;
 void logHack(int fd, int errcode);
 // Nuke 0626
-void logSpeed(int fd);
 
 void closeAllLogFile( void );
 int openAllLogFile( void );

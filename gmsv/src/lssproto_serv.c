@@ -1085,7 +1085,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_FM_RECV-message:%s\n", message);
     lssproto_FM_recv(fd, message);
     util_DiscardMessage();
     return 0;

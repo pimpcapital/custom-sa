@@ -605,7 +605,7 @@ int CHAR_CheckProfessionEquit(int toindex) {
 static void CHAR_setLuck(int charaindex);
 
 void CHAR_login(int clifd, char *data, int saveindex) {
-  int charaindex, objindex;
+  int objindex;
   Char ch;
   int per;
 //	char c_temp2[4096];
@@ -614,7 +614,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     goto MAKECHARDATAERROR;
   }
   CHAR_setCharFuncTable(&ch);
-  charaindex = CHAR_initCharOneArray(&ch);
+  int charaindex = CHAR_initCharOneArray(&ch);
   if(charaindex == -1) {
     fprint ("制作人物错误！\n");
     CHAR_endCharData(&ch);
@@ -638,72 +638,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   if(CHAR_getFlg(charaindex, CHAR_ISDIE)) {
     print("?data? ISDIE flg is standing.\n");
     CHAR_setFlg(charaindex, CHAR_ISDIE, FALSE);
-  }
-
-// Nuke 20040420: CHECK MAX POINT
-  {
-
-    int lv, vi, str, tou, dx, skup, trn, teq, quest, level, total, max;
-    float table[] = {437, 490, 521, 550, 578, 620, 888}; //各转最高点数(减10)
-    //float table[]={620,660,700,740,780,820}; //各转最高点数(减10)
-    lv = CHAR_getInt(charaindex, CHAR_LV);
-    vi = CHAR_getInt(charaindex, CHAR_VITAL);
-    str = CHAR_getInt(charaindex, CHAR_STR);
-    tou = CHAR_getInt(charaindex, CHAR_TOUGH);
-    dx = CHAR_getInt(charaindex, CHAR_DEX);
-    trn = CHAR_getInt(charaindex, CHAR_TRANSMIGRATION);
-    teq = CHAR_getInt(charaindex, CHAR_TRANSEQUATION);
-    skup = CHAR_getInt(charaindex, CHAR_SKILLUPPOINT);
-    quest = (teq >> 16) & 0xFF;
-    level = teq & 0xFFF;
-    total = (vi + str + tou + dx) / 100 + skup;
-//    max=(trn==0)?(lv-1)*3+20+10: // 0转447
-//      (lv-1)*3+table[trn-1]/12.0+quest/4.0+(level-trn*85)/4.0+10+1+10+trn*10;
-/*
-		print("升级点数:%d\n",(lv-1)*getSkup());
-		print("继承点术:%f\n",(table[trn-1]/12.0));
-		print("历史任务:%f\n",quest/4.0);
-		print("历史等级:%f\n",(level-trn*85)/4.0);
-		print("历史等级:%d/%d\n",level,trn*85);
-		print("转前祝福:%d\n",getTransPoint(trn));
-		print("误差1点:%d\n",1);
-		print("转後祝福:%d\n",getTransPoint(trn));
-		print("转生红利:%d\n",trn*10);
-*/
-    float jxds = (level - trn * 85) / 4.0;
-    if(jxds < 0)jxds = 0;
-#ifdef _SKILLUPPOINT_CF
-                                                                                                                            max=(trn==0)?getTransPoint(trn)+(lv-1)*getSkup()+20:
-			getTransPoint(trn)+(lv-1)*getSkup()+table[trn-1]/12.0+quest/4.0+jxds+getTransPoint(trn)+ trn*10+1;
-#else
-    max = (trn == 0) ? (lv - 1) * 3 + 20 + 10 : // 0转447
-          (lv - 1) * 3 + table[trn - 1] / 12.0 + quest / 4.0 + (level - trn * 85) / 4.0 + 10 + 1 + 10 + trn * 10;
-#endif
-/* 1转以上=升级点数+继承点术+历史任务+历史等级+转前祝福+误差1点+转後祝福+转生红利 */
-//	if (trn==6) max=max-20; /* 六转时没有转前祝福与转後祝福 */
-#ifdef _REVLEVEL
-    if (total>max && strcmp(getPoint(),"否")==0)
-#else
-    if(total > max)
-#endif
-    {
-      print("\n重调点数[%s:%s]:%d->%d ", CHAR_getChar(charaindex, CHAR_CDKEY), CHAR_getChar(charaindex, CHAR_NAME), total, max);
-      CHAR_setInt(charaindex, CHAR_VITAL, 1000);
-      CHAR_setInt(charaindex, CHAR_STR, 0);
-      CHAR_setInt(charaindex, CHAR_TOUGH, 0);
-      CHAR_setInt(charaindex, CHAR_DEX, 0);
-      CHAR_setInt(charaindex, CHAR_SKILLUPPOINT, max - 10);
-    }
-    // 补足六转点数不足之玩家
-/*	if ((trn==6) && (total < max))
-	{
-   		print("\n补足点数[%s:%s]:%d->%d ",
-		  CHAR_getChar(charaindex,CHAR_CDKEY),
-		  CHAR_getChar(charaindex,CHAR_NAME),
-		  total,max);
-		CHAR_setInt(charaindex,CHAR_SKILLUPPOINT,
-			CHAR_getInt(charaindex,CHAR_SKILLUPPOINT)+(max-total));
-	}*/
   }
   {
     int EQ_BBI = -1, EQ_ARM = -1, EQ_NUM = -1, EQ_BI = -1, CH_BI = -1;
@@ -947,11 +881,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
         // CoolFish: 2001/10/11 Set Pet Unicode
         CHAR_setPetUniCode(petindex);
 #endif
-#ifdef _NEWOPEN_MAXEXP
-                                                                                                                                if( CHAR_getInt( petindex, CHAR_OLDEXP) > 0 || CHAR_getInt( charaindex, CHAR_OLDEXP) < 0 ){
-					CHAR_ChangeExp( petindex);
-				}
-#endif
         ID1 = CHAR_getInt(petindex, CHAR_PETID);
 //				petstring = CHAR_makePetStringFromPetIndex( petindex);
         // WON ADD 修正白虎七技
@@ -985,7 +914,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
       int petindex = CHAR_getCharPoolPet(charaindex, i);
       if(CHAR_CHECKINDEX(petindex)) {
 #ifdef _UNIQUE_P_I
-        // CoolFish: 2001/10/11 Set Pet Unicode
         CHAR_setPetUniCode(petindex);
 #endif
         b_find = FALSE;
@@ -1061,15 +989,13 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 
   CHAR_setLuck(charaindex);
   {
-    int i;
     char *statuscat[] = {"C", "P", "I", "S", "D", "E", "F"};
-    for(i = 0; i < arraysizeof(statuscat); i++)
+    for(int i = 0; i < arraysizeof(statuscat); i++)
       CHAR_sendStatusString(charaindex, statuscat[i]);
   }
   {
-    int i;
     char category[3];
-    for(i = 0; i < CHAR_MAXPETHAVE; i++) {
+    for(int i = 0; i < CHAR_MAXPETHAVE; i++) {
       snprintf(category, sizeof(category), "K%d", i);
       CHAR_sendStatusString(charaindex, category);
       snprintf(category, sizeof(category), "W%d", i);
@@ -1096,7 +1022,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     if(CHAR_getFlg(charaindex, CHAR_ISDUEL)) flg |= CHAR_FS_DUEL;
     if(CHAR_getFlg(charaindex, CHAR_ISPARTYCHAT)) flg |= CHAR_FS_PARTYCHAT;
     if(CHAR_getFlg(charaindex, CHAR_ISTRADECARD)) flg |= CHAR_FS_TRADECARD;
-    // CoolFish: 2001/4/18
     CHAR_setFlg(charaindex, CHAR_ISTRADE, 0);
     lssproto_FS_send(clifd, flg);
 
@@ -1153,24 +1078,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   AnnounceToPlayerWN(clifd);
 
   print("\n登陆人物名称:%s ", CHAR_getChar(charaindex, CHAR_NAME));
-
-  {
-    unsigned long ip;
-    char ipstr[512];
-
-    ip = CONNECT_get_userip(clifd);
-    sprintf(ipstr, "%d.%d.%d.%d",
-            ((unsigned char *) &ip)[0],
-            ((unsigned char *) &ip)[1],
-            ((unsigned char *) &ip)[2],
-            ((unsigned char *) &ip)[3]);
-
-    LogLogin(
-        CHAR_getChar(charaindex, CHAR_CDKEY),
-        CHAR_getChar(charaindex, CHAR_NAME),
-        saveindex, ipstr
-    );
-  }
+  LogLogin(CHAR_getChar(charaindex, CHAR_CDKEY), CHAR_getChar(charaindex, CHAR_NAME), saveindex, CONNECT_get_userip(clifd));
 #ifdef _ITEM_SETLOVER
   // 夫妻上线通知对方
   if(strlen(CHAR_getChar(charaindex, CHAR_LOVE)) > 0 &&

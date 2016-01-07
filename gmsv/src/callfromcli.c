@@ -96,32 +96,7 @@ void lssproto_CreateNewChar_recv(int fd, int dataplacenum, char *charname,
             || strstr(charname, "神秘人物")
 // WON END
       ) {
-
-    unsigned ip = CONNECT_get_userip(fd);
-    int a, b, c, d, ck;
-
-    a = (ip % 0x100);
-    ip = ip / 0x100;
-    b = (ip % 0x100);
-    ip = ip / 0x100;
-    c = (ip % 0x100);
-    ip = ip / 0x100;
-    d = (ip % 0x100);
-
-    ck = (
-        ((a == 10) && (b == 0) && (c == 0)) ||
-        ((a == 211) && (b == 76) && (c == 176) && (d == 21)) ||  // 台北wayi
-        ((a == 210) && (b == 64) && (c == 97) && ((d >= 21) && (d <= 25))) ||
-        ((a == 61) && (b == 222) && (c == 142) && (d == 66)) ||
-        ((a == 172) && (b == 16) && (c == 172) && (d == 29))
-    );
-
-    print(" name_WAEI_IP:%d.%d.%d.%d ck:%d ", a, b, c, d, ck);
-
-    if(!ck) {
-      lssproto_CreateNewChar_send(fd, FAILED, "Invalid charname\n");
-      return;
-    }
+    lssproto_CreateNewChar_send(fd, FAILED, "Invalid charname\n");
   }
   {
     int ach = 0;
@@ -161,12 +136,10 @@ void lssproto_CreateNewChar_recv(int fd, int dataplacenum, char *charname,
 void lssproto_CharLogin_recv(int fd, char *charname) {
   char cdkey[CDKEYLEN], passwd[PASSWDLEN];
 
-  if(CONNECT_isCLI(fd) == FALSE)return;
-  print("\n尝试登陆: 人物名称=%s\n", charname);
-  if(charname[0] == '\0') {
-    lssproto_CharLogin_send(fd, FAILED, "Can't access char have no name\n");
+  if(CONNECT_isCLI(fd) == FALSE)
     return;
-  }
+
+  print("\n尝试登陆: 人物名称=%s\n", charname);
   if(CONNECT_isNOTLOGIN(fd) == FALSE) {
     lssproto_CharLogin_send(fd, FAILED, "Already Logged in\n");
     return;
@@ -1384,7 +1357,8 @@ void lssproto_FM_recv(int fd, char *message) {
 void lssproto_PETST_recv(int fd, int nPet, int sPet) {
   CHECKFD;
   int charaindex = CONNECT_getCharaindex(fd);
-  if(!CHAR_CHECKINDEX(charaindex)) return;
+  if(!CHAR_CHECKINDEX(charaindex))
+    return;
   if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE)
     return;
 
