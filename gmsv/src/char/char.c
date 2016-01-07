@@ -265,10 +265,6 @@ void CHAR_createNewChar(int clifd, int dataplacenum, char *charname,
 #endif
 #ifdef _PERSONAL_FAME  // Arminius: 家族个人声望
   ch.data[CHAR_FAME] = 0;
-#ifdef _ITEM_SETLOVER
-  memset(ch.string[CHAR_LOVERID].string, 0, sizeof(STRING128));
-  memset(ch.string[CHAR_LOVERNAME].string, 0, sizeof(STRING128));
-#endif
 #endif
 #ifdef _PETSKILL_BECOMEPIG
   ch.data[CHAR_BECOMEPIG] = -1;
@@ -1079,25 +1075,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 
   print("\n登陆人物名称:%s ", CHAR_getChar(charaindex, CHAR_NAME));
   LogLogin(CHAR_getChar(charaindex, CHAR_CDKEY), CHAR_getChar(charaindex, CHAR_NAME), saveindex, CONNECT_get_userip(clifd));
-#ifdef _ITEM_SETLOVER
-  // 夫妻上线通知对方
-  if(strlen(CHAR_getChar(charaindex, CHAR_LOVE)) > 0 &&
-     strlen(CHAR_getChar(charaindex, CHAR_LOVERID)) > 0 &&
-     strlen(CHAR_getChar(charaindex, CHAR_LOVERNAME)) > 0) {
-    int iPlayernum = CHAR_getPlayerMaxNum(), i;
-    char szMsg[128];
-    for(i = 0; i < iPlayernum; i++) {
-      if(CHAR_getCharUse(i) == FALSE) continue;
-      if(!strcmp(CHAR_getChar(i, CHAR_LOVE), "YES") &&
-         !strcmp(CHAR_getChar(charaindex, CHAR_LOVERID), CHAR_getChar(i, CHAR_CDKEY)) &&
-         !strcmp(CHAR_getChar(charaindex, CHAR_LOVERNAME), CHAR_getChar(i, CHAR_NAME))) {
-        sprintf(szMsg, "你的爱人 %s 上线了", CHAR_getChar(charaindex, CHAR_NAME));
-        CHAR_talkToCli(i, -1, szMsg, CHAR_COLORYELLOW);
-        break;
-      }
-    }
-  }
-#endif
   return;
 
   DELETECHARDATA:
@@ -2830,13 +2807,6 @@ int CHAR_makeObjectCString(int objindex, char *buf, int buflen) {
       if(getShowVip() != 0) if(CHAR_getInt(charaindex, CHAR_VIPRIDE) == 1)
         sprintf(VipName, "VIP-");
 #endif
-#ifdef _ITEM_SETLOVER
-      char LoveName[32] = "";
-      if(strlen(CHAR_getChar(charaindex, CHAR_LOVE)) > 0 &&
-         strlen(CHAR_getChar(charaindex, CHAR_LOVERID)) > 0 &&
-         strlen(CHAR_getChar(charaindex, CHAR_LOVERNAME)) > 0)
-        sprintf(LoveName, "§♂%s♀", CHAR_getChar(charaindex, CHAR_LOVERNAME));
-#endif
       if(CHAR_getWorkInt(charaindex, CHAR_WORKFMINDEXI) >= 0
          && CHAR_getWorkInt(charaindex, CHAR_WORKFMINDEXI) < FAMILY_MAXNUM
          && CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER
@@ -2846,13 +2816,6 @@ int CHAR_makeObjectCString(int objindex, char *buf, int buflen) {
         sprintf(tmp, "%s%s%s", VipName, CHAR_getChar(charaindex, CHAR_FMNAME), LoveName);
       else
 #endif
-#ifdef _ITEM_SETLOVER
-        sprintf(tmp, "%s%s", CHAR_getChar(charaindex, CHAR_FMNAME), LoveName);
-      else if(strlen(LoveName) > 0)
-        sprintf(tmp, "%s", LoveName);
-      else
-        strcpy(tmp, "");
-#else
                                                                                                                               sprintf(tmp, "%s",CHAR_getChar( charaindex, CHAR_FMNAME));
 		else
  		    	strcpy(tmp, "");

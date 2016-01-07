@@ -166,11 +166,6 @@ void ITEM_changePetOwner( int charaindex, int toindex, int haveitemindex);
 #ifdef _TIME_TICKET
 void ITEM_timeticket( int charaindex, int toindex, int haveitemindex);
 #endif
-#ifdef _ITEM_SETLOVER
-void ITEM_SetLoverUser( int charaindex, int toindex, int haveitemindex);
-void ITEM_LoverWarp( int charaindex, int toindex, int haveitemindex);
-void ITEM_LoverUnmarry( int charaindex, int toindex, int haveitemindex);
-#endif
 
 #ifdef _GM_ITEM
 void ITEM_GMFUNCTION( int charaindex, int toindex, int haveitemindex);

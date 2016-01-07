@@ -579,11 +579,6 @@ static CorrespondStringAndFunctionTable
 #ifdef _TIME_TICKET
         {{"ITEM_timeticket"}, ITEM_timeticket, 0},
 #endif
-#ifdef _ITEM_SETLOVER  // 结婚物品
-        {{"ITEM_SetLoverUser"}, ITEM_SetLoverUser, 0},
-        {{"ITEM_LoverWarp"}, ITEM_LoverWarp, 0},
-        {{"ITEM_LoverUnmarry"}, ITEM_LoverUnmarry, 0},
-#endif
 
 #ifdef _GM_ITEM  // GM命令物品
         { {"ITEM_GMFUNCTION"}, ITEM_GMFUNCTION, 0 },

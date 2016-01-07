@@ -879,11 +879,6 @@ static char *CHAR_setchardata[CHAR_DATACHARNUM] = {
     "fmname",  // CoolFish: Family 2001/5/24 家族名称 CHAR_FMNAME
 #ifdef _UNIQUE_P_I
     "ucode",  // CoolFish: 2001/10/11 UNIQUE_P_I CHAR_UNIQUECODE
-#ifdef _ITEM_SETLOVER
-    "love",       // 结婚判断
-    "lovrrid",    // 爱人帐号
-    "lovrrneme",  // 爱人名字
-#endif
 #endif
 #ifdef _GM_ITEM
     "gmfunction", // 玩家GM命令

@@ -512,11 +512,6 @@ typedef enum {
   CHAR_GMQUESTR1,
 #endif
 
-#ifdef _ITEM_SETLOVER
-  CHAR_LOVE,         // 结婚判断
-  CHAR_LOVERID,      // 爱人帐号
-  CHAR_LOVERNAME,    // 爱人名字
-#endif
 #ifdef _GM_ITEM
   CHAR_GMFUNCTION,   // 玩家GM命令
 #endif
