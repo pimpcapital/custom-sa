@@ -114,17 +114,16 @@ void util_DecodeMessage(char *dst, char *src) {
   util_shrstring(dst, tz + INTCODESIZE, rn);
 }
 
-int util_GetFunctionFromSlice(int *func, int *fieldcount) {
+int util_GetFunctionFromSlice(int *func) {
   char t1[1024 * 16];
   strcpy(t1, MesgSlice[1]);
   *func = atoi(t1) + RECEIVE_ADJUST;
   for(int i = 0; i < SLICE_MAX; i++)
     if(strcmp(MesgSlice[i], DEFAULTFUNCEND) == 0) {
-      *fieldcount = i - 2;
-      return 1;
+      return TRUE;
     }
 
-  return 0;  // failed: message not complete
+  return FALSE;  // failed: message not complete
 }
 
 void util_DiscardMessage(void) {

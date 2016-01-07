@@ -26,7 +26,7 @@ void util_EncodeMessage(char *dst, char *src);
 
 void util_DecodeMessage(char *dst, char *src);
 
-int util_GetFunctionFromSlice(int *func, int *fieldcount);
+int util_GetFunctionFromSlice(int *func);
 
 void util_DiscardMessage(void);
 

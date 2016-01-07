@@ -53,7 +53,7 @@ void lssproto_CleanupServer(void) {
 }
 
 int lssproto_ServerDispatchMessage(int fd, char *encoded) {
-  int func, fieldcount;
+  int func;
   char raw[1024 * 64];
   util_DecodeMessage(raw, encoded);
   if(!util_SplitMessage(raw, SEPARATOR)) {
@@ -61,12 +61,10 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
     return -1;
   }
 
-  if(!util_GetFunctionFromSlice(&func, &fieldcount)) {
+  if(!util_GetFunctionFromSlice(&func)) {
     logHack(fd, HACK_GETFUNCFAIL);
     return -1;
   }
-
-  print("\n%d\n", func);
 
   if(func == LSSPROTO_W_RECV) {
     int checksum = 0, checksumrecv;
@@ -857,7 +855,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_SP_RECV-x:%d,y:%d,dir:%d\n", x, y, dir);
     lssproto_SP_recv(fd, x, y, dir);
     util_DiscardMessage();
     return 0;
@@ -969,7 +966,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_CHARLIST_RECV\n");
     lssproto_CharList_recv(fd);
 
     util_DiscardMessage();
@@ -985,7 +981,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_CHARLOGOUT_RECV-Flg:%d\n", Flg);
     lssproto_CharLogout_recv(fd, Flg);
     util_DiscardMessage();
     return 0;
@@ -1002,7 +997,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_PROCGET_RECV\n");
     lssproto_ProcGet_recv(fd);
     util_DiscardMessage();
     return 0;
@@ -1016,7 +1010,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_PLAYERNUMGET_RECV\n");
     lssproto_PlayerNumGet_recv(fd);
     util_DiscardMessage();
     return 0;
@@ -1051,7 +1044,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_SHUTDOWN_RECV-passwd:%s,min:%d\n", passwd,min);
     lssproto_Shutdown_recv(fd, passwd, min);
     util_DiscardMessage();
     return 0;
@@ -1068,7 +1060,6 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    // printf("[接收]LSSPROTO_TD_RECV-message:%s\n", message);
     lssproto_TD_recv(fd, message);
     util_DiscardMessage();
     return 0;
