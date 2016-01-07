@@ -1,36 +1,10 @@
 #include "version.h"
-
-#define _SAACPROTOCLI_C_
-
-#include "version.h"
 #include "saacproto_cli.h"
 #include <stdio.h>
-#include <string.h>
-#include <time.h>
 #include "common.h"
 #include "net.h"
 
-#ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
-
-#include "chatmagic.h"
-
-#endif
-
 #define IS_2BYTEWORD(_a_) ( (char)(0x80) <= (_a_) && (_a_) <= (char)(0xFF) )
-
-/*
-90 :   <LI>  <a name="ACServerLoginC"><font color=red>clienttoserver ACServerLogin(string servername,string serverpas);<br></font></a>
-91 :      必□丞扔□田□互失市它件玄扔□田□卞夫弘奶件允月午五卞银丹［
-92 :      涛粮毛舰匀凶丐午｝仇及夫弘奶件毛仄卅中午允屯化及扔□申旦毛仄卅中［
-93 :      <br><br>
-94 :      <dl>
-95 :        <dt>string servername
-96 :        <dd>扔□田□  ［acserv.cf卞涩烂今木化中月［
-97 :        <dt>string serverpas
-98 :        <dd>扔□田□由旦伐□玉［acserv.cf卞涩烂今木化中月［
-99 :      </dl>
-100 :
-*/
 
 #ifdef _ALLDOMAN // (不可开) Syu ADD 排行榜NPC
 
@@ -1505,17 +1479,6 @@ int saacproto_ClientDispatchMessage(int fd, char *line) {
     toindex = saacproto_demkstr_int(saacproto.token_list[2]);
     flg = saacproto_demkstr_int(saacproto.token_list[3]);
     saacproto_ACSendFmPk_recv(fd, toindex, flg);
-    return 0;
-  }
-#endif
-#ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
-  if(strcmp(funcname, "EFFECT") == 0) {
-    char *effect;
-    effect = saacproto_wrapStringAddr(saacproto_stringwrapper[1], saacproto.workbufsize,
-                                      saacproto_demkstr_string(saacproto.token_list[2]));
-    print("\n AC send to GS weather effect !!");
-
-    CHAR_CHAT_DEBUG_sendeffect(fd, effect);
     return 0;
   }
 #endif

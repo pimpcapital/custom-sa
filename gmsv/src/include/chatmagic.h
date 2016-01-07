@@ -100,9 +100,6 @@ void CHAR_CHAT_DEBUG_SetDuck( int charaindex, char *message);
 void CHAR_CHAT_DEBUG_Toxication( int charaindex, char *message);
 #endif
 
-#ifdef _SEND_EFFECT	   	        // WON ADD AC送下雪、下雨等特效
-void CHAR_CHAT_DEBUG_sendeffect(int charaindex, char *message);
-#endif
 #ifdef _TEST_DROPITEMS
 void CHAR_CHAT_DEBUG_dropmypet( int charindex, char *message );
 void CHAR_CHAT_DEBUG_dropmyitem( int charindex , char *message );

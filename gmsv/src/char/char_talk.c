@@ -109,9 +109,6 @@ static CHAR_ChatMagicTable CHAR_cmtbl[] = {
 #endif
     {"noenemy", CHAR_CHAT_DEBUG_noenemy, TRUE, 0, 1, "on/off"},
     {"watchevent", CHAR_CHAT_DEBUG_watchevent, TRUE, 0, 1, "无"},
-#ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
-    {"sendeffect", CHAR_CHAT_DEBUG_sendeffect, TRUE, 0, 1, ""},
-#endif
     {"silent", CHAR_CHAT_DEBUG_silent, TRUE, 0, 2, "帐号 分钟"},//禁言
     {"unlock", CHAR_CHAT_DEBUG_unlock, TRUE, 0, 2, "帐号"},
     {"eventclean", CHAR_CHAT_DEBUG_eventclean, TRUE, 0, 2, "all/旗标 帐号 人物名"},
@@ -291,9 +288,6 @@ static CHAR_ChatMagicTable CHAR_cmtbl[] = {
 #endif
     {"不遇敌", CHAR_CHAT_DEBUG_noenemy, TRUE, 0, 1, "on/off"},
     {"显示完成任务", CHAR_CHAT_DEBUG_watchevent, TRUE, 0, 1, "无"},
-#ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
-    {"特效", CHAR_CHAT_DEBUG_sendeffect, TRUE, 0, 1, ""},
-#endif
     {"禁言", CHAR_CHAT_DEBUG_silent, TRUE, 0, 2, "帐号 分钟"},//禁言
     {"解锁", CHAR_CHAT_DEBUG_unlock, TRUE, 0, 2, "帐号"},
     {"清除旗标", CHAR_CHAT_DEBUG_eventclean, TRUE, 0, 2, "all/旗标 帐号 人物名"},

@@ -167,7 +167,6 @@ int init(int argc, char **argv, char **env) {
     print("物品配置文件: %s\n", getItemfile());
     print("不可战斗文件: %s\n", getInvfile());
     print("显示位置文件: %s\n", getAppearfile());
-    print("遇敌配置文件: %s\n", getEffectfile());
     print("头衔名称文件: %s\n", getTitleNamefile());
     print("头衔配置文件: %s\n", getTitleConfigfile());
     print("遇敌坐标文件: %s\n", getEncountfile());
@@ -485,10 +484,6 @@ int init(int argc, char **argv, char **env) {
     goto CLOSEBIND;
   print("完成\n");
 
-  print("读取遇敌配置文件...");
-  if(!CHAR_initEffectSetting(getEffectfile()))
-    goto CLOSEBIND;
-  print("完成\n");
   print("读取猜迷问题文件...");
   if(!QUIZ_initQuiz(getQuizfile()))
     goto CLOSEBIND;

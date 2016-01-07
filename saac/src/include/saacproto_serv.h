@@ -245,10 +245,6 @@ void saacproto_ACSendFmPk_recv(int fd, int fmpks_pos, char *data);
 void saacproto_ACKick_recv( int ti , char* id, int lock, int mesgid );
 void saacproto_ACKick_send( int fd, int act, char* data, int id );
 
-#ifdef _SEND_EFFECT		   // WON ADD 送下雪、下雨等特效
-void saacproto_SendEffect_send(int fd, char *effect);
-#endif
-
 void saacproto_ACCharLogin_recv( int fd, int clifd, char* id, char* pas, char* ip );
 void saacproto_ACCharLogin_send( int fd, int clifd, int flag );
 #endif                	

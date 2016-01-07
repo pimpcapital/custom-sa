@@ -1347,16 +1347,6 @@ void saacproto_ACKick_send(int fd, int act, char *data, int id) {
   saacproto_Send(fd, saacproto.work);
 }
 
-#ifdef _SEND_EFFECT       // WON ADD 送下雪、下雨等特效
-
-void saacproto_SendEffect_send(int fd, char *effect) {
-  saacproto_CreateHeader(saacproto.work, "EFFECT");
-  saacproto_strcatsafe(saacproto.work, saacproto_mkstr_string(effect), saacproto.workbufsize);
-  saacproto_Send(fd, saacproto.work);
-}
-
-#endif
-
 void saacproto_ACCharLogin_send(int fd, int clifd, int flag) {
   saacproto_CreateHeader(saacproto.work, "ACCharLogin");
   saacproto_strcatsafe(saacproto.work, saacproto_mkstr_int(clifd), saacproto.workbufsize);

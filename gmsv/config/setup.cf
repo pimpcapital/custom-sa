@@ -377,8 +377,6 @@ petskillfile1=config/data/petskill.txt
 
 # ?(物品组成文件?还是素材文件?)
 itematomfile=config/data/itematom.txt
-# ?(遇敌?)
-effectfile=config/data/effect.txt
 # 猜迷的文件
 quizfile=config/data/question.txt
 # ?

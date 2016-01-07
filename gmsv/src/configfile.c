@@ -68,7 +68,6 @@ typedef struct tagConfig {
 
   char petskillfile[32];
   char itematomfile[32];
-  char effectfile[32];
   char quizfile[32];
   char lsgenlog[32];
   char storedir[128];
@@ -292,7 +291,6 @@ ReadConf readconf[] =
 #endif
 
         {"itematomfile", &config.itematomfile, sizeof(config.itematomfile), NULL, CHAR},
-        {"effectfile", &config.effectfile, sizeof(config.effectfile), NULL, CHAR},
         {"quizfile", &config.quizfile, sizeof(config.quizfile), NULL, CHAR},
 
         {"lsgenlogfilename", &config.lsgenlog, sizeof(config.lsgenlog), NULL, CHAR},
@@ -947,10 +945,6 @@ char *getAppearfile(void) {
   return config.appearfile;
 }
 
-char *getEffectfile(void) {
-  return config.effectfile;
-}
-
 char *getTitleNamefile(void) {
   return config.titlenamefile;
 }
@@ -1170,54 +1164,33 @@ void defaultConfig(char *argv0) {
  */
 void lastConfig(void) {
   char entry[256];
-  /*  穴永皿犯奴伊弁玄伉及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.mapdir);
   strcpysafe(config.mapdir, sizeof(config.mapdir), entry);
 
-  /*  穴永皿涩烂白央奶伙  及涩烂    */
-  snprintf(entry, sizeof(entry), "%s/%s",
-           config.topdir, config.maptilefile);
+  snprintf(entry, sizeof(entry), "%s/%s", config.topdir, config.maptilefile);
   strcpysafe(config.maptilefile, sizeof(config.maptilefile), entry);
 
-  /*  田玄伙穴永皿涩烂白央奶伙  及涩烂    */
-  snprintf(entry, sizeof(entry), "%s/%s",
-           config.topdir, config.battlemapfile);
+  snprintf(entry, sizeof(entry), "%s/%s", config.topdir, config.battlemapfile);
   strcpysafe(config.battlemapfile, sizeof(config.battlemapfile), entry);
 
-  /*  失奶  丞涩烂白央奶伙  及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.itemfile);
   strcpysafe(config.itemfile, sizeof(config.itemfile), entry);
 
-  /*    衬涩烂白央奶伙  及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.invfile);
   strcpysafe(config.invfile, sizeof(config.invfile), entry);
 
-  /*  请蜇匏  涩烂白央奶伙  及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.appearfile);
   strcpysafe(config.appearfile, sizeof(config.appearfile), entry);
 
-  /*  梢请涩烂白央奶伙  及涩烂    */
-  snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.effectfile);
-  strcpysafe(config.effectfile, sizeof(config.effectfile), entry);
-
-  /*  弁奶术涩烂白央奶伙  及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.quizfile);
   strcpysafe(config.quizfile, sizeof(config.quizfile), entry);
 
-  /*  惫寞  白央奶伙  及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.titlenamefile);
   strcpysafe(config.titlenamefile, sizeof(config.titlenamefile), entry);
 
-  /*  lsgen 失它玄皿永玄白央奶伙      */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.lsgenlog);
   strcpysafe(config.lsgenlog, sizeof(config.lsgenlog), entry);
 
-  /*  旦玄失犯奴伊弁玄伉及涩烂    */
-/*
-    snprintf(entry,sizeof(entry), "%s/%s",config.topdir,config.storedir);
-    strcpysafe(config.storedir, sizeof(config.storedir), entry);
-*/
-  /*  NPC涩烂玄永皿犯奴伊弁玄伉及涩烂    */
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.npcdir);
   strcpysafe(config.npcdir, sizeof(config.npcdir), entry);
 
@@ -1229,16 +1202,6 @@ void lastConfig(void) {
 
 }
 
-
-/*
- * 禾奶件正□午赝濠卅滇树  毛  匀化医  毛允月楮醒
- * 娄醒
- *  to      void*   袄毛医  允月禾奶件正
- *  type    CTYPE   to及滇毛瑁户月
- *  value   double  to卞医  允月袄
- * 忒曰袄
- *  卅仄
- */
 void substitutePointerFromType(void *to, CTYPE type, double value) {
   switch(type) {
     case CHAR:
@@ -1251,7 +1214,7 @@ void substitutePointerFromType(void *to, CTYPE type, double value) {
       *(int *) to = (int) value;
       break;
     case DOUBLE:
-      *(double *) to = (double) value;
+      *(double *) to = value;
       break;
   }
 }
@@ -1293,27 +1256,17 @@ int readconfigfile(char *filename) {
         }
 
 
-        /*NULL分匀凶日医  仄卅中*/
         if(readconf[i].charvalue != NULL)
           strcpysafe(readconf[i].charvalue, readconf[i].charsize, secondToken);
 
-        /*NULL分匀凶日医  仄卅中*/
         if(readconf[i].value != NULL) {
           if(strcmp("ON", secondToken) == 0) {
-            /*ON分匀凶日1毛  木月*/
-            substitutePointerFromType(readconf[i].value,
-                                      readconf[i].valuetype,
-                                      1.0);
+            substitutePointerFromType(readconf[i].value, readconf[i].valuetype, 1.0);
 
           } else if(strcmp("OFF", secondToken) == 0) {
-            /*OFF分匀凶日1毛  木月*/
-            substitutePointerFromType(readconf[i].value,
-                                      readconf[i].valuetype,
-                                      1.0);
+            substitutePointerFromType(readconf[i].value, readconf[i].valuetype, 1.0);
           } else {
-            strtolchecknum(secondToken,
-                           (int *) readconf[i].value,
-                           10, readconf[i].valuetype);
+            strtolchecknum(secondToken, (int *) readconf[i].value, 10, readconf[i].valuetype);
           }
         }
         break;
@@ -1325,13 +1278,6 @@ int readconfigfile(char *filename) {
   return TRUE;
 }
 
-/*------------------------------------------------------------
-* 失市它件玄扔□田□卞踏五  戈田永白央及扔奶术毛涩烂允月
-* 娄醒
-*  卅仄
-* 忒曰袄
-*  unsigned int 平□毛忒允
-------------------------------------------------------------*/
 unsigned int setAcWBSize(void) {
   AC_WBSIZE = config.acwbsize;
   return AC_WBSIZE;

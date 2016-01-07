@@ -538,12 +538,6 @@ void CHAR_sendPMEToArroundCharacterFLXY(int petindex, int fl, int x, int y, int 
 
 void CHAR_sendSEoArroundCharacter(int fl, int x, int y, int senumber, int sw);
 
-int CHAR_initEffectSetting(char *filename);
-
-void CHAR_checkEffect(int charaindex);
-
-void CHAR_checkEffectLoop(void);
-
 float GetRecoveryRate(int charaindex);
 
 int storeCharaData(void);
@@ -560,25 +554,6 @@ int CHAR_findTotalEmptyItem(int index);
 
 int CHAR_CHECKJOINENEMY(int index);
 
-#endif
-
-#ifdef _SEND_EFFECT              // WON ADD AC送下雪、下雨等特效
-#define    CHAR_EFFECT_SETTINGBUFFER  256
-typedef struct tagCHAR_effectsetting {
-  int floor;
-  int effect;
-  int level;
-  int sendflg;
-  char month[CHAR_EFFECT_SETTINGBUFFER];
-  char day[CHAR_EFFECT_SETTINGBUFFER];
-  char hour[CHAR_EFFECT_SETTINGBUFFER];
-  char min[CHAR_EFFECT_SETTINGBUFFER];
-  char expire[CHAR_EFFECT_SETTINGBUFFER];
-
-} CHAR_effectsetting;
-
-CHAR_effectsetting *CHAR_effect;
-int CHAR_effectnum;
 #endif
 
 #ifdef _PET_LOSTPET

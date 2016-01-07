@@ -4,12 +4,6 @@
 #include "acfamily.h"
 #include <time.h>
 
-#ifdef _SEND_EFFECT       // WON ADD 送下雪、下雨等特效
-
-void SendEffect(char *ffect);
-
-#endif
-
 #ifdef _AC_SEND_FM_PK     // WON ADD 庄园对战列表储存在AC
 
 void load_fm_pk_list(void);

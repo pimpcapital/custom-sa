@@ -4,22 +4,11 @@
 #include "db.h"
 #include "saacproto_serv.h"
 #include "acfamily.h"
-
-#ifdef _SEND_EFFECT          // WON ADD 送下雪、下雨等特效
-
-#include "recv.h"
-
-#endif
-
 #include "char.h"
-
 #include "sasql.h"
-
-
 #include <signal.h>
 #include <getopt.h>
 #include <netinet/tcp.h>
-
 #include "lock.h"
 
 #define BACKLOGNUM 5
@@ -151,12 +140,6 @@ void sigusr1(int a) {
         sprintf(key, "echo \"%s\" > ./sigusr1.result", buf);
         system(key);
         break;
-#ifdef _SEND_EFFECT       // WON ADD 送下雪、下雨等特效
-      case 'E': log("\nAC 向 GS 发送下雪特效!!\n");
-        SendEffect(&key[1]);
-        break;
-#endif
-
       case 'L':  // Robin 列出所有Server连线
       log("\nList All Server Conncet!!!!!\n");
         for(i = 0; i < MAXCONNECTION; i++)

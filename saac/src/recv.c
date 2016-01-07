@@ -1015,21 +1015,6 @@ void saacproto_ACKick_recv(int ti, char *id, int lock, int mesgid) {
   saacproto_ACKick_send(ti, 0, retdata, mesgid);
 }
 
-#ifdef _SEND_EFFECT       // WON ADD 送下雪、下雨等特效
-
-void SendEffect(char *effect) {
-  extern gmsv gs[MAXCONNECTION];
-  int i;
-
-  for(i = 0; i < MAXCONNECTION; i++) {
-    if(gs[i].use && gs[i].name[0]) {
-      saacproto_SendEffect_send(i, effect);
-    }
-  }
-}
-
-#endif
-
 #ifdef _AC_SEND_FM_PK     // WON ADD 庄园对战列表储存在AC
 
 void load_fm_pk_list() {
