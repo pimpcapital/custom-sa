@@ -1455,9 +1455,10 @@ void CHAR_constructFunctable(int charaindex) {
 }
 
 void *CHAR_getFunctionPointer(int charaindex, int functype) {
-  if(!CHAR_CHECKINDEX(charaindex))return (void *) NULL;
+  if(!CHAR_CHECKINDEX(charaindex))
+    return NULL;
   if(functype < CHAR_FIRSTFUNCTION || functype >= CHAR_LASTFUNCTION)
-    return (void *) NULL;
+    return NULL;
 
   return CHAR_chara[charaindex].functable[functype];
 }

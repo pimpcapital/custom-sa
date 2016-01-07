@@ -973,10 +973,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   if(per != -1) {
     CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN, per);
   }
-  per = ENCOUNT_getEncountPercentMax(charaindex,
-                                     CHAR_getInt(charaindex, CHAR_FLOOR),
-                                     CHAR_getInt(charaindex, CHAR_X),
-                                     CHAR_getInt(charaindex, CHAR_Y));
+  per = ENCOUNT_getEncountPercentMax(charaindex, CHAR_getInt(charaindex, CHAR_FLOOR), CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y));
   if(per != -1) {
     CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MAX, per);
   }
@@ -1030,17 +1027,13 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   CHAR_setWorkInt(charaindex, CHAR_WORKLASTATTACKCHARAINDEX, -1);
   if(CHAR_getInt(charaindex, CHAR_HP) <= 0) {
     typedef int (*DYINGFUNC)(int);
-    DYINGFUNC dyingfunc = NULL;
-    dyingfunc = (DYINGFUNC) CHAR_getFunctionPointer(charaindex, CHAR_DYINGFUNC);
+    DYINGFUNC dyingfunc = (DYINGFUNC) CHAR_getFunctionPointer(charaindex, CHAR_DYINGFUNC);
     CHAR_setInt(charaindex, CHAR_HP, 1);    // HP 设为 1
     logHack(CHAR_getWorkInt(charaindex, CHAR_WORKFD), HACK_HP);
   }
   if(CHAR_getInt(charaindex, CHAR_SKILLUPPOINT) >= 1)
     CHAR_Skillupsend(charaindex);
-  // CoolFish: Family 2001/5/30
-  if((CHAR_getChar(charaindex, CHAR_FMNAME) != NULL) &&
-     (CHAR_getInt(charaindex, CHAR_FMINDEX) >= 0) &&
-     (strcmp(CHAR_getChar(charaindex, CHAR_FMNAME), "") != 0)) {
+  if((CHAR_getChar(charaindex, CHAR_FMNAME) != NULL) && (CHAR_getInt(charaindex, CHAR_FMINDEX) >= 0) && (strcmp(CHAR_getChar(charaindex, CHAR_FMNAME), "") != 0)) {
 #ifdef _FMVER21
     int eventflag = 0;
     // 是否符合族长得资格
@@ -1078,9 +1071,8 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   CHAR_endCharOneArray(charaindex);
   MAKECHARDATAERROR:
   {
-    int i;
     char cdkey[CDKEYLEN];
-    for(i = 0; i < CHAR_MAXPETHAVE; i++) {
+    for(int i = 0; i < CHAR_MAXPETHAVE; i++) {
       if(CHAR_CHECKINDEX(ch.unionTable.indexOfPet[i])) {
         CHAR_endCharOneArray(ch.unionTable.indexOfPet[i]);
       }
