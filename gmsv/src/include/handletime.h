@@ -16,15 +16,6 @@ EXTERN struct timeval NowTime;
 EXTERN int     DEBUG_ADJUSTTIME;
 
 int setNewTime( void );
-#ifdef _ASSESS_SYSEFFICACY
-void Assess_InitSysEfficacy( void);
-void Assess_SysEfficacy( int flg);
-void ASSESS_getSysEfficacy( float *TVsec);
-#ifdef _ASSESS_SYSEFFICACY_SUB
-void Assess_SysEfficacy_sub( int flg, int loop);
-void ASSESS_getSysEfficacy_sub( float *TVsec, int loop);
-#endif
-#endif
 // WON REM
 //struct tm *localtime(const time_t *timep);
 
@@ -53,7 +44,6 @@ typedef enum
 }LSTIME_SECTION;
 
 void RealTimeToLSTime(long t , LSTIME *lstime);
-/*void LSTimeToRealTime( LSTIME *lstime, long *t);*/
 LSTIME_SECTION getLSTime (LSTIME *lstime);
 
 #endif  

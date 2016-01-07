@@ -1812,9 +1812,7 @@ char *CHAR_makeStringFromCharData(Char *one) {
     if(strlen(p) == 0) {
       continue;
     }
-    snprintf(linedata, sizeof(linedata),
-             ADDRESSBOOKRESERVESTRING "%d=%s" CHAR_DELIMITER,
-             i, p
+    snprintf(linedata, sizeof(linedata), ADDRESSBOOKRESERVESTRING "%d=%s" CHAR_DELIMITER, i, p
     );
     strcpysafe(&CHAR_dataString[strlength],
                sizeof(CHAR_dataString) - strlength,
@@ -1850,24 +1848,21 @@ char *CHAR_makeStringFromCharData(Char *one) {
     char linedata[4096 * 2];
     char *petstring = "\0";
     petindex = one->indexOfPoolPet[petnum];
-    if(!CHAR_CHECKINDEX(petindex))continue;
+    if(!CHAR_CHECKINDEX(petindex))
+      continue;
+    
     petstring = CHAR_makePetStringFromPetIndex(petindex);
-    if(petstring == "\0") continue;
+    if(petstring == "\0")
+      continue;
 
-    //andy_log
-    if(strstr(petstring, "name:") == NULL ||
-       strstr(petstring, "ownt:") == NULL) {
+    if(strstr(petstring, "name:") == NULL || strstr(petstring, "ownt:") == NULL) {
       LodBadPetString("petstring", "poolpet string buffer err:", petnum);
       fprint("ANDY err poolpet string buffer err:\n%s\n", petstring);
       goto RETURN;
     }
 
-    snprintf(linedata, sizeof(linedata),
-             POOLPETSERVERSTRING "%d=%s" CHAR_DELIMITER, petnum, petstring);
-
-    strcpysafe(&CHAR_dataString[strlength],
-               sizeof(CHAR_dataString) - strlength,
-               linedata);
+    snprintf(linedata, sizeof(linedata), POOLPETSERVERSTRING "%d=%s" CHAR_DELIMITER, petnum, petstring);
+    strcpysafe(&CHAR_dataString[strlength], sizeof(CHAR_dataString) - strlength, linedata);
     strlength += strlen(linedata);
     if(strlength > sizeof(CHAR_dataString)) {
       fprint("err chardata buffer over\n");
@@ -1881,8 +1876,6 @@ char *CHAR_makeStringFromCharData(Char *one) {
   }
 
   return CHAR_dataString;
-  MAKESTRINGERR:
-  return "\0";
 }
 
 int CHAR_makeCharFromStringToArg(char *data, Char *one) {
@@ -1914,8 +1907,7 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
   CHAR_getDefaultChar(one, 0);
   // Robin 0726 default RidePet
   one->data[CHAR_RIDEPET] = -1;
-  strcpysafe(one->string[CHAR_FMNAME].string,
-             sizeof(one->string[CHAR_FMNAME].string), "\0");
+  strcpysafe(one->string[CHAR_FMNAME].string, sizeof(one->string[CHAR_FMNAME].string), "\0");
   one->data[CHAR_FMINDEX] = -1;
 #ifdef _PETSKILL_BECOMEPIG
   one->data[CHAR_BECOMEPIG] = -1;
@@ -1923,29 +1915,21 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
 #endif
 
   while(1) {
-    int ret;
     char linebuf[4096];
     char firstToken[256];
     char secondToken[4096];
     memset(linebuf, 0, sizeof(linebuf));
     memset(firstToken, 0, sizeof(firstToken));
     memset(secondToken, 0, sizeof(secondToken));
-    ret = getStringFromIndexWithDelim(data, CHAR_DELIMITER,
-                                      readindex,
-                                      linebuf, sizeof(linebuf));
-    if(ret == FALSE)break;
-    if(linebuf[0] == '#' ||
-       linebuf[0] == '\n' ||
-       linebuf[0] == '\0') {
+    if(getStringFromIndexWithDelim(data, CHAR_DELIMITER, readindex, linebuf, sizeof(linebuf)) == FALSE)
+      break;
+    if(linebuf[0] == '#' ||  linebuf[0] == '\n' || linebuf[0] == '\0') {
       readindex++;
       continue;
     }
-    ret = getStringFromIndexWithDelim(linebuf, "=", 1,
-                                      firstToken,
-                                      sizeof(firstToken));
-    if(ret == FALSE) return FALSE;
-    strcpysafe(secondToken, sizeof(secondToken),
-               linebuf + strlen(firstToken) + strlen("="));
+    if(getStringFromIndexWithDelim(linebuf, "=", 1, firstToken, sizeof(firstToken)) == FALSE)
+      return FALSE;
+    strcpysafe(secondToken, sizeof(secondToken), linebuf + strlen(firstToken) + strlen("="));
     for(i = 0; i < CHAR_DATAINTNUM; i++) {
       if(strcmp(firstToken, CHAR_setintdata[i]) == 0) {
         one->data[i] = atoi(secondToken);
@@ -1954,9 +1938,7 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
     }
     for(i = 0; i < CHAR_DATACHARNUM; i++) {
       if(strcmp(firstToken, CHAR_setchardata[i]) == 0) {
-        strcpysafe(one->string[i].string,
-                   sizeof(one->string[i].string),
-                   makeStringFromEscaped(secondToken));
+        strcpysafe(one->string[i].string, sizeof(one->string[i].string), makeStringFromEscaped(secondToken));
         if(strlen(one->string[i].string) > 128) {
           print(" CHARDATA_to_long!!:%s:%d ", one->string[i].string, strlen(one->string[i].string));
           one->string[i].string[0] = 0;
@@ -1964,31 +1946,23 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
         goto NEXT;
       }
     }
-    if(strncmp(firstToken, FLGRESERVESTRING,
-               strlen(FLGRESERVESTRING)) == 0) {
-      int flgindex;
-      flgindex = atoi(firstToken + strlen(FLGRESERVESTRING));
+    if(strncmp(firstToken, FLGRESERVESTRING, strlen(FLGRESERVESTRING)) == 0) {
+      int flgindex = atoi(firstToken + strlen(FLGRESERVESTRING));
       if(flgindex < 0 || arraysizeof(one->flg) <= flgindex);
       else
         one->flg[flgindex] = atoi(secondToken);
 
       goto NEXT;
     }
-    if(strncmp(firstToken, ITEMRESERVESTRING,
-               strlen(ITEMRESERVESTRING)) == 0) {
+    if(strncmp(firstToken, ITEMRESERVESTRING, strlen(ITEMRESERVESTRING)) == 0) {
       int itemindex;
       if(strcmp(secondToken, NULLITEM) == 0)
         goto NEXT;
       itemindex = atoi(firstToken + strlen(ITEMRESERVESTRING));
-      if(itemindex < 0 || CHAR_MAXITEMHAVE <= itemindex
-         || one->indexOfExistItems[itemindex] != -1) { ;
+      if(itemindex < 0 || CHAR_MAXITEMHAVE <= itemindex || one->indexOfExistItems[itemindex] != -1) { ;
       } else {
         ITEM_Item itmone;
-        int ret;
-
-        ret = ITEM_makeExistItemsFromStringToArg(secondToken, &itmone, 0);
-
-        if(ret == TRUE) {
+        if(ITEM_makeExistItemsFromStringToArg(secondToken, &itmone, 0) == TRUE) {
           int existitemindex;
           existitemindex = ITEM_initExistItemsOne(&itmone);
           one->indexOfExistItems[itemindex] = existitemindex;
@@ -1996,8 +1970,7 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
       }
       goto NEXT;
     }
-    if(strncmp(firstToken, POOLITEMRESERVESTRING,
-               strlen(POOLITEMRESERVESTRING)) == 0) {
+    if(strncmp(firstToken, POOLITEMRESERVESTRING, strlen(POOLITEMRESERVESTRING)) == 0) {
       int itemindex;
       if(strcmp(secondToken, NULLITEM) == 0)
         goto NEXT;
@@ -2006,10 +1979,7 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
          || one->indexOfExistPoolItems[itemindex] != -1) { ;
       } else {
         ITEM_Item itmone;
-        int ret;
-        ret = ITEM_makeExistItemsFromStringToArg(secondToken, &itmone, 0);
-
-        if(ret == TRUE) {
+        if(ITEM_makeExistItemsFromStringToArg(secondToken, &itmone, 0) == TRUE) {
           int existitemindex;
           existitemindex = ITEM_initExistItemsOne(&itmone);
           one->indexOfExistPoolItems[itemindex] = existitemindex;
@@ -2017,22 +1987,16 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
       }
       goto NEXT;
     }
-    if(strncmp(firstToken, SKILLRESERVESTRING,
-               strlen(SKILLRESERVESTRING)) == 0) {
+    if(strncmp(firstToken, SKILLRESERVESTRING, strlen(SKILLRESERVESTRING)) == 0) {
       int skillindex;
       if(strcmp(secondToken, NULLSKILL) == 0)
         goto NEXT;
       skillindex = atoi(firstToken + strlen(SKILLRESERVESTRING));
-      if(skillindex < 0 || CHAR_SKILLMAXHAVE <= skillindex
-         || one->haveSkill[skillindex].use == TRUE) {
+      if(skillindex < 0 || CHAR_SKILLMAXHAVE <= skillindex || one->haveSkill[skillindex].use == TRUE) {
       } else {
-        int ret;
         Skill skillone;
-        ret = SKILL_makeSkillFromStringToArg(secondToken, &skillone);
-
-        if(ret == TRUE) {
-          memcpy(&one->haveSkill[skillindex].skill, &skillone,
-                 sizeof(Skill));
+        if(SKILL_makeSkillFromStringToArg(secondToken, &skillone) == TRUE) {
+          memcpy(&one->haveSkill[skillindex].skill, &skillone, sizeof(Skill));
           one->haveSkill[skillindex].use = TRUE;
         }
       }
@@ -2049,10 +2013,8 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
       }
       goto NEXT;
     }
-    if(strncmp(firstToken, ADDRESSBOOKRESERVESTRING,
-               strlen(ADDRESSBOOKRESERVESTRING)) == 0) {
-      int addressnumber = atoi(firstToken
-                               + strlen(ADDRESSBOOKRESERVESTRING));
+    if(strncmp(firstToken, ADDRESSBOOKRESERVESTRING, strlen(ADDRESSBOOKRESERVESTRING)) == 0) {
+      int addressnumber = atoi(firstToken + strlen(ADDRESSBOOKRESERVESTRING));
       if(addressnumber < 0 || ADDRESSBOOK_MAX <= addressnumber) {
       } else {
         ADDRESSBOOK_makeAddressbookEntry(secondToken,
@@ -2062,14 +2024,11 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
       }
       goto NEXT;
     }
-    if(strncmp(firstToken, PETSERVERSTRING,
-               strlen(PETSERVERSTRING)) == 0) {
+    if(strncmp(firstToken, PETSERVERSTRING, strlen(PETSERVERSTRING)) == 0) {
       Char ch;
-      int ret;
       int petnumber = atoi(firstToken + strlen(PETSERVERSTRING));
       if(!CHAR_CHECKPETINDEX(petnumber)) goto NEXT;
-      ret = CHAR_makePetFromStringToArg(secondToken, &ch, petnumber);
-      if(ret == TRUE) {
+      if(CHAR_makePetFromStringToArg(secondToken, &ch, petnumber) == TRUE) {
         int petindex = PET_initCharOneArray(&ch);
         if(petindex < 0) {
           print("宠物制作失败。\n");
@@ -2078,19 +2037,15 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
         goto NEXT;
       } else {
         LodBadPetString(data, "错误总计", petnumber);
-
         fprint("错误 宠物字符串 无法作成\n");
         return FALSE;
       }
     }
     if(strncmp(firstToken, POOLPETSERVERSTRING, strlen(POOLPETSERVERSTRING)) == 0) {
-
       Char ch;
-      int ret;
       int petnumber = atoi(firstToken + strlen(POOLPETSERVERSTRING));
       if(!CHAR_CHECKPOOLPETINDEX(petnumber)) goto NEXT;
-      ret = CHAR_makePetFromStringToArg(secondToken, &ch, petnumber);
-      if(ret == TRUE) {
+      if(CHAR_makePetFromStringToArg(secondToken, &ch, petnumber) == TRUE) {
         int petindex = PET_initCharOneArray(&ch);
         if(petindex < 0) {
           fprint("错误 宠物 无法作成\n");
@@ -2152,8 +2107,7 @@ char *CHAR_makePetStringFromPetIndex(int petindex) {
 #ifdef _SIMPLIFY_PETSTRING
     if(CHAR_getInt(petindex, i) == 0) continue;
 #endif
-    snprintf(linedata, sizeof(linedata),
-             "%s:%d" NONCHAR_DELIMITER, CHAR_setintdata[i], CHAR_getInt(petindex, i));
+    snprintf(linedata, sizeof(linedata), "%s:%d" NONCHAR_DELIMITER, CHAR_setintdata[i], CHAR_getInt(petindex, i));
     strcpysafe(&CHAR_petdataString[strlength],
                sizeof(CHAR_petdataString) - strlength, linedata);
     strlength += strlen(linedata);

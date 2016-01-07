@@ -84,9 +84,6 @@ void mainloop(void) {
   }
 #endif
 
-#ifdef _ASSESS_SYSEFFICACY
-  Assess_InitSysEfficacy();
-#endif
 //#ifdef _ALLDOMAN
 //	print("初始化英雄表列...");
 //	InitHeroList();
@@ -102,82 +99,24 @@ void mainloop(void) {
         usleep(1);
       }
     }
-#ifdef _ASSESS_SYSEFFICACY
-    Assess_SysEfficacy(0);
-#endif
 
     setNewTime();
     memcpy(&tmNow, localtime(&NowTime.tv_sec), sizeof(tmNow));
     if(tmOld.tm_hour != getLogHour() && tmNow.tm_hour == getLogHour()) {
-#ifdef _GMSV_DEBUG
-      DebugMainFunction="backupAllLogFile";
-#endif
       backupAllLogFile(&tmOld);
     }
 
     setNewTime();
-#ifdef _ASSESS_SYSEFFICACY_SUB //显示LOOP时间
-    Assess_SysEfficacy_sub(0, 1);
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="netloop_faster";
-#endif
     netloop_faster();
-    Assess_SysEfficacy_sub(1, 1);
-
-    Assess_SysEfficacy_sub(0, 2);
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="NPC_generateLoop";
-#endif
     NPC_generateLoop(0);
-    Assess_SysEfficacy_sub(1, 2);
-
-    Assess_SysEfficacy_sub(0, 3);
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="BATTLE_Loop";
-#endif
     BATTLE_Loop();
-    Assess_SysEfficacy_sub(1, 3);
-
-    Assess_SysEfficacy_sub(0, 4);
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="CHAR_Loop";
-#endif
     CHAR_Loop();
-    Assess_SysEfficacy_sub(1, 4);
-
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="PETMAIL_proc";
-#endif
     PETMAIL_proc();
-
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="family_proc";
-#endif
     family_proc();
-
-#ifdef _GMSV_DEBUG
-    DebugMainFunction="chardatasavecheck";
-#endif
     chardatasavecheck();
-    tmOld = tmNow;
-    if(tmOld.tm_sec != tmNow.tm_sec) {
-#ifdef _GMSV_DEBUG
-      DebugMainFunction="CHAR_checkEffectLoop";
-#endif
-      CHAR_checkEffectLoop();
-    }
     if(SERVSTATE_getShutdown() > 0) {
       ShutdownProc();
-#ifdef _GMSV_DEBUG
-      DebugMainFunction="ShutdownProc";
-#endif
     }
-    tmOld = tmNow;
-
-#ifdef _ASSESS_SYSEFFICACY
-    Assess_SysEfficacy(1);
-#endif
-#endif
   }
 }
 

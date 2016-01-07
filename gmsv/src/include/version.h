@@ -183,8 +183,6 @@ Game Server 游戏环境:
 // -------------------------------------------------------------------
 // 新功能：5.0追加部分    人员：
 #define _AVID_TRADETRYBUG        // (可开放) ANDY 防止交易中丢宠/道具 寄(宠物)邮件 石币
-#define _ASSESS_SYSEFFICACY      // (可开放) ANDY 评估系统效能 12/04 更新
-#define _ASSESS_SYSEFFICACY_SUB  // (可开放) Robin 评估系统效能 增加检查内回圈
 #define _ITEM_ORNAMENTS          // (可开放) ANDY 装饰道具  12/04 更新  //出版部
 #define _CHIKULA_STONE           // (可开放) ANDY 奇克拉之石 12/04 更新  //来吉卡 宠包
 #define _SEND_EFFECT             // (可开放) WON  AC送下雪、下雨等特效 12/04 更新
@@ -241,7 +239,6 @@ Game Server 游戏环境:
 #define _SIMPLIFY_PETSTRING      // (可开放) ANDY 简化宠物存档字串
 #define _SIMPLIFY_ITEMSTRING2    // (可开放) ANDY 简化道具字串2
 #define _WOLF_TAKE_AXE           // (可开放) WON ADD 抓双头狼的限制
-#define _FIX_UNNECESSARY         // (可开放) ANDY 修正不必要的判断
 #define _ITEM_MAGICRECOVERY      // (可开放) ANDY 新光镜守
 #define _PETSKILL_GYRATE         // (可开放) Change 宠技:回旋攻击
 #define _PETSKILL_RETRACE        // (可开放) Change 宠技:追迹攻击

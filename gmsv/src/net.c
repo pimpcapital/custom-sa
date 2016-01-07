@@ -1933,10 +1933,8 @@ SINGLETHREAD int netloop_faster(void) {
 
           if(result < 0) {
             close(sockfd);
-            print("setsockopt TCP_NODELAY failed:%s\n",
-                  strerror(errno));
-          }
-          else {
+            print("setsockopt TCP_NODELAY failed:%s\n", strerror(errno));
+          } else {
             print("NO");
           }
         }
@@ -1960,8 +1958,6 @@ SINGLETHREAD int netloop_faster(void) {
     gettimeofday(&et, NULL);
     if(time_diff_us(et, st) >= looptime_us) //执行每超过0.1秒资要做的的工作
     {
-#define LOOP_NUM_ADD_CREDIT 5
-#define CREDIT_SPOOL 3
 
       switch(acceptmore) {
         case -1:
@@ -1994,8 +1990,6 @@ SINGLETHREAD int netloop_faster(void) {
           static int loop_counter=0;
 #endif
 
-          int i;
-
           if(i_counter > 10) { //10秒
             player_online = 0; //looptime_us
 #ifdef _AC_PIORITY
@@ -2006,7 +2000,7 @@ SINGLETHREAD int netloop_faster(void) {
             i_counter = 0;
             int item_max = ITEM_getITEM_itemnum();
             total_item_use = ITEM_getITEM_UseItemnum();
-            for(i = 0; i < ConnectLen; i++) {
+            for(int i = 0; i < ConnectLen; i++) {
               if((Connect[i].use) && (i != acfd)) {
                 if(CHAR_CHECKINDEX(Connect[i].charaindex))
                   player_online++;
@@ -2015,74 +2009,11 @@ SINGLETHREAD int netloop_faster(void) {
             if(player_online > player_maxonline) {
               player_maxonline = player_online;
             }
-            {
-              int max, min;
-              char buff1[512];
-              char szBuff1[256];
-#ifdef _ASSESS_SYSEFFICACY
-              {
-                float TVsec;
-                ASSESS_getSysEfficacy(&TVsec);
-                sprintf(szBuff1, "Sys:[%2.4f] \n", TVsec);
-              }
-#endif
-
-              memset(buff1, 0, sizeof(buff1));
-              CHAR_getCharOnArrayPercentage(1, &max, &min, &petcnt);
-
-              sprintf(buff1, "\n玩家=%d 宠物=%d 物品=%d 邮件:%d 战斗:%d %s",
-                      player_online, petcnt, total_item_use,
-                      PETMAIL_getPetMailTotalnums(),
-                      Battle_getTotalBattleNum(), szBuff1);
-
-              buff1[strlen(buff1) + 1] = '\0';
-              print("%s", buff1);
-#ifdef _ASSESS_SYSEFFICACY_SUB
-              float TVsec;
-              ASSESS_getSysEfficacy_sub(&TVsec, 1);
-              sprintf(szBuff1, "NT:[%2.4f] ", TVsec);
-              strcpy(buff1, szBuff1);
-
-              ASSESS_getSysEfficacy_sub(&TVsec, 2);
-              sprintf(szBuff1, "NG:[%2.4f] ", TVsec);
-              strcat(buff1, szBuff1);
-
-              ASSESS_getSysEfficacy_sub(&TVsec, 3);
-              sprintf(szBuff1, "BT:[%2.4f] ", TVsec);
-              strcat(buff1, szBuff1);
-
-              ASSESS_getSysEfficacy_sub(&TVsec, 4);
-              sprintf(szBuff1, "CH:[%2.4f] \n", TVsec);
-              strcat(buff1, szBuff1);
-
-              buff1[strlen(buff1) + 1] = 0;
-              print("%s.", buff1);
-#endif
-            }
 #ifdef _TIME_TICKET
             check_TimeTicket();
 #endif
 
           }
-#ifdef _LOOP_ANNOUNCE
-                                                                                                                                  if ( loop_counter > 60*getLoopAnnounceTime() && getLoopAnnounceMax()>0)
-					{
-					    int     i;
-					    int     playernum = CHAR_getPlayerMaxNum();
-							static int index;
-
-					    for( i = 0 ; i < playernum ; i++) {
-					      if( CHAR_getCharUse(i) != FALSE ) {
-					      	char buff[36];
-					      	snprintf( buff, sizeof( buff),"%s公告。",getGameserverID());
-					      	CHAR_talkToCli( i, -1, buff, CHAR_COLORYELLOW);
-									CHAR_talkToCli( i, -1, getLoopAnnounce(index % getLoopAnnounceMax()), CHAR_COLORYELLOW);
-								}
-							}
-							index++;
-						loop_counter=0;
-					}
-#endif
 
 #ifdef _AUTO_PK
           if(AutoPk_PKTimeGet() > -1) {

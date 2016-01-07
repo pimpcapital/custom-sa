@@ -639,32 +639,8 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     print("?data? ISDIE flg is standing.\n");
     CHAR_setFlg(charaindex, CHAR_ISDIE, FALSE);
   }
-#ifndef _FIX_UNNECESSARY
-                                                                                                                          // Arminius 7.9 airplane logout
-	if( CHAR_getWorkInt( charaindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_CLIENT ) {
-		int oyaindex = CHAR_getWorkInt( charaindex, CHAR_WORKPARTYINDEX1);
-		if( CHAR_CHECKINDEX( oyaindex)) {
-			if (CHAR_getInt( oyaindex, CHAR_WHICHTYPE ) == CHAR_TYPEBUS) {
-				if ((CHAR_getInt( oyaindex, CHAR_BASEIMAGENUMBER) !=100355) &&
-					(CHAR_getInt( oyaindex, CHAR_BASEIMAGENUMBER) !=100461))	{
-
-					if(CHAR_getWorkInt(oyaindex,CHAR_NPCWORKINT5)==1) {
-					  if( CHAR_getInt( charaindex, CHAR_LASTTALKELDER)>=0){
-						int fl,x,y;
-						CHAR_getElderPosition( CHAR_getInt( charaindex, CHAR_LASTTALKELDER), &fl, &x, &y );
-						CHAR_setInt(charaindex,CHAR_FLOOR,fl);
-						CHAR_setInt(charaindex,CHAR_X,x);
-						CHAR_setInt(charaindex,CHAR_Y,y);
-					  }
-					}
-				}
-			}
-		}
-	}
-#endif
 
 // Nuke 20040420: CHECK MAX POINT
-#if 1
   {
 
     int lv, vi, str, tou, dx, skup, trn, teq, quest, level, total, max;
@@ -694,28 +670,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 		print("转後祝福:%d\n",getTransPoint(trn));
 		print("转生红利:%d\n",trn*10);
 */
-#ifdef _REVLEVEL
-                                                                                                                            if (strcmp(getRevLevel(),"是")==0){
-		if(trn>=getChartrans()){
-			if(lv>getMaxLevel()){
-				lv=getMaxLevel();
-				print("[%s:%s]lv:%d->%d",
-								CHAR_getChar(charaindex,CHAR_CDKEY),
-							  CHAR_getChar(charaindex,CHAR_NAME),
-							  CHAR_getInt(charaindex,CHAR_LV),
-								getMaxLevel());
-			}
-		}else if(lv>getYBLevel()){
-			lv=getYBLevel();
-			print("[%s:%s]lv:%d->%d",
-							CHAR_getChar(charaindex,CHAR_CDKEY),
-						  CHAR_getChar(charaindex,CHAR_NAME),
-						  CHAR_getInt(charaindex,CHAR_LV),
-							getMaxLevel());
-		}
-		CHAR_setInt(charaindex,CHAR_LV,lv);
-	}
-#endif
     float jxds = (level - trn * 85) / 4.0;
     if(jxds < 0)jxds = 0;
 #ifdef _SKILLUPPOINT_CF
@@ -733,10 +687,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     if(total > max)
 #endif
     {
-      print("\n重调点数[%s:%s]:%d->%d ",
-            CHAR_getChar(charaindex, CHAR_CDKEY),
-            CHAR_getChar(charaindex, CHAR_NAME),
-            total, max);
+      print("\n重调点数[%s:%s]:%d->%d ", CHAR_getChar(charaindex, CHAR_CDKEY), CHAR_getChar(charaindex, CHAR_NAME), total, max);
       CHAR_setInt(charaindex, CHAR_VITAL, 1000);
       CHAR_setInt(charaindex, CHAR_STR, 0);
       CHAR_setInt(charaindex, CHAR_TOUGH, 0);
@@ -754,7 +705,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 			CHAR_getInt(charaindex,CHAR_SKILLUPPOINT)+(max-total));
 	}*/
   }
-#endif
   {
     int EQ_BBI = -1, EQ_ARM = -1, EQ_NUM = -1, EQ_BI = -1, CH_BI = -1;
     CH_BI = CHAR_getInt(charaindex, CHAR_BASEIMAGENUMBER);
@@ -771,9 +721,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 
       if(CHAR_getInt(charaindex, CHAR_RIDEPET) == -1) {  //非骑宠
         if(EQ_BI != CH_BI) {
-          print("\n 非骑宠形象 %d [%d=>%d]", charaindex,
-                CHAR_getInt(charaindex, CHAR_BASEIMAGENUMBER),
-                EQ_BI);
+          print("\n 非骑宠形象 %d [%d=>%d]", charaindex, CHAR_getInt(charaindex, CHAR_BASEIMAGENUMBER), EQ_BI);
           CHAR_setInt(charaindex, CHAR_BASEIMAGENUMBER, EQ_BI);
         }
       }
@@ -783,8 +731,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     int x, y;
     if(CHAR_isAppearPosition(CHAR_getInt(charaindex, CHAR_FLOOR), &x, &y)) {
       int flelder, xelder, yelder;
-      CHAR_getElderPosition(CHAR_getInt(charaindex, CHAR_LASTTALKELDER),
-                            &flelder, &xelder, &yelder);
+      CHAR_getElderPosition(CHAR_getInt(charaindex, CHAR_LASTTALKELDER), &flelder, &xelder, &yelder);
       CHAR_setInt(charaindex, CHAR_FLOOR, flelder);
       CHAR_setInt(charaindex, CHAR_X, xelder);
       CHAR_setInt(charaindex, CHAR_Y, yelder);
@@ -1007,13 +954,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 #endif
         ID1 = CHAR_getInt(petindex, CHAR_PETID);
 //				petstring = CHAR_makePetStringFromPetIndex( petindex);
-#ifdef _REEDIT_PETBBIS
-                                                                                                                                if( ID1 == 1133 ){
-					CHAR_setInt( petindex, CHAR_BASEIMAGENUMBER, 101578);
-					CHAR_setInt( petindex, CHAR_BASEBASEIMAGENUMBER, 101578);
-					print("PET:%s fix BBI\n", CHAR_getUseName(petindex));
-				}
-#endif
         // WON ADD 修正白虎七技
         if(ID1 == 777)CHAR_setInt(petindex, CHAR_SLOT, 7);
         CHAR_setWorkInt(petindex, CHAR_WORKPLAYERINDEX, charaindex);
@@ -1028,16 +968,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
         }
 
         CHAR_complianceParameter(petindex);
-#ifdef _FIX_GP_PET_SKILL   // WON ADD 修正gp宠会落马术
-                                                                                                                                if( ID1 == 1133){
-					int j;
-					for( j=0; j<CHAR_MAXPETSKILLHAVE; j++){
-						if( CHAR_getPetSkill( petindex, j) == 210 ){ // 落马术
-							CHAR_setPetSkill( petindex, j, -1);
-						}
-					}
-				}
-#endif
       }
     }
   }
@@ -1058,20 +988,8 @@ void CHAR_login(int clifd, char *data, int saveindex) {
         // CoolFish: 2001/10/11 Set Pet Unicode
         CHAR_setPetUniCode(petindex);
 #endif
-#ifdef _NEWOPEN_MAXEXP
-                                                                                                                                if( CHAR_getInt( petindex, CHAR_OLDEXP) > 0 ||
-					CHAR_getInt( charaindex, CHAR_OLDEXP) < 0 ){
-					CHAR_ChangeExp( petindex);
-				}
-#endif
         b_find = FALSE;
         ID1 = CHAR_getInt(petindex, CHAR_PETID);
-#ifdef _REEDIT_PETBBIS
-                                                                                                                                if( ID1 == 1133 ){
-					CHAR_setInt( petindex, CHAR_BASEIMAGENUMBER, 101578);
-					CHAR_setInt( petindex, CHAR_BASEBASEIMAGENUMBER, 101578);
-				}
-#endif
 /*
 			    tran_no=CHAR_getInt( charaindex, CHAR_TRANSMIGRATION);
 			    petstring = CHAR_makePetStringFromPetIndex( petindex);
@@ -1129,10 +1047,7 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 
 
   lssproto_CharLogin_send(clifd, SUCCESSFUL, "");
-  per = ENCOUNT_getEncountPercentMin(charaindex,
-                                     CHAR_getInt(charaindex, CHAR_FLOOR),
-                                     CHAR_getInt(charaindex, CHAR_X),
-                                     CHAR_getInt(charaindex, CHAR_Y));
+  per = ENCOUNT_getEncountPercentMin(charaindex, CHAR_getInt(charaindex, CHAR_FLOOR), CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y));
   if(per != -1) {
     CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN, per);
   }
