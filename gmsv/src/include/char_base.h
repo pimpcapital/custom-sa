@@ -1052,19 +1052,19 @@ int _CHAR_CHECKPOOLPETINDEX(char *file, int line, int petindex);
 
 int _CHAR_CHECKPETSKILLINDEX(char *file, int line, int havepetskillindex);
 
-int CHAR_getInt(int index, CHAR_DATAINT element);
+int CHAR_getInt(int index, int element);
 
 #define CHAR_setInt(index, element, data) _CHAR_setInt( __FILE__, __LINE__, index , element, data)
 
 int _CHAR_setInt(char *file, int line, int index, CHAR_DATAINT element, int data);
 
-int CHAR_getWorkInt(int index, CHAR_WORKDATAINT element);
+int CHAR_getWorkInt(int index, int element);
 
 int CHAR_setWorkInt(int index, CHAR_WORKDATAINT element, int data);
 
 #define    CHAR_getChar(index, elem) _CHAR_getChar( __FILE__, __LINE__, index, elem)
 
-char *_CHAR_getChar(char *file, int line, int index, CHAR_DATACHAR element);
+char *_CHAR_getChar(char *file, int line, int index, int element);
 
 #define    CHAR_setChar(index, elem, n) _CHAR_setChar( __FILE__, __LINE__, index, elem, n)
 

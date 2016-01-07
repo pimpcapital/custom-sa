@@ -413,6 +413,8 @@ Game Server 游戏环境:
 
 #define RECEIVE_ADJUST -13
 #define SEND_ADJUST +23
+//#define RECEIVE_ADJUST 0
+//#define SEND_ADJUST 0
 
 
 //特殊功能控制----------------------------------------

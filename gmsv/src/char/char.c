@@ -1425,7 +1425,8 @@ char *CHAR_makeStatusString(int index, char *category) {
   char c = tolower(category[0]);
   int strlength = 0;
 
-  if(!CHAR_CHECKINDEX(index)) return "\0";
+  if(!CHAR_CHECKINDEX(index))
+    return "\0";
 
   if(category == "\0") {
     CHAR_statusSendBuffer[0] = '\0';
@@ -1433,7 +1434,6 @@ char *CHAR_makeStatusString(int index, char *category) {
   }
   switch(c) {
     case 'p': {
-      int i;
       int getCharDataArray[] = {
           CHAR_NAME,
           CHAR_OWNTITLE,
@@ -1443,7 +1443,7 @@ char *CHAR_makeStatusString(int index, char *category) {
       int maxexp = CHAR_GetLevelExp(index, CHAR_getInt(index, CHAR_LV) + 1);
       int attr[4];
 
-      for(i = 0; i < 4; i++) {
+      for(int i = 0; i < 4; i++) {
         attr[i] = CHAR_getWorkInt(index, CHAR_WORKFIXEARTHAT + i);
         if(attr[i] < 0) attr[i] = 0;
       }
@@ -1478,15 +1478,13 @@ char *CHAR_makeStatusString(int index, char *category) {
                CHAR_getInt(index, CHAR_BASEBASEIMAGENUMBER)
       );
       strlength = strlen(CHAR_statusSendBuffer);
-      for(i = 0; i < arraysizeof(getCharDataArray); i++) {
+      for(int i = 0; i < arraysizeof(getCharDataArray); i++) {
         char token[256];
         char escapebuffer[128];
         snprintf(token,
                  sizeof(token),
                  "%s" STATUSSENDDELIMITER,
-                 makeEscapeString(CHAR_getChar(index, getCharDataArray[i]),
-                                  escapebuffer, sizeof(escapebuffer)
-                 ));
+                 makeEscapeString(CHAR_getChar(index, getCharDataArray[i]), escapebuffer, sizeof(escapebuffer)));
         strcpysafe(CHAR_statusSendBuffer + strlength,
                    sizeof(CHAR_statusSendBuffer) - strlength,
                    token);
@@ -1553,10 +1551,9 @@ char *CHAR_makeStatusString(int index, char *category) {
       break;
     }
     case 'i': {
-      int i;
       CHAR_statusSendBuffer[0] = 'I';
       strlength = 1;
-      for(i = 0; i < CHAR_MAXITEMHAVE; i++) {
+      for(int i = 0; i < CHAR_MAXITEMHAVE; i++) {
         char token[512];
         int itemindex;
         itemindex = CHAR_getItemIndex(index, i);
@@ -1575,11 +1572,10 @@ char *CHAR_makeStatusString(int index, char *category) {
       break;
     }
     case 's': {
-      int i;
       CHAR_statusSendBuffer[0] = 'S';
       strlength = 1;
 
-      for(i = 0; i < CHAR_SKILLMAXHAVE; i++) {
+      for(int i = 0; i < CHAR_SKILLMAXHAVE; i++) {
         char token[256];
         CHAR_HaveSkill *hskill;
 
@@ -1603,20 +1599,13 @@ char *CHAR_makeStatusString(int index, char *category) {
       break;
     }
     case 't': {
-      int i;
       CHAR_statusSendBuffer[0] = 'T';
       strlength = 1;
-      for(i = 0; i < CHAR_TITLEMAXHAVE; i++) {
+      for(int i = 0; i < CHAR_TITLEMAXHAVE; i++) {
         char token[256];
         char escape[256];
-        snprintf(token, sizeof(token), "%s|",
-                 makeEscapeString(TITLE_makeTitleStatusString(index,
-                                                              i),
-                                  escape, sizeof(escape)));
-
-        strcpysafe(CHAR_statusSendBuffer + strlength,
-                   sizeof(CHAR_statusSendBuffer) - strlength,
-                   token);
+        snprintf(token, sizeof(token), "%s|", makeEscapeString(TITLE_makeTitleStatusString(index, i), escape, sizeof(escape)));
+        strcpysafe(CHAR_statusSendBuffer + strlength, sizeof(CHAR_statusSendBuffer) - strlength, token);
         strlength += strlen(token);
         if(strlength >= arraysizeof(CHAR_statusSendBuffer))
           return CHAR_statusSendBuffer;
@@ -1626,9 +1615,7 @@ char *CHAR_makeStatusString(int index, char *category) {
       break;
     }
     case 'd':
-      snprintf(CHAR_statusSendBuffer, sizeof(CHAR_statusSendBuffer),
-               "D%d|%ld", CHAR_getWorkInt(index, CHAR_WORKOBJINDEX),
-               NowTime.tv_sec);
+      snprintf(CHAR_statusSendBuffer, sizeof(CHAR_statusSendBuffer), "D%d|%ld", CHAR_getWorkInt(index, CHAR_WORKOBJINDEX), NowTime.tv_sec);
       return CHAR_statusSendBuffer;
       break;
     case 'm':
@@ -1645,7 +1632,7 @@ char *CHAR_makeStatusString(int index, char *category) {
     case 'n': {
       int num;
 
-      int i, nindex = -1;
+      int nindex = -1;
       int getCharDataArray[] = {
           CHAR_NAME
       };
@@ -1676,7 +1663,7 @@ char *CHAR_makeStatusString(int index, char *category) {
       }
       strlength = strlen(CHAR_statusSendBuffer);
 
-      for(i = 0; i < arraysizeof(getCharDataArray); i++) {
+      for(int i = 0; i < arraysizeof(getCharDataArray); i++) {
         char token[256];
         char escapebuffer[128];
         snprintf(token,
@@ -1728,12 +1715,8 @@ char *CHAR_makeStatusString(int index, char *category) {
           cdkey = CHAR_getChar(pindex, CHAR_CDKEY);
           if(cdkey == "\0") {
             print("can't get CDKEY\n");
-          } else {
-
-            if(strlen(cdkey) == 0 ||
-               strcmp(cdkey, mycdkey) == 0) {
-              changenameflg = TRUE;
-            }
+          } else if(strlen(cdkey) == 0 || strcmp(cdkey, mycdkey) == 0) {
+            changenameflg = TRUE;
           }
         }
 
@@ -1788,7 +1771,7 @@ char *CHAR_makeStatusString(int index, char *category) {
     case 'j': {
 
       int num;
-      int i, itemindex;
+      int itemindex;
       int getMagicDataArray[] = {
           MAGIC_NAME,
           MAGIC_COMMENT,
@@ -1819,7 +1802,7 @@ char *CHAR_makeStatusString(int index, char *category) {
                  MAGIC_getInt(magicindex, MAGIC_TARGET));
         strlength = strlen(CHAR_statusSendBuffer);
 
-        for(i = 0; i < arraysizeof(getMagicDataArray); i++) {
+        for(int i = 0; i < arraysizeof(getMagicDataArray); i++) {
           char token[256];
           char escapebuffer[128];
           snprintf(token,
@@ -2023,7 +2006,7 @@ char *CHAR_makeStatusString(int index, char *category) {
           PETSKILL_NAME,
           PETSKILL_COMMENT,
       };
-      int i, petskillloop, pindex = index;
+      int petskillloop, pindex = index;
       int num = 0;//, f_num = 0;
       char tmp[16];
 
@@ -2079,7 +2062,7 @@ char *CHAR_makeStatusString(int index, char *category) {
             return CHAR_statusSendBuffer;
           }
 
-          for(i = 0; i < arraysizeof(getPetSkillDataArray); i++) {
+          for(int i = 0; i < arraysizeof(getPetSkillDataArray); i++) {
             char escapebuffer[128];
             snprintf(token,
                      sizeof(token),
@@ -2128,7 +2111,7 @@ int CHAR_sendStatusString(int charaindex, char *category) {
   }
 
   char* string = CHAR_makeStatusString(charaindex, category);
-  if(string != "\0") {
+  if(string != NULL) {
     int fd = getfdFromCharaIndex(charaindex);
     if(fd != -1) {
       lssproto_S_send(fd, string);
@@ -4254,11 +4237,6 @@ int CHAR_send_N_StatusString(int charaindex, int num, unsigned int indextable) {
 static char CHAR_K_statusSendBuffer[STRINGBUFSIZ];
 
 static char *CHAR_make_K_StatusString(int charaindex, int num, unsigned int indextable) {
-  int i, j;
-  int ret = 0;
-  int strlength;
-  int pindex;
-  char buf[64];
   struct {
     unsigned int kind;
     int intdataindex;
@@ -4284,57 +4262,44 @@ static char *CHAR_make_K_StatusString(int charaindex, int num, unsigned int inde
       {CHAR_K_STRING_USERPETNAME,     CHAR_USERPETNAME,      2},
 
   };
-  /*       凝民尼永弁 */
   if(num < 0 || num >= CHAR_MAXPETHAVE) {
     print("宠物模式失败 (%c)%d \n", num, num);
     return "\0";
   }
-  /* 矢永玄及奶件犯永弁旦毛潸   */
-  pindex = CHAR_getCharPet(charaindex, num);
+  int pindex = CHAR_getCharPet(charaindex, num);
   if(pindex == -1) {
-    /*    鬼支仃升 snprintf 允月    */
-    snprintf(CHAR_K_statusSendBuffer, sizeof(CHAR_K_statusSendBuffer),
-             "K%d|0|", num);
+    snprintf(CHAR_K_statusSendBuffer, sizeof(CHAR_K_statusSendBuffer), "K%d|0|", num);
     return CHAR_K_statusSendBuffer;
   }
 
-  snprintf(CHAR_K_statusSendBuffer, sizeof(CHAR_K_statusSendBuffer),
-           "K%d|%s|", num, cnv10to62(indextable, buf, sizeof(buf)));
-  strlength = strlen(CHAR_K_statusSendBuffer);
+  char buf[64];
+  snprintf(CHAR_K_statusSendBuffer, sizeof(CHAR_K_statusSendBuffer), "K%d|%s|", num, cnv10to62(indextable, buf, sizeof(buf)));
+  size_t strlength = strlen(CHAR_K_statusSendBuffer);
 
-  for(i = 1; i < sizeof(int) * 8; i++) {
+  int ret = 0;
+  for(int i = 1; i < sizeof(int) * 8; i++) {
     if(indextable & (1 << i)) {
       char tmp[256];
       int found = FALSE;
-      for(j = 0; j < arraysizeof(chk); j++) {
+      for(int j = 0; j < arraysizeof(chk); j++) {
         if(chk[j].kind == 1 << i) {
           if(chk[j].gettype == 0) {
             ret = CHAR_getInt(pindex, chk[j].intdataindex);
             snprintf(tmp, sizeof(tmp), "%d|", ret);
-          }
-          else if(chk[j].gettype == 1) {
+          } else if(chk[j].gettype == 1) {
             ret = CHAR_getWorkInt(pindex, chk[j].intdataindex);
             snprintf(tmp, sizeof(tmp), "%d|", ret);
-          }
-          else if(chk[j].gettype == 10) {
+          } else if(chk[j].gettype == 10) {
             ret = CHAR_getInt(pindex, chk[j].intdataindex) / 100;
             snprintf(tmp, sizeof(tmp), "%d|", ret);
-          }
-          else if(chk[j].gettype == 11) {
+          } else if(chk[j].gettype == 11) {
             ret = CHAR_getWorkInt(pindex, chk[j].intdataindex);
             if(ret < 0) ret = 0;
             snprintf(tmp, sizeof(tmp), "%d|", ret);
-          }
-            /*   侬  烟及犯□正 */
-          else if(chk[j].gettype == 2) {
+          } else if(chk[j].gettype == 2) {
             char escapebuffer[128];
             char *a = CHAR_getChar(pindex, chk[j].intdataindex);
-
-            snprintf(tmp, sizeof(tmp),
-                     "%s|",
-                     makeEscapeString(a, escapebuffer,
-                                      sizeof(escapebuffer)
-                     ));
+            snprintf(tmp, sizeof(tmp), "%s|", makeEscapeString(a, escapebuffer, sizeof(escapebuffer)));
           }
           found = TRUE;
           break;
@@ -4348,18 +4313,12 @@ static char *CHAR_make_K_StatusString(int charaindex, int num, unsigned int inde
         }
         if(indextable & CHAR_K_STRING_CHANGENAMEFLG) {
           int changenameflg = FALSE;
-          char *mycdkey, *cdkey = NULL;
-          mycdkey = CHAR_getChar(charaindex, CHAR_CDKEY);
-          {
-            cdkey = CHAR_getChar(pindex, CHAR_CDKEY);
-            if(cdkey == "\0") {
-              print("can't get CDKEY\n");
-            } else {
-              if(strlen(cdkey) == 0 ||
-                 strcmp(cdkey, mycdkey) == 0) {
-                changenameflg = TRUE;
-              }
-            }
+          char* mycdkey = CHAR_getChar(charaindex, CHAR_CDKEY);
+          char* cdkey = CHAR_getChar(pindex, CHAR_CDKEY);
+          if(cdkey == "\0") {
+            print("can't get CDKEY\n");
+          } else if(strlen(cdkey) == 0 || strcmp(cdkey, mycdkey) == 0) {
+            changenameflg = TRUE;
           }
           snprintf(tmp, sizeof(tmp), "%d|", changenameflg);
           found = TRUE;
@@ -4368,10 +4327,7 @@ static char *CHAR_make_K_StatusString(int charaindex, int num, unsigned int inde
       if(!found) {
         print("找不到指定的参数[%d]\n", indextable);
       } else {
-        strcpysafe(&CHAR_K_statusSendBuffer[strlength],
-                   sizeof(CHAR_K_statusSendBuffer) - strlength,
-                   tmp);
-
+        strcpysafe(&CHAR_K_statusSendBuffer[strlength], sizeof(CHAR_K_statusSendBuffer) - strlength, tmp);
         strlength += strlen(tmp);
         if(strlength >= sizeof(CHAR_K_statusSendBuffer)) {
           return CHAR_K_statusSendBuffer;

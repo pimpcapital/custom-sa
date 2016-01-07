@@ -972,7 +972,7 @@ int _CHAR_CHECKPETSKILLINDEX(char *file, int line, int havepetskillindex) {
   return TRUE;
 }
 
-int CHAR_getInt(int index, CHAR_DATAINT element) {
+int CHAR_getInt(int index, int element) {
   return CHAR_chara[index].data[element];
 }
 
@@ -992,7 +992,7 @@ int _CHAR_setInt(char *file, int line, int index, CHAR_DATAINT element, int data
   return buf;
 }
 
-int CHAR_getWorkInt(int index, CHAR_WORKDATAINT element) {
+int CHAR_getWorkInt(int index, int element) {
   if(CHAR_WORKBATTLEMODE > element || element >= CHAR_WORKDATAINTNUM) {
     print("err Get WorkInt element=%d\n", element);
     return -1;
@@ -1015,7 +1015,7 @@ int CHAR_setWorkInt(int index, CHAR_WORKDATAINT element, int data) {
   return buf;
 }
 
-char *_CHAR_getChar(char *file, int line, int index, CHAR_DATACHAR element) {
+char *_CHAR_getChar(char *file, int line, int index, int element) {
   if(!CHAR_CHECKINDEX(index)) {
     print("err _CHAR_getChar %s:%d index[%d] !!\n", file, line, index);
     return "\0";

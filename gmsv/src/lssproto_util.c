@@ -94,8 +94,7 @@ void lssproto_Send(int fd, char *msg) {
     msg[l] = '\n';
     msg[l + 1] = 0;
     l++;
-  }
-  else {
+  } else {
     print("\n lssproto.workbufsize:%d len:%d ", lssproto.workbufsize, l);
   }
   lssproto.write_func(fd, msg, l);
