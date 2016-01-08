@@ -1427,7 +1427,6 @@ int _CHAR_getPetSkill(char *file, int line, int petindex, int havepetskillindex)
 }
 
 int _CHAR_setPetSkill(char *file, int line, int petindex, int havepetskillindex, int new) {
-  int ret;
   if(!CHAR_CHECKINDEX(petindex)) {
     print("err %s:%d from %s:%d\n", __FILE__, __LINE__, file, line);
     return -1;
@@ -1436,7 +1435,7 @@ int _CHAR_setPetSkill(char *file, int line, int petindex, int havepetskillindex,
     print("err %s:%d from %s:%d\n", __FILE__, __LINE__, file, line);
     return -1;
   }
-  ret = CHAR_getPetSkill(petindex, havepetskillindex);
+  int ret = CHAR_getPetSkill(petindex, havepetskillindex);
   CHAR_chara[petindex].unionTable.indexOfPetskill[havepetskillindex] = new;
   return ret;
 }
