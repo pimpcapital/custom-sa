@@ -2,10 +2,6 @@
 #define __VERSION_H__
 #include "correct_bug.h"  //BUG FIX
 
-/*Server 版本控制*/
-#define _NEW_SERVER_
-#define _SERVER_NUMS
-
 #define UNIQUE_KEYCODEITEM	100
 #define UNIQUE_KEYCODEPET	"i"
 //#define _DEFAULT_PKEY "Wonwonwon"	// (可开放)( 石器 6.0 )
@@ -303,7 +299,6 @@ Game Server 游戏环境:
 #define _RIDE_CF
 #define _FM_LEADER_RIDE          // 族长专用骑宠
 #define _RIDEMODE_20             // 2.0骑宠模式
-#define _ITEM_SETLOVER           // 结婚功能
 #define _ITEM_RIDE               // 驯骑装备
 #define _SHOW_VIP_CF             // 自定义调整VIP，爱人，家族，名称显示样式
 #define _VIP_RIDE                // 会员骑黑鸡
@@ -405,7 +400,6 @@ Game Server 游戏环境:
 //版本控制----------------------------------------
 #define _DEFAULT_PKEY "www.longzoro.com"
 #define _RUNNING_KEY  "www.longzoro.com"
-#define _SA_VERSION 'L'
 
 #define RECEIVE_ADJUST -13
 #define SEND_ADJUST +23

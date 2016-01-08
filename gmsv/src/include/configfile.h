@@ -82,6 +82,10 @@ char *getDataDir();
 
 char *getPublicKey();
 
+char *getRunningKey();
+
+char getSignature();
+
 char *getConfigfilename(void);
 
 void setConfigfilename(char *newv);

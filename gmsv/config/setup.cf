@@ -1,5 +1,7 @@
 datadir=config/data
-public_key=www.beijunyi.com
+public_key=www.longzoro.com
+public_key=www.longzoro.com
+signature=L
 
 #ChangeRunLevel
 #运行等级 范围是-20~19 其中-20的运行级别最高
