@@ -522,7 +522,7 @@ char *CHAR_getUseName(int charaindex);
 
 char *CHAR_getUseID(int charaindex);
 
-EXTERN int EnemyMoveNum;
+int EnemyMoveNum;
 
 #define DB_DUELPOINT  "db_duel"
 #define DB_ADDRESSBOOK  "db_addressbook"

@@ -9,13 +9,6 @@
 
 #include <pthread.h>
 
-#undef EXTERN
-#ifdef __NET_C__
-#define EXTERN
-#else
-#define EXTERN extern
-#endif
-
 typedef enum {
   NOTLOGIN,
       LOGIN,
@@ -46,10 +39,8 @@ typedef enum {
 #define    NET_STRING_SUCCESSFULL  "successful"
 #define    NET_STRING_FAILED    "failed"
 
-// 孔勾丹及    及伉□玉］仿奶玄田永白央扔奶术
 #define RBSIZE (1024*64*10)
 #define WBSIZE (1024*64*10)
-// 失市它件玄扔□田□迕
 
 //#define	AC_RBSIZE (65536*48)
 //#define	AC_RBSIZE (65536*32)
@@ -58,9 +49,9 @@ typedef enum {
 //#define	AC_WBSIZE (65536*16)
 extern int AC_WBSIZE;
 
-EXTERN int bindedfd;     /*夫□市伙失玉伊旦卞田奶件玉仄凶末弗永玄*/
-EXTERN int acfd;         /*失市它件玄扔□田卞戊生弁玄扑正末弗永玄*/
-EXTERN int ConnectLen;   /*票及袄及赢今*/
+int bindedfd;
+int acfd;
+int ConnectLen;
 #define CONNECT_WINDOWBUFSIZE 7
 
 int initConnect(int size);
@@ -83,14 +74,9 @@ char *GetOneLine(int fd);
 int initConnectOne(int sockfd, struct sockaddr_in *sin, int len);
 
 
-/* CA , CD */
-void CAcheck(void);
-
 void CAflush(int charaindex);
 
 void CAsend(int fd);
-
-void CDcheck(void);
 
 void CDflush(int charaindex);
 
@@ -309,8 +295,6 @@ int checkNu(int fd);
 // Arminius 7.2 Ra's amulet
 void setNoenemy(int fd);
 
-void clearNoenemy(int fd);
-
 int getNoenemy(int fd);
 
 void setEqNoenemy(int fd, int level);
@@ -348,12 +332,9 @@ void CONNECT_setBDTime(int fd, int nums);
 
 int CONNECT_getBDTime(int fd);
 
-// Arminius debug
 void CONNECT_setUse(int fd, int a);
 
 #define QUEUE_LENGTH1 6
 #define QUEUE_LENGTH2 7
-
-void SetTcpBuf(int sockfd);
 
 #endif

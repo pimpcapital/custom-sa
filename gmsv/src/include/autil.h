@@ -16,7 +16,7 @@ extern char PersonalKey[4096];
 #define DEFAULTTABLE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}"
 #define DEFAULTFUNCEND "#"
 
-int util_Init(void);
+int util_Init();
 
 // WON ADD
 int util_SplitMessage(char *source, char *separator);

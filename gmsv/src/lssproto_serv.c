@@ -917,11 +917,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
     }
-    //printf("[接收]LSSPROTO_CREATENEWCHAR_RECV-dataplacenum:%d,charname:%s,imgno:%d,faceimgno:%d,vital:%d,str:%d,"
-    //				"tgh:%d,dex:%d,earth:%d,water:%d,fire:%d,wind:%d,hometown:%d\n",
-    //				dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
-    lssproto_CreateNewChar_recv(fd, dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire,
-                                wind, hometown);
+    lssproto_CreateNewChar_recv(fd, dataplacenum, charname, imgno, faceimgno, vital, str, tgh, dex, earth, water, fire, wind, hometown);
     util_DiscardMessage();
     return 0;
   }
@@ -943,10 +939,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_CHARLOGIN_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
     char charname[CHARNAMELEN];
-
-    checksum += util_destring(2, charname);
+    int checksum = util_destring(2, charname);
     util_deint(3, &checksumrecv);
     if(checksum != checksumrecv) {
       util_DiscardMessage();
@@ -959,9 +954,9 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_CHARLIST_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
     util_deint(2, &checksumrecv);
-    if(checksum != checksumrecv) {
+    if(0 != checksumrecv) {
       util_DiscardMessage();
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
@@ -973,10 +968,10 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_CHARLOGOUT_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
     int Flg = 1;
     util_deint(2, &checksumrecv);
-    if(checksum != checksumrecv) {
+    if(0 != checksumrecv) {
       util_DiscardMessage();
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;
@@ -987,12 +982,12 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   }
 
   if(func == LSSPROTO_PROCGET_RECV) {
-    int checksum = 0, checksumrecv;
+    int checksumrecv;
 
     strcpy(PersonalKey, _DEFAULT_PKEY);
 
     util_deint(2, &checksumrecv);
-    if(checksum != checksumrecv) {
+    if(0 != checksumrecv) {
       util_DiscardMessage();
       logHack(fd, HACK_CHECKSUMERROR);
       return -1;

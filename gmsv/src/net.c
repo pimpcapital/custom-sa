@@ -1239,20 +1239,6 @@ ANYTHREAD void CAsend(int fd) {
   CONNECT_setCAbufsiz(fd, 0);
 }
 
-ANYTHREAD void CAcheck(void) {
-  int i;
-  unsigned int interval_us = getCAsendinterval_ms() * 1000;
-  for(i = 0; i < ConnectLen; i++) {
-    struct timeval t;
-    if(!CONNECT_getUse_debug(i, 1008))continue;
-    CONNECT_getLastCAsendtime(i, &t);
-    if(time_diff_us(NowTime, t) > interval_us) {
-      CAsend(i);
-      CONNECT_setLastCAsendtime(i, &NowTime);
-    }
-  }
-}
-
 ANYTHREAD void CAflush(int charaindex) {
   int i;
   i = getfdFromCharaIndex(charaindex);
@@ -1282,20 +1268,6 @@ ANYTHREAD void CDsend(int fd) {
   buf[bufuse - 1] = '\0';
   lssproto_CD_send(fd, buf);
   CONNECT_setCDbufsiz(fd, 0);
-}
-
-ANYTHREAD void CDcheck(void) {
-  int i;
-  unsigned int interval_us = getCDsendinterval_ms() * 1000;
-  for(i = 0; i < ConnectLen; i++) {
-    struct timeval t;
-    if(!CONNECT_getUse_debug(i, 1082)) continue;
-    CONNECT_getLastCDsendtime(i, &t);
-    if(time_diff_us(NowTime, t) > interval_us) {
-      CDsend(i);
-      CONNECT_setLastCDsendtime(i, &NowTime);
-    }
-  }
 }
 
 ANYTHREAD void CDflush(int charaindex) {
@@ -1476,14 +1448,9 @@ ANYTHREAD int CONNECT_isLOGIN(int fd) {
 }
 
 void closeAllConnectionandSaveData(void) {
-  int i;
-  int num;
-
-  /*  これ笆惧 accept しないようにする    */
   SERVSTATE_setCloseallsocketnum(0);
 
-  /*  链婶猴近する    */
-  for(i = 0; i < ConnectLen; i++) {
+  for(int i = 0; i < ConnectLen; i++) {
     if(CONNECT_getUse_debug(i, 1413) == TRUE) {
       int clilogin = FALSE;
       if(CONNECT_isAC(i))continue;
@@ -1499,7 +1466,7 @@ void closeAllConnectionandSaveData(void) {
       }
     }
   }
-  num = SERVSTATE_getCloseallsocketnum();
+  int num = SERVSTATE_getCloseallsocketnum();
   if(num == 0) {
     SERVSTATE_SetAcceptMore(-1);
   } else {
@@ -1527,20 +1494,13 @@ void CONNECT_SysEvent_Loop(void) {
       if((Connect[i].use) && (i != acfd)) {
 
         if(chikulatime % 6 == 0) { // 每60秒
-          // shan 2001/12/27 Begin
-
-          if(CHAR_getWorkInt(Connect[i].charaindex, CHAR_WORKBATTLEMODE)
-             != BATTLE_CHARMODE_NONE) {
-
+          if(CHAR_getWorkInt(Connect[i].charaindex, CHAR_WORKBATTLEMODE) != BATTLE_CHARMODE_NONE) {
             struct timeval recvtime;
             CONNECT_GetBattleRecvTime(i, &recvtime);
-
             if(time_diff(NowTime, recvtime) > 360) {
               CONNECT_endOne_debug(i);
             }
           }
-
-          // End
         } //%30
 
         if(chikulatime % 30 == 0) { // 每300秒
@@ -1761,12 +1721,9 @@ void CONNECT_SysEvent_Loop(void) {
       if((Connect[i].use) && (i != acfd)) {
         //计算用
 
-        if(CHAR_CHECKINDEX(Connect[i].charaindex)) if(CHAR_getInt(Connect[i].charaindex, CHAR_BECOMEPIG) >
-                                                      -1) { //处於乌力化状态
-
+        if(CHAR_CHECKINDEX(Connect[i].charaindex)) if(CHAR_getInt(Connect[i].charaindex, CHAR_BECOMEPIG) > -1) { //处於乌力化状态
           if((CHAR_getInt(Connect[i].charaindex, CHAR_BECOMEPIG) - 1) <= 0) { //乌力时间结束了
             CHAR_setInt(Connect[i].charaindex, CHAR_BECOMEPIG, 0);
-
             if(CHAR_getWorkInt(Connect[i].charaindex, CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) { //不是在战斗状态下
               CHAR_setInt(Connect[i].charaindex, CHAR_BECOMEPIG, -1); //结束乌力状态
               CHAR_complianceParameter(Connect[i].charaindex);
@@ -1855,13 +1812,10 @@ SINGLETHREAD int netloop_faster(void) {
   FD_SET(bindedfd, &efds);
   tmv.tv_sec = tmv.tv_usec = 0;
   ret = select(bindedfd + 1, &rfds, &wfds, &efds, &tmv);
-  if(ret < 0 && (errno != EINTR)) { ;
-  }
   if(ret > 0 && FD_ISSET(bindedfd, &rfds)) {
     struct sockaddr_in sin;
     int addrlen = sizeof(struct sockaddr_in);
-    int sockfd;
-    sockfd = accept(bindedfd, (struct sockaddr *) &sin, &addrlen);
+    int sockfd = accept(bindedfd, (struct sockaddr *) &sin, &addrlen);
     if(sockfd == -1 && errno == EINTR) {
       print("accept err:%s\n", strerror(errno));;
     } else if(sockfd != -1) {
@@ -1884,9 +1838,7 @@ SINGLETHREAD int netloop_faster(void) {
         print("可使用宠物数已满!!");
         cono = 0;
       }
-
-      //print("CO");
-
+      
       {
         float fs;
         if((fs = ((float) Connect[acfd].rbuse / AC_RBSIZE)) > 0.6) {
@@ -1916,8 +1868,7 @@ SINGLETHREAD int netloop_faster(void) {
 
         if(getNodelay()) {
           int flag = 1;
-          int result = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY,
-                                  (char *) &flag, sizeof(int));
+          int result = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
 
           if(result < 0) {
             close(sockfd);
@@ -2664,10 +2615,6 @@ int checkKe(int fd) {
 // Nuke start 0626: For no enemy function
 void setNoenemy(int fd) {
   Connect[fd].noenemy = 6;
-}
-
-void clearNoenemy(int fd) {
-  Connect[fd].noenemy = 0;
 }
 
 int getNoenemy(int fd) {

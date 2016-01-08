@@ -185,7 +185,6 @@ Game Server 游戏环境:
 #define _AVID_TRADETRYBUG        // (可开放) ANDY 防止交易中丢宠/道具 寄(宠物)邮件 石币
 #define _ITEM_ORNAMENTS          // (可开放) ANDY 装饰道具  12/04 更新  //出版部
 #define _CHIKULA_STONE           // (可开放) ANDY 奇克拉之石 12/04 更新  //来吉卡 宠包
-#define _SEND_EFFECT             // (可开放) WON  AC送下雪、下雨等特效 12/04 更新
 #define _PETMAIL_DEFNUMS         // (可开放) ANDY 宠物邮件限制
 #define _PETSKILL_TIMID          // (可开放) ANDY 宠技-怯战
 #define _PETS_SELECTCON          // (可开放) ANDY 宠物不可点选出战
@@ -213,7 +212,7 @@ Game Server 游戏环境:
 #define _BATTLE_ATTCRAZED        // (可开放) ANDY 疯狂暴走
 #define _CAPTURE_FREES           // (可开放) ANDY 补抓条件
 #define _THROWITEM_ITEMS         // (可开放) 丢掷後有奖品
-//--------------------------------------------------------------------------
+
 #define _ACFMPK_LIST             // (可开放) ANDY 家族对战列表修正
 #define _NPC_NOSAVEPOINT         // (可开放) ANDY 纪录点不存人物资料
 #define _PETSKILL2_TXT           // (可开放) ANDY petskill2.txt
@@ -249,7 +248,6 @@ Game Server 游戏环境:
 
 #define _PETSKILL_SHOWMERCY      // (可开) Change 宠技:手下留情
 #define _NPC_ActionFreeCmp       // (可开) Change 替NPC参数加入新的比较方式
-//--------------------------------------------------------------------------
 
 
 #define _NPC_NewDelPet           // (可开) Change 替NPC加入删除宠物(原本就有了,只是用warpman使用时不成功,所以先做一个顶一下)
@@ -413,6 +411,7 @@ Game Server 游戏环境:
 #define SEND_ADJUST +23
 //#define RECEIVE_ADJUST 0
 //#define SEND_ADJUST 0
+
 
 
 //特殊功能控制----------------------------------------
