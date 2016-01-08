@@ -369,7 +369,6 @@ Game Server 游戏环境:
 #define _RELOAD_CF               // 重读CF
 #define _PET_UP                  // 可捡别人丢出的宠物
 #define _TRANS                   // 人物转生命令
-#define _TRANS_7                 // 实现人物7转
 #define _RIDEMODE_20             // 2.0骑宠模式
 #define _TALK_ACTION             // 说话动作
 #define _ENEMY_ACTION            // 玩家步行遇敌机率
@@ -389,7 +388,6 @@ Game Server 游戏环境:
 #define _FM_POINT_PK             // 庄园家族互抢庄园
 #define _PLAYER_MOVE             // 玩家顺移功能
 #define _BATTLE_PK               // 强制PK道具，输了回记录点
-#define _TRANS_7_NPC             // 人物七转NPC
 #define _DP_NPC                  // DP脚本
 #define _RIDE_CF                 // 自定义骑宠
 #define _PET_LEVEL_ITEM          // 宠物等级提升物品

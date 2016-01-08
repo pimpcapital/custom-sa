@@ -14,9 +14,6 @@ int NPC_ActionDP( int talker,char *buf);
 #ifdef _VIP_SHOP
 int NPC_ActionDelVipPoint( int talker,char *buf);
 #endif
-#ifdef _TRANS_7_NPC
-int NPC_ActionTrans7( int talker, char *buf);
-#endif
 // WON ADD
 int NPC_ActionAddGold2( int talker,char *buf);
 int NPC_ActionDelPet( int toindex,char *buf);
