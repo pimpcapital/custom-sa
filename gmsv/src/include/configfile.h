@@ -78,13 +78,13 @@ int readconfigfile(char *filename);
 
 void defaultConfig(char *argv0);
 
-char *getDataDir();
+char* getDataDir();
 
-char *getPublicKey();
+char* getPublicKey();
 
-char *getRunningKey();
+char* getRunningKey();
 
-char getSignature();
+char* getSignature();
 
 char *getConfigfilename(void);
 

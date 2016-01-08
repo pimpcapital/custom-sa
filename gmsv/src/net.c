@@ -1786,7 +1786,7 @@ SINGLETHREAD int netloop_faster(void) {
         print("可使用宠物数已满!!");
         cono = 0;
       }
-      
+
       {
         float fs;
         if((fs = ((float) Connect[acfd].rbuse / AC_RBSIZE)) > 0.6) {
@@ -1803,13 +1803,10 @@ SINGLETHREAD int netloop_faster(void) {
         print("accept but drop[cono:%d,acceptmore:%d]\n", cono, acceptmore);
         close(sockfd);
       } else if(sockfd < ConnectLen) {
-        char mess[64];
-        mess[0] = getSignature();
-
+        char* signature = getSignature();
         if(!from_acsv)
-          send(sockfd, mess, strlen(mess) + 1, 0);
+          send(sockfd, signature, strlen(signature) + 1, 0);
         initConnectOne(sockfd, &sin, addrlen);
-
         if(getNodelay()) {
           int flag = 1;
           int result = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));

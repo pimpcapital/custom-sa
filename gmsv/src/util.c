@@ -371,9 +371,7 @@ int kanjistrToInt(char *str) {
 
 int strtolchecknum(char *arg, void *number, int base, CTYPE type) {
   char *buf;
-  int num;
-
-  num = strtol(arg, &buf, base);
+  int num = strtol(arg, &buf, base);
 
   switch(type) {
     case CHAR:

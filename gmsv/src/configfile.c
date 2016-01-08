@@ -19,8 +19,8 @@ typedef struct tagConfig {
   char datadir[128];
   char public_key[16];
   char running_key[16];
-  char signature;
-  
+  char signature[16];
+
   char configfilename[32];
   unsigned int debuglevel;
   unsigned int usememoryunit;
@@ -234,11 +234,11 @@ ReadConf readconf[] =
         {"public_key", &config.public_key, sizeof(config.public_key), NULL, CHAR},
         {"running_key", &config.running_key, sizeof(config.running_key), NULL, CHAR},
         {"signature", &config.signature, sizeof(config.signature), NULL, CHAR},
-    
-        {"debuglevel", NULL, 0, (void *) &config.debuglevel, CHAR},
 
-        {"usememoryunit", NULL, 0, (void *) &config.usememoryunit, INT},
-        {"usememoryunitnum", NULL, 0, (void *) &config.usememoryunitnum, INT},
+        {"debuglevel", NULL, 0, &config.debuglevel, CHAR},
+
+        {"usememoryunit", NULL, 0, &config.usememoryunit, INT},
+        {"usememoryunitnum", NULL, 0, &config.usememoryunitnum, INT},
 
         {"acserv", &config.asname, sizeof(config.asname), NULL, CHAR},
         {"acservport", NULL, 0, (void *) &config.acservport, SHORT},
@@ -528,7 +528,6 @@ void AnnounceToPlayer(int charaindex) {
 
 }
 
-// Robin 0720
 void AnnounceToPlayerWN(int fd) {
   char buf[8192];
   lssproto_WN_send(fd, WINDOW_MESSAGETYPE_LOGINMESSAGE, WINDOW_BUTTONTYPE_OK, -1, -1, makeEscapeString(announcetext, buf, sizeof(buf))
@@ -780,30 +779,28 @@ int LoadGMSet(char *filename) {
 
 #endif
 
-char *getDataDir() {
+char* getDataDir() {
   return config.datadir;
 }
 
-char *getPublicKey() {
+char* getPublicKey() {
   return config.public_key;
 }
 
-char *getRunningKey() {
+char* getRunningKey() {
   return config.running_key;
 }
 
-char getSignature() {
+char* getSignature() {
   return config.signature;
 }
-
 
 char *getConfigfilename(void) {
   return config.configfilename;
 }
 
 void setConfigfilename(char *newv) {
-  strcpysafe(config.configfilename, sizeof(config.configfilename),
-             newv);
+  strcpysafe(config.configfilename, sizeof(config.configfilename), newv);
 }
 
 unsigned int getDebuglevel(void) {
@@ -811,8 +808,7 @@ unsigned int getDebuglevel(void) {
 }
 
 unsigned int setDebuglevel(unsigned int newv) {
-  int old;
-  old = config.debuglevel;
+  int old = config.debuglevel;
   config.debuglevel = newv;
   return old;
 }
@@ -1155,12 +1151,6 @@ void setBattleDebugMsg(unsigned int num) {
   config.battledebugmsg = num;
 }
 
-
-/*
- * Config及犯白巧伙玄袄毛瑁户月楮醒
- * 娄醒
- *  argv0   char*   戊穴件玉仿奶件娄醒及  赓
- */
 void defaultConfig(char *argv0) {
   char *program = rindex(argv0, '/');
   if(program == NULL)
@@ -1170,13 +1160,7 @@ void defaultConfig(char *argv0) {
   strcpysafe(config.configfilename, sizeof(config.configfilename), "config/setup.cf");
 }
 
-/*
- * 涩烂白央奶伙  毛  氏分  匹及质  毛垫丹［
- * 娄醒
- *  卅仄
- * 忒曰袄
- *  卅仄
- */
+
 void lastConfig(void) {
   char entry[256];
   snprintf(entry, sizeof(entry), "%s/%s", &config.topdir, config.mapdir);
@@ -1239,37 +1223,30 @@ int readconfigfile(char *filename) {
   char linebuf[256];
   int linenum = 0;
   while(fgets(linebuf, sizeof(linebuf), f)) {
-    char firstToken[256];
-    int i;
-    int ret;
-
     linenum++;
+    deleteWhiteSpace(linebuf);
 
-    deleteWhiteSpace(linebuf);          /* remove whitespace    */
+    if(linebuf[0] == '#')
+      continue;
 
-    if(linebuf[0] == '#')continue;        /* comment */
-    if(linebuf[0] == '\n')continue;       /* none    */
+    if(linebuf[0] == '\n')
+      continue;
 
-    chomp(linebuf);                    /* remove tail newline  */
-    ret = getStringFromIndexWithDelim(linebuf, "=", 1, firstToken, sizeof(firstToken));
-    if(ret == FALSE) {
+    chomp(linebuf);
+    char firstToken[256];
+    if(getStringFromIndexWithDelim(linebuf, "=", 1, firstToken, sizeof(firstToken)) == FALSE) {
       print("Find error at %s in line %d. Ignore\n", filename, linenum);
       continue;
     }
 
-    for(i = 0; i < arraysizeof(readconf); i++) {
+    for(int i = 0; i < arraysizeof(readconf); i++) {
       if(strcmp(readconf[i].name, firstToken) == 0) {
-        /* match */
-        char secondToken[256];      /*2    及  侬  */
-        /* delim "=" 匹2    及玄□弁件毛  月*/
-        ret = getStringFromIndexWithDelim(linebuf, "=", 2, secondToken, sizeof(secondToken));
-
+        char secondToken[256];
+        int ret = getStringFromIndexWithDelim(linebuf, "=", 2, secondToken, sizeof(secondToken));
         if(ret == FALSE) {
-          print("Find error at %s in line %d. Ignore",
-                filename, linenum);
+          print("Find error at %s in line %d. Ignore", filename, linenum);
           break;
         }
-
 
         if(readconf[i].charvalue != NULL)
           strcpysafe(readconf[i].charvalue, readconf[i].charsize, secondToken);
@@ -1277,7 +1254,6 @@ int readconfigfile(char *filename) {
         if(readconf[i].value != NULL) {
           if(strcmp("ON", secondToken) == 0) {
             substitutePointerFromType(readconf[i].value, readconf[i].valuetype, 1.0);
-
           } else if(strcmp("OFF", secondToken) == 0) {
             substitutePointerFromType(readconf[i].value, readconf[i].valuetype, 1.0);
           } else {
