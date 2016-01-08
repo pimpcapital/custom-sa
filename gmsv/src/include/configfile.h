@@ -82,7 +82,7 @@ char* getDataDir();
 
 char* getPublicKey();
 
-char* getRunningKey();
+char* getPrivateKey();
 
 char* getSignature();
 

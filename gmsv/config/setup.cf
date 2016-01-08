@@ -1,6 +1,6 @@
 datadir=config/data
 public_key=www.longzoro.com
-public_key=www.longzoro.com
+private_key=www.longzoro.com
 signature=L
 
 #ChangeRunLevel
