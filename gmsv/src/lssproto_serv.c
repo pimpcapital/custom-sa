@@ -1,3 +1,4 @@
+#include <configfile.h>
 #include "version.h"
 #include "autil.h"
 #include "lssproto_serv.h"
@@ -66,6 +67,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
     return -1;
   }
 
+  print("\n%d\n", func);
   if(func == LSSPROTO_W_RECV) {
     int checksum = 0, checksumrecv;
     int x;
@@ -865,7 +867,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
     char cdkey[CDKEYLEN];
     char passwd[PASSWDLEN];
 
-    strcpy(PersonalKey, _DEFAULT_PKEY);
+    strcpy(PersonalKey, getPublicKey());
 
     checksum += util_destring(2, cdkey);
     checksum += util_destring(3, passwd);
@@ -984,7 +986,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
   if(func == LSSPROTO_PROCGET_RECV) {
     int checksumrecv;
 
-    strcpy(PersonalKey, _DEFAULT_PKEY);
+    strcpy(PersonalKey, getPublicKey());
 
     util_deint(2, &checksumrecv);
     if(0 != checksumrecv) {
@@ -1164,7 +1166,7 @@ void lssproto_XYD_send(int fd, int x, int y, int dir) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, x);
   checksum += util_mkint(buffer, y);
@@ -1180,7 +1182,7 @@ void lssproto_EV_send(int fd, int seqno, int result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, seqno);
   checksum += util_mkint(buffer, result);
@@ -1197,7 +1199,7 @@ void lssproto_EN_send(int fd, int result, int field) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, result);
   checksum += util_mkint(buffer, field);
@@ -1213,7 +1215,7 @@ void lssproto_RS_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1228,7 +1230,7 @@ void lssproto_RD_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1242,7 +1244,7 @@ void lssproto_B_send(int fd, char *command) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, command);
   util_mkint(buffer, checksum);
@@ -1256,7 +1258,7 @@ void lssproto_I_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1270,7 +1272,7 @@ void lssproto_SI_send(int fd, int fromindex, int toindex) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
   checksum += util_mkint(buffer, fromindex);
   checksum += util_mkint(buffer, toindex);
   util_mkint(buffer, checksum);
@@ -1284,7 +1286,7 @@ void lssproto_MSG_send(int fd, int aindex, char *text, int color) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, aindex);
   checksum += util_mkstring(buffer, text);
@@ -1301,7 +1303,7 @@ void lssproto_PME_send(int fd, int objindex, int graphicsno, int x, int y, int d
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, objindex);
   checksum += util_mkint(buffer, graphicsno);
@@ -1323,7 +1325,7 @@ void lssproto_AB_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1338,7 +1340,7 @@ void lssproto_ABI_send(int fd, int num, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, num);
   checksum += util_mkstring(buffer, data);
@@ -1353,7 +1355,7 @@ void lssproto_TK_send(int fd, int index, char *message, int color) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, index);
   checksum += util_mkstring(buffer, message);
@@ -1369,7 +1371,7 @@ void lssproto_MC_send(int fd, int fl, int x1, int y1, int x2, int y2, int tilesu
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, fl);
   checksum += util_mkint(buffer, x1);
@@ -1392,7 +1394,7 @@ void lssproto_M_send(int fd, int fl, int x1, int y1, int x2, int y2, char *data)
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, fl);
   checksum += util_mkint(buffer, x1);
@@ -1411,7 +1413,7 @@ void lssproto_C_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1425,7 +1427,7 @@ void lssproto_CA_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1439,7 +1441,7 @@ void lssproto_CD_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1453,7 +1455,7 @@ void lssproto_R_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1467,7 +1469,7 @@ void lssproto_S_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
   util_mkint(buffer, checksum);
@@ -1481,7 +1483,7 @@ void lssproto_FS_send(int fd, int flg) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, flg);
   util_mkint(buffer, checksum);
@@ -1495,7 +1497,7 @@ void lssproto_HL_send(int fd, int flg) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, flg);
   util_mkint(buffer, checksum);
@@ -1509,7 +1511,7 @@ void lssproto_PR_send(int fd, int request, int result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, request);
   checksum += util_mkint(buffer, result);
@@ -1526,7 +1528,7 @@ void lssproto_PETS_send(int fd, int petarray, int result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, petarray);
   checksum += util_mkint(buffer, result);
@@ -1543,7 +1545,7 @@ void lssproto_KS_send(int fd, int petarray, int result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, petarray);
   checksum += util_mkint(buffer, result);
@@ -1558,7 +1560,7 @@ void lssproto_SPET_send(int fd, int standbypet, int result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, standbypet);
   checksum += util_mkint(buffer, result);
@@ -1573,7 +1575,7 @@ void lssproto_PS_send(int fd, int result, int havepetindex, int havepetskill, in
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, result);
   checksum += util_mkint(buffer, havepetindex);
@@ -1590,7 +1592,7 @@ void lssproto_SKUP_send(int fd, int point) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, point);
   util_mkint(buffer, checksum);
@@ -1604,7 +1606,7 @@ void lssproto_WN_send(int fd, int windowtype, int buttontype, int seqno, int obj
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, windowtype);
   checksum += util_mkint(buffer, buttontype);
@@ -1623,7 +1625,7 @@ void lssproto_EF_send(int fd, int effect, int level, char *option) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, effect);
   checksum += util_mkint(buffer, level);
@@ -1639,7 +1641,7 @@ void lssproto_SE_send(int fd, int x, int y, int senumber, int sw) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, x);
   checksum += util_mkint(buffer, y);
@@ -1656,7 +1658,8 @@ void lssproto_ClientLogin_send(int fd, char *result) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
+
   checksum += util_mkstring(buffer, result);
   util_mkint(buffer, checksum);
 
@@ -1671,7 +1674,7 @@ void lssproto_CreateNewChar_send(int fd, char *result, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, result);
   checksum += util_mkstring(buffer, data);
@@ -1686,7 +1689,7 @@ void lssproto_CharDelete_send(int fd, char *result, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, result);
   checksum += util_mkstring(buffer, data);
@@ -1701,7 +1704,7 @@ void lssproto_CharLogin_send(int fd, char *result, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, result);
   checksum += util_mkstring(buffer, data);
@@ -1716,7 +1719,7 @@ void lssproto_CharList_send(int fd, char *result, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, result);
   checksum += util_mkstring(buffer, data);
@@ -1731,7 +1734,7 @@ void lssproto_CharLogout_send(int fd, char *result, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, result);
   checksum += util_mkstring(buffer, data);
@@ -1746,7 +1749,7 @@ void lssproto_ProcGet_send(int fd, char *data) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, data);
 
@@ -1761,7 +1764,7 @@ void lssproto_PlayerNumGet_send(int fd, int logincount, int player) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, logincount);
   checksum += util_mkint(buffer, player);
@@ -1776,7 +1779,7 @@ void lssproto_Echo_send(int fd, char *test) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, test);
   util_mkint(buffer, checksum);
@@ -1790,7 +1793,7 @@ void lssproto_TD_send(int fd, char *message) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, message);
   util_mkint(buffer, checksum);
@@ -1805,7 +1808,7 @@ void lssproto_FM_send(int fd, char *message) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkstring(buffer, message);
   util_mkint(buffer, checksum);
@@ -1820,7 +1823,7 @@ void lssproto_WO_send(int fd, int effect) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, effect);
   util_mkint(buffer, checksum);
@@ -1836,7 +1839,7 @@ void lssproto_IC_send(int fd, int x, int y) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, x);
   checksum += util_mkint(buffer, y);
@@ -1854,7 +1857,7 @@ void lssproto_NC_send(int fd, int flg) {
   strcpy(buffer, "");
 
   CONNECT_getCdkey(fd, PersonalKey, 4096);
-  strcat(PersonalKey, _RUNNING_KEY);
+  strcat(PersonalKey, getPrivateKey());
 
   checksum += util_mkint(buffer, flg);
   util_mkint(buffer, checksum);

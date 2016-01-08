@@ -398,9 +398,6 @@ Game Server 游戏环境:
 #endif
 
 //版本控制----------------------------------------
-#define _DEFAULT_PKEY "www.longzoro.com"
-#define _RUNNING_KEY  "www.longzoro.com"
-
 #define RECEIVE_ADJUST -13
 #define SEND_ADJUST +23
 //#define RECEIVE_ADJUST 0

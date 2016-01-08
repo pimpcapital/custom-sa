@@ -17,9 +17,9 @@ extern struct MissionTable missiontable[MAXMISSIONTABLE];
 
 typedef struct tagConfig {
   char datadir[128];
-  char public_key[16];
-  char private_key[16];
-  char signature[16];
+  char public_key[128];
+  char private_key[128];
+  char signature[128];
 
   char configfilename[32];
   unsigned int debuglevel;
