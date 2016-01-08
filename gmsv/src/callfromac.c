@@ -52,10 +52,6 @@ void saacproto_ACServerLogin_recv(int fd, char *result, char *data) {
   }
   print("与AC服务器连接成功！\n");
   time(&initTime);
-#ifdef _SERVER_NUMS
-  print(" 正常服务器!\n");
-#endif
-
   print("初始化家族...");
   FAMILY_Init();
   print("完成\n");

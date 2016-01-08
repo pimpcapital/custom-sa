@@ -18,6 +18,9 @@ extern struct MissionTable missiontable[MAXMISSIONTABLE];
 typedef struct tagConfig {
   char datadir[128];
   char public_key[16];
+  char running_key[16];
+  char signature;
+  
   char configfilename[32];
   unsigned int debuglevel;
   unsigned int usememoryunit;
@@ -219,9 +222,9 @@ Config config;
 
 typedef struct tagReadConf {
   char name[32];
-  char *charvalue;
+  char* charvalue;
   size_t charsize;
-  void *value;
+  void* value;
   CTYPE valuetype;
 } ReadConf;
 
@@ -229,6 +232,9 @@ ReadConf readconf[] =
     {
         {"datadir", &config.datadir, sizeof(config.datadir), NULL, CHAR},
         {"public_key", &config.public_key, sizeof(config.public_key), NULL, CHAR},
+        {"running_key", &config.running_key, sizeof(config.running_key), NULL, CHAR},
+        {"signature", &config.signature, sizeof(config.signature), NULL, CHAR},
+    
         {"debuglevel", NULL, 0, (void *) &config.debuglevel, CHAR},
 
         {"usememoryunit", NULL, 0, (void *) &config.usememoryunit, INT},
@@ -779,8 +785,17 @@ char *getDataDir() {
 }
 
 char *getPublicKey() {
-  return config.datadir;
+  return config.public_key;
 }
+
+char *getRunningKey() {
+  return config.running_key;
+}
+
+char getSignature() {
+  return config.signature;
+}
+
 
 char *getConfigfilename(void) {
   return config.configfilename;

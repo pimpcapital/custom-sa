@@ -1,5 +1,3 @@
-#define __NET_C__
-
 #include "version.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,12 +12,9 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netinet/tcp.h>
-//ttom+1
 
-#include <sys/timeb.h>
 #include "net.h"
 #include "buf.h"
-#include "common.h"
 #include "msignal.h"
 #include "configfile.h"
 #include "util.h"
@@ -30,7 +25,6 @@
 #include "log.h"
 #include "object.h"
 #include "item_event.h"
-#include "enemy.h"
 // Arminius 7.31 cursed stone
 #include "battle.h"
 #include "version.h"
@@ -46,12 +40,6 @@
 
 
 #define MIN(x, y)     ( ( (x) < (y) ) ? (x) : (y) )
-
-#ifdef _NEW_SERVER_
-int bNewServer = TRUE;
-#else
-int bNewServer = FALSE;
-#endif
 
 // Nuke +1 0901: For state monitor
 int StateTable[WHILESAVEWAIT + 1];
@@ -71,28 +59,13 @@ static unsigned int MAX_item_use = 0;
 int i_shutdown_time = 0; //ttom
 int b_first_shutdown = FALSE; //ttom
 
-int mfdfulll = 0;
-
-/*------------------------------------------------------------
- * 扔□田及橇谪
- ------------------------------------------------------------*/
 typedef struct tag_serverState {
   int acceptmore;
-  /*  1分匀凶日｝accept 仄凶丐午
-                                        切斤仁匹｝close 允月 */
   unsigned int fdid;
-  /*  fd 及骚曰袄 */
   unsigned int closeallsocketnum;
-  /*   closeallsocket   及酸曰及
-                                             醒*/
   int shutdown;
-  /*  扔□田毛shutdown允月乒□玉
-									 *	0:骚橘 公木动陆:扑乓永玄扑乓永玄乒□玉
-									 * 乒□玉卞卅匀凶凛棉互  匀化月［
-									 */
   int dsptime;
-  /* shutdown 乒□玉及伐□弁  醒*/
-  int limittime;    /* 仇木手 */
+  int limittime;
 } ServerState;
 typedef struct tagCONNECT {
   int use;
@@ -106,47 +79,22 @@ typedef struct tagCONNECT {
   pthread_mutex_t mutex;
 
   struct sockaddr_in sin;
-  /* 涛粮燮及失玉伊旦 */
   ConnectType ctype;
-  /* 戊生弁扑亦件及潘挀 */
-
   char cdkey[CDKEYLEN];
-  /* CDKEY */
   char passwd[PASSWDLEN];
-  /* 由旦伐□玉 */
   LoginType state;
-  /* 蜇箕及夫弘奶件橇谪 */
   int nstatecount;
   char charname[CHARNAMELEN];
-  /* 夫弘奶件醱及平乓仿抩 */
   int charaindex;
-  /* char?昫尺及奶件犯永弁旦﹝
-                               * 夫弘奶件詨卞袄互涩烂今木月﹝-1互犯白巧伙玄
-                               * ?昫卞卅中凛﹝
-                               */
   char CAbuf[2048];
-  /*  CA() 毛做谅允月啃及田永白央 */
   int CAbufsiz;
-  /*  CAbuf 及扔奶术  */
-
   struct timeval lastCAsendtime;
-  /*瘉詨卞CA毛霜匀凶凛棉 */
-
   char CDbuf[2048];
-  /*  CD() 毛做谅允月啃及田永白央 */
   int CDbufsiz;
-  /*  CDbuf 及扔奶术  */
-
   struct timeval lastCDsendtime;
-  /*瘉詨卞CD毛霜匀凶凛棉 */
-
   struct timeval lastCharSaveTime;
-  /* 瘉詨卞平乓仿犯□正毛本□皮仄凶凛棉 */
-
   struct timeval lastprocesstime;
-  /* 瘉詨卞皿夫玄戊伙毛质咥仄凶凛棉*/
-
-  struct timeval lastreadtime;       /* 瘉詨卞read仄凶凛棉﹝晓午反切互丹*/
+  struct timeval lastreadtime;
 
   // Nuke start 08/27 : For acceleration avoidance
   // WALK_TOLERANCE: Permit n W messages in a second (3: is the most restricted)
@@ -1849,18 +1797,14 @@ SINGLETHREAD int netloop_faster(void) {
 
       memcpy(&sinip, &sin.sin_addr, 4);
       if((cono == 0) || (acceptmore <= 0) || isThereThisIP(sinip)) {
-        // Nuke +2 Errormessage
         char mess[64] = "E伺服器忙线中，请稍候再试。";
         if(!from_acsv)
           write(sockfd, mess, strlen(mess) + 1);
         print("accept but drop[cono:%d,acceptmore:%d]\n", cono, acceptmore);
         close(sockfd);
       } else if(sockfd < ConnectLen) {
-        char mess[64] = "A";
-        if(bNewServer) {
-          mess[0] = _SA_VERSION;    // 7.0
-        } else
-          mess[0] = '$';
+        char mess[64];
+        mess[0] = getSignature();
 
         if(!from_acsv)
           send(sockfd, mess, strlen(mess) + 1, 0);
@@ -1878,12 +1822,10 @@ SINGLETHREAD int netloop_faster(void) {
           }
         }
       } else {
-        // Nuke +2 Errormessage
         char mess[64] = "E伺服器人数已满，请稍候再试。";
         if(!from_acsv)
           write(sockfd, mess, strlen(mess) + 1);
         close(sockfd);
-        // Nuke +1 0901: Why close
       }
     }
   }
