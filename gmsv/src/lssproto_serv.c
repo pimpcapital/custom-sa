@@ -67,7 +67,7 @@ int lssproto_ServerDispatchMessage(int fd, char *encoded) {
     return -1;
   }
 
-  print("\n%d\n", func);
+  print("RECEIVED - %d\n", func);
   if(func == LSSPROTO_W_RECV) {
     int checksum = 0, checksumrecv;
     int x;

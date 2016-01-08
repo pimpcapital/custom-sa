@@ -671,10 +671,8 @@ ANYTHREAD int _CONNECT_endOne(char *file, int fromline, int sockfd, int line) {
 
   {
     free(Connect[sockfd].rb);
-
     free(Connect[sockfd].wb);
   }
-  print("编号=%d \n", sockfd);
   close(sockfd);
   return TRUE;
 }
@@ -2020,7 +2018,6 @@ SINGLETHREAD int netloop_faster(void) {
 
       if((ret == -1 && errno != EINTR) || ret == 0) {
         if(fdremember == acfd) {
-          print("读取返回:%d %s\n", ret, strerror(errno));
           print("gmsv与acsv失去连接! 异常终止...\n");
           sigshutdown(-1);
           exit(1);
@@ -2028,11 +2025,8 @@ SINGLETHREAD int netloop_faster(void) {
           if(ret == -1) {
             if(errno == 113 && errno == 104) {
               continue;
-            } else {
-              print("读取返回: %d %s \n", errno, strerror(errno));
             }
           }
-          print("\nRCL ");
           CONNECT_endOne_debug(fdremember);
           continue;
         }

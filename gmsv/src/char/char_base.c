@@ -1463,7 +1463,6 @@ void *CHAR_getFunctionPointer(int charaindex, int functype) {
 }
 
 int CHAR_initCharArray(int pnum, int petnum, int onum) {
-  int i;
 
   int CHAR_checksetdata(void);
   if(CHAR_checksetdata() == FALSE) {
@@ -1479,12 +1478,10 @@ int CHAR_initCharArray(int pnum, int petnum, int onum) {
     print("无法分配内存 !!\n");
     return FALSE;
   }
-  //andy_log
   print("分配 %4.2f MB 空间...", ((float) sizeof(Char) * CHAR_charanum) / 1024 / 1024);
 
-  for(i = 0; i < CHAR_charanum; i++) {
+  for(int i = 0; i < CHAR_charanum; i++) {
     memset(&CHAR_chara[i], 0, sizeof(Char));
-
   }
   CHAR_playernum = pnum;
   CHAR_petnum = petnum;
@@ -1875,28 +1872,10 @@ char *CHAR_makeStringFromCharData(Char *one) {
 
 int CHAR_makeCharFromStringToArg(char *data, Char *one) {
   int i;
-  int readindex = 1, rightData = 0;
+  int readindex = 1;
 
   if(data[0] == '\0')
     return FALSE;
-  {
-    char name[4096];
-    char *sp = strstr(data, "name=");
-    char *sp2 = strstr(data, "ownt=");
-    if(sp && sp2) {
-      snprintf(name, sp2 - sp - 5, "%s", sp + 5);
-      print("\n开始登陆人物名称:%s ", name);
-    } else
-      print("\n开始登陆人物名称错误! ");
-
-    if(data[strlen(data) - 2] != '\n') {
-      print("\n 登陆错误!:%s ", data + strlen(data) - 20);
-    }
-
-    if(strlen(name) > 16) {
-      print("人物名称过长!! 人物名称:%s 长度:%d ", name, strlen(name));
-    }
-  }
 
   memset(one, 0, sizeof(Char));
   CHAR_getDefaultChar(one, 0);
@@ -2054,37 +2033,10 @@ int CHAR_makeCharFromStringToArg(char *data, Char *one) {
       }
     }
 
-    if(strncmp(firstToken, DATAENDCHECKPOINT, strlen(DATAENDCHECKPOINT)) == 0) {
-      rightData = 1;
-      goto NEXT;
-    }
-
-
-    print("??? : %s[%s]\n", linebuf, firstToken);
     NEXT:
     readindex++;
   }
-  // Robin 0913  bad_chardata
-  {
-    char name[4096];
-    char *sp = strstr(data, "name=");
-    // shan add
-    char *sp2 = strstr(data, "ownt=");
-    if(sp && sp2) {
-      snprintf(name, sp2 - sp - 5, "%s", sp + 5);
-      print("\n登陆成功 人物名称:%s ", name);
-    }
-    else
-      print("\n登陆成功 人物名称错误! ");
 
-    if(data[strlen(data) - 2] != '\n') {
-      print("\n玩家登陆出错! ");
-      //return FALSE;
-    }
-  }
-//	if( rightData != 1 ){
-//		return FALSE;
-//	}
   return TRUE;
 }
 

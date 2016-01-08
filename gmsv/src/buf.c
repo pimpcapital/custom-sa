@@ -135,7 +135,6 @@ void *allocateMemory(const unsigned int nbyte) {
     NowMemory += arrayAllocSize;
 
     if(NowTime.tv_sec > AllocOldTime.tv_sec + 10) {
-      print("\n");
       if(NowMemory > (double) UNITNUMBER * 0.9) {
         print("Warning!! Memory use rate exceeded 90%% .remnants:%d\n", UNITNUMBER - NowMemory);
       } else if(NowMemory > (double) UNITNUMBER * 0.8) {

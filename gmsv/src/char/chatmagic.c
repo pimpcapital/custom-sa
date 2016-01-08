@@ -3408,7 +3408,6 @@ void CHAR_CHAT_DEBUG_playerspread(int charaindex, char *message) {
       print("ANDY MapArray full!!\n");
     }
   }
-  print("\n");
   for(i = 0; i < CHECKMAPNUMS; i++) {
     if(MapArray[i].floor == -1) break;
     print("ANDY MapArray[%d:%s]-%d\n",

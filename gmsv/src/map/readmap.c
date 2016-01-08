@@ -939,7 +939,6 @@ int MAP_setTileAndObjData(int ff, int fx, int fy, int tile, int obj) {
 }
 
 int MAP_initReadMap(char *maptilefile, char *mapdir) {
-  print("\n");
   if(!MAP_readMapConfFile(maptilefile))
     return FALSE;
   if(!MAP_readBattleMapConfFile(getBattleMapfile()))

@@ -816,8 +816,6 @@ void saacproto_ACKick_recv(int fd, int act, char *data, int retfd) {
   //char cdkey[CDKEYLEN];
   int cindex = getCharindexFromFdid(retfd);
 
-  print("状态：%s ", data);
-
   switch(act) {
     case 0:  //FAIL
       if(CONNECT_checkfd(clifd) == FALSE) return;

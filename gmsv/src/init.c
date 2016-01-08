@@ -75,8 +75,8 @@ int parseCommandLine(int argc, char **argv) {
 int parseEnvironment(char **env) {
   if(getDebuglevel() >= 3) {
     int index = 0;
-    while(env[index] != NULL)print("%s ", env[index++]);
-    print("\n");
+    while(env[index] != NULL)
+      print("%s \n", env[index++]);
   }
   return TRUE;
 }
@@ -617,7 +617,6 @@ int init(int argc, char **argv, char **env) {
 #endif
 
   DEBUG_ADJUSTTIME = 0;
-  print("\n");
   return TRUE;
 
   CLOSEAC:

@@ -540,7 +540,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
   }
 #ifdef _NEWSAVE
   CHAR_setInt(charaindex, CHAR_SAVEINDEXNUMBER, saveindex);
-  print("存档装载索引:%d\n", CHAR_getInt(charaindex, CHAR_SAVEINDEXNUMBER));
 #endif
 
   char cdkey[16];
@@ -552,7 +551,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
     print("账号%s与档案人物账号%s不相同", cdkey, CHAR_getChar(charaindex, CHAR_CDKEY));
     goto DELETECHARDATA;
   }
-  printf("\ncharaindex:%d\n", charaindex);
   if(CHAR_getFlg(charaindex, CHAR_ISDIE)) {
     print("?data? ISDIE flg is standing.\n");
     CHAR_setFlg(charaindex, CHAR_ISDIE, FALSE);
@@ -832,8 +830,6 @@ void CHAR_login(int clifd, char *data, int saveindex) {
 #endif
 
   AnnounceToPlayerWN(clifd);
-
-  print("\n登陆人物名称:%s ", CHAR_getChar(charaindex, CHAR_NAME));
   LogLogin(CHAR_getChar(charaindex, CHAR_CDKEY), CHAR_getChar(charaindex, CHAR_NAME), saveindex, CONNECT_get_userip(clifd));
   return;
 
@@ -4526,7 +4522,6 @@ int storeCharaData(void) {
     fclose(fp);
   }
 
-  print("\n");
   return 0;
 }
 

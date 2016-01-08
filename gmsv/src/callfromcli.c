@@ -56,7 +56,6 @@ void lssproto_ClientLogin_recv(int fd, char *cdkey, char *passwd) {
   CONNECT_setCtype(fd, CLI);
 
   char* ip = CONNECT_get_userip(fd);
-  print("\n登陆账号=%s 来自=%s\n", cdkey, ip);
 
   saacproto_ACCharLogin_send(acfd, fd, cdkey, passwd, ip);
 }
@@ -139,7 +138,6 @@ void lssproto_CharLogin_recv(int fd, char *charname) {
   if(CONNECT_isCLI(fd) == FALSE)
     return;
 
-  print("\n尝试登陆: 人物名称=%s\n", charname);
   if(CONNECT_isNOTLOGIN(fd) == FALSE) {
     lssproto_CharLogin_send(fd, FAILED, "Already Logged in\n");
     return;
