@@ -66,13 +66,6 @@ typedef struct tagMAP_ImageData {
   STRING32 string[MAP_DATACHAR_NUM];
 } MAP_ImageData;
 
-typedef enum {
-  MAP_KINDWALKABLE, /*  擌? F   1   入     */
-
-      MAP_KINDNUM,
-} MAP_kind;
-
-
 int MAP_getfloorIndex(int floorid);
 
 int MAP_getfloorX(int floorid);
@@ -87,8 +80,7 @@ void MAP_endMapArray(void);
 
 char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr);
 
-char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr,
-                              int *tilesum, int *objsum, int *eventsum);
+char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum, int *objsum, int *eventsum);
 
 int MAP_checkCoordinates(int mapid, int x, int y);
 
@@ -106,10 +98,6 @@ int IsValidImagenumber(int imagenumber);
 
 char *MAP_getfloorShowstring(int floorid);
 
-int MAP_makeVariousMap(char *atile, char *aobj, int floor, int startx, int starty, int xsiz, int ysiz, MAP_kind kind);
-
-int MAP_makeWalkableMap(char *data, int floor, int startx, int starty, int xsiz, int ysiz);
-
 int MAP_IsThereSpecificFloorid(int floorid);
 
 int MAP_IsValidCoordinate(int floorid, int x, int y);
@@ -120,14 +108,9 @@ int MAP_removeObj(int floor, int x, int y, int objindex);
 
 MAP_Objlink *MAP_getTopObj(int floor, int x, int y);
 
-#define    MAP_objmove(objindex, of, ox, oy, nfl, nx, ny) _MAP_objmove( __FILE__, __LINE__, objindex, of, ox, oy, nfl, nx, ny)
-
-int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
-                 int nx, int ny);
+int MAP_objmove(int objindex, int ofloor, int ox, int oy, int nfloor, int nx, int ny);
 
 char *MAP_getFloorName(int floor);
-
-int MAP_setObjData(int ff, int fx, int fy, int obj, int objhp);
 
 #ifdef _MAKE_MAP
 
@@ -144,4 +127,3 @@ int CHECKFLOORID(int id);
 #endif
 
 #endif
-/*__MAP_H__*/

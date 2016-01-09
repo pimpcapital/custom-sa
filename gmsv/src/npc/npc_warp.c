@@ -3,7 +3,6 @@
 #include "object.h"
 #include "char_base.h"
 #include "char.h"
-#include "map_deal.h"
 #include "readmap.h"
 #include "npccreate.h"
 #include "npcutil.h"

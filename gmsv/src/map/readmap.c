@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
 #include <errno.h>
-#include <unistd.h>
 
 #include <netinet/in.h>
 #include <sys/stat.h>
@@ -13,7 +11,6 @@
 #include "object.h"
 #include "readmap.h"
 #include "buf.h"
-#include "util.h"
 #include "char.h"
 #include "lssproto_serv.h"
 #include "configfile.h"
@@ -57,7 +54,7 @@ typedef enum {
   MAP_INTFUNC = 2,
   MAP_CHARFUNC = 3,
 } MAP_DATATYPECATEGORY;
-static struct MAP_itemconfentry {
+static struct {
   int type;
   int index;
   void *func;
@@ -157,8 +154,7 @@ int MAP_readMapConfFile(char *filename) {
     MAP_makeDefaultImageData(one);
     offset = 4;
     for(i = 0; i < MAP_DATAINT_NUM + MAP_DATACHAR_NUM; i++) {
-      int ret;
-      ret = getStringFromIndexWithDelim(line, " ", i + offset, token, sizeof(token));
+      int ret = getStringFromIndexWithDelim(line, " ", i + offset, token, sizeof(token));
       if(ret == FALSE)continue;
       switch(MAP_confentries[i].type) {
         case MAP_INTENTRY:
@@ -197,8 +193,6 @@ int MAP_readMapConfFile(char *filename) {
   fclose(file);
   return TRUE;
 }
-
-#if 1
 
 int MAP_readBattleMapConfFile(char *filename) {
   FILE *file;
@@ -275,7 +269,6 @@ int MAP_readBattleMapConfFile(char *filename) {
               BattleMapNo[0]);
       }
 
-      //   飓  寞恳仄中井＂
       if(IsValidImagenumber(i) == FALSE) {
         continue;
       }
@@ -297,8 +290,6 @@ int MAP_readBattleMapConfFile(char *filename) {
   return TRUE;
 }
 
-#endif
-
 int IsValidImagenumber(int imagenumber) {
   if(imagenumber < 0 || imagenumber >= arraysizeof(MAP_imgfilt))
     return FALSE;
@@ -312,7 +303,8 @@ int MAP_getImageInt(int imagenumber, int element) {
   if(imagenumber < 0 || imagenumber >= arraysizeof(MAP_imgfilt))
     return FALSE;
 
-  if(MAP_imgfilt[imagenumber] == -1)return FALSE;
+  if(MAP_imgfilt[imagenumber] == -1)
+    return FALSE;
   return MAP_imagedata[MAP_imgfilt[imagenumber]].data[element];
 }
 
@@ -320,7 +312,8 @@ int MAP_setImageInt(int imagenumber, int element, int value) {
   if(imagenumber < 0 || imagenumber >= arraysizeof(MAP_imgfilt))
     return FALSE;
 
-  if(MAP_imgfilt[imagenumber] == -1)return FALSE;
+  if(MAP_imgfilt[imagenumber] == -1)
+    return FALSE;
   MAP_imagedata[MAP_imgfilt[imagenumber]].data[element] = value;
 
   return TRUE;
@@ -346,8 +339,7 @@ int MAP_initMapArray(int num) {
 }
 
 void MAP_endMapArray(void) {
-  int i;
-  for(i = 0; i < MAP_mapnum; i++) {
+  for(int i = 0; i < MAP_mapnum; i++) {
     if(MAP_map[i].tile != NULL)
       freeMemory(MAP_map[i].tile);
 
@@ -364,14 +356,13 @@ void MAP_endMapArray(void) {
 static int MAP_IsMapFile(char *filename) {
   FILE *f;
   char buf[16];
-  int ret;
 
   f = fopen(filename, "r");
   if(f == NULL) {
     return FALSE;
   }
 
-  ret = fread(buf, sizeof(char), 6, f);
+  size_t ret = fread(buf, sizeof(char), 6, f);
   if(ret != 6)
     goto FCLOSERETURNFALSE;
   buf[ret] = '\0';
@@ -800,8 +791,6 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
 }
 
 char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum, int *objsum, int *eventsum) {
-  int floorindex;
-  int i, j;
   int floorx;
   int databufferindex = 0;
   RECT scr;
@@ -810,16 +799,13 @@ char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum,
   unsigned short tilebuf[MAP_CHAR_DEFAULTSEESIZ * MAP_CHAR_DEFAULTSEESIZ];
   unsigned short objbuf[MAP_CHAR_DEFAULTSEESIZ * MAP_CHAR_DEFAULTSEESIZ];
 
-  floorindex = MAP_getfloorIndex(floor);
-  if(floorindex == -1) return NULL;
-  if(seekr->width < 0 || seekr->height < 0 ||
-     MAP_GETMAXSIZE < seekr->width || MAP_GETMAXSIZE < seekr->height)
+  int floorindex = MAP_getfloorIndex(floor);
+  if(floorindex == -1)
+    return NULL;
+  if(seekr->width < 0 || seekr->height < 0 || MAP_GETMAXSIZE < seekr->width || MAP_GETMAXSIZE < seekr->height)
     return NULL;
 
-  strcpysafe(MAP_dataString, sizeof(MAP_dataString),
-             makeEscapeString(MAP_map[floorindex].string,
-                              escapebuffer, sizeof(escapebuffer)));
-
+  strcpysafe(MAP_dataString, sizeof(MAP_dataString), makeEscapeString(MAP_map[floorindex].string, escapebuffer, sizeof(escapebuffer)));
   floorx = MAP_map[floorindex].xsiz;
   scr.x = 0;
   scr.y = 0;
@@ -837,8 +823,8 @@ char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum,
   memset(tilebuf, 0, sizeof(tilebuf));
   memset(objbuf, 0, sizeof(objbuf));
   memset(eventbuf, 0, sizeof(eventbuf));
-  for(i = realr->y; i < realr->y + realr->height; i++) {
-    for(j = realr->x; j < realr->x + realr->width; j++) {
+  for(int i = realr->y; i < realr->y + realr->height; i++) {
+    for(int j = realr->x; j < realr->x + realr->width; j++) {
       OBJECT object;
       //int found = FALSE;
       for(object = MAP_getTopObj(floor, j, i); object;
@@ -898,13 +884,12 @@ int MAP_getTileAndObjData(int ff, int fx, int fy, int *tile, int *obj) {
 }
 
 int MAP_setTileAndObjData(int ff, int fx, int fy, int tile, int obj) {
-  int floorindex, xsiz;
-  floorindex = MAP_getfloorIndex(ff);
+  int floorindex = MAP_getfloorIndex(ff);
   if(floorindex == -1) {
     print("%s:%d:err\n", __FILE__, __LINE__);
     return FALSE;
   }
-  xsiz = MAP_map[floorindex].xsiz;
+  int xsiz = MAP_map[floorindex].xsiz;
   if(fx < 0 || fx >= xsiz) {
     return FALSE;
   }
@@ -928,138 +913,21 @@ int MAP_initReadMap(char *maptilefile, char *mapdir) {
   return TRUE;
 }
 
-static int MAP_coKindAndInt[MAP_KINDNUM] =
-    {
-        MAP_WALKABLE,
-    };
-
-int MAP_makeVariousMap(char *atile, char *aobj, int floor, int startx,
-                       int starty, int xsiz, int ysiz, MAP_kind kind) {
-  int i, j;
-  int findex;
-  int fxsiz;
-  int startpoint;
-
-  if(atile == NULL || aobj == NULL || kind < 0 || kind >= MAP_KINDNUM) {
-    print("%s:%d:err\n", __FILE__, __LINE__);
-    return FALSE;
-  }
-  findex = MAP_getfloorIndex(floor);
-  if(findex == -1) {
-    print("%s:%d:err\n", __FILE__, __LINE__);
-    return FALSE;
-  }
-  fxsiz = MAP_map[findex].xsiz;
-  startpoint = startx + starty * fxsiz;
-
-  for(i = 0; i < ysiz; i++) {
-    for(j = 0; j < xsiz; j++) {
-      atile[i * xsiz + j] = MAP_getImageInt(MAP_map[findex].tile[
-                                                startpoint + i * xsiz + j], MAP_coKindAndInt[kind])
-                            ? 1 : 0;
-
-      aobj[i * xsiz + j] = MAP_getImageInt(MAP_map[findex].obj[
-                                               startpoint + i * xsiz + j], MAP_coKindAndInt[kind])
-                           ? 1 : 0;
-    }
-  }
-  return TRUE;
-}
-
-int MAP_makeWalkableMap(char *data, int floor, int startx, int starty,
-                        int xsiz, int ysiz) {
-  int i, j;
-  char *obj;
-  obj = allocateMemory(xsiz * ysiz * sizeof(char));
-  if(obj == NULL)return FALSE;
-
-  if(MAP_makeVariousMap(data, obj, floor, startx, starty, xsiz, ysiz,
-                        MAP_KINDWALKABLE) == FALSE) {
-    freeMemory(obj);
-    return FALSE;
-  }
-
-  for(i = 0; i < ysiz; i++)
-    for(j = 0; j < xsiz; j++)
-      data[j + i * ysiz] = data[j + i * ysiz] & obj[j + i * ysiz];
-
-  return TRUE;
-}
-
 int MAP_IsThereSpecificFloorid(int floorid) {
-  if(MAP_getfloorIndex(floorid) == -1) return FALSE;
-  else return TRUE;
+  if(MAP_getfloorIndex(floorid) == -1)
+    return FALSE;
+  else
+    return TRUE;
 }
 
 int MAP_IsValidCoordinate(int floor, int x, int y) {
-  if(MAP_IsThereSpecificFloorid(floor) == FALSE)return FALSE;
-  if(x < 0 || MAP_getfloorX(floor) <= x)return FALSE;
-  if(y < 0 || MAP_getfloorY(floor) <= y)return FALSE;
+  if(MAP_IsThereSpecificFloorid(floor) == FALSE)
+    return FALSE;
+  if(x < 0 || MAP_getfloorX(floor) <= x)
+    return FALSE;
+  if(y < 0 || MAP_getfloorY(floor) <= y)
+    return FALSE;
   return TRUE;
-}
-
-int MAP_attackSpecificPoint(int floor, int x, int y, int damage,
-                            int charaindex) {
-#if 0
-  int     mapindex;
-  int     xsiz;
-  int     objimagenumber;
-
-  mapindex = MAP_getfloorIndex(floor);
-  if( mapindex == -1 ) {
-    print( "%s:%d:err\n", __FILE__, __LINE__);
-    return 5;
-}
-  xsiz = MAP_map[mapindex].xsiz;
-  if( 0 > x || x >= xsiz || 0 >y || y >= MAP_map[mapindex].ysiz ) {
-    print( "%s:%d:err\n", __FILE__, __LINE__);
-      return 5;
-}
-  if( damage <= 0 )return 5;
-
-  objimagenumber = MAP_map[mapindex].obj[x+y*xsiz];
-
-  if( MAP_getImageInt( objimagenumber,MAP_DEFENCE ) > 0 ){
-      MAP_map[mapindex].objhp[x+y*xsiz] -= damage;
-      if( MAP_map[mapindex].objhp[x+y*xsiz] < 0 ){
-          MAP_map[mapindex].obj[x+y*xsiz] = 0;
-#if 1
-          {
-              char *stringdata;
-              RECT seekr , retr;
-              seekr.x = x;
-              seekr.y = y;
-              seekr.width = 1;
-              seekr.height = 1;
-              stringdata = MAP_getdataFromRECT(floor,&seekr,&retr);
-              if( stringdata ){
-                  print("RINGO: RETR: %d %d %d %d\n",
-                        retr.x,retr.y,retr.width,retr.height);
-                  if( CHAR_getInt( charaindex , CHAR_WHICHTYPE )
-                      == CHAR_TYPEPLAYER ){
-                      int fd = getfdFromCharaIndex( charaindex );
-                      lssproto_M_send(fd,floor, retr.x, retr.y,
-                                      retr.x + retr.width, retr.y + retr.height,
-                                      stringdata );
-                  }
-              } else {
-                  print("RINGO: bad stringdata. %d %d %d %d\n",
-                        seekr.x,seekr.y,seekr.width,seekr.height);
-
-              }
-
-          }
-#endif
-          return 1;
-      }
-      return 2;
-  }
-
-  if( MAP_getImageInt(MAP_map[mapindex].obj[y*xsiz+x],MAP_HAVEHEIGHT )
-      == 0 )
-      return 4;
-#endif
-  return 3;
 }
 
 int MAP_appendTailObj(int floor, int x, int y, int objindex) {
@@ -1135,32 +1003,23 @@ int MAP_removeObj(int floor, int x, int y, int objindex) {
   return FALSE;
 }
 
-int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy, int nfloor,
-                 int nx, int ny) {
-#if 1
-
-  int oldmapindex;
-  int oldxsiz;
-
-  int dataindex;
+int MAP_objmove(int objindex, int ofloor, int ox, int oy, int nfloor, int nx, int ny) {
   MAP_Objlink *c;
   MAP_Objlink *last = NULL;
   MAP_Objlink *pointer = NULL;
 
-  oldmapindex = MAP_getfloorIndex(ofloor);
+  int oldmapindex = MAP_getfloorIndex(ofloor);
   if(oldmapindex == -1) {
-    print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
-          ofloor, ox, oy);
+    print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, ofloor, ox, oy);
     return FALSE;
   }
-  oldxsiz = MAP_map[oldmapindex].xsiz;
+  int oldxsiz = MAP_map[oldmapindex].xsiz;
   if(0 > ox || ox >= oldxsiz
      || 0 > oy || oy >= MAP_map[oldmapindex].ysiz) {
-    print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
-          ofloor, ox, oy);
+    print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, ofloor, ox, oy);
     return FALSE;
   }
-  dataindex = oy * oldxsiz + ox;
+  int dataindex = oy * oldxsiz + ox;
   c = MAP_map[oldmapindex].olink[dataindex];
   while(c) {
     if(c->objindex == objindex) {
@@ -1177,8 +1036,7 @@ int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy,
     c = c->next;
   }
   if(!pointer) {
-    print("\n%s:%d:错误( %d,%d,%d )->(%d,%d,%d)\n", __FILE__, __LINE__,
-          ofloor, ox, oy, nfloor, nx, ny);
+    print("\n%s:%d:错误( %d,%d,%d )->(%d,%d,%d)\n", __FILE__, __LINE__, ofloor, ox, oy, nfloor, nx, ny);
     return FALSE;
   }
   {
@@ -1192,16 +1050,13 @@ int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy,
     } else {
       newmapindex = MAP_getfloorIndex(nfloor);
       if(newmapindex == -1) {
-        print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
-              nfloor, nx, ny);
+        print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, nfloor, nx, ny);
         return FALSE;
       }
       newxsiz = MAP_map[newmapindex].xsiz;
     }
-    if(0 > nx || nx >= newxsiz
-       || 0 > ny || ny >= MAP_map[newmapindex].ysiz) {
-      print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__,
-            nfloor, nx, ny);
+    if(0 > nx || nx >= newxsiz || 0 > ny || ny >= MAP_map[newmapindex].ysiz) {
+      print("%s:%d:错误 地图号[%d] x:[%d] y:[%d]\n", __FILE__, __LINE__, nfloor, nx, ny);
       return FALSE;
     }
 
@@ -1218,11 +1073,6 @@ int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy,
     c->next->next = NULL;
     return TRUE;
   }
-#else
-  if( MAP_removeObj( ofloor,ox,oy,objindex)
-      && MAP_appendTailObj( nfloor, nx ,ny, objindex ) )
-      return TRUE;
-#endif
   print("%s:%d:错误\n", __FILE__, __LINE__);
   return FALSE;
 }
@@ -1242,18 +1092,16 @@ MAP_Objlink *MAP_getTopObj(int floor, int x, int y) {
 }
 
 int MAP_addNewObj(int floor, int x, int y, int objindex) {
-  OBJECT map;
-  int ret;
-
-  for(map = MAP_getTopObj(floor, x, y); map; map = NEXT_OBJECT(map)) {
+  for(OBJECT map = MAP_getTopObj(floor, x, y); map; map = NEXT_OBJECT(map)) {
     if(GET_OBJINDEX(map) == objindex) {
       print("%s:%d:err\n", __FILE__, __LINE__);
       return 0;
     }
   }
-  ret = MAP_appendTailObj(floor, x, y, objindex);
-  if(ret)return 1;
-  else return -1;
+  if(MAP_appendTailObj(floor, x, y, objindex))
+    return 1;
+  else
+    return -1;
 }
 
 char *MAP_getFloorName(int floor) {
@@ -1282,44 +1130,19 @@ int MAP_getFloorXY(int floor, int *x, int *y) {
 
 #endif
 
-int MAP_setObjData(int ff, int fx, int fy, int obj, int objhp) {
-  int floorindex, xsiz;
-
-  floorindex = MAP_getfloorIndex(ff);
-  if(floorindex == -1) {
-    print("%s:%d:err\n", __FILE__, __LINE__);
-    return FALSE;
-  }
-  xsiz = MAP_map[floorindex].xsiz;
-  if(fx < 0 || fx >= xsiz) {
-    return FALSE;
-  }
-  if(fy < 0 || fy >= MAP_map[floorindex].ysiz) {
-    return FALSE;
-  }
-  MAP_map[floorindex].obj[fy * xsiz + fx] = obj;
-  return TRUE;
-}
-
 void MAP_sendAroundMapdata(int fl, int fromx, int fromy) {
-  char *mapdata;
   RECT seek, ret;
-  int i, j;
   seek.x = fromx;
   seek.y = fromy;
   seek.width = seek.height = 1;
-  mapdata = MAP_getdataFromRECT(fl, &seek, &ret);
+  char* mapdata = MAP_getdataFromRECT(fl, &seek, &ret);
   if(mapdata != NULL) {
     int x = fromx;
     int y = fromy;
-
-    for(i = x - MAP_CHAR_DEFAULTSEESIZ / 2; i <= x + MAP_CHAR_DEFAULTSEESIZ / 2; i++) {
-      for(j = y - MAP_CHAR_DEFAULTSEESIZ / 2; j <= y + MAP_CHAR_DEFAULTSEESIZ / 2;
-          j++) {
+    for(int i = x - MAP_CHAR_DEFAULTSEESIZ / 2; i <= x + MAP_CHAR_DEFAULTSEESIZ / 2; i++) {
+      for(int j = y - MAP_CHAR_DEFAULTSEESIZ / 2; j <= y + MAP_CHAR_DEFAULTSEESIZ / 2; j++) {
         OBJECT object;
-        for(object = MAP_getTopObj(fl, i, j);
-            object;
-            object = NEXT_OBJECT(object)) {
+        for(object = MAP_getTopObj(fl, i, j); object; object = NEXT_OBJECT(object)) {
           int objindex = GET_OBJINDEX(object);
           if(OBJECT_getType(objindex) == OBJTYPE_NOUSE) continue;
           if(OBJECT_getType(objindex) == OBJTYPE_CHARA) {
@@ -1327,9 +1150,7 @@ void MAP_sendAroundMapdata(int fl, int fromx, int fromy) {
             if(CHAR_getInt(index, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
               int fd = getfdFromCharaIndex(index);
               if(fd != -1) {
-                lssproto_M_send(fd, fl, ret.x, ret.y,
-                                ret.x + ret.width, ret.y + ret.height,
-                                mapdata);
+                lssproto_M_send(fd, fl, ret.x, ret.y, ret.x + ret.width, ret.y + ret.height, mapdata);
               }
             }
           }
