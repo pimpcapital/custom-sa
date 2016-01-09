@@ -2718,7 +2718,6 @@ void CHAR_sendArroundCharaData(int charaindex) {
 }
 
 int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
-  int per;
   int objindex = CHAR_getWorkInt(charaindex, CHAR_WORKOBJINDEX);
   if(!MAP_IsValidCoordinate(floor, x, y)) {
     return FALSE;
@@ -2736,7 +2735,7 @@ int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
       fprint("ERROR MAP_OBJMOVE objindex=%d\n", objindex);
     }
   }
-  per = ENCOUNT_getEncountPercentMin(charaindex, floor, x, y);
+  int per = ENCOUNT_getEncountPercentMin(charaindex, floor, x, y);
   if(per != -1) {
     CHAR_setWorkInt(charaindex, CHAR_WORKENCOUNTPROBABILITY_MIN, per);
   }
@@ -2748,14 +2747,12 @@ int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
   if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
     CAflush(charaindex);
     {
-      int i;
       char *statuscat[] = {"C", "E",};
-      for(i = 0; i < arraysizeof(statuscat); i++)
+      for(int i = 0; i < arraysizeof(statuscat); i++)
         CHAR_sendStatusString(charaindex, statuscat[i]);
 
       if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) {
         CHAR_sendStatusString(charaindex, "P");
-
       }
     }
     if(CHAR_getWorkInt(charaindex, CHAR_WORKBATTLEMODE) == BATTLE_CHARMODE_NONE) {
@@ -2763,18 +2760,11 @@ int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
     }
   }
 
-  if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) != CHAR_TYPEPET ||
-     (CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPET &&
-      CHAR_getInt(charaindex, CHAR_MAILMODE) == CHAR_PETMAIL_NONE)) {
+  if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) != CHAR_TYPEPET || (CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPET && CHAR_getInt(charaindex, CHAR_MAILMODE) == CHAR_PETMAIL_NONE)) {
     CHAR_sendCToArroundCharacter(objindex);
   }
   else {
-    CHAR_sendPMEToArroundCharacterFLXY(charaindex,
-                                       CHAR_getInt(charaindex, CHAR_FLOOR),
-                                       CHAR_getInt(charaindex, CHAR_X),
-                                       CHAR_getInt(charaindex, CHAR_Y),
-                                       0, 1, CHAR_getInt(charaindex, CHAR_PETMAILEFFECT)
-    );
+    CHAR_sendPMEToArroundCharacterFLXY(charaindex, CHAR_getInt(charaindex, CHAR_FLOOR), CHAR_getInt(charaindex, CHAR_X), CHAR_getInt(charaindex, CHAR_Y), 0, 1, CHAR_getInt(charaindex, CHAR_PETMAILEFFECT));
   }
 
   if(CHAR_getInt(charaindex, CHAR_WHICHTYPE) == CHAR_TYPEPLAYER) {
@@ -2790,7 +2780,6 @@ int CHAR_warpToSpecificPoint(int charaindex, int floor, int x, int y) {
     {
       int petindex = CHAR_getWorkInt(charaindex, CHAR_WORKPETFOLLOW);
       if((petindex > -1) && (CHAR_CHECKINDEX(petindex)))
-
         CHAR_warpToSpecificPoint(petindex, floor, x, y);
     }
 #ifdef _MAP_TIME

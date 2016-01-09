@@ -237,7 +237,6 @@ int MAPPOINT_loadMapWarpPoint() {
       break;
     }
   }
-  //andy_log
   print("初始化 %d 地图传送点...", MapWarpPoints);
   fclose(fp);
   print("完成\n");
@@ -247,15 +246,12 @@ int MAPPOINT_loadMapWarpPoint() {
 void MAPPOINT_MapWarpHandle(int charaindex, int ps, int ofl, int ox, int oy) {
   int floor, x, y;
   if(MAPPOINT_getMapWarpGoal(ps, ofl, ox, oy, &floor, &x, &y) == -1) {
-    //andy_log
     print("获取传送点( %d, %d,%d,%d)错误!!\n", ps, ofl, ox, oy);
     return;
   }
-  if(floor == 777) return;
   CHAR_warpToSpecificPoint(charaindex, floor, x, y);
   if(CHAR_getWorkInt(charaindex, CHAR_WORKPARTYMODE) == CHAR_PARTY_LEADER) {
-    int i;
-    for(i = 1; i < CHAR_PARTYMAX; i++) {
+    for(int i = 1; i < CHAR_PARTYMAX; i++) {
       int index = CHAR_getWorkInt(charaindex, i + CHAR_WORKPARTYINDEX1);
       if(CHAR_CHECKINDEX(index)) {
         CHAR_warpToSpecificPoint(index, floor, x, y);

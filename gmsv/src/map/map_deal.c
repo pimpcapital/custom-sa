@@ -44,7 +44,7 @@ int MAP_walkAble(int index, int ff, int fx, int fy) {
   // Arminius 7.9 Airplane ok
   if(CHAR_getInt(index, CHAR_WHICHTYPE) == CHAR_TYPEBUS)
     return TRUE;
-  
+
   if(CHAR_getWorkInt(index, CHAR_WORKPARTYMODE) == CHAR_PARTY_CLIENT) {
     int oyaindex = CHAR_getWorkInt(index, CHAR_WORKPARTYINDEX1);
     if(CHAR_CHECKINDEX(oyaindex)) {
@@ -57,7 +57,6 @@ int MAP_walkAble(int index, int ff, int fx, int fy) {
 }
 
 int MAP_sendArroundCharNeedFD(int fd, int charaindex) {
-  char *stringdata;
   int x = CHAR_getInt(charaindex, CHAR_X);
   int y = CHAR_getInt(charaindex, CHAR_Y);
   int fl = CHAR_getInt(charaindex, CHAR_FLOOR);
@@ -67,31 +66,12 @@ int MAP_sendArroundCharNeedFD(int fd, int charaindex) {
   seekr.y = y - (size / 2);
   seekr.width = size;
   seekr.height = size;
-#if 1
-  {
-    int tilesum, objsum, eventsum;
-    stringdata = MAP_getChecksumFromRECT(fl, &seekr, &retr, &tilesum, &objsum, &eventsum);
-    if(stringdata == NULL)
-      return FALSE;
 
-    lssproto_MC_send(fd, fl,
-                     retr.x, retr.y,
-                     retr.x + retr.width, retr.y + retr.height,
-                     tilesum,
-                     objsum,
-                     eventsum,
-                     stringdata);
-  }
-#else
-  stringdata = MAP_getdataFromRECT(fl,&seekr,&retr);
-  if( stringdata == NULL )
-      return FALSE;
-
-  lssproto_M_send(fd,fl,
-                  retr.x,              retr.y,
-                  retr.x + retr.width, retr.y + retr.height,
-                  stringdata );
-#endif
+  int tilesum, objsum, eventsum;
+  char* stringdata = MAP_getChecksumFromRECT(fl, &seekr, &retr, &tilesum, &objsum, &eventsum);
+  if(stringdata == NULL)
+    return FALSE;
+  lssproto_MC_send(fd, fl, retr.x, retr.y, retr.x + retr.width, retr.y + retr.height, tilesum, objsum, eventsum, stringdata);
   return TRUE;
 }
 
@@ -99,6 +79,5 @@ int MAP_sendArroundChar(int charaindex) {
   int fd = getfdFromCharaIndex(charaindex);
   if(fd == -1)
     return FALSE;
-
   return MAP_sendArroundCharNeedFD(fd, charaindex);
 }

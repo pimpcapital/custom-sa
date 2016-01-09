@@ -1130,9 +1130,7 @@ int _CHAR_setFlg(char *file, int line, int index, CHAR_DATACHAR element, int new
   elementnum = element / (sizeof(char) * 8);
   bitnum = element % (sizeof(char) * 8);
 
-  /*  樯及袄毛转      */
-  buf = CHAR_chara[index].flg[elementnum]
-        & CHAR_flgbitmaskpattern[bitnum];
+  buf = CHAR_chara[index].flg[elementnum] & CHAR_flgbitmaskpattern[bitnum];
 
   if(newdata != 0) {
     bitpattern = CHAR_flgbitmaskpattern[bitnum];
@@ -1143,8 +1141,10 @@ int _CHAR_setFlg(char *file, int line, int index, CHAR_DATACHAR element, int new
     CHAR_chara[index].flg[elementnum] &= bitpattern;
   }
 
-  if(buf)return TRUE;
-  else return FALSE;
+  if(buf)
+    return TRUE;
+  else
+    return FALSE;
 }
 
 int _CHAR_getItemIndex(char *file, int line, int charaindex, int ti) {
