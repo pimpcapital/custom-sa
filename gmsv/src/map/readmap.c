@@ -1247,31 +1247,18 @@ int _MAP_objmove(char *file, int line, int objindex, int ofloor, int ox, int oy,
   return FALSE;
 }
 
-MAP_Objlink *_MAP_getTopObj(char *file, int line, int floor, int x, int y) {
-  int mapindex;
-  int xsiz;
-
-  mapindex = MAP_getfloorIndex(floor);
-  if(mapindex == -1) {
-    //print( "callfrom[%s:%d] %s:%d:err floor(%d,%d,%d)\n", file, line, __FILE__, __LINE__,
-    //	floor, x, y );
+MAP_Objlink *MAP_getTopObj(int floor, int x, int y) {
+  int mapindex = MAP_getfloorIndex(floor);
+  if(mapindex == -1)
     return NULL;
-  }
 
-  xsiz = MAP_map[mapindex].xsiz;
+  int xsiz = MAP_map[mapindex].xsiz;
 
-#if 1
-  if(x >= xsiz) return NULL;
-  if(y >= MAP_map[mapindex].ysiz) return NULL;
-  if(x < 0) return NULL;
-  if(y < 0) return NULL;
+  if(x >= xsiz || x < 0)
+    return NULL;
+  if(y >= MAP_map[mapindex].ysiz || y < 0)
+    return NULL;
   return MAP_map[mapindex].olink[y * xsiz + x];
-#else
-  if( 0 <= x && x < xsiz && 0 <= y && y < MAP_map[mapindex].ysiz )
-      return MAP_map[mapindex].olink[y*xsiz+x];
-  else
-      return NULL;
-#endif
 }
 
 int MAP_addNewObj(int floor, int x, int y, int objindex) {

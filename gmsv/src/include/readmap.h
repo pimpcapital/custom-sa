@@ -118,9 +118,7 @@ int MAP_addNewObj(int floor, int x, int y, int objindex);
 
 int MAP_removeObj(int floor, int x, int y, int objindex);
 
-#define    MAP_getTopObj(fl, x, y)  _MAP_getTopObj( __FILE__, __LINE__, fl, x, y)
-
-MAP_Objlink *_MAP_getTopObj(char *file, int line, int floor, int x, int y);
+MAP_Objlink *MAP_getTopObj(int floor, int x, int y);
 
 #define    MAP_objmove(objindex, of, ox, oy, nfl, nx, ny) _MAP_objmove( __FILE__, __LINE__, objindex, of, ox, oy, nfl, nx, ny)
 

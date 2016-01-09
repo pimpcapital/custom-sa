@@ -594,10 +594,10 @@ void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
         for(object = MAP_getTopObj(ifloor, j, i); object; object = NEXT_OBJECT(object)) {
           int o = GET_OBJINDEX(object);
           if(OBJECT_getType(o) == OBJTYPE_CHARA) {
-            int etype;
             int charaindex = OBJECT_getIndex(o);
-            if(!CHAR_CHECKINDEX(charaindex)) continue;
-            etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
+            if(!CHAR_CHECKINDEX(charaindex))
+              continue;
+            int etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
             if(etype != CHAR_EVENT_NONE) {
               if(etype == CHAR_EVENT_WARP) {
                 warp_point_x[warp_point] = j;
