@@ -466,9 +466,7 @@ static EscapeChar escapeChar[] =
 
 char makeCharFromEscaped(char c)//add this function,because the second had it
 {
-  int i;
-
-  for(i = 0; i < sizeof(escapeChar) / sizeof(escapeChar[0]); i++) {
+  for(int i = 0; i < sizeof(escapeChar) / sizeof(escapeChar[0]); i++) {
     if(escapeChar[i].escapedchar == c) {
       c = escapeChar[i].escapechar;
       break;
@@ -551,7 +549,6 @@ char *makeEscapeString(char *src, char *dest, int sizeofdest) { //ttom this func
 
 //this function copy all from the second
 char *ScanOneByte(char *src, char delim) {
-  // Nuke
   if(!src) return NULL;
 
   for(; src[0] != '\0'; src++) {
@@ -592,8 +589,7 @@ int getStringFromIndexWithDelim(char *src, char *delim, int index, char *buf, si
   return TRUE;
 }
 
-void getFourIntsFromString(char *src, int *int1, int *int2, int *int3,
-                           int *int4) {
+void getFourIntsFromString(char *src, int *int1, int *int2, int *int3, int *int4) {
   int ret;
   char string[128];
 
@@ -652,9 +648,8 @@ void deleteSequentChar(char *src, char *dels) {
 #define PRIME 211
 
 int hashpjw(char *s) {
-  char *p;
   unsigned int h = 0, g;
-  for(p = s; *p; p++) {
+  for(char* p = s; *p; p++) {
     h = (h << 4) + (*p);
     if((g = h & 0xf0000000) != 0) {
       h = h ^ (g >> 24);
@@ -666,10 +661,7 @@ int hashpjw(char *s) {
 
 int bindlocalhost(int port) {
   struct sockaddr_in sin;
-  int sfd;
-  int rc;
-
-  sfd = socket(AF_INET, SOCK_STREAM, 0);
+  int sfd = socket(AF_INET, SOCK_STREAM, 0);
   if(sfd == -1) {
     print("%s\n", strerror(errno));
     return -1;
@@ -684,7 +676,7 @@ int bindlocalhost(int port) {
   sin.sin_port = htons(port);
   sin.sin_addr.s_addr = INADDR_ANY;
 
-  rc = bind(sfd, (struct sockaddr *) &sin, sizeof(struct sockaddr_in));
+  int rc = bind(sfd, (struct sockaddr *) &sin, sizeof(struct sockaddr_in));
   if(rc == -1) {
     print("%s\n", strerror(errno));
     return -1;
@@ -701,8 +693,6 @@ int bindlocalhost(int port) {
 int connectHost(char *hostname, unsigned short port) {
   struct sockaddr_in sock;
   struct hostent *hoste;
-  int fd;
-  int lr;
 
   memset(&sock, 0, sizeof(struct sockaddr_in));
   sock.sin_family = AF_INET;
@@ -716,16 +706,15 @@ int connectHost(char *hostname, unsigned short port) {
       return -1;
     }
 
-    memcpy((void *) &sock.sin_addr.s_addr,
-           hoste->h_addr, sizeof(struct in_addr));
+    memcpy((void *) &sock.sin_addr.s_addr, hoste->h_addr, sizeof(struct in_addr));
   }
 
-  fd = socket(AF_INET, SOCK_STREAM, 0);
+  int fd = socket(AF_INET, SOCK_STREAM, 0);
   if(fd == -1) {
     print("Cannot Create Socket(%s errno:%d)\n", strerror(errno), errno);
     return -1;
   }
-  lr = connect(fd, (struct sockaddr *) &sock, sizeof(struct sockaddr_in));
+  int lr = connect(fd, (struct sockaddr *) &sock, sizeof(struct sockaddr_in));
   if(lr != 0) {
     print("Cannot connect. (%s errno:%d)\n", strerror(errno), errno);
     return -1;
@@ -930,12 +919,11 @@ char *cnv10to62(int a, char *out, int outlen) {
 }
 
 int checkRedundancy(int *src, int srclen) {
-  int i, j;
   int ret = FALSE;
 
-  for(i = 0; i < srclen; i++) {
+  for(int i = 0; i < srclen; i++) {
     if(*(src + i) != -1) {
-      for(j = i + 1; j < srclen; j++) {
+      for(int j = i + 1; j < srclen; j++) {
         if(*(src + i) == *(src + j)) {
           ret = TRUE;
           break;
@@ -1019,18 +1007,12 @@ static unsigned short crctab16[] =
 
 unsigned short CheckCRC(unsigned char *p, int size) {
   unsigned short crc = 0;
-  int i;
-
-  for(i = 0; i < size; i++) {
-    crc = (crctab16[(crc >> 8) & 0xFF]
-           ^ (crc << 8) ^ BitTable[p[i]]);
+  for(int i = 0; i < size; i++) {
+    crc = (crctab16[(crc >> 8) & 0xFF] ^ (crc << 8) ^ BitTable[p[i]]);
   }
   return crc;
 }
 
-double time_diff(struct timeval subtrahend,
-                 struct timeval subtractor) {
-  return ((subtrahend.tv_sec - subtractor.tv_sec)
-          + (subtrahend.tv_usec
-             - subtractor.tv_usec) / (double) 1E6);
+double time_diff(struct timeval subtrahend, struct timeval subtractor) {
+  return ((subtrahend.tv_sec - subtractor.tv_sec) + (subtrahend.tv_usec - subtractor.tv_usec) / (double) 1E6);
 }

@@ -15,8 +15,6 @@
 #include "pet.h"
 #include "enemy.h"
 #ifdef _PERSONAL_FAME	// Arminius: 家族个人声望
-#include "char_base.h"
-#include "configfile.h"
 #endif
 
 
@@ -299,14 +297,6 @@ int CHAR_eqimagetbl[][5]={
 
 };
 
-/*------------------------------------------------------------
- * 隶    午  飓  寞井日蕙仄中  飓  寞毛  月［
- * 娄醒
- *  basebaseimagenumber     int             葭卞卅月  飓  寞
- *  category                ITEM_CATEGORY   失奶  丞及市  打伉
- * 忒曰袄
- *  蕙仄中  飓  寞［巨仿□及凛反｝-1
- ------------------------------------------------------------*/
 int CHAR_getNewImagenumberFromEquip( int basebaseimagenumber,
                                      ITEM_CATEGORY category )
 {
@@ -321,14 +311,6 @@ int CHAR_getNewImagenumberFromEquip( int basebaseimagenumber,
     return -1;
 }
 
-/*------------------------------------------------------------
- *   侬  井日  飓  寞毛  月［
- * 娄醒
- *  string      char*         侬  
- * 忒曰袄
- *  巨仿□ -1
- *  公木动陆分午弘仿白奴永弁  寞
- ------------------------------------------------------------*/
 int CHAR_seekGraphicNumberFromString( char* string )
 {
     int     hashvalue;
@@ -340,11 +322,6 @@ int CHAR_seekGraphicNumberFromString( char* string )
     return -1;
 }
 
-
-
-
-/*====================  衬桦赭====================*/
-/*  衬桦赭毛忡  允月    */
 typedef struct tagCHAR_invinsibleArea
 {
     CHAR_AREAKIND   kind;
@@ -355,14 +332,6 @@ typedef struct tagCHAR_invinsibleArea
 CHAR_invincibleArea*    CHAR_invarea;
 int                     CHAR_invareanum;
 
-/*------------------------------------------------------------
- *   衬桦赭及赓渝祭毛允月［
- * 娄醒
- *  filename        char*       涩烂白央奶伙  
- * 忒曰袄
- *  岳      TRUE(1)
- *  撩      FALSE(0)
- *------------------------------------------------------------*/
 int CHAR_initInvinciblePlace( char* filename )
 {
     FILE*   f;

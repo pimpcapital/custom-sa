@@ -825,16 +825,13 @@ char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum,
   memset(eventbuf, 0, sizeof(eventbuf));
   for(int i = realr->y; i < realr->y + realr->height; i++) {
     for(int j = realr->x; j < realr->x + realr->width; j++) {
-      OBJECT object;
-      //int found = FALSE;
-      for(object = MAP_getTopObj(floor, j, i); object;
-          object = NEXT_OBJECT(object)) {
+      for(OBJECT object = MAP_getTopObj(floor, j, i); object; object = NEXT_OBJECT(object)) {
         int o = GET_OBJINDEX(object);
         if(OBJECT_getType(o) == OBJTYPE_CHARA) {
-          int etype;
           int charaindex = OBJECT_getIndex(o);
-          if(!CHAR_CHECKINDEX(charaindex))continue;
-          etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
+          if(!CHAR_CHECKINDEX(charaindex))
+            continue;
+          int etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
           if(etype != CHAR_EVENT_NONE) {
             eventbuf[databufferindex] = (unsigned short) etype;
             break;
