@@ -10,8 +10,6 @@
 #include "handletime.h"
 #include "npc_eventaction.h"
 
-//#define _RECORD_NPCMAN_ //纪录
-
 int NPC_TimeWarpCheck(int meindex, char *buf, int mode);
 
 static void NPC_WarpsetNeverMake(int charaindex) {
@@ -27,15 +25,6 @@ int NPC_WarpInit(int charaindex) {
   int floor = -1, x = -1, y = -1;
   char token[128];
 
-#ifdef _RECORD_NPCMAN_ //纪录
-  char evtype[256];
-  char evtime[256];
-  char argfile[256];
-
-  if( NPC_Util_CheckAssignArgFile( charaindex, argfile) == NULL )
-    sprintf( argfile, "NULL");
-#endif
-
   CHAR_setInt(charaindex, CHAR_WHICHTYPE, CHAR_TYPEWARP);
   if(NPC_Util_GetArgStr(charaindex, arg, sizeof(arg)) == NULL) {
     print("\n GetArgStr ERR!!");
@@ -43,19 +32,10 @@ int NPC_WarpInit(int charaindex) {
   }
 #ifdef _NEW_WARPPOINT
   if(strstr(arg, "FREEMORE") != NULL) {
-#ifdef _RECORD_NPCMAN_ //纪录
-    sprintf( evtype, "FREE");
-    sprintf( evtime, "NULL");
-#endif
     CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP);
   } else {
 #endif
-#ifdef _MAP_WARPPOINT
     return FALSE;
-#endif
-#ifdef _RECORD_NPCMAN_ //纪录
-    sprintf( evtype, "NONE");
-#endif
     ret = getStringFromIndexWithDelim(arg, "|", 1, token, sizeof(token));
     if(ret) floor = atoi(token);
     ret = getStringFromIndexWithDelim(arg, "|", 2, token, sizeof(token));
@@ -77,30 +57,15 @@ int NPC_WarpInit(int charaindex) {
       int day;
       day = NPC_TimeWarpCheck(charaindex, token, 0);
       if(day == 0) {
-#ifdef _RECORD_NPCMAN_ //纪录
-        sprintf( evtime, "N");
-#endif
         CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP_NIGHT);
       } else if(day == 1) {
-#ifdef _RECORD_NPCMAN_ //纪录
-        sprintf( evtime, "M");
-#endif
         CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP_MORNING);
       } else if(day == 2) {
-#ifdef _RECORD_NPCMAN_ //纪录
-        sprintf( evtime, "A");
-#endif
         CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP_NOON);
       } else {
-#ifdef _RECORD_NPCMAN_ //纪录
-        sprintf( evtime, "NULL");
-#endif
         CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP);
       }
     } else {
-#ifdef _RECORD_NPCMAN_ //纪录
-      sprintf( evtime, "NULL");
-#endif
       CHAR_setWorkInt(charaindex, CHAR_WORKEVENTTYPE, CHAR_EVENT_WARP);
     }
 #ifdef _NEW_WARPPOINT
@@ -110,24 +75,6 @@ int NPC_WarpInit(int charaindex) {
   CHAR_setFlg(charaindex, CHAR_ISOVERED, 1);
   CHAR_setFlg(charaindex, CHAR_ISATTACKED, 0);
   CHAR_setFlg(charaindex, CHAR_ISATTACK, 0);
-
-#ifdef _RECORD_NPCMAN_ //纪录
-  {
-    FILE *fp=NULL;
-    char filename[256];
-    sprintf( filename,"./data/npc/%s", "mapwarp.txt");
-    if( (fp = fopen( filename, "a+")) != NULL ) {
-      fprintf( fp, "%s:%s:%d,%d,%d:%d,%d,%d:%s\n",
-        evtype, evtime,
-        CHAR_getInt( charaindex, CHAR_FLOOR),
-        CHAR_getInt( charaindex, CHAR_X),
-        CHAR_getInt( charaindex, CHAR_Y),
-        floor, x, y, argfile );
-      fclose( fp);
-    }else {
-    }
-  }
-#endif
   return TRUE;
 }
 
@@ -253,8 +200,7 @@ void NPC_WarpWarpCharacter(int warpnpcindex, int charaindex) {
         if(eqen >= 120) {
           if((ff == 100) || (ff == 200) || (ff == 300) || (ff == 400) || (ff == 500)) {
             if((of != 100) && (of != 200) && (of != 300) && (of != 400) && (of != 500)) {
-              CHAR_talkToCli(charaindex, -1,
-                             "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
+              CHAR_talkToCli(charaindex, -1, "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
             }
           } else {
             if((of == 100) || (of == 200) || (of == 300) || (of == 400) || (of == 500)) {
@@ -264,8 +210,7 @@ void NPC_WarpWarpCharacter(int warpnpcindex, int charaindex) {
         } else if(eqen >= 80) {
           if((ff == 100) || (ff == 200) || (ff == 300) || (ff == 400)) {
             if((of != 100) && (of != 200) && (of != 300) && (of != 400)) {
-              CHAR_talkToCli(charaindex, -1,
-                             "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
+              CHAR_talkToCli(charaindex, -1, "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
             }
           } else {
             if((of == 100) || (of == 200) || (of == 300) || (of == 400)) {
@@ -275,8 +220,7 @@ void NPC_WarpWarpCharacter(int warpnpcindex, int charaindex) {
         } else if(eqen >= 40) {
           if((ff == 100) || (ff == 200)) {
             if((of != 100) && (of != 200)) {
-              CHAR_talkToCli(charaindex, -1,
-                             "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
+              CHAR_talkToCli(charaindex, -1, "太阳神的首饰发出一道奇异的光芒，隐藏了你的行踪。", CHAR_COLORWHITE);
             }
           } else {
             if((of == 100) || (of == 200)) {
@@ -318,20 +262,22 @@ void NPC_WarpWarpCharacter(int warpnpcindex, int charaindex) {
   }
 }
 
-void NPC_WarpWatch(int meobjindex, int objindex, CHAR_ACTION act,
-                   int x, int y, int dir, int *opt, int optlen) {
+void NPC_WarpWatch(int meobjindex, int objindex, CHAR_ACTION act, int x, int y, int dir, int *opt, int optlen) {
   int meindex, moveindex;
   if(OBJECT_getType(objindex) != OBJTYPE_CHARA)return;
 
   meindex = OBJECT_getIndex(meobjindex);
   moveindex = OBJECT_getIndex(objindex);
 
-  if(CHAR_getInt(moveindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER) {
+  if(CHAR_getInt(moveindex, CHAR_WHICHTYPE) != CHAR_TYPEPLAYER)
     return;
-  }
-  if(act != CHAR_ACTWALK)return;
 
-  if(opt[0] == x && opt[1] == y)return;
+  if(act != CHAR_ACTWALK)
+    return;
+
+  if(opt[0] == x && opt[1] == y)
+    return;
+
   if(CHAR_getInt(meindex, CHAR_X) == x && CHAR_getInt(meindex, CHAR_Y) == y) {
     NPC_WarpWarpCharacter(meindex, moveindex);
   }

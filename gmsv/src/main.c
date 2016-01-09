@@ -75,14 +75,13 @@ void mainloop(void) {
   print("初始化signal2...");
   signal(SIGUSR2, sigusr2);
   print("完成\n");
-#ifdef _MAP_WARPPOINT
+  
   print("初始化地图传送点...");
   MAPPOINT_InitMapWarpPoint();
   print("完成\n");
   if(!MAPPOINT_loadMapWarpPoint()) {
     return;
   }
-#endif
 
 //#ifdef _ALLDOMAN
 //	print("初始化英雄表列...");

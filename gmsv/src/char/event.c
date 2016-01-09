@@ -59,9 +59,7 @@ int EVENT_main(int charaindex, int event, int x, int y) {
           break;
         }
       }
-    }
-#ifdef _MAP_WARPPOINT
-    else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
+    } else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
       if(!MAPPOINT_CHECKINDEX(OBJECT_getIndex(o)))
         continue;
       if(OBJECT_getchartype(o) != event)
@@ -70,7 +68,6 @@ int EVENT_main(int charaindex, int event, int x, int y) {
       rc = TRUE;
       break;
     }
-#endif
   }
   return rc;
 }

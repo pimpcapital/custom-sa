@@ -201,7 +201,6 @@ Game Server 游戏环境:
 //
 #define _PETSKILL_CANNEDFOOD     // (可开放) ANDY 宠物技能罐头  for 6.0
 #define _TEST_DROPITEMS          // (可开放) ANDY 测试丢宠
-#define _MAP_WARPPOINT           // (可开放) ANDY Map WarpPoint
 #define _TREASURE_BOX            // (可开放) ANDY 宝箱
 #define _BATTLE_ABDUCTII         // (可开放) ANDY 旅途夥伴2
 #define _BATTLE_LIGHTTAKE        // (可开放) ANDY 采光术

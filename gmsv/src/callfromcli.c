@@ -606,7 +606,6 @@ void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
               }
             }
           }
-#ifdef _MAP_WARPPOINT
           else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
             int etype = OBJECT_getchartype(o);
             if(etype != CHAR_EVENT_NONE) {
@@ -616,7 +615,6 @@ void lssproto_EV_recv(int fd, int event, int seqno, int x, int y, int dir) {
               break;
             }
           }
-#endif
         }
       }
     }

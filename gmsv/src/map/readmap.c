@@ -703,16 +703,11 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
     print("%s:%d:err\n", __FILE__, __LINE__);
     return NULL;
   }
-  if(seekr->width < 0 || seekr->height < 0 ||
-     MAP_GETMAXSIZE < seekr->width || MAP_GETMAXSIZE < seekr->height) {
+  if(seekr->width < 0 || seekr->height < 0 || MAP_GETMAXSIZE < seekr->width || MAP_GETMAXSIZE < seekr->height) {
     print("%s:%d:err\n", __FILE__, __LINE__);
     return NULL;
   }
-  snprintf(tmpbuffer, sizeof(tmpbuffer),
-           "%s|",
-           makeEscapeString(MAP_map[floorindex].string,
-                            escapebuffer, sizeof(escapebuffer)));
-
+  snprintf(tmpbuffer, sizeof(tmpbuffer), "%s|", makeEscapeString(MAP_map[floorindex].string, escapebuffer, sizeof(escapebuffer)));
   strcpysafe(MAP_dataString, sizeof(MAP_dataString), tmpbuffer);
   stringlength = strlen(tmpbuffer);
 
@@ -734,11 +729,8 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
   }
   for(i = 0; i < databufferindex; i++) {
     char buf[64];
-    snprintf(tmpbuffer, sizeof(tmpbuffer), "%s" MAP_DATADELIMITER,
-             cnv10to62(MAP_workdatabuffer[i], buf, sizeof(buf)));
-    strcpysafe(&MAP_dataString[stringlength],
-               sizeof(MAP_dataString) - stringlength,
-               tmpbuffer);
+    snprintf(tmpbuffer, sizeof(tmpbuffer), "%s" MAP_DATADELIMITER, cnv10to62(MAP_workdatabuffer[i], buf, sizeof(buf)));
+    strcpysafe(&MAP_dataString[stringlength], sizeof(MAP_dataString) - stringlength, tmpbuffer);
     stringlength += strlen(tmpbuffer);
   }
   if(stringlength < sizeof(MAP_dataString))
@@ -746,19 +738,15 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
   databufferindex = 0;
   for(i = realr->y; i < realr->y + realr->height; i++) {
     for(j = realr->x; j < realr->x + realr->width; j++) {
-      MAP_workdatabuffer[databufferindex++]
-          = MAP_map[floorindex].obj[i * floorx + j];
+      MAP_workdatabuffer[databufferindex++] = MAP_map[floorindex].obj[i * floorx + j];
     }
   }
   for(i = 0; i < databufferindex; i++) {
     char buf[64];
     if(MAP_workdatabuffer[i] == 0) buf[0] = '\0';
     else cnv10to62(MAP_workdatabuffer[i], buf, sizeof(buf));
-    snprintf(tmpbuffer, sizeof(tmpbuffer), "%s" MAP_DATADELIMITER,
-             buf);
-    strcpysafe(&MAP_dataString[stringlength],
-               sizeof(MAP_dataString) - stringlength,
-               tmpbuffer);
+    snprintf(tmpbuffer, sizeof(tmpbuffer), "%s" MAP_DATADELIMITER, buf);
+    strcpysafe(&MAP_dataString[stringlength], sizeof(MAP_dataString) - stringlength, tmpbuffer);
     stringlength += strlen(tmpbuffer);
   }
 
@@ -770,22 +758,19 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
     for(j = realr->x; j < realr->x + realr->width; j++) {
       OBJECT object;
       int found = FALSE;
-      for(object = MAP_getTopObj(floor, j, i); object;
-          object = NEXT_OBJECT(object)) {
+      for(object = MAP_getTopObj(floor, j, i); object; object = NEXT_OBJECT(object)) {
         int o = GET_OBJINDEX(object);
         if(OBJECT_getType(o) == OBJTYPE_CHARA) {
-          int etype;
           int charaindex = OBJECT_getIndex(o);
-          if(!CHAR_CHECKINDEX(charaindex))continue;
-          etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
+          if(!CHAR_CHECKINDEX(charaindex))
+            continue;
+          int etype = CHAR_getWorkInt(charaindex, CHAR_WORKEVENTTYPE);
           if(etype != CHAR_EVENT_NONE) {
             MAP_workdatabuffer[databufferindex++] = etype;
             found = TRUE;
             break;
           }
-        }
-#ifdef _MAP_WARPPOINT
-        else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
+        } else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
           int etype = OBJECT_getchartype(o);
           if(etype != CHAR_EVENT_NONE) {
             MAP_workdatabuffer[databufferindex++] = (unsigned short) etype;
@@ -793,30 +778,28 @@ char *MAP_getdataFromRECT(int floor, RECT *seekr, RECT *realr) {
             break;
           }
         }
-#endif
       }
       if(!found) {
-        MAP_workdatabuffer[databufferindex++]
-            = CHAR_EVENT_NONE;
+        MAP_workdatabuffer[databufferindex++] = CHAR_EVENT_NONE;
       }
     }
   }
   for(i = 0; i < databufferindex; i++) {
     char buf[64];
-    if(MAP_workdatabuffer[i] == 0) buf[0] = '\0';
-    else cnv10to62(MAP_workdatabuffer[i], buf, sizeof(buf));
+    if(MAP_workdatabuffer[i] == 0)
+      buf[0] = '\0';
+    else
+      cnv10to62(MAP_workdatabuffer[i], buf, sizeof(buf));
 
     snprintf(tmpbuffer, sizeof(tmpbuffer), "%s" MAP_DATADELIMITER, buf);
-    strcpysafe(&MAP_dataString[stringlength],
-               sizeof(MAP_dataString) - stringlength, tmpbuffer);
+    strcpysafe(&MAP_dataString[stringlength], sizeof(MAP_dataString) - stringlength, tmpbuffer);
     stringlength += strlen(tmpbuffer);
   }
   dchop(MAP_dataString, MAP_DATADELIMITER);
   return MAP_dataString;
 }
 
-char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr,
-                              int *tilesum, int *objsum, int *eventsum) {
+char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr, int *tilesum, int *objsum, int *eventsum) {
   int floorindex;
   int i, j;
   int floorx;
@@ -870,19 +853,16 @@ char *MAP_getChecksumFromRECT(int floor, RECT *seekr, RECT *realr,
             eventbuf[databufferindex] = (unsigned short) etype;
             break;
           }
-        }
-#ifdef _MAP_WARPPOINT
-        else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
+        } else if(OBJECT_getType(o) == OBJTYPE_WARPPOINT) {
           int etype = OBJECT_getchartype(o);
           if(etype != CHAR_EVENT_NONE) {
             eventbuf[databufferindex] = (unsigned short) etype;
             break;
           }
         }
-#endif
       }
-      tilebuf[databufferindex] = (unsigned short) MAP_map[floorindex].tile[i * floorx + j];
-      objbuf[databufferindex] = (unsigned short) MAP_map[floorindex].obj[i * floorx + j];
+      tilebuf[databufferindex] = MAP_map[floorindex].tile[i * floorx + j];
+      objbuf[databufferindex] = MAP_map[floorindex].obj[i * floorx + j];
       databufferindex++;
     }
   }
