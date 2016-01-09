@@ -91,8 +91,7 @@ static void CHAR_sendMapAtWalk(int index, int fl, int ox, int oy, int fx, int fy
       {
         int tilesum, objsum, eventsum;
         mapdata = MAP_getChecksumFromRECT(fl, &send, &get, &tilesum, &objsum, &eventsum);
-        if(mapdata != NULL
-           && !(get.width == 0 && get.height == 0)) {
+        if(mapdata != NULL && !(get.width == 0 && get.height == 0)) {
           int fd = getfdFromCharaIndex(index);
           if(fd != -1)
             lssproto_MC_send(fd, fl, get.x, get.y, get.x + get.width, get.y + get.height, tilesum, objsum, eventsum, mapdata);
@@ -118,12 +117,10 @@ static void CHAR_sendMapAtWalk(int index, int fl, int ox, int oy, int fx, int fy
       {
         int tilesum, objsum, eventsum;
         mapdata = MAP_getChecksumFromRECT(fl, &send, &get, &tilesum, &objsum, &eventsum);
-        if(mapdata != NULL
-           && !(get.width == 0 && get.height == 0)) {
+        if(mapdata != NULL && !(get.width == 0 && get.height == 0)) {
           int fd = getfdFromCharaIndex(index);
           if(fd != -1)
             lssproto_MC_send(fd, fl, get.x, get.y, get.x + get.width, get.y + get.height, tilesum, objsum, eventsum, mapdata);
-
         }
       }
     }
