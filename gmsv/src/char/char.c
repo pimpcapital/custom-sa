@@ -3638,11 +3638,11 @@ int CHAR_setMyPosition_main(int index, int x, int y, int setdir, int CAFlg) {
     return FALSE;
   }
 
-  if(ABS(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || ABS(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
+  if(abs(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || abs(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
     CHAR_sendCDArroundChar(fl, prev_x, prev_y, objindex);
   }
 
-  if(ABS(x - prev_x) <= 1 && ABS(y - prev_y) <= 1) {
+  if(abs(x - prev_x) <= 1 && abs(y - prev_y) <= 1) {
     POINT start, end;
     int dir;
     start.x = CHAR_getInt(index, CHAR_X);
@@ -3669,7 +3669,7 @@ int CHAR_setMyPosition_main(int index, int x, int y, int setdir, int CAFlg) {
         return FALSE;
       }
     }
-    if(ABS(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || ABS(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
+    if(abs(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || abs(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
       CHAR_sendWatchEvent(objindex, CHAR_ACTWARP, NULL, 0, FALSE);
     }
     else if(CAFlg == TRUE) {
@@ -3678,7 +3678,7 @@ int CHAR_setMyPosition_main(int index, int x, int y, int setdir, int CAFlg) {
   }
 
   if(CHAR_getWorkInt(index, CHAR_WORKPARTYMODE) == CHAR_PARTY_LEADER) {
-    if(ABS(x - prev_x) <= 1 && ABS(y - prev_y) <= 1) {
+    if(abs(x - prev_x) <= 1 && abs(y - prev_y) <= 1) {
       int i;
       int prevparty_x = prev_x;
       int prevparty_y = prev_y;
@@ -3706,7 +3706,7 @@ int CHAR_setMyPosition_main(int index, int x, int y, int setdir, int CAFlg) {
       }
     }
 
-    else if(ABS(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || ABS(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
+    else if(abs(x - prev_x) > CHAR_DEFAULTSEESIZ / 2 || abs(y - prev_y) > CHAR_DEFAULTSEESIZ / 2) {
       for(int i = 1; i < CHAR_PARTYMAX; i++) {
         int toindex = CHAR_getWorkInt(index, i + CHAR_WORKPARTYINDEX1);
         if(CHAR_CHECKINDEX(toindex)) {
@@ -3716,7 +3716,7 @@ int CHAR_setMyPosition_main(int index, int x, int y, int setdir, int CAFlg) {
     }
   }
 
-  if(ABS(x - prev_x) <= CHAR_DEFAULTSEESIZ / 2 && ABS(y - prev_y) <= CHAR_DEFAULTSEESIZ / 2) {
+  if(abs(x - prev_x) <= CHAR_DEFAULTSEESIZ / 2 && abs(y - prev_y) <= CHAR_DEFAULTSEESIZ / 2) {
     CHAR_setMyPosition_sendData(index, prev_x, prev_y, x, y);
   }
 

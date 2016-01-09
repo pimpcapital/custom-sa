@@ -688,7 +688,7 @@ static int NPC_getRandomValue( char*  string,int* randomwidth )
         maxvalue = atoi(startmax+1);
 
         /*  切扎氏午仄凶涩烂分  */
-        *randomwidth = ABS(maxvalue - minvalue);
+        *randomwidth = abs(maxvalue - minvalue);
         return min(minvalue,maxvalue);
     }
     *randomwidth = 0;

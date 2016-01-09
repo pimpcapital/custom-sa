@@ -83,8 +83,7 @@ int charInclude(char *src, char *include);
 
 int rgetFileName(char *dirname, STRING64 *string, int size);
 
-#define RAND(x, y)   ((x-1)+1+ \
-                     (int)( (double)(y-(x-1))*rand()/(RAND_MAX+1.0)) )
+#define RAND(x, y)   ((x-1)+1+(int)( (double)(y-(x-1))*rand()/(RAND_MAX+1.0)) )
 
 int checkStringsUnique(char **strings, int num, int verbose);
 
@@ -113,9 +112,6 @@ int checkRedundancy(int *src, int srclen);
 unsigned short CheckCRC(unsigned char *p, int size);
 
 double time_diff(struct timeval subtrahend, struct timeval subtractor);
-
-
-#define ABS(x)      ((x)>=0 ? (x) : -(x))
 
 #define VALIDATEDIR(x)  ({(x)%=8;(x)=((x)+8)%8;})
 

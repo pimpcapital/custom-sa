@@ -55,23 +55,23 @@ static CHAR_WALKRET CHAR_walk_turn(int index, int dir) {
 }
 
 static void CHAR_sendMapAtWalk(int index, int fl, int ox, int oy, int fx, int fy) {
-  int vx, vy;
   const int seesiz = MAP_CHAR_DEFAULTSEESIZ;
 
-  if(!CHAR_CHECKINDEX(index))return;
+  if(!CHAR_CHECKINDEX(index))
+    return;
 
-  vx = fx - ox;
-  vy = fy - oy;
+  int vx = fx - ox;
+  int vy = fy - oy;
 
-  if(ABS(vx) >= seesiz / 2 || ABS(vy) >= seesiz / 2) {
+  if(abs(vx) >= seesiz / 2 || abs(vy) >= seesiz / 2) {
     return;
   } else {
     RECT send, get;
     char *mapdata;
     int oldlux = ox - (seesiz / 2);
     int oldluy = oy - (seesiz / 2);
-    int absx = ABS(vx);
-    int absy = ABS(vy);
+    int absx = abs(vx);
+    int absy = abs(vy);
     if(vx != 0) {
       if(vx > 0) {
         send.x = oldlux + seesiz;
@@ -689,7 +689,7 @@ void CHAR_walk_start(int index, int x, int y, char *dir, int mapsendmode) {
      const int     seesiz = MAP_CHAR_DEFAULTSEESIZ;
      ox = CHAR_getInt(index,CHAR_X);
      oy = CHAR_getInt(index,CHAR_Y);
-     if ( ABS(x - ox) > seesiz || ABS(y - oy) > seesiz ) {
+     if ( abs(x - ox) > seesiz || abs(y - oy) > seesiz ) {
         CHAR_talkToCli(index, -1, "因座标错误而断线。", CHAR_COLORYELLOW);
         CONNECT_setCloseRequest_debug(getfdFromCharaIndex(index) , 1);
         return;
@@ -787,7 +787,7 @@ void CHAR_sendCharaAtWalk(int charaindex, int of, int ox, int oy, int xflg, int 
   x = CHAR_getInt(charaindex, CHAR_X);
   y = CHAR_getInt(charaindex, CHAR_Y);
 
-  if(of != fl || ABS(x - ox) > seesiz / 2 || ABS(y - oy) > seesiz / 2)
+  if(of != fl || abs(x - ox) > seesiz / 2 || abs(y - oy) > seesiz / 2)
     return;
 
   c_msg[0] = '\0';
@@ -1000,7 +1000,7 @@ static void CHAR_sendCDCharaAtWalk(int charaindex, int of, int ox, int oy, int x
   x = CHAR_getInt(charaindex, CHAR_X);
   y = CHAR_getInt(charaindex, CHAR_Y);
 
-  if(of != fl || ABS(x - ox) > seesiz / 2 || ABS(y - oy) > seesiz / 2)
+  if(of != fl || abs(x - ox) > seesiz / 2 || abs(y - oy) > seesiz / 2)
     return;
 
   fd = getfdFromCharaIndex(charaindex);
