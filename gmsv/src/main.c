@@ -27,10 +27,6 @@ struct tm tmNow, tmOld;
 
 void family_proc();
 
-#ifdef _GMSV_DEBUG
-extern char *DebugMainFunction;
-#endif
-
 int main(int argc, char **argv, char **env) {
   setNewTime();
 /*

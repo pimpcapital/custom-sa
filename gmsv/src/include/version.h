@@ -4,10 +4,6 @@
 
 #define UNIQUE_KEYCODEITEM	100
 #define UNIQUE_KEYCODEPET	"i"
-//#define _DEFAULT_PKEY "Wonwonwon"	// (可开放)( 石器 6.0 )
-//#define _RUNNING_KEY  "11111111"  // (可开放)( 石器 6.0 )
-//#define _DEFAULT_PKEY "ttttttttt"   // (可开放)( 石器 6.0 )
-//#define _RUNNING_KEY  "20041215"    // (可开放)( 石器 6.0 )
 
 /* -------------------------------------------------------------------
  * 专案：家族庄园数量修改	人员：小瑜、彦勋、志伟、小民
@@ -259,7 +255,6 @@ Game Server 游戏环境:
 #define _ITEM_USEMAGIC           // (可开) Change 由道具使用魔法
 #define _ITEM_PROPERTY           // (可开) Change 改变四属性道具
 #define _SUIT_ADDENDUM           // (可开) Change 替套装增加功能 (_SUIT_ITEM要开)
-#define _ITEM_CHECKDROPATLOGOUT  // (可开) Change 检查回纪录点时身上有无登出後消失道具,若有,不可回纪录点
 #define _FM_MODIFY               // 家族功能修改(开放)
 #define _STANDBYPET              // Robin 待机宠封包
 #define  _PETSKILL_OPTIMUM       // Robin 宠物技能处理最佳化
@@ -396,14 +391,4 @@ Game Server 游戏环境:
 #define _GET_MULTI_ITEM          // 一次给多件物品
 #endif
 
-//版本控制----------------------------------------
-#define RECEIVE_ADJUST -13
-#define SEND_ADJUST +23
-//#define RECEIVE_ADJUST 0
-//#define SEND_ADJUST 0
-
-
-
-//特殊功能控制----------------------------------------
-//#define _GMSV_DEBUG              // GMSV调试信息
 #endif

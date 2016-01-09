@@ -103,7 +103,7 @@ void util_DecodeMessage(char *dst, char *src) {
 int util_GetFunctionFromSlice(int *func) {
   char t1[1024 * 16];
   strcpy(t1, MesgSlice[1]);
-  *func = atoi(t1) + RECEIVE_ADJUST;
+  *func = atoi(t1);
   for(int i = 0; i < SLICE_MAX; i++)
     if(strcmp(MesgSlice[i], DEFAULTFUNCEND) == 0) {
       return TRUE;
@@ -124,7 +124,7 @@ void util_SendMesg(int fd, int func, char *buffer) {
   }
 
   print("SENDING - %d %s\n", func, buffer);
-  sprintf(t1, "&;%d%s;#;", func + SEND_ADJUST, buffer);
+  sprintf(t1, "&;%d%s;#;", func, buffer);
   util_EncodeMessage(t2, t1);
   lssproto_Send(fd, t2);
 }
