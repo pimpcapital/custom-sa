@@ -238,28 +238,12 @@ acservport=9300
 # 连接到帐号服务器 SAAC的密码
 acpasswd=test
 
-QQ=246912
-
 # Game Server Name
 # 服务器名字
-gameservname=极度1线
+gameservname=StoneAge
 
 # 服务器的ID
-gameservid=极度1线
-
-==================================================
-以下内容作废 对服务器无任何影响
-#ifdef _SERVICE   (另设置??)
-#config.apid, sizeof(config.apid), NULL, 0},
-apid=
-#NULL ,0 ,(void*)&config.apport ,SHORT},
-apport=
-#NULL,0,(void*)&config.looptime,INT},
-looptime=
-#NULL,0,(void*)&config.enableservice,INT},
-enableservice=
-#endif
-==================================================
+gameservid=StoneAge
 
 #NULL, 0, (void*)&config.allowmanorpk, SHORT},
 # 是否允许族战
